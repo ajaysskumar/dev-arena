@@ -4,6 +4,14 @@
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <BlazorCacheBootResources>false</BlazorCacheBootResources>
+        <BlazorEnableTimeZoneSupport>false</BlazorEnableTimeZoneSupport>
+        <BlazorWebAssemblyLoadAllGlobalizationData>false</BlazorWebAssemblyLoadAllGlobalizationData>
+        <BlazorWebAssemblyPreserveCollationData>false</BlazorWebAssemblyPreserveCollationData>
+        <BlazorWasmPrerenderingDeleteLoadingContents>true</BlazorWasmPrerenderingDeleteLoadingContents>
+        <!-- <BlazorWasmPrerenderingEnvironment>Production</BlazorWasmPrerenderingEnvironment> -->
+        <BlazorWasmPrerenderingMode>WebAssemblyPrerendered</BlazorWasmPrerenderingMode>
+        <GHPagesBase>/</GHPagesBase>
     </PropertyGroup>
 
     <ItemGroup>
@@ -12,15 +20,19 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Update="wwwroot\.nojekyll">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <Content Update="wwwroot\404.html">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
       <Content Update="wwwroot\decode.js">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="wwwroot\.nojekyll" />
+      <Resource Include="wwwroot\.nojekyll">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
     </ItemGroup>
 
 </Project>
