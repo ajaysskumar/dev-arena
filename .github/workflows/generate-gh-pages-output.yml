@@ -105,9 +105,6 @@ jobs:
           # Configure Git author identity
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          
-#          # Create docs folder
-#          mkdir -p docs
 
           # Clean up old files and copy the new ones
           cp -r build_output/wwwroot/* .
