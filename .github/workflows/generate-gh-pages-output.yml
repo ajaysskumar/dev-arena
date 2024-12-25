@@ -106,13 +106,15 @@ jobs:
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           
-          # Create .nojeckyll file
+          # Create docs folder
           mkdir -p docs
-          touch docs/.nojekyll
-          ls
 
           # Clean up old files and copy the new ones
           cp -r build_output/wwwroot/* ./docs
+          
+          # Create .nojekyll file
+          touch docs/.nojekyll
+          ls
 
           # Commit and push changes
           git add ./docs/*
