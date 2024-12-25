@@ -34,6 +34,34 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0 # Fetch all history to ensure we can switch branches
+          
+      # Step 2: Cleanup existing file in github pages branch
+      - name: Cleanup github-pages-master branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Use the GitHub-provided token
+        run: |
+          # Log the current GITHUB_WORKSPACE
+          echo "GITHUB_WORKSPACE is set to: $GITHUB_WORKSPACE"
+
+          # Ensure we're in the root of the repository
+          cd $GITHUB_WORKSPACE
+
+          # Switch to the github-pages-master branch
+          git fetch origin github-pages-master
+          git checkout -f github-pages-master
+
+          # Cleanup pages branch
+          git rm -r *
+          git add .
+          git commit -m "Cleanup branch before pushing new code"
+          git push origin github-pages-master
+
+      # Step 2: Switch to master branch
+      - name: Set up .NET
+        run: |
+          # Switch to the github-pages-master branch
+          git fetch origin github-pages-master
+          git checkout -f github-pages-master
 
       # Step 2: Set up .NET 8
       - name: Set up .NET
@@ -83,8 +111,11 @@ jobs:
 
           # Clean up old files and copy the new ones
           cp -r build_output/wwwroot/* ./docs
+          mkdir docs
+          cd docs
+          touch .nojekyll
 
           # Commit and push changes
-          git add .
+          git add ./docs/*
           git commit -m "Deploy updated WASM site" || echo "No changes to commit"
           git push origin github-pages-master
