@@ -49,12 +49,21 @@ jobs:
       - name: Build the WASM project
         run: dotnet publish -c Release -o build_output
 
-      # Step 5: Deploy to github-pages-master branch
+      # Step 5: Debug - Verify build_output exists
+      - name: List build_output directory
+        run: |
+          echo "Checking build_output directory..."
+          ls -R build_output || echo "build_output directory does not exist!"
+
+      # Step 6: Deploy to github-pages-master branch
       - name: Deploy to github-pages-master
         run: |
+          # Log the current GITHUB_WORKSPACE
+          echo "GITHUB_WORKSPACE is set to: $GITHUB_WORKSPACE"
+
           # Ensure we're in the root of the repository
           cd $GITHUB_WORKSPACE
-          
+
           # Switch to the github-pages-master branch
           git fetch origin github-pages-master
           git checkout github-pages-master
