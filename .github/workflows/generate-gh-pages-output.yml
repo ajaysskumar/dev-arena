@@ -60,12 +60,12 @@ jobs:
           git commit -m "Cleanup branch before pushing new code"
           git push origin github-pages-master
 
-      # Step 3: Switch to master branch
-      - name: Set up .NET
+      # Step 3: Checkout main branch
+      - name: Switch to main branch
         run: |
-          # Switch to the github-pages-master branch
-          git fetch origin github-pages-master
-          git checkout -f github-pages-master
+          # Switch to the main branch
+          git fetch origin main
+          git checkout main
 
       # Step 4: Set up .NET 8
       - name: Set up .NET
