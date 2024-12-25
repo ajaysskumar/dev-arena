@@ -40,6 +40,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Use the GitHub-provided token
         run: |
+          # Configure Git author identity
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          
           # Log the current GITHUB_WORKSPACE
           echo "GITHUB_WORKSPACE is set to: $GITHUB_WORKSPACE"
 
@@ -56,34 +60,34 @@ jobs:
           git commit -m "Cleanup branch before pushing new code"
           git push origin github-pages-master
 
-      # Step 2: Switch to master branch
+      # Step 3: Switch to master branch
       - name: Set up .NET
         run: |
           # Switch to the github-pages-master branch
           git fetch origin github-pages-master
           git checkout -f github-pages-master
 
-      # Step 2: Set up .NET 8
+      # Step 4: Set up .NET 8
       - name: Set up .NET
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '8.0' # Use .NET 8
 
-      # Step 3: Restore dependencies
+      # Step 5: Restore dependencies
       - name: Restore dependencies
         run: dotnet restore
 
-      # Step 4: Build the WASM project
+      # Step 6: Build the WASM project
       - name: Build the WASM project
         run: dotnet publish -c Release -o build_output
 
-      # Step 5: Debug - Verify build_output exists
+      # Step 7: Debug - Verify build_output exists
       - name: List build_output directory
         run: |
           echo "Checking build_output directory..."
           ls -R build_output || echo "build_output directory does not exist!"
 
-      # Step 6: Deploy to github-pages-master branch
+      # Step 8: Deploy to github-pages-master branch
       - name: Deploy to github-pages-master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Use the GitHub-provided token
