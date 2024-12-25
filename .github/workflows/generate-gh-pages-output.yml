@@ -3,7 +3,7 @@ name: Build and Deploy WASM Site
 on:
   push:
     branches:
-      - master # Trigger the workflow on changes to the master branch
+      - main # Trigger the workflow on changes to the master branch
   workflow_dispatch:
     inputs:
       logLevel:
