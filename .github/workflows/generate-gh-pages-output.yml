@@ -68,7 +68,7 @@ jobs:
 
           # Switch to the github-pages-master branch
           git fetch origin github-pages-master
-          git checkout github-pages-master
+          git checkout -f github-pages-master
 
           # Cleanup existing directory
           # git reset
