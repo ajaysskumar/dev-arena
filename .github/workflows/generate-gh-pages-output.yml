@@ -57,6 +57,8 @@ jobs:
 
       # Step 6: Deploy to github-pages-master branch
       - name: Deploy to github-pages-master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Use the GitHub-provided token
         run: |
           # Log the current GITHUB_WORKSPACE
           echo "GITHUB_WORKSPACE is set to: $GITHUB_WORKSPACE"
