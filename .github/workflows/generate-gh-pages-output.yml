@@ -102,22 +102,14 @@ jobs:
           git fetch origin github-pages-master
           git checkout -f github-pages-master
 
-          # Cleanup existing directory
-          # git reset
-          # git rm -r *
-          # git add .
-          # git commit -m "Cleanup branch before pushing new code"
-          # git push origin github-pages-master
-
           # Configure Git author identity
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           
           # Create .nojeckyll file
-          mkdir docs
-          cd docs
-          touch .nojekyll
-          cd ..
+          mkdir -p docs
+          touch docs/.nojekyll
+          ls
 
           # Clean up old files and copy the new ones
           cp -r build_output/wwwroot/* ./docs
