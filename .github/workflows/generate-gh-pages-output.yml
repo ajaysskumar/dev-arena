@@ -76,7 +76,7 @@ jobs:
 
           # Clean up old files and copy the new ones
           git rm -r *
-          cp -r build_output/* .
+          cp -r build_output/wwwroot/* .
 
           # Commit and push changes
           git add .
