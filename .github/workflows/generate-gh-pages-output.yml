@@ -112,12 +112,15 @@ jobs:
           # Configure Git author identity
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-
-          # Clean up old files and copy the new ones
-          cp -r build_output/wwwroot/* ./docs
+          
+          # Create .nojeckyll file
           mkdir docs
           cd docs
           touch .nojekyll
+          cd ..
+
+          # Clean up old files and copy the new ones
+          cp -r build_output/wwwroot/* ./docs
 
           # Commit and push changes
           git add ./docs/*
