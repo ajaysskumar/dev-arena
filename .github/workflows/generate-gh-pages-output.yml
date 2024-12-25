@@ -114,9 +114,10 @@ jobs:
           
           # Create .nojekyll file
           touch docs/.nojekyll
-          ls
+          ls -la docs
 
           # Commit and push changes
           git add ./docs/*
+          git status
           git commit -m "Deploy updated WASM site" || echo "No changes to commit"
           git push origin github-pages-master
