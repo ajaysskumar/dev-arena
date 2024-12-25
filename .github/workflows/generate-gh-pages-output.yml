@@ -1,0 +1,47 @@
+name: Build and Deploy WASM Site
+
+on:
+  push:
+    branches:
+      - master # Trigger the workflow on changes to the master branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the repository
+      - name: Check out the repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Fetch all history to ensure we can switch branches
+
+      # Step 2: Set up .NET 8
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0' # Use .NET 8
+
+      # Step 3: Restore dependencies
+      - name: Restore dependencies
+        run: dotnet restore
+
+      # Step 4: Build the WASM project
+      - name: Build the WASM project
+        run: dotnet publish -c Release -o build_output
+
+      # Step 5: Deploy to github-pages-master branch
+      - name: Deploy to github-pages-master
+        run: |
+          # Switch to the github-pages-master branch
+          git fetch origin github-pages-master
+          git checkout github-pages-master
+
+          # Remove old files and copy new ones
+          git rm -r --cached --ignore-unmatch .
+          cp -r ../build_output/* .
+
+          # Commit and push changes
+          git add .
+          git commit -m "Deploy updated WASM site" || echo "No changes to commit"
+          git push origin github-pages-master
