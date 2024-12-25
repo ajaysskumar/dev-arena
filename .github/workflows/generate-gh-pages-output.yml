@@ -71,7 +71,7 @@ jobs:
           git checkout github-pages-master
 
           # Cleanup existing directory
-          git rm -r
+          git rm -r *
           git add .
           git commit -m "Cleanup branch before pushing new code"
           git push origin github-pages-master
