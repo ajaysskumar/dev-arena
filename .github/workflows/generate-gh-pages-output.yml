@@ -106,19 +106,19 @@ jobs:
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           
-          # Create docs folder
-          mkdir -p docs
+#          # Create docs folder
+#          mkdir -p docs
 
           # Clean up old files and copy the new ones
-          cp -r build_output/wwwroot/* ./docs
+          cp -r build_output/wwwroot/* .
+          rm -rf build_output
           
           # Create .nojekyll file
-          touch docs/.nojekyll
-          ls -la docs
+          touch .nojekyll
 
           # Commit and push changes
-          git add ./docs/*
-          git add docs/.nojekyll
+          git add .
+          git add .nojekyll
           git status
           git commit -m "Deploy updated WASM site" || echo "No changes to commit"
           git push origin github-pages-master
