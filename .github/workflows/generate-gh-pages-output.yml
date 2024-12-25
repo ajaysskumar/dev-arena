@@ -55,10 +55,10 @@ jobs:
           git checkout -f github-pages-master
 
           # Cleanup pages branch
-          git rm -r *
-          git add .
-          git commit -m "Cleanup branch before pushing new code"
-          git push origin github-pages-master
+#          git rm -r *
+#          git add .
+#          git commit -m "Cleanup branch before pushing new code"
+#          git push origin github-pages-master
 
       # Step 3: Checkout main branch
       - name: Switch to main branch
