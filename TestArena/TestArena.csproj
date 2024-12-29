@@ -29,10 +29,12 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Remove="wwwroot\.nojekyll" />
-      <Resource Include="wwwroot\.nojekyll">
+      <None Include="wwwroot\.nojekyll">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Resource>
+      </None>
+      <None Include="wwwroot\CNAME.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

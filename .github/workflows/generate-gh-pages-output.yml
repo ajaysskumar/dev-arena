@@ -110,13 +110,9 @@ jobs:
           cp -r build_output/wwwroot/* .
           rm -rf build_output
           rm -rf TestArena
-          
-          # Create .nojekyll file
-          touch .nojekyll
 
           # Commit and push changes
           git add .
-          git add .nojekyll
           git status
           git commit -m "Deploy updated WASM site" || echo "No changes to commit"
           git push origin github-pages-master
