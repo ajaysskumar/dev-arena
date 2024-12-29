@@ -35,31 +35,6 @@ jobs:
         with:
           fetch-depth: 0 # Fetch all history to ensure we can switch branches
           
-      # Step 2: Cleanup existing file in github pages branch
-      - name: Cleanup github-pages-master branch
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Use the GitHub-provided token
-        run: |
-          # Configure Git author identity
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          
-          # Log the current GITHUB_WORKSPACE
-          echo "GITHUB_WORKSPACE is set to: $GITHUB_WORKSPACE"
-
-          # Ensure we're in the root of the repository
-          cd $GITHUB_WORKSPACE
-
-          # Switch to the github-pages-master branch
-          git fetch origin github-pages-master
-          git checkout -f github-pages-master
-
-          # Cleanup pages branch
-          git rm -r *
-          git add .
-          git commit -m "Cleanup branch before pushing new code"
-          git push origin github-pages-master
-
       # Step 3: Checkout main branch
       - name: Switch to main branch
         run: |
