@@ -56,7 +56,7 @@ jobs:
 
       # Step 6: Build the WASM project
       - name: Build the WASM project
-        run: dotnet publish -c Release -o build_output
+        run: dotnet publish TestArena.sln -c:Release -o:publish -p:GHPages=true
 
       # Step 7: Debug - Verify build_output exists
       - name: List build_output directory
