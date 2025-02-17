@@ -1,0 +1,21 @@
+@code {
+    [Parameter] public string ImageUrl { get; set; } = string.Empty;
+    [Parameter] public string Title { get; set; } = string.Empty;
+    [Parameter] public string Author { get; set; } = string.Empty;
+    [Parameter] public string Date { get; set; } = string.Empty;
+    [Parameter] public string Category { get; set; } = string.Empty;
+    [Parameter] public string BlogUrl { get; set; } = "#";
+}
+
+<div class="card shadow-sm">
+    <a href="@BlogUrl">
+        <img src="@ImageUrl" class="card-img-top" alt="@Title">
+    </a>
+    <div class="card-body">
+        <span class="badge bg-primary">@Category</span>
+        <h5 class="card-title mt-2">
+            <a href="@BlogUrl" class="text-decoration-none text-dark">@Title</a>
+        </h5>
+        <p class="card-text text-muted small">By @Author · @Date</p>
+    </div>
+</div>

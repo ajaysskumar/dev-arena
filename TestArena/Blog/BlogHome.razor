@@ -1,0 +1,10 @@
+@page "/"
+@using TestArena.Blog.Common
+<h2 class="mb-4">Latest Blogs</h2>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col">
+        <Thumbnail ImageUrl="images/contract_test_intro.webp" Title="Contract testing using PACT in dotnet core: Introduction"
+                       Author="Ajay kumar" Date="@DateTime.Today.Date.ToLongDateString()"
+                       Category="Design Pattern" BlogUrl="/articles/contract-test-pact-net"/>
+    </div>
+</div>
