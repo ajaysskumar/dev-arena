@@ -1,0 +1,11 @@
+@using System.ComponentModel.DataAnnotations
+
+@code {
+    [Required] [Parameter] public string Heading { get; set; }
+    [Parameter, EditorRequired] public RenderFragment ChildContent { get; set; } = default!;
+}
+
+<section>
+    <h3>@Heading</h3>
+    <div>@ChildContent</div>
+</section>

@@ -1,0 +1,28 @@
+@using System.ComponentModel.DataAnnotations
+
+@code {
+    [Required] [Parameter] public string ImagePath { get; set; }
+    [Required] [Parameter] public string Description { get; set; }
+    [Parameter] public int Number { get; set; }
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <img src="@ImagePath" alt="@Description"/>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            @if (Number > 0)
+            {
+                <div class="col-md-6">
+                    @Number :
+                </div>
+            }
+            <div class="col-md-6">
+                @Description
+            </div>
+        </div>
+    </div>
+</div>
