@@ -4,24 +4,33 @@
     [Required] [Parameter] public string ImagePath { get; set; }
     [Required] [Parameter] public string Description { get; set; }
     [Parameter] public int Number { get; set; }
+
+    private string ImageDescription => Number > 0 ? $"{Number}: {Description}" : Description;
 }
 
-<div class="row">
+<style>
+    .image-header {
+        margin: 0 auto; /* Centers the div */
+        text-align: center;
+        padding: 20px 0;
+    }
+    
+    .article-image {
+        max-width: 500px;
+        height: auto;
+        border-radius: 10px;
+    }
+</style>
+
+<div class="row image-header">
     <div class="col-md-12">
-        <img src="@ImagePath" alt="@Description"/>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
+        <img class="article-image" src="@ImagePath" width="500" height="auto" alt="@Description"/>
+        <br>
         <div class="row">
-            @if (Number > 0)
-            {
-                <div class="col-md-6">
-                    @Number :
-                </div>
-            }
-            <div class="col-md-6">
-                @Description
+            <div class="col-md-12">
+                <span>
+                    @ImageDescription
+                </span>
             </div>
         </div>
     </div>

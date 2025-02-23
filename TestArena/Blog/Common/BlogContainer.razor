@@ -1,0 +1,23 @@
+@code {
+    [Parameter] public RenderFragment ChildContent { get; set; }
+}
+
+<div class="container-fluid d-flex justify-content-center">
+    <div class="content-wrapper">
+        @ChildContent
+    </div>
+</div>
+
+<style>
+    .content-wrapper {
+        width: 70%; /* Leaves 20% space on left and right */
+        padding: 20px;
+        background: white;
+    }
+
+    @@media (max-width: 768px) {
+        .content-wrapper {
+            width: 90%; /* On smaller screens, reduce left-right space */
+        }
+    }
+</style>
