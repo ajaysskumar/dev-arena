@@ -12,7 +12,6 @@
     .image-header {
         margin: 0 auto; /* Centers the div */
         text-align: center;
-        padding: 20px 0;
     }
     
     .article-image {
@@ -20,18 +19,16 @@
         height: auto;
         border-radius: 10px;
     }
+    figcaption {
+        font-style: italic;
+        padding: 2px;
+        text-align: center;
+    }
 </style>
 
 <div class="row image-header">
-    <div class="col-md-12">
+    <figure class="col-md-12">
         <img class="article-image" src="@ImagePath" width="500" height="auto" alt="@Description"/>
-        <br>
-        <div class="row">
-            <div class="col-md-12">
-                <span>
-                    @ImageDescription
-                </span>
-            </div>
-        </div>
-    </div>
+        <figcaption>@ImageDescription</figcaption>
+    </figure>
 </div>
