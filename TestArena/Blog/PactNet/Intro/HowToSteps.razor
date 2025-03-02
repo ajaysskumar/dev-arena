@@ -1,0 +1,21 @@
+@using TestArena.Blog.Common
+
+@{
+    var listItems = new List<RenderFragment>()
+    {
+        builder => builder.AddContent(0, (RenderFragment)(@<p>Student service (<code>PactNet.Provider</code>): Provider API</p>)),
+        builder => builder.AddContent(0, (RenderFragment)(@<p>Report Card Service (<code>PactNet.ConsumerOne</code>): Consumer API</p>))
+    };
+}
+<Section Heading="How we achieved the above using PACT framework ?">
+    <ChildContent>
+        <p>I will focus on how i implemented consumer driven contract testing using PACT in .NET Core API. I will not go
+            into the very details of what PACT is, as that is explained much better at <a href="https://docs.pact.io/">pact
+                official site</a>.</p>
+        
+        <List Heading="Services that we will be setting up for this exercise" HeadingLevel="6" ChildContents="listItems"/>
+        <p>Student service exposes below API:</p>
+        <BlogImage ImagePath="/images/blog/pact/intro/Student by Id API.webp"
+                   Description="Student by Id API" Number="5" />
+    </ChildContent>
+</Section>

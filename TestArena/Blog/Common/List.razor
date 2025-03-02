@@ -2,13 +2,13 @@
 
 @code {
     [Required] [Parameter] public string Heading { get; set; }
-    [Parameter] public int Level { get; set; } = 3;
-    [Parameter, EditorRequired] public RenderFragment ChildContent { get; set; } = default!;
+    [Parameter] public int HeadingLevel { get; set; } = 3;
+    [Parameter, EditorRequired] public List<RenderFragment> ChildContents { get; set; } = default!;
 }
 
 <section>
     @{
-        switch(Level){
+        switch(HeadingLevel){
             case 1:
                 <h1>@Heading</h1>
                 break;
@@ -32,5 +32,10 @@
                 break;
         }
     }
-    <div>@ChildContent</div>
+    <ol>
+        @foreach (var child in ChildContents)
+        {
+            <li>@child</li>
+        }
+    </ol>
 </section>

@@ -1,0 +1,34 @@
+@using TestArena.Blog.Common
+
+<Section Heading="Summary">
+    <ChildContent>
+        <p>Recently i came a across a situation where i had to explore contract testing using PACT framework.</p>
+
+        <p>For some background, the account that i was working for had already implemented contract testing in their
+            micro-services. They were following schema based contract testing approach.</p>
+
+        <p>In short, schema based testing approach involves matching of the schema that consumers of an API are
+            using against the said API provider. The example and images below will illustrate schema based testing
+            using a small example scenario.</p>
+
+        <p>Imagine a microservices system with 3 consumers (A, B and C) for a Provider API. Now all three consumers
+            are expecting a certain fields for their use case from the Provider API. As long as Provider is able to
+            maintain the contract expectations of the consumers, things will be fine.</p>
+
+        <p>In schema based contract tests, the testing framework is responsible for getting the schemas of all the
+            consumers and it also holds the current schema of the Provider service. The next step is the comparison
+            which is show in images below.</p>
+
+        <BlogImage ImagePath="/images/blog/pact/intro/diagram-1-success-case.webp" Description="Success case"
+            Number="1">
+        </BlogImage>
+
+        <p>In diagram above, a success scenario is shown in a schema based contract testing. All the tests are success as the expected fields by all the clients are available in provider’s schema.</p>
+
+        <BlogImage ImagePath="/images/blog/pact/intro/ct-fail.webp" Description="Failure case"
+            Number="2">
+        </BlogImage>
+
+        <p>The above diagram shows a failure case. The failure is because the <code>Consumer C</code> is expecting the role field which now has been removed from the Provider API schema.</p>
+    </ChildContent>
+</Section>

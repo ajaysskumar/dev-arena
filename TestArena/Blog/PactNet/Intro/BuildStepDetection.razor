@@ -1,0 +1,22 @@
+@using TestArena.Blog.Common
+
+<Section Heading="Everything till here looks good, we are able to capture failures, then why we explored another options ?"
+        Level="4">
+        <ChildContent>
+                <p>Its because in the approach above, the contract test pipeline was running on development environment
+                        and the schema was taken from a currently deployed service in development environment. This
+                        means that the failure will only be caught after the breaking change has been introduced in the
+                        Provider API repository and deployed to certain environment. In short, failure detection was
+                        late.</p>
+
+                <BlogImage ImagePath="/images/blog/pact/intro/Flow with schema based testing.webp"
+                        Description="Flow with schema based testing" Number="3" />
+
+                <p>As you can see above, the failure detection is after the build and deployment step were done.</p>
+
+                <p>We wanted the build step itself to fail so that an early detection of the breaking change is caught
+                        before it can make make any mess. Something like below.</p>
+                <BlogImage ImagePath="/images/blog/pact/intro/Failure at build step.webp"
+                        Description="Failure at build step" Number="4" />
+        </ChildContent>
+</Section>
