@@ -1,11 +1,23 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
-    @* <div class="container-fluid">
-        <a class="navbar-brand" href="">TestArena</a>
-        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div> *@
-</div>
+﻿@* $1$ <div class="top-row ps-3 navbar navbar-dark"> #1# *@
+@* $1$     $1$ <div class="container-fluid"> #1# *@
+@* $1$         <a class="navbar-brand" href="">TestArena</a> #1# *@
+@* $1$         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu"> #1# *@
+@* $1$             <span class="navbar-toggler-icon"></span> #1# *@
+@* $1$         </button> #1# *@
+@* $1$     </div> #1# *@ 
+@* $1$ </div> #1# *@
+
+<header class="bg-primary text-white p-3 d-flex align-items-center">
+    <div class="logo">
+        <h3 class="m-0">Tech Blog</h3>
+    </div>
+    <div class="search-bar text-center">
+        <input type="text" class="form-control w-75 mx-auto" placeholder="Search...">
+    </div>
+    <div class="settings">
+        <button class="btn btn-light">Settings</button>
+    </div>
+</header>
 
 @* <div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu"> *@
 @*     <nav class="flex-column"> *@
