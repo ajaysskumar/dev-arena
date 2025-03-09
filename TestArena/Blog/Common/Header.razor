@@ -13,7 +13,7 @@
         padding: 20px 0;
     }
     .article-image {
-        max-width: 500px;
+        max-width: 500px !important;
         height: auto;
         border-radius: 10px;
     }
@@ -21,7 +21,7 @@
 
 <header class="article-header">
     <h1 class="fw-bold">@Title</h1>
-    <img src="@Image" alt="Article Banner" class="img-fluid rounded mx-auto d-block my-3">
+    <img src="@Image" alt="Article Banner" height="200" width="auto" class="img-fluid rounded mx-auto d-block my-3 article-image">
 </header>
 
 @* <div class="row"> *@
