@@ -5,7 +5,7 @@
     [Required] [Parameter] public string Description { get; set; }
     [Parameter] public int Number { get; set; }
 
-    private string ImageDescription => Number > 0 ? $"{Number}: {Description}" : Description;
+    private string ImageDescription => Number > 0 ? $"<strong>{Number}</strong>: {Description}" : Description;
 }
 
 <style>
@@ -24,11 +24,26 @@
         padding: 2px;
         text-align: center;
     }
+
+    .figure-caption {
+        font-size: 0.9rem; /* Adjust caption size */
+        color: #6c757d; /* Muted text color */
+        text-align: center; /* Center align */
+        margin-top: 8px; /* Space between image and caption */
+        font-weight: 500; /* Slightly bold for readability */
+    }
+
+    .figure-caption strong {
+        color: #343a40; /* Darker color for image number */
+        font-weight: 600; /* Make image number bold */
+    }
 </style>
 
 <div class="row image-header">
-    <figure class="col-md-12">
-        <img class="img-fluid rounded mx-auto d-block my-3" src="@ImagePath" width="500" height="auto" alt="@Description"/>
-        <figcaption>@ImageDescription</figcaption>
+    <figure class="text-center">
+        <img src="@ImagePath" class="img-fluid rounded" alt="@Description">
+        <figcaption class="figure-caption">
+            <strong>Figure @(Number > 0 ? Number.ToString() : string.Empty) :</strong> @Description
+        </figcaption>
     </figure>
 </div>
