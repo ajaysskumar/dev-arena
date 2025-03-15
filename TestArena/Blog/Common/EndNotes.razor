@@ -1,0 +1,15 @@
+@using System.ComponentModel.DataAnnotations
+
+@code {
+    [Required] [Parameter] public string RepositoryLink { get; set; }
+}
+
+<section>
+    @{
+        if (!string.IsNullOrEmpty(RepositoryLink))
+        {
+            <p>For reference, the code repository being is discussed is available on github link: <a href="@RepositoryLink">@RepositoryLink</a></p>
+        }
+    }
+    <p>Thanks for reading through. Please share feedback, if any, in comments or on my email <a href="mailto:ajay.a338@gmail.com">ajay.a338@gmail.com</a> </p>
+</section>

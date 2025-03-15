@@ -1,0 +1,25 @@
+@using TestArena.Blog.Common
+
+<Section Heading="Failure Scenario">
+    <ChildContent>
+
+        <p>To test out failure scenario, we will try to change the pact file manually and mimic a scenario such that the
+            consumer is expecting another field called “classId” (line 26) which, at the moment, our provider API does
+            not supports. After manually changing the pact file the response expected by consumer service will look like
+            below:</p>
+        <GithubGistSnippet Title="Changing pact file manually to mimic fail scenario" UserId="ajaysskumar"
+                           FileName="5762614e542611588dacff1d77158bd8"/>
+
+        <p>After this, if we try to get this pact file verified by our provider unit test, we will get a failure result
+            indicating why the test failed. The failure message ($ -> Actual map is missing the following keys: classId)
+            below indicates the field name that was not supported by the provider API but was expected by the consumer
+            service.</p>
+
+        <BlogImage ImagePath="/images/blog/pact/intro/Failure result.webp"
+                   Description="Failure result" Number="7"/>
+
+        <p>Now, since the contract verification is happening at unit test level, we were able to handle the breaking
+            changes detection at build level only. Even better, we can use pre-commit hook so that we get information on
+            breaking changes at development level and faulty code is never committed to code repository.</p>
+    </ChildContent>
+</Section>
