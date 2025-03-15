@@ -1,0 +1,7 @@
+@code {
+    [Parameter, EditorRequired] public int Number { get; set; }
+    [Parameter] public string Text { get; set; } = "Line"!;
+
+    public string LineTextWithLineNumber => Text + " #" + Number;
+}
+<span class="text-success">@LineTextWithLineNumber</span>

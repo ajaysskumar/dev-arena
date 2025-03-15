@@ -1,5 +1,4 @@
-<h3>FailureMessage</h3>
-
 @code {
-    
+    [Parameter, EditorRequired] public RenderFragment ChildContent { get; set; } = default!;
 }
+<span class="text-danger">@ChildContent</span>
