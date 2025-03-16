@@ -1,1 +1,45 @@
-# dev-arena
+This project is intended to be a static website representing a technical and software engineering blog.
+
+Project structure
+- Layout folder
+	- It contains files and component to support overall them and layout of the site
+- wwwroot
+	- This folder is responsible for custom theming and acts as a starter point for site startup
+- Pages
+	- This folder can be ignored for now as its deprecated
+- Blog
+	- This folder has main things going on. This folder has files and component that support in writing the blog content.
+	- Steps on how to write a blog using the component inside the project
+		- Blog started with defining the header of the blog using `TestArena.Blog.Common.Header` Component
+			- It takes blog title, image, published on date and authors like below and created the content like in image below ![[Pasted image 20250316123234.png]]
+			- Images will be stored and read taken from the wwwroot/images/blog/<BLOG_TOPIC>/<BLOG_CHAPTER> folder
+		- After this, the blog starts normally with the content
+			- The whole article will be placed under `TestArena.Blog.Common.Section` component like in below image ![[Pasted image 20250316124801.png]]
+			- Anything that starts with a heading will be counted as a section and `TestArena.Blog.Common.Section` Component will be used for it.
+			- This component will take the following details
+				- Heading: It will be the heading of the section
+				- Level: This will tell the impact/font weight of the heading. Will range from 1 to 6. 1 being largest and 6 being smallest.
+				- All other details will go inside child component
+				- An example of usage of Section component is given in image below
+				- ![[Pasted image 20250316123152.png]]
+			- The blog will have images as well in between
+				- Each image will be rendered using `TestArena.Blog.Common.BlogImage` Component. It will take below params
+					- Image path: Path of the image. Usually it will be `wwwroot/images/blog/<BLOG_TOPIC>/<BLOG_CHAPTER> folder`
+					- Description: Description of the image
+					- Number: This will be the number which will represent the image number based on where it is placed in the blog. While deciding this number, header image will not be taken into account.
+					- Example usage: ![[Pasted image 20250316123639.png]]
+			- Blog will also contain code snippets at places
+				- Each code snippet will use the the component `TestArena.Blog.Common.GithubGistSnippet` Component.
+				- To make this component work, we will have to create a github jist first for the code snippet and use its id inside it.
+				- It will take the below params:
+					- Title: This represent the purpose of the code piece
+					- UserId: UserId of the use who has hosted the gist code
+					- FileName: Id of the gist file. For automated conversions use the default gist id `d5a6faaf1e103a6f90c0e92bcc69a440`
+					- Example usage: ![[Pasted image 20250316124241.png]]
+			- Blog might also contain lists at some times
+				- Use the `TestArena.Blog.Common.List` component for that. It will use the below params:
+					- Heading: Heading of the list
+					- HeadingLevel: This will tell the impact/font weight of the heading. Will range from 1 to 6. 1 being largest and 6 being smallest.
+					- ChildContents: This would be of type `List<RenderFragment>`. Example list creation looks like in below image![[Pasted image 20250316124546.png]]
+					- Example list usage looks like in image below ![[Pasted image 20250316124617.png]]
+			- 

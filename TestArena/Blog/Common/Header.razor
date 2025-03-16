@@ -3,6 +3,8 @@
 @code {
     [Required][Parameter] public string Title { get; set; }
     [Required][Parameter] public string Image { get; set; }
+    [Required][Parameter] public DateTime PublishedOn { get; set; }
+    [Required][Parameter] public string Authors { get; set; }
     [Parameter] public string Description { get; set; }
 }
 
@@ -41,12 +43,12 @@
                     <!-- Author on the left -->
                     <div class="col-6 d-flex justify-content-start">
                         <span class="text-secondary fw-bold">Author(s): </span>
-                        <span class="text-secondary fw-bold ms-1">Ajay Kumar</span>
+                        <span class="text-secondary fw-bold ms-1">@Authors</span>
                     </div>
 
                     <!-- Published date on the right -->
                     <div class="col-6 d-flex justify-content-end">
-                        <span class="text-muted fw-bold">Published On: @DateTime.Now.ToString("dd MMM yyyy")</span>
+                        <span class="text-muted fw-bold">Published On: @PublishedOn.ToString("dd MMM yyyy")</span>
                     </div>
                 </div>
             </div>
