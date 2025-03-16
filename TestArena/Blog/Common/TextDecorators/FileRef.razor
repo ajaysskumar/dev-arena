@@ -1,0 +1,27 @@
+@using System.ComponentModel.DataAnnotations
+
+@code {
+    [Parameter]
+    [Required]
+    public string FileName { get; set; }
+
+    [Parameter]
+    public string FilePath { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        if (string.IsNullOrEmpty(FileName))
+        {
+            throw new ArgumentException("FileName is a mandatory parameter.");
+        }
+    }
+}
+
+@if (!string.IsNullOrEmpty(FilePath))
+{
+    <a class="text-primary" href="@FilePath">@FileName</a>
+}
+else
+{
+    <span class="text-primary">@FileName</span>
+}

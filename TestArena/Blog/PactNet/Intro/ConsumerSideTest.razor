@@ -1,10 +1,11 @@
 @using TestArena.Blog.Common
+@using TestArena.Blog.Common.TextDecorators
 
 @{
     var listItems = new List<RenderFragment>()
     {
         builder => builder.AddContent(0, (RenderFragment)(@<p>First, the logic inside the StudentClient class will be tested to make sure the request that is dispatched from the system to the provider service should contain all the required request attributes that are defined in the unit test.</p>)),
-        builder => builder.AddContent(0, (RenderFragment)(@<p>Second, a Pact file will be generated with the name ConsumerOne — Student API.json. The naming of the file can be defined at the time of pact builder initialization.</p>))
+        builder => builder.AddContent(0, (RenderFragment)(@<p>Second, a Pact file will be generated with the name <FileRef FileName="ConsumerOne — Student API.json" FilePath="https://raw.githubusercontent.com/ajaysskumar/pact-net-example/refs/heads/master/pacts/ConsumerOne-Student%20API.json"/>. The naming of the file can be defined at the time of pact builder initialization.</p>))
     };
 }
 
@@ -14,7 +15,7 @@
             <p>The very first step is to create a unit test file and initialize pact builder as shown below</p>
             <GithubGistSnippet Title="Pact Builder Setup" UserId="ajaysskumar" FileName="c45d40c48ea2a3e2c81719e41df6f882"/>
             
-            <p>Next we have to write test and setup scenario. Here below, we are instructing pact builder to return a specific response when it gets a specific request on the mock server (ctx.MockServerUri).</p>
+            <p>Next we have to write test and setup scenario. Here below, we are instructing pact builder to return a specific response when it gets a specific request on the mock server (<code>ctx.MockServerUri</code>).</p>
             <GithubGistSnippet Title="Pact consumer unit test" UserId="ajaysskumar" FileName="fe7bf1fc92a9723d0bce1247a417ba5d"/>
             
             <p>The success test run will look like below</p>
@@ -23,7 +24,7 @@
 
             <List Heading="Once the above test runs, 2 things will happen." HeadingLevel="6" ChildContents="listItems"/>
 
-            <p>This pact file needs to be passed to Provider API so that it can be accessed inside unit test, for simplicity here, we have included this file as part of Provider API’s unit test project itself. However, there is much better way which provides many other features, that is called pactflow(https://pactflow.io/ ). It offers free plan as well which can be used to small or test projects.</p>
+            <p>This pact file needs to be passed to Provider API so that it can be accessed inside unit test, for simplicity here, we have included this file as part of Provider API’s unit test project itself. However, there is much better way which provides many other features, that is called <a href="https://pactflow.io/">pactflow</a>. It offers free plan as well which can be used to small or test projects.</p>
 
             <p>The pact file will look something like below. This file contains, among other details, the request structure that ConsumerOne(Report Card API) will be sending and response that it expects from the Provider API</p>
 
