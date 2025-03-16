@@ -6,10 +6,15 @@
     [Parameter] public string Category { get; set; } = string.Empty;
     [Parameter] public string BlogUrl { get; set; } = "#";
 }
+<style>
+    .custom-size {
+        max-width: 400px;
+    }
+</style>
 
-<div class="card shadow-sm">
+<div class="card shadow-sm custom-size">
     <a href="@BlogUrl">
-        <img src="@ImageUrl" class="card-img-top" alt="@Title">
+        <img src="@ImageUrl" class=" img img-fluid img-thumbnail" alt="@Title">
     </a>
     <div class="card-body">
         <span class="badge bg-primary">@Category</span>
