@@ -1,17 +1,24 @@
 @using System.ComponentModel.DataAnnotations
 
 @code {
-    [Required] [Parameter] public string Title { get; set; }
-    [Required] [Parameter] public string Image { get; set; }
+    [Required][Parameter] public string Title { get; set; }
+    [Required][Parameter] public string Image { get; set; }
     [Parameter] public string Description { get; set; }
 }
 
 <style>
     .article-header {
-        margin: 0 auto; /* Centers the div */
+        margin: 0 auto;
+        /* Centers the div */
         text-align: center;
         padding: 20px 0;
     }
+
+    .container-fluid, .row, .col-md-12, .col-6 {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
     .article-image {
         max-width: 500px !important;
         height: auto;
@@ -20,6 +27,31 @@
 </style>
 
 <header class="article-header">
-    <h1 class="fw-bold">@Title</h1>
-    <img src="@Image" alt="Article Banner" height="200" width="auto" class="img-fluid rounded mx-auto d-block my-3">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="fw-bold">@Title</h1>
+        </div>
+        <div class="col-md-12">
+            <img src="@Image" alt="Article Banner" height="200" width="auto"
+                class="img-fluid rounded mx-auto d-block my-3">
+        </div>
+        <div class="col-md-12">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- Author on the left -->
+                    <div class="col-6 d-flex justify-content-start">
+                        <span class="text-secondary fw-bold">Author(s): </span>
+                        <span class="text-secondary fw-bold ms-1">Ajay Kumar</span>
+                    </div>
+
+                    <!-- Published date on the right -->
+                    <div class="col-6 d-flex justify-content-end">
+                        <span class="text-muted fw-bold">Published On: @DateTime.Now.ToString("dd MMM yyyy")</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </header>
