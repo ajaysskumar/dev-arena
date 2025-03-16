@@ -1,0 +1,94 @@
+@page "/blog/contract-testing-in-pact-with-events"
+@using TestArena.Blog.Common
+
+<BlogContainer>
+    <Header 
+    Title="Intro to PACT for .NET Core: Events Based Systems"
+    ImageUrl="/images/blog/pact/intro-to-pact.jpg"
+    PublishDate="2024-06-24"
+    Authors="Ajay Kumar" />
+
+<Header 
+    Title="Intro to PACT for .NET Core: Events Based Systems"
+    ImageUrl="/images/blog/pact/intro-to-pact.jpg"
+    PublishDate="2024-06-24"
+    Authors="Ajay Kumar" />
+
+<Section Heading="Introduction">
+    <p>This is a continuation of the PACT for .NET series where I am going to cover the usage of PACT in event-based systems.</p>
+    <p>This article assumes the readers will have a basic understanding of event-based systems and frameworks. In case not, a good place to start can be <a href="https://www.rabbitmq.com/tutorials">RabbitMQ Tutorials</a>.</p>
+    <p>I will be using the same repo setup that I have used to demonstrate usage in API-based systems. I have covered the setup in detail in a previous blog in this series:</p>
+    <p><a href="/blog/contract-testing-pact-net-intro">Contract testing for APIs: Intro to PACT for .NET Core</a></p>
+</Section>
+
+<Section Heading="Scenario: Event Flow" Level="5">
+    <p>For illustration purposes, we can imagine a scenario where the Result service (Consumer) wants to get informed whenever a student is created.</p>
+    <BlogImage ImagePath="/images/blog/pact/events-demo/Publisher-Broker-Listener.webp" Description="Publisher/Broker/Listener Diagram" Number="1"/>
+    <p>Now since both Result and Student are separate services, below is the infrastructure that has been implemented in order to make that work.</p>
+    <p>I have incorporated the RabbitMQ library as a messaging service in both the APIs.</p>
+</Section>
+
+<Section Heading="Publishing Events" Level="5">
+    <p>Whenever a new student is created using the Student service’s (Provider) POST API, we are publishing an event called <strong>StudentCreatedEvent</strong>.</p>
+    <GithubGistSnippet Title="Publish event during student creation" UserId="ajaysskumar" FileName="513f17acb18ec1b6029e4850f8bc2683" />
+    
+    <p>The event structure includes details such as:</p>
+    <GithubGistSnippet Title="Properties inside StudentCreatedEvent" UserId="ajaysskumar" FileName="24a64b48634f478bc0d617ff83108565" />
+</Section>
+
+<Section Heading="Listening to Events" Level="5">
+    <p>Now the above event can be listened to by any service interested in that event. In this scenario, that service is the Result service.</p>
+
+    <p>There is a listener defined in the Result service which may perform any operation based on the information received in the <strong>StudentCreatedEvent</strong>.</p>
+
+    <GithubGistSnippet Title="Student created event listener in Result service" UserId="ajaysskumar" FileName="5265e3d73d242bbdecc0b162fd4ba4b9" />
+
+    <p>For example, it may store student details in the Result service to avoid direct dependency on the Student service while preparing results.</p>
+    <BlogImage Src="/images/blog/pact/student-event-listener.jpg" Alt="Student created event listener in Result service" />
+</Section>
+
+<Section Heading="Contract Testing with PACT" Level="4">
+    <p>The first part of contract testing involves defining the expected event structure on the consumer side, which results in generating a PACT JSON contract file.</p>
+
+    <GithubGistSnippet Title="Consumer test defining the contract" UserId="ajaysskumar" FileName="ddbb5a5ffb05223d785146f2baaf9f94" />
+
+    <p>Once the contract is defined, a PACT JSON contract file is generated, which looks something like this:</p>
+
+    <GithubGistSnippet Title="Contract snapshot" UserId="ajaysskumar" FileName="fef0bbd541154a7ce8debd5964a54ca6" />
+</Section>
+
+<Section Heading="Verifying the Provider" Level="4">
+    <p>Now that this contract file has been created, we need to write tests on the provider side to ensure that it adheres to the contract.</p>
+    <GithubGistSnippet Title="Provider side contract verification" UserId="ajaysskumar" FileName="d7f58cef45c94f59b295b12d3dee2852" />
+
+</Section>
+
+<Section Heading="PACT Testing in Action" Level="4">
+    <p>Now that this setup is ready, we can quickly do a build and test:</p>
+    <span><code>dotnet build</code></span> <br/>
+    <span><code>dotnet build</code></span> <br/>
+    <p>Alternatively, you can run individual tests as well.</p>
+    <BlogImage ImagePath="/images/blog/pact/events-demo/success test.webp" Description="Success test" Number="2"/>
+</Section>
+
+<Section Heading="Failure Case Example" Level="4">
+    <p>To test a failure case, we can make some changes in our provider. For example, renaming the <strong>LastName</strong> field to <strong>LName</strong> and rerunning the tests.</p>
+
+    <GithubGistSnippet Title="LastName property renamed to LName" UserId="ajaysskumar" FileName="a85b14d4d16831e181ba7551aa69bdfa" />
+
+    <p>When we run the tests, we can see the results:</p>
+
+    <BlogImage ImagePath="/images/blog/pact/events-demo/Provider tests hinting at the actual gap between consumer and provider contract.webp" Description="Provider tests hinting at the actual gap between consumer and provider contract" Number="3" />
+
+    <p>As we see in the results above, the error message suggests that the <strong>LastName</strong> field is missing on the provider side.</p>
+</Section>
+
+<Section Heading="Conclusion" Level="4">
+    <p>By implementing contract testing with PACT for event-based systems, we ensure reliable integrations between services.</p>
+    <p>This methodology helps detect issues early, ensuring both consumer and provider remain in sync.</p>
+    <p>For reference, the code repository being discussed is available on <a href="https://github.com/ajaysskumar/pact-net-example">GitHub</a>.</p>
+    <p>Thanks for reading! Please share feedback in the comments or reach out via email at <a href="mailto:ajay.a338@gmail.com">ajay.a338@gmail.com</a>.</p>
+</Section>
+
+
+</BlogContainer>
