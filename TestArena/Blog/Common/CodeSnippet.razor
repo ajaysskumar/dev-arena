@@ -2,16 +2,17 @@
 
 <div class="container">
     <div class="row">
-        <div class="col">
+        <div class="col-12">
             <pre class="pre-scrollable rounded border border-2 p-3">
                 <code class="language-@Language" style="font-size: 0.8rem;">@ChildContent</code>
             </pre>
         </div>
-        <div class="col text-center">
+        <div class="col-12 text-center">
            <code>Code Sample #@(Number > 0 ? Number.ToString() : string.Empty) : @Description</code> 
         </div>
     </div>
 </div>
+<br/>
 
 @code {
     [Parameter] public RenderFragment? ChildContent { get; set; }
