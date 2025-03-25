@@ -5,7 +5,15 @@
     [Required] [Parameter] public string Description { get; set; }
     [Parameter] public int Number { get; set; }
 
-    private string ImageDescription => Number > 0 ? $"<strong>{Number}</strong>: {Description}" : Description;
+    private bool IsMagnified { get; set; } = false;
+
+    private void ToggleMagnify()
+    {
+        IsMagnified = !IsMagnified;
+    }
+
+    private string CursorClass => IsMagnified ? "cursor-de-magnify" : "cursor-magnify";
+    private string ImageClass => IsMagnified ? "magnified" : "article-image";
 }
 
 <style>
@@ -13,12 +21,30 @@
         margin: 0 auto; /* Centers the div */
         text-align: center;
     }
-    
+
     .article-image {
-        max-width: 500px;
+        width: 100%; /* Ensure the image is fully responsive */
         height: auto;
         border-radius: 10px;
+        transition: transform 0.5s ease-in-out;
     }
+
+    .magnified {
+        max-width: 800px;
+        height: auto;
+        border-radius: 10px;
+        transform: scale(1.5); /* Magnify the image */
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .cursor-magnify {
+        cursor: zoom-in; /* Circular magnify button */
+    }
+
+    .cursor-de-magnify {
+        cursor: zoom-out; /* Circular de-magnify button */
+    }
+
     figcaption {
         font-style: italic;
         padding: 2px;
@@ -41,7 +67,8 @@
 
 <div class="row image-header">
     <figure class="text-center">
-        <img src="@ImagePath" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success" width="800" alt="@Description">
+        <img src="@ImagePath" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success @ImageClass @CursorClass" 
+             alt="@Description" @onclick="ToggleMagnify">
         <figcaption class="figure-caption">
             <strong>Figure @(Number > 0 ? Number.ToString() : string.Empty) :</strong> @Description
         </figcaption>
