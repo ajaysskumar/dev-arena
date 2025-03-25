@@ -1,8 +1,8 @@
 @using System.ComponentModel.DataAnnotations
 
 @code {
-    [Required] [Parameter] public string ImagePath { get; set; }
-    [Required] [Parameter] public string Description { get; set; }
+    [Required] [Parameter] public string ImagePath { get; set; } = "#";
+    [Required] [Parameter] public string Description { get; set; } = "NA";
     [Parameter] public int Number { get; set; }
 
     private bool IsMagnified { get; set; } = false;

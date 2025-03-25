@@ -1,0 +1,41 @@
+@using TestArena.Layout
+@using TestArena.Blog.Common.NavigationUtils
+
+<div class="col-12 col-md-4 d-flex justify-content-md-center justify-content-center mt-2 mt-md-0">
+    <div class="w-75 position-relative">
+        <input type="text" class="form-control" placeholder="Search..." @oninput="FilterPages">
+        <ul class="list-group position-absolute w-100 mt-1" style="z-index: 1000;" hidden="@(!FilteredPages.Any())">
+            @foreach (var filteredPage in FilteredPages)
+            {
+                <li class="list-group-item p-0">
+                    <a href="@filteredPage.RelativePath" class="d-block text-decoration-none p-2" @onclick="() => HideDropdown()">@filteredPage.Header</a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+
+@code {
+    private string SearchText { get; set; } = string.Empty;
+    private List<PageInfo> FilteredPages { get; set; } = new();
+
+    private void FilterPages(ChangeEventArgs e)
+    {
+        SearchText = e.Value?.ToString() ?? string.Empty;
+        if (string.IsNullOrWhiteSpace(SearchText))
+        {
+            FilteredPages.Clear();
+        }
+        else
+        {
+            FilteredPages = SiteMap.Pages
+                .Where(page => page.Header.Contains(SearchText, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+        }
+    }
+
+    private void HideDropdown()
+    {
+        FilteredPages.Clear();
+    }
+}
