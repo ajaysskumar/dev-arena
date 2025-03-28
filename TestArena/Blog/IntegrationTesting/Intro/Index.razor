@@ -3,16 +3,209 @@
 
 <BlogContainer>
     <Header Title="Integration testing for dotnet core APIs: Introduction"
-            Image="/images/blog/integration-testing/intro/banner.png" PublishedOn="@DateTime.Now" Authors="Ajay Kumar">
+        Image="/images/blog/integration-testing/intro/banner.png" PublishedOn="@DateTime.Now" Authors="Ajay Kumar">
     </Header>
-    <Section>
-        <p>This is going to be multi-part series on integration tests from introduction to advanced used cases.</p>
+
+    <Section Heading="What are integration tests in context of APIs?" Level="4">
+        <p>In the context of <b>.NET Core APIs</b> for a blog, integration tests are automated tests that evaluate the
+            functionality of various parts of your application working together as a whole. Specifically, these tests
+            ensure that multiple components — such as controllers, database access, middleware, internal and external
+            services — function correctly when integrated, as opposed to functioning correctly only in isolation (which
+            would be covered by unit tests).</p>
+        <p>Here is a quick one-liner summary on popular kinds of testing for an API codebase:</p>
+        <ul>
+            <li><b>Unit Tests:</b> Validate individual components like controllers or services in isolation.</li>
+            <li><b>Integration Tests:</b> Verify the interaction between multiple components (e.g., API, database,
+                middleware) as a cohesive system.</li>
+            <li><b>Contract Tests:</b> Ensure that API endpoints conform to agreed-upon interfaces or expectations
+                between services.</li>
+        </ul>
+        <p>Integration tests will help you in identifying possible bugs introduced due to any new changes in your code.</p>
+
+        <BlogImage ImagePath="/images/blog/integration-testing/intro/Build process when integration tests fail.webp" Description="Build process when integration tests fail" Number="1" />
+
+        <BlogImage ImagePath="/images/blog/integration-testing/intro/Build process when integration tests pass.webp" Description="Build process when integration tests pass" Number="2" />
+
     </Section>
 
-    <Section Heading="What are integration tests in context of APIs?">
-        <p>In the context of <b>.NET Core APIs</b> for a blog, integration tests are automated tests that evaluate the functionality of various parts of your application working together as a whole. Specifically, these tests ensure that multiple components — such as controllers, database access, middleware, internal and external services — function correctly when integrated, as opposed to functioning correctly only in isolation (which would be covered by unit tests).</p>
+    <Section Heading="Ways to write integration tests" Level="4">
+        <p>Now there are various ways to write integration tests:</p>
+        <ul>
+            <li>Using Postman or any other API testing tool</li>
+            <li>Deploying services to actual environment, either server or cloud service</li>
+            <li>Using <b>WebApplicationFactory</b> in dotnet to run an in-memory server locally</li>
+        </ul>
+        <p>We will be discussing the <b>WebApplicationFactory</b> method, which is fast, flexible, configurable and does not require any additional tools or hosting environment.</p>
+        <p>Some of the advantages of this approach are as below:</p>
+        <ul>
+            <li><b>Realistic Environment:</b> It provides a full-fledged, in-memory test server that mimics the real production environment, allowing you to test the entire request/response pipeline of your application without needing to host it on an actual web server.</li>
+            <li><b>End-to-End Testing:</b> You can perform end-to-end testing, including routing, middleware, dependency injection, and database interactions, ensuring that all components work together as expected.</li>
+            <li><b>Customizable Configuration:</b> You can override or customize the application’s configuration (e.g., swapping real services or databases for test versions) to simulate different environments or conditions without affecting the production code.</li>
+            <li><b>Easy HTTP Client Access:</b> WebApplicationFactory makes it simple to create an HttpClient for sending HTTP requests to your API, making it easy to test API endpoints and validate their responses.</li>
+            <li><b>Automatic Startup:</b> It handles the application’s startup process, so you don’t have to manually configure or boot the application, saving time and reducing boilerplate code.</li>
+            <li><b>Flexible Testing with Dependency Injection:</b> You can easily replace services, middleware, or database contexts using the test server’s dependency injection, which allows for testing specific scenarios like using an in-memory database.</li>
+            <li><b>Seamless Integration with Test Frameworks:</b> It integrates well with popular testing frameworks like xUnit, NUnit, or MSTest, and is optimized for use in .NET Core testing scenarios, reducing friction in writing and running tests.</li>
+        </ul>
+    </Section>
+
+    <Section Heading="Diving into the code" Level="4">
+        <p>For a demo code, we will be referring a code repository, which stores the information for superhero personalities. I’ll be sharing the GitHub link of the code repo at the end of the article.</p>
+        <p>Our demo API has 2 APIs:</p>
+
+        <BlogImage ImagePath="/images/blog/integration-testing/intro/Demo API swagger definition.webp" Description="Demo API swagger definition" Number="3" />
+
+        <p>A quick glimpse on our simple SuperHero controller</p>
+
+        <CodeSnippet Description="APIs for SuperHero" Number="1">
+[ApiController]
+[Route("[controller]")]
+public class SuperHeroController(ISuperHeroRepository superHeroRepository)
+    : ControllerBase
+{
+    [HttpGet("")]
+    public async Task&lt;IEnumerable&lt;SuperHero&gt;&gt; Get()
+    {
+        return await superHeroRepository.GetAllSuperHeroes();
+    }
+    
+    [HttpGet("{id}")]
+    public async Task&lt;IActionResult&gt; GetById(int id)
+    {
+        var superHero = await superHeroRepository.GetSuperHeroById(id);
+        if (superHero == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(superHero);
+    }
+}
+        </CodeSnippet>
+        <p>Since this is basic demo, our ISuperHeroRepository interacts with a Sqlite database which has some predefined SuperHero entries.</p>
+    </Section>
+
+    <Section Heading="Integration test example" Level="4">
+        <p>Here is an example for our integration test for <b>Get SuperHero By Id</b> scenario:</p>
+
+        <CodeSnippet Description='Integration test for Get SuperHero By Id' Number="2">
+[Fact(DisplayName = "Get superhero by Id returns superhero")]
+public async Task Get_ById_SuperHero_Returns_SuperHero()
+{
+    // Arrange
+    var factory = new WebApplicationFactory&lt;Program&gt;();
+    var htmlClient = factory.CreateClient();
+    
+    // Act
+    var response = await htmlClient.GetAsync("/SuperHero/1");
+
+    // Assert
+    response.StatusCode.Should().Be(HttpStatusCode.OK);
+    var superHeroes = await response.Content.ReadFromJsonAsync&lt;SuperHero&gt;();
+    superHeroes.Should().NotBeNull();
+    superHeroes!.Id.Should().Be(1);
+    superHeroes!.SuperName.Should().Be("Batman");
+}
+        </CodeSnippet>
+
+        <p>Let’s understand what’s happening inside the test:</p>
+        <h5>1. Test Definition and Setup</h5>
+        <p>The test starts with the <code>[Fact]</code> attribute from xUnit, which defines the test and makes it executable within the test framework. The <code>DisplayName</code> parameter provides a readable description for the test, which is helpful for test reports.</p>
+
+        <CodeSnippet Description='Test Definition' Number="3">
+        [Fact(DisplayName = "Get superhero by Id returns superhero")]
+        </CodeSnippet>
+        <p>This test will ensure that the API correctly retrieves a superhero by ID when we hit the <code>/SuperHero/1</code> endpoint.</p>
+
+        <h5>2. Arranging the Test Environment</h5>
+        <p>In the Arrange phase, we use <code>WebApplicationFactory</code> to spin up a test server and create an <code>HttpClient</code> for sending requests to the API.</p>
+
+        <CodeSnippet Description='Arrange Phase' Number="4">
+        var factory = new WebApplicationFactory&lt;Program&gt;();
+        var httpClient = factory.CreateClient();
+        </CodeSnippet>
+        <ul>
+            <li><code>WebApplicationFactory&lt;Program&gt;</code>: This initializes a test instance of the API, emulating the real application.</li>
+            <li><code>CreateClient()</code>: This method returns an <code>HttpClient</code> that can be used to make requests to the in-memory test server.</li>
+        </ul>
+        <p>By using <code>WebApplicationFactory</code>, we simulate the application environment, allowing us to test the full HTTP pipeline, including routing, middleware, and controllers.</p>
+
+        <h5>3. Act: Sending the Request</h5>
+        <p>In the Act phase, we make a GET request to the <code>/SuperHero/1</code> endpoint using the <code>httpClient</code> created earlier.</p>
+
+        <CodeSnippet Description='Act Phase' Number="5">
+        var response = await httpClient.GetAsync("/SuperHero/1");
+        </CodeSnippet>
+        <p>This line sends an HTTP GET request to the API and awaits the response. The application processes the request as it would in production, returning the corresponding superhero (with ID 1) if it exists.</p>
+
+        <h5>4. Assert: Validating the Response</h5>
+        <p>Now we enter the Assert phase, where we check if the response from the API matches our expectations.</p>
+
+        <p><b>Checking the Status Code:</b> This ensures that the API returns the expected HTTP status code, confirming the success or failure of the request.</p>
+        <CodeSnippet Description='Assert Status Code' Number="6">
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+        </CodeSnippet>
+        <p>This assertion ensures the API returns a status code of <code>200 OK</code>, confirming that the request was successful. If the API returned any other status code (like <code>404 Not Found</code> or <code>500 Internal Server Error</code>), the test would fail.</p>
+    </Section>
+    <Section Heading="Validating the Returned Data" Level="4">
+        <p>Next, we check the actual content of the response by deserializing the JSON response into a <code>SuperHero</code> object:</p>
+
+        <CodeSnippet Description='Validate Returned Data' Number="7">
+        var superHero = await response.Content.ReadFromJsonAsync&lt;SuperHero&gt;();
+        superHero.Should().NotBeNull();
+        </CodeSnippet>
+
+        <ul>
+            <li><code>ReadFromJsonAsync&lt;SuperHero&gt;()</code>: This method reads the JSON response and converts it into a <code>SuperHero</code> object. If the response doesn’t match the expected structure, or if the superhero doesn't exist, the test will fail.</li>
+            <li><code>superHero.Should().NotBeNull()</code>: This assertion checks that the API did, in fact, return a superhero. If the API returned null (i.e., no superhero was found), the test would fail here.</li>
+        </ul>
+    </Section>
+
+    <Section Heading="Verifying Specific Property Values" Level="4">
+        <p>Finally, we verify that the returned superhero has the correct properties, specifically checking that the ID is 1 and the superhero's name is "Batman":</p>
+
+        <CodeSnippet Description='Verify Specific Property Values' Number="8">
+        superHero!.Id.Should().Be(1);
+        superHero!.SuperName.Should().Be("Batman");
+        </CodeSnippet>
+
+        <p>When executed, if everything is good with our code, we get all green tests.</p>
+
+        <BlogImage ImagePath="/images/blog/integration-testing/intro/Success test result.webp" Description="Success test result" Number="4" />
     </Section>
     
-    <EndNotes RepositoryLink="https://github.com/ajaysskumar/pact-net-example"/>
-    
+    <Section Heading="Negative Scenario" Level="4">
+        <p>Let’s deliberately try to break our code to understand how the test behaves in a negative scenario. The test scenario <b>Get superhero by invalid Id returns not found</b> expects a <code>404 Not Found</code> status code when a superhero is not found.</p>
+
+        <p>We will make a change in our code to return <code>400 Bad Request</code> instead of <code>404 Not Found</code>:</p>
+
+        <CodeSnippet Description='Modified GetById Method' Number="9">
+        [HttpGet("{id}")]
+        public async Task&lt;IActionResult&gt; GetById(int id)
+        {
+            var superHero = await superHeroRepository.GetSuperHeroById(id);
+            if (superHero == null)
+            {
+                return BadRequest(); // Changed from NotFound()
+            }
+
+            return Ok(superHero);
+        }
+        </CodeSnippet>
+
+        <p>Now, let’s run the test and observe the results. The test result is as follows:</p>
+
+        <CodeSnippet Description='Test Failure Result' Number="10">
+        Expected response.StatusCode to be HttpStatusCode.NotFound {value: 404}, 
+        but found HttpStatusCode.BadRequest {value: 400}
+        </CodeSnippet>
+
+        <BlogImage ImagePath="/images/blog/integration-testing/intro/Failure result status.webp" Description="Failure result status" Number="5" />
+
+        <p>This failure indicates that the test correctly identified the mismatch between the expected and actual status codes. The test expected a <code>404 Not Found</code>, but the API returned a <code>400 Bad Request</code> due to the deliberate change in the code.</p>
+
+        <p>Such scenarios highlight the importance of integration tests in catching unintended changes or bugs in the application behavior.</p>
+    </Section>
+    <p>This is it for the basic setup demo. I will be covering more in the future articles like, how to work with database, authentication, events etc.</p>
+    <EndNotes RepositoryLink="https://github.com/ajaysskumar/pact-net-example" />
+
 </BlogContainer>
