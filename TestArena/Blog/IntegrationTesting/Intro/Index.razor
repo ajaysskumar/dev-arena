@@ -1,0 +1,18 @@
+@page "/blog/integration-testing-in-dotnet-intro"
+@using TestArena.Blog.Common
+
+<BlogContainer>
+    <Header Title="Integration testing for dotnet core APIs: Introduction"
+            Image="/images/blog/integration-testing/intro/banner.png" PublishedOn="@DateTime.Now" Authors="Ajay Kumar">
+    </Header>
+    <Section>
+        <p>This is going to be multi-part series on integration tests from introduction to advanced used cases.</p>
+    </Section>
+
+    <Section Heading="What are integration tests in context of APIs?">
+        <p>In the context of <b>.NET Core APIs</b> for a blog, integration tests are automated tests that evaluate the functionality of various parts of your application working together as a whole. Specifically, these tests ensure that multiple components — such as controllers, database access, middleware, internal and external services — function correctly when integrated, as opposed to functioning correctly only in isolation (which would be covered by unit tests).</p>
+    </Section>
+    
+    <EndNotes RepositoryLink="https://github.com/ajaysskumar/pact-net-example"/>
+    
+</BlogContainer>
