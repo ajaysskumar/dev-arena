@@ -1,0 +1,134 @@
+@page "/blog/integration-testing-in-dotnet-with-database"
+@using TestArena.Blog.Common
+
+
+<BlogContainer>
+    <Header Title="Integration testing for dotnet core APIs: Handling database"
+        Image="/images/blog/integration-testing/handling-database/banner.png" PublishedOn="@DateTime.Now" Authors="Ajay Kumar">
+    </Header>
+
+    <Section Heading="What are integration tests in context of APIs?" Level="4">
+        <p>In the context of <b>.NET Core APIs</b> for a blog, integration tests are automated tests that evaluate the
+            functionality of various parts of your application working together as a whole. Specifically, these tests
+            ensure that multiple components — such as controllers, database access, middleware, internal and external
+            services — function correctly when integrated, as opposed to functioning correctly only in isolation (which
+            would be covered by unit tests).</p>
+        <p>Here is a quick one-liner summary on popular kinds of testing for an API codebase:</p>
+        <ul>
+            <li><b>Unit Tests:</b> Validate individual components like controllers or services in isolation.</li>
+            <li><b>Integration Tests:</b> Verify the interaction between multiple components (e.g., API, database,
+                middleware) as a cohesive system.</li>
+            <li><b>Contract Tests:</b> Ensure that API endpoints conform to agreed-upon interfaces or expectations
+                between services.</li>
+        </ul>
+        <p>Integration tests will help you in identifying possible bugs introduced due to any new changes in your code.
+        </p>
+
+        <BlogImage ImagePath="/images/blog/integration-testing/intro/Build process when integration tests fail.webp"
+            Description="Build process when integration tests fail" Number="1" />
+
+                    <CodeSnippet Description="APIs for SuperHero" Number="1">
+[ApiController]
+[Route("[controller]")]
+public class SuperHeroController(ISuperHeroRepository superHeroRepository)
+    : ControllerBase
+{
+    [HttpGet("")]
+    public async Task&lt;IEnumerable&lt;SuperHero&gt;&gt; Get()
+    {
+        return await superHeroRepository.GetAllSuperHeroes();
+    }
+    
+    [HttpGet("{id}")]
+    public async Task&lt;IActionResult&gt; GetById(int id)
+    {
+        var superHero = await superHeroRepository.GetSuperHeroById(id);
+        if (superHero == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(superHero);
+    }
+}
+        </CodeSnippet>
+    </Section> 
+
+    <Section Heading="Summary" Level="4">
+        <p>Welcome to the 2nd post in our Integration testing series. You may check out the previous post that introduces the concept of writing integration tests using <b>WebApplicationFactory</b> in dotnet below:</p>
+        <BlogReferenceCard 
+        Title="Integration testing for dotnet core APIs: Introduction"
+        Description="Integration testing for dotnet core APIs: Introduction"
+        Url="/blog/integration-testing-in-dotnet-intro"
+        ImageUrl="/images/blog/integration-testing/intro/banner.png"
+        Source="devcodex.in"/>
+
+        <p>Almost every application relies on persistent storage, typically through a database. Integration testing with a real database can be challenging, especially when trying to maintain isolation and consistency across tests. In this post, we will explore how to effectively manage database dependencies in integration tests using <b>WebApplicationFactory</b> and containerized databases.</p>
+        <p><b>Pre-requisites</b>, in case you want to follow the same setup on your system:</p>
+        <ul>
+            <li><b>Postgres DB Server:</b> This is needed in case you want to test out the main application.</li>
+            <li><b>Docker:</b> This is needed to run test containers.</li>
+        </ul>
+    </Section>
+
+    <Section Heading="Setting Up the Database" Level="4">
+        <p>To do this we need to first introduce a database in our sample superhero API. For this demo purpose, we have used a Postgres database.</p>
+        <p>For this, we made the below changes in our superhero API:</p>
+        <CodeSnippet Description="Connection String in appsettings.json" Number="2">
+{
+  "ConnectionStrings": {
+    "WebApiDatabase": "Host=localhost; Database=superhero; Username=postgres; Password=postgres"
+  }
+}
+        </CodeSnippet>
+        <p>Install the package <b>Npgsql.EntityFrameworkCore.PostgreSQL</b> in the main API project. After that, we need to provide options in the program file to guide the application to use the Postgres database:</p>
+        <CodeSnippet Description="Configuring DbContext in Program.cs" Number="3">
+builder.Services.AddDbContext&lt;SuperHeroDbContext&gt;(opt =>
+    opt.UseNpgsql(configuration.GetConnectionString("WebApiDatabase")));
+        </CodeSnippet>
+        <p>Along with this, we also need to create a migration, if not already present, to set up the database schema.</p>
+    </Section>
+
+    <Section Heading="Unit Test Example" Level="4">
+        <p>Finally, our unit test:</p>
+        <CodeSnippet Description="Unit Test for Get All SuperHeroes API" Number="4">
+[Fact(DisplayName = "Get all superheros API returns all superheroes")]
+public async Task Get_All_SuperHeroes_Returns_List_Of_SuperHero()
+{
+    // Arrange
+    factory.SharedFixture.SuperHeroDbContext.SuperHero.AddRange(new List&lt;SuperHero&gt;()
+    {
+        new SuperHero(1, "Batman","Bruce Wayne","Short distance fly,Common sense","Gotham", 40),
+        new SuperHero(2, "Superman", "Clark kent", "Fly, Shoot laser beam, Super strength, ice breath","Gotham", 42),
+        new SuperHero(3, "Robin", "John Blake", "Detective","Gotham", 35)
+    });
+    await factory.SharedFixture.SuperHeroDbContext.SaveChangesAsync();
+    
+    // Act
+    var response = await factory.CreateClient().GetAsync("/SuperHero");
+
+    // Assert
+    response.StatusCode.Should().Be(HttpStatusCode.OK);
+    var superHeroes = await response.Content.ReadFromJsonAsync&lt;List&lt;SuperHero&gt;&gt;();
+    superHeroes.Should().NotBeEmpty();
+    superHeroes![0].Id.Should().Be(1);
+    superHeroes![0].SuperName.Should().Be("Batman");
+}
+        </CodeSnippet>
+        <p>Let's understand the above test:</p>
+        <ul>
+            <li>Now before any of the tests will start executing, our <b>SharedFixture</b> code will run and it will fire up the test container as you can see in the below image:</li>
+        </ul>
+        <BlogImage ImagePath="/images/blog/integration-testing/handling-database/Test containers in action.webp"
+            Description="Test containers in action" Number="2" />
+        <ul>
+            <li>In the <b>Arrange</b> step, I added a few records directly to the database using the <b>SharedFixture</b>.</li>
+            <li>After the above step, there are some records in the system and in the <b>Act</b> step, we will be trying to call the GET superheroes API.</li>
+            <li>If everything is correct, we should be able to see our tests being passed like below:</li>
+        </ul>
+        <BlogImage ImagePath="/images/blog/integration-testing/handling-database/Tests passing.webp"
+            Description="Tests passing" Number="3" />
+    </Section>
+    <p>This is it for the setup with database. I will be covering more in the future articles like, how to work with authentication, events etc.</p>
+    <EndNotes RepositoryLink="https://github.com/ajaysskumar/SuperHeroSolution" />
+</BlogContainer>
