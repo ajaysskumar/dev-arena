@@ -1,49 +1,18 @@
 @page "/"
 @using TestArena.Blog.Common
+@using TestArena.Blog.Common.NavigationUtils
+
 <h2 class="mb-4">Latest Blogs</h2>
-<div class="row row-cols-1 row-cols-md-3 g-4">
-    <div class="col">
-        <Thumbnail ImageUrl="images/blog/pact/intro/header_landscape.png"
-            Title="Contract testing using PACT in dotnet core: Introduction" Author="Ajay kumar"
-            Date="@DateTime.Today.Date.ToLongDateString()" Category="Pact contract testing"
-            BlogUrl="/blog/contract-testing-pact-net-intro" />
-    </div>
-    <div class="col">
-        <Thumbnail ImageUrl="images/blog/pact/events-demo/contract-testing-events.webp"
-            Title="Intro to PACT for .NET Core: Events Based Systems" Author="Ajay kumar"
-            Date="@DateTime.Today.Date.ToLongDateString()" Category="Pact contract testing"
-            BlogUrl="/blog/contract-testing-in-pact-with-events" />
-    </div>
-    <div class="col">
-        <Thumbnail ImageUrl="images/blog/pact/pact-broker/blog_header.png"
-            Title="Intro to PACT for .NET Core: Integration with PactFlow" Author="Ajay kumar"
-            Date="@DateTime.Today.Date.ToLongDateString()" Category="Pact contract testing"
-            BlogUrl="/blog/integration-with-pactflow" />
-    </div>
-    <div class="col">
-        <Thumbnail ImageUrl="images/blog/integration-testing/intro/banner.png"
-            Title="Integration testing for dotnet core APIs: Introduction" Author="Ajay kumar"
-            Date="@DateTime.Today.Date.ToLongDateString()" Category="Integration testing"
-            BlogUrl="/blog/integration-testing-in-dotnet-intro" />
-    </div>
-    <div class="col">
-        <Thumbnail ImageUrl="images/blog/integration-testing/handling-database/banner.png"
-            Title="Integration testing for dotnet core APIs: Handling database" Author="Ajay kumar"
-            Date="@DateTime.Today.Date.ToLongDateString()" Category="Integration testing"
-            BlogUrl="/blog/integration-testing-in-dotnet-with-database" />
-    </div>
+<div class="row row-cols-1 row-cols-md-3 g-4 p-2">
 
-    <div class="col">
-        <Thumbnail ImageUrl="images/blog/integration-testing/handling-external-services/banner.png"
-            Title="Integration testing for dotnet core APIs: Handling 3rd party service calls using wiremock" Author="Ajay kumar"
-            Date="@DateTime.Today.Date.ToLongDateString()" Category="Integration testing"
-            BlogUrl="/blog/integration-testing-in-dotnet-with-external-services" />
-    </div>
-
-    <div class="col">
-        <Thumbnail ImageUrl="images/blog/integration-testing/handling-auth/banner.png"
-            Title="Integration testing for dotnet core APIs: Handling authentication" Author="Ajay kumar"
-            Date="@DateTime.Today.Date.ToLongDateString()" Category="Integration testing"
-            BlogUrl="/blog/integration-testing-in-dotnet-with-auth" />
-    </div>
+    @{
+        foreach (var articlePage in SiteMap.Pages)
+        {
+            <div class="col">
+                <Thumbnail ImageUrl="@articlePage.ArticleImage" Title="@articlePage.Header" Author="Ajay kumar"
+                    Date="@articlePage.PublishedOn.ToLongDateString()" Category="@articlePage.Tags"
+                    BlogUrl="@articlePage.RelativePath" />
+            </div>
+        }
+    }
 </div>

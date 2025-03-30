@@ -1,9 +1,11 @@
+@using System.Collections.Generic
+
 @code {
     [Parameter] public string ImageUrl { get; set; } = string.Empty;
     [Parameter] public string Title { get; set; } = string.Empty;
     [Parameter] public string Author { get; set; } = string.Empty;
     [Parameter] public string Date { get; set; } = string.Empty;
-    [Parameter] public string Category { get; set; } = string.Empty;
+    [Parameter] public List<string> Category { get; set; } = [];
     [Parameter] public string BlogUrl { get; set; } = "#";
 }
 <style>
@@ -17,7 +19,10 @@
         <img src="@ImageUrl" class=" img img-fluid img-thumbnail" alt="@Title">
     </a>
     <div class="card-body">
-        <span class="badge bg-primary">@Category</span>
+        @foreach (var c in Category)
+        {
+            <span class="badge bg-primary mx-1">@c</span>
+        }
         <h5 class="card-title mt-2">
             <a href="@BlogUrl" class="text-decoration-none text-dark">@Title</a>
         </h5>
