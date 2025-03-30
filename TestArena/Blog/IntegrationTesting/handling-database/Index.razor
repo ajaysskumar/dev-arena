@@ -3,57 +3,6 @@
 
 
 <BlogContainer>
-    <Header Title="Integration testing for dotnet core APIs: Handling database"
-        Image="/images/blog/integration-testing/handling-database/banner.png" PublishedOn="@DateTime.Now" Authors="Ajay Kumar">
-    </Header>
-
-    <Section Heading="What are integration tests in context of APIs?" Level="4">
-        <p>In the context of <b>.NET Core APIs</b> for a blog, integration tests are automated tests that evaluate the
-            functionality of various parts of your application working together as a whole. Specifically, these tests
-            ensure that multiple components — such as controllers, database access, middleware, internal and external
-            services — function correctly when integrated, as opposed to functioning correctly only in isolation (which
-            would be covered by unit tests).</p>
-        <p>Here is a quick one-liner summary on popular kinds of testing for an API codebase:</p>
-        <ul>
-            <li><b>Unit Tests:</b> Validate individual components like controllers or services in isolation.</li>
-            <li><b>Integration Tests:</b> Verify the interaction between multiple components (e.g., API, database,
-                middleware) as a cohesive system.</li>
-            <li><b>Contract Tests:</b> Ensure that API endpoints conform to agreed-upon interfaces or expectations
-                between services.</li>
-        </ul>
-        <p>Integration tests will help you in identifying possible bugs introduced due to any new changes in your code.
-        </p>
-
-        <BlogImage ImagePath="/images/blog/integration-testing/intro/Build process when integration tests fail.webp"
-            Description="Build process when integration tests fail" Number="1" />
-
-                    <CodeSnippet Description="APIs for SuperHero" Number="1">
-[ApiController]
-[Route("[controller]")]
-public class SuperHeroController(ISuperHeroRepository superHeroRepository)
-    : ControllerBase
-{
-    [HttpGet("")]
-    public async Task&lt;IEnumerable&lt;SuperHero&gt;&gt; Get()
-    {
-        return await superHeroRepository.GetAllSuperHeroes();
-    }
-    
-    [HttpGet("{id}")]
-    public async Task&lt;IActionResult&gt; GetById(int id)
-    {
-        var superHero = await superHeroRepository.GetSuperHeroById(id);
-        if (superHero == null)
-        {
-            return NotFound();
-        }
-
-        return Ok(superHero);
-    }
-}
-        </CodeSnippet>
-    </Section> 
-
     <Section Heading="Summary" Level="4">
         <p>Welcome to the 2nd post in our Integration testing series. You may check out the previous post that introduces the concept of writing integration tests using <b>WebApplicationFactory</b> in dotnet below:</p>
         <BlogReferenceCard Title="Integration testing for dotnet core APIs: Introduction"
