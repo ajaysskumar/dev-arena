@@ -1,0 +1,291 @@
+@page "/blog/integration-testing-in-dotnet-with-auth"
+@using TestArena.Blog.Common
+<BlogContainer>
+    <Header Title="Integration testing for dotnet core APIs: Handling APIs behind authentication"
+        Image="/images/blog/integration-testing/handling-auth/banner.png" PublishedOn="@DateTime.Now"
+        Authors="Ajay Kumar">
+    </Header>
+
+    <Section Heading="Integration testing for APIs behind authentication" Level="4">
+        <p>This is continuation of the <b>Integration testing in dotnet</b> series.</p>
+        <p>This time we will be covering on how to test APIs which are behind authentication. We will be extending the same code repo we used in the previous article on handling 3rd party services (folder name <code>DemoWith3rdPartyService</code>).</p>
+        <p>Please make sure to checkout the previous articles in the series to get the most out of this article:</p>
+        <ul>
+            <li>
+                <BlogReferenceCard Title="Integration testing for dotnet core APIs: Introduction"
+                    Description="This is going to be a multi-part series on integration tests from introduction to advanced use cases."
+                    Url="https://medium.com" ImageUrl="/images/blog/integration-testing/intro/banner.png"
+                    Source="medium.com" />
+            </li>
+            <li>
+                <BlogReferenceCard Title="Integration testing for dotnet core APIs: Handling database"
+                    Description="Welcome to the 2nd post in our Integration testing series. You may check out the previous post that introduces integration testing."
+                    Url="https://medium.com" ImageUrl="/images/blog/integration-testing/database/banner.png"
+                    Source="medium.com" />
+            </li>
+            <li>
+                <BlogReferenceCard Title="Integration testing for dotnet core APIs: Handling 3rd party service calls using wiremock"
+                    Description="This is continuation of the Integration testing in dotnet series. This time we will be covering the scenario where APIs interact with 3rd party services."
+                    Url="https://medium.com" ImageUrl="/images/blog/integration-testing/handling-auth/banner.png"
+                    Source="medium.com" />
+            </li>
+        </ul>
+    </Section>
+
+    <Section Heading="Let’s get started" Level="4">
+        <p>To make this happen we have created an authenticated version of our SuperHero API. The API is called <code>/SuperHero/private</code>. Refer the swagger screenshot below.</p>
+
+        <BlogImage ImagePath="/images/blog/integration-testing/handling-auth/Swagger-api.webp"
+            Description="Swagger API" Number="1" />
+
+        <p>Our API action method in code will look like below. Notice the [Authorize] attribute with role required as Admin</p>
+
+        <CodeSnippet Description="Authenticated API action method" Number="2">
+            [HttpGet("private")]
+            [Authorize(Roles = "Admin")]
+            public async Task&lt;IEnumerable&lt;SuperHero&gt;&gt; GetPrivate()
+            {
+                return await superHeroRepository.GetAllSuperHeroes();
+            }
+        </CodeSnippet>
+
+        <p>We have done some wiring to setup JWT based authentication scheme in our SuperHero API project. However, please note that, with little tweaks in the test setup, this should work for all kinds of authentication schemes.</p>
+
+        <p>For a quick reference, here is the authentication setup. The auth settings are being read from <code>appsettings</code>.</p>
+
+        <CodeSnippet Description="Authentication setup" Number="3">
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
+            {
+                IdentityModelEventSource.ShowPII = true;
+                options.SaveToken = true;
+                options.IncludeErrorDetails = true;
+                var authSettings = builder.Configuration.GetSection("JwtBearerSettings")
+                    .Get&lt;JwtBearerSettings&gt;();
+
+                options.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidAudience = authSettings!.Audience,
+                    ValidIssuer = authSettings.Issuer,
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authSettings.SigningKey))
+                };
+            });
+        </CodeSnippet>
+
+        <p>After all that setup, when we try to access this API without token then we get 401 error as expected</p>
+
+        <BlogImage ImagePath="/images/blog/integration-testing/handling-auth/Swagger api response.webp"
+            Description="Swagger API response" Number="2" />
+
+        <p>Now that we understand the authentication setup, we can quickly head to <a href="https://jwt.io" target="_blank">https://jwt.io</a> to generate a token by specifying the claims and signing key. Notice we have also setup the role as admin in the token. This is just to verify that the API functions correctly. We will cover how can we generate this token for integration tests later.</p>
+
+        <BlogImage ImagePath="/images/blog/integration-testing/handling-auth/access token jwt.webp"
+            Description="Access token jwt" Number="3" />
+
+        <p>Now once we get hold of the token, we can set the token in swagger.</p>
+
+        <BlogImage ImagePath="/images/blog/integration-testing/handling-auth/setting auth token.webp"
+            Description="Setting auth token" Number="4" />
+
+        <p>Once the token is configured, we should expect 200 success with response data like below.</p>
+
+        <BlogImage ImagePath="/images/blog/integration-testing/handling-auth/getting response under authentication.webp"
+            Description="Getting response under authentication" Number="5" />
+
+        <p>Now that we have seen our authenticated API working, we can proceed to write the integration tests for it.</p>
+    </Section>
+
+    <Section Heading="The setup" Level="4">
+        <p>Now this is going to be a bit complex setup, however, it will help us in testing different and complex scenarios. The following steps are needed before we begin writing tests.</p>
+
+        <Section Heading="Step 1: A class to help us create authentication claims" Level="5">
+            <p><b>Why is this needed?</b></p>
+            <p>We need this to create HTTP client with different set of authentication claims for different kinds of auth flows. For example, an API might work only for Admin role and another may work for some other role having fewer privileges. Our <code>AuthClaimsProvider</code> looks like below:</p>
+
+            <CodeSnippet Description="AuthClaimsProvider class" Number="4">
+                public class AuthClaimsProvider
+                {
+                    public IList&lt;Claim&gt; Claims { get; } = new List&lt;Claim&gt;();
+
+                    public static AuthClaimsProvider WithAdminClaim()
+                    {
+                        var provider = new AuthClaimsProvider();
+                        provider.Claims.Add(new Claim(ClaimTypes.Role, "Admin"));
+
+                        return provider;
+                    }
+                    
+                    public static AuthClaimsProvider WithAnonymousClaim()
+                    {
+                        var provider = new AuthClaimsProvider();
+                        provider.Claims.Add(new Claim(ClaimTypes.Role, "Anonymous"));
+
+                        return provider;
+                    }
+                }
+            </CodeSnippet>
+        </Section>
+
+        <Section Heading="Step 2: An extension method to create HTTP client with required auth claims" Level="5">
+            <p><b>Why is this needed?</b></p>
+            <p>It's needed because when we create a default HTTP client for tests using <code>CustomApiFactory</code>, the created HTTP client instance does not hold any auth token. However, for our authenticated APIs, we want our HTTP client to have the required token.</p>
+
+            <CodeSnippet Description="Extension method for HTTP client" Number="5">
+                public static HttpClient CreateClientWithClaim(this CustomApiFactory factory, AuthClaimsProvider claims)
+                {
+                    var client = factory.WithWebHostBuilder(builder =>
+                        {
+                            builder.ConfigureTestServices(services =>
+                            {
+                                // Removing existing instance of AuthClaimsProvider to register with instance received as param
+                                var descriptor = services.SingleOrDefault(d => d.ServiceType == typeof(AuthClaimsProvider));
+
+                                if (descriptor != null)
+                                {
+                                    services.Remove(descriptor);
+                                    services.AddScoped(_ => claims);
+                                }
+                            });
+                        })
+                        .CreateClient();
+
+                    return client;
+                }
+            </CodeSnippet>
+        </Section>
+
+        <Section Heading="Step 3: Setting up a service to introduce the authentication ticket/token in the request" Level="5">
+            <p><b>Why is this needed?</b></p>
+            <p>It's needed because in real scenarios, users will get tokens by performing any auth process, like:</p>
+            <ul>
+                <li>By providing username and password</li>
+                <li>By using third-party auth services like Google, Facebook, LinkedIn, etc.</li>
+                <li>By using ClientId and Secret to obtain a token via client credentials flow</li>
+            </ul>
+            <p>Since our integration tests should not require any user intervention, we will be introducing a <code>TestAuthHandler</code> so that whenever we try to create an HTTP client to call our service, we should get a client with the authentication token as per our test setup.</p>
+
+            <CodeSnippet Description="TestAuthHandler class" Number="6">
+                public class TestAuthHandler(
+                    IOptionsMonitor&lt;AuthenticationSchemeOptions&gt; options,
+                    ILoggerFactory logger,
+                    UrlEncoder encoder,
+                    AuthClaimsProvider claimsProvider)
+                    : AuthenticationHandler&lt;AuthenticationSchemeOptions&gt;(options, logger, encoder)
+                {
+                    public const string SchemeName = "Test";
+
+                    // These claims will be set by the extension method `CreateClientWithClaim` used to create HTTP client in tests
+                    private readonly IList&lt;Claim&gt; _claims = claimsProvider.Claims;
+
+                    protected override Task&lt;AuthenticateResult&gt; HandleAuthenticateAsync()
+                    {
+                        // Sometimes we do not want to have our HTTP client to hold a token.
+                        // This line will make sure the default HTTP client created from CustomApiFactory is not with auth ticket
+                        if (_claims == null || !_claims.Any())
+                        {
+                            return Task.FromResult(AuthenticateResult.NoResult());
+                        }
+                        
+                        var identity = new ClaimsIdentity(_claims, SchemeName);
+                        var principal = new ClaimsPrincipal(identity);
+                        var ticket = new AuthenticationTicket(principal, SchemeName);
+
+                        return Task.FromResult(AuthenticateResult.Success(ticket));
+                    }
+                }
+            </CodeSnippet>
+        </Section>
+
+        <Section Heading="Step 4: Registering the TestAuthHandler service" Level="5">
+            <p><b>Why is this needed?</b></p>
+            <p>It's needed so that whenever we try to get an HTTP client from the <code>CustomApiFactory</code>, we get an HTTP client with an auth token in it (unless we do not want it by using empty claims).</p>
+
+            <CodeSnippet Description="Registering TestAuthHandler" Number="7">
+                builder.ConfigureTestServices(services =>
+                {
+                    services.AddAuthentication(TestAuthHandler.SchemeName)
+                        .AddScheme&lt;AuthenticationSchemeOptions, TestAuthHandler&gt;(TestAuthHandler.SchemeName, _ => { });
+
+                    services.AddScoped(_ => new AuthClaimsProvider());
+                });
+            </CodeSnippet>
+        </Section>
+    </Section>
+
+    <Section Heading="Finally, the tests" Level="4">
+        <p>Let's add a test to our <code>SuperHeroApiTests</code>. Please note that the below test is with the default HTTP client, which does not hold any successful auth ticket:</p>
+
+        <CodeSnippet Description="Test with default HTTP client" Number="8">
+            [Fact(DisplayName = "Get all superheroes authenticated API returns all superheroes")]
+            public async Task Get_All_SuperHeroes_Authenticated_Returns_List_Of_SuperHero()
+            {
+                // Arrange
+                factory.SharedFixture.SuperHeroDbContext.SuperHero.AddRange(new List&lt;SuperHeroApiWith3rdPartyService.Data.Models.SuperHero&gt;()
+                {
+                    new(11, "Batman","Bruce Wayne","Short distance fly,Common sense","Gotham", 40),
+                    new(22, "Superman", "Clark kent", "Fly, Shoot laser beam, Super strength, ice breath","Gotham", 42),
+                    new(33, "Robin", "John Blake", "Detective","Gotham", 35)
+                });
+                await factory.SharedFixture.SuperHeroDbContext.SaveChangesAsync();
+                
+                // Act
+                using var httpClient = factory.CreateClient(); // Default HTTP client
+                var response = await httpClient.GetAsync("/SuperHero/private");
+                
+                // Assert
+                response.StatusCode.Should().Be(HttpStatusCode.OK);
+                var superHeroes = await response.Content.ReadFromJsonAsync&gt;List&gt;SuperHeroApiWith3rdPartyService.Data.Models.SuperHero&gt;&gt;();
+                superHeroes.Should().NotBeEmpty();
+                superHeroes.Should().Contain(s => s.SuperName == "Batman");
+            }
+        </CodeSnippet>
+
+        <p>Upon running this, we get a result like below: <b>401</b>, since the auth token is not there.</p>
+
+        <BlogImage ImagePath="/images/blog/integration-testing/handling-auth/Failing test.webp"
+            Description="Failing test" Number="6" />
+
+        <p>Let's change the code to create the HTTP client with some claims this time:</p>
+
+        <CodeSnippet Description="Test with anonymous claims" Number="9">
+            // Replace
+            using var httpClient = factory.CreateClient();
+
+            // With
+            using var httpClient = factory.CreateClientWithClaim(AuthClaimsProvider.WithAnonymousClaim());
+        </CodeSnippet>
+
+        <p>Now our API is using the token. Let's run the tests.</p>
+
+        <BlogImage ImagePath="/images/blog/integration-testing/handling-auth/Failing test 2.webp"
+            Description="Failing test with anonymous role" Number="7" />
+
+        <p>The test run above also failed with a <b>403</b> status code. Our authentication issue is resolved since we no longer receive a 401 error. However, we still get a 403 because the token contains the <b>Anonymous</b> role, while our API requires the <b>Admin</b> role, resulting in a forbidden error.</p>
+
+        <p>Let's fix our test by assigning the correct token with the <b>Admin</b> role when creating the HTTP client:</p>
+
+        <CodeSnippet Description="Test with admin claims" Number="10">
+            // Replace
+            using var httpClient = factory.CreateClientWithClaim(AuthClaimsProvider.WithAnonymousClaim());
+
+            // With
+            using var httpClient = factory.CreateClientWithClaim(AuthClaimsProvider.WithAdminClaim());
+        </CodeSnippet>
+
+        <p>Now, if we run the test after the above changes, our test succeeds with all assertions.</p>
+
+        <BlogImage ImagePath="/images/blog/integration-testing/handling-auth/Passing Test.webp"
+            Description="Tests passing when correct claims are provided" Number="8" />
+    </Section>
+    
+    <p>Thats about it for this article. Hope you liked it.</p>
+
+    <EndNotes RepositoryLink="https://github.com/ajaysskumar/SuperHeroSolution" />
+</BlogContainer>
