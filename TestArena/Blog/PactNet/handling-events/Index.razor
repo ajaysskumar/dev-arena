@@ -1,9 +1,14 @@
 @page "/blog/contract-testing-in-pact-with-events"
 @using TestArena.Blog.Common
+@using TestArena.Blog.Common.NavigationUtils
+
+@code{
+    PageInfo currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/contract-testing-in-pact-with-events");
+}
 
 <BlogContainer>
-    <Header Title="Intro to PACT for .NET Core: Events based systems"
-            Image="images/blog/pact/events-demo/contract-testing-events.webp" PublishedOn="@DateTime.Now" Authors="Ajay Kumar">
+    <Header Title="@currentPage.Header"
+            Image="@currentPage.ArticleImage" PublishedOn="@currentPage.PublishedOn" Authors="Ajay Kumar">
     </Header>
 
 <Section Heading="Introduction">

@@ -1,12 +1,15 @@
 @page "/blog/integration-with-pactflow"
 @using TestArena.Blog.Common
+@using TestArena.Blog.Common.NavigationUtils
+
+@code{
+    PageInfo currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/integration-with-pactflow");
+}
 
 <BlogContainer>
-    <Header 
-        Title="Intro to PACT for .NET Core: Integration with PactFlow"
-        Image="/images/blog/pact/pact-broker/blog_header.png"
-        PublishedOn="@DateTime.Now"
-        Authors="Ajay Kumar" />
+    <Header Title="@currentPage.Header"
+            Image="@currentPage.ArticleImage" PublishedOn="@currentPage.PublishedOn" Authors="Ajay Kumar">
+    </Header>
 
     <Section Heading="Introduction">
         <p>This is in continuation of PACT for .NET series where we will be looking into one of the ways to integrate our APIs with PactFlow.</p>

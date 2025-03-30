@@ -1,9 +1,14 @@
 @page "/blog/integration-testing-in-dotnet-with-auth"
 @using TestArena.Blog.Common
+@using TestArena.Blog.Common.NavigationUtils
+
+@code{
+    PageInfo currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/integration-testing-in-dotnet-with-auth");
+}
+
 <BlogContainer>
-    <Header Title="Integration testing for dotnet core APIs: Handling APIs behind authentication"
-        Image="/images/blog/integration-testing/handling-auth/banner.png" PublishedOn="@DateTime.Now"
-        Authors="Ajay Kumar">
+    <Header Title="@currentPage.Header"
+            Image="@currentPage.ArticleImage" PublishedOn="@currentPage.PublishedOn" Authors="Ajay Kumar">
     </Header>
 
     <Section Heading="Integration testing for APIs behind authentication" Level="4">

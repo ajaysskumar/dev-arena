@@ -1,11 +1,14 @@
 @page "/blog/integration-testing-in-dotnet-with-database"
 @using TestArena.Blog.Common
+@using TestArena.Blog.Common.NavigationUtils
 
+@code{
+    PageInfo currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/integration-testing-in-dotnet-with-database");
+}
 
 <BlogContainer>
-    <Header Title="Integration testing for dotnet core APIs: Handling database"
-        Image="/images/blog/integration-testing/handling-database/banner.png" PublishedOn="@DateTime.Now"
-        Authors="Ajay Kumar">
+    <Header Title="@currentPage.Header"
+            Image="@currentPage.ArticleImage" PublishedOn="@currentPage.PublishedOn" Authors="Ajay Kumar">
     </Header>
 
     <Section Heading="Summary" Level="4">

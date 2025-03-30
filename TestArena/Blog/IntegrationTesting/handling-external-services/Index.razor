@@ -1,11 +1,14 @@
 @page "/blog/integration-testing-in-dotnet-with-external-services"
 @using TestArena.Blog.Common
+@using TestArena.Blog.Common.NavigationUtils
 
+@code{
+    PageInfo currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/integration-testing-in-dotnet-with-external-services");
+}
 
 <BlogContainer>
-    <Header Title="Integration testing for dotnet core APIs: Handling 3rd party service calls using wiremock"
-        Image="/images/blog/integration-testing/handling-external-services/banner.png" PublishedOn="@DateTime.Now"
-        Authors="Ajay Kumar">
+    <Header Title="@currentPage.Header"
+            Image="@currentPage.ArticleImage" PublishedOn="@currentPage.PublishedOn" Authors="Ajay Kumar">
     </Header>
 
     <Section Heading="Summary" Level="4">

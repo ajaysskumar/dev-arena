@@ -1,9 +1,14 @@
 @page "/blog/contract-testing-pact-net-intro"
 @using TestArena.Blog.Common
+@using TestArena.Blog.Common.NavigationUtils
+
+@code{
+    PageInfo currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/contract-testing-pact-net-intro");
+}
 
 <BlogContainer>
-    <Header Title="Intro to PACT for .NET Core: API contract testing"
-            Image="/images/blog/pact/intro/header_landscape.png" PublishedOn="@DateTime.Now" Authors="Ajay Kumar">
+    <Header Title="@currentPage.Header"
+            Image="@currentPage.ArticleImage" PublishedOn="@currentPage.PublishedOn" Authors="Ajay Kumar">
     </Header>
     
     <Summary></Summary>
@@ -20,4 +25,4 @@
     
     <EndNotes RepositoryLink="https://github.com/ajaysskumar/pact-net-example"/>
     
-</BlogContainer>
+</BlogContainer> 
