@@ -1,0 +1,291 @@
+@page "/blog/integration-testing-in-dotnet-with-external-services"
+@using TestArena.Blog.Common
+
+
+<BlogContainer>
+    <Header Title="Integration testing for dotnet core APIs: Handling 3rd party service calls using wiremock"
+        Image="/images/blog/integration-testing/handling-external-services/banner.png" PublishedOn="@DateTime.Now"
+        Authors="Ajay Kumar">
+    </Header>
+
+    <Section Heading="What are integration tests in context of APIs?" Level="4">
+        <p>In the context of <b>.NET Core APIs</b> for a blog, integration tests are automated tests that evaluate the
+            functionality of various parts of your application working together as a whole. Specifically, these tests
+            ensure that multiple components — such as controllers, database access, middleware, internal and external
+            services — function correctly when integrated, as opposed to functioning correctly only in isolation (which
+            would be covered by unit tests).</p>
+        <p>Here is a quick one-liner summary on popular kinds of testing for an API codebase:</p>
+        <ul>
+            <li><b>Unit Tests:</b> Validate individual components like controllers or services in isolation.</li>
+            <li><b>Integration Tests:</b> Verify the interaction between multiple components (e.g., API, database,
+                middleware) as a cohesive system.</li>
+            <li><b>Contract Tests:</b> Ensure that API endpoints conform to agreed-upon interfaces or expectations
+                between services.</li>
+        </ul>
+        <p>Integration tests will help you in identifying possible bugs introduced due to any new changes in your code.
+        </p>
+
+        <BlogReferenceCard Title="Integration testing for dotnet core APIs: Introduction"
+            Description="Integration testing for dotnet core APIs: Introduction"
+            Url="/blog/integration-testing-in-dotnet-intro" ImageUrl="/images/blog/integration-testing/intro/banner.png"
+            Source="devcodex.in" />
+
+        <BlogImage ImagePath="/images/blog/integration-testing/intro/Build process when integration tests fail.webp"
+            Description="Build process when integration tests fail" Number="1" />
+
+        <CodeSnippet Description="APIs for SuperHero" Number="1">
+            [ApiController]
+            [Route("[controller]")]
+            public class SuperHeroController(ISuperHeroRepository superHeroRepository)
+            : ControllerBase
+            {
+            [HttpGet("")]
+            public async Task&lt;IEnumerable&lt;SuperHero&gt;&gt; Get()
+            {
+            return await superHeroRepository.GetAllSuperHeroes();
+            }
+
+            [HttpGet("{id}")]
+            public async Task&lt;IActionResult&gt; GetById(int id)
+            {
+            var superHero = await superHeroRepository.GetSuperHeroById(id);
+            if (superHero == null)
+            {
+            return NotFound();
+            }
+
+            return Ok(superHero);
+            }
+            }
+        </CodeSnippet>
+    </Section> 
+
+    <Section Heading="Summary" Level="4">
+        <p>This is a continuation of the <b>Integration testing in dotnet</b> series. This time we will be covering the
+            scenario where third-party service calls are present in our API flows.</p>
+        <p>Before we begin further, you may want to visit the previous articles in this series to get a better context
+            of integration testing in general and the code repository that we will be using for demo purposes here. The
+            links to the articles are mentioned below:</p>
+        <BlogReferenceCard Title="Getting started" Description="Integration testing for dotnet core APIs: Introduction"
+            Url="/blog/integration-testing-in-dotnet-intro" ImageUrl="/images/blog/integration-testing/intro/banner.png"
+            Source="medium.com" />
+        <BlogReferenceCard Title="Demo with database"
+            Description="Integration testing for dotnet core APIs: Handling database"
+            Url="/blog/integration-testing-in-dotnet-database"
+            ImageUrl="/images/blog/integration-testing/handling-database/banner.png" Source="medium.com" />
+        <p>Also, all the code used here is available at:</p>
+        <BlogReferenceCard Title="GitHub Repository" Description="Code for Integration Testing with 3rd Party Service"
+            Url="https://github.com/ajaysskumar/SuperHeroSolution/tree/main/DemoWith3rdPartyService"
+            ImageUrl="/images/blog/integration-testing/github/banner.png" Source="github.com" />
+    </Section>
+
+    <Section Heading="Why need to mock?" Level="4">
+        <p>Mocking third-party service calls is crucial to ensure tests are isolated, reliable, and repeatable.</p>
+        <p>It avoids dependency on external systems that may be unavailable, slow, or unpredictable, allowing the focus
+            to remain on verifying the behavior of your application in a controlled environment.</p>
+        <p>Mocking also simplifies setting up specific scenarios, such as handling failures or edge cases, which might
+            be hard to replicate with real services.</p>
+        <p>However, unlike unit tests, the mocking here is wire-level mocking since we want all our logic, including the
+            way we call the HTTP service and the way we parse the response, because here we are testing the overall
+            integration of all the components of our application. So we will be mocking only what goes out to the
+            network and what comes into the network here.</p>
+    </Section>
+
+    <Section Heading="Suspects API" Level="4">
+        <p>Continuing with the article, let's imagine we need an API that returns the list of notorious suspects in the
+            superhero universe.</p>
+        <p>We created an API as mentioned in the below Swagger screenshot:</p>
+
+        <BlogImage ImagePath="/images/blog/integration-testing/handling-external-services/Suspect API screenshot.webp"
+            Description="Suspect API screenshot" Number="2" />
+
+        <CodeSnippet Description="Suspect API" Number="2">
+            [HttpGet("/suspects")]
+            public async Task&lt;IActionResult&gt; Suspects([FromQuery] string searchTerm)
+            {
+            var people = await GetPeople();
+            var peopleOfInterest = people.Data.Where(person =>
+            person.First_Name.Contains(searchTerm, StringComparison.InvariantCultureIgnoreCase) ||
+            person.Last_Name.Contains(searchTerm, StringComparison.InvariantCultureIgnoreCase) ||
+            person.Email.Contains(searchTerm, StringComparison.InvariantCultureIgnoreCase));
+            if (!peopleOfInterest.Any())
+            {
+            return NotFound();
+            }
+            return Ok(peopleOfInterest);
+            }
+
+            // Method to fetch people from 3rd party service
+            // We have also defined a variable "SuspectServiceUrl" in appsettings.json
+            private async Task&lt;PersonResponse&gt; GetPeople()
+            {
+            using var client = new HttpClient();
+
+            var url = $"{configuration.GetValue&lt;string&gt;("SuspectServiceUrl")}/api/users?page=1";
+            var response = await client.GetAsync(url);
+            if (!response.IsSuccessStatusCode)
+            {
+            throw new HttpRequestException($"Unable to get people from {url}");
+            }
+
+            return await response.Content.ReadFromJsonAsync&lt;PersonResponse&gt;();
+            }
+        </CodeSnippet>
+    </Section>
+
+    <Section Heading="Wiremock to the rescue!" Level="4">
+        <p>Here we will be setting up <b>Wiremock</b> to be used in the integration tests. For those who are new to
+            Wiremock, please visit <a href="https://github.com/WireMock-Net/WireMock.Net"
+                target="_blank">WireMock.Net</a> for more details.</p>
+        <p>Install the below package in the Integration test project:</p>
+        <CodeSnippet Description="Install WireMock.Net" Number="3">
+            dotnet add package WireMock.Net --version 1.6.10
+        </CodeSnippet>
+        <p>After setup, the shared fixture class will look as follows. I have provided comments to understand the code
+            context better.</p>
+        <p>On a high level, we did the following:</p>
+        <ul>
+            <li>Created and initialized the Wiremock server.</li>
+            <li>Captured the mocked server’s base URL in the property <code>SuspectServiceUrlOverride</code>.</li>
+            <li>Exposed the mocked server via the property <code>WireMockServer</code>. This is needed because our
+                application can behave differently based on different responses from the third-party service.</li>
+        </ul>
+        <CodeSnippet Description="SharedFixture class" Number="4">
+            public class SharedFixture : IAsyncLifetime
+            {
+            public string SuspectServiceUrlOverride { get; private set; } = null!;
+            private WireMockServer? _server;
+
+            public WireMockServer WireMockServer => _server;
+
+            public async Task InitializeAsync()
+            {
+            SuspectServiceUrlOverride = StartWireMockForService();
+            }
+
+            public async Task DisposeAsync()
+            {
+            _server?.Stop();
+            }
+
+            private string StartWireMockForService()
+            {
+            _server = WireMockServer.Start();
+            return _server.Urls[0];
+            }
+            }
+        </CodeSnippet>
+        <p>Next, we guide our application to override the <code>SuspectServiceUrl</code> from
+            <code>appsettings.json</code> and take the base URL value for the third-party service from the mocked
+            server, i.e., <code>SharedFixture</code>’s <code>SuspectServiceUrlOverride</code> property.</p>
+        <p>For this, we make changes in our <code>CustomApiFactory</code> class as shown below:</p>
+        <CodeSnippet Description="CustomApiFactory class" Number="5">
+            public class CustomApiFactory(SharedFixture sharedFixture) : WebApplicationFactory&lt;Program&gt;
+            {
+            protected override void ConfigureWebHost(IWebHostBuilder builder)
+            {
+            builder.ConfigureAppConfiguration((_, configBuilder) =>
+            {
+            configBuilder.AddInMemoryCollection(new Dictionary&lt;string, string&gt;
+            {
+            ["SuspectServiceUrl"] = sharedFixture.SuspectServiceUrlOverride
+            });
+            });
+            }
+            }
+        </CodeSnippet>
+        <p>This completes the setup. We are now ready to write the tests.</p>
+    </Section>
+
+    <Section Heading="Test Scenarios" Level="4">
+        <p>Below are the test scenarios for our Suspect API. These tests ensure that the API behaves as expected under
+            different conditions, including both positive and negative cases.</p>
+
+        <CodeSnippet Description="SetupServiceMockForSuspectApi method" Number="6">
+            /// &lt;summary&gt;
+            /// This method will take params and will return the list of people/suspects
+            /// &lt;/summary&gt;
+            /// &lt;param name="pageNum"&gt;Number of page to look for. Can be any number, but for this problem, lets
+            assume this will always be 1&lt;/param&gt;
+            /// &lt;param name="apiResponse"&gt;Response JSON returned by the API&lt;/param&gt;
+            /// &lt;param name="expectedStatusCode"&gt;Status code returned from the API&lt;/param&gt;
+            /// &lt;typeparam name="T"&gt;Type of the response&lt;/typeparam&gt;
+            private void SetupServiceMockForSuspectApi&lt;T&gt;(string pageNum, T apiResponse, HttpStatusCode
+            expectedStatusCode = HttpStatusCode.OK)
+            {
+            factory.SharedFixture.WireMockServer
+            .Given(Request
+            .Create()
+            .WithPath("/api/users")
+            .UsingGet()
+            .WithParam("page", MatchBehaviour.AcceptOnMatch, ignoreCase: true, pageNum))
+            .RespondWith(Response
+            .Create()
+            .WithStatusCode(expectedStatusCode)
+            .WithBodyAsJson(apiResponse, Encoding.UTF8));
+            }
+        </CodeSnippet>
+
+        <CodeSnippet Description="Positive Test: Valid Data" Number="7">
+            [Fact(DisplayName = "Get suspects should return all matching suspects")]
+            public async Task Get_All_Suspects_Returns_List_Of_Matching_Suspects()
+            {
+            // Arrange
+            // Setting up mocked data for success response
+            SetupServiceMockForSuspectApi("1", new PersonResponse()
+            {
+            Data =
+            [
+            new Suspect()
+            {
+            Id = 1,
+            First_Name = "Selina",
+            Last_Name = "Kyle",
+            Email = "selina.kyle@gotham.com",
+            }
+            ]
+            });
+
+            // Act
+            var response = await factory.CreateClient().GetAsync("/suspects?searchTerm=selina");
+
+            // Assert
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+            var superHeroes = await response.Content.ReadFromJsonAsync&lt;List&lt;Suspect&gt;&gt;();
+            superHeroes.Should().NotBeEmpty();
+            superHeroes![0].Id.Should().Be(1);
+            superHeroes![0].Email.Should().Be("selina.kyle@gotham.com");
+            superHeroes![0].First_Name.Should().Be("Selina");
+            superHeroes![0].Last_Name.Should().Be("Kyle");
+            }
+        </CodeSnippet>
+
+        <CodeSnippet Description="Negative Test: 500 Response" Number="8">
+            [Fact(DisplayName = "Get suspects should return 500 status code when API responds with 500 status code")]
+            public async Task Get_All_Suspects_Should_Return_500_StatusCode_When_3rd_Party_Api_Fails()
+            {
+            // Arrange
+            // Setting up mocked data for failure response
+            SetupServiceMockForSuspectApi("1", new {Status = "Failed" }, HttpStatusCode.InternalServerError);
+
+            // Act
+            var response = await factory.CreateClient().GetAsync("/suspects?searchTerm=selina");
+
+            // Assert
+            response.StatusCode.Should().Be(HttpStatusCode.InternalServerError);
+            }
+        </CodeSnippet>
+    </Section>
+
+    <Section Heading="Test Results" Level="4">
+        <p>When running the tests, we can observe the following results:</p>
+        <BlogImage ImagePath="/images/blog/integration-testing/handling-external-services/Test results.webp"
+            Description="Test results showing successful execution of all test cases" Number="3" />
+        <p>As seen in the above screenshot, all the test cases have passed successfully, ensuring that our API behaves
+            as expected under different scenarios, including both positive and negative cases.</p>
+    </Section>
+
+    <p>Thats about it for this article. Hope you liked it.</p>
+
+    <EndNotes RepositoryLink="https://github.com/ajaysskumar/SuperHeroSolution" />
+</BlogContainer>
