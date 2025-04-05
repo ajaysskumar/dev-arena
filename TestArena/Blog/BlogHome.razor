@@ -3,6 +3,14 @@
 @using TestArena.Blog.Common.NavigationUtils
 
 <h2 class="mb-4">Latest Blogs</h2>
+
+<h4 class="mb-4">
+    @foreach(var tag in SiteMap.Pages.SelectMany(x => x.Tags).Distinct())
+    {
+        var route = $"/filtered-blogs?tag={tag}";
+        <a href="@route" class="text-info px-2">#@tag</a>
+    }
+</h4>
 <div class="row row-cols-1 row-cols-md-3 g-4 p-2">
 
     @{
