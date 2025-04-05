@@ -1,0 +1,237 @@
+@page "/blog/package-vulnerability-detection-in-dotnet"
+@using TestArena.Blog.Common
+@using TestArena.Blog.Common.NavigationUtils
+
+@code{
+    PageInfo currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/package-vulnerability-detection-in-dotnet")!;
+}
+
+<BlogContainer>
+    <Header
+        Title="@currentPage.Header"
+        Description="@currentPage.Header"
+        Image="@currentPage.ArticleImage"
+        PublishedOn="@currentPage.PublishedOn"
+        Authors="Ajay kumar"/>
+
+    <Section Heading="Summary">
+        <p>As developers, we often trust third-party NuGet packages to accelerate development—but with that trust comes risk. Many of these packages may carry <b>known security vulnerabilities</b>, and if left unchecked, they can become a backdoor into your application. This is where <b>vulnerability detection in .NET</b> projects becomes critical.</p>
+
+        <p>Starting with .NET SDK 5.0.200, Microsoft introduced a built-in auditing command:</p>
+        <CodeSnippet Number="1" Language="Bash" Description="Command to check for vulnerable packages">
+dotnet list package --vulnerable
+        </CodeSnippet>
+
+        <p>This command scans both direct and transitive NuGet dependencies for known security issues using Microsoft’s advisory database. It flags packages with vulnerabilities, categorizing them by severity (Low to Critical), and provides advisory URLs to investigate further.</p>
+
+        <p>But detection is only step one.</p>
+
+        <p>Vulnerability checks should be automated into your build or deployment workflows. Failing a build when vulnerabilities are found prevents insecure code from reaching production. Simple shell or PowerShell scripts can be used to enforce this in local or CI pipelines without relying on GitHub or external tools.</p>
+
+        <p>Equally important is the role of the .csproj file—this file acts as the source of truth for all your package references. A single vulnerable package listed here, directly or indirectly, can compromise your entire application.</p>
+    </Section>
+
+    <Section Heading="NugetAudit to the rescue!">
+        <p>
+            NuGet 6.8 introduced the <code>NuGetAudit</code> MSBuild property, which enhances vulnerability detection during build time. When set to <code>true</code>, NuGetAudit performs an audit of your project's NuGet dependencies and generates warnings for any detected vulnerabilities. This allows you to identify and address security issues before your application is deployed.
+        </p>
+        
+        <p>
+            We are using a sample repo here which which uses below packages
+            <ul>
+                <li><code>Refit</code> version <b><i>7.2.1</i></b> which has <b>Critical</b> vulnerability</li>
+                <li><code>Newtonsoft.Json</code> version <b><i>12.0.3</i></b> which has <b>High</b> vulnerability</li>
+            </ul>
+        </p>
+        <p>To enable <code>NuGetAudit</code>, we can add the following to our <code>.csproj</code> file:</p>
+        <CodeSnippet Number="2" Language="xml" Description="Example .csproj file with NuGetAudit enabled">
+&lt;Project Sdk="Microsoft.NET.Sdk"&gt;
+    &lt;PropertyGroup&gt;
+        &lt;TargetFramework&gt;net8.0&lt;/TargetFramework&gt;
+        &lt;ImplicitUsings&gt;enable&lt;/ImplicitUsings&gt;
+        &lt;Nullable&gt;enable&lt;/Nullable&gt;
+        &lt;NugetAudit&gt;true&lt;/NugetAudit&gt;
+    &lt;/PropertyGroup&gt;
+
+    &lt;ItemGroup&gt;
+      &lt;PackageReference Include="Newtonsoft.Json" Version="12.0.3" /&gt;
+      &lt;PackageReference Include="Refit" Version="7.2.1" /&gt;
+    &lt;/ItemGroup&gt;
+&lt;/Project&gt;
+        </CodeSnippet>
+
+        <p>
+            When <code>NuGetAudit</code> is enabled, the build process will generate warnings for any NuGet packages with known vulnerabilities. These warnings will include information about the vulnerability, such as the severity and the affected package version.
+        </p>
+
+        <p>
+            You can configure the level of detail in the NuGet audit warnings by using the <code>NuGetAuditLevel</code> property. This property accepts the following values:
+        </p>
+        <ul>
+            <li><code>None</code>: No audit warnings are displayed.</li>
+            <li><code>Low</code>: Only warnings for vulnerabilities with a severity of Low or higher are displayed. This is <b>default</b> value.</li>
+            <li><code>Moderate</code>: Only warnings for vulnerabilities with a severity of Moderate or higher are displayed.</li>
+            <li><code>High</code>: Only warnings for vulnerabilities with a severity of High or Critical are displayed.</li>
+            <li><code>Critical</code>: Only warnings for vulnerabilities with a severity of Critical are displayed.</li>
+        </ul>
+    </Section>
+
+    <Section Heading="Lets explore some more scenarios">
+        <Section Heading="Disabling the audit mode" Level="5">
+            <p>When We disbale the auditing by setting <code>NuGetAudit</code> To <b>false</b> and try to <code>build / restore</code> </p>
+
+                    <CodeSnippet Number="2" Language="xml" Description="Example .csproj file with NuGetAudit disabled">
+&lt;Project Sdk="Microsoft.NET.Sdk"&gt;
+    &lt;PropertyGroup&gt;
+        &lt;TargetFramework&gt;net8.0&lt;/TargetFramework&gt;
+        &lt;ImplicitUsings&gt;enable&lt;/ImplicitUsings&gt;
+        &lt;Nullable&gt;enable&lt;/Nullable&gt;
+        &lt;NugetAudit&gt;false&lt;/NugetAudit&gt;
+    &lt;/PropertyGroup&gt;
+
+    &lt;ItemGroup&gt;
+      &lt;PackageReference Include="Newtonsoft.Json" Version="12.0.3" /&gt;
+      &lt;PackageReference Include="Refit" Version="7.2.1" /&gt;
+    &lt;/ItemGroup&gt;
+&lt;/Project&gt;
+        </CodeSnippet>
+
+            <BlogImage ImagePath="/images/blog/vulnerability/auditing/Build Passed with audit disabled.png" Description="Build passed" Number="1"/>
+        </Section>
+
+        <Section Heading="Eabling the audit mode" Level="5">
+            <p>Lets enable the auditing by setting <code>NuGetAudit</code> To <b>true</b> and try to <code>build / restore</code> </p>
+
+                    <CodeSnippet Number="3" Language="xml" Description="Example .csproj file with NuGetAudit enabled">
+&lt;Project Sdk="Microsoft.NET.Sdk"&gt;
+    &lt;PropertyGroup&gt;
+        &lt;TargetFramework&gt;net8.0&lt;/TargetFramework&gt;
+        &lt;ImplicitUsings&gt;enable&lt;/ImplicitUsings&gt;
+        &lt;Nullable&gt;enable&lt;/Nullable&gt;
+        &lt;NugetAudit&gt;true&lt;/NugetAudit&gt;
+    &lt;/PropertyGroup&gt;
+
+    &lt;ItemGroup&gt;
+      &lt;PackageReference Include="Newtonsoft.Json" Version="12.0.3" /&gt;
+      &lt;PackageReference Include="Refit" Version="7.2.1" /&gt;
+    &lt;/ItemGroup&gt;
+&lt;/Project&gt;
+        </CodeSnippet>
+
+            <BlogImage ImagePath="/images/blog/vulnerability/auditing/Build failed with audit enabled.png" Description="Build passed with warnings" Number="2"/>
+
+            <p>As we can see the build is warning about both the critical and high severity level packages.</p>
+            <p>Depending on security guidelines we may want to only flag certain severity level</p>
+        </Section>
+
+        <Section Heading="Setting the severity level" Level="5">
+            <p>Depending on security guidelines for out project we may want to only flag certain severity level and above. For this article lets assume, we only want to warn about critial vulnerabilities and leave the rest.</p>
+
+            <p>Lets set the severity level for our audit by setting <code>NuGetAudit</code> To <b>true</b> and try to <code>build / restore</code> </p>
+
+                    <CodeSnippet Number="4" Language="xml" Description="Example .csproj file with NugetAuditLevel defined">
+&lt;Project Sdk="Microsoft.NET.Sdk"&gt;
+    &lt;PropertyGroup&gt;
+        &lt;TargetFramework&gt;net8.0&lt;/TargetFramework&gt;
+        &lt;ImplicitUsings&gt;enable&lt;/ImplicitUsings&gt;
+        &lt;Nullable&gt;enable&lt;/Nullable&gt;
+        &lt;NugetAudit&gt;true&lt;/NugetAudit&gt;
+        &lt;NugetAuditLevel&gt;critical&lt;/NugetAuditLevel&gt;
+    &lt;/PropertyGroup&gt;
+
+    &lt;ItemGroup&gt;
+      &lt;PackageReference Include="Newtonsoft.Json" Version="12.0.3" /&gt;
+      &lt;PackageReference Include="Refit" Version="7.2.1" /&gt;
+    &lt;/ItemGroup&gt;
+&lt;/Project&gt;
+        </CodeSnippet>
+
+            <BlogImage 
+                ImagePath="/images/blog/vulnerability/auditing/Build passed with audit enabled and severity level defined.png" 
+                Description="Build passed with critical severity level warnings" 
+                Number="3"/>
+
+            <p>As we can see the build is warning about only the critical severity level package(s).</p>
+            
+        </Section>
+
+        <Section Heading="Enforcing build failure for vulnerabilities" Level="5">
+            <p>Now, warning are good but they can be ignored/missed allowing vulnerabilities to creep into the production code. To prevent this, there is another msbuild property <code>WarningsAsErrors</code> that can help by treating specified warnings codes as errors resulting in build failure. Refer the below table to such warning codes</p>
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Warning Code</th>
+                        <th>Reason</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>NU1900</td>
+                        <td>Error communicating with package source, while getting vulnerability information.</td>
+                    </tr>
+                    <tr>
+                        <td>NU1901</td>
+                        <td>Package with low severity detected</td>
+                    </tr>
+                    <tr>
+                        <td>NU1902</td>
+                        <td>Package with moderate severity detected</td>
+                    </tr>
+                    <tr>
+                        <td>NU1903</td>
+                        <td>Package with high severity detected</td>
+                    </tr>
+                    <tr>
+                        <td>NU1904</td>
+                        <td>Package with critical severity detected</td>
+                    </tr>
+                    <tr>
+                        <td>NU1905</td>
+                        <td>An audit source does not provide a vulnerability database</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>Lets set critical warning as error for our audit by setting <code>WarningsAsErrors</code> To <b>true</b> and try to <code>build / restore</code> </p>
+
+                    <CodeSnippet Number="5" Language="xml" Description="Example .csproj file with WarningsAsErrors defined">
+&lt;Project Sdk="Microsoft.NET.Sdk"&gt;
+    &lt;PropertyGroup&gt;
+        &lt;TargetFramework&gt;net8.0&lt;/TargetFramework&gt;
+        &lt;ImplicitUsings&gt;enable&lt;/ImplicitUsings&gt;
+        &lt;Nullable&gt;enable&lt;/Nullable&gt;
+        &lt;NugetAudit&gt;true&lt;/NugetAudit&gt;
+        &lt;NugetAuditLevel&gt;critical&lt;/NugetAuditLevel&gt;
+        &lt;WarningsAsErrors&gt;NU1904;&lt;/WarningsAsErrors&gt;
+    &lt;/PropertyGroup&gt;
+
+    &lt;ItemGroup&gt;
+      &lt;PackageReference Include="Newtonsoft.Json" Version="12.0.3" /&gt;
+      &lt;PackageReference Include="Refit" Version="7.2.1" /&gt;
+    &lt;/ItemGroup&gt;
+&lt;/Project&gt;
+        </CodeSnippet>
+
+            <BlogImage 
+                ImagePath="/images/blog/vulnerability/auditing/Build failure with critical vulnerability.png" 
+                Description="Build failure with critical vulnerability" 
+                Number="4"/>
+
+            <p>As we can see the build is warning about only the critical severity level package(s).</p>
+            
+        </Section>
+    </Section>
+
+    <Section Heading="Conclusion">
+        <p>In conclusion, vulnerability detection in .NET projects is a critical aspect of modern software development. By leveraging the built-in auditing command and the NuGetAudit MSBuild property, developers can proactively identify and address security vulnerabilities in their applications. This not only helps to protect sensitive data but also ensures compliance with security standards and best practices.</p>
+
+        <p>By integrating these tools into your development workflow, you can significantly reduce the risk of security breaches and enhance the overall security posture of your .NET applications.</p>
+        <p>Integrating these tools into your CI/CD build pipelines ensures that vulnerabilities are detected and addressed early, preventing insecure code from being deployed to production systems.</p>
+    </Section>
+
+    <hr/>
+    <p>Thats about it for this article. Hope you liked it.</p>
+
+    <EndNotes/>
+
+</BlogContainer>
