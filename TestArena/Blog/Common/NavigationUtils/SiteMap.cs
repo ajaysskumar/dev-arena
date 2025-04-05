@@ -28,7 +28,7 @@ namespace TestArena.Blog.Common.NavigationUtils
             "/blog/integration-testing-in-dotnet-intro",
             new DateTime(2025, 1, 25),
             "images/blog/integration-testing/intro/banner.png",
-            ["Integration Testing", "DotNet"]),
+            ["Integration Testing", ".NET"]),
 
         new("Integration testing for dotnet core APIs: Handling database",
             "/blog/integration-testing-in-dotnet-with-database",

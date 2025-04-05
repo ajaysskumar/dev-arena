@@ -1,0 +1,23 @@
+@page "/filtered-blogs"
+@using TestArena.Blog.Common
+@using TestArena.Blog.Common.NavigationUtils
+
+@code{
+    [SupplyParameterFromQuery(Name = "tag")]
+    private string? Tag { get; set; }
+}
+
+<h2 class="mb-4">Blogs with tag: <code>@Tag</code></h2>
+<div class="row row-cols-1 row-cols-md-3 g-4 p-2">
+
+    @{
+        foreach (var articlePage in SiteMap.Pages.Where(x => Tag is null || x.Tags.Contains(Tag)).ToList())
+        {
+            <div class="col">
+                <Thumbnail ImageUrl="@articlePage.ArticleImage" Title="@articlePage.Header" Author="Ajay kumar"
+                    Date="@articlePage.PublishedOn.ToLongDateString()" Category="@articlePage.Tags"
+                    BlogUrl="@articlePage.RelativePath" />
+            </div>
+        }
+    }
+</div>
