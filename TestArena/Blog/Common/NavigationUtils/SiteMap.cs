@@ -48,7 +48,7 @@ namespace TestArena.Blog.Common.NavigationUtils
             "images/blog/integration-testing/handling-external-services/banner.png",
             ["Integration Testing", "WireMock"]),
 
-        new("Enforcing package auditing in .NET",
+        new("Securing .NET Applications: Preventing Threats Through Package Audits",
             "/blog/package-vulnerability-detection-in-dotnet",
             new DateTime(2025, 3, 22),
             "images/blog/vulnerability/auditing/banner.png",

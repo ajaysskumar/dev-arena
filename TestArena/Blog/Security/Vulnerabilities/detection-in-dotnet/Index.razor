@@ -15,14 +15,14 @@
         Authors="Ajay kumar"/>
 
     <Section Heading="Summary">
-        <p>As developers, we often trust third-party NuGet packages to accelerate development—but with that trust comes risk. Many of these packages may carry <b>known security vulnerabilities</b>, and if left unchecked, they can become a backdoor into your application. This is where <b>vulnerability detection in .NET</b> projects becomes critical.</p>
+        <p>As developers, we often trust third-party <code>NuGet</code> packages to accelerate development—but with that trust comes risk. Many of these packages may carry <b>known security vulnerabilities</b>, and if left unchecked, they can become a backdoor into your application. This is where <b>vulnerability detection in <code>.NET</code> </b> projects becomes critical.</p>
 
-        <p>Starting with .NET SDK 5.0.200, Microsoft introduced a built-in auditing command:</p>
+        <p>Starting with <code>.NET SDK 5.0.200</code>, Microsoft introduced a built-in auditing command:</p>
         <CodeSnippet Number="1" Language="Bash" Description="Command to check for vulnerable packages">
 dotnet list package --vulnerable
         </CodeSnippet>
 
-        <p>This command scans both direct and transitive NuGet dependencies for known security issues using Microsoft’s advisory database. It flags packages with vulnerabilities, categorizing them by severity (Low to Critical), and provides advisory URLs to investigate further.</p>
+        <p>This command scans both direct and transitive <code>NuGet</code> dependencies for known security issues using Microsoft’s advisory database. It flags packages with vulnerabilities, categorizing them by severity (Low to Critical), and provides advisory URLs to investigate further.</p>
 
         <p>But detection is only step one.</p>
 
@@ -33,14 +33,14 @@ dotnet list package --vulnerable
 
     <Section Heading="NugetAudit to the rescue!">
         <p>
-            NuGet 6.8 introduced the <code>NuGetAudit</code> MSBuild property, which enhances vulnerability detection during build time. When set to <code>true</code>, NuGetAudit performs an audit of your project's NuGet dependencies and generates warnings for any detected vulnerabilities. This allows you to identify and address security issues before your application is deployed.
+            <code>NuGet 6.8</code> introduced the <code>NuGetAudit</code> MSBuild property, which enhances vulnerability detection during restore/build time. When set to <code>true</code>, <code>NuGetAudit</code> performs an audit of your project's <code>NuGet</code> dependencies and generates warnings for any detected vulnerabilities. This allows you to identify and address security issues before your application is deployed.
         </p>
         
         <p>
             We are using a sample repo here which which uses below packages
             <ul>
-                <li><code>Refit</code> version <b><i>7.2.1</i></b> which has <b>Critical</b> vulnerability</li>
-                <li><code>Newtonsoft.Json</code> version <b><i>12.0.3</i></b> which has <b>High</b> vulnerability</li>
+                <li><code>Refit</code> version <i>7.2.1</i> which has <b class="text-danger">Critical</b> vulnerability</li>
+                <li><code>Newtonsoft.Json</code> version <i>12.0.3</i> which has <b class="text-warning">High</b> vulnerability</li>
             </ul>
         </p>
         <p>To enable <code>NuGetAudit</code>, we can add the following to our <code>.csproj</code> file:</p>
@@ -61,11 +61,11 @@ dotnet list package --vulnerable
         </CodeSnippet>
 
         <p>
-            When <code>NuGetAudit</code> is enabled, the build process will generate warnings for any NuGet packages with known vulnerabilities. These warnings will include information about the vulnerability, such as the severity and the affected package version.
+            When <code>NuGetAudit</code> is enabled, the build process will generate warnings for any <code>NuGet</code> packages with known vulnerabilities. These warnings will include information about the vulnerability, such as the severity and the affected package version.
         </p>
 
         <p>
-            You can configure the level of detail in the NuGet audit warnings by using the <code>NuGetAuditLevel</code> property. This property accepts the following values:
+            You can configure the level of detail in the <code>NuGet</code> audit warnings by using the <code>NuGetAuditLevel</code> property. This property accepts the following values:
         </p>
         <ul>
             <li><code>None</code>: No audit warnings are displayed.</li>
@@ -223,9 +223,9 @@ dotnet list package --vulnerable
     </Section>
 
     <Section Heading="Conclusion">
-        <p>In conclusion, vulnerability detection in .NET projects is a critical aspect of modern software development. By leveraging the built-in auditing command and the NuGetAudit MSBuild property, developers can proactively identify and address security vulnerabilities in their applications. This not only helps to protect sensitive data but also ensures compliance with security standards and best practices.</p>
+        <p>In conclusion, vulnerability detection in <code>.NET</code> projects is a critical aspect of modern software development. By leveraging the built-in auditing command and the NuGetAudit MSBuild property, developers can proactively identify and address security vulnerabilities in their applications. This not only helps to protect sensitive data but also ensures compliance with security standards and best practices.</p>
 
-        <p>By integrating these tools into your development workflow, you can significantly reduce the risk of security breaches and enhance the overall security posture of your .NET applications.</p>
+        <p>By integrating these tools into your development workflow, you can significantly reduce the risk of security breaches and enhance the overall security posture of your <code>.NET</code> applications.</p>
         <p>Integrating these tools into your CI/CD build pipelines ensures that vulnerabilities are detected and addressed early, preventing insecure code from being deployed to production systems.</p>
     </Section>
 
