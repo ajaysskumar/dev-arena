@@ -4,22 +4,26 @@
 
 <h2 class="mb-4">Latest Blogs</h2>
 
-<h4 class="mb-4">
-    @foreach(var tag in SiteMap.Pages.SelectMany(x => x.Tags).Distinct())
-    {
-        var route = $"/filtered-blogs?tag={tag}";
-        <a href="@route" class="text-info px-2">#@tag</a>
-    }
-</h4>
 <div class="row row-cols-1 row-cols-md-3 g-4 p-2">
+    <div class="col col-md-12">
+        <h4 class="d-flex flex-wrap">
+            @foreach (var tag in SiteMap.Pages.SelectMany(x => x.Tags).Distinct())
+            {
+                var route = $"/filtered-blogs?tag={tag}";
+                <a href="@route" class="text-info px-2">#@tag</a>
+            }
+        </h4>
+    </div>
+</div>
 
+<div class="row row-cols-1 row-cols-md-3 g-4 p-2">
     @{
-        foreach (var articlePage in SiteMap.Pages)
+        foreach (var articlePage in SiteMap.Pages.OrderByDescending(x => x.PublishedOn))
         {
             <div class="col">
                 <Thumbnail ImageUrl="@articlePage.ArticleImage" Title="@articlePage.Header" Author="Ajay kumar"
-                    Date="@articlePage.PublishedOn.ToLongDateString()" Category="@articlePage.Tags"
-                    BlogUrl="@articlePage.RelativePath" />
+                           Date="@articlePage.PublishedOn.ToLongDateString()" Category="@articlePage.Tags"
+                           BlogUrl="@articlePage.RelativePath"/>
             </div>
         }
     }

@@ -11,7 +11,10 @@
 <div class="row row-cols-1 row-cols-md-3 g-4 p-2">
 
     @{
-        foreach (var articlePage in SiteMap.Pages.Where(x => Tag is null || x.Tags.Contains(Tag)).ToList())
+        foreach (var articlePage in SiteMap.Pages
+                     .Where(x => Tag is null || x.Tags.Contains(Tag))
+                     .OrderByDescending(x => x.PublishedOn)
+                     .ToList())
         {
             <div class="col">
                 <Thumbnail ImageUrl="@articlePage.ArticleImage" Title="@articlePage.Header" Author="Ajay kumar"
