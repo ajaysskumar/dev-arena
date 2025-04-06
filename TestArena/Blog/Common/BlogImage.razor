@@ -13,7 +13,7 @@
     }
 
     private string CursorClass => IsMagnified ? "cursor-de-magnify" : "cursor-magnify";
-    private string ImageClass => IsMagnified ? "magnified" : "article-image";
+    private string ImageClass => IsMagnified ? "magnified" : "blog-support-image";
 }
 
 <style>
@@ -22,7 +22,7 @@
         text-align: center;
     }
 
-    .article-image {
+    .blog-support-image {
         width: 100%; /* Ensure the image is fully responsive */
         height: auto;
         border-radius: 10px;
@@ -30,7 +30,7 @@
     }
 
     .magnified {
-        max-width: 800px;
+        width: 100%; /* Ensure the magnified image is fully responsive */
         height: auto;
         border-radius: 10px;
         transform: scale(1.5); /* Magnify the image */
