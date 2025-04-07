@@ -15,16 +15,27 @@
         Authors="Ajay kumar"/>
 
     <Section Heading="Summary">
-        <p>As developers, we often trust third-party <code>NuGet</code> packages to accelerate development—but with that trust comes risk. Many of these packages may carry <b>known security vulnerabilities</b>, and if left unchecked, they can become a backdoor into your application. This is where <b>vulnerability detection in <code>.NET</code> </b> projects becomes critical.</p>
+        <p>Lets start this article with a few important questions !</p>
+        <ul>
+            <li>Have you ever faced a production issue due to a vulnerable package?</li>
+            <li>Are you confident your CI/CD pipeline can catch outdated or risky dependencies?</li>
+            <li>How do you currently monitor package vulnerabilities in your projects?</li>
+        </ul>
+
+        <p>These are <b>critical</b> questions every developer and team should ask themselves. Addressing these concerns proactively can save you from potential security breaches and ensure the reliability of your applications.</p>
+
+        <p>We often trust third-party <code>NuGet</code> packages to accelerate development—but with that trust comes risk. Many of these packages may carry <b>known security vulnerabilities</b>, and if left unchecked, they can become a backdoor into your application. This is where <b>vulnerability detection in <code>.NET</code> </b> projects becomes critical.</p>
 
         <p>Starting with <code>.NET SDK 5.0.200</code>, Microsoft introduced a built-in auditing command:</p>
+        <p>Try running the below command in your dotnet project and see what happens</p>
+        
         <CodeSnippet Number="1" Language="Bash" Description="Command to check for vulnerable packages">
 dotnet list package --vulnerable
         </CodeSnippet>
 
         <p>This command scans both direct and transitive <code>NuGet</code> dependencies for known security issues using Microsoft’s advisory database. It flags packages with vulnerabilities, categorizing them by severity (Low to Critical), and provides advisory URLs to investigate further.</p>
 
-        <p>But detection is only step one.</p>
+        <p><b>But detection is only step one.</b></p>
 
         <p>Vulnerability checks should be automated into your build or deployment workflows. Failing a build when vulnerabilities are found prevents insecure code from reaching production. Simple shell or PowerShell scripts can be used to enforce this in local or CI pipelines without relying on GitHub or external tools.</p>
 
