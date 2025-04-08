@@ -1,0 +1,558 @@
+<!DOCTYPE html><html lang="en"><head>
+    <!-- Google tag (gtag.js) -->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-N1BDBV7WLD"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-N1BDBV7WLD');
+    </script>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Dev Codex</title>
+    <base href="/"/>
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/app.css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+<link rel="icon" type="image/png" href="favicon.png"/>
+<link href="TestArena.styles.css" rel="stylesheet"/>
+
+<!--Blazor:{"type":"webassembly","prerenderId":"1bd082a9ea2d446396c8b32912ee76c9","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><!--Blazor:{"prerenderId":"1bd082a9ea2d446396c8b32912ee76c9"}-->
+</head>
+
+<body>
+    <div id="app">
+<!-- %%-PRERENDERING-BEGIN-%% -->
+<!--Blazor:{"type":"webassembly","prerenderId":"8bfb3935204247308fb007c3a77777d4","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
+                        <h3 class="m-0">Dev Codex</h3></a></div>
+
+                
+                <div class="col-12 col-md-4 d-flex justify-content-md-center justify-content-center mt-2 mt-md-0"><div class="w-75 position-relative"><input type="text" class="form-control" placeholder="Search..." />
+        <ul class="list-group position-absolute w-100 mt-1" style="z-index: 1000;" hidden></ul></div></div>
+
+                
+                <div class="col-12 col-md-4 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><div class="dropdown"><a href="/about-author" class="d-inline-block rounded-circle overflow-hidden border border-white" style="width: 3rem; height: 3rem; border-width: 0.25rem;"><img src="/images/shared/author.jpg" alt="About Author" class="img-fluid rounded-circle" style="width: 100%; height: 100%; object-fit: cover;"></a></div></div></div></div></div></header>
+        <article class="content px-4" b-mcp0h0uciv><div class="container-fluid d-flex justify-content-center"><div class="content-wrapper"><style>
+    .article-header {
+        margin: 0 auto;
+        /* Centers the div */
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    .container-fluid,
+    .row,
+    .col-md-12,
+    .col-6 {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .article-image {
+        max-width: 500px !important;
+        height: auto;
+        border-radius: 10px;
+    }
+</style>
+
+<header class="article-header"><div class="row"><div class="col-md-12"><h1 class="fw-bold">Integration testing for dotnet core APIs: Introduction</h1></div>
+        <div class="col-md-12"><img src="images/blog/integration-testing/intro/banner.png" alt="Article Banner" height="200" width="auto" class="img-fluid rounded mx-auto d-block my-3" /></div>
+        <div class="col-md-12"><div class="container-fluid"><div class="row"><div class="col-md-6 col-xs-12 d-flex justify-content-md-start justify-content-center"><span class="text-secondary fw-bold">Author(s): </span>
+                        <span class="text-secondary fw-bold ms-1">Ajay Kumar</span></div>
+
+                    
+                    <div class="col-md-6 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Published On: 25 Jan 2025</span></div></div></div></div></div></header>
+
+    <section><h3></h3><hr class="border border-success border-1 opacity-50">
+    <div><p>This is going to be multi-part series on integration tests from introduction to advanced used cases.</p></div></section>
+
+    <section><h3>What are integration tests in context of APIs?</h3><hr class="border border-success border-1 opacity-50">
+    <div><p>In the context of <b>.NET Core APIs</b> for a blog, integration tests are automated tests that evaluate the
+            functionality of various parts of your application working together as a whole. Specifically, these tests
+            ensure that multiple components — such as controllers, database access, middleware, internal and external
+            services — function correctly when integrated, as opposed to functioning correctly only in isolation (which
+            would be covered by unit tests).</p>
+        <p>Here is a quick one-liner summary on popular kinds of testing for an API codebase:</p>
+        <ul><li><b>Unit Tests:</b> Validate individual components like controllers or services in isolation.</li>
+            <li><b>Integration Tests:</b> Verify the interaction between multiple components (e.g., API, database,
+                middleware) as a cohesive system.</li>
+            <li><b>Contract Tests:</b> Ensure that API endpoints conform to agreed-upon interfaces or expectations
+                between services.</li></ul>
+        <p>Integration tests will help you in identifying possible bugs introduced due to any new changes in your code.</p>
+
+        <style>
+    .image-header {
+        margin: 0 auto; /* Centers the div */
+        text-align: center;
+    }
+
+    .blog-support-image {
+        width: 100%; /* Ensure the image is fully responsive */
+        height: auto;
+        border-radius: 10px;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .magnified {
+        width: 100%; /* Ensure the magnified image is fully responsive */
+        height: auto;
+        border-radius: 10px;
+        transform: scale(1.5); /* Magnify the image */
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .cursor-magnify {
+        cursor: zoom-in; /* Circular magnify button */
+    }
+
+    .cursor-de-magnify {
+        cursor: zoom-out; /* Circular de-magnify button */
+    }
+
+    figcaption {
+        font-style: italic;
+        padding: 2px;
+        text-align: center;
+    }
+
+    .figure-caption {
+        font-size: 0.9rem; /* Adjust caption size */
+        color: #6c757d; /* Muted text color */
+        text-align: center; /* Center align */
+        margin-top: 8px; /* Space between image and caption */
+        font-weight: 500; /* Slightly bold for readability */
+    }
+
+    .figure-caption strong {
+        color: #343a40; /* Darker color for image number */
+        font-weight: 600; /* Make image number bold */
+    }
+</style>
+
+<div class="row image-header"><figure class="text-center"><img src="/images/blog/integration-testing/intro/Build process when integration tests fail.webp" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="Build process when integration tests fail" />
+        <figcaption class="figure-caption"><strong>Figure 1 :</strong> Build process when integration tests fail</figcaption></figure></div>
+
+        <style>
+    .image-header {
+        margin: 0 auto; /* Centers the div */
+        text-align: center;
+    }
+
+    .blog-support-image {
+        width: 100%; /* Ensure the image is fully responsive */
+        height: auto;
+        border-radius: 10px;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .magnified {
+        width: 100%; /* Ensure the magnified image is fully responsive */
+        height: auto;
+        border-radius: 10px;
+        transform: scale(1.5); /* Magnify the image */
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .cursor-magnify {
+        cursor: zoom-in; /* Circular magnify button */
+    }
+
+    .cursor-de-magnify {
+        cursor: zoom-out; /* Circular de-magnify button */
+    }
+
+    figcaption {
+        font-style: italic;
+        padding: 2px;
+        text-align: center;
+    }
+
+    .figure-caption {
+        font-size: 0.9rem; /* Adjust caption size */
+        color: #6c757d; /* Muted text color */
+        text-align: center; /* Center align */
+        margin-top: 8px; /* Space between image and caption */
+        font-weight: 500; /* Slightly bold for readability */
+    }
+
+    .figure-caption strong {
+        color: #343a40; /* Darker color for image number */
+        font-weight: 600; /* Make image number bold */
+    }
+</style>
+
+<div class="row image-header"><figure class="text-center"><img src="/images/blog/integration-testing/intro/Build process when integration tests pass.webp" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="Build process when integration tests pass" />
+        <figcaption class="figure-caption"><strong>Figure 2 :</strong> Build process when integration tests pass</figcaption></figure></div></div></section>
+
+    <section><h3>Ways to write integration tests</h3><hr class="border border-success border-1 opacity-50">
+    <div><p>Now there are various ways to write integration tests:</p>
+        <ul><li>Using Postman or any other API testing tool</li>
+            <li>Deploying services to actual environment, either server or cloud service</li>
+            <li>Using <b>WebApplicationFactory</b> in dotnet to run an in-memory server locally</li></ul>
+        <p>We will be discussing the <b>WebApplicationFactory</b> method, which is fast, flexible, configurable and does not require any additional tools or hosting environment.</p>
+        <p>Some of the advantages of this approach are as below:</p>
+        <ul><li><b>Realistic Environment:</b> It provides a full-fledged, in-memory test server that mimics the real production environment, allowing you to test the entire request/response pipeline of your application without needing to host it on an actual web server.</li>
+            <li><b>End-to-End Testing:</b> You can perform end-to-end testing, including routing, middleware, dependency injection, and database interactions, ensuring that all components work together as expected.</li>
+            <li><b>Customizable Configuration:</b> You can override or customize the application’s configuration (e.g., swapping real services or databases for test versions) to simulate different environments or conditions without affecting the production code.</li>
+            <li><b>Easy HTTP Client Access:</b> WebApplicationFactory makes it simple to create an HttpClient for sending HTTP requests to your API, making it easy to test API endpoints and validate their responses.</li>
+            <li><b>Automatic Startup:</b> It handles the application’s startup process, so you don’t have to manually configure or boot the application, saving time and reducing boilerplate code.</li>
+            <li><b>Flexible Testing with Dependency Injection:</b> You can easily replace services, middleware, or database contexts using the test server’s dependency injection, which allows for testing specific scenarios like using an in-memory database.</li>
+            <li><b>Seamless Integration with Test Frameworks:</b> It integrates well with popular testing frameworks like xUnit, NUnit, or MSTest, and is optimized for use in .NET Core testing scenarios, reducing friction in writing and running tests.</li></ul></div></section>
+
+    <section><h3>Diving into the code</h3><hr class="border border-success border-1 opacity-50">
+    <div><p>For a demo code, we will be referring a code repository, which stores the information for superhero personalities. I’ll be sharing the GitHub link of the code repo at the end of the article.</p>
+        <p>Our demo API has 2 APIs:</p>
+
+        <style>
+    .image-header {
+        margin: 0 auto; /* Centers the div */
+        text-align: center;
+    }
+
+    .blog-support-image {
+        width: 100%; /* Ensure the image is fully responsive */
+        height: auto;
+        border-radius: 10px;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .magnified {
+        width: 100%; /* Ensure the magnified image is fully responsive */
+        height: auto;
+        border-radius: 10px;
+        transform: scale(1.5); /* Magnify the image */
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .cursor-magnify {
+        cursor: zoom-in; /* Circular magnify button */
+    }
+
+    .cursor-de-magnify {
+        cursor: zoom-out; /* Circular de-magnify button */
+    }
+
+    figcaption {
+        font-style: italic;
+        padding: 2px;
+        text-align: center;
+    }
+
+    .figure-caption {
+        font-size: 0.9rem; /* Adjust caption size */
+        color: #6c757d; /* Muted text color */
+        text-align: center; /* Center align */
+        margin-top: 8px; /* Space between image and caption */
+        font-weight: 500; /* Slightly bold for readability */
+    }
+
+    .figure-caption strong {
+        color: #343a40; /* Darker color for image number */
+        font-weight: 600; /* Make image number bold */
+    }
+</style>
+
+<div class="row image-header"><figure class="text-center"><img src="/images/blog/integration-testing/intro/Demo API swagger definition.webp" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="Demo API swagger definition" />
+        <figcaption class="figure-caption"><strong>Figure 3 :</strong> Demo API swagger definition</figcaption></figure></div>
+
+        <p>A quick glimpse on our simple SuperHero controller</p>
+
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-3"><code class="language-csharp" style="font-size: 0.8rem;">
+[ApiController]
+[Route("[controller]")]
+public class SuperHeroController(ISuperHeroRepository superHeroRepository)
+    : ControllerBase
+{
+    [HttpGet("")]
+    public async Task&lt;IEnumerable&lt;SuperHero&gt;&gt; Get()
+    {
+        return await superHeroRepository.GetAllSuperHeroes();
+    }
+    
+    [HttpGet("{id}")]
+    public async Task&lt;IActionResult&gt; GetById(int id)
+    {
+        var superHero = await superHeroRepository.GetSuperHeroById(id);
+        if (superHero == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(superHero);
+    }
+}
+        </code></pre></div>
+        <div class="col-12 text-center"><code>Code Sample #1 : APIs for SuperHero</code></div></div></div>
+<br>
+        <p>Since this is basic demo, our ISuperHeroRepository interacts with a Sqlite database which has some predefined SuperHero entries.</p></div></section>
+
+    <section><h3>Integration test example</h3><hr class="border border-success border-1 opacity-50">
+    <div><p>Here is an example for our integration test for <b>Get SuperHero By Id</b> scenario:</p>
+
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-3"><code class="language-csharp" style="font-size: 0.8rem;">
+[Fact(DisplayName = "Get superhero by Id returns superhero")]
+public async Task Get_ById_SuperHero_Returns_SuperHero()
+{
+    // Arrange
+    var factory = new WebApplicationFactory&lt;Program&gt;();
+    var htmlClient = factory.CreateClient();
+    
+    // Act
+    var response = await htmlClient.GetAsync("/SuperHero/1");
+
+    // Assert
+    response.StatusCode.Should().Be(HttpStatusCode.OK);
+    var superHeroes = await response.Content.ReadFromJsonAsync&lt;SuperHero&gt;();
+    superHeroes.Should().NotBeNull();
+    superHeroes!.Id.Should().Be(1);
+    superHeroes!.SuperName.Should().Be("Batman");
+}
+        </code></pre></div>
+        <div class="col-12 text-center"><code>Code Sample #2 : Integration test for Get SuperHero By Id</code></div></div></div>
+<br>
+
+        <p>Let’s understand what’s happening inside the test:</p>
+        <h5>1. Test Definition and Setup</h5>
+        <p>The test starts with the <code>[Fact]</code> attribute from xUnit, which defines the test and makes it executable within the test framework. The <code>DisplayName</code> parameter provides a readable description for the test, which is helpful for test reports.</p>
+
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-3"><code class="language-csharp" style="font-size: 0.8rem;">
+        [Fact(DisplayName = "Get superhero by Id returns superhero")]
+        </code></pre></div>
+        <div class="col-12 text-center"><code>Code Sample #3 : Test Definition</code></div></div></div>
+<br>
+        <p>This test will ensure that the API correctly retrieves a superhero by ID when we hit the <code>/SuperHero/1</code> endpoint.</p>
+
+        <h5>2. Arranging the Test Environment</h5>
+        <p>In the Arrange phase, we use <code>WebApplicationFactory</code> to spin up a test server and create an <code>HttpClient</code> for sending requests to the API.</p>
+
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-3"><code class="language-csharp" style="font-size: 0.8rem;">
+        var factory = new WebApplicationFactory&lt;Program&gt;();
+        var httpClient = factory.CreateClient();
+        </code></pre></div>
+        <div class="col-12 text-center"><code>Code Sample #4 : Arrange Phase</code></div></div></div>
+<br>
+        <ul><li><code>WebApplicationFactory&lt;Program&gt;</code>: This initializes a test instance of the API, emulating the real application.</li>
+            <li><code>CreateClient()</code>: This method returns an <code>HttpClient</code> that can be used to make requests to the in-memory test server.</li></ul>
+        <p>By using <code>WebApplicationFactory</code>, we simulate the application environment, allowing us to test the full HTTP pipeline, including routing, middleware, and controllers.</p>
+
+        <h5>3. Act: Sending the Request</h5>
+        <p>In the Act phase, we make a GET request to the <code>/SuperHero/1</code> endpoint using the <code>httpClient</code> created earlier.</p>
+
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-3"><code class="language-csharp" style="font-size: 0.8rem;">
+        var response = await httpClient.GetAsync("/SuperHero/1");
+        </code></pre></div>
+        <div class="col-12 text-center"><code>Code Sample #5 : Act Phase</code></div></div></div>
+<br>
+        <p>This line sends an HTTP GET request to the API and awaits the response. The application processes the request as it would in production, returning the corresponding superhero (with ID 1) if it exists.</p>
+
+        <h5>4. Assert: Validating the Response</h5>
+        <p>Now we enter the Assert phase, where we check if the response from the API matches our expectations.</p>
+
+        <p><b>Checking the Status Code:</b></p>
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-3"><code class="language-csharp" style="font-size: 0.8rem;">
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+        </code></pre></div>
+        <div class="col-12 text-center"><code>Code Sample #6 : Assert Status Code</code></div></div></div>
+<br>
+        <p>This assertion ensures the API returns a status code of <code>200 OK</code>, confirming that the request was successful. If the API returned any other status code (like <code>404 Not Found</code> or <code>500 Internal Server Error</code>), the test would fail.</p></div></section>
+    <section><h3>Validating the Returned Data</h3><hr class="border border-success border-1 opacity-50">
+    <div><p>Next, we check the actual content of the response by deserializing the JSON response into a <code>SuperHero</code> object:</p>
+
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-3"><code class="language-csharp" style="font-size: 0.8rem;">
+        var superHero = await response.Content.ReadFromJsonAsync&lt;SuperHero&gt;();
+        superHero.Should().NotBeNull();
+        </code></pre></div>
+        <div class="col-12 text-center"><code>Code Sample #7 : Validate Returned Data</code></div></div></div>
+<br>
+
+        <ul><li><code>ReadFromJsonAsync&lt;SuperHero&gt;()</code>: This method reads the JSON response and converts it into a <code>SuperHero</code> object. If the response doesn’t match the expected structure, or if the superhero doesn't exist, the test will fail.</li>
+            <li><code>superHero.Should().NotBeNull()</code>: This assertion checks that the API did, in fact, return a superhero. If the API returned null (i.e., no superhero was found), the test would fail here.</li></ul></div></section>
+
+    <section><h3>Verifying Specific Property Values</h3><hr class="border border-success border-1 opacity-50">
+    <div><p>Finally, we verify that the returned superhero has the correct properties, specifically checking that the ID is 1 and the superhero's name is "Batman":</p>
+
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-3"><code class="language-csharp" style="font-size: 0.8rem;">
+        superHero!.Id.Should().Be(1);
+        superHero!.SuperName.Should().Be("Batman");
+        </code></pre></div>
+        <div class="col-12 text-center"><code>Code Sample #8 : Verify Specific Property Values</code></div></div></div>
+<br>
+
+        <p>When executed, if everything is good with our code, we get all green tests.</p>
+
+        <style>
+    .image-header {
+        margin: 0 auto; /* Centers the div */
+        text-align: center;
+    }
+
+    .blog-support-image {
+        width: 100%; /* Ensure the image is fully responsive */
+        height: auto;
+        border-radius: 10px;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .magnified {
+        width: 100%; /* Ensure the magnified image is fully responsive */
+        height: auto;
+        border-radius: 10px;
+        transform: scale(1.5); /* Magnify the image */
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .cursor-magnify {
+        cursor: zoom-in; /* Circular magnify button */
+    }
+
+    .cursor-de-magnify {
+        cursor: zoom-out; /* Circular de-magnify button */
+    }
+
+    figcaption {
+        font-style: italic;
+        padding: 2px;
+        text-align: center;
+    }
+
+    .figure-caption {
+        font-size: 0.9rem; /* Adjust caption size */
+        color: #6c757d; /* Muted text color */
+        text-align: center; /* Center align */
+        margin-top: 8px; /* Space between image and caption */
+        font-weight: 500; /* Slightly bold for readability */
+    }
+
+    .figure-caption strong {
+        color: #343a40; /* Darker color for image number */
+        font-weight: 600; /* Make image number bold */
+    }
+</style>
+
+<div class="row image-header"><figure class="text-center"><img src="/images/blog/integration-testing/intro/Success test result.webp" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="Success test result" />
+        <figcaption class="figure-caption"><strong>Figure 4 :</strong> Success test result</figcaption></figure></div></div></section>
+    
+    <section><h3>Negative Scenario</h3><hr class="border border-success border-1 opacity-50">
+    <div><p>Let’s deliberately try to break our code to understand how the test behaves in a negative scenario. The test scenario <b>Get superhero by invalid Id returns not found</b> expects a <code>404 Not Found</code> status code when a superhero is not found.</p>
+
+        <p>We will make a change in our code to return <code>400 Bad Request</code> instead of <code>404 Not Found</code>:</p>
+
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-3"><code class="language-csharp" style="font-size: 0.8rem;">
+        [HttpGet("{id}")]
+        public async Task&lt;IActionResult&gt; GetById(int id)
+        {
+            var superHero = await superHeroRepository.GetSuperHeroById(id);
+            if (superHero == null)
+            {
+                return BadRequest(); // Changed from NotFound()
+            }
+
+            return Ok(superHero);
+        }
+        </code></pre></div>
+        <div class="col-12 text-center"><code>Code Sample #9 : Modified GetById Method</code></div></div></div>
+<br>
+
+        <p>Now, let’s run the test and observe the results. The test result is as follows:</p>
+
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-3"><code class="language-csharp" style="font-size: 0.8rem;">
+        Expected response.StatusCode to be HttpStatusCode.NotFound {value: 404}, 
+        but found HttpStatusCode.BadRequest {value: 400}.
+        </code></pre></div>
+        <div class="col-12 text-center"><code>Code Sample #10 : Test Failure Result</code></div></div></div>
+<br>
+
+        <style>
+    .image-header {
+        margin: 0 auto; /* Centers the div */
+        text-align: center;
+    }
+
+    .blog-support-image {
+        width: 100%; /* Ensure the image is fully responsive */
+        height: auto;
+        border-radius: 10px;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .magnified {
+        width: 100%; /* Ensure the magnified image is fully responsive */
+        height: auto;
+        border-radius: 10px;
+        transform: scale(1.5); /* Magnify the image */
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .cursor-magnify {
+        cursor: zoom-in; /* Circular magnify button */
+    }
+
+    .cursor-de-magnify {
+        cursor: zoom-out; /* Circular de-magnify button */
+    }
+
+    figcaption {
+        font-style: italic;
+        padding: 2px;
+        text-align: center;
+    }
+
+    .figure-caption {
+        font-size: 0.9rem; /* Adjust caption size */
+        color: #6c757d; /* Muted text color */
+        text-align: center; /* Center align */
+        margin-top: 8px; /* Space between image and caption */
+        font-weight: 500; /* Slightly bold for readability */
+    }
+
+    .figure-caption strong {
+        color: #343a40; /* Darker color for image number */
+        font-weight: 600; /* Make image number bold */
+    }
+</style>
+
+<div class="row image-header"><figure class="text-center"><img src="/images/blog/integration-testing/intro/Failure result status.webp" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="Failure result status" />
+        <figcaption class="figure-caption"><strong>Figure 5 :</strong> Failure result status</figcaption></figure></div>
+
+        <p>This failure indicates that the test correctly identified the mismatch between the expected and actual status codes. The test expected a <code>404 Not Found</code>, but the API returned a <code>400 Bad Request</code> due to the deliberate change in the code.</p>
+
+        <p>Such scenarios highlight the importance of integration tests in catching unintended changes or bugs in the application behavior.</p></div></section>
+    <p>This is it for the basic setup demo. I will be covering more in the future articles like, how to work with database, authentication, events etc.</p>
+    <section><p>For reference, the code repository being discussed is available at github: <a href="https://github.com/ajaysskumar/pact-net-example">https://github.com/ajaysskumar/pact-net-example</a></p><p>Thanks for reading through. Please share feedback, if any, in comments or on my email <a href="mailto:ajay.a338@gmail.com">ajay.a338@gmail.com</a></p></section></div></div>
+
+<style>
+    .content-wrapper {
+        width: 50%; /* Leaves 20% space on left and right */
+        background: white;
+    }
+
+    @media (max-width: 768px) {
+        .content-wrapper {
+            width: 90%; /* On smaller screens, reduce left-right space */
+        }
+    }
+</style></article>
+        <footer class="bg-dark text-white py-4 mt-auto"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><p class="mb-0">Copyright © 2025 Dev Codex</p></div>
+
+            
+            <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
+                <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
+        <!--Blazor:{"prerenderId":"8bfb3935204247308fb007c3a77777d4"}-->
+<!-- %%-PRERENDERING-END-%% -->
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UW01eVNGQk1NMWx2UmtadE1XNTNRMFIxZDNnMmJqUlNSSFl0VFdneFkxcEZia0V4Ym14clpXTlVObFpwU2poSE5UZ3lTSFJzVmtSd1NEVTRjMlZqV0c5SVdTMU1Obmh3UzBWdk1reE1kVVZhTkVrMFREbE9ZV3h5ZVhGdFZVUndMVFJTUTNJeldteGZMVzltTUZwNU1URjBkV013VjBReVJEWjFVRzVpUlRFNU16VkNRMFI0Tlc1d1VIWjZVMmt3VmkxeGJUUXdJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+    <script src="_framework/blazor.webassembly.js" autostart="false"></script>
+    <script src="brotliloader.min.js" type="module"></script>
+
+
+
+</body></html>

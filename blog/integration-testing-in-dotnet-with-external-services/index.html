@@ -1,0 +1,431 @@
+<!DOCTYPE html><html lang="en"><head>
+    <!-- Google tag (gtag.js) -->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-N1BDBV7WLD"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-N1BDBV7WLD');
+    </script>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Dev Codex</title>
+    <base href="/"/>
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/app.css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+<link rel="icon" type="image/png" href="favicon.png"/>
+<link href="TestArena.styles.css" rel="stylesheet"/>
+
+<!--Blazor:{"type":"webassembly","prerenderId":"17d59ff923814c5c9bb05b8ea97704aa","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><!--Blazor:{"prerenderId":"17d59ff923814c5c9bb05b8ea97704aa"}-->
+</head>
+
+<body>
+    <div id="app">
+<!-- %%-PRERENDERING-BEGIN-%% -->
+<!--Blazor:{"type":"webassembly","prerenderId":"7de3756ee96643af94fbd65e3e4d6dcb","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
+                        <h3 class="m-0">Dev Codex</h3></a></div>
+
+                
+                <div class="col-12 col-md-4 d-flex justify-content-md-center justify-content-center mt-2 mt-md-0"><div class="w-75 position-relative"><input type="text" class="form-control" placeholder="Search..." />
+        <ul class="list-group position-absolute w-100 mt-1" style="z-index: 1000;" hidden></ul></div></div>
+
+                
+                <div class="col-12 col-md-4 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><div class="dropdown"><a href="/about-author" class="d-inline-block rounded-circle overflow-hidden border border-white" style="width: 3rem; height: 3rem; border-width: 0.25rem;"><img src="/images/shared/author.jpg" alt="About Author" class="img-fluid rounded-circle" style="width: 100%; height: 100%; object-fit: cover;"></a></div></div></div></div></div></header>
+        <article class="content px-4" b-mcp0h0uciv><div class="container-fluid d-flex justify-content-center"><div class="content-wrapper"><style>
+    .article-header {
+        margin: 0 auto;
+        /* Centers the div */
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    .container-fluid,
+    .row,
+    .col-md-12,
+    .col-6 {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .article-image {
+        max-width: 500px !important;
+        height: auto;
+        border-radius: 10px;
+    }
+</style>
+
+<header class="article-header"><div class="row"><div class="col-md-12"><h1 class="fw-bold">Integration testing for dotnet core APIs: Handling 3rd party service calls using wiremock</h1></div>
+        <div class="col-md-12"><img src="images/blog/integration-testing/handling-external-services/banner.png" alt="Article Banner" height="200" width="auto" class="img-fluid rounded mx-auto d-block my-3" /></div>
+        <div class="col-md-12"><div class="container-fluid"><div class="row"><div class="col-md-6 col-xs-12 d-flex justify-content-md-start justify-content-center"><span class="text-secondary fw-bold">Author(s): </span>
+                        <span class="text-secondary fw-bold ms-1">Ajay Kumar</span></div>
+
+                    
+                    <div class="col-md-6 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Published On: 08 Mar 2025</span></div></div></div></div></div></header>
+
+    <section><h4>Summary</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>This is a continuation of the <b>Integration testing in dotnet</b> series. This time we will be covering the
+            scenario where third-party service calls are present in our API flows.</p>
+        <p>Before we begin further, you may want to visit the previous articles in this series to get a better context
+            of integration testing in general and the code repository that we will be using for demo purposes here. The
+            links to the articles are mentioned below:</p>
+        <div class="card mb-3 mx-auto" style="max-width: 600px;"><div class="row g-0"><div class="col-md-8"><div class="card-body"><h5 class="card-title"><a href="/blog/integration-testing-in-dotnet-intro" class="text-decoration-none"><strong>Getting started</strong></a></h5>
+                <p class="card-text">Integration testing for dotnet core APIs: Introduction</p>
+                <a href="/blog/integration-testing-in-dotnet-intro" class="text-muted">devcodex.in</a></div></div>
+        <div class="col-md-4 d-flex align-items-center pe-2"><img src="/images/blog/integration-testing/intro/banner.png" class="img-fluid rounded-end" alt="Blog Image" /></div></div></div>
+        <div class="card mb-3 mx-auto" style="max-width: 600px;"><div class="row g-0"><div class="col-md-8"><div class="card-body"><h5 class="card-title"><a href="/blog/integration-testing-in-dotnet-with-database" class="text-decoration-none"><strong>Demo with database</strong></a></h5>
+                <p class="card-text">Integration testing for dotnet core APIs: Handling database</p>
+                <a href="/blog/integration-testing-in-dotnet-with-database" class="text-muted">devcodex.in</a></div></div>
+        <div class="col-md-4 d-flex align-items-center pe-2"><img src="/images/blog/integration-testing/handling-database/banner.png" class="img-fluid rounded-end" alt="Blog Image" /></div></div></div>
+        <p>Also, all the code used here is available at: <a href="https://github.com/ajaysskumar/SuperHeroSolution/tree/main/DemoWith3rdPartyService">SuperHero repository link</a></p></div></section>
+
+    <section><h4>Why need to mock?</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>Mocking third-party service calls is crucial to ensure tests are isolated, reliable, and repeatable.</p>
+        <p>It avoids dependency on external systems that may be unavailable, slow, or unpredictable, allowing the focus
+            to remain on verifying the behavior of your application in a controlled environment.</p>
+        <p>Mocking also simplifies setting up specific scenarios, such as handling failures or edge cases, which might
+            be hard to replicate with real services.</p>
+        <p>However, unlike unit tests, the mocking here is wire-level mocking since we want all our logic, including the
+            way we call the HTTP service and the way we parse the response, because here we are testing the overall
+            integration of all the components of our application. So we will be mocking only what goes out to the
+            network and what comes into the network here.</p></div></section>
+
+    <section><h4>Suspects API</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>Continuing with the article, let's imagine we need an API that returns the list of notorious suspects in the
+            superhero universe.</p>
+        <p>We created an API as mentioned in the below Swagger screenshot:</p>
+
+        <style>
+    .image-header {
+        margin: 0 auto; /* Centers the div */
+        text-align: center;
+    }
+
+    .blog-support-image {
+        width: 100%; /* Ensure the image is fully responsive */
+        height: auto;
+        border-radius: 10px;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .magnified {
+        width: 100%; /* Ensure the magnified image is fully responsive */
+        height: auto;
+        border-radius: 10px;
+        transform: scale(1.5); /* Magnify the image */
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .cursor-magnify {
+        cursor: zoom-in; /* Circular magnify button */
+    }
+
+    .cursor-de-magnify {
+        cursor: zoom-out; /* Circular de-magnify button */
+    }
+
+    figcaption {
+        font-style: italic;
+        padding: 2px;
+        text-align: center;
+    }
+
+    .figure-caption {
+        font-size: 0.9rem; /* Adjust caption size */
+        color: #6c757d; /* Muted text color */
+        text-align: center; /* Center align */
+        margin-top: 8px; /* Space between image and caption */
+        font-weight: 500; /* Slightly bold for readability */
+    }
+
+    .figure-caption strong {
+        color: #343a40; /* Darker color for image number */
+        font-weight: 600; /* Make image number bold */
+    }
+</style>
+
+<div class="row image-header"><figure class="text-center"><img src="/images/blog/integration-testing/handling-external-services/Suspect API screenshot.webp" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="Suspect API screenshot" />
+        <figcaption class="figure-caption"><strong>Figure 2 :</strong> Suspect API screenshot</figcaption></figure></div>
+
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-3"><code class="language-csharp" style="font-size: 0.8rem;">
+            [HttpGet("/suspects")]
+            public async Task&lt;IActionResult&gt; Suspects([FromQuery] string searchTerm)
+            {
+            var people = await GetPeople();
+            var peopleOfInterest = people.Data.Where(person =>
+            person.First_Name.Contains(searchTerm, StringComparison.InvariantCultureIgnoreCase) ||
+            person.Last_Name.Contains(searchTerm, StringComparison.InvariantCultureIgnoreCase) ||
+            person.Email.Contains(searchTerm, StringComparison.InvariantCultureIgnoreCase));
+            if (!peopleOfInterest.Any())
+            {
+            return NotFound();
+            }
+            return Ok(peopleOfInterest);
+            }
+
+            // Method to fetch people from 3rd party service
+            // We have also defined a variable "SuspectServiceUrl" in appsettings.json
+            private async Task&lt;PersonResponse&gt; GetPeople()
+            {
+            using var client = new HttpClient();
+
+            var url = $"{configuration.GetValue&lt;string&gt;("SuspectServiceUrl")}/api/users?page=1";
+            var response = await client.GetAsync(url);
+            if (!response.IsSuccessStatusCode)
+            {
+            throw new HttpRequestException($"Unable to get people from {url}");
+            }
+
+            return await response.Content.ReadFromJsonAsync&lt;PersonResponse&gt;();
+            }
+        </code></pre></div>
+        <div class="col-12 text-center"><code>Code Sample #2 : Suspect API</code></div></div></div>
+<br></div></section>
+
+    <section><h4>Wiremock to the rescue!</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>Here we will be setting up <b>Wiremock</b> to be used in the integration tests. For those who are new to
+            Wiremock, please visit <a href="https://github.com/WireMock-Net/WireMock.Net" target="_blank">WireMock.Net</a> for more details.</p>
+        <p>Install the below package in the Integration test project:</p>
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-3"><code class="language-csharp" style="font-size: 0.8rem;">
+            dotnet add package WireMock.Net --version 1.6.10
+        </code></pre></div>
+        <div class="col-12 text-center"><code>Code Sample #3 : Install WireMock.Net</code></div></div></div>
+<br>
+        <p>After setup, the shared fixture class will look as follows. I have provided comments to understand the code
+            context better.</p>
+        <p>On a high level, we did the following:</p>
+        <ul><li>Created and initialized the Wiremock server.</li>
+            <li>Captured the mocked server’s base URL in the property <code>SuspectServiceUrlOverride</code>.</li>
+            <li>Exposed the mocked server via the property <code>WireMockServer</code>. This is needed because our
+                application can behave differently based on different responses from the third-party service.</li></ul>
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-3"><code class="language-csharp" style="font-size: 0.8rem;">
+            public class SharedFixture : IAsyncLifetime
+            {
+            public string SuspectServiceUrlOverride { get; private set; } = null!;
+            private WireMockServer? _server;
+
+            public WireMockServer WireMockServer => _server;
+
+            public async Task InitializeAsync()
+            {
+            SuspectServiceUrlOverride = StartWireMockForService();
+            }
+
+            public async Task DisposeAsync()
+            {
+            _server?.Stop();
+            }
+
+            private string StartWireMockForService()
+            {
+            _server = WireMockServer.Start();
+            return _server.Urls[0];
+            }
+            }
+        </code></pre></div>
+        <div class="col-12 text-center"><code>Code Sample #4 : SharedFixture class</code></div></div></div>
+<br>
+        <p>Next, we guide our application to override the <code>SuspectServiceUrl</code> from
+            <code>appsettings.json</code> and take the base URL value for the third-party service from the mocked
+            server, i.e., <code>SharedFixture</code>’s <code>SuspectServiceUrlOverride</code> property.</p>
+        <p>For this, we make changes in our <code>CustomApiFactory</code> class as shown below:</p>
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-3"><code class="language-csharp" style="font-size: 0.8rem;">
+            public class CustomApiFactory(SharedFixture sharedFixture) : WebApplicationFactory&lt;Program&gt;
+            {
+            protected override void ConfigureWebHost(IWebHostBuilder builder)
+            {
+            builder.ConfigureAppConfiguration((_, configBuilder) =>
+            {
+            configBuilder.AddInMemoryCollection(new Dictionary&lt;string, string&gt;
+            {
+            ["SuspectServiceUrl"] = sharedFixture.SuspectServiceUrlOverride
+            });
+            });
+            }
+            }
+        </code></pre></div>
+        <div class="col-12 text-center"><code>Code Sample #5 : CustomApiFactory class</code></div></div></div>
+<br>
+        <p>This completes the setup. We are now ready to write the tests.</p></div></section>
+
+    <section><h4>Test Scenarios</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>Below are the test scenarios for our Suspect API. These tests ensure that the API behaves as expected under
+            different conditions, including both positive and negative cases.</p>
+
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-3"><code class="language-csharp" style="font-size: 0.8rem;">
+            /// &lt;summary&gt;
+            /// This method will take params and will return the list of people/suspects
+            /// &lt;/summary&gt;
+            /// &lt;param name="pageNum"&gt;Number of page to look for. Can be any number, but for this problem, lets
+            assume this will always be 1&lt;/param&gt;
+            /// &lt;param name="apiResponse"&gt;Response JSON returned by the API&lt;/param&gt;
+            /// &lt;param name="expectedStatusCode"&gt;Status code returned from the API&lt;/param&gt;
+            /// &lt;typeparam name="T"&gt;Type of the response&lt;/typeparam&gt;
+            private void SetupServiceMockForSuspectApi&lt;T&gt;(string pageNum, T apiResponse, HttpStatusCode
+            expectedStatusCode = HttpStatusCode.OK)
+            {
+            factory.SharedFixture.WireMockServer
+            .Given(Request
+            .Create()
+            .WithPath("/api/users")
+            .UsingGet()
+            .WithParam("page", MatchBehaviour.AcceptOnMatch, ignoreCase: true, pageNum))
+            .RespondWith(Response
+            .Create()
+            .WithStatusCode(expectedStatusCode)
+            .WithBodyAsJson(apiResponse, Encoding.UTF8));
+            }
+        </code></pre></div>
+        <div class="col-12 text-center"><code>Code Sample #6 : SetupServiceMockForSuspectApi method</code></div></div></div>
+<br>
+
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-3"><code class="language-csharp" style="font-size: 0.8rem;">
+            [Fact(DisplayName = "Get suspects should return all matching suspects")]
+            public async Task Get_All_Suspects_Returns_List_Of_Matching_Suspects()
+            {
+            // Arrange
+            // Setting up mocked data for success response
+            SetupServiceMockForSuspectApi("1", new PersonResponse()
+            {
+            Data =
+            [
+            new Suspect()
+            {
+            Id = 1,
+            First_Name = "Selina",
+            Last_Name = "Kyle",
+            Email = "selina.kyle@gotham.com",
+            }
+            ]
+            });
+
+            // Act
+            var response = await factory.CreateClient().GetAsync("/suspects?searchTerm=selina");
+
+            // Assert
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+            var superHeroes = await response.Content.ReadFromJsonAsync&lt;List&lt;Suspect&gt;&gt;();
+            superHeroes.Should().NotBeEmpty();
+            superHeroes![0].Id.Should().Be(1);
+            superHeroes![0].Email.Should().Be("selina.kyle@gotham.com");
+            superHeroes![0].First_Name.Should().Be("Selina");
+            superHeroes![0].Last_Name.Should().Be("Kyle");
+            }
+        </code></pre></div>
+        <div class="col-12 text-center"><code>Code Sample #7 : Positive Test: Valid Data</code></div></div></div>
+<br>
+
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-3"><code class="language-csharp" style="font-size: 0.8rem;">
+            [Fact(DisplayName = "Get suspects should return 500 status code when API responds with 500 status code")]
+            public async Task Get_All_Suspects_Should_Return_500_StatusCode_When_3rd_Party_Api_Fails()
+            {
+            // Arrange
+            // Setting up mocked data for failure response
+            SetupServiceMockForSuspectApi("1", new {Status = "Failed" }, HttpStatusCode.InternalServerError);
+
+            // Act
+            var response = await factory.CreateClient().GetAsync("/suspects?searchTerm=selina");
+
+            // Assert
+            response.StatusCode.Should().Be(HttpStatusCode.InternalServerError);
+            }
+        </code></pre></div>
+        <div class="col-12 text-center"><code>Code Sample #8 : Negative Test: 500 Response</code></div></div></div>
+<br></div></section>
+
+    <section><h4>Test Results</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>When running the tests, we can observe the following results:</p>
+        <style>
+    .image-header {
+        margin: 0 auto; /* Centers the div */
+        text-align: center;
+    }
+
+    .blog-support-image {
+        width: 100%; /* Ensure the image is fully responsive */
+        height: auto;
+        border-radius: 10px;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .magnified {
+        width: 100%; /* Ensure the magnified image is fully responsive */
+        height: auto;
+        border-radius: 10px;
+        transform: scale(1.5); /* Magnify the image */
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .cursor-magnify {
+        cursor: zoom-in; /* Circular magnify button */
+    }
+
+    .cursor-de-magnify {
+        cursor: zoom-out; /* Circular de-magnify button */
+    }
+
+    figcaption {
+        font-style: italic;
+        padding: 2px;
+        text-align: center;
+    }
+
+    .figure-caption {
+        font-size: 0.9rem; /* Adjust caption size */
+        color: #6c757d; /* Muted text color */
+        text-align: center; /* Center align */
+        margin-top: 8px; /* Space between image and caption */
+        font-weight: 500; /* Slightly bold for readability */
+    }
+
+    .figure-caption strong {
+        color: #343a40; /* Darker color for image number */
+        font-weight: 600; /* Make image number bold */
+    }
+</style>
+
+<div class="row image-header"><figure class="text-center"><img src="/images/blog/integration-testing/handling-external-services/Test results.webp" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="Test results showing successful execution of all test cases" />
+        <figcaption class="figure-caption"><strong>Figure 3 :</strong> Test results showing successful execution of all test cases</figcaption></figure></div>
+        <p>As seen in the above screenshot, all the test cases have passed successfully, ensuring that our API behaves
+            as expected under different scenarios, including both positive and negative cases.</p></div></section>
+
+    <p>Thats about it for this article. Hope you liked it.</p>
+
+    <section><p>For reference, the code repository being discussed is available at github: <a href="https://github.com/ajaysskumar/SuperHeroSolution">https://github.com/ajaysskumar/SuperHeroSolution</a></p><p>Thanks for reading through. Please share feedback, if any, in comments or on my email <a href="mailto:ajay.a338@gmail.com">ajay.a338@gmail.com</a></p></section></div></div>
+
+<style>
+    .content-wrapper {
+        width: 50%; /* Leaves 20% space on left and right */
+        background: white;
+    }
+
+    @media (max-width: 768px) {
+        .content-wrapper {
+            width: 90%; /* On smaller screens, reduce left-right space */
+        }
+    }
+</style></article>
+        <footer class="bg-dark text-white py-4 mt-auto"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><p class="mb-0">Copyright © 2025 Dev Codex</p></div>
+
+            
+            <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
+                <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
+        <!--Blazor:{"prerenderId":"7de3756ee96643af94fbd65e3e4d6dcb"}-->
+<!-- %%-PRERENDERING-END-%% -->
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UW01eVNGQk1NMWx2UmtadE1XNTNRMFIxZDNnMmJHNVlSV0l3TnpReVRrUTNTV3MwYTNwT04yUnRjbGRRTUVGcFNrcFpRMjFmYTJGMldrSTBkRTAzWmpCVlQzY3pjVzlVT0VsMGJGbG9WM1Z4VWpWYVozRmtOM2w1WlRsNmNtMUVUMGxCVFVaNVNFUTNPRmR0WkRKelR6TlVOV2w1WW1oSGFXNHhUMUp2UmpoMmRsRnhha1JvTjFweFdtUmFSakF5YlVwRWNraEZJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+    <script src="_framework/blazor.webassembly.js" autostart="false"></script>
+    <script src="brotliloader.min.js" type="module"></script>
+
+
+
+</body></html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html><html lang="en"><head>
+    <!-- Google tag (gtag.js) -->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-N1BDBV7WLD"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-N1BDBV7WLD');
+    </script>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Dev Codex</title>
+    <base href="/"/>
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/app.css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+<link rel="icon" type="image/png" href="favicon.png"/>
+<link href="TestArena.styles.css" rel="stylesheet"/>
+
+<!--Blazor:{"type":"webassembly","prerenderId":"e98efd87876944d1baf09f050ea4a1b4","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><!--Blazor:{"prerenderId":"e98efd87876944d1baf09f050ea4a1b4"}-->
+</head>
+
+<body>
+    <div id="app">
+<!-- %%-PRERENDERING-BEGIN-%% -->
+<!--Blazor:{"type":"webassembly","prerenderId":"abacb12c41bc4f03b334886a40002040","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
+                        <h3 class="m-0">Dev Codex</h3></a></div>
+
+                
+                <div class="col-12 col-md-4 d-flex justify-content-md-center justify-content-center mt-2 mt-md-0"><div class="w-75 position-relative"><input type="text" class="form-control" placeholder="Search..." />
+        <ul class="list-group position-absolute w-100 mt-1" style="z-index: 1000;" hidden></ul></div></div>
+
+                
+                <div class="col-12 col-md-4 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><div class="dropdown"><a href="/about-author" class="d-inline-block rounded-circle overflow-hidden border border-white" style="width: 3rem; height: 3rem; border-width: 0.25rem;"><img src="/images/shared/author.jpg" alt="About Author" class="img-fluid rounded-circle" style="width: 100%; height: 100%; object-fit: cover;"></a></div></div></div></div></div></header>
+        <article class="content px-4" b-mcp0h0uciv><div class="container-fluid d-flex justify-content-center"><div class="content-wrapper"><style>
+    .article-header {
+        margin: 0 auto;
+        /* Centers the div */
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    .container-fluid,
+    .row,
+    .col-md-12,
+    .col-6 {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .article-image {
+        max-width: 500px !important;
+        height: auto;
+        border-radius: 10px;
+    }
+</style>
+
+<header class="article-header"><div class="row"><div class="col-md-12"><h1 class="fw-bold">Integration testing for dotnet core APIs: Handling database</h1></div>
+        <div class="col-md-12"><img src="images/blog/integration-testing/handling-database/banner.png" alt="Article Banner" height="200" width="auto" class="img-fluid rounded mx-auto d-block my-3" /></div>
+        <div class="col-md-12"><div class="container-fluid"><div class="row"><div class="col-md-6 col-xs-12 d-flex justify-content-md-start justify-content-center"><span class="text-secondary fw-bold">Author(s): </span>
+                        <span class="text-secondary fw-bold ms-1">Ajay Kumar</span></div>
+
+                    
+                    <div class="col-md-6 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Published On: 08 Feb 2025</span></div></div></div></div></div></header>
+
+    <section><h4>Summary</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>Welcome to the 2nd post in our Integration testing series. You may check out the previous post that introduces the concept of writing integration tests using <b>WebApplicationFactory</b> in dotnet below:</p>
+        <div class="card mb-3 mx-auto" style="max-width: 600px;"><div class="row g-0"><div class="col-md-8"><div class="card-body"><h5 class="card-title"><a href="/blog/integration-testing-in-dotnet-intro" class="text-decoration-none"><strong>Integration testing for dotnet core APIs: Introduction</strong></a></h5>
+                <p class="card-text">Integration testing for dotnet core APIs: Introduction</p>
+                <a href="/blog/integration-testing-in-dotnet-intro" class="text-muted">devcodex.in</a></div></div>
+        <div class="col-md-4 d-flex align-items-center pe-2"><img src="/images/blog/integration-testing/intro/banner.png" class="img-fluid rounded-end" alt="Blog Image" /></div></div></div>
+
+        <p>Almost every application relies on persistent storage, typically through a database. Integration testing with a real database can be challenging, especially when trying to maintain isolation and consistency across tests. In this post, we will explore how to effectively manage database dependencies in integration tests using <b>WebApplicationFactory</b> and containerized databases.</p>
+        <p><b>Pre-requisites</b>, in case you want to follow the same setup on your system:</p>
+        <ul><li><b>Postgres DB Server:</b> This is needed in case you want to test out the main application.</li>
+            <li><b>Docker:</b> This is needed to run test containers.</li></ul></div></section>
+
+    <section><h4>Setting Up the Database</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>To do this we need to first introduce a database in our sample superhero API. For this demo purpose, we have used a Postgres database.</p>
+        <p>For this, we made the below changes in our superhero API:</p>
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-3"><code class="language-csharp" style="font-size: 0.8rem;">
+{
+  "ConnectionStrings": {
+    "WebApiDatabase": "Host=localhost; Database=superhero; Username=postgres; Password=postgres"
+  }
+}
+        </code></pre></div>
+        <div class="col-12 text-center"><code>Code Sample #2 : Connection String in appsettings.json</code></div></div></div>
+<br>
+        <p>Install the package <b>Npgsql.EntityFrameworkCore.PostgreSQL</b> in the main API project. After that, we need to provide options in the program file to guide the application to use the Postgres database:</p>
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-3"><code class="language-csharp" style="font-size: 0.8rem;">
+builder.Services.AddDbContext&lt;SuperHeroDbContext&gt;(opt =>
+    opt.UseNpgsql(configuration.GetConnectionString("WebApiDatabase")));
+        </code></pre></div>
+        <div class="col-12 text-center"><code>Code Sample #3 : Configuring DbContext in Program.cs</code></div></div></div>
+<br>
+        <p>Along with this, we also need to create a migration, if not already present, to set up the database schema.</p></div></section>
+
+    <section><h4>Unit Test Example</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>Finally, our unit test:</p>
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-3"><code class="language-csharp" style="font-size: 0.8rem;">
+[Fact(DisplayName = "Get all superheros API returns all superheroes")]
+public async Task Get_All_SuperHeroes_Returns_List_Of_SuperHero()
+{
+    // Arrange
+    factory.SharedFixture.SuperHeroDbContext.SuperHero.AddRange(new List&lt;SuperHero&gt;()
+    {
+        new SuperHero(1, "Batman","Bruce Wayne","Short distance fly,Common sense","Gotham", 40),
+        new SuperHero(2, "Superman", "Clark kent", "Fly, Shoot laser beam, Super strength, ice breath","Gotham", 42),
+        new SuperHero(3, "Robin", "John Blake", "Detective","Gotham", 35)
+    });
+    await factory.SharedFixture.SuperHeroDbContext.SaveChangesAsync();
+    
+    // Act
+    var response = await factory.CreateClient().GetAsync("/SuperHero");
+
+    // Assert
+    response.StatusCode.Should().Be(HttpStatusCode.OK);
+    var superHeroes = await response.Content.ReadFromJsonAsync&lt;List&lt;SuperHero&gt;&gt;();
+    superHeroes.Should().NotBeEmpty();
+    superHeroes![0].Id.Should().Be(1);
+    superHeroes![0].SuperName.Should().Be("Batman");
+}
+        </code></pre></div>
+        <div class="col-12 text-center"><code>Code Sample #4 : Unit Test for Get All SuperHeroes API</code></div></div></div>
+<br>
+        <p>Let's understand the above test:</p>
+        <ul><li>Now before any of the tests will start executing, our <b>SharedFixture</b> code will run and it will fire up the test container as you can see in the below image:</li></ul>
+        <style>
+    .image-header {
+        margin: 0 auto; /* Centers the div */
+        text-align: center;
+    }
+
+    .blog-support-image {
+        width: 100%; /* Ensure the image is fully responsive */
+        height: auto;
+        border-radius: 10px;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .magnified {
+        width: 100%; /* Ensure the magnified image is fully responsive */
+        height: auto;
+        border-radius: 10px;
+        transform: scale(1.5); /* Magnify the image */
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .cursor-magnify {
+        cursor: zoom-in; /* Circular magnify button */
+    }
+
+    .cursor-de-magnify {
+        cursor: zoom-out; /* Circular de-magnify button */
+    }
+
+    figcaption {
+        font-style: italic;
+        padding: 2px;
+        text-align: center;
+    }
+
+    .figure-caption {
+        font-size: 0.9rem; /* Adjust caption size */
+        color: #6c757d; /* Muted text color */
+        text-align: center; /* Center align */
+        margin-top: 8px; /* Space between image and caption */
+        font-weight: 500; /* Slightly bold for readability */
+    }
+
+    .figure-caption strong {
+        color: #343a40; /* Darker color for image number */
+        font-weight: 600; /* Make image number bold */
+    }
+</style>
+
+<div class="row image-header"><figure class="text-center"><img src="/images/blog/integration-testing/handling-database/Test containers in action.webp" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="Test containers in action" />
+        <figcaption class="figure-caption"><strong>Figure 2 :</strong> Test containers in action</figcaption></figure></div>
+        <ul><li>In the <b>Arrange</b> step, I added a few records directly to the database using the <b>SharedFixture</b>.</li>
+            <li>After the above step, there are some records in the system and in the <b>Act</b> step, we will be trying to call the GET superheroes API.</li>
+            <li>If everything is correct, we should be able to see our tests being passed like below:</li></ul>
+        <style>
+    .image-header {
+        margin: 0 auto; /* Centers the div */
+        text-align: center;
+    }
+
+    .blog-support-image {
+        width: 100%; /* Ensure the image is fully responsive */
+        height: auto;
+        border-radius: 10px;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .magnified {
+        width: 100%; /* Ensure the magnified image is fully responsive */
+        height: auto;
+        border-radius: 10px;
+        transform: scale(1.5); /* Magnify the image */
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .cursor-magnify {
+        cursor: zoom-in; /* Circular magnify button */
+    }
+
+    .cursor-de-magnify {
+        cursor: zoom-out; /* Circular de-magnify button */
+    }
+
+    figcaption {
+        font-style: italic;
+        padding: 2px;
+        text-align: center;
+    }
+
+    .figure-caption {
+        font-size: 0.9rem; /* Adjust caption size */
+        color: #6c757d; /* Muted text color */
+        text-align: center; /* Center align */
+        margin-top: 8px; /* Space between image and caption */
+        font-weight: 500; /* Slightly bold for readability */
+    }
+
+    .figure-caption strong {
+        color: #343a40; /* Darker color for image number */
+        font-weight: 600; /* Make image number bold */
+    }
+</style>
+
+<div class="row image-header"><figure class="text-center"><img src="/images/blog/integration-testing/handling-database/Tests passing.webp" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="Tests passing" />
+        <figcaption class="figure-caption"><strong>Figure 3 :</strong> Tests passing</figcaption></figure></div></div></section>
+    <p>This is it for the setup with database. I will be covering more in the future articles like, how to work with authentication, events etc.</p>
+    <section><p>For reference, the code repository being discussed is available at github: <a href="https://github.com/ajaysskumar/SuperHeroSolution">https://github.com/ajaysskumar/SuperHeroSolution</a></p><p>Thanks for reading through. Please share feedback, if any, in comments or on my email <a href="mailto:ajay.a338@gmail.com">ajay.a338@gmail.com</a></p></section></div></div>
+
+<style>
+    .content-wrapper {
+        width: 50%; /* Leaves 20% space on left and right */
+        background: white;
+    }
+
+    @media (max-width: 768px) {
+        .content-wrapper {
+            width: 90%; /* On smaller screens, reduce left-right space */
+        }
+    }
+</style></article>
+        <footer class="bg-dark text-white py-4 mt-auto"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><p class="mb-0">Copyright © 2025 Dev Codex</p></div>
+
+            
+            <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
+                <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
+        <!--Blazor:{"prerenderId":"abacb12c41bc4f03b334886a40002040"}-->
+<!-- %%-PRERENDERING-END-%% -->
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UW01eVNGQk1NMWx2UmtadE1XNTNRMFIxZDNnMmJGcHVjV3RwVEhsTlJYWkJkRFZ4VWsxdlJHTk1TMjR6VGw5MmNHOHRWRTlFYUVJd2NYRlhYMk4xZWxGbVVXaFpUbFJqVlRSVmVHaGhZbXhHVjIxUk1qWlJWRzFyVEVoR1JFMDFWbkZyVkhWcGFXdHlUVkJ0Wm1OTU4wbGljRFpHYUZCTmRXdHRSa3RXT0hCemVUVjRha1ppYm1wVWVEUkJOR1ZMUjNjMVlqRkpJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+    <script src="_framework/blazor.webassembly.js" autostart="false"></script>
+    <script src="brotliloader.min.js" type="module"></script>
+
+
+
+</body></html>
