@@ -3,7 +3,7 @@
 @using TestArena.Blog.Common.NavigationUtils
 
 @code{
-    PageInfo currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/integration-testing-in-dotnet-intro");
+    PageInfo currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/integration-testing-in-dotnet-intro")!;
 }
 
 <BlogContainer>
