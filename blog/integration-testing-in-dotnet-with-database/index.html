@@ -21,13 +21,13 @@
 <link rel="icon" type="image/png" href="favicon.png"/>
 <link href="TestArena.styles.css" rel="stylesheet"/>
 
-<!--Blazor:{"type":"webassembly","prerenderId":"42f37e052a264f3190c0a8f02dd30a21","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><!--Blazor:{"prerenderId":"42f37e052a264f3190c0a8f02dd30a21"}-->
+<!--Blazor:{"type":"webassembly","prerenderId":"6e5543a2e1a6408d91d1906608e89fb3","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><!--Blazor:{"prerenderId":"6e5543a2e1a6408d91d1906608e89fb3"}-->
 </head>
 
 <body>
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"29e8361a251c4d89962e80c8a886c9c5","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"c0755ee2bf144498b46bf33906c43f62","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -67,7 +67,7 @@
                     
                     <div class="col-md-6 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Published On: 08 Feb 2025</span></div></div></div></div></div></header>
 
-    <section id="e528df5b-23f4-4204-b210-14c5bc02e706"><h4>Summary</h4><hr class="border border-success border-1 opacity-50">
+    <section id="d92e9e1b-66b0-4f4f-a4c8-8b54c7782664"><h4>Summary</h4><hr class="border border-success border-1 opacity-50">
     <div><p>Welcome to the 2nd post in our Integration testing series. You may check out the previous post that introduces the concept of writing integration tests using <b>WebApplicationFactory</b> in dotnet below:</p>
         <div class="card mb-3 mx-auto" style="max-width: 600px;"><div class="row g-0"><div class="col-md-8"><div class="card-body"><h5 class="card-title"><a href="/blog/integration-testing-in-dotnet-intro" class="text-decoration-none"><strong>Integration testing for dotnet core APIs: Introduction</strong></a></h5>
                 <p class="card-text">Integration testing for dotnet core APIs: Introduction</p>
@@ -79,7 +79,7 @@
         <ul><li><b>Postgres DB Server:</b> This is needed in case you want to test out the main application.</li>
             <li><b>Docker:</b> This is needed to run test containers.</li></ul></div></section>
 
-    <section id="3ed6e201-db49-4c5d-b395-221edf488ee3"><h4>Setting Up the Database</h4><hr class="border border-success border-1 opacity-50">
+    <section id="6aae91dc-781d-46e2-893c-e7a5565f2532"><h4>Setting Up the Database</h4><hr class="border border-success border-1 opacity-50">
     <div><p>To do this we need to first introduce a database in our sample superhero API. For this demo purpose, we have used a Postgres database.</p>
         <p>For this, we made the below changes in our superhero API:</p>
         <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-3"><code class="language-csharp" style="font-size: 0.8rem;">
@@ -100,7 +100,7 @@ builder.Services.AddDbContext&lt;SuperHeroDbContext&gt;(opt =>
 <br>
         <p>Along with this, we also need to create a migration, if not already present, to set up the database schema.</p></div></section>
 
-    <section id="ba89cd37-7eeb-480b-b279-e8a3fc959c30"><h4>Unit Test Example</h4><hr class="border border-success border-1 opacity-50">
+    <section id="ea030fe4-da81-43f9-a45e-03b075cfec8e"><h4>Unit Test Example</h4><hr class="border border-success border-1 opacity-50">
     <div><p>Finally, our unit test:</p>
         <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-3"><code class="language-csharp" style="font-size: 0.8rem;">
 [Fact(DisplayName = "Get all superheros API returns all superheroes")]
@@ -255,9 +255,9 @@ public async Task Get_All_SuperHeroes_Returns_List_Of_SuperHero()
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-        <!--Blazor:{"prerenderId":"29e8361a251c4d89962e80c8a886c9c5"}-->
+        <!--Blazor:{"prerenderId":"c0755ee2bf144498b46bf33906c43f62"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80U2xvdFprSmtaV3hQUmtkeVMydFZiMWRPTUZCUU1GRlhZVzU0YVhvd2JIaENhalJvTUVkME5GRlZPR1JpU2xoR2FXYzNWa0ZPYlU5RlZXSTRTbXRVZDNaS1FVaEhWVE4yVDA5eVVVcHlXbXQwTm1OeGJVWnBla2h6WTBWeU1UQlRRMnRXVTFodFJUaDBjVnBSV0RsVlpqWnVkVmR5ZUZJdFZITTFWVGd5UjNWM1JGZHFYMjB5TW5Jd2FuSlljRnBIZEc4MGVHUkJJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80U25ObVpsUktjRFJ6U2tscFZYZG1NblZwV1hOQ1gzRTJaVTlXZFZOVWMwVnBjREJxUXpsbWJsSmpOVEowYjJwbWMwaFlZMmx2V0RabGREUklTVE5VVVZwTVIyZzRlR0ZQZVY4eWR6ZFphelZYZEdseU9XUlBUMlYxVTBOTmJ6bGxObTFJTVdGT1dYQnNRVlptZUhaeGJteGlZMDlrVVdaWFJFRkphVWRyYzBOak9YWjNZalJKUkVRdGNFcEhZVk40Vm01WVIwbDNJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
