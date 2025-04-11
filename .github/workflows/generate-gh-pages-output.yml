@@ -31,10 +31,16 @@ jobs:
     steps:
       # Step 1: Check out the repository
       - name: Check out the repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0 # Fetch all history to ensure we can switch branches
           
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x # Use .NET 9
+
       # Step 3: Checkout main branch
       - name: Switch to main branch
         run: |

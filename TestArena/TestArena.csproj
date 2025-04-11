@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
     <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>net9.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <BlazorCacheBootResources>false</BlazorCacheBootResources>
@@ -16,12 +16,12 @@
 
     <ItemGroup>
         <PackageReference Include="BlazorWasmPreRendering.Build" Version="5.0.1" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.14" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="9.0.3" PrivateAssets="all" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.4" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="9.0.4" PrivateAssets="all" />
         <PackageReference Include="PublishSPAforGitHubPages.Build" Version="3.0.0" />
     </ItemGroup>
 
-    <ItemGroup>
+    <!-- <ItemGroup>
       <Content Update="wwwroot\404.html">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
@@ -37,9 +37,9 @@
       <Content Update="wwwroot\favicon.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
-    </ItemGroup>
+    </ItemGroup> -->
 
-    <ItemGroup>
+    <!-- <ItemGroup>
       <None Include="wwwroot\.nojekyll">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
@@ -47,10 +47,10 @@
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
       <None Include="wwwroot\images\contract_test_intro.webp" />
-    </ItemGroup>
+    </ItemGroup> -->
 
-    <ItemGroup>
+    <!-- <ItemGroup>
       <Folder Include="Blog/IntegrationTesting/" />
-    </ItemGroup>
+    </ItemGroup> -->
 
 </Project>
