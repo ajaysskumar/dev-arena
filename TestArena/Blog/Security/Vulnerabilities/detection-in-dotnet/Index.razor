@@ -6,6 +6,15 @@
     PageInfo currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/package-vulnerability-detection-in-dotnet")!;
 }
 
+<style>
+    /* Add your custom styles here */
+.small-table {
+    font-size: 0.85rem; /* Smaller font size */
+    width: 80%; /* Reduce table width */
+    margin: auto; /* Center the table */
+}
+</style>
+
 <BlogContainer>
     <Header
         Title="@currentPage.Header"
@@ -168,40 +177,42 @@ dotnet list package --vulnerable
 
         <Section Heading="Enforcing build failure for vulnerabilities" Level="5">
             <p>Now, warning are good but they can be ignored/missed allowing vulnerabilities to creep into the production code. To prevent this, there is another msbuild property <code>WarningsAsErrors</code> that can help by treating specified warnings codes as errors resulting in build failure. Refer the below table to such warning codes</p>
-            <table class="table table-bordered">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>Warning Code</th>
-                        <th>Reason</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>NU1900</td>
-                        <td>Error communicating with package source, while getting vulnerability information.</td>
-                    </tr>
-                    <tr>
-                        <td>NU1901</td>
-                        <td>Package with low severity detected</td>
-                    </tr>
-                    <tr>
-                        <td>NU1902</td>
-                        <td>Package with moderate severity detected</td>
-                    </tr>
-                    <tr>
-                        <td>NU1903</td>
-                        <td>Package with high severity detected</td>
-                    </tr>
-                    <tr>
-                        <td>NU1904</td>
-                        <td>Package with critical severity detected</td>
-                    </tr>
-                    <tr>
-                        <td>NU1905</td>
-                        <td>An audit source does not provide a vulnerability database</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="small-table">
+                <table class="table table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Warning Code</th>
+                            <th>Reason</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>NU1900</td>
+                            <td>Error communicating with package source, while getting vulnerability information.</td>
+                        </tr>
+                        <tr>
+                            <td>NU1901</td>
+                            <td>Package with low severity detected</td>
+                        </tr>
+                        <tr>
+                            <td>NU1902</td>
+                            <td>Package with moderate severity detected</td>
+                        </tr>
+                        <tr>
+                            <td>NU1903</td>
+                            <td>Package with high severity detected</td>
+                        </tr>
+                        <tr>
+                            <td>NU1904</td>
+                            <td>Package with critical severity detected</td>
+                        </tr>
+                        <tr>
+                            <td>NU1905</td>
+                            <td>An audit source does not provide a vulnerability database</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
             <p>Lets set critical warning as error for our audit by setting <code>WarningsAsErrors</code> To <b>true</b> and try to <code>build / restore</code> </p>
 
