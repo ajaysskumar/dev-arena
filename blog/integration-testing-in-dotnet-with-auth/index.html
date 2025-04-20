@@ -30,13 +30,13 @@
 <link rel="icon" type="image/png" href="favicon.png"/>
 <link href="TestArena.styles.css" rel="stylesheet"/>
 
-<!--Blazor:{"type":"webassembly","prerenderId":"482e8133e43b4b6e829a5c3919a05973","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><!--Blazor:{"prerenderId":"482e8133e43b4b6e829a5c3919a05973"}-->
+<!--Blazor:{"type":"webassembly","prerenderId":"3a44aaa8820942d08e92feb72b58d7b3","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><!--Blazor:{"prerenderId":"3a44aaa8820942d08e92feb72b58d7b3"}-->
 </head>
 
 <body>
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"1282009fc45943c0b9087046a469e9fc","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"331f3f491ebc4e2aa605e7c3cee1ee03","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -76,7 +76,7 @@
                     
                     <div class="col-md-6 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Published On: 22 Feb 2025</span></div></div></div></div></div></header>
 
-    <section id="467a0b44-3cd2-4d8d-af72-15ca40328685"><h4>Integration testing for APIs behind authentication</h4><hr class="border border-success border-1 opacity-50">
+    <section id="1732e08a-4bbb-4e8e-a061-36ffb6236364"><h4>Integration testing for APIs behind authentication</h4><hr class="border border-success border-1 opacity-50">
     <div><p>This is continuation of the <b>Integration testing in dotnet</b> series.</p>
         <p>This time we will be covering on how to test APIs which are behind authentication. We will be extending the same code repo we used in the previous article on handling 3rd party services (folder name <code>DemoWith3rdPartyService</code>).</p>
         <p>Please make sure to checkout the previous articles in the series to get the most out of this article:</p>
@@ -93,7 +93,7 @@
                 <a href="/blog/integration-testing-in-dotnet-with-external-services" class="text-muted">devcodex.in</a></div></div>
         <div class="col-md-4 d-flex align-items-center pe-2"><img src="/images/blog/integration-testing/handling-auth/banner.png" class="img-fluid rounded-end" alt="Blog Image" /></div></div></div></div></section>
 
-    <section id="492c619b-e02e-4879-b398-b1b66f6ab767"><h4>Let&#x2019;s get started</h4><hr class="border border-success border-1 opacity-50">
+    <section id="5ae115eb-8c9a-4f59-bc01-ad1c3da934f7"><h4>Let&#x2019;s get started</h4><hr class="border border-success border-1 opacity-50">
     <div><p>To make this happen we have created an authenticated version of our SuperHero API. The API is called <code>/SuperHero/private</code>. Refer the swagger screenshot below.</p>
 
         <style>
@@ -150,22 +150,21 @@
 
         <p>Our API action method in code will look like below. Notice the [Authorize] attribute with role required as Admin</p>
 
-        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-3"><code class="language-csharp" style="font-size: 0.8rem;">
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
             [HttpGet("private")]
             [Authorize(Roles = "Admin")]
             public async Task&lt;IEnumerable&lt;SuperHero&gt;&gt; GetPrivate()
             {
                 return await superHeroRepository.GetAllSuperHeroes();
             }
-        </code></pre></div>
-        <div class="col-12 text-center"><code>Code Sample #2 : Authenticated API action method</code></div></div></div>
+        </code></pre></div><div class="col-12 text-center"><code>Code Sample #2 : Authenticated API action method</code></div></div></div>
 <br>
 
         <p>We have done some wiring to setup JWT based authentication scheme in our SuperHero API project. However, please note that, with little tweaks in the test setup, this should work for all kinds of authentication schemes.</p>
 
         <p>For a quick reference, here is the authentication setup. The auth settings are being read from <code>appsettings</code>.</p>
 
-        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-3"><code class="language-csharp" style="font-size: 0.8rem;">
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
             builder.Services.AddAuthentication(options =>
             {
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -189,8 +188,7 @@
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authSettings.SigningKey))
                 };
             });
-        </code></pre></div>
-        <div class="col-12 text-center"><code>Code Sample #3 : Authentication setup</code></div></div></div>
+        </code></pre></div><div class="col-12 text-center"><code>Code Sample #3 : Authentication setup</code></div></div></div>
 <br>
 
         <p>After all that setup, when we try to access this API without token then we get 401 error as expected</p>
@@ -411,14 +409,14 @@
 
         <p>Now that we have seen our authenticated API working, we can proceed to write the integration tests for it.</p></div></section>
 
-    <section id="7787e550-401c-4aac-b05d-0168da609f49"><h4>The setup</h4><hr class="border border-success border-1 opacity-50">
+    <section id="c27ce14c-6ae5-45cc-9fa5-9b8768c5832a"><h4>The setup</h4><hr class="border border-success border-1 opacity-50">
     <div><p>Now this is going to be a bit complex setup, however, it will help us in testing different and complex scenarios. The following steps are needed before we begin writing tests.</p>
 
-        <section id="0ff12271-9f07-4ba7-bc8b-eccb2392852a"><h5>Step 1: A class to help us create authentication claims</h5><hr class="border border-success border-1 opacity-50">
+        <section id="da7e51e5-1d6b-4e0f-a7dc-8666981a2e11"><h5>Step 1: A class to help us create authentication claims</h5><hr class="border border-success border-1 opacity-50">
     <div><p><b>Why is this needed?</b></p>
             <p>We need this to create HTTP client with different set of authentication claims for different kinds of auth flows. For example, an API might work only for Admin role and another may work for some other role having fewer privileges. Our <code>AuthClaimsProvider</code> looks like below:</p>
 
-            <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-3"><code class="language-csharp" style="font-size: 0.8rem;">
+            <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
                 public class AuthClaimsProvider
                 {
                     public IList&lt;Claim&gt; Claims { get; } = new List&lt;Claim&gt;();
@@ -439,15 +437,14 @@
                         return provider;
                     }
                 }
-            </code></pre></div>
-        <div class="col-12 text-center"><code>Code Sample #4 : AuthClaimsProvider class</code></div></div></div>
+            </code></pre></div><div class="col-12 text-center"><code>Code Sample #4 : AuthClaimsProvider class</code></div></div></div>
 <br></div></section>
 
-        <section id="547b0547-f1f3-4340-8170-ce7f01027eee"><h5>Step 2: An extension method to create HTTP client with required auth claims</h5><hr class="border border-success border-1 opacity-50">
+        <section id="210f671b-8422-4417-94d1-ef5a9305946e"><h5>Step 2: An extension method to create HTTP client with required auth claims</h5><hr class="border border-success border-1 opacity-50">
     <div><p><b>Why is this needed?</b></p>
             <p>It's needed because when we create a default HTTP client for tests using <code>CustomApiFactory</code>, the created HTTP client instance does not hold any auth token. However, for our authenticated APIs, we want our HTTP client to have the required token.</p>
 
-            <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-3"><code class="language-csharp" style="font-size: 0.8rem;">
+            <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
                 public static HttpClient CreateClientWithClaim(this CustomApiFactory factory, AuthClaimsProvider claims)
                 {
                     var client = factory.WithWebHostBuilder(builder =>
@@ -468,11 +465,10 @@
 
                     return client;
                 }
-            </code></pre></div>
-        <div class="col-12 text-center"><code>Code Sample #5 : Extension method for HTTP client</code></div></div></div>
+            </code></pre></div><div class="col-12 text-center"><code>Code Sample #5 : Extension method for HTTP client</code></div></div></div>
 <br></div></section>
 
-        <section id="553aec6c-ce13-4a74-8bf6-42953325c49c"><h5>Step 3: Setting up a service to introduce the authentication ticket/token in the request</h5><hr class="border border-success border-1 opacity-50">
+        <section id="f39fd5ff-563f-4b55-bdc2-e9baa992f96a"><h5>Step 3: Setting up a service to introduce the authentication ticket/token in the request</h5><hr class="border border-success border-1 opacity-50">
     <div><p><b>Why is this needed?</b></p>
             <p>It's needed because in real scenarios, users will get tokens by performing any auth process, like:</p>
             <ul><li>By providing username and password</li>
@@ -480,7 +476,7 @@
                 <li>By using ClientId and Secret to obtain a token via client credentials flow</li></ul>
             <p>Since our integration tests should not require any user intervention, we will be introducing a <code>TestAuthHandler</code> so that whenever we try to create an HTTP client to call our service, we should get a client with the authentication token as per our test setup.</p>
 
-            <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-3"><code class="language-csharp" style="font-size: 0.8rem;">
+            <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
                 public class TestAuthHandler(
                     IOptionsMonitor&lt;AuthenticationSchemeOptions&gt; options,
                     ILoggerFactory logger,
@@ -509,15 +505,14 @@
                         return Task.FromResult(AuthenticateResult.Success(ticket));
                     }
                 }
-            </code></pre></div>
-        <div class="col-12 text-center"><code>Code Sample #6 : TestAuthHandler class</code></div></div></div>
+            </code></pre></div><div class="col-12 text-center"><code>Code Sample #6 : TestAuthHandler class</code></div></div></div>
 <br></div></section>
 
-        <section id="1d93eb0e-11c7-4ac7-ae94-f86811adba62"><h5>Step 4: Registering the TestAuthHandler service</h5><hr class="border border-success border-1 opacity-50">
+        <section id="8e7b9167-a412-49e3-b133-8dc8c213b537"><h5>Step 4: Registering the TestAuthHandler service</h5><hr class="border border-success border-1 opacity-50">
     <div><p><b>Why is this needed?</b></p>
             <p>It's needed so that whenever we try to get an HTTP client from the <code>CustomApiFactory</code>, we get an HTTP client with an auth token in it (unless we do not want it by using empty claims).</p>
 
-            <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-3"><code class="language-csharp" style="font-size: 0.8rem;">
+            <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
                 builder.ConfigureTestServices(services =>
                 {
                     services.AddAuthentication(TestAuthHandler.SchemeName)
@@ -525,14 +520,13 @@
 
                     services.AddScoped(_ => new AuthClaimsProvider());
                 });
-            </code></pre></div>
-        <div class="col-12 text-center"><code>Code Sample #7 : Registering TestAuthHandler</code></div></div></div>
+            </code></pre></div><div class="col-12 text-center"><code>Code Sample #7 : Registering TestAuthHandler</code></div></div></div>
 <br></div></section></div></section>
 
-    <section id="edff70b4-6cc5-4ed4-8f3a-6043dd7f50ed"><h4>Finally, the tests</h4><hr class="border border-success border-1 opacity-50">
+    <section id="7c64d569-9a7d-41f7-aa93-87cd60bf8222"><h4>Finally, the tests</h4><hr class="border border-success border-1 opacity-50">
     <div><p>Let's add a test to our <code>SuperHeroApiTests</code>. Please note that the below test is with the default HTTP client, which does not hold any successful auth ticket:</p>
 
-        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-3"><code class="language-csharp" style="font-size: 0.8rem;">
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
             [Fact(DisplayName = "Get all superheroes authenticated API returns all superheroes")]
             public async Task Get_All_SuperHeroes_Authenticated_Returns_List_Of_SuperHero()
             {
@@ -555,8 +549,7 @@
                 superHeroes.Should().NotBeEmpty();
                 superHeroes.Should().Contain(s => s.SuperName == "Batman");
             }
-        </code></pre></div>
-        <div class="col-12 text-center"><code>Code Sample #8 : Test with default HTTP client</code></div></div></div>
+        </code></pre></div><div class="col-12 text-center"><code>Code Sample #8 : Test with default HTTP client</code></div></div></div>
 <br>
 
         <p>Upon running this, we get a result like below: <b>401</b>, since the auth token is not there.</p>
@@ -615,14 +608,13 @@
 
         <p>Let's change the code to create the HTTP client with some claims this time:</p>
 
-        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-3"><code class="language-csharp" style="font-size: 0.8rem;">
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
             // Replace
             using var httpClient = factory.CreateClient();
 
             // With
             using var httpClient = factory.CreateClientWithClaim(AuthClaimsProvider.WithAnonymousClaim());
-        </code></pre></div>
-        <div class="col-12 text-center"><code>Code Sample #9 : Test with anonymous claims</code></div></div></div>
+        </code></pre></div><div class="col-12 text-center"><code>Code Sample #9 : Test with anonymous claims</code></div></div></div>
 <br>
 
         <p>Now our API is using the token. Let's run the tests.</p>
@@ -683,14 +675,13 @@
 
         <p>Let's fix our test by assigning the correct token with the <b>Admin</b> role when creating the HTTP client:</p>
 
-        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-3"><code class="language-csharp" style="font-size: 0.8rem;">
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
             // Replace
             using var httpClient = factory.CreateClientWithClaim(AuthClaimsProvider.WithAnonymousClaim());
 
             // With
             using var httpClient = factory.CreateClientWithClaim(AuthClaimsProvider.WithAdminClaim());
-        </code></pre></div>
-        <div class="col-12 text-center"><code>Code Sample #10 : Test with admin claims</code></div></div></div>
+        </code></pre></div><div class="col-12 text-center"><code>Code Sample #10 : Test with admin claims</code></div></div></div>
 <br>
 
         <p>Now, if we run the test after the above changes, our test succeeds with all assertions.</p>
@@ -768,9 +759,9 @@
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-        <!--Blazor:{"prerenderId":"1282009fc45943c0b9087046a469e9fc"}-->
+        <!--Blazor:{"prerenderId":"331f3f491ebc4e2aa605e7c3cee1ee03"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80VFROU1RqVlNkRkZxVWs5cVJsRnNhRUowYkVKcWFtTmZkMXBZUlVSMVlYTllSWFk0WkVkTU1URkJOVUpUYVZKV01XZFhXbUZHVUROU1NYa3djR1ZMVFRCU2IwUnJNek15TVd0RE1HUjFPWFpXVDI5SVpWZHRNRTAzU1Vka01tTjJaMjUwWlhoTmRFOTBUR3BhYkhCdU0xOVFVV2R5VVRGWmR6WkRYMFZRV25ScVFURjNabUkzYjIxWE56RlpiRGwyTlc1MlVrbGpJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UzBaeWVqVk5SVjlmUWt4MWFWbDFZekpwTFRWVE5EbHZibXBoY1VseFRWWjZVM3BHU21FdFlYWkpSa3BMV1d4SGFXazNOM1E0VTAxb1NVY3pOVVZJYVVGalNubEpaMU5GYXpjM1NWVkhNV2c0VVRJelVHRmlRbVJvWlc1Q2VrcG1ZMnRrWWxkd1dIcEVlRmMxTWkxWVdETm5jV3QyYTJveVZtWjFaRGxVWjBSRU4waFRNalZNVVVOSlRGTllPVzF0UjFGMU4zazBJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.

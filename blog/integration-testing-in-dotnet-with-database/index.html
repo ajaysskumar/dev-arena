@@ -30,13 +30,13 @@
 <link rel="icon" type="image/png" href="favicon.png"/>
 <link href="TestArena.styles.css" rel="stylesheet"/>
 
-<!--Blazor:{"type":"webassembly","prerenderId":"248d99150555444889030e3e932d0563","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><!--Blazor:{"prerenderId":"248d99150555444889030e3e932d0563"}-->
+<!--Blazor:{"type":"webassembly","prerenderId":"418db8f8bb024b0ebd32a7c8ff5d9dd7","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><!--Blazor:{"prerenderId":"418db8f8bb024b0ebd32a7c8ff5d9dd7"}-->
 </head>
 
 <body>
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"acf0bcbd7ab54fa1aa48187417dee14d","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"b298f338b86447c580174f02b434f46d","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -76,7 +76,7 @@
                     
                     <div class="col-md-6 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Published On: 08 Feb 2025</span></div></div></div></div></div></header>
 
-    <section id="fd115936-8793-4cf3-8adc-112bc28302bb"><h4>Summary</h4><hr class="border border-success border-1 opacity-50">
+    <section id="594ae7c5-3cfd-429c-992d-78ac4db561ba"><h4>Summary</h4><hr class="border border-success border-1 opacity-50">
     <div><p>Welcome to the 2nd post in our Integration testing series. You may check out the previous post that introduces the concept of writing integration tests using <b>WebApplicationFactory</b> in dotnet below:</p>
         <div class="card mb-3 mx-auto" style="max-width: 600px;"><div class="row g-0"><div class="col-md-8"><div class="card-body"><h5 class="card-title"><a href="/blog/integration-testing-in-dotnet-intro" class="text-decoration-none"><strong>Integration testing for dotnet core APIs: Introduction</strong></a></h5>
                 <p class="card-text">Integration testing for dotnet core APIs: Introduction</p>
@@ -88,30 +88,28 @@
         <ul><li><b>Postgres DB Server:</b> This is needed in case you want to test out the main application.</li>
             <li><b>Docker:</b> This is needed to run test containers.</li></ul></div></section>
 
-    <section id="f096d0f2-6c3d-407a-9bc8-16afa607ea99"><h4>Setting Up the Database</h4><hr class="border border-success border-1 opacity-50">
+    <section id="cb44faf0-4aa8-43ef-b852-664580ee88dd"><h4>Setting Up the Database</h4><hr class="border border-success border-1 opacity-50">
     <div><p>To do this we need to first introduce a database in our sample superhero API. For this demo purpose, we have used a Postgres database.</p>
         <p>For this, we made the below changes in our superhero API:</p>
-        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-3"><code class="language-csharp" style="font-size: 0.8rem;">
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
 {
   "ConnectionStrings": {
     "WebApiDatabase": "Host=localhost; Database=superhero; Username=postgres; Password=postgres"
   }
 }
-        </code></pre></div>
-        <div class="col-12 text-center"><code>Code Sample #2 : Connection String in appsettings.json</code></div></div></div>
+        </code></pre></div><div class="col-12 text-center"><code>Code Sample #2 : Connection String in appsettings.json</code></div></div></div>
 <br>
         <p>Install the package <b>Npgsql.EntityFrameworkCore.PostgreSQL</b> in the main API project. After that, we need to provide options in the program file to guide the application to use the Postgres database:</p>
-        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-3"><code class="language-csharp" style="font-size: 0.8rem;">
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
 builder.Services.AddDbContext&lt;SuperHeroDbContext&gt;(opt =>
     opt.UseNpgsql(configuration.GetConnectionString("WebApiDatabase")));
-        </code></pre></div>
-        <div class="col-12 text-center"><code>Code Sample #3 : Configuring DbContext in Program.cs</code></div></div></div>
+        </code></pre></div><div class="col-12 text-center"><code>Code Sample #3 : Configuring DbContext in Program.cs</code></div></div></div>
 <br>
         <p>Along with this, we also need to create a migration, if not already present, to set up the database schema.</p></div></section>
 
-    <section id="884eab73-5bfa-4d5a-be08-18d66d1e0276"><h4>Unit Test Example</h4><hr class="border border-success border-1 opacity-50">
+    <section id="540e47f0-d661-4dae-b242-9808cc75a4ef"><h4>Unit Test Example</h4><hr class="border border-success border-1 opacity-50">
     <div><p>Finally, our unit test:</p>
-        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-3"><code class="language-csharp" style="font-size: 0.8rem;">
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
 [Fact(DisplayName = "Get all superheros API returns all superheroes")]
 public async Task Get_All_SuperHeroes_Returns_List_Of_SuperHero()
 {
@@ -134,8 +132,7 @@ public async Task Get_All_SuperHeroes_Returns_List_Of_SuperHero()
     superHeroes![0].Id.Should().Be(1);
     superHeroes![0].SuperName.Should().Be("Batman");
 }
-        </code></pre></div>
-        <div class="col-12 text-center"><code>Code Sample #4 : Unit Test for Get All SuperHeroes API</code></div></div></div>
+        </code></pre></div><div class="col-12 text-center"><code>Code Sample #4 : Unit Test for Get All SuperHeroes API</code></div></div></div>
 <br>
         <p>Let's understand the above test:</p>
         <ul><li>Now before any of the tests will start executing, our <b>SharedFixture</b> code will run and it will fire up the test container as you can see in the below image:</li></ul>
@@ -264,9 +261,9 @@ public async Task Get_All_SuperHeroes_Returns_List_Of_SuperHero()
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-        <!--Blazor:{"prerenderId":"acf0bcbd7ab54fa1aa48187417dee14d"}-->
+        <!--Blazor:{"prerenderId":"b298f338b86447c580174f02b434f46d"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80VFROU1RqVlNkRkZxVWs5cVJsRnNhRUowYkVKcWFuUXhUalJYUkZaR1ZrbEdTM1J1VEdoUE9HSTVRMVpxU1VkdlpXdDNRWFJTZEZSSU1XRjNaVGR0YkVFd1ZVbG1lVGQ0WTA5eFJ6RnBkRGhwVjNaclUyaHlZMkZtYm1OMU1ETkRjM05aUzJsek5qTnNTMjVtVW1GVFkwZzNWMlF6Y3paVlVteFRUbWhOWjJ3emMyUjZlRVl4Um1OM1pFaDZYMW90V205R1oxVlpJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UzBaeWVqVk5SVjlmUWt4MWFWbDFZekpwTFRWVE4xOVRNMWxGT0VOQ2QydEJWVVZMZW1sV1pWcGxWM0JHYms5Q01UQnZVMDVyWVZkQmQwRXRXRll5VUd0UU4yaEhjVTV3TWpnd1oyZ3lTRTVPY1hsQmNIcEtTR04xUWpKTGFVdHFRalJuU1V4TE5EaENTbTA0YW5CR2VGQkNlSEZ6VkVOclZucFhPUzB3UVZKUlJHRlpaamh2U2xab1FWOUllbEpOZW5OTWVUSXdJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
