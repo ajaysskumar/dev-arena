@@ -53,6 +53,11 @@ namespace TestArena.Blog.Common.NavigationUtils
             new DateTime(2025, 3, 22),
             "images/blog/vulnerability/auditing/banner.png",
             ["Security", "Vulnerability", ".NET"]),
+        new("Custom Elements in HTML",
+            "/blog/custom-elements-in-html",
+            new DateTime(2025, 4, 5),
+            "images/blog/html-blogs/custom-element/banner.png",
+            ["HTML", "Web Components", "Custom Elements"]),
         ];
     }
 

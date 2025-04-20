@@ -1,0 +1,270 @@
+@page "/blog/custom-elements-in-html"
+@using TestArena.Blog.Common
+@using TestArena.Blog.Common.NavigationUtils
+
+<style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 20px 0;
+    }
+    th, td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background-color: #f0f0f0;
+    }
+    .tip {
+      background: #eaf4ff;
+      padding: 10px;
+      border-left: 5px solid #3498db;
+      margin: 1em 0;
+    }
+  </style>
+@code{
+    PageInfo currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/custom-elements-in-html");
+}
+
+<BlogContainer>
+    <Header Title="@currentPage.Header"
+            Image="@currentPage.ArticleImage" PublishedOn="@currentPage.PublishedOn" Authors="Ajay Kumar">
+    </Header>
+
+  <h2>🧩 Custom Elements in HTML</h2>
+
+  <p>HTML has evolved from a static markup language to a full-fledged platform for building web applications. One of its most powerful features is the ability to define <strong>Custom Elements</strong> — your very own HTML tags.</p>
+
+  <h3>✅ What Are Custom Elements?</h3>
+
+  <p><strong>Custom Elements</strong> are a key feature of the <strong>Web Components</strong> standard — a set of APIs that lets developers create reusable, encapsulated HTML elements with custom behavior.</p>
+
+  <div class="tip">
+    🧠 <strong>Web Components</strong> are a suite of technologies (Custom Elements, Shadow DOM, HTML Templates) for building reusable UI components natively in the browser.
+  </div>
+
+  <p>For example:</p>
+
+  <CodeSnippet Language="html" ShowDescription="false">
+&lt;user-profile name="Alice" age="30"&gt;&lt;/user-profile&gt;
+  </CodeSnippet>
+  @* <pre><code>&lt;user-profile name="Alice" age="30"&gt;&lt;/user-profile&gt;</code></pre> *@
+
+  <p>This <code>&lt;user-profile&gt;</code> tag is not part of standard HTML. It's a <strong>custom element</strong> you can define with specific behavior and UI.</p>
+
+  <p>Each custom element typically includes:</p>
+  <ul>
+    <li>A <strong>JavaScript class</strong> that defines its logic and rendering.</li>
+    <li>A <strong>unique tag name</strong> (must include a hyphen).</li>
+    <li>Optional <strong>lifecycle callbacks</strong> for reacting to events like insertion into the DOM or attribute changes.</li>
+  </ul>
+
+  <h3>💡 Why Use Custom Elements?</h3>
+
+  <h4>1. Reusability</h4>
+  <p>Encapsulate UI logic and use your element across multiple pages or projects — just like built-in tags.</p>
+
+  <h4>2. Encapsulation</h4>
+  <p>By using the <strong>Shadow DOM</strong>, your element’s internal styles and structure are protected from outside interference.</p>
+
+  <div class="tip">
+    🧠 <strong>Shadow DOM</strong> is a hidden DOM tree inside an element that isolates markup and styles from the main document, preventing clashes.
+  </div>
+
+  <h4>3. Zero Dependencies</h4>
+  <p>No need for a JavaScript framework — Custom Elements are built into the browser.</p>
+
+  <h4>4. Modular Architecture</h4>
+  <p>Just like components in frameworks (React, Vue), Custom Elements promote maintainability and separation of concerns.</p>
+
+  <h3>📅 When Should You Use Custom Elements?</h3>
+
+  <p>Use custom elements when:</p>
+  <ul>
+    <li>You need reusable UI pieces that can live independently.</li>
+    <li>You’re building framework-agnostic components for multiple teams.</li>
+    <li>You want to encapsulate logic and styles tightly.</li>
+    <li>You’re building a design system or web component library.</li>
+  </ul>
+
+  <p><strong>Avoid</strong> using them if your project is already heavily coupled to a frontend framework — unless interoperability is a goal.</p>
+
+  <h3>🛠️ How to Create Custom Elements (Step-by-Step)</h3>
+
+  <p>Let’s build a simple, interactive custom element: <code>&lt;user-profile&gt;</code>.</p>
+
+  <h4>🔹 Step 1: Define the Element Class</h4>
+
+  <CodeSnippet Number="1" Language="javascript" Description="Defining the Element Class">
+class UserProfile extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({ mode: 'open' });
+    this.render();
+  }
+
+  static get observedAttributes() {
+    return ['name', 'age'];
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    this.render();
+  }
+
+  render() {
+    const name = this.getAttribute('name') || 'Unknown';
+    const age = this.getAttribute('age') || 'N/A';
+
+    this.shadowRoot.innerHTML = `
+      &lt;style&gt;
+        .profile {
+          font-family: sans-serif;
+          padding: 1em;
+          border: 1px solid #ccc;
+          border-radius: 8px;
+          background: #f9f9f9;
+        }
+      &lt;/style&gt;
+      &lt;div class="profile"&gt;
+        &lt;h2&gt;${name}&lt;/h2&gt;
+        &lt;p&gt;Age: ${age}&lt;/p&gt;
+      &lt;/div&gt;
+    `;
+  }
+}
+  </CodeSnippet>
+
+  <div class="tip">
+    🧠 <strong>Lifecycle Callbacks</strong> like <code>attributeChangedCallback</code> fire at different stages of the element's life (e.g., insertion or attribute change).
+  </div>
+
+  <h4>🔹 Step 2: Register the Custom Element</h4>
+
+  <CodeSnippet Number="2" Language="javascript" Description="Registering the Custom Element">
+customElements.define('user-profile', UserProfile);
+  </CodeSnippet>
+
+  <div class="tip">
+    🧠 Custom element tag names <strong>must include a hyphen</strong> to differentiate them from standard HTML tags.
+  </div>
+
+  <h4>🔹 Step 3: Use It in HTML</h4>
+
+    <CodeSnippet Number="3" Language="html" Description="Using it in HTML">
+&lt;user-profile name="Jane Doe" age="28"&gt;&lt;/user-profile&gt;
+
+&lt;script src="user-profile.js"&gt;&lt;/script&gt;
+  </CodeSnippet>
+
+    <BlogImage Number="1" Description="Custom Element in Action"
+        ImagePath="/images/blog/html-blogs/custom-element/Custom Element in Action.png" />
+
+  <h3>🎯 Bonus: Make It Interactive</h3>
+
+  <p>Let’s enhance it with a birthday button to increment the age.</p>
+
+    <CodeSnippet Number="4" Language="javascript" Description="Making It Interactive">
+render() {
+  const name = this.getAttribute('name') || 'Unknown';
+  const age = this.getAttribute('age') || 'N/A';
+
+  this.shadowRoot.innerHTML = `
+    &lt;style&gt;
+      .profile { font-family: sans-serif; }
+      button { margin-top: 10px; }
+    &lt;/style&gt;
+    &lt;div class="profile"&gt;
+      &lt;h2&gt;${name}&lt;/h2&gt;
+      &lt;p&gt;Age: &lt;span id="age"&gt;${age}&lt;/span&gt;&lt;/p&gt;
+      &lt;button id="birthdayBtn"&gt;Celebrate Birthday 🎂&lt;/button&gt;
+    &lt;/div&gt;
+  `;
+
+  this.shadowRoot.querySelector('#birthdayBtn').onclick = () => {
+    let newAge = parseInt(this.getAttribute('age') || '0') + 1;
+    this.setAttribute('age', newAge.toString());
+  };
+}
+  </CodeSnippet>
+
+    <BlogImage Number="2" Description="Interactive custom element in action"
+        ImagePath="/images/blog/html-blogs/custom-element/Interactive custom element in action.gif" />
+
+  <h3>⚠️ Gotchas to Keep in Mind</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Gotcha</th>
+        <th>Why It Matters</th>
+        <th>What You Should Do</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Tag name must include a hyphen</strong></td>
+        <td>Avoids conflicts with native HTML tags</td>
+        <td>Always use names like <code>my-button</code>, <code>user-profile</code></td>
+      </tr>
+      <tr>
+        <td><strong>Shadow DOM may block external CSS</strong></td>
+        <td>Styles in global CSS files won’t reach inside</td>
+        <td>Define styles inside the shadow DOM or use CSS variables</td>
+      </tr>
+      <tr>
+        <td><strong>Not supported in older browsers (e.g., IE11)</strong></td>
+        <td>Your users might see broken UI</td>
+        <td>Use polyfills or feature detection if backward compatibility is required</td>
+      </tr>
+      <tr>
+        <td><strong>No data binding or templating out of the box</strong></td>
+        <td>You may miss convenience features from frameworks</td>
+        <td>Consider adding a light templating engine or integrate with frameworks carefully</td>
+      </tr>
+      <tr>
+        <td><strong>Observed attributes must be explicitly listed</strong></td>
+        <td>Your component won't react to attribute changes otherwise</td>
+        <td>Always declare <code>observedAttributes</code> properly to enable dynamic updates</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>📦 Packaging Tips</h3>
+  <ul>
+    <li>Bundle your custom elements using <strong>Vite</strong>, <strong>Rollup</strong>, or <strong>Webpack</strong> for modular usage.</li>
+    <li>You can publish them to <strong>npm</strong> or host via <strong>CDN</strong> for global use.</li>
+    <li>Prefix your components (<code>my-</code>, <code>app-</code>, etc.) to avoid name collisions.</li>
+  </ul>
+
+  <h3>📚 Summary</h3>
+
+  <table>
+    <tr>
+      <th>Concept</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <td><strong>What</strong></td>
+      <td>Custom HTML tags with built-in behavior</td>
+    </tr>
+    <tr>
+      <td><strong>Why</strong></td>
+      <td>Reusable, encapsulated, framework-free components</td>
+    </tr>
+    <tr>
+      <td><strong>When</strong></td>
+      <td>For UI modules that are reused or shared</td>
+    </tr>
+    <tr>
+      <td><strong>How</strong></td>
+      <td>Define a class, use <code>customElements.define</code>, and drop in your HTML</td>
+    </tr>
+  </table>
+
+  <h3>🚀 Final Thoughts</h3>
+
+  <p>Custom Elements are a native way to bring component-based architecture to your frontend without the weight of a framework. They offer reusability, encapsulation, and portability across projects.</p>
+
+  <p>They’re a perfect fit when building reusable UI pieces, design systems, or standalone widgets. Try one today — you’ll appreciate how clean and maintainable your frontend can be.</p>
+  </BlogContainer>
