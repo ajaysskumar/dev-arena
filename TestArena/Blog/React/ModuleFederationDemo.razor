@@ -1,0 +1,212 @@
+@page "/blog/module-federation-demo-in-react"
+@using TestArena.Blog.Common
+@using TestArena.Blog.Common.NavigationUtils
+  <style>
+    code, pre {
+      background-color: #f4f4f4;
+      padding: 0.5em;
+      display: block;
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+    }
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+    th, td {
+      padding: 0.5rem;
+      text-align: left;
+    }
+    a {
+      color: #2980b9;
+    }
+  </style>
+
+@code{
+    PageInfo currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/module-federation-demo-in-react");
+}
+
+<BlogContainer>
+    <Header Title="@currentPage.Header"
+            Image="@currentPage.ArticleImage" PublishedOn="@currentPage.PublishedOn" Authors="Ajay Kumar">
+    </Header>
+
+
+  <h1>Unleashing Micro Frontends with Module Federation in React</h1>
+
+  <p>
+    Modern web applications are growing at an unprecedented scale. Codebases are expanding, teams are scaling, and release cycles are accelerating. 
+    In this fast-paced development world, <strong>Module Federation</strong> stands out as a game-changer for building scalable and independent frontend applications.
+  </p>
+
+  <p>Let’s break it down using the <strong>What</strong>, <strong>Why</strong>, <strong>When</strong>, and <strong>How</strong> format — so by the end, you’ll not only understand the concept but be motivated to give it a try in your next project.</p>
+
+  <h2>🧠 What is Module Federation?</h2>
+
+  <p>
+    Module Federation is a feature introduced in <strong>Webpack 5</strong> that allows multiple independently-built and deployed applications (or “modules”) to share code and functionality with each other at runtime.
+  </p>
+  <p>
+    In simpler terms:
+    <ul>
+      <li>It lets <strong>App A</strong> use components or utilities from <strong>App B</strong> <em>without importing it during build time</em>.</li>
+      <li>All sharing happens at <strong>runtime</strong>.</li>
+    </ul>
+  </p>
+
+  <blockquote>
+    🧩 <strong>Micro Frontends</strong>: An architectural approach where frontend applications are broken down into smaller, independently deployable apps that work together.<br>
+    🔌 <strong>Webpack</strong>: A module bundler that packages JavaScript code for usage in a browser.
+  </blockquote>
+
+  <h2>🚀 Why Should You Care About Module Federation?</h2>
+
+  <p>Imagine you're building a product with multiple teams:</p>
+  <ul>
+    <li>One team handles <strong>authentication</strong></li>
+    <li>Another handles <strong>dashboard</strong></li>
+    <li>A third team builds <strong>analytics</strong></li>
+  </ul>
+
+  <p>Without Module Federation, you'd likely:</p>
+  <ul>
+    <li>Merge all code into a monolith</li>
+    <li>Rebuild everything on every change</li>
+    <li>Coordinate deployments like a game of Tetris</li>
+  </ul>
+
+  <p>With Module Federation:</p>
+  <ul>
+    <li>✅ Teams build and deploy independently</li>
+    <li>✅ Apps share components and libraries at runtime</li>
+    <li>✅ Performance improves through <strong>lazy loading</strong></li>
+    <li>✅ You avoid <strong>code duplication</strong> (like React loaded multiple times)</li>
+  </ul>
+
+  <p>It’s like giving every team their own spaceship — yet letting them dock with the mothership when needed 🚀</p>
+
+  <h2>📆 When Should You Use Module Federation?</h2>
+
+  <p>Use Module Federation when:</p>
+  <ul>
+    <li>You're building <strong>micro frontends</strong></li>
+    <li>Your application is growing too large for one team to manage</li>
+    <li>You want <strong>independent deployments</strong></li>
+    <li>You need to <strong>reuse components</strong> across projects</li>
+    <li>You want to <strong>experiment</strong> without breaking the monolith</li>
+  </ul>
+
+  <p>Avoid it if:</p>
+  <ul>
+    <li>Your app is simple and tightly coupled</li>
+    <li>You don’t want the overhead of managing multiple repos and deployments</li>
+  </ul>
+
+  <h2>🔧 How Does Module Federation Work?</h2>
+
+  <p>Let’s explore using the GitHub repository: <a href="https://github.com/ajaysskumar/module-federation-demo" target="_blank">ajaysskumar/module-federation-demo</a></p>
+
+  <h3>🏗 Project Structure</h3>
+  <pre><code>module-federation-demo/
+├── host-app/        # The main app consuming components
+└── remote-app/      # The app exposing components
+  </code></pre>
+
+  <h3>🔌 Step 1: Setup the Remote App</h3>
+  <p>The <code>remote-app</code> exposes a <code>Button</code> component.</p>
+
+  <h4>remote-app/webpack.config.js</h4>
+  <pre><code>new ModuleFederationPlugin({
+  name: "remote_app",
+  filename: "remoteEntry.js",
+  exposes: {
+    "./Button": "./src/Button",
+  },
+  shared: { react: { singleton: true }, "react-dom": { singleton: true } },
+})
+  </code></pre>
+
+  <h4>remote-app/src/Button.js</h4>
+  <pre><code>const Button = () => &lt;button&gt;Remote Button&lt;/button&gt;;
+export default Button;
+  </code></pre>
+
+  <p><strong>Run remote-app:</strong></p>
+  <pre><code>cd remote-app
+npm install
+npm start
+# Runs at http://localhost:3002
+  </code></pre>
+
+  <h3>🧲 Step 2: Consume in the Host App</h3>
+
+  <h4>host-app/webpack.config.js</h4>
+  <pre><code>new ModuleFederationPlugin({
+  name: "host_app",
+  remotes: {
+    remote_app: "remote_app@http://localhost:3002/remoteEntry.js",
+  },
+  shared: { react: { singleton: true }, "react-dom": { singleton: true } },
+})
+  </code></pre>
+
+  <h4>host-app/src/App.js</h4>
+  <pre><code>const RemoteButton = React.lazy(() => import("remote_app/Button"));
+
+&lt;Suspense fallback="Loading..."&gt;
+  &lt;RemoteButton /&gt;
+&lt;/Suspense&gt;
+  </code></pre>
+
+  <p><strong>Run host-app:</strong></p>
+  <pre><code>cd host-app
+npm install
+npm start
+# Runs at http://localhost:3001
+  </code></pre>
+
+  <p>Boom! 🎉 The host renders a button from the remote app — without bundling it.</p>
+
+  <h2>🧠 Key Concepts at a Glance</h2>
+
+  <table>
+    <thead>
+      <tr><th>Term</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Host</strong></td><td>App consuming remote modules</td></tr>
+      <tr><td><strong>Remote</strong></td><td>App exposing modules</td></tr>
+      <tr><td><strong>Exposes</strong></td><td>Declares what components the remote provides</td></tr>
+      <tr><td><strong>Remotes</strong></td><td>Declares what the host will consume</td></tr>
+      <tr><td><strong>Singleton</strong></td><td>Ensures only one instance of a library (like React) is used</td></tr>
+      <tr><td><strong>Lazy Loading</strong></td><td>Load components on demand</td></tr>
+    </tbody>
+  </table>
+
+  <h2>🔥 Final Thoughts — Why You Should Try Module Federation</h2>
+
+  <p>Module Federation isn’t just a tool — it’s a new way of thinking:</p>
+  <ul>
+    <li>It <strong>breaks silos</strong> between frontend teams</li>
+    <li>It <strong>speeds up development</strong> by reducing inter-team dependencies</li>
+    <li>It helps you <strong>build faster, ship sooner, and scale better</strong></li>
+  </ul>
+
+  <blockquote>
+    If you're working on a React app with growing complexity, <strong>you owe it to your team to explore Module Federation</strong>.
+  </blockquote>
+
+  <p>By adopting it, you're not only making your architecture more resilient — you're also unlocking a whole new level of collaboration and efficiency 🚀</p>
+
+  <h3>📎 Demo Repository</h3>
+  <p>Check out the complete working code:<br />
+    <a href="https://github.com/ajaysskumar/module-federation-demo" target="_blank">
+      🔗 ajaysskumar/module-federation-demo
+    </a>
+  </p>
+
+  <p><em>Want help setting this up for your team or project? Let’s chat. Module Federation can be your next superpower. 💪</em></p>
+</BlogContainer>

@@ -58,15 +58,22 @@ namespace TestArena.Blog.Common.NavigationUtils
             new DateTime(2025, 4, 5),
             "images/blog/html-blogs/custom-element/banner.png",
             ["HTML", "Web Components", "Custom Elements"]),
+        new("Module Federation in React",
+            "/blog/module-federation-demo-in-react",
+            new DateTime(2025, 4, 19),
+            "images/blog/html-blogs/custom-element/banner.png",
+            ["micro-fronted", "react", "module-federation"], false),
         ];
     }
 
-    public class PageInfo(string header, string relativePath, DateTime publishedOn, string articleImage, List<string> tags)
+    public class PageInfo(string header, string relativePath, DateTime publishedOn, string articleImage, List<string> tags, bool isPublished = true)
     {
         public string Header { get; } = header;
         public string RelativePath { get; } = relativePath;
         public List<string> Tags { get; } = tags;
         public DateTime PublishedOn { get; } = publishedOn;
         public string ArticleImage { get; } = articleImage;
+
+        public bool IsPublished { get; set; } = isPublished;
     }
 }

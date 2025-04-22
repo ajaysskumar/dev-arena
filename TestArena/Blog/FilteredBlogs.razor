@@ -12,7 +12,8 @@
 
     @{
         foreach (var articlePage in SiteMap.Pages
-                     .Where(x => Tag is null || x.Tags.Contains(Tag))
+                     .Where(x => (Tag is null || x.Tags.Contains(Tag))
+                                 && x.IsPublished)
                      .OrderByDescending(x => x.PublishedOn)
                      .ToList())
         {

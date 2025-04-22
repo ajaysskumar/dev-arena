@@ -7,7 +7,7 @@
 <div class="row row-cols-1 row-cols-md-3 g-4 p-2">
     <div class="col col-md-12">
         <h4 class="d-flex flex-wrap">
-            @foreach (var tag in SiteMap.Pages.SelectMany(x => x.Tags).Distinct())
+            @foreach (var tag in SiteMap.Pages.Where(b => b.IsPublished).SelectMany(x => x.Tags).Distinct())
             {
                 var route = $"/filtered-blogs?tag={tag}";
                 <a href="@route" class="text-info px-2">#@tag</a>
@@ -18,7 +18,7 @@
 
 <div class="row row-cols-1 row-cols-md-3 g-4 p-2">
     @{
-        foreach (var articlePage in SiteMap.Pages.OrderByDescending(x => x.PublishedOn))
+        foreach (var articlePage in SiteMap.Pages.Where(b => b.IsPublished).OrderByDescending(x => x.PublishedOn))
         {
             <div class="col">
                 <Thumbnail ImageUrl="@articlePage.ArticleImage" Title="@articlePage.Header" Author="Ajay kumar"

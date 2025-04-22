@@ -29,7 +29,7 @@
         else
         {
             FilteredPages = SiteMap.Pages
-                .Where(page => page.Header.Contains(SearchText, StringComparison.OrdinalIgnoreCase))
+                .Where(page => page.Header.Contains(SearchText, StringComparison.OrdinalIgnoreCase) && page.IsPublished)
                 .ToList();
         }
     }
