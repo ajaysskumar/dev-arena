@@ -16,12 +16,6 @@
     th {
       background-color: #f0f0f0;
     }
-    .tip {
-      background: #eaf4ff;
-      padding: 10px;
-      border-left: 5px solid #3498db;
-      margin: 1em 0;
-    }
   </style>
 @code{
     PageInfo currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/custom-elements-in-html");
@@ -49,7 +43,6 @@
   <CodeSnippet Language="html" ShowDescription="false">
 &lt;user-profile name="Alice" age="30"&gt;&lt;/user-profile&gt;
   </CodeSnippet>
-  @* <pre><code>&lt;user-profile name="Alice" age="30"&gt;&lt;/user-profile&gt;</code></pre> *@
 
   <p>This <code>&lt;user-profile&gt;</code> tag is not part of standard HTML. It's a <strong>custom element</strong> you can define with specific behavior and UI.</p>
 

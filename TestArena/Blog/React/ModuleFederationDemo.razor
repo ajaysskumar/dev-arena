@@ -2,12 +2,6 @@
 @using TestArena.Blog.Common
 @using TestArena.Blog.Common.NavigationUtils
   <style>
-    code, pre {
-      background-color: #f4f4f4;
-      padding: 0.5em;
-      display: block;
-      overflow-x: auto;
-    }
     table {
       width: 100%;
       border-collapse: collapse;
@@ -35,7 +29,7 @@
     </Header>
 
 
-  <h1>Unleashing Micro Frontends with Module Federation in React</h1>
+  <h2>Unleashing Micro Frontends with Module Federation in React</h2>
 
   <p>
     Modern web applications are growing at an unprecedented scale. Codebases are expanding, teams are scaling, and release cycles are accelerating. 
@@ -44,7 +38,7 @@
 
   <p>Let’s break it down using the <strong>What</strong>, <strong>Why</strong>, <strong>When</strong>, and <strong>How</strong> format — so by the end, you’ll not only understand the concept but be motivated to give it a try in your next project.</p>
 
-  <h2>🧠 What is Module Federation?</h2>
+  <h3>🧠 What is Module Federation?</h3>
 
   <p>
     Module Federation is a feature introduced in <strong>Webpack 5</strong> that allows multiple independently-built and deployed applications (or “modules”) to share code and functionality with each other at runtime.
@@ -57,12 +51,15 @@
     </ul>
   </p>
 
+  <BlogImage Number="1" Description="Module Federation Integration architecture"
+        ImagePath="/images/blog/react/module-federation/module federation.svg" />
+
   <blockquote>
     🧩 <strong>Micro Frontends</strong>: An architectural approach where frontend applications are broken down into smaller, independently deployable apps that work together.<br>
     🔌 <strong>Webpack</strong>: A module bundler that packages JavaScript code for usage in a browser.
   </blockquote>
 
-  <h2>🚀 Why Should You Care About Module Federation?</h2>
+  <h3>🚀 Why Should You Care About Module Federation?</h3>
 
   <p>Imagine you're building a product with multiple teams:</p>
   <ul>
@@ -88,7 +85,7 @@
 
   <p>It’s like giving every team their own spaceship — yet letting them dock with the mothership when needed 🚀</p>
 
-  <h2>📆 When Should You Use Module Federation?</h2>
+  <h3>📆 When Should You Use Module Federation?</h3>
 
   <p>Use Module Federation when:</p>
   <ul>
@@ -105,21 +102,23 @@
     <li>You don’t want the overhead of managing multiple repos and deployments</li>
   </ul>
 
-  <h2>🔧 How Does Module Federation Work?</h2>
+  <h3>🔧 How Does Module Federation Work?</h3>
 
   <p>Let’s explore using the GitHub repository: <a href="https://github.com/ajaysskumar/module-federation-demo" target="_blank">ajaysskumar/module-federation-demo</a></p>
 
-  <h3>🏗 Project Structure</h3>
-  <pre><code>module-federation-demo/
+  <h4>🏗 Project Structure</h4>
+  <CodeSnippet Language="shell" Description="Running remote app">
+module-federation-demo/
 ├── host-app/        # The main app consuming components
 └── remote-app/      # The app exposing components
-  </code></pre>
+  </CodeSnippet>
 
-  <h3>🔌 Step 1: Setup the Remote App</h3>
+  <h4>🔌 Step 1: Setup the Remote App</h4>
   <p>The <code>remote-app</code> exposes a <code>FruitsTable</code> component.</p>
 
-  <h4>remote-app/webpack.config.js</h4>
-  <pre><code>new ModuleFederationPlugin({
+  <h5>remote-app/webpack.config.js</h5>
+  <CodeSnippet Number="1" Language="js" Description="Running remote app">
+    new ModuleFederationPlugin({
       name: "remoteApp",
       filename: "remoteEntry.js",
       exposes: {
@@ -134,11 +133,11 @@
         },
       },
     })
-  </code></pre>
+  </CodeSnippet>
 
-  <h4>remote-app/src/FruitsTable.js</h4>
-  <pre><code>
-    const FruitsTable = () => (
+  <h5>remote-app/src/FruitsTable.js</h5>
+    <CodeSnippet Number="2" Language="js" Description="FruitsTable remote component">
+const FruitsTable = () => (
       &lt;div&gt;
         &lt;h1 style={{ textAlign: "center", color: "green" }}&gt;Hello from Remote App component&lt;/h1&gt;
         &lt;table style={{ width: "50%", margin: "0 auto", borderCollapse: "collapse" }}&gt;
@@ -161,29 +160,34 @@
         &lt;/table&gt;
       &lt;/div&gt;
     );
-  </code></pre>
+  </CodeSnippet>
 
   <p><strong>Run remote-app:</strong></p>
-  <pre><code>cd remote-app
+  <CodeSnippet Number="3" Language="shell" Description="Running remote app">
+cd remote-app
 npm install
 npm start
-# Runs at http://localhost:3002
-  </code></pre>
+# Runs at http://localhost:3001
+  </CodeSnippet>
 
-  <h3>🧲 Step 2: Consume in the Host App</h3>
+  <h4>🧲 Step 2: Consume in the Host App</h4>
 
-  <h4>host-app/webpack.config.js</h4>
-  <pre><code>new ModuleFederationPlugin({
+  <h5>host-app/webpack.config.js</h5>
+  <CodeSnippet Number="4" Language="js" Description="Module Federation Plugin setup in webpack config">
+new ModuleFederationPlugin({
   name: "host_app",
   remotes: {
-    remote_app: "remote_app@http://localhost:3002/remoteEntry.js",
+    remote_app: "remoteApp@http://localhost:3001/remoteEntry.js",
   },
   shared: { react: { singleton: true }, "react-dom": { singleton: true } },
 })
-  </code></pre>
+  </CodeSnippet>
 
-  <h4>host-app/src/App.js</h4>
-  <pre><code>
+  <BlogImage Number="2" Description="Remote js file"
+        ImagePath="/images/blog/react/module-federation/Remote js file.png" />
+
+  <h5>host-app/src/App.js</h5>
+  <CodeSnippet Number="5" Language="js" Description="Host app consuming remote component">
     import React, { Suspense, lazy } from "react";
 
     const RemoteFruitsTable = lazy(() => import("remote_app/FruitsTable"));
@@ -197,18 +201,23 @@ npm start
     }
 
     export default App;
-  </code></pre>
+  </CodeSnippet>
 
   <p><strong>Run host-app:</strong></p>
-  <pre><code>cd host-app
+  <CodeSnippet Number="6" Language="shell" Description="Running host app">
+cd host-app
 npm install
 npm start
-# Runs at http://localhost:3001
-  </code></pre>
+# Runs at http://localhost:3000
+  </CodeSnippet>
 
   <p>Boom! 🎉 The host renders a Fruits table from the remote app — without bundling it.</p>
 
-  <h2>🧠 Key Concepts at a Glance</h2>
+  <BlogImage Number="3" Description="Remote component loading in host component"
+        ImagePath="/images/blog/react/module-federation/Remote component loading in host component.png" />
+  <p class="tip">💡 And the best part? You can update the remote app independently, and the host will always fetch the latest version at runtime.</p>
+
+  <h3>🧠 Key Concepts at a Glance</h3>
 
   <table>
     <thead>
@@ -224,7 +233,7 @@ npm start
     </tbody>
   </table>
 
-  <h2>🔥 Final Thoughts — Why You Should Try Module Federation</h2>
+  <h3>🔥 Final Thoughts — Why You Should Try Module Federation</h3>
 
   <p>Module Federation isn’t just a tool — it’s a new way of thinking:</p>
   <ul>
@@ -239,7 +248,7 @@ npm start
 
   <p>By adopting it, you're not only making your architecture more resilient — you're also unlocking a whole new level of collaboration and efficiency 🚀</p>
 
-  <h3>📎 Demo Repository</h3>
+  <h4>📎 Demo Repository</h4>
   <p>Check out the complete working code:<br />
     <a href="https://github.com/ajaysskumar/module-federation-demo" target="_blank">
       🔗 ajaysskumar/module-federation-demo

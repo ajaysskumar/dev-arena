@@ -61,8 +61,8 @@ namespace TestArena.Blog.Common.NavigationUtils
         new("Module Federation in React",
             "/blog/module-federation-demo-in-react",
             new DateTime(2025, 4, 19),
-            "images/blog/html-blogs/custom-element/banner.png",
-            ["micro-fronted", "react", "module-federation"], false),
+            "images/blog/react/module-federation/banner.png",
+            ["micro-fronted", "react", "module-federation"]),
         ];
     }
 
