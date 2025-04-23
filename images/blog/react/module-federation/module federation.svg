@@ -1,0 +1,50 @@
+<svg width="1200" height="500" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .title { font: bold 32px sans-serif; fill: #f9fafb; }
+    .label { font: bold 20px sans-serif; fill: #ffffff; }
+    .desc { font: 16px sans-serif; fill:rgb(241, 125, 36); }
+    .component { font: bold 18px sans-serif; fill: #1f2937; }
+    .bg { fill: #0f172a; }
+    .box { rx: 12; }
+  </style>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" class="bg"/>
+
+  <!-- Title -->
+  <text x="50" y="50" class="title">Module Federation in React - Integration Architecture</text>
+
+  <!-- Host App -->
+  <rect x="100" y="150" width="300" height="200" fill="#3B82F6" class="box"/>
+  <text x="130" y="180" class="label">host-app</text>
+  <rect x="120" y="200" width="260" height="120" fill="#ffffff" class="box"/>
+  <text x="130" y="230" class="component">&lt;App /&gt;</text>
+  <text x="130" y="260" class="desc">+ Header h1 (host)</text>
+  <text x="130" y="285" class="desc">+ Fruit (from remote)</text>
+
+  <!-- Remote App -->
+  <rect x="800" y="150" width="300" height="200" fill="#10B981" class="box"/>
+  <text x="830" y="180" class="label">remote-app</text>
+  <rect x="820" y="200" width="260" height="120" fill="#ffffff" class="box"/>
+  <text x="835" y="230" class="component">&lt;Fruit /&gt;</text>
+  <text x="835" y="260" class="desc">Exposed to host</text>
+
+  <!-- React Logo in center -->
+  <!-- <circle cx="600" cy="250" r="50" fill="#61dafb"/> -->
+  <ellipse cx="600" cy="250" rx="100" ry="40" fill="#61dafb"/>
+  <text x="520" y="260" font-size="24" font-weight="italic" fill="#0f172a">remote-module.js</text>
+
+  <!-- Arrows -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#facc15"/>
+    </marker>
+  </defs>
+
+  <line x1="780" y1="250" x2="740" y2="250" stroke="#facc15" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="490" y1="250" x2="440" y2="250" stroke="#facc15" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- Arrow Labels -->
+  <text x="740" y="230" font-size="14" fill="#fef9c3">Expose</text>
+  <text x="440" y="230" font-size="14" fill="#fef9c3">Consume</text>
+</svg>
