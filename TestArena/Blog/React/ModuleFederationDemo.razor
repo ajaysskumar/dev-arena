@@ -116,22 +116,51 @@
   </code></pre>
 
   <h3>🔌 Step 1: Setup the Remote App</h3>
-  <p>The <code>remote-app</code> exposes a <code>Button</code> component.</p>
+  <p>The <code>remote-app</code> exposes a <code>FruitsTable</code> component.</p>
 
   <h4>remote-app/webpack.config.js</h4>
   <pre><code>new ModuleFederationPlugin({
-  name: "remote_app",
-  filename: "remoteEntry.js",
-  exposes: {
-    "./Button": "./src/Button",
-  },
-  shared: { react: { singleton: true }, "react-dom": { singleton: true } },
-})
+      name: "remoteApp",
+      filename: "remoteEntry.js",
+      exposes: {
+        "./FruitsTable": "./src/FruitsTable",
+      },
+      shared: {
+        react: {
+          singleton: true
+        },
+        "react-dom": {
+          singleton: true
+        },
+      },
+    })
   </code></pre>
 
-  <h4>remote-app/src/Button.js</h4>
-  <pre><code>const Button = () => &lt;button&gt;Remote Button&lt;/button&gt;;
-export default Button;
+  <h4>remote-app/src/FruitsTable.js</h4>
+  <pre><code>
+    const FruitsTable = () => (
+      &lt;div&gt;
+        &lt;h1 style={{ textAlign: "center", color: "green" }}&gt;Hello from Remote App component&lt;/h1&gt;
+        &lt;table style={{ width: "50%", margin: "0 auto", borderCollapse: "collapse" }}&gt;
+          &lt;thead&gt;
+            &lt;tr&gt;
+              &lt;th style={{ border: "1px solid black", padding: "8px", backgroundColor: "#f2f2f2" }}&gt;Name&lt;/th&gt;
+              &lt;th style={{ border: "1px solid black", padding: "8px", backgroundColor: "#f2f2f2" }}&gt;Quantity&lt;/th&gt;
+              &lt;th style={{ border: "1px solid black", padding: "8px", backgroundColor: "#f2f2f2" }}&gt;Price&lt;/th&gt;
+            &lt;/tr&gt;
+          &lt;/thead&gt;
+          &lt;tbody&gt;
+            {fruits.map((fruit, index) => (
+              &lt;tr key={index}&gt;
+                &lt;td style={{ border: "1px solid black", padding: "8px", textAlign: "center" }}&gt;{fruit.name}&lt;/td&gt;
+                &lt;td style={{ border: "1px solid black", padding: "8px", textAlign: "center" }}&gt;{fruit.quantity}&lt;/td&gt;
+                &lt;td style={{ border: "1px solid black", padding: "8px", textAlign: "center" }}&gt;${fruit.price.toFixed(2)}&lt;/td&gt;
+              &lt;/tr&gt;
+            ))}
+          &lt;/tbody&gt;
+        &lt;/table&gt;
+      &lt;/div&gt;
+    );
   </code></pre>
 
   <p><strong>Run remote-app:</strong></p>
@@ -154,11 +183,20 @@ npm start
   </code></pre>
 
   <h4>host-app/src/App.js</h4>
-  <pre><code>const RemoteButton = React.lazy(() => import("remote_app/Button"));
+  <pre><code>
+    import React, { Suspense, lazy } from "react";
 
-&lt;Suspense fallback="Loading..."&gt;
-  &lt;RemoteButton /&gt;
-&lt;/Suspense&gt;
+    const RemoteFruitsTable = lazy(() => import("remote_app/FruitsTable"));
+
+    function App() {
+      return (
+        &lt;Suspense fallback=&lt;div&gt;This is host app. Remote will be loaded soon..&lt;/div&gt;&gt;
+          &lt;RemoteFruitsTable /&gt;
+        &lt;/Suspense&gt;
+      );
+    }
+
+    export default App;
   </code></pre>
 
   <p><strong>Run host-app:</strong></p>
@@ -168,7 +206,7 @@ npm start
 # Runs at http://localhost:3001
   </code></pre>
 
-  <p>Boom! 🎉 The host renders a button from the remote app — without bundling it.</p>
+  <p>Boom! 🎉 The host renders a Fruits table from the remote app — without bundling it.</p>
 
   <h2>🧠 Key Concepts at a Glance</h2>
 
