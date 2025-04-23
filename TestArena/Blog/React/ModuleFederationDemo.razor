@@ -51,8 +51,9 @@
     </ul>
   </p>
 
-  <BlogImage Number="1" Description="Module Federation Integration architecture"
-        ImagePath="/images/blog/react/module-federation/module federation.svg" />
+  <BlogImage Number="1" 
+  Description="Module Federation Integration architecture" 
+  ImagePath="/images/blog/react/module-federation/module federation.svg" />
 
   <blockquote>
     🧩 <strong>Micro Frontends</strong>: An architectural approach where frontend applications are broken down into smaller, independently deployable apps that work together.<br>
@@ -173,6 +174,7 @@ npm start
   <h4>🧲 Step 2: Consume in the Host App</h4>
 
   <h5>host-app/webpack.config.js</h5>
+
   <CodeSnippet Number="4" Language="js" Description="Module Federation Plugin setup in webpack config">
 new ModuleFederationPlugin({
   name: "host_app",
@@ -215,6 +217,7 @@ npm start
 
   <BlogImage Number="3" Description="Remote component loading in host component"
         ImagePath="/images/blog/react/module-federation/Remote component loading in host component.png" />
+  <p><b>Notice</b> the network tab in above image to see <code>remoteEntry.js</code> file being loaded from <code>http://localhost:3001</code></p>
   <p class="tip">💡 And the best part? You can update the remote app independently, and the host will always fetch the latest version at runtime.</p>
 
   <h3>🧠 Key Concepts at a Glance</h3>
