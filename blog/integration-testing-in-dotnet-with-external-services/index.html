@@ -18,7 +18,6 @@
     <meta property="og:description" content="Explore expert insights on .NET development, AI integration, clean coding, performance testing, and modern software practices. Build better, smarter, and faster applications with Dev Codex."/>
     <meta property="og:url" content="https://devcodex.in/"/>
     <meta property="og:type" content="website"/>
-    <meta property="og:image" content="https://devcodex.in/images/og-image.png"/>
     <meta property="og:locale" content="en_US"/>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -30,13 +29,13 @@
 <link rel="icon" type="image/png" href="favicon.png"/>
 <link href="TestArena.styles.css" rel="stylesheet"/>
 
-<!--Blazor:{"type":"webassembly","prerenderId":"e6914146e2c9407e9f4429da93fcd686","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><!--Blazor:{"prerenderId":"e6914146e2c9407e9f4429da93fcd686"}-->
+<!--Blazor:{"type":"webassembly","prerenderId":"4f7688d1a74b429d9ec1688dcaac446f","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><!--Blazor:{"prerenderId":"4f7688d1a74b429d9ec1688dcaac446f"}-->
 </head>
 
 <body>
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"5de6c0af0b314d33ad8502517018e5e3","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"4aedb8de1e3f47dc808f95098022c9d5","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -76,7 +75,7 @@
                     
                     <div class="col-md-6 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Published On: 08 Mar 2025</span></div></div></div></div></div></header>
 
-    <section id="e0c7ee4f-9b0c-4838-80eb-64054e2f5b21"><h4>Summary</h4><hr class="border border-success border-1 opacity-50">
+    <section id="56ef9437-64ab-4a49-8e43-cf01285bf917"><h4>Summary</h4><hr class="border border-success border-1 opacity-50">
     <div><p>This is a continuation of the <b>Integration testing in dotnet</b> series. This time we will be covering the
             scenario where third-party service calls are present in our API flows.</p>
         <p>Before we begin further, you may want to visit the previous articles in this series to get a better context
@@ -92,7 +91,7 @@
         <div class="col-md-4 d-flex align-items-center pe-2"><img src="/images/blog/integration-testing/handling-database/banner.png" class="img-fluid rounded-end" alt="Blog Image" /></div></div></div>
         <p>Also, all the code used here is available at: <a href="https://github.com/ajaysskumar/SuperHeroSolution/tree/main/DemoWith3rdPartyService">SuperHero repository link</a></p></div></section>
 
-    <section id="dbad0333-a09e-4a5e-9196-1e45c63af874"><h4>Why need to mock?</h4><hr class="border border-success border-1 opacity-50">
+    <section id="09150b83-bfc0-44ac-bb52-0e94f878c7ed"><h4>Why need to mock?</h4><hr class="border border-success border-1 opacity-50">
     <div><p>Mocking third-party service calls is crucial to ensure tests are isolated, reliable, and repeatable.</p>
         <p>It avoids dependency on external systems that may be unavailable, slow, or unpredictable, allowing the focus
             to remain on verifying the behavior of your application in a controlled environment.</p>
@@ -103,7 +102,7 @@
             integration of all the components of our application. So we will be mocking only what goes out to the
             network and what comes into the network here.</p></div></section>
 
-    <section id="e0e965d4-a49a-4575-a65d-0c1b5ed28985"><h4>Suspects API</h4><hr class="border border-success border-1 opacity-50">
+    <section id="f24de3a2-1f4d-4e68-a568-3404bfc1dc1e"><h4>Suspects API</h4><hr class="border border-success border-1 opacity-50">
     <div><p>Continuing with the article, let's imagine we need an API that returns the list of notorious suspects in the
             superhero universe.</p>
         <p>We created an API as mentioned in the below Swagger screenshot:</p>
@@ -194,7 +193,7 @@
         </code></pre></div><div class="col-12 text-center"><code>Code Sample #2 : Suspect API</code></div></div></div>
 <br></div></section>
 
-    <section id="4bee47a3-65f3-4cb1-9fc5-25f73f07bc50"><h4>Wiremock to the rescue!</h4><hr class="border border-success border-1 opacity-50">
+    <section id="2e19633d-22ef-49c9-873a-b46a7342c979"><h4>Wiremock to the rescue!</h4><hr class="border border-success border-1 opacity-50">
     <div><p>Here we will be setting up <b>Wiremock</b> to be used in the integration tests. For those who are new to
             Wiremock, please visit <a href="https://github.com/WireMock-Net/WireMock.Net" target="_blank">WireMock.Net</a> for more details.</p>
         <p>Install the below package in the Integration test project:</p>
@@ -257,7 +256,7 @@
 <br>
         <p>This completes the setup. We are now ready to write the tests.</p></div></section>
 
-    <section id="e9b06d59-601c-4ebe-900d-41965c4c1ee9"><h4>Test Scenarios</h4><hr class="border border-success border-1 opacity-50">
+    <section id="ea8b2fcb-c08c-4632-89f7-7af26259312f"><h4>Test Scenarios</h4><hr class="border border-success border-1 opacity-50">
     <div><p>Below are the test scenarios for our Suspect API. These tests ensure that the API behaves as expected under
             different conditions, including both positive and negative cases.</p>
 
@@ -339,7 +338,7 @@
         </code></pre></div><div class="col-12 text-center"><code>Code Sample #8 : Negative Test: 500 Response</code></div></div></div>
 <br></div></section>
 
-    <section id="0797bb2e-34af-4687-9710-4158c97a02c8"><h4>Test Results</h4><hr class="border border-success border-1 opacity-50">
+    <section id="3d98ca60-3098-49a2-855c-4fde8a5a5eea"><h4>Test Results</h4><hr class="border border-success border-1 opacity-50">
     <div><p>When running the tests, we can observe the following results:</p>
         <style>
     .image-header {
@@ -416,9 +415,9 @@
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-        <!--Blazor:{"prerenderId":"5de6c0af0b314d33ad8502517018e5e3"}-->
+        <!--Blazor:{"prerenderId":"4aedb8de1e3f47dc808f95098022c9d5"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UTFWSGRrUjNkRVF3VWs5cWFtZDBSa2xYVWpGWmVWZEhNVzFYUkZkM2JsTkxZbFZwYmpCTmVGTkRjVlF0TldwdlJYUkdUMkU1UlZwZlZIRlVSV2RLVmpNNWFrbFNOMHRaVFdReVkxQjBlREUzWmtkM2VIbHZhV0ZXVld0eFlreGxjMVpmUldSR1ZucFVTMEpwTVdKUmNGWlFURTFwWWsxb1VtVnNaekoxYVZWV1JHcEJXWGhYYkdGclJFZEZPRWRaWkZGalNTMVpJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UVZOdFRuTkhWVTk1ZUVsb09GY3libkZuTlRsNlkxbGtRM0p0T1ZkSmJtcEllbkowUjJ0aGVVRklSMGN4ZG1GRFJuUnBlSEZGV21FM01ta3ljMmRpV1daM1UyeFdSM05pY2pFeWVtcERSR05pZFc5VFRXbGhRbEIxVW1jek1UZE5NamsyU21kVk5HbGlTV1JwV0Rka1ZrOXlhRkZ5WVVsSmJ6aDBWbVp1UzJoNFMyRlFPRzFuVjNkSFdXbE9RWGh2ZEhsd1pUQlJJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
