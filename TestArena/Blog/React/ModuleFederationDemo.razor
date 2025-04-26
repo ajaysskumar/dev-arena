@@ -198,12 +198,19 @@ npm start
 
   <CodeSnippet Number="4" Language="js" Description="Module Federation Plugin setup in webpack config">
 new ModuleFederationPlugin({
-  name: "hostApp",
-  remotes: {
-    remote_app: "remoteApp@http://localhost:3001/remoteEntry.js",
-  },
-  shared: { react: { singleton: true }, "react-dom": { singleton: true } },
-})
+      name: "hostApp",
+      remotes: {
+        remoteApp: "remoteApp@http://localhost:3001/remoteEntry.js",
+      },
+      shared: {
+        react: {
+          singleton: true,
+        },
+        "react-dom": {
+          singleton: true
+        },
+      },
+    })
   </CodeSnippet>
 
   <BlogImage Number="2" Description="Remote js file"
