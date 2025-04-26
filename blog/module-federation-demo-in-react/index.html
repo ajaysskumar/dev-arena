@@ -29,13 +29,13 @@
 <link rel="icon" type="image/png" href="favicon.png"/>
 <link href="TestArena.styles.css" rel="stylesheet"/>
 
-<!--Blazor:{"type":"webassembly","prerenderId":"5b1d7e2593104ee295220920b73b4688","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><!--Blazor:{"prerenderId":"5b1d7e2593104ee295220920b73b4688"}-->
+<!--Blazor:{"type":"webassembly","prerenderId":"683dfeabfd1140a3bdd74e23c5931278","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><!--Blazor:{"prerenderId":"683dfeabfd1140a3bdd74e23c5931278"}-->
 </head>
 
 <body>
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"49a5521a96444f9d9cb0a4a8dc876a85","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"ca0506d7b58f4558be065010daac0fe1","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -43,7 +43,7 @@
         <ul class="list-group position-absolute w-100 mt-1" style="z-index: 1000;" hidden></ul></div></div>
 
                 
-                <div class="col-12 col-md-4 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><div class="dropdown"><a href="/about-author" class="d-inline-block rounded-circle overflow-hidden border border-white" style="width: 3rem; height: 3rem; border-width: 0.25rem;"><img src="/images/shared/author.jpg" alt="About Author" class="img-fluid rounded-circle" style="width: 100%; height: 100%; object-fit: cover;"></a></div></div></div></div></div></header>
+                <div class="col-12 col-md-4 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><div class="dropdown"><a href="/about-author" class="d-inline-block rounded-circle overflow-hidden border border-white" style="width: 3rem; height: 3rem; border-width: 0.25rem;"><img src="/images/shared/author.png" alt="About Author" class="img-fluid rounded-circle" style="width: 100%; height: 100%; object-fit: cover;"></a></div></div></div></div></div></header>
         <article class="content px-4" b-mcp0h0uciv><style>
     table {
       width: 100%;
@@ -222,8 +222,14 @@ module-federation-demo/
 
   <h4>🔌 Step 1: Setup the Remote App</h4>
   <p>The <code>remote-app</code> exposes a <code>FruitsTable</code> component.</p>
+  <p>
+    The below code snippet configures the Webpack Module Federation Plugin for the <code>remote-app</code>. It specifies:
+    <ul><li><strong>name</strong>: The unique name of the remote application (<code>remoteApp</code>).</li>
+      <li><strong>filename</strong>: The name of the file (<code>remoteEntry.js</code>) that will act as the entry point for exposing modules.</li>
+      <li><strong>exposes</strong>: Declares the modules/components to be exposed by the remote app. Here, the <code>FruitsTable</code> component is exposed.</li>
+      <li><strong>shared</strong>: Specifies shared dependencies like <code>react</code> and <code>react-dom</code>, ensuring they are loaded as singletons to avoid duplication.</li></ul></p>
 
-  <h5>remote-app/webpack.config.js</h5>
+  <h5>📜 remote-app/webpack.config.js</h5>
   <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-js" style="font-size: 0.8rem;">
     new ModuleFederationPlugin({
       name: "remoteApp",
@@ -243,7 +249,7 @@ module-federation-demo/
   </code></pre></div><div class="col-12 text-center"><code>Code Sample #1 : Running remote app</code></div></div></div>
 <br>
 
-  <h5>remote-app/src/FruitsTable.js</h5>
+  <h5>📜 remote-app/src/FruitsTable.js</h5>
     <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-js" style="font-size: 0.8rem;">
 const FruitsTable = () => (
       &lt;div&gt;
@@ -281,12 +287,17 @@ npm start
 <br>
 
   <h4>🧲 Step 2: Consume in the Host App</h4>
+  <p>
+    The above code snippet configures the Webpack Module Federation Plugin for the host application. It specifies:
+    <ul><li><strong>name</strong>: The unique name of the host application (<code>hostApp</code>).</li>
+      <li><strong>remotes</strong>: Declares the remote application (<code>remoteApp</code>) and its entry point (<code>http://localhost:3001/remoteEntry.js</code>).</li>
+      <li><strong>shared</strong>: Ensures that dependencies like <code>react</code> and <code>react-dom</code> are loaded as singletons to avoid duplication across the host and remote apps.</li></ul></p>
 
-  <h5>host-app/webpack.config.js</h5>
+  <h5>📜 host-app/webpack.config.js</h5>
 
   <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-js" style="font-size: 0.8rem;">
 new ModuleFederationPlugin({
-  name: "host_app",
+  name: "hostApp",
   remotes: {
     remote_app: "remoteApp@http://localhost:3001/remoteEntry.js",
   },
@@ -478,9 +489,9 @@ npm start
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-        <!--Blazor:{"prerenderId":"49a5521a96444f9d9cb0a4a8dc876a85"}-->
+        <!--Blazor:{"prerenderId":"ca0506d7b58f4558be065010daac0fe1"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UVZOdFRuTkhWVTk1ZUVsb09GY3libkZuTlRsNlkzVlhSVmRvVnpCbVFYbDJiM1pQYnpJME0zVlhZMHMwZEZNMlRTMXpaME5tVVRobldXNVBTMHc0V2s0MlpHUXdabkZPTlUxb2NFZFFWSEZ5TkhabGJtWnlTa3BYVVRaUmJtOWZhVVpvU1U5UFVWQXpNMDlLVlc5SmVqSmtSWGxMT0U1M2FsQlNjVzVzTmtkT1pFcExPRlJ6Ymt4a1VWQlRiV1YxWVU5TU16SkJJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80VEZwbWNFeG1iblJKZEZCdFRVVnhjVFIyYjNkMVEzcDVSMFIwYlhoVGRYTmhRa3BDYkZKUVVUY3plV05wVERsU1VucG9Wek5pWnkwMVdsa3dlbk5pVVVKUGFVOVZjbUZJZVRSR2JXc3pOWFZLZEhaRmVuRXpjbFpPYTBoblFqSlVWbFpKYkdKaldsVm5UVzFGVEhkQk5ESlRURzB4UWxaWmJYVlBZMGR0Y2xGemJHODJZV0ZmTkVsS2NFUkNabmt5YWxodlpsOWpJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
