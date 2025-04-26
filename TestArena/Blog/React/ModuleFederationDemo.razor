@@ -220,7 +220,7 @@ new ModuleFederationPlugin({
   <CodeSnippet Number="5" Language="js" Description="Host app consuming remote component">
     import React, { Suspense, lazy } from "react";
 
-    const RemoteFruitsTable = lazy(() => import("remote_app/FruitsTable"));
+    const RemoteFruitsTable = lazy(() => import("remoteApp/FruitsTable"));
 
     function App() {
       return (
