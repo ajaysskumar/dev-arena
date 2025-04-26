@@ -120,8 +120,17 @@ module-federation-demo/
 
   <h4>🔌 Step 1: Setup the Remote App</h4>
   <p>The <code>remote-app</code> exposes a <code>FruitsTable</code> component.</p>
+  <p>
+    The below code snippet configures the Webpack Module Federation Plugin for the <code>remote-app</code>. It specifies:
+    <ul>
+      <li><strong>name</strong>: The unique name of the remote application (<code>remoteApp</code>).</li>
+      <li><strong>filename</strong>: The name of the file (<code>remoteEntry.js</code>) that will act as the entry point for exposing modules.</li>
+      <li><strong>exposes</strong>: Declares the modules/components to be exposed by the remote app. Here, the <code>FruitsTable</code> component is exposed.</li>
+      <li><strong>shared</strong>: Specifies shared dependencies like <code>react</code> and <code>react-dom</code>, ensuring they are loaded as singletons to avoid duplication.</li>
+    </ul>
+  </p>
 
-  <h5>remote-app/webpack.config.js</h5>
+  <h5>📜 remote-app/webpack.config.js</h5>
   <CodeSnippet Number="1" Language="js" Description="Running remote app">
     new ModuleFederationPlugin({
       name: "remoteApp",
@@ -140,7 +149,7 @@ module-federation-demo/
     })
   </CodeSnippet>
 
-  <h5>remote-app/src/FruitsTable.js</h5>
+  <h5>📜 remote-app/src/FruitsTable.js</h5>
     <CodeSnippet Number="2" Language="js" Description="FruitsTable remote component">
 const FruitsTable = () => (
       &lt;div&gt;
@@ -176,12 +185,20 @@ npm start
   </CodeSnippet>
 
   <h4>🧲 Step 2: Consume in the Host App</h4>
+  <p>
+    The above code snippet configures the Webpack Module Federation Plugin for the host application. It specifies:
+    <ul>
+      <li><strong>name</strong>: The unique name of the host application (<code>hostApp</code>).</li>
+      <li><strong>remotes</strong>: Declares the remote application (<code>remoteApp</code>) and its entry point (<code>http://localhost:3001/remoteEntry.js</code>).</li>
+      <li><strong>shared</strong>: Ensures that dependencies like <code>react</code> and <code>react-dom</code> are loaded as singletons to avoid duplication across the host and remote apps.</li>
+    </ul>
+  </p>
 
-  <h5>host-app/webpack.config.js</h5>
+  <h5>📜 host-app/webpack.config.js</h5>
 
   <CodeSnippet Number="4" Language="js" Description="Module Federation Plugin setup in webpack config">
 new ModuleFederationPlugin({
-  name: "host_app",
+  name: "hostApp",
   remotes: {
     remote_app: "remoteApp@http://localhost:3001/remoteEntry.js",
   },
