@@ -1,0 +1,244 @@
+@page "/blog/integration-testing-in-dotnet-with-aws"
+@using TestArena.Blog.Common
+@using TestArena.Blog.Common.NavigationUtils
+
+@code{
+    PageInfo currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/integration-testing-in-dotnet-with-aws");
+}
+
+<BlogContainer>
+    <Header Title="@currentPage.Header"
+            Image="@currentPage.ArticleImage" PublishedOn="@currentPage.PublishedOn" Authors="Ajay Kumar">
+    </Header>
+    <h4>Summary</h4>
+    <p>Welcome back to our integration testing in .NET series! In this chapter, we’re diving into the exciting world of testing AWS components integrated into our .NET APIs. For a quick introduction on integration testing, refer to the article below.</p>
+
+    <BlogReferenceCard Title="Integration testing for dotnet core APIs: Introduction"
+            Description="Integration testing for dotnet core APIs: Introduction"
+            Url="/blog/integration-testing-in-dotnet-intro" ImageUrl="/images/blog/integration-testing/intro/banner.png"
+            Source="devcodex.in" />
+
+    <h6>Modern apps and cloud</h6>
+    <p>AWS services (or any cloud services) have become the backbone of modern application development, offering scalable and reliable solutions for a variety of needs. For example, Amazon SNS (Simple Notification Service) sends notifications to users or systems via email, SMS, or other channels. Meanwhile, Amazon SQS (Simple Queue Service) enables asynchronous communication between distributed system components.</p>
+
+    <h6>Challenges in testing cloud integrations</h6>
+    <p>Here’s the twist: while using AWS services like SNS, SQS, S3, or SES is straightforward with the SDK, how do we ensure that our messages actually reach AWS? It’s not just about calling the right method with the right input; it’s about verifying that AWS receives and processes our requests correctly.</p>
+
+    <h6>Lets dive into the article</h6>
+    <p>To make this more fun, imagine we’ve built an API called <code>call-superhero</code>. This API takes a superhero’s name as a parameter and sends an SNS notification, hoping that the superhero hears the call and springs into action!</p>
+
+    <CodeSnippet Number="1" Description="Call superhero API to send message to SNS">
+    [HttpPost("call-superhero")]
+    public async Task&lt;IActionResult&gt; CallSuperHero(string superHeroName)
+    {
+        // Simulate calling a superhero
+        var superHero = await superHeroRepository.GetAllSuperHeroes();
+        var hero = superHero.FirstOrDefault(h => h.SuperName.Equals(superHeroName, StringComparison.InvariantCultureIgnoreCase));
+
+        // Publish an SNS notification
+        var topicArn = configuration.GetValue&lt;string&gt;("AWS:SnsTopicArn"); // Ensure this is configured in appsettings.json
+        var message = $"Calling {hero.SuperName}! They are on their way to save the day!";
+        var publishRequest = new Amazon.SimpleNotificationService.Model.PublishRequest
+        {
+            TopicArn = topicArn,
+            Message = message,
+            Subject = "Superhero Alert"
+        };
+
+        var response = await snsClient.PublishAsync(publishRequest);
+        if (response.HttpStatusCode != System.Net.HttpStatusCode.OK)
+        {
+            return StatusCode((int)response.HttpStatusCode, "Failed to send SNS notification.");
+        }
+
+        return Ok($"Calling {hero.SuperName}! They are on their way to save the day!");
+    }
+    </CodeSnippet>
+
+    <p>In the above code, we’re using the SNS client to publish a message to the SNS topic. This ensures that our superhero call is broadcasted loud and clear!</p>
+    <p>Here’s a quick recap of the AWS setup we did to make this work:</p>
+    <ul>
+        <li>Defined appsettings for AWS, including the region and the SNS topic ARN.</li>
+        <li>Set up credentials for the application. Check out the <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html" target="_blank">official AWS documentation</a> for configuring access key ID and secret access key on your local machine.</li>
+        <li>Registered the dependency for <code>IAmazonSimpleNotificationService</code>.</li>
+    </ul>
+
+    <h5>🔧 Configuring appsettings.json</h5>
+    <p>Ensure your <code>appsettings.json</code> file includes the following configuration for AWS:</p>
+    <CodeSnippet Number="2" Description="appsettings.json configuration">
+    {
+        "AWS": {
+            "Region": "us-east-1",
+            "SnsTopicArn": "arn:aws:sns:us-east-1:123456789012:dev-superhero-called"
+        }
+    }
+    </CodeSnippet>
+    <p><i>Note: To retrieve the SNS Topic ARN, create a topic in the AWS Management Console or using the AWS CLI. Refer to the <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-create-topic.html" target="_blank">AWS documentation</a> for details.</i></p>
+
+    <h4>Setting Up LocalStack for Integration Testing</h4>
+    <p>LocalStack is like having your own personal AWS cloud running locally. Below is a step-by-step guide to setting it up for integration testing in a .NET application. For more details, refer to the <a href="https://testcontainers.com/modules/localstack/" target="_blank">Testcontainers.LocalStack documentation</a>.</p>
+
+    <h5>Define the LocalStack Container</h5>
+    <p>The <code>LocalStackContainer</code> is configured using the <code>Testcontainers.LocalStack</code> library. This setup specifies the Docker image, wait strategy, and cleanup options.</p>
+
+    <CodeSnippet Number="3" Description="Building LocalStack container">
+    private readonly LocalStackContainer _localStackContainer =
+        new LocalStackBuilder()
+            .WithImage("localstack/localstack")
+            .WithWaitStrategy(Wait.ForUnixContainer().UntilMessageIsLogged("Ready."))
+            .WithCleanUp(true)
+            .WithAutoRemove(true)
+            .Build();
+    </CodeSnippet>
+
+    <h5>Start the LocalStack Container</h5>
+    <p>The container is started asynchronously in the <code>InitializeAsync</code> method to ensure it’s ready before running tests.</p>
+
+    <CodeSnippet Number="4" Description="Starting LocalStack container">
+    await _localStackContainer.StartAsync();
+    </CodeSnippet>
+
+    <h5>Create an SNS Topic</h5>
+    <p>We create an SNS topic using the <code>awslocal sns create-topic</code> command inside the LocalStack container. The output is parsed to extract the <code>TopicArn</code>.</p>
+
+    <CodeSnippet Number="5" Description="Creating SNS topic">
+    private async Task&lt;string?&gt; CreateSnsTopic()
+    {
+        var createTopicResult = await _localStackContainer.ExecAsync(
+        [
+            "awslocal", "sns", "create-topic", "--name", "dev-superhero-called"
+        ]);
+
+        var createTopicOutput = createTopicResult.Stdout;
+        var topicArn = JsonNode.Parse(createTopicOutput)?["TopicArn"]?.ToString();
+        if (string.IsNullOrEmpty(topicArn))
+        {
+            throw new InvalidOperationException("Failed to create SNS topic in LocalStack.");
+        }
+
+        return topicArn;
+    }
+    </CodeSnippet>
+
+    <h5>Expose the LocalStack Container</h5>
+    <p>The <code>LocalStackContainer</code> is exposed as a property for use in tests, allowing additional AWS CLI commands to be executed.</p>
+
+    <CodeSnippet Number="6" Description="Exposing LocalStack container object">
+    public LocalStackContainer LocalStackContainer => _localStackContainer;
+    </CodeSnippet>
+
+    <h5>Clean Up Resources</h5>
+    <p>Once the tests are done, the container is stopped and cleaned up to ensure no leftover resources.</p>
+
+    <CodeSnippet Number="7" Description="Cleaning up LocalStack container">
+    public async Task DisposeAsync()
+    {
+        await _localStackContainer.DisposeAsync();
+    }
+    </CodeSnippet>
+
+  <p>With this setup, LocalStack is ready to emulate AWS services for integration testing. By using <code>LocalStackContainer.ExecAsync</code>, you can directly execute AWS CLI commands inside the LocalStack container, making it easy to manage AWS resources like SNS topics and SQS queues during tests.</p>
+
+    <h4>LocalStack Setup in CustomApiFactory</h4>
+    <p>The <code>CustomApiFactory</code> class is responsible for configuring the test environment, including setting up LocalStack for integration testing. Below are the steps and code snippets related to LocalStack setup in this class.</p>
+
+    <h5>Replace the SNS Client with LocalStack</h5>
+    <p>The existing <code>IAmazonSimpleNotificationService</code> client is replaced with a LocalStack SNS client. This ensures that all SNS operations during tests are directed to LocalStack.</p>
+
+    <CodeSnippet Number="8" Description="Null check for snsClient">
+    builder.ConfigureServices(services =>
+    {
+        var snsClient = services.SingleOrDefault(d => d.ServiceType == typeof(IAmazonSimpleNotificationService));
+        if (snsClient != null)
+        {
+            services.Remove(snsClient);
+        }
+        services.AddSingleton(GetSnsClient(new Uri(SharedFixture.LocalStackContainer.GetConnectionString())));
+    });
+    </CodeSnippet>
+
+    <p>The <code>GetSnsClient</code> method creates an SNS client configured to use the LocalStack endpoint. This client is used for all SNS operations during tests.</p>
+
+    <CodeSnippet Number="9" Description="Method to create LocalStack SNS client">
+    private IAmazonSimpleNotificationService GetSnsClient(Uri serviceUrl)
+    {
+        var credentials = new BasicAWSCredentials("keyId", "secret");
+        var clientConfig = new AmazonSimpleNotificationServiceConfig
+        {
+            ServiceURL = serviceUrl.ToString()
+        };
+        return new AmazonSimpleNotificationServiceClient(credentials, clientConfig);
+    }
+    </CodeSnippet>
+
+    <h5>Override Application Configuration</h5>
+    <p>The SNS topic ARN created in LocalStack is injected into the application configuration. This ensures that the application uses the correct topic ARN during tests.</p>
+
+    <CodeSnippet Number="10" Description="Overriding application configuration">
+    builder.ConfigureAppConfiguration((_, configBuilder) =>
+    {
+        Console.WriteLine($"SNS topic in config {sharedFixture.SnsTopicArn}");
+        configBuilder.AddInMemoryCollection(new Dictionary&lt;string, string&gt;
+        {
+            ["SuspectServiceUrl"] = sharedFixture.SuspectServiceUrlOverride,
+            ["AWS:SnsTopicArn"] = sharedFixture.SnsTopicArn
+        }!);
+    });
+    </CodeSnippet>
+
+    <p>The <code>CustomApiFactory</code> class ensures that all SNS operations during integration tests are directed to LocalStack. By replacing the default SNS client and overriding the application configuration, it provides a seamless testing environment for AWS integrations.</p>
+
+    <h4>Finally, the Test!</h4>
+    <p>The test verifies that the <code>CallSuperHero</code> API correctly publishes a message to an SNS topic and that the message is received by an SQS queue subscribed to the topic. This test uses LocalStack to emulate AWS services.</p>
+
+    <CodeSnippet Number="11" Description="Test for CallSuperHero API">
+    [Fact(DisplayName = "CallSuperHero API raises correct SNS notification using LocalStack")]
+    public async Task CallSuperHero_Raises_Correct_SNS_Notification_Using_LocalStack()
+    {
+        // Arrange
+        var superHeroName = "Venom";
+        factory.SharedFixture.SuperHeroDbContext.SuperHero.AddRange(new List&lt;SuperHeroApiWith3rdPartyService.Data.Models.SuperHero&gt;()
+        {
+            new(5, "Venom", "Eddie Brock", "Super strength, Shape-shifting, Healing factor", "San Francisco", 35),
+        });
+        await factory.SharedFixture.SuperHeroDbContext.SaveChangesAsync();
+
+        // Create SQS queue and subscribe it to the SNS topic
+        var queueName = "superhero-called-queue";
+        var queue = await factory.SharedFixture.LocalStackContainer.ExecAsync(["awslocal", "sqs", "create-queue", "--queue-name", queueName]);
+        var queueUrl = JsonNode.Parse(queue.Stdout)!["QueueUrl"]!.ToString();
+
+        var queueAttributeResult = await factory.SharedFixture.LocalStackContainer.ExecAsync(["awslocal", "sqs", "get-queue-attributes", "--queue-url", queueUrl, "--attribute-names", "All"]);
+
+        // Extract the QueueArn from the queue attributes
+        var queueArn = JsonNode.Parse(queueAttributeResult.Stdout)!["Attributes"]!["QueueArn"]!.ToString();
+
+        // Subscribe the SQS queue to the SNS topic
+        await factory.SharedFixture.LocalStackContainer.ExecAsync(["awslocal", "sns", "subscribe", "--topic-arn", factory.SharedFixture.SnsTopicArn, "--protocol", "sqs", "--notification-endpoint", queueArn]);
+
+        // Act
+        var response = await factory.CreateClient().PostAsJsonAsync($"/SuperHero/call-superhero?superHeroName={superHeroName}", new { });
+
+        // Assert
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+        var responseMessage = await response.Content.ReadAsStringAsync();
+        responseMessage.Should().Contain($"Calling {superHeroName}! They are on their way to save the day!");
+
+        // Verify SNS message was published
+        var messages = await factory.SharedFixture.LocalStackContainer.ExecAsync(
+        [
+          "awslocal", "sqs", "receive-message", "--queue-url", queueUrl
+        ]);
+        var sqsMessages = JsonNode.Parse(messages.Stdout);
+        var message = sqsMessages!["Messages"]![0]!["Body"]!.ToString();
+        message.Should().Contain($"Calling {superHeroName}! They are on their way to save the day!");
+    }
+    </CodeSnippet>
+
+    <BlogImage ImagePath="/images/blog/integration-testing/handling-aws/passing test.png"
+                Description="Passing Test" Number="1" />
+
+    <p>This test demonstrates how to use LocalStack to verify that the <code>CallSuperHero</code> API correctly interacts with AWS SNS and SQS. By emulating AWS services locally or via test containers, the test ensures that the API behaves as expected without incurring costs or requiring access to real AWS resources.</p>
+
+    <p>If you want to explore the actual code discussed in this article, feel free to visit the GitHub repository: <a href="https://github.com/ajaysskumar/SuperHeroSolution" target="_blank">https://github.com/ajaysskumar/SuperHeroSolution</a>. It contains the complete implementation and test setup for the <code>CallSuperHero</code> API and AWS integration testing using LocalStack.</p>
+</BlogContainer>

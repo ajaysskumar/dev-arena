@@ -63,6 +63,11 @@ namespace TestArena.Blog.Common.NavigationUtils
             new DateTime(2025, 4, 19),
             "images/blog/react/module-federation/banner.png",
             ["micro-fronted", "react", "module-federation"]),
+        new("Integration testing for dotnet core APIs: Working with AWS flows",
+            "/blog/integration-testing-in-dotnet-with-aws",
+            new DateTime(2025, 5, 03),
+            "images/blog/integration-testing/handling-aws/banner.png",
+            ["Integration Testing", "Localstack", "AWS"]),
         ];
     }
 
