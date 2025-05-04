@@ -29,13 +29,13 @@
 <link rel="icon" type="image/png" href="favicon.png"/>
 <link href="TestArena.styles.css" rel="stylesheet"/>
 
-<!--Blazor:{"type":"webassembly","prerenderId":"f3b75e0002a7429fba9cc49e9aa93873","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><!--Blazor:{"prerenderId":"f3b75e0002a7429fba9cc49e9aa93873"}-->
+<!--Blazor:{"type":"webassembly","prerenderId":"6bd2d0fe87874e9da6d8d80069c8c8a1","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><!--Blazor:{"prerenderId":"6bd2d0fe87874e9da6d8d80069c8c8a1"}-->
 </head>
 
 <body>
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"2b836f2415d44765b3a059afcc2ca082","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"658dc8a503f24319acfa6b059dc3b1d6","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -87,6 +87,8 @@
 
     <h6>Challenges in testing cloud integrations</h6>
     <p>Here’s the twist: while using AWS services like SNS, SQS, S3, or SES is straightforward with the SDK, how do we ensure that our messages actually reach AWS? It’s not just about calling the right method with the right input; it’s about verifying that AWS receives and processes our requests correctly.</p>
+
+    <p>Another challenge is the cost associated with testing on real AWS infrastructure. Running integration tests frequently on live AWS services can quickly add up, especially when dealing with high volumes of requests or multiple environments. This is where tools like LocalStack come in handy, allowing us to emulate AWS services locally and avoid unnecessary expenses.</p>
 
     <h6>Lets dive into the article</h6>
     <p>To make this more fun, imagine we’ve built an API called <code>call-superhero</code>. This API takes a superhero’s name as a parameter and sends an SNS notification, hoping that the superhero hears the call and springs into action!</p>
@@ -140,7 +142,40 @@
     <p><i>Note: To retrieve the SNS Topic ARN, create a topic in the AWS Management Console or using the AWS CLI. Refer to the <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-create-topic.html" target="_blank">AWS documentation</a> for details.</i></p>
 
     <h4>Setting Up LocalStack for Integration Testing</h4>
+    <p>For more information, visit the official LocalStack website: <a href="https://localstack.cloud/" target="_blank">https://localstack.cloud/</a>.</p>
     <p>LocalStack is like having your own personal AWS cloud running locally. Below is a step-by-step guide to setting it up for integration testing in a .NET application. For more details, refer to the <a href="https://testcontainers.com/modules/localstack/" target="_blank">Testcontainers.LocalStack documentation</a>.</p>
+
+  
+  <div class="small-table"><h6>A quick glance on using localstack for testing vs using real AWS resources</h6>
+    <table class="table table-bordered table-striped"><thead class="thead-light"><tr><th>Aspect</th>
+          <th>LocalStack</th>
+          <th>Real AWS</th></tr></thead>
+      <tbody><tr><td>Cost</td>
+          <td>✅ Free or minimal cost for local testing.</td>
+          <td>❌ Can be expensive, especially for high-frequency testing.</td></tr>
+        <tr><td>Speed</td>
+          <td>✅ Faster as it runs locally without network latency.</td>
+          <td>❌ Slower due to network calls and AWS service response times.</td></tr>
+        <tr><td>Environment</td>
+          <td>✅ Runs locally, no dependency on internet or AWS account.</td>
+          <td>❌ Requires internet and a valid AWS account.</td></tr>
+        <tr><td>Feature Coverage</td>
+          <td>❌ Supports many AWS services but may lack full feature parity.</td>
+          <td>✅ Complete feature set and latest updates.</td></tr>
+        <tr><td>Realism</td>
+          <td>❌ Simulates AWS services but may not perfectly replicate behavior.</td>
+          <td>✅ Provides real-world behavior and interactions.</td></tr>
+        <tr><td>Setup Complexity</td>
+          <td>✅ Can be quickly spinned up using docker or local setup</td>
+          <td>❌ Requires AWS credentials and service configuration.</td></tr>
+        <tr><td>Scalability Testing</td>
+          <td>❌ Limited to local machine resources.</td>
+          <td>✅ Can test real-world scalability and performance.</td></tr>
+        <tr><td>Debugging</td>
+          <td>✅ Easier to debug locally with full control over the environment.</td>
+          <td>❌ Harder to debug due to remote infrastructure.</td></tr></tbody></table></div>
+
+  <p class="tip">💡 LocalStack isn't just for testing; it also speeds up development by emulating AWS locally, reducing costs and dependency on internet connectivity while ensuring AWS API compatibility.</p>
 
     <h5>Define the LocalStack Container</h5>
     <p>The <code>LocalStackContainer</code> is configured using the <code>Testcontainers.LocalStack</code> library. This setup specifies the Docker image, wait strategy, and cleanup options.</p>
@@ -381,9 +416,9 @@
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-        <!--Blazor:{"prerenderId":"2b836f2415d44765b3a059afcc2ca082"}-->
+        <!--Blazor:{"prerenderId":"658dc8a503f24319acfa6b059dc3b1d6"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80VUdOdVpEZDRMV1UzUWtKMGRVNVNhMWRMZVc5aVRXUk5RVU13TVVoMVUwWmxObE5hVFMxdVRtMDJlSFozZGtwd2EyUmhXa0l4U0ZwSlJ6SnRZMjlWTm5Cb1VYcEpNelZHYm5WQk1sOW9SMlk1ZEV4SGFsQmtjRXRhTlc1VmJHZDBla3A2YTJFMFNrUnNXblZZUzFOMFVFNXNiSG96T1VvMWMxWnplVEl3VWpBNVVsaFVRV3RuV0dsdFZsTk1ZMWx2YVhsRE5WOXZJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UkdScE1FdFdSa2xWUmxCeGFHMURjMGh4VUY5UVpWSXdTMnBRYXpWWFJsUjZlV05UUmpkR2JuQnRXWHBDWjFsNFpFUjVSMWgzUVhSdFIzZGpTV1kxT0VZd1NXeG5ObWRyZGxkZlFqSllhSHBXVUdZMVdtaFlUamd3ZDNsM2NGSldWR3QyUXprd05qaDVjR3d4T1RWdGFWbGZaSEp1TVRWTVFVOVZhMjFMUWtSSFZUQnRPRXhSVlRCTmVHeFdiRkJQVmsxUlJFNDRJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
