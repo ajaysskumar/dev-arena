@@ -3,7 +3,7 @@
 @using TestArena.Blog.Common.NavigationUtils
 
 @code{
-    PageInfo currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/integration-testing-in-dotnet-with-aws");
+    PageInfo currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/integration-testing-in-dotnet-with-aws")!;
 }
 
 <BlogContainer>
@@ -23,6 +23,8 @@
 
     <h6>Challenges in testing cloud integrations</h6>
     <p>Here’s the twist: while using AWS services like SNS, SQS, S3, or SES is straightforward with the SDK, how do we ensure that our messages actually reach AWS? It’s not just about calling the right method with the right input; it’s about verifying that AWS receives and processes our requests correctly.</p>
+
+    <p>Another challenge is the cost associated with testing on real AWS infrastructure. Running integration tests frequently on live AWS services can quickly add up, especially when dealing with high volumes of requests or multiple environments. This is where tools like LocalStack come in handy, allowing us to emulate AWS services locally and avoid unnecessary expenses.</p>
 
     <h6>Lets dive into the article</h6>
     <p>To make this more fun, imagine we’ve built an API called <code>call-superhero</code>. This API takes a superhero’s name as a parameter and sends an SNS notification, hoping that the superhero hears the call and springs into action!</p>
@@ -76,7 +78,66 @@
     <p><i>Note: To retrieve the SNS Topic ARN, create a topic in the AWS Management Console or using the AWS CLI. Refer to the <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-create-topic.html" target="_blank">AWS documentation</a> for details.</i></p>
 
     <h4>Setting Up LocalStack for Integration Testing</h4>
+    <p>For more information, visit the official LocalStack website: <a href="https://localstack.cloud/" target="_blank">https://localstack.cloud/</a>.</p>
     <p>LocalStack is like having your own personal AWS cloud running locally. Below is a step-by-step guide to setting it up for integration testing in a .NET application. For more details, refer to the <a href="https://testcontainers.com/modules/localstack/" target="_blank">Testcontainers.LocalStack documentation</a>.</p>
+
+  
+  <div class="small-table">
+    <h6>A quick glance on using localstack for testing vs using real AWS resources</h6>
+    <table class="table table-bordered table-striped">
+      <thead class="thead-light">
+        <tr>
+          <th>Aspect</th>
+          <th>LocalStack</th>
+          <th>Real AWS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Cost</td>
+          <td>✅ Free or minimal cost for local testing.</td>
+          <td>❌ Can be expensive, especially for high-frequency testing.</td>
+        </tr>
+        <tr>
+          <td>Speed</td>
+          <td>✅ Faster as it runs locally without network latency.</td>
+          <td>❌ Slower due to network calls and AWS service response times.</td>
+        </tr>
+        <tr>
+          <td>Environment</td>
+          <td>✅ Runs locally, no dependency on internet or AWS account.</td>
+          <td>❌ Requires internet and a valid AWS account.</td>
+        </tr>
+        <tr>
+          <td>Feature Coverage</td>
+          <td>❌ Supports many AWS services but may lack full feature parity.</td>
+          <td>✅ Complete feature set and latest updates.</td>
+        </tr>
+        <tr>
+          <td>Realism</td>
+          <td>❌ Simulates AWS services but may not perfectly replicate behavior.</td>
+          <td>✅ Provides real-world behavior and interactions.</td>
+        </tr>
+        <tr>
+          <td>Setup Complexity</td>
+          <td>✅ Can be quickly spinned up using docker or local setup</td>
+          <td>❌ Requires AWS credentials and service configuration.</td>
+        </tr>
+        <tr>
+          <td>Scalability Testing</td>
+          <td>❌ Limited to local machine resources.</td>
+          <td>✅ Can test real-world scalability and performance.</td>
+        </tr>
+        <tr>
+          <td>Debugging</td>
+          <td>✅ Easier to debug locally with full control over the environment.</td>
+          <td>❌ Harder to debug due to remote infrastructure.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="tip">💡 LocalStack isn't just for testing; it also speeds up development by emulating AWS locally, reducing costs and dependency on internet connectivity while ensuring AWS API compatibility.</p>
 
     <h5>Define the LocalStack Container</h5>
     <p>The <code>LocalStackContainer</code> is configured using the <code>Testcontainers.LocalStack</code> library. This setup specifies the Docker image, wait strategy, and cleanup options.</p>
