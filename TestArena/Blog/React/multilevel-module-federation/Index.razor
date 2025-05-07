@@ -3,15 +3,15 @@
 @using TestArena.Blog.Common
 @inject HttpClient Http
 
-<h1>Markdown File Renderer</h1>
-
 @if (string.IsNullOrEmpty(MarkdownContent))
 {
     <p>Loading...</p>
 }
 else
 {
-    <MarkdownRenderer MarkdownContent="@MarkdownContent" />
+    <BlogContainer>
+        <MarkdownRenderer MarkdownContent="@MarkdownContent" />
+    </BlogContainer>
 }
 
 @code {
