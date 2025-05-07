@@ -1,0 +1,17 @@
+@using Markdig
+@code {
+    [Parameter, EditorRequired] public string MarkdownContent { get; set; } = string.Empty;
+
+    private MarkupString RenderedHtml => (MarkupString)Markdown.ToHtml(MarkdownContent);
+}
+
+<div class="markdown-content">
+    @RenderedHtml
+</div>
+
+<style>
+    .markdown-content {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+</style>
