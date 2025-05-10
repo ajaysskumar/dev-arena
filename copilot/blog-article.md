@@ -10,4 +10,5 @@ If Topic is a tech topic then focus should be more on the tech side of things e.
 Use a small relatable/real world problem/analogy to drive the narration of the article.
 Analogy should simple enough to reach wider audience.
 For code samle use <Root>/TestArena/Blog/Common/CodeSnippet.razor component. Refer the usage pattern from the ReferenceFile.
+Add entry for the article #file:sitemap.xml
 At the end, leave a summary.
