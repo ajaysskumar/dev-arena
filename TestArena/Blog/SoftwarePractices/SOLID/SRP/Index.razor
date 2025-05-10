@@ -157,12 +157,41 @@ public interface IInvoiceService
         </p>
     </Section>
 
-    <Section Heading="⚠️ Common Pitfalls (and How to Dodge Them)" Level="3">
+    <Section Heading="🏗️ SRP in Larger Systems: Microservices & Layered Architectures" Level="3">
+        <p>
+            SRP isn’t just for small classes—it’s a guiding light for designing larger systems too. In a <b>layered architecture</b>, for example, you’ll often see clear separations: controllers handle HTTP requests, services contain business logic, and repositories manage data access. Each layer has its own responsibility, making the system easier to maintain and scale.
+        </p>
+        <p>
+            In <b>microservices</b>, SRP helps define service boundaries. Each microservice should focus on a single business capability. This makes services easier to deploy, test, and evolve independently—just like SRP does for classes.
+        </p>
+    </Section>
+
+    <Section Heading="🚩 Common Pitfalls (and How to Dodge Them)" Level="3">
         <ul>
             <li><b>God classes:</b> If a class has "Manager", "Processor", or "Helper" in its name and does too much, break it up.</li>
             <li><b>Feature creep:</b> Resist the urge to add unrelated features to existing classes. It’s tempting, but it’ll bite you later.</li>
             <li><b>Premature abstraction:</b> Don’t over-engineer. Split responsibilities when it makes sense, not just for the sake of it.</li>
+            <li><b>Misidentifying responsibilities:</b> Sometimes, it’s tricky to decide what counts as a single responsibility. If you find yourself changing a class for multiple unrelated reasons, it’s time to refactor.</li>
+            <li><b>Over-splitting:</b> Don’t create a new class for every method. Group related behaviors that change for the same reason.</li>
         </ul>
+        <p>
+            <b>Pro tip:</b> When in doubt, ask: “If I change this, what else will break?” If the answer is “lots of things,” SRP can help!
+        </p>
+    </Section>
+
+    <Section Heading="🔗 SRP and the Other SOLID Principles" Level="3">
+        <p>
+            SRP is the foundation of SOLID, but it works best when combined with the other principles:
+        </p>
+        <ul>
+            <li><b>Open/Closed Principle:</b> SRP makes it easier to extend classes without modifying them, since each class has a clear job.</li>
+            <li><b>Liskov Substitution Principle:</b> When classes have a single responsibility, it’s easier to substitute them without surprises.</li>
+            <li><b>Interface Segregation Principle:</b> SRP encourages small, focused interfaces that do one thing well.</li>
+            <li><b>Dependency Inversion Principle:</b> SRP helps you define clear abstractions, making it easier to depend on interfaces rather than concrete implementations.</li>
+        </ul>
+        <p>
+            Mastering SRP sets you up for success with the rest of SOLID!
+        </p>
     </Section>
 
     <Section Heading="📝 Wrapping Up: Why SRP Makes Life Easier" Level="3">
