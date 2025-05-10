@@ -72,7 +72,7 @@ namespace TestArena.Blog.Common.NavigationUtils
             "/blog/software-practices/solid/single-responsibility-principle",
             new DateTime(2025, 5, 10),
             "images/blog/software-practices/solid/srp/banner.png",
-            ["Software Practices", "SOLID", "SRP"], false),
+            ["Software Practices", "SOLID", "SRP"]),
         ];
     }
 
