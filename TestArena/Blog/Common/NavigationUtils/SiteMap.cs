@@ -68,6 +68,11 @@ namespace TestArena.Blog.Common.NavigationUtils
             new DateTime(2025, 5, 03),
             "images/blog/integration-testing/handling-aws/banner.png",
             ["Integration Testing", "Localstack", "AWS"]),
+        new("Understanding the Single Responsibility Principle",
+            "/blog/software-practices-solid-srp",
+            new DateTime(2025, 5, 10),
+            "images/blog/software-practices/solid-srp/banner.png",
+            ["Software Practices", "SOLID", "SRP"], false),
         ];
     }
 

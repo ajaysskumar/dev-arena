@@ -1,0 +1,158 @@
+@page "/blog/software-practices-solid-srp"
+@using TestArena.Blog.Common
+@using TestArena.Blog.Common.NavigationUtils
+
+@code{
+    PageInfo currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/software-practices-solid-srp")!;
+}
+
+<BlogContainer>
+    <Header Title="@currentPage.Header"
+            Image="@currentPage.ArticleImage" PublishedOn="@currentPage.PublishedOn" Authors="Ajay Kumar">
+    </Header>
+
+    <Section Heading="What is the Single Responsibility Principle (SRP)?" Level="3">
+        <p>
+            Imagine you own a Swiss Army knife. It has a blade, a screwdriver, a can opener, and more—all in one tool. While it’s handy, if the blade gets dull or the screwdriver breaks, fixing just one part can be tricky. Now, imagine you have separate, specialized tools: a sharp knife, a sturdy screwdriver, and a reliable can opener. Each does one job, and does it well. This is the essence of the <b>Single Responsibility Principle (SRP)</b> in software design.
+        </p>
+        <p>
+            SRP is the first of the five SOLID principles. It states: <b>"A class should have only one reason to change."</b> In other words, every module, class, or function in your code should focus on a single responsibility or job.
+        </p>
+    </Section>
+
+    <Section Heading="Why is SRP Useful?" Level="3">
+        <p>
+            When a class or function has more than one responsibility, changes in one area can unintentionally affect others. This leads to code that is:
+        </p>
+        <ul>
+            <li><b>Hard to maintain:</b> Fixing a bug or adding a feature can break something unrelated.</li>
+            <li><b>Difficult to test:</b> Testing one responsibility may require setting up unrelated parts.</li>
+            <li><b>Challenging to reuse:</b> You can’t easily use just the part you need.</li>
+        </ul>
+        <p>
+            By following SRP, you make your codebase easier to understand, maintain, and extend. Teams can work on different features without stepping on each other’s toes.
+        </p>
+    </Section>
+
+    <Section Heading="When Should You Apply SRP?" Level="3">
+        <p>
+            SRP is most valuable when your codebase starts to grow or when you notice classes doing too much. Signs you need SRP include:
+        </p>
+        <ul>
+            <li>Classes with names like <code>UserManager</code> that handle user data, authentication, and notifications all at once.</li>
+            <li>Methods that are hundreds of lines long, juggling unrelated tasks.</li>
+            <li>Frequent changes to a class for different reasons (e.g., business logic and UI updates).</li>
+        </ul>
+        <p>
+            Apply SRP early in design, but don’t be afraid to refactor as your understanding of the domain grows.
+        </p>
+    </Section>
+
+    <Section Heading="How to Apply SRP in C#" Level="3">
+        <p>
+            Let’s look at a real-world example. Suppose you have a <code>User</code> class that handles both user data and sending emails:
+        </p>
+        <CodeSnippet Number="1" Language="csharp" Description="A class violating SRP">
+public class User
+{
+    public string Name { get; set; }
+    public string Email { get; set; }
+
+    public void ChangePassword(string newPassword)
+    {
+        // Change password logic
+    }
+
+    public void SendWelcomeEmail()
+    {
+        // Email sending logic
+    }
+}
+        </CodeSnippet>
+        <p>
+            Here, <code>User</code> is responsible for both managing user data and sending emails. If the way you send emails changes (e.g., using a different service), you must modify this class—even though user data logic hasn’t changed.
+        </p>
+        <p>
+            Let’s refactor using SRP:
+        </p>
+        <CodeSnippet Number="2" Language="csharp" Description="SRP-compliant design">
+public class User
+{
+    public string Name { get; set; }
+    public string Email { get; set; }
+
+    public void ChangePassword(string newPassword)
+    {
+        // Change password logic
+    }
+}
+
+public class EmailService
+{
+    public void SendWelcomeEmail(User user)
+    {
+        // Email sending logic
+    }
+}
+        </CodeSnippet>
+        <p>
+            Now, <code>User</code> only manages user data, and <code>EmailService</code> handles emails. Each class has a single responsibility and can change independently.
+        </p>
+        <p>
+            <b>Note:</b> SRP does not mean every method must be in a separate class. Methods that are closely related and change for the same reason (like user data methods) should remain together. SRP is about grouping by reason to change, not splitting everything apart.
+        </p>
+    </Section>
+
+    <Section Heading="SRP in Practice: Real-World Scenarios" Level="3">
+        <p>
+            SRP isn’t just for classes. It applies to methods, modules, and even microservices. Here are some practical tips:
+        </p>
+        <ul>
+            <li><b>Controllers in ASP.NET:</b> Keep them thin. Move business logic to services.</li>
+            <li><b>Services:</b> Each service should do one thing (e.g., <code>EmailService</code> only sends emails).</li>
+            <li><b>UI Components:</b> A component should focus on a single part of the UI.</li>
+        </ul>
+        <p>
+            Here’s a quick example of splitting responsibilities in an ASP.NET Core controller:
+        </p>
+        <CodeSnippet Number="3" Language="csharp" Description="Thin controller, separate service">
+public class InvoiceController : ControllerBase
+{
+    private readonly IInvoiceService _invoiceService;
+    public InvoiceController(IInvoiceService invoiceService)
+    {
+        _invoiceService = invoiceService;
+    }
+
+    [HttpPost]
+    public IActionResult CreateInvoice(InvoiceDto dto)
+    {
+        var invoice = _invoiceService.Create(dto);
+        return Ok(invoice);
+    }
+}
+
+public interface IInvoiceService
+{
+    Invoice Create(InvoiceDto dto);
+}
+        </CodeSnippet>
+        <p>
+            The controller delegates business logic to <code>IInvoiceService</code>, keeping each class focused and testable.
+        </p>
+    </Section>
+
+    <Section Heading="Common Pitfalls and How to Avoid Them" Level="3">
+        <ul>
+            <li><b>God classes:</b> If a class has "Manager", "Processor", or "Helper" in its name and does too much, break it up.</li>
+            <li><b>Feature creep:</b> Resist the urge to add unrelated features to existing classes.</li>
+            <li><b>Premature abstraction:</b> Don’t over-engineer. Split responsibilities when it makes sense.</li>
+        </ul>
+    </Section>
+
+    <Section Heading="Summary" Level="3">
+        <p>
+            The Single Responsibility Principle is about focus. Like using the right tool for the job, SRP helps you build software that’s easier to maintain, test, and extend. Start small, refactor when needed, and your codebase will thank you.
+        </p>
+    </Section>
+</BlogContainer>
