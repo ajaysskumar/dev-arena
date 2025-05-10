@@ -16,6 +16,7 @@ Use the body to explain what and why you have done something. In most cases, you
 In the body, use bullet points to describe everything.
 Avoid vague terms like "update", "enhance", "improve", or "better".
 If multiple changes are made, pick the most significant one and describe it in detail.
+Take extra caution in identifying rename file and content edit
 Message length is maximum 250 characters.
 gitmojis:
 
@@ -29,4 +30,4 @@ gitmojis:
 ✅: Add, update, or pass tests.
 🔒️: Fix security issues.
 ♻️: Refactor code.
-✏️: Rename or Move files.
+✏️: Update file content or enhance content or append content
