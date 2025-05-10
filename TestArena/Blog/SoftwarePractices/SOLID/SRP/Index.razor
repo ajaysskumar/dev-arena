@@ -95,6 +95,11 @@ public class EmailService
     }
 }
         </CodeSnippet>
+        <CalloutBox Type="tip" Title="Do all methods need their own class?">
+            <p>
+            Not at all! SRP groups related methods that change for the same reason. For instance, user data methods like <code>ChangePassword</code> and <code>UpdateProfile</code> belong in the <code>User</code> class. Only move methods, like email sending, to a separate class if they have a different reason to change.
+            </p>
+        </CalloutBox>
         <p>
             Now, <code>User</code> only manages user data, and <code>EmailService</code> handles emails. Each class has a single responsibility and can change independently.
         </p>
