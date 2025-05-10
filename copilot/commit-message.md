@@ -9,11 +9,10 @@ Write a summary in the imperative, no wider than 50 characters.
 Separate summary from body with a blank line.
 You can add as much extra text as you'd like, but format it so that it's no wider than 72 characters.
 There will be less friction if you follow the 50/72 rule.
-Write the summary in the imperative mood.
 Follow past tense in writing commit messages.
 Apart from the summary,focus on explaining why a change was made, since what constitutes the change is already visible via Git’s diff view.
-Use the body to explain what and why you have done something. In most cases, you can leave out details about how a change has been made.
-In the body, use bullet points to describe everything.
+Very important. Use the body to explain what and why you have done something. In most cases, you can leave out details about how a change has been made.
+In the body, use bullet points to describe everything. Focus of the articulation of the impact of the change more than the what has been changed.
 Avoid vague terms like "update", "enhance", "improve", or "better".
 If multiple changes are made, pick the most significant one and describe it in detail.
 Take extra caution in identifying rename file and content edit
