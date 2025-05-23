@@ -1,0 +1,135 @@
+@page "/blog/software-practices/solid/open-close-principle"
+@using TestArena.Blog.Common
+@using TestArena.Blog.Common.NavigationUtils
+
+@code{
+    PageInfo currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/software-practices/solid/open-close-principle")!;
+}
+
+<BlogContainer>
+    <Header Title="@currentPage.Header"
+            Image="@currentPage.ArticleImage" PublishedOn="@currentPage.PublishedOn" Authors="Ajay Kumar">
+    </Header>
+
+    <Section Heading="🔍 What is the Open/Closed Principle (OCP)?" Level="3">
+        <p>
+            Imagine you own a pizza shop. Every time a customer wants a new topping, you have to rewrite your entire menu and retrain your staff. Sounds exhausting, right? Wouldn’t it be better if you could just add new toppings without changing how your kitchen works? That’s the essence of the <b>Open/Closed Principle (OCP)</b> in software design.
+        </p>
+        <p>
+            OCP is the second of the five SOLID principles. In simple terms: <b>“Software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification.”</b> This means you should be able to add new features or behaviors without changing existing code.
+        </p>
+    </Section>
+
+    <Section Heading="💡 Why is OCP Useful?" Level="3">
+        <p>
+            Let’s go back to our pizza shop analogy. If you keep changing your kitchen’s workflow every time you add a topping, mistakes will happen, and your staff will get confused. In code, constantly modifying existing classes can introduce bugs and make maintenance a nightmare. OCP helps you:
+        </p>
+        <ul>
+            <li><b>Reduce bugs:</b> By not touching tested code, you avoid breaking things that already work.</li>
+            <li><b>Encourage reuse:</b> You can add new features by building on top of what’s already there.</li>
+            <li><b>Make maintenance easier:</b> Extensions are isolated, so changes are less risky.</li>
+        </ul>
+    </Section>
+
+    <Section Heading="🕒 When Should You Apply OCP?" Level="3">
+        <p>
+            OCP is most valuable when your application needs to adapt to new requirements frequently. Watch for these signs:
+        </p>
+        <ul>
+            <li>Business rules change often, and you need to add new behaviors regularly.</li>
+            <li>You want to support plugins or modules without rewriting core logic.</li>
+            <li>Multiple teams work on different features that extend the same base functionality.</li>
+        </ul>
+    </Section>
+
+    <Section Heading="🛠️ How to Implement OCP in C#?" Level="3">
+        <p>
+            Let’s get practical. Imagine you’re building a notification system. Initially, you only send emails, but soon you need to support SMS and push notifications. Here’s a class that violates OCP:
+        </p>
+        <CodeSnippet Number="1" Language="csharp" Description="A class violating OCP (too many reasons to change)">
+public class NotificationService
+{
+    public void Send(string message, string type)
+    {
+        if (type == "email")
+        {
+            // send email
+        }
+        else if (type == "sms")
+        {
+            // send SMS
+        }
+        // ...more types
+    }
+}
+        </CodeSnippet>
+        <p>
+            Every time you add a new notification type, you must modify <code>NotificationService</code>. This violates OCP.
+        </p>
+        <p>
+            Here’s how you can refactor with OCP in mind:
+        </p>
+        <CodeSnippet Number="2" Language="csharp" Description="OCP-compliant design: open for extension, closed for modification">
+public interface INotificationSender
+{
+    void Send(string message);
+}
+
+public class EmailSender : INotificationSender
+{
+    public void Send(string message)
+    {
+        // send email
+    }
+}
+
+public class SmsSender : INotificationSender
+{
+    public void Send(string message)
+    {
+        // send SMS
+    }
+}
+
+public class NotificationService
+{
+    private readonly List&lt;INotificationSender&gt; _senders;
+    public NotificationService(List&lt;INotificationSender&gt; senders)
+    {
+        _senders = senders;
+    }
+    public void SendAll(string message)
+    {
+        foreach (var sender in _senders)
+        {
+            sender.Send(message);
+        }
+    }
+}
+        </CodeSnippet>
+        <CalloutBox Type="tip" Title="How does this help?">
+            <p>
+            Now, to add a new notification type (like push notifications), you just implement <code>INotificationSender</code>—no changes to <code>NotificationService</code> needed! This keeps your codebase stable and easy to extend.
+            </p>
+        </CalloutBox>
+    </Section>
+
+    <Section Heading="🌍 Real-World Analogy" Level="3">
+        <p>
+            Think of OCP like adding new apps to your smartphone. You don’t have to change the phone’s operating system every time you want a new feature—you just install an app. The OS is closed for modification but open for extension.
+        </p>
+    </Section>
+
+    <Section Heading="🚦 Common Pitfalls and How to Avoid Them" Level="3">
+        <ul>
+            <li><b>Overengineering:</b> Don’t create abstractions for everything. Use OCP when you expect changes or extensions.</li>
+            <li><b>Leaky abstractions:</b> Make sure your interfaces are meaningful and not just placeholders.</li>
+        </ul>
+    </Section>
+
+    <Section Heading="🔗 Summary" Level="3">
+        <p>
+            The Open/Closed Principle helps you build flexible, maintainable, and robust software. By designing your code to be open for extension but closed for modification, you can adapt to new requirements with confidence and less risk.
+        </p>
+    </Section>
+</BlogContainer>

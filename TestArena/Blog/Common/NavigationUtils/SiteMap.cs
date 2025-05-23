@@ -73,6 +73,12 @@ namespace TestArena.Blog.Common.NavigationUtils
             new DateTime(2025, 5, 10),
             "images/blog/software-practices/solid/srp/banner.png",
             ["Software Practices", "SOLID", "SRP"]),
+
+        new("SOLID Principles: Understanding the Open/Closed Principle",
+            "/blog/software-practices/solid/open-close-principle",
+            new DateTime(2025, 5, 23),
+            "images/blog/software-practices/solid/ocp/banner.png",
+            ["Software Practices", "SOLID", "OCP"]),
         ];
     }
 
