@@ -28,7 +28,7 @@
         }
         else
         {
-            FilteredPages = SiteMap.Pages
+            FilteredPages = SiteMap.PublishedArticles
                 .Where(page => page.Header.Contains(SearchText, StringComparison.OrdinalIgnoreCase) && page.IsPublished)
                 .ToList();
         }

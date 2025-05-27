@@ -11,7 +11,7 @@
 <div class="row row-cols-1 row-cols-md-3 g-4 p-2">
 
     @{
-        foreach (var articlePage in SiteMap.Pages
+        foreach (var articlePage in SiteMap.PublishedArticles
                      .Where(x => (Tag is null || x.Tags.Contains(Tag))
                                  && x.IsPublished)
                      .OrderByDescending(x => x.PublishedOn)

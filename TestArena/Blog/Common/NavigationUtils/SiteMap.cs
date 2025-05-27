@@ -79,7 +79,15 @@ namespace TestArena.Blog.Common.NavigationUtils
             new DateTime(2025, 5, 23),
             "images/blog/software-practices/solid/ocp/banner.png",
             ["Software Practices", "SOLID", "OCP"]),
+
+        new("SOLID Principles: Understanding the Liskov Substitution Principle",
+            "/blog/software-practices/solid/liskov-substitution-principle",
+            new DateTime(2025, 6, 1),
+            "images/blog/software-practices/solid/lsp/banner.png",
+            ["Software Practices", "SOLID", "LSP"])
         ];
+
+        public static IEnumerable<PageInfo> PublishedArticles => Pages.Where(p => p.IsPublished && p.PublishedOn <= DateTime.UtcNow);
     }
 
     public class PageInfo(string header, string relativePath, DateTime publishedOn, string articleImage, List<string> tags, bool isPublished = true)
@@ -89,7 +97,6 @@ namespace TestArena.Blog.Common.NavigationUtils
         public List<string> Tags { get; } = tags;
         public DateTime PublishedOn { get; } = publishedOn;
         public string ArticleImage { get; } = articleImage;
-
         public bool IsPublished { get; set; } = isPublished;
     }
 }

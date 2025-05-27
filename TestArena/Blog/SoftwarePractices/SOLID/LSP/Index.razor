@@ -1,0 +1,185 @@
+@page "/blog/software-practices/solid/liskov-substitution-principle"
+@using TestArena.Blog.Common
+@using TestArena.Blog.Common.NavigationUtils
+
+@code{
+    PageInfo currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/software-practices/solid/liskov-substitution-principle")!;
+}
+
+<BlogContainer>
+    <Header Title="@currentPage.Header"
+            Image="@currentPage.ArticleImage" PublishedOn="@currentPage.PublishedOn" Authors="Ajay Kumar">
+    </Header>
+
+    <!-- Article content will be added here following the What, When, How format and using CodeSnippet, Section, and CalloutBox components. -->
+    <Section Heading="🔍 What is the Liskov Substitution Principle (LSP)?" Level="3">
+        <p>
+            Imagine you have a universal remote at home. It works perfectly with your TV, but when you try it with your new soundbar, some buttons do the wrong thing—or nothing at all! Frustrating, right? In software, the <b>Liskov Substitution Principle (LSP)</b> is about making sure that when you swap one part (like a remote or a class) for another, everything still works as expected.
+        </p>
+        <p>
+            LSP is the third of the five SOLID principles. In simple terms: <b>"Objects of a superclass should be replaceable with objects of a subclass without breaking the application."</b> That means if you have code that works with a base class, it should work just as well with any derived class.
+        </p>
+    </Section>
+
+    <Section Heading="💡 Why is LSP Important?" Level="3">
+        <p>
+            Violating LSP leads to code that’s hard to maintain, test, and extend. If a subclass can’t be used in place of its parent, you’ll end up with bugs, unexpected behavior, and lots of <code>if</code> statements to handle exceptions. Here’s why LSP matters:
+        </p>
+        <ul>
+            <li><b>Predictability:</b> You can trust that subclasses won’t break your code.</li>
+            <li><b>Reusability:</b> Components can be swapped easily, making your codebase flexible.</li>
+            <li><b>Maintainability:</b> Fewer surprises mean easier debugging and refactoring.</li>
+        </ul>
+        <p>
+            LSP helps you build robust, future-proof systems where new features don’t break old ones.
+        </p>
+    </Section>
+
+    <Section Heading="🕒 When Does LSP Matter Most?" Level="3">
+        <p>
+            LSP is crucial when you use inheritance or interfaces. Watch for these red flags 🚩:
+        </p>
+        <ul>
+            <li>Subclasses override methods and change expected behavior.</li>
+            <li>Code using a base class needs to check the actual type before calling methods.</li>
+            <li>Unit tests for subclasses look very different from those for the base class.</li>
+        </ul>
+        <p>
+            The earlier you spot these, the easier it is to fix. LSP is your guide to safe inheritance!
+        </p>
+    </Section>
+
+    <Section Heading="🛠️ How Do You Apply LSP in C#?" Level="3">
+        <p>
+            Let’s get practical. Suppose you have a <code>Rectangle</code> class and a <code>Square</code> class that inherits from it:
+        </p>
+        <CodeSnippet Number="1" Language="csharp" Description="A classic LSP violation: Square inherits Rectangle">
+public class Rectangle
+{
+    public virtual int Width { get; set; }
+    public virtual int Height { get; set; }
+    public int Area() => Width * Height;
+}
+
+public class Square : Rectangle
+{
+    public override int Width
+    {
+        get => base.Width;
+        set { base.Width = value; base.Height = value; }
+    }
+    public override int Height
+    {
+        get => base.Height;
+        set { base.Width = value; base.Height = value; }
+    }
+}
+        </CodeSnippet>
+        <p>
+            Here, <code>Square</code> tries to force both sides to be equal. But if you use a <code>Square</code> where a <code>Rectangle</code> is expected, you get weird results:
+        </p>
+        <CodeSnippet Number="2" Language="csharp" Description="Unexpected behavior when substituting Square for Rectangle">
+Rectangle rect = new Square();
+rect.Width = 5;
+rect.Height = 10;
+Console.WriteLine(rect.Area()); // Output: 100, but you expected 50!
+        </CodeSnippet>
+        <p>
+            This breaks LSP. The <code>Square</code> class can’t be used everywhere a <code>Rectangle</code> is expected without causing bugs.
+        </p>
+        <p>
+            <b>How to fix it?</b> Prefer composition over inheritance when the relationship isn’t truly "is-a". Here’s a better approach:
+        </p>
+        <CodeSnippet Number="3" Language="csharp" Description="LSP-compliant design: separate classes">
+public interface IShape
+{
+    int Area();
+}
+
+public class Rectangle : IShape
+{
+    public int Width { get; set; }
+    public int Height { get; set; }
+    public int Area() => Width * Height;
+}
+
+public class Square : IShape
+{
+    public int Side { get; set; }
+    public int Area() => Side * Side;
+}
+        </CodeSnippet>
+        <CalloutBox Type="tip" Title="Is inheritance always bad?">
+            <p>
+            Not at all! Inheritance is powerful when used for true "is-a" relationships. LSP helps you decide when inheritance makes sense. If a subclass can’t stand in for its parent without surprises, consider using interfaces or composition instead.
+            </p>
+        </CalloutBox>
+        <p>
+            Now, <code>Rectangle</code> and <code>Square</code> both implement <code>IShape</code>, and you can use them interchangeably without breaking expectations.
+        </p>
+    </Section>
+
+    <Section Heading="🌍 LSP in the Real World: Practical Scenarios" Level="3">
+        <p>
+            LSP isn’t just for shapes! It applies to services, controllers, and any place you use inheritance or interfaces. Here’s a real-world example with a payment system:
+        </p>
+        <CodeSnippet Number="4" Language="csharp" Description="LSP in services: substitutable payment processors">
+public interface IPaymentProcessor
+{
+    void Process(decimal amount);
+}
+
+public class CreditCardProcessor : IPaymentProcessor
+{
+    public void Process(decimal amount)
+    {
+        // Credit card processing logic
+    }
+}
+
+public class PaypalProcessor : IPaymentProcessor
+{
+    public void Process(decimal amount)
+    {
+        // PayPal processing logic
+    }
+}
+        </CodeSnippet>
+        <p>
+            Any code that expects an <code>IPaymentProcessor</code> can use either <code>CreditCardProcessor</code> or <code>PaypalProcessor</code> without worrying about surprises. That’s LSP in action!
+        </p>
+    </Section>
+
+    <Section Heading="🚩 Common Pitfalls (and How to Dodge Them)" Level="3">
+        <ul>
+            <li><b>Forcing inheritance:</b> Don’t use inheritance just to reuse code. Only use it for true "is-a" relationships.</li>
+            <li><b>Overriding with surprises:</b> Subclasses that override methods and change expected behavior break LSP.</li>
+            <li><b>Throwing NotImplementedException:</b> If a subclass can’t implement a method, it probably shouldn’t inherit from the base class.</li>
+            <li><b>Type checks:</b> If you need <code>if (obj is SubType)</code> in your code, LSP is likely being violated.</li>
+        </ul>
+        <p>
+            <b>Pro tip:</b> When in doubt, ask: “If I swap this class for its parent, will my code still work?” If not, rethink your design!
+        </p>
+    </Section>
+
+    <Section Heading="🔗 LSP and the Other SOLID Principles" Level="3">
+        <p>
+            LSP works hand-in-hand with the other SOLID principles:
+        </p>
+        <ul>
+            <li><b>Single Responsibility Principle:</b> LSP is easier to follow when classes have clear, focused responsibilities.</li>
+            <li><b>Open/Closed Principle:</b> LSP enables safe extension of code without modification.</li>
+            <li><b>Interface Segregation Principle:</b> LSP encourages small, focused interfaces that are easy to implement correctly.</li>
+            <li><b>Dependency Inversion Principle:</b> LSP makes it safe to depend on abstractions, not concrete classes.</li>
+        </ul>
+        <p>
+            Mastering LSP helps you build flexible, reliable, and maintainable systems.
+        </p>
+    </Section>
+
+    <Section Heading="📝 Wrapping Up: Why LSP Makes Life Easier" Level="3">
+        <p>
+            The Liskov Substitution Principle is about trust and predictability. Like a universal remote that works with every device, LSP helps you build systems where parts can be swapped without fear. Use LSP to guide your inheritance and interface design, and your codebase will be easier to test, extend, and maintain.
+        </p>
+    </Section>
+</BlogContainer>
