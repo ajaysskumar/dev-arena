@@ -84,7 +84,13 @@ namespace TestArena.Blog.Common.NavigationUtils
             "/blog/software-practices/solid/liskov-substitution-principle",
             new DateTime(2025, 6, 1),
             "images/blog/software-practices/solid/lsp/banner.png",
-            ["Software Practices", "SOLID", "LSP"])
+            ["Software Practices", "SOLID", "LSP"]),
+
+        new("SOLID Principles: Understanding the Interface Segregation Principle",
+            "/blog/software-practices/solid/interface-segregation-principle",
+            new DateTime(2025, 6, 8),
+            "images/blog/software-practices/solid/isp/banner.png",
+            ["Software Practices", "SOLID", "ISP"]),
         ];
 
         public static IEnumerable<PageInfo> PublishedArticles => Pages.Where(p => p.IsPublished && p.PublishedOn <= DateTime.UtcNow);

@@ -1,0 +1,176 @@
+@page "/blog/software-practices/solid/interface-segregation-principle"
+@using TestArena.Blog.Common
+@using TestArena.Blog.Common.NavigationUtils
+
+@code{
+    PageInfo currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/software-practices/solid/interface-segregation-principle")!;
+}
+
+<BlogContainer>
+    <Header Title="@currentPage.Header"
+            Image="@currentPage.ArticleImage" PublishedOn="@currentPage.PublishedOn" Authors="Ajay Kumar">
+    </Header>
+
+    <!-- Article content will be added here following the What, When, How format and using CodeSnippet, Section, and CalloutBox components. -->
+    <Section Heading="🔍 What is the Interface Segregation Principle (ISP)?" Level="3">
+        <p>
+            Imagine you’re at a restaurant, and the menu is a single giant page with every possible dish—pizza, sushi, burgers, desserts, drinks, and more. You just want a coffee, but you have to flip through everything! Wouldn’t it be easier if there was a separate drinks menu? That’s the heart of the <b>Interface Segregation Principle (ISP)</b> in software design.
+        </p>
+        <p>
+            ISP is the fourth of the five SOLID principles. In simple terms: <b>"Clients should not be forced to depend on interfaces they do not use."</b> This means you should split large, "fat" interfaces into smaller, more specific ones so that classes only need to know about the methods that are relevant to them.
+        </p>
+    </Section>
+
+    <Section Heading="💡 Why is ISP Important?" Level="3">
+        <p>
+            Violating ISP leads to code that’s hard to maintain and extend. If a class is forced to implement methods it doesn’t need, you end up with empty method bodies, confusing code, and more chances for bugs. Here’s why ISP matters:
+        </p>
+        <ul>
+            <li><b>Clarity:</b> Classes only see what they need—no more, no less.</li>
+            <li><b>Flexibility:</b> You can change or extend parts of your system without breaking unrelated code.</li>
+            <li><b>Testability:</b> Smaller interfaces are easier to mock and test.</li>
+        </ul>
+        <p>
+            ISP helps you build focused, maintainable, and robust systems.
+        </p>
+    </Section>
+
+    <Section Heading="🕒 When Does ISP Matter Most?" Level="3">
+        <p>
+            ISP is crucial when you design APIs, services, or any system with interfaces. Watch for these red flags 🚩:
+        </p>
+        <ul>
+            <li>Interfaces with lots of methods, many of which are not used by all implementers.</li>
+            <li>Classes that implement interfaces but leave some methods empty or throw <code>NotImplementedException</code>.</li>
+            <li>Changes to an interface force changes in many unrelated classes.</li>
+        </ul>
+        <p>
+            The earlier you spot these, the easier it is to fix. ISP is your guide to clean, focused interfaces!
+        </p>
+    </Section>
+
+    <Section Heading="🛠️ How Do You Apply ISP in C#?" Level="3">
+        <p>
+            Let’s get practical. Suppose you have a <code>IWorker</code> interface that tries to do too much:
+        </p>
+        <CodeSnippet Number="1" Language="csharp" Description="A fat interface violating ISP">
+public interface IWorker
+{
+    void Work();
+    void Eat();
+}
+
+public class HumanWorker : IWorker
+{
+    public void Work() { /* working */ }
+    public void Eat() { /* eating */ }
+}
+
+public class RobotWorker : IWorker
+{
+    public void Work() { /* working */ }
+    public void Eat() { throw new NotImplementedException(); }
+}
+        </CodeSnippet>
+        <p>
+            Here, <code>RobotWorker</code> is forced to implement <code>Eat()</code> even though robots don’t eat! This is confusing and error-prone.
+        </p>
+        <p>
+            <b>How to fix it?</b> Split the interface into smaller, focused ones:
+        </p>
+        <CodeSnippet Number="2" Language="csharp" Description="ISP-compliant design: split interfaces">
+public interface IWorkable
+{
+    void Work();
+}
+
+public interface IFeedable
+{
+    void Eat();
+}
+
+public class HumanWorker : IWorkable, IFeedable
+{
+    public void Work() { /* working */ }
+    public void Eat() { /* eating */ }
+}
+
+public class RobotWorker : IWorkable
+{
+    public void Work() { /* working */ }
+}
+        </CodeSnippet>
+        <CalloutBox Type="tip" Title="Is it okay to have many small interfaces?">
+            <p>
+            Absolutely! Small, focused interfaces make your code more flexible and easier to maintain. Only group methods together if they always belong together.
+            </p>
+        </CalloutBox>
+        <p>
+            Now, each class only implements what it needs. No more empty methods or confusing exceptions.
+        </p>
+    </Section>
+
+    <Section Heading="🌍 ISP in the Real World: Practical Scenarios" Level="3">
+        <p>
+            ISP isn’t just for workers! It applies to services, controllers, and any place you use interfaces. Here’s a real-world example with a notification system:
+        </p>
+        <CodeSnippet Number="3" Language="csharp" Description="ISP in services: focused notification interfaces">
+public interface IEmailSender
+{
+    void SendEmail(string to, string subject, string body);
+}
+
+public interface ISmsSender
+{
+    void SendSms(string number, string message);
+}
+
+public class NotificationService : IEmailSender, ISmsSender
+{
+    public void SendEmail(string to, string subject, string body)
+    {
+        // Email sending logic
+    }
+    public void SendSms(string number, string message)
+    {
+        // SMS sending logic
+    }
+}
+        </CodeSnippet>
+        <p>
+            Now, you can use <code>NotificationService</code> for both email and SMS, or swap in a different implementation for just one type of notification. That’s ISP in action!
+        </p>
+    </Section>
+
+    <Section Heading="🚩 Common Pitfalls (and How to Dodge Them)" Level="3">
+        <ul>
+            <li><b>Fat interfaces:</b> Don’t add methods "just in case." Only include what’s truly needed.</li>
+            <li><b>Empty implementations:</b> If a class leaves interface methods empty, it’s a sign to split the interface.</li>
+            <li><b>Breaking changes:</b> Changing a large interface can force many unrelated classes to change. Keep interfaces small to avoid this.</li>
+        </ul>
+        <p>
+            <b>Pro tip:</b> When in doubt, ask: “Does every implementer need every method?” If not, split the interface!
+        </p>
+    </Section>
+
+    <Section Heading="🔗 ISP and the Other SOLID Principles" Level="3">
+        <p>
+            ISP works hand-in-hand with the other SOLID principles:
+        </p>
+        <ul>
+            <li><b>Single Responsibility Principle:</b> ISP encourages focused interfaces, making SRP easier to follow.</li>
+            <li><b>Open/Closed Principle:</b> ISP enables safe extension of code without breaking existing implementations.</li>
+            <li><b>Liskov Substitution Principle:</b> ISP makes it easier to substitute implementations without surprises.</li>
+            <li><b>Dependency Inversion Principle:</b> ISP helps you depend on abstractions that are easy to implement and use.</li>
+        </ul>
+        <p>
+            Mastering ISP helps you build flexible, reliable, and maintainable systems.
+        </p>
+    </Section>
+
+    <Section Heading="📝 Wrapping Up: Why ISP Makes Life Easier" Level="3">
+        <p>
+            The Interface Segregation Principle is about focus and clarity. Like a well-organized menu, ISP helps you build systems where classes only see what they need. Use ISP to guide your interface design, and your codebase will be easier to test, extend, and maintain.
+        </p>
+    </Section>
+</BlogContainer>
