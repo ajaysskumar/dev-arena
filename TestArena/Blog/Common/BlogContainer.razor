@@ -2,9 +2,27 @@
     [Parameter] public RenderFragment ChildContent { get; set; }
 }
 
-<div class="container-fluid d-flex justify-content-center">
+<div class="container-fluid d-flex flex-column align-items-center">
     <div class="content-wrapper">
         @ChildContent
+    </div>
+    <div class="content-wrapper mt-4">
+        <script src="https://giscus.app/client.js"
+        data-repo="ajaysskumar/dev-arena"
+        data-repo-id="R_kgDONiBGGQ"
+        data-category="Comments"
+        data-category-id="DIC_kwDONiBGGc4Cq2ND"
+        data-mapping="url"
+        data-strict="0"
+        data-reactions-enabled="0"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+        </script>
     </div>
 </div>
 
