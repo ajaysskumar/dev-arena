@@ -76,19 +76,19 @@ namespace TestArena.Blog.Common.NavigationUtils
 
         new("SOLID Principles: Understanding the Open/Closed Principle",
             "/blog/software-practices/solid/open-close-principle",
-            new DateTime(2025, 5, 23),
+            new DateTime(2025, 5, 24),
             "images/blog/software-practices/solid/ocp/banner.png",
             ["Software Practices", "SOLID", "OCP"]),
 
         new("SOLID Principles: Understanding the Liskov Substitution Principle",
             "/blog/software-practices/solid/liskov-substitution-principle",
-            new DateTime(2025, 6, 1),
+            new DateTime(2025, 5, 31),
             "images/blog/software-practices/solid/lsp/banner.png",
             ["Software Practices", "SOLID", "LSP"]),
 
         new("SOLID Principles: Understanding the Interface Segregation Principle",
             "/blog/software-practices/solid/interface-segregation-principle",
-            new DateTime(2025, 6, 8),
+            new DateTime(2025, 6, 7),
             "images/blog/software-practices/solid/isp/banner.png",
             ["Software Practices", "SOLID", "ISP"]),
         ];
