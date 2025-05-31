@@ -44,13 +44,17 @@
             <div class="container-fluid">
                 <div class="row">
                     <!-- Author on the left -->
-                    <div class="col-md-6 col-xs-12 d-flex justify-content-md-start justify-content-center">
+                    <div class="col-md-4 col-xs-12 d-flex justify-content-md-start justify-content-center">
                         <span class="text-secondary fw-bold">Author(s): </span>
                         <span class="text-secondary fw-bold ms-1">@Authors</span>
                     </div>
 
+                    <div class="col-md-4 col-xs-12 d-flex justify-content-md-center justify-content-center">
+                        <SocialShare Title="@Title" />
+                    </div>
+
                     <!-- Published date on the right -->
-                    <div class="col-md-6 col-xs-12 d-flex justify-content-md-end justify-content-center">
+                    <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center">
                         <span class="text-muted fw-bold">Last updated: @PublishedOn.ToString("dd MMM yyyy")</span>
                     </div>
                 </div>

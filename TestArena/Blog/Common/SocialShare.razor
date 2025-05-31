@@ -1,0 +1,50 @@
+@inject NavigationManager NavigationManager
+
+@code {
+    [Parameter] public string Title { get; set; } = "";
+
+    private string BlogUrl => $"{NavigationManager.Uri}";
+}
+<div class="social-share flex">
+    <a href="https://twitter.com/intent/tweet?url=@System.Web.HttpUtility.UrlEncode("https://devcodex.in/blog/integration-testing-in-dotnet-with-aws")&text=@Uri.EscapeDataString(Title)" title="Share on Twitter" target="_blank" rel="noopener">
+        <img src="images/shared/icons/twitter-old.svg" alt="Twitter" width="24" style="cursor:pointer" />
+    </a>
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url=@System.Web.HttpUtility.UrlEncode("https://devcodex.in/blog/integration-testing-in-dotnet-with-aws")&title=@Uri.EscapeDataString(Title)" title="Share on LinkedIn" target="_blank" rel="noopener">
+        <img src="images/shared/icons/linkedin.svg" alt="LinkedIn" width="24" style="cursor:pointer" />
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=@Uri.EscapeDataString(BlogUrl)" title="Share on Facebook" target="_blank" rel="noopener">
+        <img src="images/shared/icons/facebook.svg" alt="Facebook" width="24" style="cursor:pointer" />
+    </a>
+</div>
+
+@code {
+    private enum SocialPlatform
+    {
+        Twitter,
+        LinkedIn,
+        Facebook
+    }
+
+    private void Share(SocialPlatform platform)
+    {
+        string url = platform switch
+        {
+            SocialPlatform.Twitter => $"https://twitter.com/intent/tweet?url={Uri.EscapeDataString(BlogUrl)}&text={Uri.EscapeDataString(Title)}",
+            SocialPlatform.LinkedIn => $"https://www.linkedin.com/shareArticle?mini=true&url={System.Web.HttpUtility.UrlEncode("https://devcodex.in/blog/integration-testing-in-dotnet-with-aws")}",
+            SocialPlatform.Facebook => $"https://www.facebook.com/sharer/sharer.php?u={Uri.EscapeDataString(BlogUrl)}",
+            _ => ""
+        };
+
+        if (!string.IsNullOrEmpty(url))
+        {
+            OpenShareWindow(url);
+        }
+    }
+
+    private void OpenShareWindow(string url)
+    {
+        JS.InvokeVoidAsync("window.open", url, "_blank", "noopener,width=600,height=400");
+    }
+
+    [Inject] private IJSRuntime JS { get; set; }
+}
