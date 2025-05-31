@@ -21,7 +21,7 @@
         foreach (var articlePage in SiteMap.PublishedArticles.Where(b => b.IsPublished).OrderByDescending(x => x.PublishedOn))
         {
             <div class="col">
-                <Thumbnail ImageUrl="@articlePage.ArticleImage" Title="@articlePage.Header" Author="Ajay kumar"
+                <Thumbnail ImageUrl="@(articlePage.ArticleImageThumbnail)" Title="@articlePage.Header" Author="Ajay kumar"
                            Date="@articlePage.PublishedOn.ToLongDateString()" Category="@articlePage.Tags"
                            BlogUrl="@articlePage.RelativePath"/>
             </div>

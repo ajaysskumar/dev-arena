@@ -9,19 +9,19 @@ namespace TestArena.Blog.Common.NavigationUtils
             new("Intro to PACT for .NET Core: API contract testing",
             "/blog/contract-testing-pact-net-intro",
             new DateTime(2024, 12, 14),
-            "images/blog/pact/intro/header_landscape.png",
+            "images/blog/pact/intro/banner.png",
             ["PACT", "API"]),
 
         new("Intro to PACT for .NET Core: Events based systems",
             "/blog/contract-testing-in-pact-with-events",
             new DateTime(2024, 12, 28),
-            "images/blog/pact/events-demo/contract-testing-events.webp",
+            "images/blog/pact/events-demo/banner.webp",
             ["PACT", "Events"]),
 
         new("Intro to PACT for .NET Core: Integration with PactFlow",
             "/blog/integration-with-pactflow",
             new DateTime(2025, 1, 11),
-            "images/blog/pact/pact-broker/blog_header.png",
+            "images/blog/pact/pact-broker/banner.png",
             ["PACT", "PactFlow"]),
 
         new("Integration testing for dotnet core APIs: Introduction",
@@ -103,6 +103,19 @@ namespace TestArena.Blog.Common.NavigationUtils
         public List<string> Tags { get; } = tags;
         public DateTime PublishedOn { get; } = publishedOn;
         public string ArticleImage { get; } = articleImage;
+        public string ArticleImageThumbnail { get; } = GetThumbnailName(articleImage);
         public bool IsPublished { get; set; } = isPublished;
+
+        private static string GetThumbnailName(string imagePath)
+        {
+            if (string.IsNullOrEmpty(imagePath))
+                return imagePath;
+
+            var lastDot = imagePath.LastIndexOf('.');
+            if (lastDot <= 0)
+                return imagePath;
+
+            return imagePath[..lastDot] + "-thumbnail" + imagePath[lastDot..];
+        }
     }
 }
