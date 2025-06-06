@@ -91,6 +91,12 @@ namespace TestArena.Blog.Common.NavigationUtils
             new DateTime(2025, 6, 7),
             "images/blog/software-practices/solid/isp/banner.png",
             ["Software Practices", "SOLID", "ISP"]),
+
+        new("Connection Pooling in SQL Server: What, When, and How",
+            "/blog/connection-pooling-sql-server",
+            new DateTime(2025, 6, 14),
+            "images/blog/sql-server/connection-pooling/banner.png",
+            ["SQL Server", "Connection Pooling", ".NET", "Database"], false),
         ];
 
         public static IEnumerable<PageInfo> PublishedArticles => Pages.Where(p => p.IsPublished && p.PublishedOn <= DateTime.UtcNow);
