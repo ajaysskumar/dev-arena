@@ -52,6 +52,14 @@ using (var connection = new SqlConnection(connectionString))
         <CodeSnippet Number="2" Language="csharp" Description="Connection string with pooling options">
 var connectionString = "Server=localhost;Database=MyDb;User Id=sa;Password=your_password;Pooling=true;Min Pool Size=5;Max Pool Size=100;";
         </CodeSnippet>
+        <ul>
+            <li><b>Pooling</b>: Enables or disables connection pooling. Default is <code>true</code>.</li>
+            <li><b>Min Pool Size</b>: The minimum number of connections maintained in the pool. Default is <code>0</code>.</li>
+            <li><b>Max Pool Size</b>: The maximum number of connections allowed in the pool. Default is <code>100</code>.</li>
+            <li><b>Connection Timeout</b>: The time (in seconds) to wait for a connection to become available before throwing an error. Default is <code>15</code> seconds.</li>
+            <li><b>Load Balance Timeout</b>: The minimum time (in seconds) a connection lives in the pool before being destroyed. Default is <code>0</code> (no timeout).</li>
+            <li><b>Enlist</b>: Whether the connection is automatically enlisted in the current transaction context. Default is <code>true</code>.</li>
+        </ul>
     </Section>
     <Section Heading="Common Pitfalls and Troubleshooting" Level="4">
         <ul>
