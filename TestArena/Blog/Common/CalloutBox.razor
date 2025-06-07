@@ -1,4 +1,4 @@
-<div class="callout-box @GetCalloutType() py-1">
+<div class="callout-box special @GetCalloutType() py-1">
         <div class="py-1">
             <span class="callout-icon">@GetIcon()</span>
             <span class="callout-title">@Title</span>
@@ -16,7 +16,7 @@
     private string GetIcon() => Type.ToLower() switch
     {
         "tip" => "💡",
-        "note" => "📝",
+        "note" => "🎯",
         "important" => "❗",
         "trythis" => "🧪",
         _ => "ℹ️"
@@ -30,48 +30,3 @@
         _ => "ℹ️"
     };
 }
-
-<style>
-.callout-box {
-    border-left: 4px solid;
-    background-color: white !important;
-}
-
-.callout-icon {
-    width: 2rem;
-    flex-shrink: 0;
-    line-height: 1;
-    margin-top: 0.15rem;
-}
-
-.callout-title {
-    font-size: 1rem;
-    margin-bottom: 0.25rem;
-}
-
-.callout-message {
-    font-size: 0.95rem;
-    color: rgb(93, 89, 89) !important;
-}
-
-/* Variants */
-.callout-box.tip {
-    border-color: #28a745;
-    color: #28a745;
-}
-
-.callout-box.note {
-    border-color: #0d6efd;
-    color: #0d6efd;
-}
-
-.callout-box.important {
-    border-color: #dc3545;
-    color: #dc3545;
-}
-
-.callout-box.trythis {
-    border-color: #ffc107;
-    color: #ffc107;
-}
-    </style>
