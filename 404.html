@@ -3,7 +3,7 @@
 
 <head>
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N1BDBV7WLD"></script>
+    <script defer src="https://www.googletagmanager.com/gtag/js?id=G-N1BDBV7WLD"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
@@ -13,9 +13,9 @@
     </script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dev Codex: Your Ultimate Guide to .NET Development, Testing, and Security</title>
+    <title>Dev Codex: .NET Development and Testing Guide</title>
     <meta name="description" content="Your ultimate resource for development, AI integration, clean coding, software testing, and modern software practices." />
-    <meta name="keywords" content=".NET development, AI in software, clean coding, performance testing, software practices, secure applications, modern development" />
+    <!-- Removed meta keywords tag as modern search engines often ignore it -->
     <meta name="author" content="Ajay Kumar" />
     <meta property="og:title" content="Dev Codex: Your Ultimate Guide to .NET Development, AI, and Software Practices" />
     <meta property="og:description" content="Explore expert insights on .NET development, AI integration, clean coding, performance testing, and modern software practices. Build better, smarter, and faster applications with Dev Codex." />
@@ -37,7 +37,9 @@
 <body>
     <div id="app">
         <svg class="loading-progress">
+            <!-- Outer circle for loading animation -->
             <circle r="40%" cx="50%" cy="50%" />
+            <!-- Inner circle for loading animation -->
             <circle r="40%" cx="50%" cy="50%" />
         </svg>
         <div class="loading-progress-text"></div>
@@ -48,7 +50,7 @@
         <a href="" class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
-    <script src="_framework/blazor.webassembly.js" autostart="false"></script>
+    <script src="_framework/blazor.webassembly.js" defer autostart="false"></script>
     <script src="brotliloader.min.js" type="module"></script>
 </body>
 
