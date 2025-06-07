@@ -24,18 +24,18 @@
     <link rel="stylesheet" href="css/app.css"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" defer=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js" defer=""></script>
 <link rel="icon" type="image/png" href="favicon.png"/>
 <link href="TestArena.styles.css" rel="stylesheet"/>
 
-<!--Blazor:{"type":"webassembly","prerenderId":"f95e1743b1174803b3688cf93d97215e","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><!--Blazor:{"prerenderId":"f95e1743b1174803b3688cf93d97215e"}-->
+<!--Blazor:{"type":"webassembly","prerenderId":"370efc4f64d94024b1bd44331c8337e1","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><!--Blazor:{"prerenderId":"370efc4f64d94024b1bd44331c8337e1"}-->
 </head>
 
 <body>
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"aed8474f3af747a9b67788fec76bb0b4","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"928b7d40bd844f899c700b0d875a5fcf","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -75,7 +75,7 @@
                     
                     <div class="col-md-6 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 11 Jan 2025</span></div></div></div></div></div></header>
 
-    <section id="ba0a1e79-0123-4761-b601-bb85c692427d"><h3>Introduction</h3><hr class="border border-success border-1 opacity-50">
+    <section id="b42b14b8-6a8d-4bde-aba8-e278479099da"><h3>Introduction</h3><hr class="border border-success border-1 opacity-50">
     <div><p>This is in continuation of PACT for .NET series where we will be looking into one of the ways to integrate our APIs with PactFlow.</p>
         <p>For a short introduction, PactFlow is a platform that can act as a broker between consumers and providers services/systems. Consumers can push/upload the contracts to PactFlow and provider systems can read the same contracts and try to verify them.</p>
         <p>In PactFlow one can visualise failing/passing contracts, total contract integrations, dependency graph and much more. For a better read please visit <a href="https://pactflow.io/">https://pactflow.io/</a></p>
@@ -92,7 +92,7 @@
                 <a href="/blog/contract-testing-in-pact-with-events" class="text-muted">devcodex.in</a></div></div>
         <div class="col-md-4 d-flex align-items-center pe-2"><img src="/images/blog/pact/events-demo/banner.webp" class="img-fluid rounded-end" alt="Blog Image" /></div></div></div>
 
-    <section id="e95794e9-4c69-4907-b9f5-aa353f2c0633"><h3>Consumer Side</h3><hr class="border border-success border-1 opacity-50">
+    <section id="cb3f0a3e-98d1-468b-bc58-68d40a5a16eb"><h3>Consumer Side</h3><hr class="border border-success border-1 opacity-50">
     <div><p>Once the PACT contract file is generated by the consumer, there are several ways we can push or upload the contract to PactFlow. You can read about all the ways at <a href="https://docs.pact.io/getting_started/sharing_pacts">https://docs.pact.io/getting_started/sharing_pacts</a>.</p>
         <p>For this post, I have used a combination of their REST APIs and the PactNet library.</p>
         <p>The below utility code uploads the contract file to the Pact broker. Among all the parameters, it requires the Pact broker base URI and read/write access token for authentication to the Pact broker. You can obtain this information by logging into your PactFlow account and reaching out to the settings section.</p>
@@ -146,7 +146,7 @@
     }
 </style>
 
-<div class="row image-header"><figure class="text-center"><img src="/images/blog/pact/pact-broker/PactFlow settings section.webp" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="PactFlow settings section" />
+<div class="row image-header"><figure class="text-center"><img src="/images/blog/pact/pact-broker/PactFlow settings section.webp" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="PactFlow settings section" loading="lazy" />
         <figcaption class="figure-caption"><strong>Figure 1 :</strong> PactFlow settings section</figcaption></figure></div>
 
         <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
@@ -295,12 +295,12 @@ Environment.GetEnvironmentVariable("PACT_FLOW_TOKEN");
     }
 </style>
 
-<div class="row image-header"><figure class="text-center"><img src="/images/blog/pact/pact-broker/Student API and its consumer integration in pact flow.webp" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="Student API and its consumer integration in pact flow" />
+<div class="row image-header"><figure class="text-center"><img src="/images/blog/pact/pact-broker/Student API and its consumer integration in pact flow.webp" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="Student API and its consumer integration in pact flow" loading="lazy" />
         <figcaption class="figure-caption"><strong>Figure 2 :</strong> Student API and its consumer integration in pact flow</figcaption></figure></div>
 
         <p>If you observe the above image, we can see the contract is there, but its in unverified mode. It is because this pact has not been verified yet by the provider. We can see verification in action next.</p></div></section>
 
-    <section id="e1a2dbad-b998-4b0e-a1d2-5c89f158f84f"><h3>Provider Side</h3><hr class="border border-success border-1 opacity-50">
+    <section id="4f1a63ce-96ba-4b03-a4e7-c4f9796326d1"><h3>Provider Side</h3><hr class="border border-success border-1 opacity-50">
     <div><p>Provider side verification is relatively straightforward. The following unit test in the provider's unit test class ensures compliance with the contract.</p>
 
         <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
@@ -395,7 +395,7 @@ public void Ensure_StudentApi_Honours_Pact_With_ConsumerOne_Using_PactFlow()
     }
 </style>
 
-<div class="row image-header"><figure class="text-center"><img src="/images/blog/pact/pact-broker/Pact flow success console logs.webp" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="Pact flow success console logs" />
+<div class="row image-header"><figure class="text-center"><img src="/images/blog/pact/pact-broker/Pact flow success console logs.webp" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="Pact flow success console logs" loading="lazy" />
         <figcaption class="figure-caption"><strong>Figure 3 :</strong> Pact flow success console logs</figcaption></figure></div>
 
         <p>As a result of this we should also be able to see that the pact integration that was showing as unverified earlier has changed to verified.</p>
@@ -449,7 +449,7 @@ public void Ensure_StudentApi_Honours_Pact_With_ConsumerOne_Using_PactFlow()
     }
 </style>
 
-<div class="row image-header"><figure class="text-center"><img src="/images/blog/pact/pact-broker/Pact verification success in pact flow.webp" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="Pact verification success in pact flow" />
+<div class="row image-header"><figure class="text-center"><img src="/images/blog/pact/pact-broker/Pact verification success in pact flow.webp" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="Pact verification success in pact flow" loading="lazy" />
         <figcaption class="figure-caption"><strong>Figure 4 :</strong> Pact verification success in pact flow</figcaption></figure></div>
 
         <style>
@@ -501,10 +501,10 @@ public void Ensure_StudentApi_Honours_Pact_With_ConsumerOne_Using_PactFlow()
     }
 </style>
 
-<div class="row image-header"><figure class="text-center"><img src="/images/blog/pact/pact-broker/Image mentioning that the interactions have been passed.webp" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="Image mentioning that the interactions have been passed" />
+<div class="row image-header"><figure class="text-center"><img src="/images/blog/pact/pact-broker/Image mentioning that the interactions have been passed.webp" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="Image mentioning that the interactions have been passed" loading="lazy" />
         <figcaption class="figure-caption"><strong>Figure 5 :</strong> Image mentioning that the interactions have been passed</figcaption></figure></div></div></section>
 
-    <section id="6400c6e1-b42c-4f4a-be67-3dcc052ed1b8"><h3>Failure scenario!</h3><hr class="border border-success border-1 opacity-50">
+    <section id="ec23a308-84ba-4e11-a12b-2c33bbecab6e"><h3>Failure scenario!</h3><hr class="border border-success border-1 opacity-50">
     <div><p>Lets make some changes in our code to deliberately make the code fail. For demo we can change the student service to return <code>firstName1</code> property in the response instead on <code>firstName</code> as expected by consumer service. After making this change, when the unit test is run, we can see the below result in pact verification.</p>
 
         <style>
@@ -556,7 +556,7 @@ public void Ensure_StudentApi_Honours_Pact_With_ConsumerOne_Using_PactFlow()
     }
 </style>
 
-<div class="row image-header"><figure class="text-center"><img src="/images/blog/pact/pact-broker/Pact flow failure.webp" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="Pact flow failure" />
+<div class="row image-header"><figure class="text-center"><img src="/images/blog/pact/pact-broker/Pact flow failure.webp" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="Pact flow failure" loading="lazy" />
         <figcaption class="figure-caption"><strong>Figure 6 :</strong> Pact flow failure</figcaption></figure></div>
         <style>
     .image-header {
@@ -607,7 +607,7 @@ public void Ensure_StudentApi_Honours_Pact_With_ConsumerOne_Using_PactFlow()
     }
 </style>
 
-<div class="row image-header"><figure class="text-center"><img src="/images/blog/pact/pact-broker/Pact flow failure details.webp" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="Pact flow failure details" />
+<div class="row image-header"><figure class="text-center"><img src="/images/blog/pact/pact-broker/Pact flow failure details.webp" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="Pact flow failure details" loading="lazy" />
         <figcaption class="figure-caption"><strong>Figure 7 :</strong> Pact flow failure details</figcaption></figure></div></div></section>
     <section><p>For reference, the code repository being discussed is available at github: <a href="https://github.com/ajaysskumar/pact-net-example">https://github.com/ajaysskumar/pact-net-example</a></p><p>Thanks for reading through. Please share feedback, if any, in comments or on my email <a href="mailto:ajay.a338@gmail.com">ajay.a338@gmail.com</a></p></section></div>
     <div class="content-wrapper mt-4"><script src="https://giscus.app/client.js" data-repo="ajaysskumar/dev-arena" data-repo-id="R_kgDONiBGGQ" data-category="Comments" data-category-id="DIC_kwDONiBGGc4Cq2ND" data-mapping="pathname" data-strict="0" data-reactions-enabled="0" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script></div></div>
@@ -629,9 +629,9 @@ public void Ensure_StudentApi_Honours_Pact_With_ConsumerOne_Using_PactFlow()
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-        <!--Blazor:{"prerenderId":"aed8474f3af747a9b67788fec76bb0b4"}-->
+        <!--Blazor:{"prerenderId":"928b7d40bd844f899c700b0d875a5fcf"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80VEVaaGNIRndVM2hHYUVKclRucGpjbEJzV1ZSU1ptbG5NMjVvYkZZeVVGUlphbGxxT1U1cmVVTlRWSFZpU214b2MyTmtUMDFrZWtOQ1FtSnBXVkZqZDNOaFMzRnBiMjF4ZGw5cmQzZGZUbXBWVm5ScE1WYzNjWHB4VFU5eGEwaDZTRGx2VFhOblRUWk1SRkJRVUc1UFoyaHVhMVI2VlZaaWFreEtRMlJGVFdVMWRsWlRObnBvU0ROM1ZEWkdkbEprY2pGWU5uSkpJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UlZCUmJHNURiVFJET1U5ME9ITkNhblZuVFdoRVpIRnJSbUZHYVdaNVdWaHVlRXhKVEhJMlZFaHhTV0pzZEZBeU0yUlVaVTFTWlRsemRqUmlWamd5WlZBM2JqZElPVEZpVjBObGQyNWlMWEE0YVZWQmFFNXVUazVaYlhOeE4wcElSbE5MTTNKcGFsb3RRazVWWWpGSVNuTkdRbnB4ZUcxRmRHUk1kWGxxWTBWTWMzSmZRalJHWVVsR2JVZzRabEpRY1hOaFJHOXpJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.

@@ -24,18 +24,18 @@
     <link rel="stylesheet" href="css/app.css"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" defer=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js" defer=""></script>
 <link rel="icon" type="image/png" href="favicon.png"/>
 <link href="TestArena.styles.css" rel="stylesheet"/>
 
-<!--Blazor:{"type":"webassembly","prerenderId":"0b6f12aa786f47d58d6e894c9ccf0458","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><!--Blazor:{"prerenderId":"0b6f12aa786f47d58d6e894c9ccf0458"}-->
+<!--Blazor:{"type":"webassembly","prerenderId":"b0d0dbc0ac224c64bc51823c3f217570","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><!--Blazor:{"prerenderId":"b0d0dbc0ac224c64bc51823c3f217570"}-->
 </head>
 
 <body>
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"27a58a301cce40049b51974eacdab511","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"b121ed691f4e4cb8bc29c71cb15f4cd3","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -75,7 +75,7 @@
                     
                     <div class="col-md-6 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 08 Feb 2025</span></div></div></div></div></div></header>
 
-    <section id="729676a0-7c67-4399-a2b4-7770717573ab"><h4>Summary</h4><hr class="border border-success border-1 opacity-50">
+    <section id="bb5a0b85-3600-4ef5-b8e7-d081377cfba5"><h4>Summary</h4><hr class="border border-success border-1 opacity-50">
     <div><p>Welcome to the 2nd post in our Integration testing series. You may check out the previous post that introduces the concept of writing integration tests using <b>WebApplicationFactory</b> in dotnet below:</p>
         <div class="card mb-3 mx-auto" style="max-width: 600px;"><div class="row g-0"><div class="col-md-8"><div class="card-body"><h5 class="card-title"><a href="/blog/integration-testing-in-dotnet-intro" class="text-decoration-none"><strong>Integration testing for dotnet core APIs: Introduction</strong></a></h5>
                 <p class="card-text">Integration testing for dotnet core APIs: Introduction</p>
@@ -87,7 +87,7 @@
         <ul><li><b>Postgres DB Server:</b> This is needed in case you want to test out the main application.</li>
             <li><b>Docker:</b> This is needed to run test containers.</li></ul></div></section>
 
-    <section id="ad0c0786-431c-450e-a4e2-155c4f571d15"><h4>Setting Up the Database</h4><hr class="border border-success border-1 opacity-50">
+    <section id="586f240d-e9b5-4161-a569-b78fd7756002"><h4>Setting Up the Database</h4><hr class="border border-success border-1 opacity-50">
     <div><p>To do this we need to first introduce a database in our sample superhero API. For this demo purpose, we have used a Postgres database.</p>
         <p>For this, we made the below changes in our superhero API:</p>
         <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
@@ -106,7 +106,7 @@ builder.Services.AddDbContext&lt;SuperHeroDbContext&gt;(opt =>
 <br>
         <p>Along with this, we also need to create a migration, if not already present, to set up the database schema.</p></div></section>
 
-    <section id="53f230c6-a922-4c4e-badb-24505b664571"><h4>Unit Test Example</h4><hr class="border border-success border-1 opacity-50">
+    <section id="1f33bf5a-0f1c-4c8b-856c-f6b30fd00dc5"><h4>Unit Test Example</h4><hr class="border border-success border-1 opacity-50">
     <div><p>Finally, our unit test:</p>
         <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
 [Fact(DisplayName = "Get all superheros API returns all superheroes")]
@@ -184,7 +184,7 @@ public async Task Get_All_SuperHeroes_Returns_List_Of_SuperHero()
     }
 </style>
 
-<div class="row image-header"><figure class="text-center"><img src="/images/blog/integration-testing/handling-database/Test containers in action.webp" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="Test containers in action" />
+<div class="row image-header"><figure class="text-center"><img src="/images/blog/integration-testing/handling-database/Test containers in action.webp" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="Test containers in action" loading="lazy" />
         <figcaption class="figure-caption"><strong>Figure 2 :</strong> Test containers in action</figcaption></figure></div>
         <ul><li>In the <b>Arrange</b> step, I added a few records directly to the database using the <b>SharedFixture</b>.</li>
             <li>After the above step, there are some records in the system and in the <b>Act</b> step, we will be trying to call the GET superheroes API.</li>
@@ -238,7 +238,7 @@ public async Task Get_All_SuperHeroes_Returns_List_Of_SuperHero()
     }
 </style>
 
-<div class="row image-header"><figure class="text-center"><img src="/images/blog/integration-testing/handling-database/Tests passing.webp" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="Tests passing" />
+<div class="row image-header"><figure class="text-center"><img src="/images/blog/integration-testing/handling-database/Tests passing.webp" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="Tests passing" loading="lazy" />
         <figcaption class="figure-caption"><strong>Figure 3 :</strong> Tests passing</figcaption></figure></div></div></section>
     <p>This is it for the setup with database. I will be covering more in the future articles like, how to work with authentication, events etc.</p>
     <section><p>For reference, the code repository being discussed is available at github: <a href="https://github.com/ajaysskumar/SuperHeroSolution">https://github.com/ajaysskumar/SuperHeroSolution</a></p><p>Thanks for reading through. Please share feedback, if any, in comments or on my email <a href="mailto:ajay.a338@gmail.com">ajay.a338@gmail.com</a></p></section></div>
@@ -261,9 +261,9 @@ public async Task Get_All_SuperHeroes_Returns_List_Of_SuperHero()
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-        <!--Blazor:{"prerenderId":"27a58a301cce40049b51974eacdab511"}-->
+        <!--Blazor:{"prerenderId":"b121ed691f4e4cb8bc29c71cb15f4cd3"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80VEVaaGNIRndVM2hHYUVKclRucGpjbEJzV1ZSU1pXNVVSRU13TjBWVFlVdDFVM2xoV0RKUmFXWlBZbWMzV1VwemFUQlRlbmRQTkZwcWRVTlFlVGRDU1hndGFrNUJkbWhtYm1wV1JXaENhREJrZW5sNmFUbGZTRzEyVmxoRVlWRjZRV1ZOZVRaa2VYUkpaR0l0Y1dsR2IyODJVM280ZFd4NFFVd3lSRk52YzNjNVlVWlpWREJxUTNsaVdHSkZkMGxHYm14SWFqTXdJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UlZCUmJHNURiVFJET1U5ME9ITkNhblZuVFdoRVpIaGtaVGxzV21ORlRIaElVMEkwVTFZNFNUQkNkMnQzUjJWR1dUTnViMU5qVDJodFdrZ3RRelZoV2kxRFREZDFiR1JHVm04M1pUaHFURlJLTXpKYVoxVndWWHBpTFZaUVEzcFljV0p2ZFdVNE4yNTBPRkV0TW5FdFJtNVhWMmxDWmxsV1VVSXhjek5uUkRnemVXVTFObmN0UmsxRk1sTXRTVUptWlcweVVYWm5JaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
