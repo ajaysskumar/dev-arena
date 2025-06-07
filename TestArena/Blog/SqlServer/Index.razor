@@ -1,6 +1,8 @@
 @page "/blog/connection-pooling-sql-server"
 @using TestArena.Blog.Common
 @using TestArena.Blog.Common.NavigationUtils
+@using TestArena.Blog.Common.About
+@using TestArena.Blog.Common.TextDecorators
 
 @code{
     PageInfo currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/connection-pooling-sql-server")!;
@@ -18,6 +20,15 @@
         Imagine you run a busy coffee shop. Every time a customer walks in, you build a new coffee machine just for their order, then throw it away when they're done. Sounds wasteful, right? That's what happens if your application creates a new database connection for every request! Connection pooling is like having a set of ready-to-use coffee machines (connections) that you can quickly hand out to customers (requests) as needed, then clean and reuse for the next customer.
         <br /><br />
         In technical terms, connection pooling is a technique used to reduce the overhead of repeatedly opening and closing database connections. Instead of creating a new connection every time, a pool of connections is maintained and reused, improving performance and resource utilization.
+    </Section>
+    <Section Heading="How Does Connection Pooling Work Internally?" Level="4">
+        <BlogImage ImagePath="/images/blog/connection-pooling-intro/connection-pooling.png" Description="Connection Pool Lifecycle" Number="1" />
+        <ul>
+            <li>When <code>SqlConnection.Open()</code> is called, ADO.NET checks for an available connection in the pool.</li>
+            <li>If available, it is reused. If not, a new connection is created (up to <code>Max Pool Size</code>).</li>
+            <li>When <code>Close()</code> or <code>Dispose()</code> is called, the connection is returned to the pool (not actually closed).</li>
+            <li>If the pool is full, the connection is closed and discarded.</li>
+        </ul>
     </Section>
     <Section Heading="When is Connection Pooling Useful?" Level="4">
         Connection pooling is especially useful in high-traffic applications, such as web APIs or enterprise services, where many users or processes need to access the database concurrently. Without pooling, the cost of establishing and tearing down connections can become a major bottleneck, leading to slow response times and increased load on the database server.
@@ -42,6 +53,17 @@ using (var connection = new SqlConnection(connectionString))
 var connectionString = "Server=localhost;Database=MyDb;User Id=sa;Password=your_password;Pooling=true;Min Pool Size=5;Max Pool Size=100;";
         </CodeSnippet>
     </Section>
+    <Section Heading="Common Pitfalls and Troubleshooting" Level="4">
+        <ul>
+            <li><b>Connection Leaks:</b> Not disposing/closing connections will eventually exhaust the pool. Always use <code>using</code> blocks.</li>
+            <li><b>Pool Fragmentation:</b> Changing connection string parameters (even whitespace) creates new pools. Use consistent connection strings.</li>
+            <li><b>Pool Exhaustion:</b> If all connections are in use, new requests wait for a free connection or timeout. Monitor and increase <code>Max Pool Size</code> if needed.</li>
+            <li><b>Diagnosing Issues:</b> Use performance counters (<code>NumberOfPooledConnections</code>, <code>NumberOfActiveConnections</code>) or logging to monitor pool usage.</li>
+        </ul>
+        <CalloutBox Type="important" Title="Troubleshooting">
+            If you see errors like <code>Timeout expired. The timeout period elapsed prior to obtaining a connection from the pool</code>, check for connection leaks and pool size limits.
+        </CalloutBox>
+    </Section>
     <Section Heading="Common Problems Solved by Connection Pooling" Level="4">
         <ul>
             <li><b>Performance:</b> Reduces latency by reusing existing connections.</li>
@@ -62,6 +84,24 @@ SqlConnection.ClearAllPools();
             </li>
             <li><b>Handling Pool Exhaustion:</b> If all connections are in use, new requests will wait (up to the connection timeout). Monitor and tune <code>Max Pool Size</code> as needed.</li>
             <li><b>Pooling and Transactions:</b> Connections are only returned to the pool when fully closed and not enlisted in a transaction.</li>
+        </ul>
+    </Section>
+    <Section Heading="Best Practices for Connection Pooling" Level="4">
+        <ul>
+            <li>Always use <code>using</code> blocks to ensure connections are returned to the pool.</li>
+            <li>Keep connections open only as long as needed.</li>
+            <li>Use consistent connection strings to avoid pool fragmentation.</li>
+            <li>Monitor pool usage and tune <code>Min/Max Pool Size</code> as needed.</li>
+            <li>Store connection strings securely (e.g., environment variables, secrets manager).</li>
+        </ul>
+    </Section>
+    <Section Heading="Pooling Beyond SQL Server" Level="4">
+        Connection pooling is available for other ADO.NET providers (e.g., Npgsql for PostgreSQL, MySqlConnector for MySQL). Each provider may have its own pooling implementation and settings—refer to their documentation for details.
+    </Section>
+    <Section Heading="Further Reading & References" Level="4">
+        <ul>
+            <li><a href="https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/sql-server-connection-pooling">Microsoft Docs: SQL Server Connection Pooling (ADO.NET)</a></li>
+            <li><a href="https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures#connection-pooling">Connection Pooling in Modern Web Apps</a></li>
         </ul>
     </Section>
     <Section Heading="Summary" Level="4">

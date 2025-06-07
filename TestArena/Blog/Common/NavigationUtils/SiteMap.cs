@@ -95,7 +95,7 @@ namespace TestArena.Blog.Common.NavigationUtils
         new("Connection Pooling in SQL Server: What, When, and How",
             "/blog/connection-pooling-sql-server",
             new DateTime(2025, 6, 14),
-            "images/blog/sql-server/connection-pooling/banner.png",
+            "images/blog/connection-pooling-intro/banner.png",
             ["SQL Server", "Connection Pooling", ".NET", "Database"], false),
         ];
 
