@@ -6,7 +6,7 @@
     [Parameter] public string Description { get; set; } = "";
     [Parameter] public string HashTags { get; set; } = "";
 
-    private string BlogUrl => $"{NavigationManager.Uri}".Replace("http://localhost:5128","https://devcodex.in");
+    private string BlogUrl => $"{NavigationManager.Uri}";
 }
 <div class="social-share flex">
     <a href="@GetTwitterShareUrl()" title="Share on Twitter" target="_blank" rel="noopener">
