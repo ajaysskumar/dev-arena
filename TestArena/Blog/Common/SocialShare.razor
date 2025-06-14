@@ -1,50 +1,53 @@
 @inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
 
 @code {
     [Parameter] public string Title { get; set; } = "";
+    [Parameter] public string Description { get; set; } = "";
+    [Parameter] public string HashTags { get; set; } = "";
 
-    private string BlogUrl => $"{NavigationManager.Uri}";
+    private string BlogUrl => $"{NavigationManager.Uri}".Replace("http://localhost:5128","https://devcodex.in");
 }
 <div class="social-share flex">
-    <a href="https://twitter.com/intent/tweet?url=@System.Web.HttpUtility.UrlEncode("https://devcodex.in/blog/integration-testing-in-dotnet-with-aws")&text=@Uri.EscapeDataString(Title)" title="Share on Twitter" target="_blank" rel="noopener">
-        <img src="images/shared/icons/twitter-old.svg" alt="Twitter" width="24" style="cursor:pointer" />
+    <a href="@GetTwitterShareUrl()" title="Share on Twitter" target="_blank" rel="noopener">
+        <img src="images/shared/icons/twitter-old.svg" alt="Twitter/X" width="24" style="cursor:pointer" />
     </a>
-    <a href="https://www.linkedin.com/shareArticle?mini=true&url=@System.Web.HttpUtility.UrlEncode("https://devcodex.in/blog/integration-testing-in-dotnet-with-aws")&title=@Uri.EscapeDataString(Title)" title="Share on LinkedIn" target="_blank" rel="noopener">
+    <a href="@GetLinkedInShareUrl()" title="Share on LinkedIn" target="_blank" rel="noopener">
         <img src="images/shared/icons/linkedin.svg" alt="LinkedIn" width="24" style="cursor:pointer" />
     </a>
-    <a href="https://www.facebook.com/sharer/sharer.php?u=@Uri.EscapeDataString(BlogUrl)" title="Share on Facebook" target="_blank" rel="noopener">
+    <a href="@GetFacebookShareUrl()" title="Share on Facebook" target="_blank" rel="noopener">
         <img src="images/shared/icons/facebook.svg" alt="Facebook" width="24" style="cursor:pointer" />
     </a>
 </div>
 
 @code {
-    private enum SocialPlatform
+    private string GetTwitterShareUrl()
     {
-        Twitter,
-        LinkedIn,
-        Facebook
+        string url = Uri.EscapeDataString(BlogUrl);
+        string text = Uri.EscapeDataString(Title);
+        string hashtags = string.IsNullOrEmpty(HashTags) ? "" : $"&hashtags={HashTags.Replace(" ", "")}";
+        
+        return $"https://twitter.com/intent/tweet?url={url}&text={text}{hashtags}";
     }
-
-    private void Share(SocialPlatform platform)
+    
+    private string GetLinkedInShareUrl()
     {
-        string url = platform switch
-        {
-            SocialPlatform.Twitter => $"https://twitter.com/intent/tweet?url={Uri.EscapeDataString(BlogUrl)}&text={Uri.EscapeDataString(Title)}",
-            SocialPlatform.LinkedIn => $"https://www.linkedin.com/shareArticle?mini=true&url={System.Web.HttpUtility.UrlEncode("https://devcodex.in/blog/integration-testing-in-dotnet-with-aws")}",
-            SocialPlatform.Facebook => $"https://www.facebook.com/sharer/sharer.php?u={Uri.EscapeDataString(BlogUrl)}",
-            _ => ""
-        };
-
-        if (!string.IsNullOrEmpty(url))
-        {
-            OpenShareWindow(url);
-        }
+        // LinkedIn's current sharing URL format
+        string url = Uri.EscapeDataString(BlogUrl);
+        string title = Uri.EscapeDataString(Title);
+        string summary = string.IsNullOrEmpty(Description) ? "" : $"&summary={Uri.EscapeDataString(Description)}";
+        
+        return $"https://www.linkedin.com/feed/?shareActive=true&shareUrl={BlogUrl}";
     }
-
-    private void OpenShareWindow(string url)
+    
+    private string GetFacebookShareUrl()
     {
-        JS.InvokeVoidAsync("window.open", url, "_blank", "noopener,width=600,height=400");
+        string url = Uri.EscapeDataString(BlogUrl);
+        return $"https://www.facebook.com/sharer/sharer.php?u={url}";
     }
-
-    [Inject] private IJSRuntime JS { get; set; }
+    
+    private async Task CopyUrlToClipboard()
+    {
+        await JSRuntime.InvokeVoidAsync("navigator.clipboard.writeText", BlogUrl);
+    }
 }
