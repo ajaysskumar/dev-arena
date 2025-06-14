@@ -14,11 +14,18 @@
     <meta name="description" content="Your ultimate resource for development, AI integration, clean coding, software testing, and modern software practices."/>
     <!-- Removed meta keywords tag as modern search engines often ignore it -->
     <meta name="author" content="Ajay Kumar"/>
-    <meta property="og:title" content="Dev Codex: Your Ultimate Guide to .NET Development, AI, and Software Practices"/>
-    <meta property="og:description" content="Explore expert insights on .NET development, AI integration, clean coding, performance testing, and modern software practices. Build better, smarter, and faster applications with Dev Codex."/>
-    <meta property="og:url" content="https://devcodex.in/blog/connection-pooling-sql-server"/>
-    <meta property="og:type" content="website"/>
-    <meta property="og:locale" content="en_US"/>
+    <!-- <meta property="og:title" content="Dev Codex: Your Ultimate Guide to .NET Development, AI, and Software Practices" />
+    <meta property="og:description" content="Explore expert insights on .NET development, AI integration, clean coding, performance testing, and modern software practices. Build better, smarter, and faster applications with Dev Codex." />
+    <meta property="og:url" content="https://devcodex.in/blog/connection-pooling-sql-server" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" /> -->
+    
+<!--Blazor:{"type":"webassembly","prerenderId":"f34ba799495c4b329763d6d4462d2d40","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>Intro to PACT for .NET Core: Integration with PactFlow</title><meta property="og:url" content="http://127.0.0.1:5050/blog/integration-with-pactflow" />
+    <meta property="og:title" content="Intro to PACT for .NET Core: Integration with PactFlow" />
+    <meta property="og:description" content="" />
+    <meta property="og:image" content="http://127.0.0.1:5050images/blog/pact/pact-broker/banner.png" />
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"f34ba799495c4b329763d6d4462d2d40"}-->
+</head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
     <link rel="stylesheet" href="css/app.css"/>
@@ -29,13 +36,11 @@
 <link rel="icon" type="image/png" href="favicon.png"/>
 <link href="TestArena.styles.css" rel="stylesheet"/>
 
-<!--Blazor:{"type":"webassembly","prerenderId":"3537e0d475c74762abcded40c645804e","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><!--Blazor:{"prerenderId":"3537e0d475c74762abcded40c645804e"}-->
-</head>
 
-<body>
+
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"59edcdfa7d884df0a9ceab7cb6a76c19","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"49f680e9a91d47359e91fe2140a0169a","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -67,6 +72,9 @@
     }
 </style>
 
+
+
+
 <header class="article-header"><div class="row"><div class="col-md-12"><h1 class="fw-bold">Intro to PACT for .NET Core: Integration with PactFlow</h1></div>
         <div class="col-md-12"><img src="images/blog/pact/pact-broker/banner.png" alt="Article Banner" height="200" width="auto" class="img-fluid rounded mx-auto d-block my-3" loading="lazy" /></div>
         <div class="col-md-12"><div class="container-fluid"><div class="row"><div class="col-md-6 col-xs-12 d-flex justify-content-md-start justify-content-center"><span class="text-secondary fw-bold">Author(s): </span>
@@ -75,7 +83,7 @@
                     
                     <div class="col-md-6 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 11 Jan 2025</span></div></div></div></div></div></header>
 
-    <section id="5f69256e-c2cc-4ab4-94b0-17845b70e14a"><h3>Introduction</h3><hr class="border border-success border-1 opacity-50">
+    <section id="773169b9-fcf1-43fb-a321-080698c5eb4a"><h3>Introduction</h3><hr class="border border-success border-1 opacity-50">
     <div><p>This is in continuation of PACT for .NET series where we will be looking into one of the ways to integrate our APIs with PactFlow.</p>
         <p>For a short introduction, PactFlow is a platform that can act as a broker between consumers and providers services/systems. Consumers can push/upload the contracts to PactFlow and provider systems can read the same contracts and try to verify them.</p>
         <p>In PactFlow one can visualise failing/passing contracts, total contract integrations, dependency graph and much more. For a better read please visit <a href="https://pactflow.io/">https://pactflow.io/</a></p>
@@ -92,7 +100,7 @@
                 <a href="/blog/contract-testing-in-pact-with-events" class="text-muted">devcodex.in</a></div></div>
         <div class="col-md-4 d-flex align-items-center pe-2"><img src="/images/blog/pact/events-demo/banner.webp" class="img-fluid rounded-end" alt="Blog Image" /></div></div></div>
 
-    <section id="37af4526-a060-42bb-a6cc-3f587c64a2ad"><h3>Consumer Side</h3><hr class="border border-success border-1 opacity-50">
+    <section id="0f8d6591-70a7-49b0-a058-1849db27f3e3"><h3>Consumer Side</h3><hr class="border border-success border-1 opacity-50">
     <div><p>Once the PACT contract file is generated by the consumer, there are several ways we can push or upload the contract to PactFlow. You can read about all the ways at <a href="https://docs.pact.io/getting_started/sharing_pacts">https://docs.pact.io/getting_started/sharing_pacts</a>.</p>
         <p>For this post, I have used a combination of their REST APIs and the PactNet library.</p>
         <p>The below utility code uploads the contract file to the Pact broker. Among all the parameters, it requires the Pact broker base URI and read/write access token for authentication to the Pact broker. You can obtain this information by logging into your PactFlow account and reaching out to the settings section.</p>
@@ -300,7 +308,7 @@ Environment.GetEnvironmentVariable("PACT_FLOW_TOKEN");
 
         <p>If you observe the above image, we can see the contract is there, but its in unverified mode. It is because this pact has not been verified yet by the provider. We can see verification in action next.</p></div></section>
 
-    <section id="e938f2c1-c17c-4036-ac09-7a7c799c7478"><h3>Provider Side</h3><hr class="border border-success border-1 opacity-50">
+    <section id="90983c0a-429d-4fc0-8f0c-9808e651719b"><h3>Provider Side</h3><hr class="border border-success border-1 opacity-50">
     <div><p>Provider side verification is relatively straightforward. The following unit test in the provider's unit test class ensures compliance with the contract.</p>
 
         <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
@@ -504,7 +512,7 @@ public void Ensure_StudentApi_Honours_Pact_With_ConsumerOne_Using_PactFlow()
 <div class="row image-header"><figure class="text-center"><img src="/images/blog/pact/pact-broker/Image mentioning that the interactions have been passed.webp" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="Image mentioning that the interactions have been passed" loading="lazy" />
         <figcaption class="figure-caption"><strong>Figure 5 :</strong> Image mentioning that the interactions have been passed</figcaption></figure></div></div></section>
 
-    <section id="733f84af-31dc-43f3-b236-7edd1efab382"><h3>Failure scenario!</h3><hr class="border border-success border-1 opacity-50">
+    <section id="f54cfcda-a32f-4c2e-b49d-e6a42d29e052"><h3>Failure scenario!</h3><hr class="border border-success border-1 opacity-50">
     <div><p>Lets make some changes in our code to deliberately make the code fail. For demo we can change the student service to return <code>firstName1</code> property in the response instead on <code>firstName</code> as expected by consumer service. After making this change, when the unit test is run, we can see the below result in pact verification.</p>
 
         <style>
@@ -629,9 +637,9 @@ public void Ensure_StudentApi_Honours_Pact_With_ConsumerOne_Using_PactFlow()
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-        <!--Blazor:{"prerenderId":"59edcdfa7d884df0a9ceab7cb6a76c19"}-->
+        <!--Blazor:{"prerenderId":"49f680e9a91d47359e91fe2140a0169a"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80Um5JeE9ERlhja04yZEU5MWIwVTJWRWx3TW1kQlZVUXpVSEpDYTNSQ2NqQXpYMEptZDBaSGRFSXdiekJFWTFabGNXVmpVSGRIY1dGT1FWazNaVUo0VkhRM2JVUkdZM0kxTlZWZk5FRndVRk5KVldSRFdUVnRkVjlmZVc5Q2JXTjNYMFF3YnkxRGJUTlhWWEJRWWtRMFpWRnNZV2xVTmpaVldYcGxlblUxWVUxNE5WbFJaa0ZxVTJ0T1gwWkdOMGxaT1ZaV1lXaHpJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UXpKV05VNTBkelF3TlVOclV6WXdTVXhaY1d0YVZXVnNVSFU1TWpBMFprUnNWRU5uTUU5R05rSjZaM1J2Y3pCMldWUmpORTltUVRCWlVXbEdNMWhTWkhWTGQwUXRNelV5VGtaZmJucDRPSEZZVlZaM2JuUTJhVlpzY0U0emRpMXdTRUpUYkVGd09FOVJMWEU0WjFaVFNUZFZZM0pvUzFOVE56RmhXbWwzTkc0eFpIaGphelpXZWtSWU4yaEhXRVZCYXpjMFptWnJJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
@@ -643,4 +651,4 @@ public void Ensure_StudentApi_Honours_Pact_With_ConsumerOne_Using_PactFlow()
 
 
 
-</body></html>
+</headoutlet></body></html>

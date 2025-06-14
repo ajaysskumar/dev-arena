@@ -14,11 +14,14 @@
     <meta name="description" content="Your ultimate resource for development, AI integration, clean coding, software testing, and modern software practices."/>
     <!-- Removed meta keywords tag as modern search engines often ignore it -->
     <meta name="author" content="Ajay Kumar"/>
-    <meta property="og:title" content="Dev Codex: Your Ultimate Guide to .NET Development, AI, and Software Practices"/>
-    <meta property="og:description" content="Explore expert insights on .NET development, AI integration, clean coding, performance testing, and modern software practices. Build better, smarter, and faster applications with Dev Codex."/>
-    <meta property="og:url" content="https://devcodex.in/blog/connection-pooling-sql-server"/>
-    <meta property="og:type" content="website"/>
-    <meta property="og:locale" content="en_US"/>
+    <!-- <meta property="og:title" content="Dev Codex: Your Ultimate Guide to .NET Development, AI, and Software Practices" />
+    <meta property="og:description" content="Explore expert insights on .NET development, AI integration, clean coding, performance testing, and modern software practices. Build better, smarter, and faster applications with Dev Codex." />
+    <meta property="og:url" content="https://devcodex.in/blog/connection-pooling-sql-server" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" /> -->
+    
+<!--Blazor:{"type":"webassembly","prerenderId":"68144f809bb04f419abe01036bcef4bd","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><!--Blazor:{"prerenderId":"68144f809bb04f419abe01036bcef4bd"}-->
+</head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
     <link rel="stylesheet" href="css/app.css"/>
@@ -29,13 +32,11 @@
 <link rel="icon" type="image/png" href="favicon.png"/>
 <link href="TestArena.styles.css" rel="stylesheet"/>
 
-<!--Blazor:{"type":"webassembly","prerenderId":"f8317f5408534bb2a385430c7d0b6f0b","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><!--Blazor:{"prerenderId":"f8317f5408534bb2a385430c7d0b6f0b"}-->
-</head>
 
-<body>
+
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"49810025d8cf453e9c4be388109253f6","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"d4803045cbd44aed9b044f3f94307b70","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -179,9 +180,9 @@
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-        <!--Blazor:{"prerenderId":"49810025d8cf453e9c4be388109253f6"}-->
+        <!--Blazor:{"prerenderId":"d4803045cbd44aed9b044f3f94307b70"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80Um5JeE9ERlhja04yZEU5MWIwVTJWRWx3TW1kQldIQkNiVkZFV0hKRlNqaE9XbGhrTlZOa1EwdFJVWGRpTkVSclkxOWhTbGRyTjNKT1NuQlNXVEk0WldWSVpFdDJXVmhWYUhVMmRVSjNOME5LYmtoUlRVbzBlREpLZDBsalp6TlFaVEZZY1VkMFl6Sm9URlo1U25aSGEwOURNRE5vWDNSTVl6VnpiSGRLVVdaWWVIUnBNakJNWVV4QlJXeHNObGhFWVVwS2QxUlJJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UXpKV05VNTBkelF3TlVOclV6WXdTVXhaY1d0YVZuWkZTemwxYTJOQlJtSnhZMmN6UkdsWVMwSlFibGhaZVdodE9ETmtRVzExTUd4eVVrVTVNMFpuZUdsa2MwWm9VRFJpT1Y5a2FISktaazE1YUdwQ2RWRkxjak5FT1hCM2VWWTFkMkpQU0VNNE1ISkRaMkU1VkdadlYybE1hR3hFT0RWNU5pMVhVbUp1UzBOaFoxRndkMkp4UXpKMVdrOUZVamxrVVRreWVqaFJJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
@@ -193,4 +194,4 @@
 
 
 
-</body></html>
+</headoutlet></body></html>
