@@ -109,7 +109,18 @@ Links to related articles:
     Source="devcodex.in" />
 ```
 
-### 8. EndNotes
+### 8. SocialShare
+
+Enables readers to share blog posts on social media:
+
+```cshtml
+<SocialShare 
+    Title="@currentPage.Header" 
+    Description="A concise description of your blog post" 
+    HashTags="dotnet,blazor,webdev" />
+```
+
+### 9. EndNotes
 
 Adds conclusion with repository link:
 
