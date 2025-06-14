@@ -1,0 +1,21 @@
+@using TestArena.Blog.Common
+@using TestArena.Blog.Common.NavigationUtils
+@using Microsoft.AspNetCore.Components.Web
+
+@code {
+    [Parameter] public PageInfo CurrentPage { get; set; } = null!;
+    [Parameter] public string Description { get; set; } = string.Empty;
+    [Parameter] public RenderFragment ChildContent { get; set; } = null!;
+    [Parameter] public string Authors { get; set; } = "Ajay Kumar";
+}
+
+<BlogContainer>
+    <Header 
+        Title="@CurrentPage.Header"
+        Image="@CurrentPage.ArticleImage" 
+        PublishedOn="@CurrentPage.PublishedOn" 
+        Authors="@Authors">
+    </Header>
+
+    @ChildContent
+</BlogContainer>

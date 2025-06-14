@@ -91,6 +91,18 @@ namespace TestArena.Blog.Common.NavigationUtils
             new DateTime(2025, 6, 7),
             "images/blog/software-practices/solid/isp/banner.png",
             ["Software Practices", "SOLID", "ISP"]),
+
+        new("Connection Pooling in SQL Server: What, When, and How",
+            "/blog/connection-pooling-sql-server",
+            new DateTime(2025, 6, 14),
+            "images/blog/connection-pooling-intro/banner.png",
+            ["SQL Server", "Connection Pooling", ".NET", "Database"]),
+
+        new("Understanding and Using OpenAI APIs: A Comprehensive Guide",
+            "/blog/ai/openai-rest-api-in-dotnet",
+            new DateTime(2025, 6, 21),
+            "images/blog/ai/open-ai-rest-demo/banner.png",
+            ["AI", "OpenAI", "API", ".NET", "C#"]),
         ];
 
         public static IEnumerable<PageInfo> PublishedArticles => Pages.Where(p => p.IsPublished && p.PublishedOn <= DateTime.UtcNow);
