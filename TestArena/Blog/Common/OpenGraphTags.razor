@@ -20,5 +20,5 @@
     private string ImageAbsoluteUrl => 
         string.IsNullOrEmpty(ImageUrl) ? string.Empty :
         ImageUrl.StartsWith("http") ? ImageUrl : 
-        $"{NavigationManager.BaseUri.TrimEnd('/')}{ImageUrl}";
+        $"{NavigationManager.BaseUri}{ImageUrl}";
 }

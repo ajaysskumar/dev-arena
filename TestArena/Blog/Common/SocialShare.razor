@@ -1,0 +1,53 @@
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
+
+@code {
+    [Parameter] public string Title { get; set; } = "";
+    [Parameter] public string Description { get; set; } = "";
+    [Parameter] public string HashTags { get; set; } = "";
+
+    private string BlogUrl => $"{NavigationManager.Uri}";
+}
+<div class="social-share flex">
+    <a href="@GetTwitterShareUrl()" title="Share on Twitter" target="_blank" rel="noopener">
+        <img src="images/shared/icons/twitter-old.svg" alt="Twitter/X" width="24" style="cursor:pointer" />
+    </a>
+    <a href="@GetLinkedInShareUrl()" title="Share on LinkedIn" target="_blank" rel="noopener">
+        <img src="images/shared/icons/linkedin.svg" alt="LinkedIn" width="24" style="cursor:pointer" />
+    </a>
+    <a href="@GetFacebookShareUrl()" title="Share on Facebook" target="_blank" rel="noopener">
+        <img src="images/shared/icons/facebook.svg" alt="Facebook" width="24" style="cursor:pointer" />
+    </a>
+</div>
+
+@code {
+    private string GetTwitterShareUrl()
+    {
+        string url = Uri.EscapeDataString(BlogUrl);
+        string text = Uri.EscapeDataString(Title);
+        string hashtags = string.IsNullOrEmpty(HashTags) ? "" : $"&hashtags={HashTags.Replace(" ", "")}";
+        
+        return $"https://twitter.com/intent/tweet?url={url}&text={text}{hashtags}";
+    }
+    
+    private string GetLinkedInShareUrl()
+    {
+        // LinkedIn's current sharing URL format
+        string url = Uri.EscapeDataString(BlogUrl);
+        string title = Uri.EscapeDataString(Title);
+        string summary = string.IsNullOrEmpty(Description) ? "" : $"&summary={Uri.EscapeDataString(Description)}";
+        
+        return $"https://www.linkedin.com/feed/?shareActive=true&shareUrl={BlogUrl}";
+    }
+    
+    private string GetFacebookShareUrl()
+    {
+        string url = Uri.EscapeDataString(BlogUrl);
+        return $"https://www.facebook.com/sharer/sharer.php?u={url}";
+    }
+    
+    private async Task CopyUrlToClipboard()
+    {
+        await JSRuntime.InvokeVoidAsync("navigator.clipboard.writeText", BlogUrl);
+    }
+}
