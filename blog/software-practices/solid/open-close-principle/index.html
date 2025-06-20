@@ -20,11 +20,11 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" /> -->
     
-<!--Blazor:{"type":"webassembly","prerenderId":"5f3241fb56bb411499782ad73c423e19","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>SOLID Principles: Understanding the Open/Closed Principle</title><meta property="og:url" content="http://127.0.0.1:5050/blog/software-practices/solid/open-close-principle" />
+<!--Blazor:{"type":"webassembly","prerenderId":"381428d856074499a7c3ccfeb654c9a5","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>SOLID Principles: Understanding the Open/Closed Principle</title><meta property="og:url" content="http://127.0.0.1:5050/blog/software-practices/solid/open-close-principle" />
     <meta property="og:title" content="SOLID Principles: Understanding the Open/Closed Principle" />
     <meta property="og:description" content="" />
     <meta property="og:image" content="http://127.0.0.1:5050/images/blog/software-practices/solid/ocp/banner.png" />
-    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"5f3241fb56bb411499782ad73c423e19"}-->
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"381428d856074499a7c3ccfeb654c9a5"}-->
 </head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -40,7 +40,7 @@
 
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"f5e68bc9941a4920aaa324a6a8da93a2","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"f6cb19e3afab4e2d8ad83d7cfc875cb3","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -87,7 +87,7 @@
                     
                     <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 24 May 2025</span></div></div></div></div></div></header>
 
-    <section id="ccf176d1-4dde-41c7-bbc4-053ffc734c26"><h3>&#x1F50D; What is the Open/Closed Principle (OCP)?</h3><hr class="border border-success border-1 opacity-50">
+    <section id="771d63c9-35d8-42bf-90c0-693c56bce15c"><h3>&#x1F50D; What is the Open/Closed Principle (OCP)?</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             Imagine you own a pizza shop. Every time a customer wants a new topping, you have to rewrite your entire menu and retrain your staff. Sounds exhausting, right? Wouldn’t it be better if you could just add new toppings without changing how your kitchen works? That’s the essence of the <b>Open/Closed Principle (OCP)</b> in software design.
         </p>
@@ -95,7 +95,7 @@
             OCP is the second of the five SOLID principles. In simple terms: <b>“Software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification.”</b> This means you should be able to add new features or behaviors without changing existing code.
         </p></div></section>
 
-    <section id="12a71d10-dcec-4bf7-b668-bcc483fc228a"><h3>&#x1F4A1; Why is OCP Useful?</h3><hr class="border border-success border-1 opacity-50">
+    <section id="853ecbeb-36cb-41f2-9d3d-a5c318e46c89"><h3>&#x1F4A1; Why is OCP Useful?</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             Let’s go back to our pizza shop analogy. If you keep changing your kitchen’s workflow every time you add a topping, mistakes will happen, and your staff will get confused. In code, constantly modifying existing classes can introduce bugs and make maintenance a nightmare. OCP helps you:
         </p>
@@ -103,7 +103,7 @@
             <li><b>Encourage reuse:</b> You can add new features by building on top of what’s already there.</li>
             <li><b>Make maintenance easier:</b> Extensions are isolated, so changes are less risky.</li></ul></div></section>
 
-    <section id="0427a386-7293-48cb-a1da-f41dd083ee49"><h3>&#x1F552; When Should You Apply OCP?</h3><hr class="border border-success border-1 opacity-50">
+    <section id="d2c4130b-49c6-408e-bd68-cd9f10393353"><h3>&#x1F552; When Should You Apply OCP?</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             OCP is most valuable when your application needs to adapt to new requirements frequently. Watch for these signs:
         </p>
@@ -111,7 +111,7 @@
             <li>You want to support plugins or modules without rewriting core logic.</li>
             <li>Multiple teams work on different features that extend the same base functionality.</li></ul></div></section>
 
-    <section id="975f3f0c-df59-4e53-b45f-c11409d3a205"><h3>&#x1F6E0;&#xFE0F; How to Implement OCP in C#?</h3><hr class="border border-success border-1 opacity-50">
+    <section id="5ced3c3a-8655-4bfe-8584-0d1a75e55efe"><h3>&#x1F6E0;&#xFE0F; How to Implement OCP in C#?</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             Let’s get practical. Imagine you’re building a notification system. Initially, you only send emails, but soon you need to support SMS and push notifications. Here’s a class that violates OCP:
         </p>
@@ -184,16 +184,16 @@ public class NotificationService
             Now, to add a new notification type (like push notifications), you just implement <code>INotificationSender</code>—no changes to <code>NotificationService</code> needed! This keeps your codebase stable and easy to extend.
             </p></div></div></div></section>
 
-    <section id="fdcc22ec-507c-45c1-b6c2-ba0dd682bf4d"><h3>&#x1F30D; Real-World Analogy</h3><hr class="border border-success border-1 opacity-50">
+    <section id="a95fe750-9102-4444-9bec-8aa351ccb765"><h3>&#x1F30D; Real-World Analogy</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             Think of OCP like adding new apps to your smartphone. You don’t have to change the phone’s operating system every time you want a new feature—you just install an app. The OS is closed for modification but open for extension.
         </p></div></section>
 
-    <section id="04c0b9e2-4629-4994-8e61-d98c361ea645"><h3>&#x1F6A6; Common Pitfalls and How to Avoid Them</h3><hr class="border border-success border-1 opacity-50">
+    <section id="bada89bb-097b-4d8d-9139-920480cd5345"><h3>&#x1F6A6; Common Pitfalls and How to Avoid Them</h3><hr class="border border-success border-1 opacity-50">
     <div><ul><li><b>Overengineering:</b> Don’t create abstractions for everything. Use OCP when you expect changes or extensions.</li>
             <li><b>Leaky abstractions:</b> Make sure your interfaces are meaningful and not just placeholders.</li></ul></div></section>
 
-    <section id="b4c3edae-2cd0-40c0-a93c-8912b04d96ca"><h3>&#x1F517; Summary</h3><hr class="border border-success border-1 opacity-50">
+    <section id="93ea029c-5146-43c4-b09f-39bca6b368c3"><h3>&#x1F517; Summary</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             The Open/Closed Principle helps you build flexible, maintainable, and robust software. By designing your code to be open for extension but closed for modification, you can adapt to new requirements with confidence and less risk.
         </p></div></section></div>
@@ -216,9 +216,9 @@ public class NotificationService
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-        <!--Blazor:{"prerenderId":"f5e68bc9941a4920aaa324a6a8da93a2"}-->
+        <!--Blazor:{"prerenderId":"f6cb19e3afab4e2d8ad83d7cfc875cb3"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80U2tsMFVuWk1WMTgwVmtsc1dIZDBWV2hmZWxZeFZIbGZjMWxoVGxOdVYxTXhaWGRUVWpsRFdsUlpkMUpoTmpkTGFtbHVUek41VFVZeVRXVjFVRTlWUzNwSFZXMXJkMVZrZW1GRFJYWk1ORXg1YW1GVWFVYzNZVFJsYjNOTWVrMTVObE5UUWxaUFJEZHZhbTAwYUhoYVV6RnFhR2hTUVV0amJHNHRORGwwVG5VeWJrSkRTMFF5VGpWMGNWaHVVMUF3VkdGcVJraEJJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80VERsME1tMUpSV0ZuV2tsc1VtZFBkRW96YWtaSVNYZEtTM1l6U1habGNsRlVUbXBsYUdWT2RVVldiSFJrZW1aNFVXRTJZeTB0Wkd0c1VtdzNaVVpmZEVkU2NYaFFWVFpaZFZSZlJtNVZUR1psVXpCTFFqSklUR2RFZGpORWNtOVdXR2gzVTBsV1lYVnVVVVJwVjFSTFdtZHJUSEpvU214Sk1UZEZNM0JJVEZJMFYyUTBhRXhZYm1SRVl6QkVORTg1YkVOd2JFd3dJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
