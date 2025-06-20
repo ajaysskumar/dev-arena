@@ -20,11 +20,11 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" /> -->
     
-<!--Blazor:{"type":"webassembly","prerenderId":"8e0928c7ceec4907a4a87ebdc8c997b9","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>SOLID Principles: Understanding the Liskov Substitution Principle</title><meta property="og:url" content="http://127.0.0.1:5050/blog/software-practices/solid/liskov-substitution-principle" />
+<!--Blazor:{"type":"webassembly","prerenderId":"0801054b3bb74597b1f582441443c2a7","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>SOLID Principles: Understanding the Liskov Substitution Principle</title><meta property="og:url" content="http://127.0.0.1:5050/blog/software-practices/solid/liskov-substitution-principle" />
     <meta property="og:title" content="SOLID Principles: Understanding the Liskov Substitution Principle" />
     <meta property="og:description" content="" />
     <meta property="og:image" content="http://127.0.0.1:5050/images/blog/software-practices/solid/lsp/banner.png" />
-    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"8e0928c7ceec4907a4a87ebdc8c997b9"}-->
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"0801054b3bb74597b1f582441443c2a7"}-->
 </head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -40,7 +40,7 @@
 
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"b6c3af511e824c1cb9fef0e9db84a0c6","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"7834e94bee0541fca901b0ae2c123b37","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -88,7 +88,7 @@
                     <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 31 May 2025</span></div></div></div></div></div></header>
 
     
-    <section id="7125ff33-d085-40dd-b84a-ffd0d56cacee"><h3>&#x1F50D; What is the Liskov Substitution Principle (LSP)?</h3><hr class="border border-success border-1 opacity-50">
+    <section id="4c764a27-78a2-4610-b516-4882c0003db1"><h3>&#x1F50D; What is the Liskov Substitution Principle (LSP)?</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             Imagine you have a universal remote at home. It works perfectly with your TV, but when you try it with your new soundbar, some buttons do the wrong thing—or nothing at all! Frustrating, right? In software, the <b>Liskov Substitution Principle (LSP)</b> is about making sure that when you swap one part (like a remote or a class) for another, everything still works as expected.
         </p>
@@ -96,7 +96,7 @@
             LSP is the third of the five SOLID principles. In simple terms: <b>"Objects of a superclass should be replaceable with objects of a subclass without breaking the application."</b> That means if you have code that works with a base class, it should work just as well with any derived class.
         </p></div></section>
 
-    <section id="06475c08-0dc0-42e5-a082-532afbde39e2"><h3>&#x1F4A1; Why is LSP Important?</h3><hr class="border border-success border-1 opacity-50">
+    <section id="20430a8b-9485-4346-a7b0-3181dcf5f416"><h3>&#x1F4A1; Why is LSP Important?</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             Violating LSP leads to code that’s hard to maintain, test, and extend. If a subclass can’t be used in place of its parent, you’ll end up with bugs, unexpected behavior, and lots of <code>if</code> statements to handle exceptions. Here’s why LSP matters:
         </p>
@@ -107,7 +107,7 @@
             LSP helps you build robust, future-proof systems where new features don’t break old ones.
         </p></div></section>
 
-    <section id="30441efb-9409-403a-be76-0b210058d3de"><h3>&#x1F552; When Does LSP Matter Most?</h3><hr class="border border-success border-1 opacity-50">
+    <section id="2e2d5b55-e9c4-4b0a-9d90-a0baee3b6510"><h3>&#x1F552; When Does LSP Matter Most?</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             LSP is crucial when you use inheritance or interfaces. Watch for these red flags 🚩:
         </p>
@@ -118,7 +118,7 @@
             The earlier you spot these, the easier it is to fix. LSP is your guide to safe inheritance!
         </p></div></section>
 
-    <section id="94df1fd3-fa61-4b02-a522-aa3974d46eaa"><h3>&#x1F6E0;&#xFE0F; How Do You Apply LSP in C#?</h3><hr class="border border-success border-1 opacity-50">
+    <section id="e0ccc2b5-21c9-4035-8547-a0e2e189a5c1"><h3>&#x1F6E0;&#xFE0F; How Do You Apply LSP in C#?</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             Let’s get practical. Suppose you have a <code>Rectangle</code> class and a <code>Square</code> class that inherits from it:
         </p>
@@ -189,7 +189,7 @@ public class Square : IShape
             Now, <code>Rectangle</code> and <code>Square</code> both implement <code>IShape</code>, and you can use them interchangeably without breaking expectations.
         </p></div></section>
 
-    <section id="4196d248-d1ac-4fa9-a8b0-dbef817994e8"><h3>&#x1F30D; LSP in the Real World: Practical Scenarios</h3><hr class="border border-success border-1 opacity-50">
+    <section id="b75fb70d-7ce6-444d-9fed-dfb72479cf51"><h3>&#x1F30D; LSP in the Real World: Practical Scenarios</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             LSP isn’t just for shapes! It applies to services, controllers, and any place you use inheritance or interfaces. Here’s a real-world example with a payment system:
         </p>
@@ -220,7 +220,7 @@ public class PaypalProcessor : IPaymentProcessor
             Any code that expects an <code>IPaymentProcessor</code> can use either <code>CreditCardProcessor</code> or <code>PaypalProcessor</code> without worrying about surprises. That’s LSP in action!
         </p></div></section>
 
-    <section id="3be453e5-bbc6-46f9-9588-a9c0c5ba50e5"><h3>&#x1F6A9; Common Pitfalls (and How to Dodge Them)</h3><hr class="border border-success border-1 opacity-50">
+    <section id="67061db8-0942-43fd-9652-a5077a1f6605"><h3>&#x1F6A9; Common Pitfalls (and How to Dodge Them)</h3><hr class="border border-success border-1 opacity-50">
     <div><ul><li><b>Forcing inheritance:</b> Don’t use inheritance just to reuse code. Only use it for true "is-a" relationships.</li>
             <li><b>Overriding with surprises:</b> Subclasses that override methods and change expected behavior break LSP.</li>
             <li><b>Throwing NotImplementedException:</b> If a subclass can’t implement a method, it probably shouldn’t inherit from the base class.</li>
@@ -228,7 +228,7 @@ public class PaypalProcessor : IPaymentProcessor
         <p><b>Pro tip:</b> When in doubt, ask: “If I swap this class for its parent, will my code still work?” If not, rethink your design!
         </p></div></section>
 
-    <section id="2eafbb53-a88b-4910-b66c-cc94e4130db5"><h3>&#x1F517; LSP and the Other SOLID Principles</h3><hr class="border border-success border-1 opacity-50">
+    <section id="a4fd5629-ab72-46a3-8f66-391627cf87dc"><h3>&#x1F517; LSP and the Other SOLID Principles</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             LSP works hand-in-hand with the other SOLID principles:
         </p>
@@ -240,7 +240,7 @@ public class PaypalProcessor : IPaymentProcessor
             Mastering LSP helps you build flexible, reliable, and maintainable systems.
         </p></div></section>
 
-    <section id="9f2edf03-7e58-46bd-a7fc-7d280731b462"><h3>&#x1F4DD; Wrapping Up: Why LSP Makes Life Easier</h3><hr class="border border-success border-1 opacity-50">
+    <section id="5b05bee1-dcdd-4683-802b-d32c9c7c24eb"><h3>&#x1F4DD; Wrapping Up: Why LSP Makes Life Easier</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             The Liskov Substitution Principle is about trust and predictability. Like a universal remote that works with every device, LSP helps you build systems where parts can be swapped without fear. Use LSP to guide your inheritance and interface design, and your codebase will be easier to test, extend, and maintain.
         </p></div></section></div>
@@ -263,9 +263,9 @@ public class PaypalProcessor : IPaymentProcessor
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-        <!--Blazor:{"prerenderId":"b6c3af511e824c1cb9fef0e9db84a0c6"}-->
+        <!--Blazor:{"prerenderId":"7834e94bee0541fca901b0ae2c123b37"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UWtkdmREaElNbmhCZEVkbldtNHRVRGhGUVRKM1JVUkVkelJTV0docGFsZ3dTRUpWVDNCeWNUTjVkMFpOY21RNWRtRmxVVlpZVW0xWFVuaEdabkpSYW5sRGNXZG5OVzE0UTFoNFRtaHVTRmRDV1VGZmR6Tm1NMUJJZEdkdGJ6VXRVa2h4WVVGM2NVdGpkRFowY201VE16azBOQzFmVEd0Q1pYSTFUMjh5ZG1oa1kyeExRamcxTjJjeFlVWjFZemswY2xka2NEbFpJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80U2tsMFVuWk1WMTgwVmtsc1dIZDBWV2hmZWxZeFVUQkpUVjl0WkhObmNFdDRhREE1V0hGblpFNWFkWEZEV25CUFNWOVhjMWgyWkROMU5WUjNUak01ZFRGSlFYSXdjMUZKYkhOVmNHUmlWMDVNVEc1QlMweEpWVmxzUlVocGRHbzBRVkprTm1OQk9YUlRlRUpIYURCR1FqSlFlR0pNY1RGWVZYZE9ZV3QxZDJrd1ZFZE9kMDA1VlhZeVNIVmZVVXM1VTJKVloybEJJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
