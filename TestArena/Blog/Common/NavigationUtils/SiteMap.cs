@@ -98,7 +98,7 @@ namespace TestArena.Blog.Common.NavigationUtils
             "images/blog/connection-pooling-intro/banner.png",
             ["SQL Server", "Connection Pooling", ".NET", "Database"]),
 
-        new("Understanding and Using OpenAI APIs: A Comprehensive Guide",
+        new("Using OpenAI APIs: Basic chat completions API Guide in .NET",
             "/blog/ai/openai-rest-api-in-dotnet",
             new DateTime(2025, 6, 28),
             "images/blog/ai/open-ai-rest-demo/banner.png",
