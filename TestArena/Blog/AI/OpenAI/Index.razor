@@ -2,16 +2,44 @@
 @using TestArena.Blog.Common
 @using TestArena.Blog.Common.NavigationUtils
 
+@using TestArena
+@inject OpenAIService OpenAIService
+
 @code {
     PageInfo currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/ai/openai-rest-api-in-dotnet")!;
+
+    private string? titanicSummary;
+    private string movieInput = "Titanic";
+    private string apiKeyInput = string.Empty;
+    private string ApiKeyInputTrimmed => apiKeyInput?.Trim() ?? string.Empty;
+    private string MovieInputTrimmed => movieInput?.Trim() ?? string.Empty;
+    private bool IsGetSummaryDisabled => isLoading || string.IsNullOrWhiteSpace(ApiKeyInputTrimmed) || string.IsNullOrWhiteSpace(MovieInputTrimmed);
+    private bool isApiKeyVisible = false;
+    private bool isLoading = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Optionally, prefill API key from env or local storage if desired
+    }
+
+    private async Task GetSummary()
+    {
+        isLoading = true;
+        titanicSummary = null;
+        StateHasChanged();
+        titanicSummary = await OpenAIService.GetMovieSummaryAsync(MovieInputTrimmed, ApiKeyInputTrimmed);
+        isLoading = false;
+        StateHasChanged();
+    }
 }
 
 <BlogContainer>
     <Header
         Title="@currentPage.Header"
-        Description="Learn how to leverage OpenAI's powerful APIs to integrate AI capabilities into your applications. From authentication to implementation, discover everything you need to know about working with OpenAI APIs."
+        Description="Learn how to leverage OpenAI's powerful APIs to integrate AI capabilities into your applications. From authentication to implementation, discover everything you need to know about working with OpenAI APIs using direct HTTP requests."
         Image="@currentPage.ArticleImage"
-        PublishedOn="@currentPage.PublishedOn"/>
+        PublishedOn="@currentPage.PublishedOn"
+        Authors="Ajay kumar"/>
 
     <Section Heading="Understanding OpenAI APIs">
         <p>
@@ -50,125 +78,88 @@
         </ul>
     </Section>
 
-    <Section Heading="How to Implement OpenAI APIs">
-        <h3>1. Authentication and Setup</h3>
-        
+
+    <Section Heading="How to Implement OpenAI APIs (API-based Approach)">
+        <h3>1. Authentication: Getting and Securing Your API Key</h3>
         <p>
-            First, you'll need to set up authentication with OpenAI. Here's how to configure it in a C# application:
+            <b>Authentication</b> is required for every OpenAI API call. You must use a secret API key, which you can generate from your <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI dashboard</a>.
         </p>
+        <ul>
+            <li><b>Never share or commit your API key to source control.</b></li>
+            <li>Store your API key in a secure location, such as an environment variable or a secrets manager.</li>
+            <li>For local development, you can set the key in your shell profile or <code>appsettings.Development.json</code> (but never in public repos).</li>
+        </ul>
+        <p>Example: Setting an environment variable in your terminal (macOS/Linux):</p>
+        <CodeSnippet Language="bash">export OPENAI_API_KEY=sk-...yourkey...</CodeSnippet>
+        <p>Or in Windows PowerShell:</p>
+        <CodeSnippet Language="bash">$env:OPENAI_API_KEY="sk-...yourkey..."</CodeSnippet>
+        <p>Accessing the key in C#:</p>
+        <CodeSnippet Language="csharp">
+string apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
+if (string.IsNullOrWhiteSpace(apiKey))
+    throw new InvalidOperationException("OpenAI API key not found in environment variables.");
+        </CodeSnippet>
 
-        <CodeSnippet Language="csharp" >
-using OpenAI.GPT3;
-using OpenAI.GPT3.Managers;
-using OpenAI.GPT3.ObjectModels.RequestModels;
-
-public class OpenAIService
+        <h3>2. Setup: Creating a Typed API Client</h3>
+        <p>
+            To call OpenAI APIs directly, you'll use <b>HttpClient</b> to make HTTP requests. Here is a simple client class that includes authentication in every request:
+        </p>
+        <CodeSnippet Language="csharp">
+public class OpenAIClient
 {
-    private readonly OpenAIService _openAiService;
+    private readonly HttpClient _httpClient;
+    private readonly string _apiKey;
 
-    public OpenAIService(IConfiguration configuration)
+    public OpenAIClient(HttpClient httpClient, string apiKey)
     {
-        var apiKey = configuration["OpenAI:ApiKey"];
-        _openAiService = new OpenAIService(new OpenAiOptions { ApiKey = apiKey });
+        _httpClient = httpClient;
+        _apiKey = apiKey;
+    }
+
+    private HttpRequestMessage CreateRequest(string url, HttpMethod method, string jsonContent)
+    {
+        var request = new HttpRequestMessage(method, url);
+        request.Headers.Add("Authorization", $"Bearer {_apiKey}");
+        request.Content = new StringContent(jsonContent, System.Text.Encoding.UTF8, "application/json");
+        return request;
     }
 }
         </CodeSnippet>
 
-        <h3>2. Making API Calls</h3>
-        
+
+        <h3>3. Handling Chat Conversations (Chat Completion API)</h3>
         <p>
-            Let's implement a simple text completion example:
+            For chat-based interactions, use the <b>Chat Completions</b> endpoint. Here’s a practical example: asking the model to summarize a movie.
         </p>
-
-        <CodeSnippet Language="csharp" >
-public async Task&lt;string&gt; GenerateCompletion(string prompt)
+        <p><b>Example prompt:</b> <code>Give me a summary of the movie Inception.</code></p>
+        <CodeSnippet Language="csharp">
+public async Task&lt;string&gt; GetChatResponseAsync()
 {
-    var completionResult = await _openAiService.Completions.CreateCompletion(new CompletionCreateRequest
+    var url = "https://api.openai.com/v1/chat/completions";
+    var requestBody = new
     {
-        Prompt = prompt,
-        Model = Models.TextDavinciV3,
-        MaxTokens = 100,
-        Temperature = 0.7,
-        TopP = 1,
-        FrequencyPenalty = 0,
-        PresencePenalty = 0
-    });
-
-    if (completionResult.Successful)
-    {
-        return completionResult.Choices[0].Text;
-    }
-
-    throw new Exception($"API Error: {completionResult.Error?.Message}");
-}
-        </CodeSnippet>
-
-        <h3>3. Handling Chat Conversations</h3>
-        
-        <p>
-            For chat-based interactions, use the Chat Completion API:
-        </p>
-
-        <CodeSnippet Language="csharp" >
-public async Task&lt;string&gt; GetChatResponse(string userMessage)
-{
-    var chatResult = await _openAiService.ChatCompletion.CreateCompletion(new ChatCompletionCreateRequest
-    {
-        Messages = new List&lt;ChatMessage&gt;
+        model = "gpt-4",
+        messages = new[]
         {
-            ChatMessage.FromSystem("You are a helpful assistant."),
-            ChatMessage.FromUser(userMessage)
+            new { role = "system", content = "You are a helpful assistant." },
+            new { role = "user", content = "Give me a summary of the movie Inception." }
         },
-        Model = Models.Gpt_4,
-        MaxTokens = 150
-    });
+        max_tokens = 150
+    };
+    var json = JsonSerializer.Serialize(requestBody);
+    var request = CreateRequest(url, HttpMethod.Post, json);
 
-    if (chatResult.Successful)
-    {
-        return chatResult.Choices[0].Message.Content;
-    }
+    var response = await _httpClient.SendAsync(request);
+    response.EnsureSuccessStatusCode();
 
-    throw new Exception($"API Error: {chatResult.Error?.Message}");
+    var responseString = await response.Content.ReadAsStringAsync();
+    using var doc = JsonDocument.Parse(responseString);
+    return doc.RootElement.GetProperty("choices")[0].GetProperty("message").GetProperty("content").GetString();
 }
+// Usage:
+// string summary = await GetChatResponseAsync();
         </CodeSnippet>
 
-        <h3>4. Error Handling and Best Practices</h3>
-
-        <p>
-            Implement robust error handling and rate limiting:
-        </p>
-
-        <CodeSnippet Language="csharp" >
-public class OpenAIApiException : Exception
-{
-    public string ErrorCode { get; }
-    public HttpStatusCode StatusCode { get; }
-
-    public OpenAIApiException(string message, string errorCode, HttpStatusCode statusCode) 
-        : base(message)
-    {
-        ErrorCode = errorCode;
-        StatusCode = statusCode;
-    }
-}
-
-private async Task&lt;T&gt; ExecuteWithRetry&lt;T&gt;(Func&lt;Task&lt;T&gt;&gt; action, int maxRetries = 3)
-{
-    for (int i = 0; i &lt; maxRetries; i++)
-    {
-        try
-        {
-            return await action();
-        }
-        catch (Exception ex) when (ex is HttpRequestException || ex is TimeoutException)
-        {
-            if (i == maxRetries - 1) throw;
-            await Task.Delay((int)Math.Pow(2, i) * 1000); // Exponential backoff
-        }
-    }
-    throw new Exception("Max retries exceeded");
-}
-        </CodeSnippet>
     </Section>
 
     <Section Heading="Important Considerations">
@@ -181,5 +172,47 @@ private async Task&lt;T&gt; ExecuteWithRetry&lt;T&gt;(Func&lt;Task&lt;T&gt;&gt; 
         </ul>
     </Section>
 
+<Section Heading="Demo: Movie Summary Generator">
+    <div class="mb-3">
+        <label for="apiKeyInput" class="form-label"><b>Enter your OpenAI API key:</b></label>
+        <div class="input-group">
+            <input id="apiKeyInput" class="form-control" type="@(isApiKeyVisible ? "text" : "password")" @bind="apiKeyInput" @bind:event="oninput" placeholder="sk-..." autocomplete="off" />
+            <button class="btn btn-outline-secondary" type="button" @onclick="() => isApiKeyVisible = !isApiKeyVisible" tabindex="-1">
+                <i class="@(isApiKeyVisible ? "bi bi-eye-slash" : "bi bi-eye")"></i>
+            </button>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="movieInput" class="form-label"><b>Enter a movie name:</b></label>
+        <input id="movieInput" class="form-control" @bind="movieInput" @bind:event="oninput" placeholder="e.g. Titanic" />
+    </div>
+    <button class="btn btn-primary mb-3" @onclick="GetSummary" disabled="@IsGetSummaryDisabled">
+        @if (isLoading)
+        {
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <span class="visually-hidden">Loading...</span>
+        }
+        else
+        {
+            <span>Get Summary</span>
+        }
+    </button>
+    <div>
+        <b>OpenAI response:</b><br />
+        @if (isLoading)
+        {
+            <span>Loading...</span>
+        }
+        else if (!string.IsNullOrWhiteSpace(titanicSummary))
+        {
+            <div class="card mt-2" style="background-color: #f8f9fa; border: 1px solid #e9ecef;">
+                <div class="card-body">
+                    <span>@titanicSummary</span>
+                </div>
+            </div>
+        }
+    </div>
+</Section>
+<br/>
     <EndNotes/>
 </BlogContainer>
