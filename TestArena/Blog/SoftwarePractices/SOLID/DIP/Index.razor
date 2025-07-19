@@ -1,0 +1,191 @@
+
+
+@page "/blog/software-practices/solid/dependency-inversion-principle"
+@using TestArena.Blog.Common
+@using TestArena.Blog.Common.NavigationUtils
+
+@code{
+    PageInfo currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/software-practices/solid/dependency-inversion-principle")!;
+}
+
+<BlogContainer>
+    <Header Title="@currentPage.Header"
+            Image="@currentPage.ArticleImage" PublishedOn="@currentPage.PublishedOn" Authors="Ajay Kumar">
+    </Header>
+
+    <Section Heading="🔍 What is the Dependency Inversion Principle (DIP)?" Level="3">
+        <p>
+            Imagine you’re building a house. Would you want your living room lights to be directly wired to a specific brand of light bulb? Of course not! You want the flexibility to swap bulbs as needed. In software, the <b>Dependency Inversion Principle (DIP)</b> is about making sure high-level modules (like your living room) don’t depend on low-level details (a specific bulb brand), but on general contracts (the light socket). DIP is the fifth and final SOLID principle, and it states:
+        </p>
+        <blockquote>
+            <b>High-level modules should not depend on low-level modules. Both should depend on abstractions.<br />
+            Abstractions should not depend on details. Details should depend on abstractions.</b>
+        </blockquote>
+        <p>
+            In plain English: <b>Depend on interfaces, not concrete implementations.</b> This makes your code flexible, testable, and easy to maintain.
+        </p>
+    </Section>
+
+    <Section Heading="💡 Why is DIP Important?" Level="3">
+        <p>
+            Without DIP, your code becomes rigid and hard to change. High-level modules are tightly coupled to low-level details, making it difficult to swap implementations, test in isolation, or extend functionality. DIP encourages you to program to abstractions (like interfaces or abstract classes), so both high-level and low-level modules depend on contracts, not each other.
+        </p>
+        <ul>
+            <li><b>Flexibility:</b> Swap implementations without rewriting your core logic.</li>
+            <li><b>Testability:</b> Easily mock dependencies for unit testing.</li>
+            <li><b>Maintainability:</b> Change details without breaking the big picture.</li>
+            <li><b>Extensibility:</b> Add new features with minimal changes to existing code.</li>
+        </ul>
+    </Section>
+
+    <Section Heading="🕒 When Does DIP Matter Most?" Level="3">
+        <p>
+            DIP shines as your application grows. Watch for these red flags 🚩:
+        </p>
+        <ul>
+            <li>Classes that create their own dependencies using <code>new</code>.</li>
+            <li>Business logic that’s hard to test because it’s tied to specific implementations.</li>
+            <li>Difficulty swapping out services (e.g., switching from file logging to database logging).</li>
+            <li>Code that breaks in multiple places when a low-level detail changes.</li>
+        </ul>
+        <p>
+            The earlier you apply DIP, the easier it is to keep your codebase healthy. But it’s never too late to refactor!
+        </p>
+    </Section>
+
+    <Section Heading="🛠️ How Do You Apply DIP in C#?" Level="3">
+        <p>
+            Let’s get practical. Suppose you have a <code>ReportGenerator</code> class that logs messages:
+        </p>
+        <CodeSnippet Number="1" Language="csharp" Description="A class tightly coupled to a concrete logger (violates DIP)">
+public class FileLogger
+{
+    public void Log(string message)
+    {
+        // Write to file
+    }
+}
+
+public class ReportGenerator
+{
+    private FileLogger _logger = new FileLogger();
+    public void Generate()
+    {
+        // ...
+        _logger.Log("Report generated");
+    }
+}
+        </CodeSnippet>
+        <p>
+            Here, <code>ReportGenerator</code> is tightly coupled to <code>FileLogger</code>. If you want to log to a database or send logs to the cloud, you have to change <code>ReportGenerator</code> itself. This makes testing and maintenance harder.
+        </p>
+        <p>
+            <b>How to fix it?</b> Introduce an abstraction:
+        </p>
+        <CodeSnippet Number="2" Language="csharp" Description="DIP-compliant design: depend on abstractions">
+public interface ILogger
+{
+    void Log(string message);
+}
+
+public class FileLogger : ILogger
+{
+    public void Log(string message)
+    {
+        // Write to file
+    }
+}
+
+public class DatabaseLogger : ILogger
+{
+    public void Log(string message)
+    {
+        // Write to database
+    }
+}
+
+public class ReportGenerator
+{
+    private readonly ILogger _logger;
+    public ReportGenerator(ILogger logger)
+    {
+        _logger = logger;
+    }
+    public void Generate()
+    {
+        // ...
+        _logger.Log("Report generated");
+    }
+}
+        </CodeSnippet>
+        <CalloutBox Type="tip" Title="How does this help?">
+            <p>
+                Now, <code>ReportGenerator</code> depends on the <code>ILogger</code> abstraction. You can inject any logger you want—file, database, or even a mock for testing. This makes your code flexible, testable, and open to extension.
+            </p>
+        </CalloutBox>
+    </Section>
+
+    <Section Heading="🌍 Real-World Analogy" Level="3">
+        <p>
+            Think of DIP like using a universal power adapter. Your laptop charger (high-level module) doesn’t care about the specific wall socket (low-level detail)—it just needs a compatible interface. As long as the adapter fits, you’re good to go! In software, DIP lets you swap out details without changing the big picture.
+        </p>
+    </Section>
+
+    <Section Heading="🏗️ DIP in Larger Systems: Dependency Injection" Level="3">
+        <p>
+            DIP is the foundation of <b>dependency injection</b>—a technique where dependencies are provided from the outside, rather than created inside a class. In ASP.NET Core, for example, you register services and inject them where needed:
+        </p>
+        <CodeSnippet Number="3" Language="csharp" Description="Registering and injecting dependencies in ASP.NET Core">
+// Register services in Startup.cs or Program.cs
+services.AddScoped&lt;ILogger, FileLogger&gt;();
+services.AddScoped&lt;ReportGenerator&gt;();
+
+// Inject ReportGenerator where needed
+public class HomeController : Controller
+{
+    private readonly ReportGenerator _reportGenerator;
+    public HomeController(ReportGenerator reportGenerator)
+    {
+        _reportGenerator = reportGenerator;
+    }
+    // ...
+}
+        </CodeSnippet>
+        <p>
+            This approach makes your application modular and easy to test. You can swap implementations without touching the core logic.
+        </p>
+    </Section>
+
+    <Section Heading="🚩 Common Pitfalls (and How to Dodge Them)" Level="3">
+        <ul>
+            <li><b>Over-injecting:</b> Don’t inject everything—only what’s needed. Too many dependencies can make classes hard to understand.</li>
+            <li><b>Leaky abstractions:</b> Make sure your interfaces are meaningful, not just placeholders.</li>
+            <li><b>Premature abstraction:</b> Don’t create interfaces for every class. Use DIP where flexibility and testability matter.</li>
+            <li><b>Service locator anti-pattern:</b> Avoid pulling dependencies from a global container inside your classes. Prefer constructor injection.</li>
+        </ul>
+        <p>
+            <b>Pro tip:</b> When in doubt, ask: “If I want to swap this dependency, how much code do I have to change?” If the answer is “a lot,” DIP can help!
+        </p>
+    </Section>
+
+    <Section Heading="🔗 DIP and the Other SOLID Principles" Level="3">
+        <p>
+            DIP ties all the SOLID principles together:
+        </p>
+        <ul>
+            <li><b>SRP:</b> Clear responsibilities make it easier to define abstractions.</li>
+            <li><b>OCP:</b> Depending on abstractions lets you extend behavior without modifying code.</li>
+            <li><b>LSP:</b> Substitutable abstractions make your code robust.</li>
+            <li><b>ISP:</b> Small, focused interfaces are easier to depend on.</li>
+        </ul>
+        <p>
+            Mastering DIP helps you build flexible, maintainable, and scalable systems.
+        </p>
+    </Section>
+
+    <Section Heading="📝 Wrapping Up: Why DIP Makes Life Easier" Level="3">
+        <p>
+            The Dependency Inversion Principle is about building on solid ground. By depending on abstractions, not details, you make your codebase ready for change. Like a universal socket, DIP lets you plug in new features, swap out old ones, and keep everything running smoothly. Start small, refactor as you grow, and your future self will thank you.
+        </p>
+    </Section>
+</BlogContainer>

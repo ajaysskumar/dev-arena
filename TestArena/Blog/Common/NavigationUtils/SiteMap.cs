@@ -86,11 +86,18 @@ namespace TestArena.Blog.Common.NavigationUtils
             "images/blog/software-practices/solid/lsp/banner.png",
             ["Software Practices", "SOLID", "LSP"]),
 
+
         new("SOLID Principles: Understanding the Interface Segregation Principle",
             "/blog/software-practices/solid/interface-segregation-principle",
             new DateTime(2025, 6, 7),
             "images/blog/software-practices/solid/isp/banner.png",
             ["Software Practices", "SOLID", "ISP"]),
+
+        new("SOLID Principles: Understanding the Dependency Inversion Principle",
+            "/blog/software-practices/solid/dependency-inversion-principle",
+            new DateTime(2025, 7, 12),
+            "images/blog/software-practices/solid/dip/banner.png",
+            ["Software Practices", "SOLID", "DIP"]),
 
         new("Connection Pooling in SQL Server: What, When, and How",
             "/blog/connection-pooling-sql-server",
