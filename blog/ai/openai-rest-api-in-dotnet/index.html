@@ -1,0 +1,274 @@
+<!DOCTYPE html><html lang="en"><head>
+    <!-- Google tag (gtag.js) -->
+    <script defer="" src="https://www.googletagmanager.com/gtag/js?id=G-N1BDBV7WLD"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-N1BDBV7WLD');
+    </script>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Dev Codex: .NET Development and Testing Guide</title>
+    <meta name="description" content="Your ultimate resource for development, AI integration, clean coding, software testing, and modern software practices."/>
+    <!-- Removed meta keywords tag as modern search engines often ignore it -->
+    <meta name="author" content="Ajay Kumar"/>
+    <!-- <meta property="og:title" content="Dev Codex: Your Ultimate Guide to .NET Development, AI, and Software Practices" />
+    <meta property="og:description" content="Explore expert insights on .NET development, AI integration, clean coding, performance testing, and modern software practices. Build better, smarter, and faster applications with Dev Codex." />
+    <meta property="og:url" content="https://devcodex.in/blog/connection-pooling-sql-server" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" /> -->
+    
+<!--Blazor:{"type":"webassembly","prerenderId":"e5edb776528a4aa2a631855cfed0d2c9","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>Using OpenAI APIs: Basic chat completions API Guide in .NET</title><meta property="og:url" content="http://127.0.0.1:5050/blog/ai/openai-rest-api-in-dotnet" />
+    <meta property="og:title" content="Using OpenAI APIs: Basic chat completions API Guide in .NET" />
+    <meta property="og:description" content="Learn how to leverage OpenAI&#x27;s powerful APIs to integrate AI capabilities into your applications. From authentication to implementation, discover everything you need to know about working with OpenAI APIs using direct HTTP requests." />
+    <meta property="og:image" content="http://127.0.0.1:5050/images/blog/ai/open-ai-rest-demo/banner.png" />
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"e5edb776528a4aa2a631855cfed0d2c9"}-->
+</head><body><headoutlet>
+    <base href="/"/>
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/app.css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" defer=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js" defer=""></script>
+<link rel="icon" type="image/png" href="favicon.png"/>
+<link href="TestArena.styles.css" rel="stylesheet"/>
+
+
+
+    <div id="app">
+<!-- %%-PRERENDERING-BEGIN-%% -->
+<!--Blazor:{"type":"webassembly","prerenderId":"f48f10b177ac42dc89f237c74f7c150f","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
+                        <h3 class="m-0">Dev Codex</h3></a></div>
+
+                
+                <div class="col-12 col-md-4 d-flex justify-content-md-center justify-content-center mt-2 mt-md-0"><div class="w-75 position-relative"><input type="text" class="form-control" placeholder="Search..." />
+        <ul class="list-group position-absolute w-100 mt-1" style="z-index: 1000;" hidden></ul></div></div>
+
+                
+                <div class="col-12 col-md-4 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><div class="dropdown"><a href="/about-author" class="d-inline-block rounded-circle overflow-hidden border border-white" style="width: 3rem; height: 3rem; border-width: 0.25rem;"><img src="/images/shared/author.png" alt="About Author" class="img-fluid rounded-circle" style="width: 100%; height: 100%; object-fit: cover;"></a></div></div></div></div></div></header>
+        <article class="content px-4" b-mcp0h0uciv><div class="container-fluid d-flex flex-column align-items-center"><div class="content-wrapper"><style>
+    .article-header {
+        margin: 0 auto;
+        /* Centers the div */
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    .container-fluid,
+    .row,
+    .col-md-12,
+    .col-6 {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .article-image {
+        max-width: 500px !important;
+        height: auto;
+        border-radius: 10px;
+    }
+</style>
+
+
+
+
+<header class="article-header"><div class="row"><div class="col-md-12"><h1 class="fw-bold">Using OpenAI APIs: Basic chat completions API Guide in .NET</h1></div>
+        <div class="col-md-12"><img src="images/blog/ai/open-ai-rest-demo/banner.png" alt="Article Banner" height="200" width="auto" class="img-fluid rounded mx-auto d-block my-3" loading="lazy" /></div>
+        <div class="col-md-12"><div class="container-fluid"><div class="row"><div class="col-md-4 col-xs-12 d-flex justify-content-md-start justify-content-center"><span class="text-secondary fw-bold">Author(s): </span>
+                        <span class="text-secondary fw-bold ms-1">Ajay kumar</span></div>
+
+                    <div class="col-md-4 col-xs-12 d-flex justify-content-md-center justify-content-center"><div class="social-share flex" b-gjpj7q7b4s><a href="https://twitter.com/intent/tweet?url=http%3A%2F%2F127.0.0.1%3A5050%2Fblog%2Fai%2Fopenai-rest-api-in-dotnet&amp;text=Using%20OpenAI%20APIs%3A%20Basic%20chat%20completions%20API%20Guide%20in%20.NET" title="Share on Twitter" target="_blank" rel="noopener" b-gjpj7q7b4s><img src="images/shared/icons/twitter-old.svg" alt="Twitter/X" width="24" style="cursor:pointer" b-gjpj7q7b4s></a>
+    <a href="https://www.linkedin.com/feed/?shareActive=true&amp;shareUrl=http://127.0.0.1:5050/blog/ai/openai-rest-api-in-dotnet" title="Share on LinkedIn" target="_blank" rel="noopener" b-gjpj7q7b4s><img src="images/shared/icons/linkedin.svg" alt="LinkedIn" width="24" style="cursor:pointer" b-gjpj7q7b4s></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A5050%2Fblog%2Fai%2Fopenai-rest-api-in-dotnet" title="Share on Facebook" target="_blank" rel="noopener" b-gjpj7q7b4s><img src="images/shared/icons/facebook.svg" alt="Facebook" width="24" style="cursor:pointer" b-gjpj7q7b4s></a></div></div>
+
+                    
+                    <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 28 Jun 2025</span></div></div></div></div></div></header>
+
+    <section id="2aede48d-1b82-4cbf-ba32-3b7b68767e85"><h2>Understanding OpenAI APIs</h2><hr class="border border-success border-1 opacity-50">
+    <div><p>
+            Imagine you're building a smart home system. Just as your system needs to communicate with various devices through specific protocols,
+            developers need to interact with AI models through APIs. OpenAI's APIs serve as this communication bridge, allowing you to harness
+            the power of advanced AI models like GPT-4 in your applications.
+        </p></div></section>
+
+    <section id="e814c5f9-75ce-45ae-b6db-50d78dc3ac0a"><h4>What are OpenAI APIs?</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>
+            Imagine if you could add the magic of ChatGPT, DALL-E, or Whisper to your own apps—instantly making them smarter, more creative, and more helpful. That’s exactly what OpenAI APIs let you do! These are powerful, easy-to-use web services that unlock the same AI superpowers behind the tools everyone’s talking about.
+        </p>
+        <p><b>What can you build?</b> Here are just a few real-world examples:
+        </p>
+        <ul><li><b>Write emails for you:</b> Let your app draft a friendly reply or summarize a long thread in seconds.</li>
+            <li><b>Chatbots that feel human:</b> Add a virtual assistant to your website that can answer questions, help with shopping, or even tell jokes.</li>
+            <li><b>Turn sketches into art:</b> Use DALL-E to generate stunning images from a simple description—"a cat surfing a wave at sunset" becomes a real picture!</li>
+            <li><b>Transcribe meetings automatically:</b> Whisper can listen to audio and give you a written transcript, perfect for notes or accessibility.</li>
+            <li><b>Personalized learning:</b> Build a study buddy that explains tough concepts in plain language, tailored to each student.</li></ul>
+        <p>
+            With OpenAI APIs, you’re not just coding—you’re inventing the future. Whether you want to automate boring tasks, create something fun, or solve real problems, these APIs are your gateway to next-level innovation. The possibilities are endless and limited only by your imagination!
+        </p></div></section>
+
+    <section id="83debdb4-da4f-46f8-b591-b99815d51299"><h4>When to Use OpenAI APIs?</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>
+            Wondering when OpenAI APIs can make a real difference? Here are some moments where they shine—and you’ll probably recognize a few from your own life or work:
+        </p>
+        <ul><li><b>Stuck on a blank page?</b> Instantly generate blog intros, catchy headlines, or even code snippets to kickstart your creativity.</li>
+            <li><b>Customer support overload?</b> Deploy a chatbot that answers FAQs, helps users troubleshoot, or even cracks a joke to lighten the mood.</li>
+            <li><b>Need to summarize mountains of info?</b> Let AI read through long articles, meeting notes, or emails and give you the highlights in seconds.</li>
+            <li><b>Dreaming up new designs?</b> Use AI to brainstorm product ideas, generate marketing copy, or even create images for your next campaign.</li>
+            <li><b>Making your app accessible?</b> Transcribe audio, translate languages, or simplify complex text so everyone can use your product.</li>
+            <li><b>Personalized learning or coaching?</b> Build a tutor that adapts to each student’s needs, explains tough concepts, or quizzes them in a fun way.</li></ul>
+        <p>
+            If you’ve ever wished for a superpower to automate, accelerate, or amplify your work—OpenAI APIs are your toolkit. The best part? You don’t need to be an AI expert to get started!
+        </p></div></section>
+
+
+    <section id="0cbfe444-4cf9-4cbe-85e9-6432ed7b83c6"><h3>How to Implement OpenAI APIs (API-based Approach)</h3><hr class="border border-success border-1 opacity-50">
+    <div><h4>1. Authentication: Getting and Securing Your API Key</h4>
+        <p><b>Authentication</b> is required for every OpenAI API call. You must use a secret API key, which you can generate from your <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI dashboard</a>.
+        </p>
+        <ul><li><b>Never share or commit your API key to source control.</b></li>
+            <li>Store your API key in a secure location, such as an environment variable or a secrets manager.</li>
+            <li>For local development, you can set the key in your shell profile or <code>appsettings.Development.json</code> (but never in public repos).</li></ul>
+        <p>Example: Setting an environment variable in your terminal (macOS/Linux):</p>
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-bash" style="font-size: 0.8rem;">export OPENAI_API_KEY=sk-...yourkey...</code></pre></div><div class="col-12 text-center"><code></code></div></div></div>
+<br>
+        <p>Or in Windows PowerShell:</p>
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-bash" style="font-size: 0.8rem;">$env:OPENAI_API_KEY=&quot;sk-...yourkey...&quot;</code></pre></div><div class="col-12 text-center"><code></code></div></div></div>
+<br>
+        <p>Accessing the key in C#:</p>
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
+string apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
+if (string.IsNullOrWhiteSpace(apiKey))
+    throw new InvalidOperationException("OpenAI API key not found in environment variables.");
+        </code></pre></div><div class="col-12 text-center"><code></code></div></div></div>
+<br>
+
+        <h4>2. Setup: Creating a Typed API Client</h4>
+        <p>
+            To call OpenAI APIs directly, you'll use <b>HttpClient</b> to make HTTP requests. Here is a simple client class that includes authentication in every request:
+        </p>
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
+public class OpenAIClient
+{
+    private readonly HttpClient _httpClient;
+    private readonly string _apiKey;
+
+    public OpenAIClient(HttpClient httpClient, string apiKey)
+    {
+        _httpClient = httpClient;
+        _apiKey = apiKey;
+    }
+
+    private HttpRequestMessage CreateRequest(string url, HttpMethod method, string jsonContent)
+    {
+        var request = new HttpRequestMessage(method, url);
+        request.Headers.Add("Authorization", $"Bearer {_apiKey}");
+        request.Content = new StringContent(jsonContent, System.Text.Encoding.UTF8, "application/json");
+        return request;
+    }
+}
+        </code></pre></div><div class="col-12 text-center"><code></code></div></div></div>
+<br>
+
+
+        <h4>3. Handling Chat Conversations (Chat Completion API)</h4>
+        <p>
+            To have a conversation with an AI model—such as asking it to summarize a movie—you'll use the <b>Chat Completions</b> endpoint. This endpoint lets you send a series of messages (like a chat history) and receive a smart, context-aware response from the model.
+
+            The request body for this endpoint typically includes:
+            <ul><li><b>model</b>: The name of the AI model you want to use (e.g., <code>gpt-4</code> or <code>gpt-3.5-turbo</code>). Different models have different capabilities and costs.
+                </li>
+                <li><b>messages</b>: An array of message objects representing the conversation so far. Each message has a <code>role</code> (such as <code>system</code>, <code>user</code>, or <code>assistant</code>) and <code>content</code> (the actual text). This structure allows the model to understand context and respond appropriately.
+                </li>
+                <li><b>max_tokens</b>: The maximum number of tokens (words or word pieces) in the response. This helps control the length and cost of the output.
+                </li>
+                <li><b>Other optional parameters</b>: You can also specify things like <code>temperature</code> (controls randomness/creativity), <code>top_p</code> (controls diversity), and more, depending on your needs.
+                </li></ul>
+            Here’s how you might use it in practice:
+        </p>
+        <p><b>Example prompt:</b> <code>Give me a summary of the movie Inception.</code></p>
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
+public async Task&lt;string&gt; GetChatResponseAsync()
+{
+    var url = "https://api.openai.com/v1/chat/completions";
+    var requestBody = new
+    {
+        model = "gpt-4",
+        messages = new[]
+        {
+            new { role = "system", content = "You are a helpful assistant." },
+            new { role = "user", content = "Give me a summary of the movie Inception." }
+        },
+        max_tokens = 150
+    };
+    var json = JsonSerializer.Serialize(requestBody);
+    var request = CreateRequest(url, HttpMethod.Post, json);
+
+    var response = await _httpClient.SendAsync(request);
+    response.EnsureSuccessStatusCode();
+
+    var responseString = await response.Content.ReadAsStringAsync();
+    using var doc = JsonDocument.Parse(responseString);
+    return doc.RootElement.GetProperty("choices")[0].GetProperty("message").GetProperty("content").GetString();
+}
+// Usage:
+// string summary = await GetChatResponseAsync();
+        </code></pre></div><div class="col-12 text-center"><code></code></div></div></div>
+<br></div></section>
+
+    <section id="08e47cdd-e76c-41c8-ac3f-5dfa7a931b12"><h3>&#x1F3AC; Demo: Movie Summary Generator</h3><hr class="border border-success border-1 opacity-50">
+    <div><p><b>How to use this demo:</b> Enter your personal OpenAI API key (you can create one from your <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI dashboard</a>) in the first field. Then, type the name of any movie you want summarized in the second field. Click <b>Get Summary</b> and the AI will generate a short summary of the movie using OpenAI's API. Your API key is never stored or sent anywhere except directly to OpenAI for this request.
+        </p>
+    <div class="mb-3"><label for="apiKeyInput" class="form-label"><b>Enter your OpenAI API key:</b></label>
+        <div class="input-group"><input id="apiKeyInput" class="form-control" type="password" placeholder="sk-..." autocomplete="off" value="" />
+            <button class="btn btn-outline-secondary" type="button" tabindex="-1"><i class="bi bi-eye"></i></button></div></div>
+    <div class="mb-3"><label for="movieInput" class="form-label"><b>Enter a movie name:</b></label>
+        <input id="movieInput" class="form-control" placeholder="e.g. Titanic" value="Titanic" /></div>
+    <button class="btn btn-primary mb-3" disabled><span>Get Summary</span></button>
+    <div><b>OpenAI response:</b><br><div class="card mt-2" style="background-color: #f8f9fa; border: 1px solid #e9ecef;"><div class="card-body"><span>Response will appear here after you enter your API key and movie name.</span></div></div></div></div></section>
+<br>
+<section id="247dd461-b460-4c7e-be50-887b0024db26"><h4>Important Considerations</h4><hr class="border border-success border-1 opacity-50">
+    <div><ul><li><b>Never hardcode your API key!</b> Treat it like your password—use environment variables or a secure vault. One accidental push to GitHub can expose your account.</li>
+        <li><b>Expect the unexpected.</b> Always handle errors gracefully. Network hiccups, expired keys, or API changes can happen—show helpful messages, not cryptic errors.</li>
+        <li><b>Watch your usage and costs.</b> OpenAI APIs are powerful, but not free. Set usage limits, monitor your dashboard, and consider caching frequent responses to save money.</li>
+        <li><b>Respect rate limits.</b> If you send too many requests too quickly, you’ll get throttled. Build in retries with backoff and inform users if things slow down.</li>
+        <li><b>Mind the tokens.</b> Each model has a token (word) limit. If your prompt or response is too long, you’ll get errors or cut-off answers. Trim and test your prompts!</li>
+        <li><b>Stay up to date.</b> OpenAI is evolving fast. Check the docs for new features, models, and best practices—what’s true today might change tomorrow.</li>
+        <li><b>Be ethical and transparent.</b> Let users know when they’re interacting with AI, and never use generated content to mislead or harm.</li></ul>
+    <p style="margin-top:1em;"><b>Pro tip:</b> The best AI apps feel magical because they combine smart tech with thoughtful design. Test with real users, handle edge cases, and always keep learning!</p></div></section></div>
+    <div class="content-wrapper mt-4"><script src="https://giscus.app/client.js" data-repo="ajaysskumar/dev-arena" data-repo-id="R_kgDONiBGGQ" data-category="Comments" data-category-id="DIC_kwDONiBGGc4Cq2ND" data-mapping="pathname" data-strict="0" data-reactions-enabled="0" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script></div></div>
+
+<style>
+    .content-wrapper {
+        width: 50%; /* Leaves 20% space on left and right */
+        background: white;
+    }
+
+    @media (max-width: 768px) {
+        .content-wrapper {
+            width: 90%; /* On smaller screens, reduce left-right space */
+        }
+    }
+</style></article>
+        <footer class="bg-dark text-white py-4 mt-auto"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><p class="mb-0">Copyright © 2025 Dev Codex</p></div>
+
+            
+            <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
+                <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
+        <!--Blazor:{"prerenderId":"f48f10b177ac42dc89f237c74f7c150f"}-->
+<!-- %%-PRERENDERING-END-%% -->
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UVMxSlVFY3RNblU0UWxCMFZVazRNVEphWm5OR1ozaEpjR1ZMVG1vNWFWaDRia1Z0VUZGMVpXeERhV3RzUW5aaVdtazVNWGRQVVRoNkxVRlVWVFpsTXpST1RpMVJPSFI0YXpSU01XeHBkalpHYlRWVFkyazFiM2xPVlRCNWQzUjFXbmw2TjBWdFJYQnBaSGhTZFd4S2FXZHVVVk5KUnpKbVIyNWpSa3RsYkRKYU1GUnBUemw2WDBkR2FpMDFibEZGU0RoR1RsOXpJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+    <script src="_framework/blazor.webassembly.js" defer="" autostart="false"></script>
+    <script src="brotliloader.min.js" type="module"></script>
+
+
+
+</headoutlet></body></html>
