@@ -1,0 +1,744 @@
+@page "/blog/frontend/events-demo"
+@using TestArena.Blog.Common
+@using TestArena.Blog.Common.NavigationUtils
+
+@code{
+    PageInfo currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/frontend/events-demo")!;
+}
+
+<BlogContainer>
+    <Header Title="@currentPage.Header"
+            Image="@currentPage.ArticleImage" PublishedOn="@currentPage.PublishedOn" Authors="Ajay Kumar">
+    </Header>
+
+    <Section Heading="🎭 The Tale of Two Components: A Story of Decoupled Communication" Level="3">
+        <p>
+            Imagine you're at a bustling coffee shop. People are chatting, baristas are calling out orders, and the atmosphere is alive with activity. But here's the fascinating part: the barista doesn't need to know every customer personally, and customers don't need to know each other. They all communicate through a simple, elegant system—the order board and the coffee shop's rhythm.
+        </p>
+        <p>
+            This is exactly how <b>event-driven communication</b> works in micro-frontends. It's like having a magical post office where components can send messages to each other without ever meeting face-to-face. Today, we'll explore this fascinating world where components become pen pals, communicating through a shared event system.
+        </p>
+    </Section>
+
+    <Section Heading="🔮 The Magic of Event-Driven Architecture" Level="3">
+        <p>
+            Picture this: You have a React application with multiple components that need to talk to each other. Traditionally, you'd connect them like a family tree—parent to child, child to grandchild, creating a web of dependencies that's as tangled as Christmas lights.
+        </p>
+        <p>
+            But what if there was a better way? What if components could communicate like people at a party—sending messages into the air and letting anyone who's interested pick them up?
+        </p>
+        
+        <Section Heading="The Event Bus: Our Digital Post Office" Level="4">
+            <p>
+                Think of an <b>event bus</b> as a magical post office that never closes. When one component wants to share something, it simply drops a message into the post office. Any other component that's interested can pick up that message and react accordingly.
+            </p>
+            <p>
+                The beauty of this system is that the sender doesn't need to know who's listening, and the listeners don't need to know who's sending. It's like having a town square where anyone can make an announcement, and anyone can choose to listen.
+            </p>
+        </Section>
+
+        <Section Heading="The Three Musketeers of Event Communication" Level="4">
+            <p>
+                Every event-driven system has three key players:
+            </p>
+            <ul>
+                <li><b>The Publisher (Sender):</b> Like a town crier, this component announces events to the world</li>
+                <li><b>The Subscriber (Listener):</b> Like an attentive audience, this component listens for specific events</li>
+                <li><b>The Event Bus:</b> Like the town square, this is where all the magic happens</li>
+            </ul>
+        </Section>
+    </Section>
+
+    <Section Heading="🏗️ Building Our Digital Town Square" Level="3">
+        <p>
+            Let's create our own event bus—a simple but powerful system that can handle all our component communication needs. Think of it as building a digital town square where messages can flow freely.
+        </p>
+        
+        <CodeSnippet Number="1" Language="javascript" Description="Our Digital Town Square - The Event Bus">
+// Simple Event Bus for decoupled communication
+class EventBus {
+  constructor() {
+    this.events = {};
+  }
+
+  // Subscribe to an event
+  on(event, callback) {
+    if (!this.events[event]) {
+      this.events[event] = [];
+    }
+    this.events[event].push(callback);
+    
+    // Return unsubscribe function
+    return () => {
+      this.events[event] = this.events[event].filter(cb => cb !== callback);
+    };
+  }
+
+  // Emit an event with data
+  emit(event, data) {
+    if (this.events[event]) {
+      this.events[event].forEach(callback => {
+        callback(data);
+      });
+    }
+  }
+
+  // Remove all listeners for an event
+  off(event) {
+    if (this.events[event]) {
+      delete this.events[event];
+    }
+  }
+}
+
+// Create a singleton instance
+const eventBus = new EventBus();
+
+export default eventBus;
+        </CodeSnippet>
+        
+        <p>
+            This simple event bus is like having a magical notice board where anyone can post messages and anyone can read them. The beauty is in its simplicity—it's just a collection of functions that know how to deliver messages to the right people.
+        </p>
+    </Section>
+
+    <Section Heading="🎭 Meet Our Characters: The Sender and Receiver" Level="3">
+        <p>
+            Now let's meet our two main characters in this story: the Sender and the Receiver. They're like two people at opposite ends of our digital town square, communicating through our event bus.
+        </p>
+        
+        <Section Heading="The Sender: Our Town Crier" Level="4">
+            <p>
+                The Sender is like a friendly town crier who loves to share news with everyone. It doesn't care who's listening—it just wants to broadcast its messages to the world.
+            </p>
+            
+            <CodeSnippet Number="2" Language="javascript" Description="The Sender Component - Our Town Crier">
+import React, { useState } from 'react';
+import eventBus from '../utils/eventBus';
+import './Sender.css';
+
+const Sender = () => {
+  const [message, setMessage] = useState('');
+  const [eventType, setEventType] = useState('message');
+
+  const handleSendMessage = () => {
+    if (message.trim()) {
+      // Emit the event with message data
+      eventBus.emit(eventType, {
+        message: message,
+        timestamp: new Date().toISOString(),
+        sender: 'Sender Component'
+      });
+      
+      // Clear the input after sending
+      setMessage('');
+    }
+  };
+
+  const handleSendAlert = () => {
+    eventBus.emit('alert', {
+      type: 'info',
+      message: 'This is an alert from Sender!',
+      timestamp: new Date().toISOString()
+    });
+  };
+
+  const handleSendError = () => {
+    eventBus.emit('error', {
+      type: 'error',
+      message: 'This is an error from Sender!',
+      timestamp: new Date().toISOString()
+    });
+  };
+
+  return (
+    &lt;div className="sender"&gt;
+      &lt;h2&gt;Sender Component&lt;/h2&gt;
+      &lt;p&gt;This component emits events that the Receiver listens to.&lt;/p&gt;
+      
+      &lt;div className="sender-controls"&gt;
+        &lt;div className="input-group"&gt;
+          &lt;label htmlFor="eventType"&gt;Event Type:&lt;/label&gt;
+          &lt;select 
+            id="eventType"
+            value={eventType} 
+            onChange={(e) =&gt; setEventType(e.target.value)}
+          &gt;
+            &lt;option value="message"&gt;message&lt;/option&gt;
+            &lt;option value="alert"&gt;alert&lt;/option&gt;
+            &lt;option value="error"&gt;error&lt;/option&gt;
+            &lt;option value="custom"&gt;custom&lt;/option&gt;
+          &lt;/select&gt;
+        &lt;/div&gt;
+
+        &lt;div className="input-group"&gt;
+          &lt;label htmlFor="message"&gt;Message:&lt;/label&gt;
+          &lt;input
+            id="message"
+            type="text"
+            value={message}
+            onChange={(e) =&gt; setMessage(e.target.value)}
+            placeholder="Enter your message..."
+            onKeyPress={(e) =&gt; e.key === 'Enter' &amp;&amp; handleSendMessage()}
+          /&gt;
+        &lt;/div&gt;
+
+        &lt;button 
+          onClick={handleSendMessage}
+          disabled={!message.trim()}
+          className="send-btn"
+        &gt;
+          Send Message
+        &lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;div className="quick-actions"&gt;
+        &lt;h3&gt;Quick Actions:&lt;/h3&gt;
+        &lt;button onClick={handleSendAlert} className="alert-btn"&gt;
+          Send Alert
+        &lt;/button&gt;
+        &lt;button onClick={handleSendError} className="error-btn"&gt;
+          Send Error
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default Sender;
+            </CodeSnippet>
+        </Section>
+
+        <Section Heading="The Receiver: Our Attentive Audience" Level="4">
+            <p>
+                The Receiver is like an attentive audience member who's always listening for interesting announcements. It doesn't care who's speaking—it just wants to hear what's being said.
+            </p>
+            
+            <CodeSnippet Number="3" Language="javascript" Description="The Receiver Component - Our Attentive Audience">
+import React, { useState, useEffect, useCallback } from 'react';
+import eventBus from '../utils/eventBus';
+import './Receiver.css';
+
+const Receiver = () => {
+  const [receivedEvents, setReceivedEvents] = useState([]);
+  const [isListening, setIsListening] = useState(true);
+
+  const handleEvent = useCallback((data) => {
+    if (isListening) {
+      setReceivedEvents(prev => [{
+        ...data,
+        id: Date.now(),
+        receivedAt: new Date().toISOString()
+      }, ...prev]);
+    }
+  }, [isListening]);
+
+  useEffect(() => {
+    // Subscribe to different event types
+    const unsubscribeMessage = eventBus.on('message', handleEvent);
+    const unsubscribeAlert = eventBus.on('alert', handleEvent);
+    const unsubscribeError = eventBus.on('error', handleEvent);
+    const unsubscribeCustom = eventBus.on('custom', handleEvent);
+
+    // Cleanup function to unsubscribe when component unmounts
+    return () => {
+      unsubscribeMessage();
+      unsubscribeAlert();
+      unsubscribeError();
+      unsubscribeCustom();
+    };
+  }, [handleEvent]);
+
+  const clearEvents = () => {
+    setReceivedEvents([]);
+  };
+
+  const toggleListening = () => {
+    setIsListening(!isListening);
+  };
+
+  const getEventTypeClass = (eventType) => {
+    switch (eventType) {
+      case 'alert':
+        return 'event-alert';
+      case 'error':
+        return 'event-error';
+      case 'custom':
+        return 'event-custom';
+      default:
+        return 'event-message';
+    }
+  };
+
+  return (
+    &lt;div className="receiver"&gt;
+      &lt;h2&gt;Receiver Component&lt;/h2&gt;
+      &lt;p&gt;This component listens to events from the Sender component.&lt;/p&gt;
+      
+      &lt;div className="receiver-controls"&gt;
+        &lt;button 
+          onClick={toggleListening}
+          className={isListening ? 'listening-btn active' : 'listening-btn inactive'}
+        &gt;
+          {isListening ? '🔊 Listening' : '🔇 Not Listening'}
+        &lt;/button&gt;
+        
+        &lt;button onClick={clearEvents} className="clear-btn"&gt;
+          Clear Events
+        &lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;div className="events-container"&gt;
+        &lt;h3&gt;Received Events ({receivedEvents.length})&lt;/h3&gt;
+        
+        {receivedEvents.length === 0 ? (
+          &lt;div className="no-events"&gt;
+            &lt;p&gt;No events received yet. Try sending a message from the Sender!&lt;/p&gt;
+          &lt;/div&gt;
+        ) : (
+          &lt;div className="events-list"&gt;
+            {receivedEvents.map((event) => (
+              &lt;div 
+                key={event.id} 
+                className={`event-item ${getEventTypeClass(event.eventType || 'message')}`}
+              &gt;
+                &lt;div className="event-header"&gt;
+                  &lt;span className="event-type"&gt;
+                    {event.eventType || 'message'}
+                  &lt;/span&gt;
+                  &lt;span className="event-time"&gt;
+                    {new Date(event.receivedAt).toLocaleTimeString()}
+                  &lt;/span&gt;
+                &lt;/div&gt;
+                
+                &lt;div className="event-content"&gt;
+                  &lt;p className="event-message"&gt;
+                    {event.message || 'No message content'}
+                  &lt;/p&gt;
+                  
+                  {event.sender &amp;&amp; (
+                    &lt;p className="event-sender"&gt;
+                      From: {event.sender}
+                    &lt;/p&gt;
+                  )}
+                  
+                  {event.type &amp;&amp; (
+                    &lt;p className="event-type-info"&gt;
+                      Type: {event.type}
+                    &lt;/p&gt;
+                  )}
+                &lt;/div&gt;
+              &lt;/div&gt;
+            ))}
+          &lt;/div&gt;
+        )}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default Receiver;
+            </CodeSnippet>
+        </Section>
+    </Section>
+
+    <Section Heading="🌟 The Magic Happens: Multiple Listeners" Level="3">
+        <p>
+            Here's where the real magic begins. Just like in a real town square, one announcement can be heard by many people, each reacting in their own way. Let's add a third character to our story—the Logger.
+        </p>
+        
+        <Section Heading="The Logger: Our Town Historian" Level="4">
+            <p>
+                The Logger is like a town historian who records everything that happens in the square. While the Receiver displays messages, the Logger keeps a permanent record of all events.
+            </p>
+            
+            <CodeSnippet Number="4" Language="javascript" Description="The Logger Component - Our Town Historian">
+import React, { useState, useEffect, useCallback } from 'react';
+import eventBus from '../utils/eventBus';
+import './Logger.css';
+
+const Logger = () => {
+  const [logs, setLogs] = useState([]);
+  const [isLogging, setIsLogging] = useState(true);
+  const [logLevel, setLogLevel] = useState('all'); // all, message, alert, error, custom
+
+  const getLogLevel = (data) => {
+    if (data.type === 'error') return 'error';
+    if (data.type === 'info') return 'info';
+    if (data.eventType === 'alert') return 'warning';
+    return 'info';
+  };
+
+  const handleLog = useCallback((data) => {
+    if (isLogging) {
+      const logEntry = {
+        id: Date.now(),
+        timestamp: new Date().toISOString(),
+        eventType: data.eventType || 'unknown',
+        message: data.message || 'No message',
+        sender: data.sender || 'Unknown',
+        type: data.type || 'info',
+        level: getLogLevel(data)
+      };
+
+      setLogs(prev => [logEntry, ...prev]);
+    }
+  }, [isLogging]);
+
+  useEffect(() => {
+    // Subscribe to all event types for logging
+    const unsubscribeMessage = eventBus.on('message', handleLog);
+    const unsubscribeAlert = eventBus.on('alert', handleLog);
+    const unsubscribeError = eventBus.on('error', handleLog);
+    const unsubscribeCustom = eventBus.on('custom', handleLog);
+
+    return () => {
+      unsubscribeMessage();
+      unsubscribeAlert();
+      unsubscribeError();
+      unsubscribeCustom();
+    };
+  }, [handleLog]);
+
+  const clearLogs = () => {
+    setLogs([]);
+  };
+
+  const toggleLogging = () => {
+    setIsLogging(!isLogging);
+  };
+
+  const getLogLevelClass = (level) => {
+    switch (level) {
+      case 'error':
+        return 'log-error';
+      case 'warning':
+        return 'log-warning';
+      case 'info':
+        return 'log-info';
+      default:
+        return 'log-info';
+    }
+  };
+
+  const filteredLogs = logs.filter(log => {
+    if (logLevel === 'all') return true;
+    return log.level === logLevel;
+  });
+
+  return (
+    &lt;div className="logger"&gt;
+      &lt;h2&gt;Event Logger&lt;/h2&gt;
+      &lt;p&gt;This component logs all events for debugging and monitoring purposes.&lt;/p&gt;
+      
+      &lt;div className="logger-controls"&gt;
+        &lt;div className="control-group"&gt;
+          &lt;button 
+            onClick={toggleLogging}
+            className={isLogging ? 'logging-btn active' : 'logging-btn inactive'}
+          &gt;
+            {isLogging ? '📝 Logging' : '⏸️ Paused'}
+          &lt;/button&gt;
+          
+          &lt;button onClick={clearLogs} className="clear-btn"&gt;
+            Clear Logs
+          &lt;/button&gt;
+        &lt;/div&gt;
+
+        &lt;div className="filter-group"&gt;
+          &lt;label htmlFor="logLevel"&gt;Filter Level:&lt;/label&gt;
+          &lt;select 
+            id="logLevel"
+            value={logLevel} 
+            onChange={(e) =&gt; setLogLevel(e.target.value)}
+          &gt;
+            &lt;option value="all"&gt;All Levels&lt;/option&gt;
+            &lt;option value="error"&gt;Error&lt;/option&gt;
+            &lt;option value="warning"&gt;Warning&lt;/option&gt;
+            &lt;option value="info"&gt;Info&lt;/option&gt;
+          &lt;/select&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div className="logs-container"&gt;
+        &lt;h3&gt;Event Logs ({filteredLogs.length})&lt;/h3&gt;
+        
+        {filteredLogs.length === 0 ? (
+          &lt;div className="no-logs"&gt;
+            &lt;p&gt;No logs yet. Events will appear here when sent from the Sender!&lt;/p&gt;
+          &lt;/div&gt;
+        ) : (
+          &lt;div className="logs-list"&gt;
+            {filteredLogs.map((log) => (
+              &lt;div 
+                key={log.id} 
+                className={`log-item ${getLogLevelClass(log.level)}`}
+              &gt;
+                &lt;div className="log-header"&gt;
+                  &lt;span className="log-level"&gt;
+                    {log.level.toUpperCase()}
+                  &lt;/span&gt;
+                  &lt;span className="log-time"&gt;
+                    {new Date(log.timestamp).toLocaleTimeString()}
+                  &lt;/span&gt;
+                  &lt;span className="log-type"&gt;
+                    {log.eventType}
+                  &lt;/span&gt;
+                &lt;/div&gt;
+                
+                &lt;div className="log-content"&gt;
+                  &lt;p className="log-message"&gt;
+                    {log.message}
+                  &lt;/p&gt;
+                  
+                  {log.sender &amp;&amp; (
+                    &lt;p className="log-sender"&gt;
+                      From: {log.sender}
+                    &lt;/p&gt;
+                  )}
+                &lt;/div&gt;
+              &lt;/div&gt;
+            ))}
+          &lt;/div&gt;
+        )}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default Logger;
+            </CodeSnippet>
+        </Section>
+
+        <CalloutBox Type="tip" Title="The Power of Multiple Listeners">
+            <p>
+                This is the true beauty of event-driven communication: <b>one sender can notify multiple receivers independently</b>. The Sender doesn't need to know about the Receiver or Logger—it simply announces its message, and anyone who's interested can listen and react in their own way.
+            </p>
+        </CalloutBox>
+    </Section>
+
+    <Section Heading="🎨 The Art of Event Design" Level="3">
+        <p>
+            Just like a well-designed town square has clear signage and organized notice boards, our event system needs thoughtful design to be truly effective.
+        </p>
+        
+        <Section Heading="Naming Your Events: The Art of Clarity" Level="4">
+            <p>
+                Event names are like street signs—they need to be clear, consistent, and meaningful. A good event name tells you exactly what happened, like a well-written headline.
+            </p>
+            
+            <CodeSnippet Number="5" Language="javascript" Description="Event Naming Patterns">
+// Good event names (like clear street signs)
+const GOOD_EVENTS = {
+  'user:login': 'user:login',           // Clear and specific
+  'cart:item:added': 'cart:item:added', // Hierarchical and descriptive
+  'product:viewed': 'product:viewed',   // Action-oriented
+  'theme:changed': 'theme:changed'      // Simple and direct
+};
+
+// Bad event names (like confusing street signs)
+const BAD_EVENTS = {
+  'update': 'update',                   // Too vague
+  'data': 'data',                       // Not descriptive
+  'event1': 'event1',                   // Meaningless
+  'doSomething': 'doSomething'          // Not clear what it does
+};
+            </CodeSnippet>
+        </Section>
+
+        <Section Heading="Event Data: The Message in the Bottle" Level="4">
+            <p>
+                Event data is like the message inside a bottle—it needs to contain everything the receiver needs to understand what happened, but not so much that it becomes unwieldy.
+            </p>
+            
+            <CodeSnippet Number="6" Language="javascript" Description="Well-Structured Event Data">
+// Good event data (like a well-written letter)
+eventBus.emit('user:login', {
+  userId: '12345',
+  email: 'user@example.com',
+  timestamp: new Date().toISOString(),
+  source: 'login-form',
+  sessionId: 'abc-123-def'
+});
+
+// Bad event data (like a confusing note)
+eventBus.emit('login', {
+  data: user,           // Too generic
+  stuff: 'whatever',    // Meaningless
+  // Missing important context
+});
+            </CodeSnippet>
+        </Section>
+    </Section>
+
+    <Section Heading="🔄 The Dance of Decoupling" Level="3">
+        <p>
+            Now let's explore why this dance of decoupled communication is so powerful. It's like having a party where everyone can mingle freely, rather than being stuck in assigned seats.
+        </p>
+        
+        <Section Heading="The Problem with Traditional Coupling" Level="4">
+            <p>
+                Traditional component communication is like a family dinner where everyone has to pass messages through the person sitting next to them. If you want to tell your cousin something, you have to ask your sibling to tell their parent to tell your cousin. It's inefficient and creates a web of dependencies.
+            </p>
+            
+            <CodeSnippet Number="7" Language="javascript" Description="Traditional Coupled Communication">
+// Like a family dinner with assigned seating
+class UserService {
+  constructor(cartService, preferencesService, notificationsService) {
+    this.cartService = cartService;
+    this.preferencesService = preferencesService;
+    this.notificationsService = notificationsService;
+  }
+
+  updateUser(user) {
+    // Have to tell everyone individually
+    this.cartService.updateUser(user);
+    this.preferencesService.updateUser(user);
+    this.notificationsService.updateUser(user);
+  }
+}
+            </CodeSnippet>
+        </Section>
+
+        <Section Heading="The Freedom of Event-Driven Communication" Level="4">
+            <p>
+                Event-driven communication is like a party where everyone can mingle freely. You can announce something to the room, and anyone who's interested can listen and react in their own way.
+            </p>
+            
+            <CodeSnippet Number="8" Language="javascript" Description="Decoupled Event-Driven Communication">
+// Like a party where everyone can mingle freely
+class UserService {
+  updateUser(user) {
+    // Simply announce to the room
+    eventBus.emit('user:updated', { user });
+  }
+}
+
+// Anyone interested can listen and react
+eventBus.on('user:updated', (data) => {
+  // Cart service reacts
+  updateCartForUser(data.user);
+});
+
+eventBus.on('user:updated', (data) => {
+  // Preferences service reacts
+  updatePreferencesForUser(data.user);
+});
+
+eventBus.on('user:updated', (data) => {
+  // Notifications service reacts
+  sendWelcomeNotification(data.user);
+});
+            </CodeSnippet>
+        </Section>
+    </Section>
+
+    <Section Heading="🌟 Real-World Applications: When Events Shine" Level="3">
+        <p>
+            Event-driven communication isn't just a theoretical concept—it's a practical solution for many real-world scenarios. Let's explore some situations where this pattern truly shines.
+        </p>
+        
+        <Section Heading="The Shopping Experience" Level="4">
+            <p>
+                Imagine an e-commerce application where multiple components need to react to user actions. When a user adds an item to their cart, several things need to happen:
+            </p>
+            <ul>
+                <li>The cart needs to update</li>
+                <li>The inventory needs to be checked</li>
+                <li>Recommendations need to be updated</li>
+                <li>Analytics need to be tracked</li>
+                <li>A notification might need to be shown</li>
+            </ul>
+            <p>
+                With event-driven communication, the "add to cart" component simply announces what happened, and all interested components can react independently.
+            </p>
+        </Section>
+
+        <Section Heading="The User Authentication Flow" Level="4">
+            <p>
+                When a user logs in, multiple parts of the application need to know about it:
+            </p>
+            <ul>
+                <li>The navigation bar needs to show the user's name</li>
+                <li>The cart needs to load the user's saved items</li>
+                <li>Preferences need to be loaded</li>
+                <li>Permissions need to be updated</li>
+                <li>Analytics need to track the login</li>
+            </ul>
+            <p>
+                Instead of the login component having to know about all these other components, it simply announces "user logged in" and lets everyone else figure out what they need to do.
+            </p>
+        </Section>
+    </Section>
+
+    <Section Heading="🎭 The Dark Side: When Events Can Be Tricky" Level="3">
+        <p>
+            Like any powerful tool, event-driven communication has its challenges. It's important to understand when to use it and when to avoid it.
+        </p>
+        
+        <Section Heading="When Events Are Perfect" Level="4">
+            <ul>
+                <li><b>Multiple components need to react to the same event</b> - Like when a user logs in and many parts of the app need to update</li>
+                <li><b>You want to avoid tight coupling</b> - When components shouldn't need to know about each other</li>
+                <li><b>Real-time updates are needed</b> - When changes need to propagate immediately across the application</li>
+                <li><b>You're building a micro-frontend architecture</b> - Where different teams work on different parts</li>
+            </ul>
+        </Section>
+
+        <Section Heading="When Events Might Not Be the Best Choice" Level="4">
+            <ul>
+                <li><b>Simple parent-child communication</b> - When you just need to pass data down one level</li>
+                <li><b>Guaranteed delivery is critical</b> - When you need to ensure a message is received</li>
+                <li><b>Performance is extremely critical</b> - When the overhead of events might be too much</li>
+                <li><b>Synchronous operations</b> - When you need immediate, blocking responses</li>
+            </ul>
+        </Section>
+    </Section>
+
+    <Section Heading="🚀 Bringing It All Together: Our Demo in Action" Level="3">
+        <p>
+            Our demo from the [frontend-events-demo repository](https://github.com/ajaysskumar/frontend-events-demo) brings all these concepts to life. It's like a miniature town square where you can see the magic of event-driven communication happening in real-time.
+        </p>
+        
+        <p>
+            The demo features three main characters:
+        </p>
+        <ul>
+            <li><b>The Sender</b> - Our town crier who announces messages to the world</li>
+            <li><b>The Receiver</b> - Our attentive audience who displays messages in real-time</li>
+            <li><b>The Logger</b> - Our town historian who keeps a permanent record</li>
+        </ul>
+        
+        <BlogImage ImagePath="/images/blog/frontend/events-demo/events-repo-flow.png" 
+                   Description="Event-driven communication flow in the demo repository - showing how messages flow from Sender through Event Bus to multiple listeners (Receiver and Logger)" 
+                   Number="1" />
+        
+        <BlogImage ImagePath="/images/blog/frontend/events-demo/final-demo-image.gif" 
+                   Description="Live demo showing the event-driven communication in action - Sender component broadcasting messages that are received by both Receiver and Logger components simultaneously" 
+                   Number="2" />
+        
+        <p>
+            You can interact with the demo to see how one announcement can be heard by multiple listeners, each reacting in their own unique way. It's a perfect example of how components can communicate without ever knowing about each other directly.
+        </p>
+    </Section>
+
+    <Section Heading="🎯 The Moral of Our Story" Level="3">
+        <p>
+            Event-driven communication is like having a magical town square where everyone can communicate freely. It's not about forcing components to talk to each other—it's about creating a space where they can choose to listen and react in their own way.
+        </p>
+        
+        <p>
+            The beauty of this approach is its simplicity and flexibility. Components become like people at a party—they can mingle, share information, and react to what's happening around them without being tied to specific relationships.
+        </p>
+        
+        <p>
+            Whether you're building a simple React app or a complex micro-frontend architecture, event-driven communication provides a clean, scalable way for components to work together while maintaining their independence. It's like having the best of both worlds—the power of collaboration with the freedom of independence.
+        </p>
+    </Section>
+    <Section Heading="🔗 Reference Implementation" Level="3">
+        <p>
+            All code samples above are from the open-source <a href="https://github.com/ajaysskumar/frontend-events-demo" target="_blank">frontend-events-demo</a> repository. You can clone, run, and extend the demo to fit your own business needs.
+        </p>
+    </Section>
+    <EndNotes RepositoryLink="https://github.com/ajaysskumar/frontend-events-demo"/>
+</BlogContainer> 

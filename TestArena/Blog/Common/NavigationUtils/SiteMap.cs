@@ -110,6 +110,12 @@ namespace TestArena.Blog.Common.NavigationUtils
             new DateTime(2025, 6, 28),
             "images/blog/ai/open-ai-rest-demo/banner.png",
             ["AI", "OpenAI", "API", ".NET", "C#"]),
+
+        new("Event-Driven Communication in frontend/react: Beginner's Guide",
+            "/blog/frontend/events-demo",
+            new DateTime(2025, 7, 19),
+            "images/blog/frontend/events-demo/banner.png",
+            ["Frontend", "Micro-Frontends", "Events", "JavaScript", "Architecture"]),
         ];
 
         public static IEnumerable<PageInfo> PublishedArticles => Pages.Where(p => p.IsPublished && p.PublishedOn <= DateTime.UtcNow);
