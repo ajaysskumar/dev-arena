@@ -1,0 +1,142 @@
+@page "/error-test"
+@using Sentry
+
+<PageTitle>Error Boundary Test</PageTitle>
+
+<div class="container mt-4">
+    <h2>Error Boundary Test Page</h2>
+    <p>This page contains buttons to test the global error boundary and Sentry integration.</p>
+    
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Exception Tests</h5>
+                </div>
+                <div class="card-body">
+                    <button class="btn btn-danger mb-2" @onclick="ThrowNullReferenceException">
+                        Throw NullReferenceException
+                    </button>
+                    <br/>
+                    <button class="btn btn-danger mb-2" @onclick="ThrowArgumentException">
+                        Throw ArgumentException
+                    </button>
+                    <br/>
+                    <button class="btn btn-danger mb-2" @onclick="ThrowCustomException">
+                        Throw Custom Exception
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Sentry Test Actions</h5>
+                </div>
+                <div class="card-body">
+                    <button class="btn btn-info mb-2" @onclick="SendTestMessage">
+                        Send Test Message
+                    </button>
+                    <br/>
+                    <button class="btn btn-warning mb-2" @onclick="AddBreadcrumb">
+                        Add Breadcrumb
+                    </button>
+                    <br/>
+                    <button class="btn btn-success mb-2" @onclick="StartTransaction">
+                        Start Transaction
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="mt-4">
+        <h5>Test Results:</h5>
+        <div class="alert alert-info">
+            @if (!string.IsNullOrEmpty(lastAction))
+            {
+                <p>Last Action: @lastAction</p>
+                <p>Time: @lastActionTime</p>
+            }
+            else
+            {
+                <p>No actions performed yet.</p>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    private string lastAction = "";
+    private string lastActionTime = "";
+
+    private void ThrowNullReferenceException()
+    {
+        lastAction = "Attempting to throw NullReferenceException";
+        lastActionTime = DateTime.Now.ToString("HH:mm:ss");
+        StateHasChanged();
+        
+        // This will trigger the error boundary
+        string? nullString = null;
+        var length = nullString.Length; // This will throw NullReferenceException
+    }
+
+    private void ThrowArgumentException()
+    {
+        lastAction = "Attempting to throw ArgumentException";
+        lastActionTime = DateTime.Now.ToString("HH:mm:ss");
+        StateHasChanged();
+        
+        // This will trigger the error boundary
+        throw new ArgumentException("This is a test argument exception for Sentry testing");
+    }
+
+    private void ThrowCustomException()
+    {
+        lastAction = "Attempting to throw Custom Exception";
+        lastActionTime = DateTime.Now.ToString("HH:mm:ss");
+        StateHasChanged();
+        
+        // This will trigger the error boundary
+        throw new InvalidOperationException("Custom test exception for error boundary and Sentry integration testing");
+    }
+
+    private void SendTestMessage()
+    {
+        lastAction = "Sent test message to Sentry";
+        lastActionTime = DateTime.Now.ToString("HH:mm:ss");
+        
+        SentrySdk.CaptureMessage("Test message from Blazor WebAssembly", SentryLevel.Info);
+        StateHasChanged();
+    }
+
+    private void AddBreadcrumb()
+    {
+        lastAction = "Added breadcrumb to Sentry";
+        lastActionTime = DateTime.Now.ToString("HH:mm:ss");
+        
+        SentrySdk.AddBreadcrumb("User clicked test breadcrumb button", "user.click", data: new Dictionary<string, string>
+        {
+            {"page", "error-test"},
+            {"action", "breadcrumb-test"}
+        });
+        StateHasChanged();
+    }
+
+    private void StartTransaction()
+    {
+        lastAction = "Started test transaction";
+        lastActionTime = DateTime.Now.ToString("HH:mm:ss");
+        
+        var transaction = SentrySdk.StartTransaction("test-transaction", "user-action");
+        transaction.SetTag("test", "true");
+        transaction.SetExtra("page", "error-test");
+        
+        // Simulate some work
+        System.Threading.Thread.Sleep(100);
+        
+        transaction.Finish();
+        StateHasChanged();
+    }
+}

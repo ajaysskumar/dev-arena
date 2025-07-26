@@ -1,0 +1,107 @@
+@namespace TestArena.Components
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.WebAssembly.Hosting
+@using Sentry
+@using Microsoft.AspNetCore.Components.Web
+@inherits ErrorBoundaryBase
+
+<div class="error-boundary">
+    @if (CurrentException is null)
+    {
+        @ChildContent
+    }
+    else
+    {
+        <div class="error-container">
+            <div class="error-content">
+                <h2 class="error-title">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Oops! Something went wrong
+                </h2>
+                <p class="error-message">
+                    We've encountered an unexpected error. Our team has been notified and is working to fix it.
+                </p>
+                <div class="error-actions">
+                    <button class="btn btn-primary" @onclick="RecoverFromError">
+                        <i class="fas fa-redo"></i>
+                        Try Again
+                    </button>
+                    <button class="btn btn-secondary" @onclick="GoHome">
+                        <i class="fas fa-home"></i>
+                        Go Home
+                    </button>
+                </div>
+                
+                @if (ShowErrorDetails)
+                {
+                    <div class="error-details">
+                        <h4>Error Details (Development Mode):</h4>
+                        <pre class="error-stack">@CurrentException.ToString()</pre>
+                    </div>
+                }
+                
+                <button class="btn btn-link error-toggle" @onclick="ToggleErrorDetails">
+                    @(ShowErrorDetails ? "Hide" : "Show") Technical Details
+                </button>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public bool ShowErrorDetails { get; set; } = false;
+    
+    [Inject] private NavigationManager Navigation { get; set; } = default!;
+    [Inject] private IWebAssemblyHostEnvironment HostEnvironment { get; set; } = default!;
+
+    protected override Task OnErrorAsync(Exception exception)
+    {
+        // Log to Sentry with additional context
+        SentrySdk.ConfigureScope(scope =>
+        {
+            scope.SetTag("component", "GlobalErrorBoundary");
+            scope.SetTag("environment", HostEnvironment.Environment);
+            scope.SetExtra("url", Navigation.Uri);
+            scope.SetExtra("timestamp", DateTimeOffset.UtcNow);
+            scope.Level = SentryLevel.Error;
+        });
+        
+        SentrySdk.CaptureException(exception);
+
+        // Also log to console for development
+        Console.Error.WriteLine($"[GlobalErrorBoundary] Unhandled exception: {exception}");
+        
+        // Set flag to show error details in development
+        ShowErrorDetails = HostEnvironment.IsDevelopment();
+        
+        // Trigger UI update
+        StateHasChanged();
+        
+        return Task.CompletedTask;
+    }
+
+    private void RecoverFromError()
+    {
+        SentrySdk.AddBreadcrumb("User attempted error recovery", "ui.click");
+        Recover();
+    }
+
+    private void GoHome()
+    {
+        SentrySdk.AddBreadcrumb("User navigated to home from error", "navigation");
+        Navigation.NavigateTo("/", forceLoad: true);
+    }
+
+    private void ToggleErrorDetails()
+    {
+        ShowErrorDetails = !ShowErrorDetails;
+        SentrySdk.AddBreadcrumb($"User toggled error details: {ShowErrorDetails}", "ui.click");
+    }
+
+    private string? GetUserId()
+    {
+        // TODO: Implement based on your authentication system
+        // For now, return a placeholder or session-based ID
+        return "anonymous-user";
+    }
+}
