@@ -20,11 +20,11 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" /> -->
     
-<!--Blazor:{"type":"webassembly","prerenderId":"945f2dc500194363bcfe0f464a299c35","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>Using OpenAI APIs: Basic chat completions API Guide in .NET</title><meta property="og:url" content="http://127.0.0.1:5050/blog/ai/openai-rest-api-in-dotnet" />
+<!--Blazor:{"type":"webassembly","prerenderId":"543f464d8d8740e199fe7e0c17d4795d","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>Using OpenAI APIs: Basic chat completions API Guide in .NET</title><meta property="og:url" content="http://127.0.0.1:5050/blog/ai/openai-rest-api-in-dotnet" />
     <meta property="og:title" content="Using OpenAI APIs: Basic chat completions API Guide in .NET" />
     <meta property="og:description" content="Learn how to leverage OpenAI&#x27;s powerful APIs to integrate AI capabilities into your applications. From authentication to implementation, discover everything you need to know about working with OpenAI APIs using direct HTTP requests." />
     <meta property="og:image" content="http://127.0.0.1:5050/images/blog/ai/open-ai-rest-demo/banner.png" />
-    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"945f2dc500194363bcfe0f464a299c35"}-->
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"543f464d8d8740e199fe7e0c17d4795d"}-->
 </head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -40,7 +40,7 @@
 
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"4e61ba3260ab4202a24f60f084ed0807","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"2b307a74399b42b8a055a0eed4184700","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -87,14 +87,14 @@
                     
                     <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 28 Jun 2025</span></div></div></div></div></div></header>
 
-    <section id="ed244084-cab4-4c24-82ac-2ead7bee0b1b"><h2>Understanding OpenAI APIs</h2><hr class="border border-success border-1 opacity-50">
+    <section id="61a8de72-8b66-442d-a551-15867262f282"><h2>Understanding OpenAI APIs</h2><hr class="border border-success border-1 opacity-50">
     <div><p>
             Imagine you're building a smart home system. Just as your system needs to communicate with various devices through specific protocols,
             developers need to interact with AI models through APIs. OpenAI's APIs serve as this communication bridge, allowing you to harness
             the power of advanced AI models like GPT-4 in your applications.
         </p></div></section>
 
-    <section id="a2883bc4-0b5d-4b98-97a8-5c2318b0a83d"><h4>What are OpenAI APIs?</h4><hr class="border border-success border-1 opacity-50">
+    <section id="5391c85a-4f02-4ad2-8041-2dc2eb1010f1"><h4>What are OpenAI APIs?</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             Imagine if you could add the magic of ChatGPT, DALL-E, or Whisper to your own apps—instantly making them smarter, more creative, and more helpful. That’s exactly what OpenAI APIs let you do! These are powerful, easy-to-use web services that unlock the same AI superpowers behind the tools everyone’s talking about.
         </p>
@@ -109,7 +109,7 @@
             With OpenAI APIs, you’re not just coding—you’re inventing the future. Whether you want to automate boring tasks, create something fun, or solve real problems, these APIs are your gateway to next-level innovation. The possibilities are endless and limited only by your imagination!
         </p></div></section>
 
-    <section id="9b6586c6-cf59-42df-b5f4-33c8986f2709"><h4>When to Use OpenAI APIs?</h4><hr class="border border-success border-1 opacity-50">
+    <section id="55c0da2a-6747-4aec-9e1a-603a6d08c1d7"><h4>When to Use OpenAI APIs?</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             Wondering when OpenAI APIs can make a real difference? Here are some moments where they shine—and you’ll probably recognize a few from your own life or work:
         </p>
@@ -124,7 +124,7 @@
         </p></div></section>
 
 
-    <section id="f348cf84-6c62-4fd8-b12b-2103071761ef"><h3>How to Implement OpenAI APIs (API-based Approach)</h3><hr class="border border-success border-1 opacity-50">
+    <section id="6400ccc0-c621-4327-a85c-86d3d0f03532"><h3>How to Implement OpenAI APIs (API-based Approach)</h3><hr class="border border-success border-1 opacity-50">
     <div><h4>1. Authentication: Getting and Securing Your API Key</h4>
         <p><b>Authentication</b> is required for every OpenAI API call. You must use a secret API key, which you can generate from your <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI dashboard</a>.
         </p>
@@ -218,7 +218,7 @@ public async Task&lt;string&gt; GetChatResponseAsync()
         </code></pre></div><div class="col-12 text-center"><code></code></div></div></div>
 <br></div></section>
 
-    <section id="8226b5d6-250d-47d6-967b-483fdcae0ffe"><h3>&#x1F3AC; Demo: Movie Summary Generator</h3><hr class="border border-success border-1 opacity-50">
+    <section id="6bd0db88-cd0a-4437-b001-84a4c2c74d9f"><h3>&#x1F3AC; Demo: Movie Summary Generator</h3><hr class="border border-success border-1 opacity-50">
     <div><p><b>How to use this demo:</b> Enter your personal OpenAI API key (you can create one from your <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI dashboard</a>) in the first field. Then, type the name of any movie you want summarized in the second field. Click <b>Get Summary</b> and the AI will generate a short summary of the movie using OpenAI's API. Your API key is never stored or sent anywhere except directly to OpenAI for this request.
         </p>
     <div class="mb-3"><label for="apiKeyInput" class="form-label"><b>Enter your OpenAI API key:</b></label>
@@ -229,7 +229,7 @@ public async Task&lt;string&gt; GetChatResponseAsync()
     <button class="btn btn-primary mb-3" disabled><span>Get Summary</span></button>
     <div><b>OpenAI response:</b><br><div class="card mt-2" style="background-color: #f8f9fa; border: 1px solid #e9ecef;"><div class="card-body"><span>Response will appear here after you enter your API key and movie name.</span></div></div></div></div></section>
 <br>
-<section id="eccf7ddd-f07a-488e-94ce-d96d30989b77"><h4>Important Considerations</h4><hr class="border border-success border-1 opacity-50">
+<section id="685ee383-76c0-4ad1-8779-8f422263af1a"><h4>Important Considerations</h4><hr class="border border-success border-1 opacity-50">
     <div><ul><li><b>Never hardcode your API key!</b> Treat it like your password—use environment variables or a secure vault. One accidental push to GitHub can expose your account.</li>
         <li><b>Expect the unexpected.</b> Always handle errors gracefully. Network hiccups, expired keys, or API changes can happen—show helpful messages, not cryptic errors.</li>
         <li><b>Watch your usage and costs.</b> OpenAI APIs are powerful, but not free. Set usage limits, monitor your dashboard, and consider caching frequent responses to save money.</li>
@@ -257,15 +257,16 @@ public async Task&lt;string&gt; GetChatResponseAsync()
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-        <!--Blazor:{"prerenderId":"4e61ba3260ab4202a24f60f084ed0807"}-->
+        <!--Blazor:{"prerenderId":"2b307a74399b42b8a055a0eed4184700"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UzBoUmVsWTFSazlzVGtWMWR6QXlPR2RwVG5aeVR6QnlUR00zYmxoVVpWWjZkR1pDYkhjMFdWaGFZbEpuV0ROVGVtVk1VMDlWZEc4NFNtMVhSSEp0TW1GSk1WbFdkelp0VkdkWlZFRldYM00zVFdodk9YZHdUMGRVU1hvdE1sVmFiRmxaYlRoMVUxbEZaMnhmYUhSbkxWODNUVmN0ZHpCaVVYWlpOV1Y0TXpKRVQzUlFOVTFLVG1wNFJHWmZSM0ZaVm1vdGNYVjNJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80VFZGTFVrRTFUMmxOU2s1MU9URTVaV0pOYzBKNFUyNTJNWGN4WVVGRk1tbE9YMkZHTWtwUVVFTk1hSFZEVVdsTWVqTmhMVTVDZERkMVdqZEphalJ3Y0hGeFNGSlpXVkJuT1ZkblpXTjNaM1p5UkZKRWIyTnVabU5XWjBONU5XZE5UWFI2VDE4NWRITjNObmd4U1VaV2VYbEVURE5hYVRKUU4wdFJWbUZxUVRjMFNtOXJVM1o2UWxoaWNFZHBNbHBWU25KNlJVdFpJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
         <a href="" class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
+    <script src="js/sentry-helpers.js"></script>
     <script src="_framework/blazor.webassembly.js" defer="" autostart="false"></script>
     <script src="brotliloader.min.js" type="module"></script>
 
