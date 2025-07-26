@@ -1,8 +1,22 @@
+@using Sentry
+@inject NavigationManager NavigationManager
 @code {
     [Parameter] public RenderFragment ChildContent { get; set; }
+    public void LogPageVisitedMessage()
+    {
+        SentrySdk.CaptureMessage($"Page Visited: {NavigationManager.Uri}");
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            LogPageVisitedMessage();
+        }
+    }
 }
 
-<div class="container-fluid d-flex flex-column align-items-center">
+<div class="container-fluid d-flex flex-column align-items-center" @onload="@LogPageVisitedMessage">
     <div class="content-wrapper">
         @ChildContent
     </div>
