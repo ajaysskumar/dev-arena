@@ -2,21 +2,17 @@
 @inject NavigationManager NavigationManager
 @code {
     [Parameter] public RenderFragment ChildContent { get; set; }
-    public void LogPageVisitedMessage()
-    {
-        SentrySdk.CaptureMessage($"Page Visited: {NavigationManager.Uri}");
-    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            LogPageVisitedMessage();
+            SentrySdk.CaptureMessage($"Page Visited: {NavigationManager.Uri}", SentryLevel.Info);
         }
     }
 }
 
-<div class="container-fluid d-flex flex-column align-items-center" @onload="@LogPageVisitedMessage">
+<div class="container-fluid d-flex flex-column align-items-center">
     <div class="content-wrapper">
         @ChildContent
     </div>
