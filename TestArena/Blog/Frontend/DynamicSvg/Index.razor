@@ -1,0 +1,640 @@
+@page "/blog/frontend/dynamically-updating-svg-images"
+@using TestArena.Blog.Common
+@using TestArena.Blog.Common.NavigationUtils
+@using TestArena.Blog.Frontend.DynamicSvg.Components
+
+@code{
+    PageInfo currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/frontend/dynamically-updating-svg-images")!;
+}
+
+<BlogContainer>
+    <Header Title="@currentPage.Header"
+            Image="@currentPage.ArticleImage" 
+            PublishedOn="@currentPage.PublishedOn" 
+            Authors="Ajay Kumar" />
+
+    <Section Heading="🎨 Understanding SVG: The Smart Image Format" Level="3">
+        <p>
+            Before we dive into dynamic manipulation, let's understand what makes SVG special. <b>Scalable Vector Graphics (SVG)</b> is fundamentally different from traditional image formats like JPEG, PNG, or GIF. While those formats store pixel data, SVG files contain <b>mathematical descriptions</b> of shapes, paths, and colors using XML markup.
+        </p>
+        <p>
+            Think of the difference this way:
+        </p>
+        <ul>
+            <li><b>Traditional images (JPEG/PNG):</b> Like a photograph made of tiny colored dots (pixels)</li>
+            <li><b>SVG images:</b> Like a recipe that tells the browser "draw a red circle here, a blue rectangle there"</li>
+        </ul>
+        <p>
+            This fundamental difference gives SVG some remarkable capabilities:
+        </p>
+        <ul>
+            <li><b>Infinite scalability:</b> SVGs look crisp at any size, from tiny icons to billboard-sized displays</li>
+            <li><b>Small file sizes:</b> Mathematical descriptions are often much smaller than pixel data</li>
+            <li><b>Code-accessible:</b> Since SVG is XML, you can modify colors, shapes, and text using JavaScript or CSS</li>
+            <li><b>Interactive elements:</b> You can add click handlers, hover effects, and animations to individual parts</li>
+            <li><b>SEO-friendly:</b> Search engines can read and index text content within SVG files</li>
+        </ul>
+        <p>
+            <b>Common SVG use cases include:</b> logos that need to look perfect on any device, icons in user interfaces, data visualizations like charts and graphs, interactive diagrams, technical illustrations, and animated graphics. The real magic happens when you realize that every element in an SVG can be controlled and modified by your application code in real-time!
+        </p>
+    </Section>
+
+    <Section Heading="🔍 What is Dynamic SVG Manipulation?" Level="3">
+        <p>
+            Imagine walking into a smart building where you can see real-time temperature readings for each room on a digital floor plan. As temperatures change, the colors on the floor plan update instantly—hot rooms turning red, cool rooms staying blue. This isn't magic; it's the power of <b>dynamic SVG manipulation</b> in modern web applications!
+        </p>
+        <p>
+            <b>Dynamic SVG manipulation</b> is the technique of programmatically modifying Scalable Vector Graphics (SVG) elements in real-time using code. Unlike static images (PNG, JPG), SVG images are XML-based markup that can be treated like HTML elements—meaning you can change colors, shapes, text, and other properties on the fly using JavaScript, CSS, or in our case, Blazor.
+        </p>
+        <p>
+            Think of SVG as a smart drawing where every line, shape, and color can be controlled by your application. It's like having a digital whiteboard that automatically updates based on your data!
+        </p>
+    </Section>
+
+    <Section Heading="🎮 See It In Action!" Level="3">
+        <p>
+            <strong>Before we dive into the technical details, let's see what we're building!</strong> Here's a live interactive demo of a smart building temperature monitoring system. Try clicking on rooms, adjusting temperatures, and watch the real-time SVG updates:
+        </p>
+        
+        <FloorPlanDemo />
+        
+        <p style="margin-top: 20px; text-align: center; font-style: italic; color: #666;">
+            ✨ <strong>This is a live demo!</strong> The SVG colors update in real-time as you interact with the controls. 
+            Pretty cool, right? Let's learn how to build this step by step!
+        </p>
+    </Section>
+
+    <Section Heading="🧠 How Does This Work?" Level="4">
+        <p>
+            The demo above combines several key technologies to create a seamless interactive experience:
+        </p>
+        <ul>
+            <li><b>External SVG File:</b> A designer-created floor plan stored as a separate asset</li>
+            <li><b>Blazor Component:</b> C# code managing state, business logic, and user interactions</li>
+            <li><b>JavaScript Bridge:</b> Minimal functions to manipulate the SVG DOM elements</li>
+            <li><b>Real-time Updates:</b> Colors and text change instantly as you adjust temperature values</li>
+            <li><b>Interactive Elements:</b> Click directly on rooms in the floor plan to select them</li>
+        </ul>
+        <p>
+            The best part? Most of the complexity is handled in C# with familiar Blazor patterns, while the JavaScript layer 
+            is kept minimal and focused solely on DOM manipulation. Let's break down how to build this step by step!
+        </p>
+    </Section>
+
+    <Section Heading="💡 Why Choose SVG for Dynamic Content?" Level="3">
+        <p>
+            Before diving into the "how," let's understand "why" SVG is perfect for dynamic, interactive content:
+        </p>
+        <ul>
+            <li><b>Scalability:</b> SVGs look crisp at any size—from tiny mobile screens to large 4K displays</li>
+            <li><b>Programmable:</b> Every element has attributes you can modify with code</li>
+            <li><b>Lightweight:</b> Vector-based graphics are often smaller than equivalent bitmap images</li>
+            <li><b>Interactive:</b> You can add event handlers to individual shapes and paths</li>
+            <li><b>Accessible:</b> Screen readers can understand SVG content better than bitmap images</li>
+            <li><b>SEO-friendly:</b> Search engines can index SVG text content</li>
+        </ul>
+        <p>
+            For real-time dashboards, interactive floor plans, data visualizations, and IoT monitoring systems, SVG is often the perfect choice.
+        </p>
+    </Section>
+
+    <Section Heading="🕒 Real-Time Use Cases: Where Dynamic SVG Shines" Level="3">
+        <p>
+            Dynamic SVG manipulation shines in scenarios where visual data needs to update in real-time or respond to user interactions. Here are some compelling real-world applications:
+        </p>
+        <ul>
+            <li><b>Building management systems:</b> Floor plans showing room occupancy, temperature, or lighting status that update as sensors report new data</li>
+            <li><b>IoT dashboards:</b> Equipment diagrams where components change color based on operational status, temperature readings, or maintenance schedules</li>
+            <li><b>Interactive maps:</b> Real-time traffic conditions, weather patterns, or demographic data overlays that refresh automatically</li>
+            <li><b>Process monitoring:</b> Manufacturing pipelines showing flow rates, server architectures displaying load balancing, or network diagrams indicating connection health</li>
+            <li><b>Financial dashboards:</b> Stock charts, portfolio visualizations, and market indicators that update with live trading data</li>
+            <li><b>Gaming interfaces:</b> Interactive game boards, character customization screens, or strategy maps that respond to player actions</li>
+            <li><b>Healthcare monitoring:</b> Patient vital signs displayed on anatomical diagrams, medical equipment status indicators</li>
+            <li><b>Smart city applications:</b> Public transportation tracking, parking availability, energy consumption visualization across city infrastructure</li>
+        </ul>
+        <p>
+            If your application needs to show visual information that changes based on external data or user input, dynamic SVG is likely a great solution that combines performance with visual appeal.
+        </p>
+    </Section>
+
+    <Section Heading="🏢 Building Our Interactive Floor Plan Demo">
+        <p>
+            Let's create a practical example: an interactive building floor plan where users can select rooms from a dropdown and adjust their temperatures. The floor plan will visually update to show temperature changes with color coding.
+        </p>
+        <p>
+            Our demo will include:
+        </p>
+        <ul>
+            <li>An SVG floor plan with multiple rooms</li>
+            <li>A dropdown to select rooms</li>
+            <li>Temperature input controls</li>
+            <li>Real-time color updates based on temperature ranges</li>
+            <li>Interactive room selection by clicking on the floor plan</li>
+        </ul>
+    </Section>
+
+    <Section Heading="🛠️ Step 1: Working with External SVG Files" Level="4">
+        <p>
+            In most real-world scenarios, you'll have SVG files created by designers using tools like Figma, Adobe Illustrator, or Sketch. Here's how to make external SVG files interactive in Blazor using DOM manipulation with minimal JavaScript interop:
+        </p>
+        <p>
+            <b>First, prepare your SVG file:</b> Ensure each interactive element has a unique <code>id</code> attribute. For our floor plan example, your designer would create an SVG file with rooms having IDs like <code>room-conference</code>, <code>room-office1</code>, etc.
+        </p>
+        <CodeSnippet Number="1" Language="csharp" Description="Loading External SVG Files with Object Tag">
+@@* Place your SVG file in your project *@@
+@@inject IJSRuntime JSRuntime
+
+&lt;div class="floor-plan-container"&gt;
+    &lt;object id="floor-plan-svg" data="/images/dynamic-svg/floor-plan.svg" type="image/svg+xml" 
+            width="400" height="300" style="display: block;" @@onload="OnSvgLoaded"&gt;
+        &lt;!-- Fallback content --&gt;
+        &lt;div style="padding: 50px; text-align: center; color: #dc3545;"&gt;
+            ❌ SVG not supported by your browser
+        &lt;/div&gt;
+    &lt;/object&gt;
+&lt;/div&gt;
+
+@@code {
+    private bool svgLoaded = false;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("setBlazorReference", DotNetObjectReference.Create(this));
+        }
+    }
+
+    private async Task OnSvgLoaded()
+    {
+        svgLoaded = true;
+        await UpdateSvgDisplay();
+        await SetupClickHandlers();
+    }
+
+    // Method for JavaScript interop (for clicking on SVG elements)
+    [JSInvokable]
+    public async Task SelectRoom(string roomName) =&gt; await SelectRoomAsync(roomName);
+}
+        </CodeSnippet>
+    </Section>
+
+    <Section Heading="🎛️ Building the Control Interface" Level="4">
+        <p>
+            To make our SVG interactive, we need user interface controls. The specific implementation will depend on your design system, but you'll typically need:
+        </p>
+        <ul>
+            <li><b>Room Selection:</b> A dropdown or list component bound to your selected room state using @@bind</li>
+            <li><b>Temperature Input:</b> A range slider or numeric input with @@oninput event handling for real-time updates</li>
+            <li><b>Preset Buttons:</b> Quick action buttons that call methods to set common temperature values</li>
+            <li><b>Action Buttons:</b> Additional controls like "Randomize" or "Reset" for demonstration purposes</li>
+        </ul>
+        <p>
+            The key is ensuring your controls are properly bound to component state and trigger StateHasChanged() when values change to update the SVG visualization.
+        </p>
+    </Section>
+
+    <Section Heading="🔧 Step 2: JavaScript Functions for SVG Manipulation" Level="4">
+        <p>
+            Since external SVG files loaded via <code>&lt;object&gt;</code> tag exist in a separate document context, we need minimal JavaScript functions to bridge between Blazor and the SVG DOM:
+        </p>
+        <CodeSnippet Number="2" Language="javascript" Description="Essential JavaScript Functions for SVG DOM Manipulation">
+&lt;script&gt;
+    window.setBlazorReference = (dotNetRef) =&gt; {
+        window.blazorCulture = dotNetRef;
+    };
+
+    window.updateRoomColor = (roomId, color) =&gt; {
+        const svgObject = document.getElementById('floor-plan-svg');
+        if (svgObject && svgObject.contentDocument) {
+            const room = svgObject.contentDocument.getElementById(roomId);
+            if (room) {
+                room.setAttribute('fill', color);
+            }
+        }
+    };
+
+    window.updateTemperatureText = (x, y, text, color) =&gt; {
+        const svgObject = document.getElementById('floor-plan-svg');
+        if (svgObject && svgObject.contentDocument) {
+            const textElements = svgObject.contentDocument.querySelectorAll('text');
+            for (let textEl of textElements) {
+                if (textEl.getAttribute('x') == x && textEl.getAttribute('y') == y && textEl.textContent.includes('°C')) {
+                    textEl.textContent = text;
+                    textEl.setAttribute('fill', color);
+                    break;
+                }
+            }
+        }
+    };
+
+    window.setupRoomClickHandler = (roomId, roomName) =&gt; {
+        const svgObject = document.getElementById('floor-plan-svg');
+        if (svgObject && svgObject.contentDocument) {
+            const room = svgObject.contentDocument.getElementById(roomId);
+            if (room) {
+                room.style.cursor = 'pointer';
+                room.addEventListener('click', () =&gt; {
+                    if (window.blazorCulture) {
+                        window.blazorCulture.invokeMethodAsync('SelectRoom', roomName);
+                    }
+                });
+            }
+        }
+    };
+
+    window.addSelectionIndicator = (x, y, width, height) =&gt; {
+        const svgObject = document.getElementById('floor-plan-svg');
+        if (svgObject && svgObject.contentDocument) {
+            const svg = svgObject.contentDocument.documentElement;
+            
+            const rect = svgObject.contentDocument.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            rect.setAttribute('id', 'selection-indicator');
+            rect.setAttribute('x', x - 3);
+            rect.setAttribute('y', y - 3);
+            rect.setAttribute('width', width + 6);
+            rect.setAttribute('height', height + 6);
+            rect.setAttribute('fill', 'none');
+            rect.setAttribute('stroke', '#007bff');
+            rect.setAttribute('stroke-width', '3');
+            rect.setAttribute('stroke-dasharray', '5,5');
+            rect.style.animation = 'dash 2s linear infinite';
+            
+            svg.appendChild(rect);
+        }
+    };
+
+    window.removeSelectionIndicator = () =&gt; {
+        const svgObject = document.getElementById('floor-plan-svg');
+        if (svgObject && svgObject.contentDocument) {
+            const existing = svgObject.contentDocument.getElementById('selection-indicator');
+            if (existing) {
+                existing.remove();
+            }
+        }
+    };
+&lt;/script&gt;
+        </CodeSnippet>
+    </Section>
+
+    <Section Heading="⚙️ Step 3: Implementing the Blazor Component Logic" Level="4">
+        <p>
+            Here's the Blazor C# code that manages state and coordinates with the JavaScript functions for SVG manipulation:
+        </p>
+        <CodeSnippet Number="3" Language="csharp" Description="Blazor Component Logic with JavaScript Interop for External SVG">
+@@code {
+    // Component state management
+    private Dictionary&lt;string, double&gt; roomTemperatures = new()
+    {
+        { "Conference Room", 22.0 },
+        { "Office 1", 21.5 },
+        { "Office 2", 23.0 },
+        { "Kitchen", 24.5 },
+        { "Server Room", 18.0 },
+        { "Storage", 20.0 }
+    };
+
+    private string selectedRoom = "Conference Room";
+    private double currentTemperature = 22.0;
+    private bool svgLoaded = false;
+
+    // Handle room selection - called from JavaScript SVG click events
+    [JSInvokable]
+    public async Task SelectRoom(string roomName)
+    {
+        selectedRoom = roomName;
+        currentTemperature = roomTemperatures[roomName];
+        await UpdateSvgDisplay();
+        StateHasChanged();
+    }
+
+    // Update SVG display when temperatures change
+    private async Task UpdateSvgDisplay()
+    {
+        if (!svgLoaded) return;
+
+        // Update room colors and temperatures
+        foreach (var room in roomTemperatures.Keys)
+        {
+            var roomId = GetRoomId(room);
+            var color = GetRoomColor(room);
+            var temp = roomTemperatures[room].ToString("F1");
+            var textColor = GetTextColor(room);
+            
+            // Update room fill color
+            await JSRuntime.InvokeVoidAsync("updateRoomColor", roomId, color);
+            
+            // Update temperature text
+            var coords = GetRoomTextCoords(room);
+            await JSRuntime.InvokeVoidAsync("updateTemperatureText", coords.x, coords.y, $"{temp}°C", textColor);
+        }
+
+        // Update selection indicator
+        await UpdateSelectionIndicator();
+    }
+
+    private async Task UpdateSelectionIndicator()
+    {
+        if (!svgLoaded) return;
+
+        // Remove existing selection indicator
+        await JSRuntime.InvokeVoidAsync("removeSelectionIndicator");
+
+        // Add new selection indicator
+        if (!string.IsNullOrEmpty(selectedRoom))
+        {
+            var coords = GetRoomCoordinates(selectedRoom);
+            if (coords.HasValue)
+            {
+                await JSRuntime.InvokeVoidAsync("addSelectionIndicator", 
+                    coords.Value.x, coords.Value.y, coords.Value.width, coords.Value.height);
+            }
+        }
+    }
+
+    // Setup click handlers for SVG elements
+    private async Task SetupClickHandlers()
+    {
+        if (!svgLoaded) return;
+
+        foreach (var room in roomTemperatures.Keys)
+        {
+            var roomId = GetRoomId(room);
+            await JSRuntime.InvokeVoidAsync("setupRoomClickHandler", roomId, room);
+        }
+    }
+
+    // Dynamic color calculation based on temperature
+    private string GetRoomColor(string roomName)
+    {
+        var temp = roomTemperatures[roomName];
+        
+        if (temp &lt; 18) return "#a8dadc";      // Light blue - very cool
+        if (temp &lt; 20) return "#457b9d";      // Blue - cool
+        if (temp &lt; 22) return "#1d3557";      // Dark blue - comfortable cool
+        if (temp &lt; 24) return "#f1faee";      // Light green - comfortable
+        if (temp &lt; 26) return "#f4a261";      // Orange - warm
+        return "#e63946";                     // Red - hot
+    }
+
+    private string GetRoomId(string roomName)
+    {
+        return roomName switch
+        {
+            "Conference Room" =&gt; "room-conference",
+            "Office 1" =&gt; "room-office1", 
+            "Office 2" =&gt; "room-office2",
+            "Kitchen" =&gt; "room-kitchen",
+            "Server Room" =&gt; "room-server",
+            "Storage" =&gt; "room-storage",
+            _ =&gt; ""
+        };
+    }
+
+    private (int x, int y) GetRoomTextCoords(string roomName)
+    {
+        return roomName switch
+        {
+            "Conference Room" =&gt; (80, 67),
+            "Office 1" =&gt; (200, 62),
+            "Office 2" =&gt; (320, 62),
+            "Kitchen" =&gt; (70, 147),
+            "Server Room" =&gt; (190, 142),
+            "Storage" =&gt; (320, 147),
+            _ =&gt; (0, 0)
+        };
+    }
+
+    private (int x, int y, int width, int height)? GetRoomCoordinates(string roomName)
+    {
+        return roomName switch
+        {
+            "Conference Room" =&gt; (20, 20, 120, 80),
+            "Office 1" =&gt; (150, 20, 100, 80),
+            "Office 2" =&gt; (260, 20, 120, 80),
+            "Kitchen" =&gt; (20, 110, 100, 70),
+            "Server Room" =&gt; (130, 110, 120, 70),
+            "Storage" =&gt; (260, 110, 120, 70),
+            _ =&gt; null
+        };
+    }
+
+    // Event handlers for UI controls
+    private async Task UpdateTemperature(ChangeEventArgs e)
+    {
+        if (double.TryParse(e.Value?.ToString(), out var temp))
+        {
+            currentTemperature = temp;
+            roomTemperatures[selectedRoom] = temp;
+            await UpdateSvgDisplay();
+        }
+    }
+
+    private async Task SetPresetTemperature(double temperature)
+    {
+        currentTemperature = temperature;
+        roomTemperatures[selectedRoom] = temperature;
+        await UpdateSvgDisplay();
+    }
+
+    private async Task RandomizeTemperatures()
+    {
+        var random = new Random();
+        var rooms = roomTemperatures.Keys.ToList();
+        
+        foreach (var room in rooms)
+        {
+            roomTemperatures[room] = Math.Round(15 + random.NextDouble() * 15, 1);
+        }
+        
+        currentTemperature = roomTemperatures[selectedRoom];
+        await UpdateSvgDisplay();
+    }
+}
+        </CodeSnippet>
+    </Section>
+
+    <Section Heading="🎨 Step 4: Understanding the Architecture" Level="4">
+        <p>
+            Our approach uses a hybrid architecture that combines the benefits of external SVG files with efficient DOM manipulation:
+        </p>
+        <ul>
+            <li><b>External SVG Files:</b> Maintainable by designers, cacheable by browsers, version-controlled separately</li>
+            <li><b>Object Tag Loading:</b> Preserves SVG structure while allowing JavaScript access to the embedded document</li>
+            <li><b>Minimal JavaScript Interop:</b> Only essential DOM manipulation functions, keeping the bulk of logic in C#</li>
+            <li><b>Blazor State Management:</b> All business logic, event handling, and data binding handled in C#</li>
+            <li><b>Real-time Updates:</b> Direct DOM manipulation for optimal performance without full re-renders</li>
+        </ul>
+        <p>
+            <b>Advantages of This Approach:</b>
+        </p>
+        <ul>
+            <li><b>Designer-Friendly:</b> External SVG files can be updated independently by design teams</li>
+            <li><b>Performance:</b> Direct DOM manipulation avoids expensive re-renders of large SVG content</li>
+            <li><b>Type Safety:</b> Business logic remains in C# with full IntelliSense and compile-time checking</li>
+            <li><b>Maintainability:</b> Clear separation between presentation (SVG + CSS) and logic (C#)</li>
+            <li><b>Scalability:</b> Works efficiently with complex SVG files without string processing overhead</li>
+            <li><b>Browser Compatibility:</b> Object tag approach works consistently across all modern browsers</li>
+        </ul>
+    </Section>
+
+    <Section Heading="📊 Adding a Temperature Legend" Level="3">
+        <p>
+            A visual legend helps users understand your color coding system. Consider adding a legend component that displays:
+        </p>
+        <ul>
+            <li><b>Color Swatches:</b> Small colored rectangles or circles showing each temperature range color</li>
+            <li><b>Range Labels:</b> Text descriptions of what each color represents (e.g., "Less than 18°C", "18-20°C")</li>
+            <li><b>Dynamic Updates:</b> If needed, highlight the current temperature range based on selected room</li>
+            <li><b>Accessibility:</b> Include proper ARIA labels and ensure sufficient color contrast</li>
+        </ul>
+        <p>
+            The legend should use the same color values from your GetRoomColor() method to maintain consistency. Position it near your floor plan where it won't obscure the main visualization.
+        </p>
+    </Section>
+
+    <Section Heading="� Preparing SVG Files from Design Tools" Level="3">
+        <p>
+            When working with SVG files from design tools like Figma, Adobe Illustrator, or Sketch, you'll need to prepare them for interactivity:
+        </p>
+        <ul>
+            <li><b>Assign Meaningful IDs:</b> Ensure each interactive element has a unique ID like <code>room-conference</code>, <code>room-office1</code></li>
+            <li><b>Group Related Elements:</b> Group room shapes, text, and icons together for easier manipulation</li>
+            <li><b>Optimize SVG Code:</b> Remove unnecessary elements, clean up the code, and minimize file size</li>
+            <li><b>Use Consistent Naming:</b> Follow a naming convention that matches your C# code logic</li>
+            <li><b>Add Data Attributes:</b> Consider adding custom data attributes for additional metadata</li>
+        </ul>
+        <p>
+            <b>Tip:</b> Many design tools now have plugins that can automatically add IDs and optimize SVGs for web development. For Figma, consider using the "SVG Export" plugin with ID preservation options.
+        </p>
+    </Section>
+
+    <Section Heading="�🔧 Advanced Features and Enhancements" Level="3">
+        <p>
+            Our basic implementation is working great, but let's explore some advanced features you might want to add:
+        </p>
+        <ul>
+            <li><b>Real-time data integration:</b> Connect to IoT sensors or APIs for live temperature readings</li>
+            <li><b>Historical data visualization:</b> Show temperature trends over time with animated transitions</li>
+            <li><b>Alert system:</b> Highlight rooms that exceed temperature thresholds</li>
+            <li><b>Export functionality:</b> Save the current floor plan state as an image or PDF</li>
+            <li><b>Mobile responsiveness:</b> Adapt the layout for touch interfaces</li>
+            <li><b>Accessibility improvements:</b> Add ARIA labels and keyboard navigation</li>
+        </ul>
+        <p>
+            For implementing alerts, consider creating a method that evaluates all room temperatures against predefined thresholds and returns a list of warning messages. Display these alerts in a dedicated panel with appropriate styling and icons to grab user attention.
+        </p>
+    </Section>
+
+    <Section Heading="🔄 JavaScript Interop vs Pure Blazor: When to Use Each" Level="4">
+        <p>
+            You might wonder: "Should I use JavaScript interop or a pure Blazor approach?" The answer depends on your specific requirements:
+        </p>
+        <p>
+            <b>Use JavaScript Interop (Our Approach) When:</b>
+        </p>
+        <ul>
+            <li><b>External SVG Files:</b> You have SVG files created by designers that need to remain external for maintainability</li>
+            <li><b>Complex Graphics:</b> Large or complex SVG files where re-rendering the entire markup would be expensive</li>
+            <li><b>Real-time Performance:</b> You need efficient DOM manipulation for frequent updates</li>
+            <li><b>Design Collaboration:</b> Designers need to update SVG files independently from development cycles</li>
+            <li><b>File Caching:</b> You want browsers to cache SVG assets separately from application code</li>
+        </ul>
+        <p>
+            <b>Use Pure Blazor When:</b>
+        </p>
+        <ul>
+            <li><b>Simple Graphics:</b> Small, simple SVG elements that are quick to re-render</li>
+            <li><b>Generated Content:</b> SVG content that's dynamically generated from data</li>
+            <li><b>Server-Side Rendering:</b> You need full SSR support without client-side dependencies</li>
+            <li><b>Minimal Complexity:</b> You prefer to avoid any JavaScript dependencies</li>
+            <li><b>Inline Graphics:</b> SVG content is small enough to be embedded directly in components</li>
+        </ul>
+        <p>
+            In our floor plan demo, we chose JavaScript interop because it provides the best balance of performance, maintainability, and designer collaboration for external SVG assets.
+        </p>
+    </Section>
+
+    <Section Heading="🔄 Connecting to Real-Time Data" Level="4">
+        <p>
+            In a real-world application, you'd typically connect this to actual sensor data or APIs. Consider these integration approaches:
+        </p>
+        <ul>
+            <li><b>SignalR:</b> For real-time bi-directional communication with the server</li>
+            <li><b>HTTP Polling:</b> Periodically fetch updates from a REST API using HttpClient</li>
+            <li><b>WebSockets:</b> For low-latency real-time data streams</li>
+            <li><b>Timer-based updates:</b> Use Blazor's Timer for periodic data refresh</li>
+            <li><b>Event-driven updates:</b> Respond to external events or message queues</li>
+        </ul>
+        <p>
+            When implementing real-time updates, remember to call StateHasChanged() and consider using InvokeAsync() when updating from background threads. Always handle connection failures gracefully and provide user feedback about connection status.
+        </p>
+    </Section>
+
+    <Section Heading="🎯 Event Handling and Performance" Level="4">
+        <p>
+            When working with dynamic SVG in Blazor, keep these best practices in mind:
+        </p>
+        <ul>
+            <li><b>Use StateHasChanged() judiciously:</b> Only call it when you need to trigger a re-render</li>
+            <li><b>Optimize SVG complexity:</b> Simpler shapes perform better, especially on mobile devices</li>
+            <li><b>Consider virtualization:</b> For large floor plans, only render visible areas</li>
+            <li><b>Cache color calculations:</b> Pre-compute colors for common temperature ranges</li>
+            <li><b>Use CSS transitions:</b> Let CSS handle smooth animations instead of JavaScript</li>
+            <li><b>Test on different devices:</b> SVG rendering can vary between browsers and devices</li>
+        </ul>
+    </Section>
+
+    <Section Heading="🚀 Taking It Further" Level="3">
+        <p>
+            Our building temperature monitoring system demonstrates the power of dynamic SVG manipulation, but this is just the beginning! Here are some ideas for extending this concept:
+        </p>
+        <ul>
+            <li><b>Multi-floor buildings:</b> Add floor selection with elevator animations</li>
+            <li><b>Different sensor types:</b> Humidity, air quality, occupancy sensors</li>
+            <li><b>Energy optimization:</b> Visual feedback for energy-saving recommendations</li>
+            <li><b>Security integration:</b> Show door/window status, access control</li>
+            <li><b>Maintenance scheduling:</b> Highlight equipment due for maintenance</li>
+            <li><b>Emergency systems:</b> Fire evacuation routes, emergency lighting</li>
+        </ul>
+    </Section>
+
+    <Section Heading="📝 Summary" Level="3">
+        <p>
+            Dynamic SVG manipulation in Blazor opens up exciting possibilities for creating interactive, real-time visual applications. We've explored how to:
+        </p>
+        <ul>
+            <li>Load external SVG files using the &lt;object&gt; tag for maintainable design workflows</li>
+            <li>Implement minimal JavaScript interop functions for essential DOM manipulation</li>
+            <li>Manage application state and business logic entirely in C# using Blazor</li>
+            <li>Create real-time visual updates through efficient DOM manipulation techniques</li>
+            <li>Build interactive SVG applications that work seamlessly with external design assets</li>
+        </ul>
+        <p>
+            The key advantage of this approach is <b>optimal balance between maintainability and performance</b>. By using external SVG files, designers can work independently using their preferred tools while developers maintain full control over interactivity and business logic in C#. <b>The minimal JavaScript interop layer provides efficient DOM access while keeping complexity low.</b>
+        </p>
+        <p>
+            This approach is particularly powerful for teams where designers and developers collaborate on complex interactive visualizations. The result is a clean separation between design assets and application logic, with robust real-time functionality that scales well with complex SVG graphics.
+        </p>
+    </Section>
+
+    <Section Heading="🚀 What's Next?" Level="3">
+        <p>
+            <strong>Congratulations!</strong> You now have all the knowledge needed to create interactive SVG applications in Blazor. 
+            The techniques we've covered can be applied to many scenarios beyond temperature monitoring:
+        </p>
+        <ul>
+            <li><b>IoT Dashboards:</b> Visualize sensor data on equipment diagrams</li>
+            <li><b>Interactive Maps:</b> Show real-time traffic, weather, or demographic data</li>
+            <li><b>Process Monitoring:</b> Manufacturing pipelines, server architectures, network diagrams</li>
+            <li><b>Gaming Interfaces:</b> Interactive game boards or character customization</li>
+            <li><b>Data Visualization:</b> Charts and graphs that update with live data feeds</li>
+        </ul>
+        <p style="margin-top: 20px; text-align: center;">
+            <strong>Ready to build your own interactive SVG application?</strong><br/>
+            <em>The demo above shows exactly what you can achieve with the techniques from this article!</em>
+        </p>
+    </Section>
+
+    <EndNotes RepositoryLink="https://github.com/ajaysskumar/dynamic-svg-blazor-demo" />
+</BlogContainer>

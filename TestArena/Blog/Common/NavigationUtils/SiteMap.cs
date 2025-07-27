@@ -116,6 +116,12 @@ namespace TestArena.Blog.Common.NavigationUtils
             new DateTime(2025, 7, 19),
             "images/blog/frontend/events-demo/banner.png",
             ["Frontend", "Micro-Frontends", "Events", "JavaScript", "Architecture"]),
+
+        new("Interactive SVG Graphics with Blazor: From Static Images to Real-Time Visualizations",
+            "/blog/frontend/dynamically-updating-svg-images",
+            new DateTime(2025, 7, 26),
+            "images/blog/frontend/dynamic-svg/banner.png",
+            ["Frontend", "SVG", "Blazor", "Interactive", "Real-time"]),
         ];
 
         public static IEnumerable<PageInfo> PublishedArticles => Pages.Where(p => p.IsPublished && p.PublishedOn <= DateTime.UtcNow);

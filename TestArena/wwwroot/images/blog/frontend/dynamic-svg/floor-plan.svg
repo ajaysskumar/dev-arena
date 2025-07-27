@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+    <!-- Building outline -->
+    <rect x="10" y="10" width="380" height="280" fill="none" stroke="#333" stroke-width="3"/>
+    
+    <!-- Room 1: Conference Room -->
+    <rect id="room-conference" x="20" y="20" width="120" height="80" 
+          fill="#f1faee" stroke="#333" stroke-width="2" style="cursor: pointer;"/>
+    <text x="80" y="55" text-anchor="middle" fill="#000" font-size="11" font-weight="bold">Conference</text>
+    <text x="80" y="67" text-anchor="middle" fill="#333" font-size="10">22.0°C</text>
+    
+    <!-- Room 2: Office 1 -->
+    <rect id="room-office1" x="150" y="20" width="100" height="80" 
+          fill="#1d3557" stroke="#333" stroke-width="2" style="cursor: pointer;"/>
+    <text x="200" y="50" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">Office 1</text>
+    <text x="200" y="62" text-anchor="middle" fill="#ccc" font-size="10">21.5°C</text>
+    
+    <!-- Room 3: Office 2 -->
+    <rect id="room-office2" x="260" y="20" width="120" height="80" 
+          fill="#f1faee" stroke="#333" stroke-width="2" style="cursor: pointer;"/>
+    <text x="320" y="50" text-anchor="middle" fill="#000" font-size="11" font-weight="bold">Office 2</text>
+    <text x="320" y="62" text-anchor="middle" fill="#333" font-size="10">23.0°C</text>
+    
+    <!-- Room 4: Kitchen -->
+    <rect id="room-kitchen" x="20" y="110" width="100" height="70" 
+          fill="#f4a261" stroke="#333" stroke-width="2" style="cursor: pointer;"/>
+    <text x="70" y="135" text-anchor="middle" fill="#000" font-size="11" font-weight="bold">Kitchen</text>
+    <text x="70" y="147" text-anchor="middle" fill="#333" font-size="10">24.5°C</text>
+    
+    <!-- Room 5: Server Room -->
+    <rect id="room-server" x="130" y="110" width="120" height="70" 
+          fill="#a8dadc" stroke="#333" stroke-width="2" style="cursor: pointer;"/>
+    <text x="190" y="130" text-anchor="middle" fill="#000" font-size="11" font-weight="bold">Server Room</text>
+    <text x="190" y="142" text-anchor="middle" fill="#333" font-size="10">18.0°C</text>
+    
+    <!-- Room 6: Storage -->
+    <rect id="room-storage" x="260" y="110" width="120" height="70" 
+          fill="#457b9d" stroke="#333" stroke-width="2" style="cursor: pointer;"/>
+    <text x="320" y="135" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">Storage</text>
+    <text x="320" y="147" text-anchor="middle" fill="#ccc" font-size="10">20.0°C</text>
+    
+    <!-- Hallway -->
+    <rect x="20" y="190" width="360" height="90" fill="#e9ecef" stroke="#333" stroke-width="2"/>
+    <text x="200" y="240" text-anchor="middle" fill="#666" font-size="14" font-weight="bold">Hallway</text>
+    
+    <!-- CSS Styles for transitions and hover effects -->
+    <style>
+        <![CDATA[
+        rect[id^="room-"] {
+            transition: all 0.3s ease;
+        }
+        
+        rect[id^="room-"]:hover {
+            stroke-width: 4;
+            filter: brightness(1.1);
+        }
+        ]]>
+    </style>
+</svg>
