@@ -1,0 +1,1166 @@
+<!DOCTYPE html><html lang="en"><head>
+    <!-- Google tag (gtag.js) -->
+    <script defer="" src="https://www.googletagmanager.com/gtag/js?id=G-N1BDBV7WLD"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-N1BDBV7WLD');
+    </script>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Dev Codex: .NET Development and Testing Guide</title>
+    <meta name="description" content="Your ultimate resource for development, AI integration, clean coding, software testing, and modern software practices."/>
+    <!-- Removed meta keywords tag as modern search engines often ignore it -->
+    <meta name="author" content="Ajay Kumar"/>
+    <!-- <meta property="og:title" content="Dev Codex: Your Ultimate Guide to .NET Development, AI, and Software Practices" />
+    <meta property="og:description" content="Explore expert insights on .NET development, AI integration, clean coding, performance testing, and modern software practices. Build better, smarter, and faster applications with Dev Codex." />
+    <meta property="og:url" content="https://devcodex.in/blog/connection-pooling-sql-server" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" /> -->
+    
+<!--Blazor:{"type":"webassembly","prerenderId":"5e93a0aac5c84970b6345de8e59de57f","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>Interactive SVG Graphics with Blazor: From Static Images to Real-Time Visualizations</title><meta property="og:url" content="http://127.0.0.1:5050/blog/frontend/dynamically-updating-svg-images" />
+    <meta property="og:title" content="Interactive SVG Graphics with Blazor: From Static Images to Real-Time Visualizations" />
+    <meta property="og:description" content="" />
+    <meta property="og:image" content="http://127.0.0.1:5050/images/blog/frontend/dynamic-svg/banner.png" />
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"5e93a0aac5c84970b6345de8e59de57f"}-->
+</head><body><headoutlet>
+    <base href="/"/>
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/app.css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" defer=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js" defer=""></script>
+<link rel="icon" type="image/png" href="favicon.png"/>
+<link href="TestArena.styles.css" rel="stylesheet"/>
+
+
+
+    <div id="app">
+<!-- %%-PRERENDERING-BEGIN-%% -->
+<!--Blazor:{"type":"webassembly","prerenderId":"1383de741b634e2b8f2319d26bd99fe2","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
+                        <h3 class="m-0">Dev Codex</h3></a></div>
+
+                
+                <div class="col-12 col-md-4 d-flex justify-content-md-center justify-content-center mt-2 mt-md-0"><div class="w-75 position-relative"><input type="text" class="form-control" placeholder="Search..." />
+        <ul class="list-group position-absolute w-100 mt-1" style="z-index: 1000;" hidden></ul></div></div>
+
+                
+                <div class="col-12 col-md-4 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><div class="dropdown"><a href="/about-author" class="d-inline-block rounded-circle overflow-hidden border border-white" style="width: 3rem; height: 3rem; border-width: 0.25rem;"><img src="/images/shared/author.png" alt="About Author" class="img-fluid rounded-circle" style="width: 100%; height: 100%; object-fit: cover;"></a></div></div></div></div></div></header>
+        <article class="content px-4" b-mcp0h0uciv><div class="container-fluid d-flex flex-column align-items-center"><div class="content-wrapper"><style>
+    .article-header {
+        margin: 0 auto;
+        /* Centers the div */
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    .container-fluid,
+    .row,
+    .col-md-12,
+    .col-6 {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .article-image {
+        max-width: 500px !important;
+        height: auto;
+        border-radius: 10px;
+    }
+</style>
+
+
+
+
+<header class="article-header"><div class="row"><div class="col-md-12"><h1 class="fw-bold">Interactive SVG Graphics with Blazor: From Static Images to Real-Time Visualizations</h1></div>
+        <div class="col-md-12"><img src="images/blog/frontend/dynamic-svg/banner.png" alt="Article Banner" height="200" width="auto" class="img-fluid rounded mx-auto d-block my-3" loading="lazy" /></div>
+        <div class="col-md-12"><div class="container-fluid"><div class="row"><div class="col-md-4 col-xs-12 d-flex justify-content-md-start justify-content-center"><span class="text-secondary fw-bold">Author(s): </span>
+                        <span class="text-secondary fw-bold ms-1">Ajay Kumar</span></div>
+
+                    <div class="col-md-4 col-xs-12 d-flex justify-content-md-center justify-content-center"><div class="social-share flex" b-gjpj7q7b4s><a href="https://twitter.com/intent/tweet?url=http%3A%2F%2F127.0.0.1%3A5050%2Fblog%2Ffrontend%2Fdynamically-updating-svg-images&amp;text=Interactive%20SVG%20Graphics%20with%20Blazor%3A%20From%20Static%20Images%20to%20Real-Time%20Visualizations" title="Share on Twitter" target="_blank" rel="noopener" b-gjpj7q7b4s><img src="images/shared/icons/twitter-old.svg" alt="Twitter/X" width="24" style="cursor:pointer" b-gjpj7q7b4s></a>
+    <a href="https://www.linkedin.com/feed/?shareActive=true&amp;shareUrl=http://127.0.0.1:5050/blog/frontend/dynamically-updating-svg-images" title="Share on LinkedIn" target="_blank" rel="noopener" b-gjpj7q7b4s><img src="images/shared/icons/linkedin.svg" alt="LinkedIn" width="24" style="cursor:pointer" b-gjpj7q7b4s></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A5050%2Fblog%2Ffrontend%2Fdynamically-updating-svg-images" title="Share on Facebook" target="_blank" rel="noopener" b-gjpj7q7b4s><img src="images/shared/icons/facebook.svg" alt="Facebook" width="24" style="cursor:pointer" b-gjpj7q7b4s></a></div></div>
+
+                    
+                    <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 26 Jul 2025</span></div></div></div></div></div></header>
+
+    <section id="3469c5fb-5c48-4692-af31-2b4dde93870e"><h3>&#x1F3A8; Understanding SVG: The Smart Image Format</h3><hr class="border border-success border-1 opacity-50">
+    <div><p>
+            Before we dive into dynamic manipulation, let's understand what makes SVG special. <b>Scalable Vector Graphics (SVG)</b> is fundamentally different from traditional image formats like JPEG, PNG, or GIF. While those formats store pixel data, SVG files contain <b>mathematical descriptions</b> of shapes, paths, and colors using XML markup.
+        </p>
+        <p>
+            Think of the difference this way:
+        </p>
+        <ul><li><b>Traditional images (JPEG/PNG):</b> Like a photograph made of tiny colored dots (pixels)</li>
+            <li><b>SVG images:</b> Like a recipe that tells the browser "draw a red circle here, a blue rectangle there"</li></ul>
+        <p>
+            This fundamental difference gives SVG some remarkable capabilities:
+        </p>
+        <ul><li><b>Infinite scalability:</b> SVGs look crisp at any size, from tiny icons to billboard-sized displays</li>
+            <li><b>Small file sizes:</b> Mathematical descriptions are often much smaller than pixel data</li>
+            <li><b>Code-accessible:</b> Since SVG is XML, you can modify colors, shapes, and text using JavaScript or CSS</li>
+            <li><b>Interactive elements:</b> You can add click handlers, hover effects, and animations to individual parts</li>
+            <li><b>SEO-friendly:</b> Search engines can read and index text content within SVG files</li></ul>
+        <p><b>Common SVG use cases include:</b> logos that need to look perfect on any device, icons in user interfaces, data visualizations like charts and graphs, interactive diagrams, technical illustrations, and animated graphics. The real magic happens when you realize that every element in an SVG can be controlled and modified by your application code in real-time!
+        </p></div></section>
+
+    <section id="376d0880-f1b2-46c5-b6ad-789f209be043"><h3>&#x1F50D; What is Dynamic SVG Manipulation?</h3><hr class="border border-success border-1 opacity-50">
+    <div><p>
+            Imagine walking into a smart building where you can see real-time temperature readings for each room on a digital floor plan. As temperatures change, the colors on the floor plan update instantly—hot rooms turning red, cool rooms staying blue. This isn't magic; it's the power of <b>dynamic SVG manipulation</b> in modern web applications!
+        </p>
+        <p><b>Dynamic SVG manipulation</b> is the technique of programmatically modifying Scalable Vector Graphics (SVG) elements in real-time using code. Unlike static images (PNG, JPG), SVG images are XML-based markup that can be treated like HTML elements—meaning you can change colors, shapes, text, and other properties on the fly using JavaScript, CSS, or in our case, Blazor.
+        </p>
+        <p>
+            Think of SVG as a smart drawing where every line, shape, and color can be controlled by your application. It's like having a digital whiteboard that automatically updates based on your data!
+        </p></div></section>
+
+    <section id="27eb3107-a0e0-4d78-800b-cb7a9d9c3da7"><h3>&#x1F3AE; See It In Action!</h3><hr class="border border-success border-1 opacity-50">
+    <div><p><strong>Before we dive into the technical details, let's see what we're building!</strong> Here's a live interactive demo of a smart building temperature monitoring system. Try clicking on rooms, adjusting temperatures, and watch the real-time SVG updates:
+        </p>
+        
+        <div class="interactive-demo-container"><div class="floor-plan-section"><h4>🏢 Smart Building Temperature Monitor</h4>
+        <div class="floor-plan-with-download"><div class="floor-plan-container" style="border: 2px solid #333; background: #f8f9fa; border-radius: 8px; display: inline-block;"><object id="floor-plan-svg" data="/images/blog/frontend/dynamic-svg/floor-plan.svg" type="image/svg&#x2B;xml" width="600" height="450" style="display: block;"><div style="padding: 50px; text-align: center; color: #dc3545;">
+                        ❌ SVG not supported by your browser
+                    </div></object></div>
+            
+            
+            <div class="demo-download-small"><button class="demo-btn-download-small" title="Download current SVG with temperature settings">
+                    ⬇️
+                </button></div></div>
+        
+        
+        <div class="demo-temperature-legend"><div class="legend-title"><strong>Temperature Scale:</strong></div>
+            <div class="legend-items"><div class="demo-legend-item"><div class="demo-legend-color" style="background-color: #a8dadc;"></div>
+                    <span>&lt; 18°C</span></div>
+                <div class="demo-legend-item"><div class="demo-legend-color" style="background-color: #457b9d;"></div>
+                    <span>18-20°C</span></div>
+                <div class="demo-legend-item"><div class="demo-legend-color" style="background-color: #1d3557;"></div>
+                    <span>20-22°C</span></div>
+                <div class="demo-legend-item"><div class="demo-legend-color" style="background-color: #f1faee;"></div>
+                    <span>22-24°C</span></div>
+                <div class="demo-legend-item"><div class="demo-legend-color" style="background-color: #f4a261;"></div>
+                    <span>24-26°C</span></div>
+                <div class="demo-legend-item"><div class="demo-legend-color" style="background-color: #e63946;"></div>
+                    <span>&gt; 26°C</span></div></div></div></div>
+
+    
+    <div class="demo-control-panel"><h5>🌡️ Temperature Controls</h5>
+        
+        <div class="demo-control-row"><label><strong>Selected Room:</strong></label>
+            <select class="demo-form-control" value="Conference Room"><option value="Conference Room" selected>Conference Room</option><option value="Office 1">Office 1</option><option value="Office 2">Office 2</option><option value="Kitchen">Kitchen</option><option value="Server Room">Server Room</option><option value="Storage">Storage</option></select></div>
+        
+        <div class="demo-control-row"><label><strong>Temperature:</strong></label>
+            <div class="demo-temperature-control"><input type="range" min="15" max="30" step="0.5" class="demo-temp-slider" value="22" />
+                <span class="demo-temp-display" style="color: #28a745;">22.0°C
+                </span></div></div>
+        
+        <div class="demo-preset-buttons"><button class="demo-btn demo-btn-cool">❄️ Cool</button>
+            <button class="demo-btn demo-btn-comfort">🌱 Comfort</button>
+            <button class="demo-btn demo-btn-warm">🔥 Warm</button>
+            <button class="demo-btn demo-btn-random">🎲 Random</button></div><div class="demo-tip">
+            💡 <em>Click directly on rooms in the floor plan to select them!</em></div></div></div>
+
+
+<script>
+    window.setBlazorReference = (dotNetRef) => {
+        window.blazorCulture = dotNetRef;
+    };
+
+    window.updateRoomColor = (roomId, color) => {
+        const svgObject = document.getElementById('floor-plan-svg');
+        if (svgObject && svgObject.contentDocument) {
+            const room = svgObject.contentDocument.getElementById(roomId);
+            if (room) {
+                room.setAttribute('fill', color);
+            }
+        }
+    };
+
+    window.updateTemperatureText = (x, y, text, color) => {
+        const svgObject = document.getElementById('floor-plan-svg');
+        if (svgObject && svgObject.contentDocument) {
+            // Find text element at specific coordinates
+            const textElements = svgObject.contentDocument.querySelectorAll('text');
+            for (let textEl of textElements) {
+                if (textEl.getAttribute('x') == x && textEl.getAttribute('y') == y && textEl.textContent.includes('°C')) {
+                    textEl.textContent = text;
+                    textEl.setAttribute('fill', color);
+                    break;
+                }
+            }
+        }
+    };
+
+    window.addSelectionIndicator = (x, y, width, height) => {
+        const svgObject = document.getElementById('floor-plan-svg');
+        if (svgObject && svgObject.contentDocument) {
+            const svg = svgObject.contentDocument.documentElement;
+            
+            // Create selection rectangle
+            const rect = svgObject.contentDocument.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            rect.setAttribute('id', 'selection-indicator');
+            rect.setAttribute('x', x - 3);
+            rect.setAttribute('y', y - 3);
+            rect.setAttribute('width', width + 6);
+            rect.setAttribute('height', height + 6);
+            rect.setAttribute('fill', 'none');
+            rect.setAttribute('stroke', '#007bff');
+            rect.setAttribute('stroke-width', '3');
+            rect.setAttribute('stroke-dasharray', '5,5');
+            rect.style.animation = 'dash 2s linear infinite';
+            
+            svg.appendChild(rect);
+        }
+    };
+
+    window.removeSelectionIndicator = () => {
+        const svgObject = document.getElementById('floor-plan-svg');
+        if (svgObject && svgObject.contentDocument) {
+            const existing = svgObject.contentDocument.getElementById('selection-indicator');
+            if (existing) {
+                existing.remove();
+            }
+        }
+    };
+
+    window.setupRoomClickHandler = (roomId, roomName) => {
+        const svgObject = document.getElementById('floor-plan-svg');
+        if (svgObject && svgObject.contentDocument) {
+            const room = svgObject.contentDocument.getElementById(roomId);
+            if (room) {
+                room.style.cursor = 'pointer';
+                room.addEventListener('click', () => {
+                    if (window.blazorCulture) {
+                        window.blazorCulture.invokeMethodAsync('SelectRoom', roomName);
+                    }
+                });
+            }
+        }
+    };
+
+    window.downloadCurrentSvg = () => {
+        const svgObject = document.getElementById('floor-plan-svg');
+        if (svgObject && svgObject.contentDocument) {
+            try {
+                // Clone the SVG element to preserve the current state
+                const svgElement = svgObject.contentDocument.documentElement.cloneNode(true);
+                
+                // Create a new SVG string with current modifications
+                const serializer = new XMLSerializer();
+                let svgString = serializer.serializeToString(svgElement);
+                
+                // Add XML declaration if not present
+                if (!svgString.startsWith('<?xml')) {
+                    svgString = '<?xml version="1.0" encoding="UTF-8"?>\n' + svgString;
+                }
+                
+                // Create blob and download
+                const blob = new Blob([svgString], { type: 'image/svg+xml' });
+                const url = window.URL.createObjectURL(blob);
+                
+                // Create temporary download link
+                const downloadLink = document.createElement('a');
+                downloadLink.href = url;
+                downloadLink.download = 'floor-plan-current-state.svg';
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+                
+                // Clean up
+                window.URL.revokeObjectURL(url);
+            } catch (error) {
+                console.error('Error downloading SVG:', error);
+                alert('Error downloading SVG. Please try again.');
+            }
+        } else {
+            alert('SVG not loaded yet. Please wait and try again.');
+        }
+    };
+
+    // Add CSS animation for selection indicator
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes dash {
+            to { stroke-dashoffset: -10; }
+        }
+    `;
+    document.head.appendChild(style);
+</script>
+
+<style>
+    /* Interactive Demo Styles */
+    .interactive-demo-container {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border: 2px solid #dee2e6;
+        border-radius: 12px;
+        padding: 25px;
+        margin: 25px 0;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .floor-plan-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 25px;
+    }
+
+    .floor-plan-section h4 {
+        margin: 0 0 15px 0;
+        color: #495057;
+        text-align: center;
+    }
+
+    .demo-room-rect {
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .demo-room-rect:hover {
+        stroke-width: 4;
+        filter: brightness(1.1);
+        transform: scale(1.02);
+    }
+
+    .demo-selection-indicator {
+        animation: demo-dash 2s linear infinite;
+    }
+
+    .selection-indicator {
+        animation: demo-dash 2s linear infinite;
+    }
+
+    @keyframes demo-dash {
+        to {
+            stroke-dashoffset: -10;
+        }
+    }
+
+    .demo-temperature-legend {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+        font-size: 12px;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 15px;
+        border-radius: 8px;
+        border: 1px solid #dee2e6;
+        max-width: 600px;
+    }
+
+    .floor-plan-with-download {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .demo-download-small {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .demo-btn-download-small {
+        background-color: transparent;
+        color: #17a2b8;
+        border: 2px solid #17a2b8;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+        width: 35px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .demo-btn-download-small:hover {
+        background-color: #17a2b8;
+        color: white;
+        transform: translateY(-1px);
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .legend-title {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .legend-items {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .demo-legend-item {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .demo-legend-color {
+        width: 14px;
+        height: 14px;
+        border: 1px solid #333;
+        border-radius: 3px;
+    }
+
+    .demo-control-panel {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 20px;
+        border-radius: 8px;
+        border: 1px solid #dee2e6;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .demo-control-panel h5 {
+        margin: 0 0 15px 0;
+        color: #495057;
+        text-align: center;
+    }
+
+    .demo-control-row {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin: 15px 0;
+        flex-wrap: wrap;
+    }
+
+    .demo-control-row label {
+        min-width: 120px;
+        font-weight: 600;
+        color: #495057;
+    }
+
+    .demo-form-control {
+        padding: 8px 12px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        font-size: 14px;
+        min-width: 150px;
+        background: white;
+    }
+
+    .demo-temperature-control {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        flex: 1;
+    }
+
+    .demo-temp-slider {
+        flex: 1;
+        max-width: 200px;
+        height: 6px;
+        -webkit-appearance: none;
+        appearance: none;
+        background: #ddd;
+        border-radius: 3px;
+        outline: none;
+    }
+
+    .demo-temp-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 18px;
+        height: 18px;
+        background: #007bff;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    .demo-temp-slider::-moz-range-thumb {
+        width: 18px;
+        height: 18px;
+        background: #007bff;
+        border-radius: 50%;
+        cursor: pointer;
+        border: none;
+    }
+
+    .demo-temp-display {
+        min-width: 70px;
+        font-weight: bold;
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .demo-preset-buttons {
+        display: flex;
+        gap: 8px;
+        margin: 20px 0;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .demo-btn {
+        padding: 8px 12px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 600;
+        transition: all 0.2s;
+        white-space: nowrap;
+    }
+
+    .demo-btn-cool { background-color: #17a2b8; color: white; }
+    .demo-btn-comfort { background-color: #28a745; color: white; }
+    .demo-btn-warm { background-color: #fd7e14; color: white; }
+    .demo-btn-random { background-color: #6f42c1; color: white; }
+
+    .demo-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        opacity: 0.9;
+    }
+
+    .demo-alert-panel {
+        background: #fff3cd;
+        border: 1px solid #ffeaa7;
+        border-radius: 6px;
+        padding: 12px;
+        margin: 15px 0;
+    }
+
+    .demo-alert-title {
+        font-weight: bold;
+        color: #856404;
+        margin-bottom: 8px;
+    }
+
+    .demo-alert-item {
+        font-size: 13px;
+        color: #856404;
+        margin: 4px 0;
+    }
+
+    .demo-tip {
+        font-size: 12px;
+        color: #6c757d;
+        margin-top: 15px;
+        text-align: center;
+        font-style: italic;
+    }
+
+    /* Responsive design for demo */
+    @media (max-width: 768px) {
+        .interactive-demo-container {
+            padding: 15px;
+        }
+        
+        .floor-plan-with-download {
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .floor-plan-container {
+            width: 100% !important;
+            overflow-x: auto;
+        }
+        
+        .floor-plan-container object {
+            width: 100%;
+            min-width: 400px;
+            height: auto;
+        }
+        
+        .demo-download-small {
+            flex-direction: row;
+            justify-content: center;
+        }
+        
+        .legend-items {
+            gap: 8px;
+        }
+        
+        .demo-control-row {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .demo-control-row label {
+            min-width: auto;
+        }
+        
+        .demo-preset-buttons {
+            justify-content: center;
+            gap: 6px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .floor-plan-container object {
+            min-width: 350px;
+        }
+        
+        .demo-btn, .demo-btn-download-small {
+            font-size: 14px;
+        }
+        
+        .demo-btn-download-small {
+            width: 32px;
+            height: 32px;
+        }
+    }
+</style>
+        
+        <p style="margin-top: 20px; text-align: center; font-style: italic; color: #666;">
+            ✨ <strong>This is a live demo!</strong> The SVG colors update in real-time as you interact with the controls. 
+            Pretty cool, right? Let's learn how to build this step by step!
+        </p></div></section>
+
+    <section id="5bed7c2f-3faa-4da6-b4a8-268de5751785"><h4>&#x1F9E0; How Does This Work?</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>
+            The demo above combines several key technologies to create a seamless interactive experience:
+        </p>
+        <ul><li><b>External SVG File:</b> A designer-created floor plan stored as a separate asset</li>
+            <li><b>Blazor Component:</b> C# code managing state, business logic, and user interactions</li>
+            <li><b>JavaScript Bridge:</b> Minimal functions to manipulate the SVG DOM elements</li>
+            <li><b>Real-time Updates:</b> Colors and text change instantly as you adjust temperature values</li>
+            <li><b>Interactive Elements:</b> Click directly on rooms in the floor plan to select them</li></ul>
+        <p>
+            The best part? Most of the complexity is handled in C# with familiar Blazor patterns, while the JavaScript layer 
+            is kept minimal and focused solely on DOM manipulation. Let's break down how to build this step by step!
+        </p></div></section>
+
+    <section id="43dc525b-960e-46f5-93b9-196afd075e3d"><h3>&#x1F4A1; Why Choose SVG for Dynamic Content?</h3><hr class="border border-success border-1 opacity-50">
+    <div><p>
+            Before diving into the "how," let's understand "why" SVG is perfect for dynamic, interactive content:
+        </p>
+        <ul><li><b>Scalability:</b> SVGs look crisp at any size—from tiny mobile screens to large 4K displays</li>
+            <li><b>Programmable:</b> Every element has attributes you can modify with code</li>
+            <li><b>Lightweight:</b> Vector-based graphics are often smaller than equivalent bitmap images</li>
+            <li><b>Interactive:</b> You can add event handlers to individual shapes and paths</li>
+            <li><b>Accessible:</b> Screen readers can understand SVG content better than bitmap images</li>
+            <li><b>SEO-friendly:</b> Search engines can index SVG text content</li></ul>
+        <p>
+            For real-time dashboards, interactive floor plans, data visualizations, and IoT monitoring systems, SVG is often the perfect choice.
+        </p></div></section>
+
+    <section id="e19686b3-b9d2-4e14-a93e-97340392f156"><h3>&#x1F552; Real-Time Use Cases: Where Dynamic SVG Shines</h3><hr class="border border-success border-1 opacity-50">
+    <div><p>
+            Dynamic SVG manipulation shines in scenarios where visual data needs to update in real-time or respond to user interactions. Here are some compelling real-world applications:
+        </p>
+        <ul><li><b>Building management systems:</b> Floor plans showing room occupancy, temperature, or lighting status that update as sensors report new data</li>
+            <li><b>IoT dashboards:</b> Equipment diagrams where components change color based on operational status, temperature readings, or maintenance schedules</li>
+            <li><b>Interactive maps:</b> Real-time traffic conditions, weather patterns, or demographic data overlays that refresh automatically</li>
+            <li><b>Process monitoring:</b> Manufacturing pipelines showing flow rates, server architectures displaying load balancing, or network diagrams indicating connection health</li>
+            <li><b>Financial dashboards:</b> Stock charts, portfolio visualizations, and market indicators that update with live trading data</li>
+            <li><b>Gaming interfaces:</b> Interactive game boards, character customization screens, or strategy maps that respond to player actions</li>
+            <li><b>Healthcare monitoring:</b> Patient vital signs displayed on anatomical diagrams, medical equipment status indicators</li>
+            <li><b>Smart city applications:</b> Public transportation tracking, parking availability, energy consumption visualization across city infrastructure</li></ul>
+        <p>
+            If your application needs to show visual information that changes based on external data or user input, dynamic SVG is likely a great solution that combines performance with visual appeal.
+        </p></div></section>
+
+    <section id="8bf65118-d196-4f16-88c8-5ed257677835"><h3>&#x1F3E2; Building Our Interactive Floor Plan Demo</h3><hr class="border border-success border-1 opacity-50">
+    <div><p>
+            Let's create a practical example: an interactive building floor plan where users can select rooms from a dropdown and adjust their temperatures. The floor plan will visually update to show temperature changes with color coding.
+        </p>
+        <p>
+            Our demo will include:
+        </p>
+        <ul><li>An SVG floor plan with multiple rooms</li>
+            <li>A dropdown to select rooms</li>
+            <li>Temperature input controls</li>
+            <li>Real-time color updates based on temperature ranges</li>
+            <li>Interactive room selection by clicking on the floor plan</li></ul></div></section>
+
+    <section id="39509cea-3a69-4962-9204-06a71fdc0fa9"><h4>&#x1F6E0;&#xFE0F; Step 1: Working with External SVG Files</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>
+            In most real-world scenarios, you'll have SVG files created by designers using tools like Figma, Adobe Illustrator, or Sketch. Here's how to make external SVG files interactive in Blazor using DOM manipulation with minimal JavaScript interop:
+        </p>
+        <p><b>First, prepare your SVG file:</b> Ensure each interactive element has a unique <code>id</code> attribute. For our floor plan example, your designer would create an SVG file with rooms having IDs like <code>room-conference</code>, <code>room-office1</code>, etc.
+        </p>
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">@* Place your SVG file in your project *@
+@inject IJSRuntime JSRuntime
+
+&lt;div class="floor-plan-container"&gt;
+    &lt;object id="floor-plan-svg" data="/images/dynamic-svg/floor-plan.svg" type="image/svg+xml" 
+            width="400" height="300" style="display: block;" @onload="OnSvgLoaded"&gt;
+        &lt;!-- Fallback content --&gt;
+        &lt;div style="padding: 50px; text-align: center; color: #dc3545;"&gt;
+            ❌ SVG not supported by your browser
+        &lt;/div&gt;
+    &lt;/object&gt;
+&lt;/div&gt;
+
+@code {
+    private bool svgLoaded = false;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("setBlazorReference", DotNetObjectReference.Create(this));
+        }
+    }
+
+    private async Task OnSvgLoaded()
+    {
+        svgLoaded = true;
+        await UpdateSvgDisplay();
+        await SetupClickHandlers();
+    }
+
+    // Method for JavaScript interop (for clicking on SVG elements)
+    [JSInvokable]
+    public async Task SelectRoom(string roomName) =&gt; await SelectRoomAsync(roomName);
+}
+        </code></pre></div><div class="col-12 text-center"><code>Code Sample #1 : Loading External SVG Files with Object Tag</code></div></div></div>
+<br></div></section>
+
+    <section id="c3efbb47-ae6c-4a4a-a8ce-12e82c41f06d"><h4>&#x1F39B;&#xFE0F; Building the Control Interface</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>
+            To make our SVG interactive, we need user interface controls. The specific implementation will depend on your design system, but you'll typically need:
+        </p>
+        <ul><li><b>Room Selection:</b> A dropdown or list component bound to your selected room state using @bind</li>
+            <li><b>Temperature Input:</b> A range slider or numeric input with @oninput event handling for real-time updates</li>
+            <li><b>Preset Buttons:</b> Quick action buttons that call methods to set common temperature values</li>
+            <li><b>Action Buttons:</b> Additional controls like "Randomize" or "Reset" for demonstration purposes</li></ul>
+        <p>
+            The key is ensuring your controls are properly bound to component state and trigger StateHasChanged() when values change to update the SVG visualization.
+        </p></div></section>
+
+    <section id="edb82fab-6699-4231-b5f4-284da0e28014"><h4>&#x1F527; Step 2: JavaScript Functions for SVG Manipulation</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>
+            Since external SVG files loaded via <code>&lt;object&gt;</code> tag exist in a separate document context, we need minimal JavaScript functions to bridge between Blazor and the SVG DOM:
+        </p>
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-javascript" style="font-size: 0.8rem;">
+&lt;script&gt;
+    window.setBlazorReference = (dotNetRef) =&gt; {
+        window.blazorCulture = dotNetRef;
+    };
+
+    window.updateRoomColor = (roomId, color) =&gt; {
+        const svgObject = document.getElementById('floor-plan-svg');
+        if (svgObject && svgObject.contentDocument) {
+            const room = svgObject.contentDocument.getElementById(roomId);
+            if (room) {
+                room.setAttribute('fill', color);
+            }
+        }
+    };
+
+    window.updateTemperatureText = (x, y, text, color) =&gt; {
+        const svgObject = document.getElementById('floor-plan-svg');
+        if (svgObject && svgObject.contentDocument) {
+            const textElements = svgObject.contentDocument.querySelectorAll('text');
+            for (let textEl of textElements) {
+                if (textEl.getAttribute('x') == x && textEl.getAttribute('y') == y && textEl.textContent.includes('°C')) {
+                    textEl.textContent = text;
+                    textEl.setAttribute('fill', color);
+                    break;
+                }
+            }
+        }
+    };
+
+    window.setupRoomClickHandler = (roomId, roomName) =&gt; {
+        const svgObject = document.getElementById('floor-plan-svg');
+        if (svgObject && svgObject.contentDocument) {
+            const room = svgObject.contentDocument.getElementById(roomId);
+            if (room) {
+                room.style.cursor = 'pointer';
+                room.addEventListener('click', () =&gt; {
+                    if (window.blazorCulture) {
+                        window.blazorCulture.invokeMethodAsync('SelectRoom', roomName);
+                    }
+                });
+            }
+        }
+    };
+
+    window.addSelectionIndicator = (x, y, width, height) =&gt; {
+        const svgObject = document.getElementById('floor-plan-svg');
+        if (svgObject && svgObject.contentDocument) {
+            const svg = svgObject.contentDocument.documentElement;
+            
+            const rect = svgObject.contentDocument.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            rect.setAttribute('id', 'selection-indicator');
+            rect.setAttribute('x', x - 3);
+            rect.setAttribute('y', y - 3);
+            rect.setAttribute('width', width + 6);
+            rect.setAttribute('height', height + 6);
+            rect.setAttribute('fill', 'none');
+            rect.setAttribute('stroke', '#007bff');
+            rect.setAttribute('stroke-width', '3');
+            rect.setAttribute('stroke-dasharray', '5,5');
+            rect.style.animation = 'dash 2s linear infinite';
+            
+            svg.appendChild(rect);
+        }
+    };
+
+    window.removeSelectionIndicator = () =&gt; {
+        const svgObject = document.getElementById('floor-plan-svg');
+        if (svgObject && svgObject.contentDocument) {
+            const existing = svgObject.contentDocument.getElementById('selection-indicator');
+            if (existing) {
+                existing.remove();
+            }
+        }
+    };
+&lt;/script&gt;
+        </code></pre></div><div class="col-12 text-center"><code>Code Sample #2 : Essential JavaScript Functions for SVG DOM Manipulation</code></div></div></div>
+<br></div></section>
+
+    <section id="de8413f5-c982-4acc-8904-2939769b7573"><h4>&#x2699;&#xFE0F; Step 3: Implementing the Blazor Component Logic</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>
+            Here's the Blazor C# code that manages state and coordinates with the JavaScript functions for SVG manipulation:
+        </p>
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">@code {
+    // Component state management
+    private Dictionary&lt;string, double&gt; roomTemperatures = new()
+    {
+        { "Conference Room", 22.0 },
+        { "Office 1", 21.5 },
+        { "Office 2", 23.0 },
+        { "Kitchen", 24.5 },
+        { "Server Room", 18.0 },
+        { "Storage", 20.0 }
+    };
+
+    private string selectedRoom = "Conference Room";
+    private double currentTemperature = 22.0;
+    private bool svgLoaded = false;
+
+    // Handle room selection - called from JavaScript SVG click events
+    [JSInvokable]
+    public async Task SelectRoom(string roomName)
+    {
+        selectedRoom = roomName;
+        currentTemperature = roomTemperatures[roomName];
+        await UpdateSvgDisplay();
+        StateHasChanged();
+    }
+
+    // Update SVG display when temperatures change
+    private async Task UpdateSvgDisplay()
+    {
+        if (!svgLoaded) return;
+
+        // Update room colors and temperatures
+        foreach (var room in roomTemperatures.Keys)
+        {
+            var roomId = GetRoomId(room);
+            var color = GetRoomColor(room);
+            var temp = roomTemperatures[room].ToString("F1");
+            var textColor = GetTextColor(room);
+            
+            // Update room fill color
+            await JSRuntime.InvokeVoidAsync("updateRoomColor", roomId, color);
+            
+            // Update temperature text
+            var coords = GetRoomTextCoords(room);
+            await JSRuntime.InvokeVoidAsync("updateTemperatureText", coords.x, coords.y, $"{temp}°C", textColor);
+        }
+
+        // Update selection indicator
+        await UpdateSelectionIndicator();
+    }
+
+    private async Task UpdateSelectionIndicator()
+    {
+        if (!svgLoaded) return;
+
+        // Remove existing selection indicator
+        await JSRuntime.InvokeVoidAsync("removeSelectionIndicator");
+
+        // Add new selection indicator
+        if (!string.IsNullOrEmpty(selectedRoom))
+        {
+            var coords = GetRoomCoordinates(selectedRoom);
+            if (coords.HasValue)
+            {
+                await JSRuntime.InvokeVoidAsync("addSelectionIndicator", 
+                    coords.Value.x, coords.Value.y, coords.Value.width, coords.Value.height);
+            }
+        }
+    }
+
+    // Setup click handlers for SVG elements
+    private async Task SetupClickHandlers()
+    {
+        if (!svgLoaded) return;
+
+        foreach (var room in roomTemperatures.Keys)
+        {
+            var roomId = GetRoomId(room);
+            await JSRuntime.InvokeVoidAsync("setupRoomClickHandler", roomId, room);
+        }
+    }
+
+    // Dynamic color calculation based on temperature
+    private string GetRoomColor(string roomName)
+    {
+        var temp = roomTemperatures[roomName];
+        
+        if (temp &lt; 18) return "#a8dadc";      // Light blue - very cool
+        if (temp &lt; 20) return "#457b9d";      // Blue - cool
+        if (temp &lt; 22) return "#1d3557";      // Dark blue - comfortable cool
+        if (temp &lt; 24) return "#f1faee";      // Light green - comfortable
+        if (temp &lt; 26) return "#f4a261";      // Orange - warm
+        return "#e63946";                     // Red - hot
+    }
+
+    private string GetRoomId(string roomName)
+    {
+        return roomName switch
+        {
+            "Conference Room" =&gt; "room-conference",
+            "Office 1" =&gt; "room-office1", 
+            "Office 2" =&gt; "room-office2",
+            "Kitchen" =&gt; "room-kitchen",
+            "Server Room" =&gt; "room-server",
+            "Storage" =&gt; "room-storage",
+            _ =&gt; ""
+        };
+    }
+
+    private (int x, int y) GetRoomTextCoords(string roomName)
+    {
+        return roomName switch
+        {
+            "Conference Room" =&gt; (80, 67),
+            "Office 1" =&gt; (200, 62),
+            "Office 2" =&gt; (320, 62),
+            "Kitchen" =&gt; (70, 147),
+            "Server Room" =&gt; (190, 142),
+            "Storage" =&gt; (320, 147),
+            _ =&gt; (0, 0)
+        };
+    }
+
+    private (int x, int y, int width, int height)? GetRoomCoordinates(string roomName)
+    {
+        return roomName switch
+        {
+            "Conference Room" =&gt; (20, 20, 120, 80),
+            "Office 1" =&gt; (150, 20, 100, 80),
+            "Office 2" =&gt; (260, 20, 120, 80),
+            "Kitchen" =&gt; (20, 110, 100, 70),
+            "Server Room" =&gt; (130, 110, 120, 70),
+            "Storage" =&gt; (260, 110, 120, 70),
+            _ =&gt; null
+        };
+    }
+
+    // Event handlers for UI controls
+    private async Task UpdateTemperature(ChangeEventArgs e)
+    {
+        if (double.TryParse(e.Value?.ToString(), out var temp))
+        {
+            currentTemperature = temp;
+            roomTemperatures[selectedRoom] = temp;
+            await UpdateSvgDisplay();
+        }
+    }
+
+    private async Task SetPresetTemperature(double temperature)
+    {
+        currentTemperature = temperature;
+        roomTemperatures[selectedRoom] = temperature;
+        await UpdateSvgDisplay();
+    }
+
+    private async Task RandomizeTemperatures()
+    {
+        var random = new Random();
+        var rooms = roomTemperatures.Keys.ToList();
+        
+        foreach (var room in rooms)
+        {
+            roomTemperatures[room] = Math.Round(15 + random.NextDouble() * 15, 1);
+        }
+        
+        currentTemperature = roomTemperatures[selectedRoom];
+        await UpdateSvgDisplay();
+    }
+}
+        </code></pre></div><div class="col-12 text-center"><code>Code Sample #3 : Blazor Component Logic with JavaScript Interop for External SVG</code></div></div></div>
+<br></div></section>
+
+    <section id="4796a58f-7223-451a-acf3-b8be97256b98"><h4>&#x1F3A8; Step 4: Understanding the Architecture</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>
+            Our approach uses a hybrid architecture that combines the benefits of external SVG files with efficient DOM manipulation:
+        </p>
+        <ul><li><b>External SVG Files:</b> Maintainable by designers, cacheable by browsers, version-controlled separately</li>
+            <li><b>Object Tag Loading:</b> Preserves SVG structure while allowing JavaScript access to the embedded document</li>
+            <li><b>Minimal JavaScript Interop:</b> Only essential DOM manipulation functions, keeping the bulk of logic in C#</li>
+            <li><b>Blazor State Management:</b> All business logic, event handling, and data binding handled in C#</li>
+            <li><b>Real-time Updates:</b> Direct DOM manipulation for optimal performance without full re-renders</li></ul>
+        <p><b>Advantages of This Approach:</b></p>
+        <ul><li><b>Designer-Friendly:</b> External SVG files can be updated independently by design teams</li>
+            <li><b>Performance:</b> Direct DOM manipulation avoids expensive re-renders of large SVG content</li>
+            <li><b>Type Safety:</b> Business logic remains in C# with full IntelliSense and compile-time checking</li>
+            <li><b>Maintainability:</b> Clear separation between presentation (SVG + CSS) and logic (C#)</li>
+            <li><b>Scalability:</b> Works efficiently with complex SVG files without string processing overhead</li>
+            <li><b>Browser Compatibility:</b> Object tag approach works consistently across all modern browsers</li></ul></div></section>
+
+    <section id="5c1e3b70-2945-43c1-95fd-a971173896bb"><h3>&#x1F4CA; Adding a Temperature Legend</h3><hr class="border border-success border-1 opacity-50">
+    <div><p>
+            A visual legend helps users understand your color coding system. Consider adding a legend component that displays:
+        </p>
+        <ul><li><b>Color Swatches:</b> Small colored rectangles or circles showing each temperature range color</li>
+            <li><b>Range Labels:</b> Text descriptions of what each color represents (e.g., "Less than 18°C", "18-20°C")</li>
+            <li><b>Dynamic Updates:</b> If needed, highlight the current temperature range based on selected room</li>
+            <li><b>Accessibility:</b> Include proper ARIA labels and ensure sufficient color contrast</li></ul>
+        <p>
+            The legend should use the same color values from your GetRoomColor() method to maintain consistency. Position it near your floor plan where it won't obscure the main visualization.
+        </p></div></section>
+
+    <section id="6f4ab17a-f7fa-4ce7-89e7-31c8fd26583b"><h3>&#xFFFD; Preparing SVG Files from Design Tools</h3><hr class="border border-success border-1 opacity-50">
+    <div><p>
+            When working with SVG files from design tools like Figma, Adobe Illustrator, or Sketch, you'll need to prepare them for interactivity:
+        </p>
+        <ul><li><b>Assign Meaningful IDs:</b> Ensure each interactive element has a unique ID like <code>room-conference</code>, <code>room-office1</code></li>
+            <li><b>Group Related Elements:</b> Group room shapes, text, and icons together for easier manipulation</li>
+            <li><b>Optimize SVG Code:</b> Remove unnecessary elements, clean up the code, and minimize file size</li>
+            <li><b>Use Consistent Naming:</b> Follow a naming convention that matches your C# code logic</li>
+            <li><b>Add Data Attributes:</b> Consider adding custom data attributes for additional metadata</li></ul>
+        <p><b>Tip:</b> Many design tools now have plugins that can automatically add IDs and optimize SVGs for web development. For Figma, consider using the "SVG Export" plugin with ID preservation options.
+        </p></div></section>
+
+    <section id="0a3f49c7-ea8e-4245-aad0-059c667b689c"><h3>&#xFFFD;&#x1F527; Advanced Features and Enhancements</h3><hr class="border border-success border-1 opacity-50">
+    <div><p>
+            Our basic implementation is working great, but let's explore some advanced features you might want to add:
+        </p>
+        <ul><li><b>Real-time data integration:</b> Connect to IoT sensors or APIs for live temperature readings</li>
+            <li><b>Historical data visualization:</b> Show temperature trends over time with animated transitions</li>
+            <li><b>Alert system:</b> Highlight rooms that exceed temperature thresholds</li>
+            <li><b>Export functionality:</b> Save the current floor plan state as an image or PDF</li>
+            <li><b>Mobile responsiveness:</b> Adapt the layout for touch interfaces</li>
+            <li><b>Accessibility improvements:</b> Add ARIA labels and keyboard navigation</li></ul>
+        <p>
+            For implementing alerts, consider creating a method that evaluates all room temperatures against predefined thresholds and returns a list of warning messages. Display these alerts in a dedicated panel with appropriate styling and icons to grab user attention.
+        </p></div></section>
+
+    <section id="34111246-adf2-4760-94dd-b2acf76d6e05"><h4>&#x1F504; JavaScript Interop vs Pure Blazor: When to Use Each</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>
+            You might wonder: "Should I use JavaScript interop or a pure Blazor approach?" The answer depends on your specific requirements:
+        </p>
+        <p><b>Use JavaScript Interop (Our Approach) When:</b></p>
+        <ul><li><b>External SVG Files:</b> You have SVG files created by designers that need to remain external for maintainability</li>
+            <li><b>Complex Graphics:</b> Large or complex SVG files where re-rendering the entire markup would be expensive</li>
+            <li><b>Real-time Performance:</b> You need efficient DOM manipulation for frequent updates</li>
+            <li><b>Design Collaboration:</b> Designers need to update SVG files independently from development cycles</li>
+            <li><b>File Caching:</b> You want browsers to cache SVG assets separately from application code</li></ul>
+        <p><b>Use Pure Blazor When:</b></p>
+        <ul><li><b>Simple Graphics:</b> Small, simple SVG elements that are quick to re-render</li>
+            <li><b>Generated Content:</b> SVG content that's dynamically generated from data</li>
+            <li><b>Server-Side Rendering:</b> You need full SSR support without client-side dependencies</li>
+            <li><b>Minimal Complexity:</b> You prefer to avoid any JavaScript dependencies</li>
+            <li><b>Inline Graphics:</b> SVG content is small enough to be embedded directly in components</li></ul>
+        <p>
+            In our floor plan demo, we chose JavaScript interop because it provides the best balance of performance, maintainability, and designer collaboration for external SVG assets.
+        </p></div></section>
+
+    <section id="63ac0a55-8e1c-48d8-9b14-1af12586f768"><h4>&#x1F504; Connecting to Real-Time Data</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>
+            In a real-world application, you'd typically connect this to actual sensor data or APIs. Consider these integration approaches:
+        </p>
+        <ul><li><b>SignalR:</b> For real-time bi-directional communication with the server</li>
+            <li><b>HTTP Polling:</b> Periodically fetch updates from a REST API using HttpClient</li>
+            <li><b>WebSockets:</b> For low-latency real-time data streams</li>
+            <li><b>Timer-based updates:</b> Use Blazor's Timer for periodic data refresh</li>
+            <li><b>Event-driven updates:</b> Respond to external events or message queues</li></ul>
+        <p>
+            When implementing real-time updates, remember to call StateHasChanged() and consider using InvokeAsync() when updating from background threads. Always handle connection failures gracefully and provide user feedback about connection status.
+        </p></div></section>
+
+    <section id="a81c1c7a-4837-4209-9067-b6dfe3df986b"><h4>&#x1F3AF; Event Handling and Performance</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>
+            When working with dynamic SVG in Blazor, keep these best practices in mind:
+        </p>
+        <ul><li><b>Use StateHasChanged() judiciously:</b> Only call it when you need to trigger a re-render</li>
+            <li><b>Optimize SVG complexity:</b> Simpler shapes perform better, especially on mobile devices</li>
+            <li><b>Consider virtualization:</b> For large floor plans, only render visible areas</li>
+            <li><b>Cache color calculations:</b> Pre-compute colors for common temperature ranges</li>
+            <li><b>Use CSS transitions:</b> Let CSS handle smooth animations instead of JavaScript</li>
+            <li><b>Test on different devices:</b> SVG rendering can vary between browsers and devices</li></ul></div></section>
+
+    <section id="7607ba09-6a86-48ac-a310-6660bac31c67"><h3>&#x1F680; Taking It Further</h3><hr class="border border-success border-1 opacity-50">
+    <div><p>
+            Our building temperature monitoring system demonstrates the power of dynamic SVG manipulation, but this is just the beginning! Here are some ideas for extending this concept:
+        </p>
+        <ul><li><b>Multi-floor buildings:</b> Add floor selection with elevator animations</li>
+            <li><b>Different sensor types:</b> Humidity, air quality, occupancy sensors</li>
+            <li><b>Energy optimization:</b> Visual feedback for energy-saving recommendations</li>
+            <li><b>Security integration:</b> Show door/window status, access control</li>
+            <li><b>Maintenance scheduling:</b> Highlight equipment due for maintenance</li>
+            <li><b>Emergency systems:</b> Fire evacuation routes, emergency lighting</li></ul></div></section>
+
+    <section id="9a5ef434-ba5c-4f61-9246-3c223262e21f"><h3>&#x1F4DD; Summary</h3><hr class="border border-success border-1 opacity-50">
+    <div><p>
+            Dynamic SVG manipulation in Blazor opens up exciting possibilities for creating interactive, real-time visual applications. We've explored how to:
+        </p>
+        <ul><li>Load external SVG files using the &lt;object&gt; tag for maintainable design workflows</li>
+            <li>Implement minimal JavaScript interop functions for essential DOM manipulation</li>
+            <li>Manage application state and business logic entirely in C# using Blazor</li>
+            <li>Create real-time visual updates through efficient DOM manipulation techniques</li>
+            <li>Build interactive SVG applications that work seamlessly with external design assets</li></ul>
+        <p>
+            The key advantage of this approach is <b>optimal balance between maintainability and performance</b>. By using external SVG files, designers can work independently using their preferred tools while developers maintain full control over interactivity and business logic in C#. <b>The minimal JavaScript interop layer provides efficient DOM access while keeping complexity low.</b></p>
+        <p>
+            This approach is particularly powerful for teams where designers and developers collaborate on complex interactive visualizations. The result is a clean separation between design assets and application logic, with robust real-time functionality that scales well with complex SVG graphics.
+        </p></div></section>
+
+    <section id="0bc6d7ca-20c7-4790-82bb-8d6bb8157ad1"><h3>&#x1F680; What&#x27;s Next?</h3><hr class="border border-success border-1 opacity-50">
+    <div><p><strong>Congratulations!</strong> You now have all the knowledge needed to create interactive SVG applications in Blazor. 
+            The techniques we've covered can be applied to many scenarios beyond temperature monitoring:
+        </p>
+        <ul><li><b>IoT Dashboards:</b> Visualize sensor data on equipment diagrams</li>
+            <li><b>Interactive Maps:</b> Show real-time traffic, weather, or demographic data</li>
+            <li><b>Process Monitoring:</b> Manufacturing pipelines, server architectures, network diagrams</li>
+            <li><b>Gaming Interfaces:</b> Interactive game boards or character customization</li>
+            <li><b>Data Visualization:</b> Charts and graphs that update with live data feeds</li></ul>
+        <p style="margin-top: 20px; text-align: center;"><strong>Ready to build your own interactive SVG application?</strong><br>
+            <em>The demo above shows exactly what you can achieve with the techniques from this article!</em></p></div></section>
+
+    <section><p>For reference, the code repository being discussed is available at github: <a href="https://github.com/ajaysskumar/dynamic-svg-blazor-demo">https://github.com/ajaysskumar/dynamic-svg-blazor-demo</a></p><p>Thanks for reading through. Please share feedback, if any, in comments or on my email <a href="mailto:ajay.a338@gmail.com">ajay.a338@gmail.com</a></p></section></div>
+    <div class="content-wrapper mt-4"><script src="https://giscus.app/client.js" data-repo="ajaysskumar/dev-arena" data-repo-id="R_kgDONiBGGQ" data-category="Comments" data-category-id="DIC_kwDONiBGGc4Cq2ND" data-mapping="pathname" data-strict="0" data-reactions-enabled="0" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script></div></div>
+
+<style>
+    .content-wrapper {
+        width: 50%; /* Leaves 20% space on left and right */
+        background: white;
+    }
+
+    @media (max-width: 768px) {
+        .content-wrapper {
+            width: 90%; /* On smaller screens, reduce left-right space */
+        }
+    }
+</style></article>
+        <footer class="bg-dark text-white py-4 mt-auto"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><p class="mb-0">Copyright © 2025 Dev Codex</p></div>
+
+            
+            <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
+                <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
+            </div><!--Blazor:{"prerenderId":"1383de741b634e2b8f2319d26bd99fe2"}-->
+<!-- %%-PRERENDERING-END-%% -->
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80VGpoV1MybzFlalJDY0VaMWNXTmFUbVUzTVcxaWJYVnFjMGRJV2xreFdIaFlUbEZvVVVaMFpIaFFTbFJpVW01RFRFZFdNMlEyYTNGVVZsUXpZVko1TlRoU09VdGxka0pyZVY5UGFYbGxNV0l6ZEU4NU55MUhaekUzV0cxWllWY3RTRmxmTUZGbWVtbHJTRXR5YjIxZmVuVmpSMDVoY21OblYyNXRjMFpPZDNCU1RGVmhOWEJHWmpkeFZrTkxOVWxxYlZGTFFVRk5JaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+    <script src="_framework/blazor.webassembly.js" defer="" autostart="false"></script>
+    <script src="brotliloader.min.js" type="module"></script>
+
+
+
+</headoutlet></body></html>
