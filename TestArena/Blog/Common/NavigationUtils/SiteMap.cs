@@ -6,7 +6,7 @@ namespace TestArena.Blog.Common.NavigationUtils
     {
         public static List<PageInfo> Pages { get; } =
         [
-            new("Intro to PACT for .NET Core: API contract testing",
+        new("Intro to PACT for .NET Core: API contract testing",
             "/blog/contract-testing-pact-net-intro",
             new DateTime(2024, 12, 14),
             "images/blog/pact/intro/banner.png",
@@ -122,6 +122,12 @@ namespace TestArena.Blog.Common.NavigationUtils
             new DateTime(2025, 7, 26),
             "images/blog/frontend/dynamic-svg/banner.png",
             ["Frontend", "SVG", "Blazor", "Interactive", "Real-time"]),
+
+        new("Performance Testing for APIs: Basic setup with K6",
+            "/blog/performance-testing-with-k6",
+            new DateTime(2025, 8, 09),
+            "images/blog/performance-testing/basic-setup/banner.png",
+            ["Performance Testing", "K6", "API", ".NET"]),
         ];
 
         public static IEnumerable<PageInfo> PublishedArticles => Pages.Where(p => p.IsPublished && p.PublishedOn <= DateTime.UtcNow);
