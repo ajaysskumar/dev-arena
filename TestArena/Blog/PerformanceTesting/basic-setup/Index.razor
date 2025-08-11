@@ -180,18 +180,110 @@ npx k6-reporter results.json
         </Section>
     </Section>
 
-
+    <Section Heading="Demo Repository" Level="5">
+            <p>
+                The full demo code for this article is available at:
+                <a href="https://github.com/ajaysskumar/API-Performance-Testing" target="_blank">ajaysskumar/API-Performance-Testing</a>
+            </p>
+            <p>
+                This repository contains:
+                <ul>
+                    <li><strong>MostBorrowedBookApi</strong>: ASP.NET Core Web API with an in-memory database, seeded with thousands of books and borrows at startup. The endpoint <code>/mostborrowedbook</code> returns the book with the highest borrow count.</li>
+                    <li><strong>k6-mostborrowedbook.js</strong>: K6 test script for load testing the API.</li>
+                    <li><strong>run-perf-test.sh</strong>: Bash script to run the API and K6 test in one shot.</li>
+                </ul>
+            </p>
+            <Section Heading="One-Shot Bash Script" Level="5">
+                <p>
+                    To run the API and the K6 test together, use the <code>run-perf-test.sh</code> script in the repository root. This script:
+                </p>
+                <ul>
+                    <li>Checks if K6 is installed (installs via Homebrew on macOS if needed).</li>
+                    <li>Starts the API in the background.</li>
+                    <li>Waits for the API to start.</li>
+                    <li>Runs the K6 test script.</li>
+                    <li>Stops the API process after the test.</li>
+                </ul>
+                <p>
+                    This makes it easy to run the full demo and performance test with a single command.
+                </p>
+            </Section>
+        </Section>
     <Section Heading="Understanding K6 Metrics" Level="4">
         <p>
             After running the test, K6 outputs a summary like this:
         </p>
         <CodeSnippet Language="text">
-checks................: 100.00% ✓ 1000 ✗ 0
-http_req_duration....: avg=50ms min=30ms med=45ms max=120ms p(90)=80ms p(95)=100ms
-http_reqs............: 1000  100.000000/s
-vus..................: 10    min=10 max=10
+Running K6 test...
+
+          /\      |‾‾| /‾‾/   /‾‾/   
+     /\  /  \     |  |/  /   /  /    
+    /  \/    \    |     (   /   ‾‾\  
+   /          \   |  |\  \ |  (‾)  | 
+  / __________ \  |__| \__\ \_____/ .io
+
+     execution: local
+        script: k6-mostborrowedbook.js
+        output: -
+
+     scenarios: (100.00%) 1 scenario, 10 max VUs, 40s max duration (incl. graceful stop):
+              * default: 10 looping VUs for 10s (gracefulStop: 30s)
+
+
+     ✓ status is 200
+
+     checks.........................: 100.00% ✓ 60       ✗ 0   
+     data_received..................: 14 kB   1.2 kB/s
+     data_sent......................: 5.8 kB  509 B/s
+     http_req_blocked...............: avg=1.63ms   min=1µs      med=6µs      max=11.72ms p(90)=11.09ms p(95)=11.33ms
+     http_req_connecting............: avg=589.03µs min=0s       med=0s       max=7.52ms  p(90)=2.06ms  p(95)=4.84ms 
+     http_req_duration..............: avg=874.47ms min=758.66ms med=823.23ms max=1.18s   p(90)=1.15s   p(95)=1.17s  
+       { expected_response:true }...: avg=874.47ms min=758.66ms med=823.23ms max=1.18s   p(90)=1.15s   p(95)=1.17s  
+     http_req_failed................: 0.00%   ✓ 0        ✗ 60  
+     http_req_receiving.............: avg=1.09ms   min=13µs     med=48µs     max=11.35ms p(90)=1.23ms  p(95)=10.06ms
+     http_req_sending...............: avg=1.43ms   min=5µs      med=27.5µs   max=9.13ms  p(90)=8.22ms  p(95)=8.46ms 
+     http_req_tls_handshaking.......: avg=0s       min=0s       med=0s       max=0s      p(90)=0s      p(95)=0s     
+     http_req_waiting...............: avg=871.94ms min=758.58ms med=823.17ms max=1.17s   p(90)=1.13s   p(95)=1.16s  
+     http_reqs......................: 60      5.302087/s
+     iteration_duration.............: avg=1.87s    min=1.75s    med=1.82s    max=2.2s    p(90)=2.18s   p(95)=2.19s  
+     iterations.....................: 60      5.302087/s
+     vus............................: 10      min=10     max=10
+     vus_max........................: 10      min=10     max=10
+
+
+running (11.3s), 00/10 VUs, 60 complete and 0 interrupted iterations
+default ✓ [======================================] 10 VUs  10s
         </CodeSnippet>
-        <List Heading="Key Metrics" HeadingLevel="4" ChildContents="@k6Metrics" />
+        <p>
+            Here’s a breakdown of the key metrics:
+        </p>
+        <table class="table table-bordered table-striped" style="margin-top:1rem;">
+            <thead>
+                <tr>
+                    <th>Metric</th>
+                    <th>Explanation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><code>checks</code></td><td>Percentage and count of successful checks (assertions), e.g., status 200.</td></tr>
+                <tr><td><code>data_received</code></td><td>Total and average amount of data received from the server.</td></tr>
+                <tr><td><code>data_sent</code></td><td>Total and average amount of data sent to the server.</td></tr>
+                <tr><td><code>http_req_blocked</code></td><td>Time spent waiting for a free TCP connection slot (blocked by OS or client limits).</td></tr>
+                <tr><td><code>http_req_connecting</code></td><td>Time spent establishing TCP connections to the server.</td></tr>
+                <tr><td><code>http_req_duration</code></td><td>Total time for request (from start to end, including waiting, sending, receiving).</td></tr>
+                <tr><td><code>{ expected_response:true }</code></td><td>Duration for requests that received expected responses (usually status 200).</td></tr>
+                <tr><td><code>http_req_failed</code></td><td>Percentage and count of failed HTTP requests.</td></tr>
+                <tr><td><code>http_req_receiving</code></td><td>Time spent receiving response data from the server.</td></tr>
+                <tr><td><code>http_req_sending</code></td><td>Time spent sending request data to the server.</td></tr>
+                <tr><td><code>http_req_tls_handshaking</code></td><td>Time spent on TLS/SSL handshake (if using HTTPS).</td></tr>
+                <tr><td><code>http_req_waiting</code></td><td>Time spent waiting for server to respond after sending request (server processing time).</td></tr>
+                <tr><td><code>http_reqs</code></td><td>Total number of HTTP requests made and average per second.</td></tr>
+                <tr><td><code>iteration_duration</code></td><td>Total time taken for each test iteration (one virtual user run).</td></tr>
+                <tr><td><code>iterations</code></td><td>Total number of test iterations and average per second.</td></tr>
+                <tr><td><code>vus</code></td><td>Number of active virtual users during the test.</td></tr>
+                <tr><td><code>vus_max</code></td><td>Maximum number of virtual users reached during the test.</td></tr>
+            </tbody>
+        </table>
         <p>
             If you use k6-reporter, you’ll get an HTML file with charts and detailed breakdowns.
         </p>
