@@ -3,7 +3,7 @@
 ### General Guidelines
 
 1. **Initial Setup**
-   - **Refer ReferenceFile** for guidance and formatting
+   - Refer **ReferenceFile** for guidance and formatting
 2. **Article Structure**
    1. Write beginner-friendly content on **Topic** in **TargetFile**
    2. Article length: **1200-1800 words**
