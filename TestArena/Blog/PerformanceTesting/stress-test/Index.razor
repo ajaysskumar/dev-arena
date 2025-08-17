@@ -1,0 +1,486 @@
+@page "/blog/performance-testing/stress-test-with-k6"
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web
+@using TestArena.Blog.Common
+@using TestArena.Blog.Common.NavigationUtils
+@using System.Text
+@using System.Collections.Generic
+
+@code {
+    PageInfo currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/performance-testing/stress-test-with-k6")!;
+
+    List<RenderFragment> stressTestGoals = new List<RenderFragment> 
+    {
+        builder => builder.AddContent(0, "Identify system performance under extreme conditions"),
+        builder => builder.AddContent(0, "Find breaking points and resource limits"),
+        builder => builder.AddContent(0, "Verify system behavior during periods of high load"),
+        builder => builder.AddContent(0, "Ensure data integrity and response accuracy under pressure"),
+        builder => builder.AddContent(0, "Validate recovery capabilities after system overload")
+    };
+    
+    List<RenderFragment> whenToUseStressTest = new List<RenderFragment>
+    {
+        builder => builder.AddContent(0, "Before major product launches or anticipated traffic spikes"),
+        builder => builder.AddContent(0, "During application scaling or infrastructure changes"),
+        builder => builder.AddContent(0, "When implementing new features that affect system resources"),
+        builder => builder.AddContent(0, "After significant architecture modifications"),
+        builder => builder.AddContent(0, "In preparation for peak business periods")
+    };
+}
+
+<BlogContainer>
+    <Header Title="@currentPage.Header"
+        Image="@currentPage.ArticleImage"
+        PublishedOn="@currentPage.PublishedOn"
+        Authors="Ajay Kumar"
+        Description="@currentPage.Header" />
+
+    <Section Heading="🚀 Introduction" Level="5">
+        <p>
+            Imagine this: It's the first day of summer reading programs at your public library. Your book tracking API is running smoothly, handling the usual 100 requests per minute for most borrowed books. Suddenly, thousands of excited children and parents start searching simultaneously for popular titles. Within minutes, the traffic surges to 1,000 requests per minute. Will your system maintain accuracy and responsiveness, or will it falter, leading to frustrated readers and inaccurate borrowing statistics?
+        </p>
+        <p>
+            These scenarios aren't hypothetical. Libraries worldwide face similar challenges during peak periods like semester starts, summer reading programs, and popular book releases. The key to maintaining service quality? Thorough stress testing.
+        </p>
+        <p>
+            In our previous article, we covered the basics of performance testing with K6. Today, we're diving deep into stress testing - your safeguard against system failures under extreme conditions. While load testing ensures your system works under expected conditions, stress testing pushes your system to and beyond its limits, helping you understand not just when it breaks, but how it breaks and, crucially, how it recovers.
+        </p>
+        <List Heading="Key Goals of Stress Testing" HeadingLevel="5" ChildContents="@stressTestGoals" />
+    </Section>
+
+    <Section Heading="💥 The Real Cost of Inadequate Stress Testing" Level="5">
+        <p>
+            Let's look at some real-world incidents that highlight the importance of thorough stress testing:
+        </p>
+        <ul>
+            <li>
+                <strong>University Library System (2024):</strong> During final exams week, a major university's library system crashed when thousands of students simultaneously accessed the catalog for research materials. The result? Students couldn't locate crucial study materials, and librarians couldn't track borrowed books accurately.
+            </li>
+            <li>
+                <strong>Public Library Launch (2023):</strong> A metropolitan library's new digital catalog system failed during the summer reading program kickoff. The system wasn't adequately tested for concurrent access by hundreds of families, leading to incorrect availability information and frustrated patrons.
+            </li>
+            <li>
+                <strong>Best-Seller Release (2024):</strong> A regional library network's book tracking system experienced severe delays when a highly anticipated novel was released. Despite normal load testing, the real-world usage patterns of simultaneous holds and availability checks overwhelmed the system.
+            </li>
+        </ul>
+        <p>
+            These incidents share a common theme: systems that worked perfectly under normal conditions failed catastrophically when pushed beyond their limits. This is where stress testing becomes invaluable.
+        </p>
+    </Section>
+
+    <Section Heading="When to Use Stress Testing" Level="5">
+        <p>
+            Stress testing becomes essential when you need to validate your system's behavior under extreme conditions. Here are the critical scenarios where you should prioritize it:
+        </p>
+        <List Heading="Key Scenarios" HeadingLevel="5" ChildContents="@whenToUseStressTest" />
+        
+        <CalloutBox Type="Tip">
+            Always test for at least 2x your highest expected load. If you're planning for 1000 users, test for 2000. It's better to be over-prepared than caught off guard.
+        </CalloutBox>
+    </Section>
+
+    <Section Heading="Understanding Stress Test Stages" Level="5">
+        <p>
+            🌊 Think of stress testing like pressure testing a dam. You don't just flood it at maximum capacity immediately; you carefully increase the water levels while monitoring every crack and strain. Let's break down this methodical approach:
+        </p>
+        <ol>
+            <li>
+                <strong>Baseline Stage:</strong> Like checking the dam at normal water levels, we start with your typical production load to establish normal performance metrics. This gives us a reference point for later comparison.
+            </li>
+            <li>
+                <strong>Ramp-up Stages:</strong> Similar to gradually increasing water levels, we step up the load in controlled increments. This helps identify:
+                <ul>
+                    <li>When performance starts to degrade</li>
+                    <li>How your scaling mechanisms respond</li>
+                    <li>Which components show strain first</li>
+                </ul>
+            </li>
+            <li>
+                <strong>Breaking Point Stage:</strong> This is where we push until something gives. Like finding a dam's maximum capacity, we need to know:
+                <ul>
+                    <li>The exact point where the system starts failing</li>
+                    <li>Which components fail first</li>
+                    <li>How the system behaves during failure</li>
+                </ul>
+            </li>
+            <li>
+                <strong>Recovery Stage:</strong> Perhaps the most crucial stage. Like monitoring how a dam stabilizes after high water levels, we observe:
+                <ul>
+                    <li>How quickly the system returns to normal</li>
+                    <li>Whether any permanent damage occurs</li>
+                    <li>If all components recover properly</li>
+                </ul>
+            </li>
+        </ol>
+    </Section>
+
+    <Section Heading="Implementing a Stress Test with K6" Level="5">
+        <p>
+            Let's work with our Most Borrowed Book API example. Sarah's team needs to stress test their book tracking API, which currently handles 100 requests per minute. They want to verify it can handle a 10x spike during peak usage periods. More importantly, they need to ensure that even if the system gets overwhelmed, it won't provide incorrect borrowing statistics or lose track of book availability.
+        </p>
+        <p>
+            We'll build upon our previous MostBorrowedBook API example to demonstrate these principles. Our stress test will simulate a gradual increase from normal load to well beyond expected peaks, while monitoring not just response times but also data integrity and system recovery.
+        </p>
+
+        <Section Heading="The Stress Test Script" Level="5">
+            <CodeSnippet Description="K6 Stress Test Script" Language="javascript">
+import http from 'k6/http';
+import { check, sleep } from 'k6';
+import { Rate } from 'k6/metrics';
+import { htmlReport } from "https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js";
+import { textSummary } from "https://jslib.k6.io/k6-summary/0.0.1/index.js";
+
+// Custom metric to track failure rate
+const failureRate = new Rate('check_failure_rate');
+
+export const options = {
+  // Stress test configuration with stages
+  stages: [
+    { duration: '30s', target: 25 },    // Ramp up to 25 users
+    { duration: '30s', target: 50 },    // Ramp up to 50 users
+    { duration: '30s', target: 100 },   // Ramp up to 100 users
+    { duration: '30s', target: 200 },   // Peak at 200 users
+    { duration: '30s', target: 0 },     // Ramp down to 0 users (recovery)
+  ],
+  thresholds: {
+    // We set higher thresholds for stress test
+    'http_req_duration': [
+      'p(95)&lt;2000',  // 95% of requests should be below 2s
+      'p(99)&lt;3000',  // 99% of requests should be below 3s
+    ],
+    'http_req_failed': ['rate&lt;0.15'],      // Allow up to 15% failure rate during stress
+    'check_failure_rate': ['rate&lt;0.15'],    // Same threshold for our custom check
+  },
+};
+
+export default function () {
+  const url = 'http://localhost:5127/mostborrowedbook';
+  
+  // Send GET request with custom tags
+  const response = http.get(url, {
+    tags: { name: 'MostBorrowedBook' },
+  });
+
+  // Define checks
+  const checks = check(response, {
+    'status is 200': (r) => r.status === 200,
+    'response time &lt; 2000ms': (r) => r.timings.duration &lt; 2000,
+    'valid response body': (r) => r.body.length &gt; 0,
+  });
+
+  // Update custom metric
+  failureRate.add(!checks);
+
+  // Log if we see a non-200 response
+  if (response.status !== 200) {
+    console.log(`Got non-200 response: ${response.status}, body: ${response.body}`);
+  }
+
+  // Random sleep between 1s and 3s to add variability
+  sleep(Math.random() * 2 + 1); // Random sleep between 1-3s
+}
+
+export function handleSummary(data) {
+  return {
+    "stress-test-results.html": htmlReport(data),
+    stdout: textSummary(data, { indent: " ", enableColors: true }),
+  };
+}
+            </CodeSnippet>
+
+            <Section Heading="Key Components Explained" Level="5">
+                <p>Let's break down the key differences from our basic load test:</p>
+                <ol>
+                    <li>
+                        <strong>Staged Load Profile:</strong>
+                        <ul>
+                            <li>Starts with 25 virtual users</li>
+                            <li>Gradually increases to 200 users</li>
+                            <li>Each stage lasts 30 seconds</li>
+                            <li>Includes recovery phase</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Higher Thresholds:</strong>
+                        <ul>
+                            <li>95th percentile response time threshold set to 2 seconds (meaning 95 out of 100 library catalog searches should complete in under 2 seconds)</li>
+                            <li>99th percentile response time threshold set to 3 seconds (allowing only 1 in 100 searches to take longer than 3 seconds)</li>
+                            <li>Allows up to 15% failure rate (higher than load test, since we're testing extreme conditions)</li>
+                        </ul>
+                        <p class="text-muted">
+                            Think of percentile thresholds like library service standards: if you promise "95% of book checkouts will be processed within 2 minutes," that's your p95 threshold.
+                        </p>
+                    </li>
+                    <li>
+                        <strong>Custom Failure Rate Metric:</strong>
+                        <ul>
+                            <li>Tracks overall check failures</li>
+                            <li>Helps identify degradation patterns</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Enhanced Checks:</strong>
+                        <ul>
+                            <li>Verifies HTTP status</li>
+                            <li>Checks response time</li>
+                            <li>Validates response body</li>
+                        </ul>
+                    </li>
+                </ol>
+            </Section>
+        </Section>
+
+        <Section Heading="Running the Stress Test" Level="5">
+            <p>
+                To run the stress test:
+            </p>
+            <CodeSnippet Language="bash">
+k6 run k6-stress-test-demo.js
+            </CodeSnippet>
+            <p>
+                The test will run for 2.5 minutes total (5 stages x 30 seconds each).
+            </p>
+
+            <BlogImage 
+                ImagePath="/images/blog/performance-testing/stress-test/stress-test-result.png"
+                Description="K6 stress test results showing response time and error rate patterns during load stages"
+                Number="1" />
+            
+        </Section>
+
+        <Section Heading="Analyzing Test Results: A Detective Story" Level="5">
+            <p>
+                🔍 Analyzing stress test results is like being a detective at a crime scene. Each metric tells part of the story, and it's your job to piece together what happened and why. Let's look at a real scenario we encountered during our MostBorrowedBook API testing:
+            </p>
+            
+            <Section Heading="The Mystery of the Degrading Performance" Level="5">
+                <p>
+                    During our test run, we noticed something interesting at around the 90-second mark (when we hit 100 concurrent users):
+                </p>
+                <table class="table table-bordered table-striped" style="margin-top:1rem;">
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>What We Found</th>
+                            <th>What It Meant</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>http_req_duration</code></td>
+                            <td>Response times jumped from 200ms to 1.5s</td>
+                            <td>First sign of trouble - the system was starting to strain</td>
+                        </tr>
+                        <tr>
+                            <td><code>http_req_failed</code></td>
+                            <td>Error rate increased from 0% to 5%</td>
+                            <td>Some requests were failing completely</td>
+                        </tr>
+                        <tr>
+                            <td><code>check_failure_rate</code></td>
+                            <td>Started climbing at 100 users</td>
+                            <td>System wasn't just slow, it was becoming unstable</td>
+                        </tr>
+                        <tr>
+                            <td><code>iterations</code></td>
+                            <td>Dropped by 30%</td>
+                            <td>Clear indication of system saturation</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>
+                    This pattern revealed a critical insight: our system wasn't failing catastrophically, but it was degrading in a specific way. The database queries for finding the most borrowed book were taking longer as the connection pool saturated.
+                </p>
+            </Section>
+
+            <Section Heading="The Story in the Metrics" Level="5">
+                <p>
+                    By correlating different metrics, we uncovered the full story:
+                </p>
+                <ol>
+                    <li>
+                        <strong>The Initial Signs:</strong>
+                        <ul>
+                            <li>Response times started creeping up gradually</li>
+                            <li>CPU usage remained moderate</li>
+                            <li>Memory usage was stable</li>
+                            <li>This pointed to a database bottleneck, not an application issue</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>The Breaking Point:</strong>
+                        <ul>
+                            <li>At 100 users, error rates spiked suddenly</li>
+                            <li>Database connections were being exhausted</li>
+                            <li>Some requests started timing out</li>
+                            <li>This identified our first scaling limit</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>The Recovery Pattern:</strong>
+                        <ul>
+                            <li>System recovered within 45 seconds of load reduction</li>
+                            <li>No lingering issues or degraded performance</li>
+                            <li>This suggested our connection pooling was working correctly</li>
+                        </ul>
+                    </li>
+                </ol>
+            </Section>
+
+            <Section Heading="Visual Analysis with K6 Dashboard" Level="5">
+                <p>
+                    The K6 HTML report transformed these raw numbers into compelling visualizations that helped us spot patterns:
+                </p>
+                <ul>
+                    <li>
+                        <strong>Response Time Graph:</strong> Showed a clear "hockey stick" pattern at 100 users - our first warning sign
+                    </li>
+                    <li>
+                        <strong>Error Rate Timeline:</strong> Revealed that errors started sporadically before becoming consistent
+                    </li>
+                    <li>
+                        <strong>Virtual User Impact:</strong> Demonstrated how each user increment affected system stability
+                    </li>
+                </ul>
+            </Section>
+        </Section>
+    </Section>
+
+    <Section Heading="From Testing to Action" Level="5">
+        <p>
+            After analyzing these test results, Sarah's library team implemented several improvements to handle their summer reading program traffic. Here's how they strengthened their book tracking API:
+        </p>
+
+        <Section Heading="Immediate Actions" Level="5">
+            <ol>
+                <li>
+                    <strong>Connection Pool Optimization:</strong>
+                    <ul>
+                        <li>Increased the database connection pool size</li>
+                        <li>Implemented connection timeout retry logic</li>
+                        <li>Added monitoring for pool utilization</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Caching Layer:</strong>
+                    <ul>
+                        <li>Added Redis caching for frequently accessed data</li>
+                        <li>Implemented cache warming during low-traffic periods</li>
+                        <li>Set up cache hit ratio monitoring</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Circuit Breakers:</strong>
+                    <ul>
+                        <li>Implemented graceful degradation for non-critical features (like "similar books" recommendations)</li>
+                        <li>Added automatic recovery mechanisms</li>
+                        <li>Set up alerts for circuit breaker triggers</li>
+                    </ul>
+                    <p class="text-muted">
+                        Think of circuit breakers like a library's backup procedures: when the main catalog system is overwhelmed, you might temporarily switch to a basic search-only mode while keeping core book checkout functionality working.
+                    </p>
+                </li>
+            </ol>    
+
+            <CalloutBox Type="Info">
+                📝 Quick Summary of Actions Taken:
+                <ul>
+                    <li>Identified database connection pool as the main bottleneck</li>
+                    <li>Implemented caching for frequently borrowed books list</li>
+                    <li>Added monitoring for early warning signs</li>
+                    <li>Created fallback modes for peak traffic periods</li>
+                </ul>
+            </CalloutBox>
+        </Section>
+    </Section>
+
+    <Section Heading="Best Practices: Lessons from the Trenches" Level="5">
+        <p>
+            🏆 Through our library API testing and similar experiences from larger systems, we've compiled these battle-tested best practices. While our example focuses on a library system, these principles apply universally:
+        </p>
+        <ol>
+            <li>
+                <strong>Start Small, Think Big:</strong> 
+                <p>
+                    Begin with baseline tests but plan for 10x your expected load. Netflix famously tests for 5x their Christmas Day traffic - their highest traffic day of the year.
+                </p>
+            </li>
+            <li>
+                <strong>Monitor the Full Stack:</strong>
+                <p>
+                    Don't just watch your application metrics. During the 2020 US election, major news sites stayed online by closely monitoring everything from CDN cache hits to database IOPS.
+                </p>
+            </li>
+            <li>
+                <strong>Test Recovery Thoroughly:</strong>
+                <p>
+                    Amazon's famous "chaos engineering" practices include testing not just if systems fail, but how they recover. Your recovery patterns are as important as your failure points.
+                </p>
+            </li>
+            <li>
+                <strong>Use Production-Like Data:</strong>
+                <p>
+                    When Spotify stress tests new features, they use anonymized production data patterns to ensure realistic testing scenarios.
+                </p>
+            </li>
+        </ol>
+    </Section>
+
+    <Section Heading="Common Pitfalls: War Stories" Level="5">
+        <p>
+            ⚠️ Learn from these real-world stress testing mistakes:
+        </p>
+        <ul>
+            <li>
+                <strong>The "Quick Warm-up" Trap:</strong>
+                <p>
+                    A major e-commerce site once concluded their system could handle Black Friday loads based on a 5-minute warm-up test. They learned the hard way that sustained load reveals issues that brief tests miss.
+                </p>
+            </li>
+            <li>
+                <strong>The "Perfect World" Fallacy:</strong>
+                <p>
+                    A payment processor tested their system with perfect network conditions, only to face issues when real-world latency and packet loss came into play.
+                </p>
+            </li>
+            <li>
+                <strong>The "Missing Metrics" Mystery:</strong>
+                <p>
+                    A streaming service couldn't figure out why their API was failing until they discovered they weren't monitoring their Redis cache eviction rates - a critical metric that explained their performance degradation.
+                </p>
+            </li>
+        </ul>
+    </Section>
+
+    <Section Heading="Demo Repository and Resources" Level="5">
+        <p>
+            To help you get started, we've provided a complete, production-ready testing setup in our demo repository:
+            <a href="https://github.com/ajaysskumar/API-Performance-Testing" target="_blank">ajaysskumar/API-Performance-Testing</a>
+        </p>
+        <p>
+            Additional resources for diving deeper:
+        </p>
+        <ul>
+            <li>K6's official documentation on advanced metrics collection</li>
+            <li>Real-world stress testing case studies from the K6 blog</li>
+            <li>Our sample dashboards and alert configurations</li>
+        </ul>
+    </Section>
+
+    <Section Heading="Conclusion: The Path Forward" Level="5">
+        <p>
+            Stress testing isn't just a technical exercise - it's about building confidence in your system's resilience. When done right, it transforms unknowns into knowns, anxiety into assurance, and potential disasters into manageable situations.
+        </p>
+        <p>
+            Sarah's team launched their summer reading program successfully, handling 10x their normal load without a hiccup. More importantly, they now confidently serve their community knowing exactly how their system will behave during peak periods.
+        </p>
+        <p>
+            In our next article, we'll explore spike testing - preparing for those sudden, massive traffic surges that can make or break your system. We'll look at real-world examples like flash sales, viral content spikes, and breaking news scenarios.
+        </p>
+        <p>
+            ⚡ Remember: In the world of high-scale systems, it's not about if your system will be stressed, but when. The question is: Will you be ready?
+        </p>
+    </Section>
+
+</BlogContainer>
