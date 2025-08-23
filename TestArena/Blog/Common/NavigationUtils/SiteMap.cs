@@ -134,6 +134,11 @@ namespace TestArena.Blog.Common.NavigationUtils
             new DateTime(2025, 8, 16),
             "images/blog/performance-testing/stress-test/banner.png",
             ["Performance Testing", "K6", "API", ".NET", "Stress Test"]),
+        new("Performance Testing for APIs: Spike testing with K6",
+            "/blog/performance-testing/spike-test-with-k6",
+            new DateTime(2025, 8, 23),
+            "images/blog/performance-testing/spike-test/banner.png",
+            ["Performance Testing", "K6", "API", ".NET", "Spike Test"]),
         ];
 
         public static IEnumerable<PageInfo> PublishedArticles => Pages.Where(p => p.IsPublished && p.PublishedOn <= DateTime.UtcNow);
