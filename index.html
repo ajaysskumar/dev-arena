@@ -20,7 +20,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" /> -->
     
-<!--Blazor:{"type":"webassembly","prerenderId":"72a6a006177041a796a82b06161965b2","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><!--Blazor:{"prerenderId":"72a6a006177041a796a82b06161965b2"}-->
+<!--Blazor:{"type":"webassembly","prerenderId":"3616726d58c34828bc7acb98b8d8167a","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><!--Blazor:{"prerenderId":"3616726d58c34828bc7acb98b8d8167a"}-->
 </head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -36,7 +36,7 @@
 
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"3e6437b9b10e4942968151982fc8f057","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"441c7116552e44fd9e5188c3312ae2fe","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -52,6 +52,8 @@
 <div class="row row-cols-1 row-cols-md-3 g-4 p-2"><div class="col"><style>
     .custom-size {
         max-width: 400px;
+        /* keep overflow hidden so the scaled card doesn't overflow layout */
+        overflow: hidden;
     }
     .thumbnail-img {
         width: 100%;
@@ -60,14 +62,35 @@
         border-radius: 0.375rem 0.375rem 0 0;
         background: #f8f9fa;
         display: block;
+        /* smooth filter transition for image brighten */
+        transition: filter 250ms ease;
+    }
+
+    /* Slight zoom of the whole component on hover */
+    .thumbnail-card {
+        transition: transform 220ms ease, box-shadow 220ms ease;
+        transform-origin: center center;
+        will-change: transform;
+    }
+
+    .thumbnail-card:hover {
+        transform: scale(1.04);
+        box-shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.12);
+    }
+
+    /* Subtle image brighten on hover */
+    .thumbnail-card:hover .thumbnail-img {
+        filter: brightness(1.04);
     }
 </style>
 
-<div class="card shadow-sm custom-size"><a href="/blog/performance-testing/spike-test-with-k6"><img src="images/blog/performance-testing/spike-test/banner-thumbnail.png" class="thumbnail-img" alt="Performance Testing for APIs: Spike testing with K6" /></a>
+<div class="card shadow-sm custom-size thumbnail-card"><a href="/blog/performance-testing/spike-test-with-k6"><img src="images/blog/performance-testing/spike-test/banner-thumbnail.png" class="thumbnail-img" alt="Performance Testing for APIs: Spike testing with K6" /></a>
     <div class="card-body"><a href="/filtered-blogs?tag=Performance Testing"><span class="badge bg-primary mx-1">Performance Testing</span></a><a href="/filtered-blogs?tag=K6"><span class="badge bg-primary mx-1">K6</span></a><a href="/filtered-blogs?tag=API"><span class="badge bg-primary mx-1">API</span></a><a href="/filtered-blogs?tag=.NET"><span class="badge bg-primary mx-1">.NET</span></a><a href="/filtered-blogs?tag=Spike Test"><span class="badge bg-primary mx-1">Spike Test</span></a><h5 class="card-title mt-2"><a href="/blog/performance-testing/spike-test-with-k6" class="text-decoration-none text-dark">Performance Testing for APIs: Spike testing with K6</a></h5>
         <p class="card-text text-muted small">By Ajay kumar · Saturday, August 23, 2025</p></div></div></div><div class="col"><style>
     .custom-size {
         max-width: 400px;
+        /* keep overflow hidden so the scaled card doesn't overflow layout */
+        overflow: hidden;
     }
     .thumbnail-img {
         width: 100%;
@@ -76,14 +99,35 @@
         border-radius: 0.375rem 0.375rem 0 0;
         background: #f8f9fa;
         display: block;
+        /* smooth filter transition for image brighten */
+        transition: filter 250ms ease;
+    }
+
+    /* Slight zoom of the whole component on hover */
+    .thumbnail-card {
+        transition: transform 220ms ease, box-shadow 220ms ease;
+        transform-origin: center center;
+        will-change: transform;
+    }
+
+    .thumbnail-card:hover {
+        transform: scale(1.04);
+        box-shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.12);
+    }
+
+    /* Subtle image brighten on hover */
+    .thumbnail-card:hover .thumbnail-img {
+        filter: brightness(1.04);
     }
 </style>
 
-<div class="card shadow-sm custom-size"><a href="/blog/performance-testing/stress-test-with-k6"><img src="images/blog/performance-testing/stress-test/banner-thumbnail.png" class="thumbnail-img" alt="Performance Testing for APIs: Stress testing with K6" /></a>
+<div class="card shadow-sm custom-size thumbnail-card"><a href="/blog/performance-testing/stress-test-with-k6"><img src="images/blog/performance-testing/stress-test/banner-thumbnail.png" class="thumbnail-img" alt="Performance Testing for APIs: Stress testing with K6" /></a>
     <div class="card-body"><a href="/filtered-blogs?tag=Performance Testing"><span class="badge bg-primary mx-1">Performance Testing</span></a><a href="/filtered-blogs?tag=K6"><span class="badge bg-primary mx-1">K6</span></a><a href="/filtered-blogs?tag=API"><span class="badge bg-primary mx-1">API</span></a><a href="/filtered-blogs?tag=.NET"><span class="badge bg-primary mx-1">.NET</span></a><a href="/filtered-blogs?tag=Stress Test"><span class="badge bg-primary mx-1">Stress Test</span></a><h5 class="card-title mt-2"><a href="/blog/performance-testing/stress-test-with-k6" class="text-decoration-none text-dark">Performance Testing for APIs: Stress testing with K6</a></h5>
         <p class="card-text text-muted small">By Ajay kumar · Saturday, August 16, 2025</p></div></div></div><div class="col"><style>
     .custom-size {
         max-width: 400px;
+        /* keep overflow hidden so the scaled card doesn't overflow layout */
+        overflow: hidden;
     }
     .thumbnail-img {
         width: 100%;
@@ -92,14 +136,35 @@
         border-radius: 0.375rem 0.375rem 0 0;
         background: #f8f9fa;
         display: block;
+        /* smooth filter transition for image brighten */
+        transition: filter 250ms ease;
+    }
+
+    /* Slight zoom of the whole component on hover */
+    .thumbnail-card {
+        transition: transform 220ms ease, box-shadow 220ms ease;
+        transform-origin: center center;
+        will-change: transform;
+    }
+
+    .thumbnail-card:hover {
+        transform: scale(1.04);
+        box-shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.12);
+    }
+
+    /* Subtle image brighten on hover */
+    .thumbnail-card:hover .thumbnail-img {
+        filter: brightness(1.04);
     }
 </style>
 
-<div class="card shadow-sm custom-size"><a href="/blog/performance-testing-with-k6"><img src="images/blog/performance-testing/basic-setup/banner-thumbnail.png" class="thumbnail-img" alt="Performance Testing for APIs: Basic setup with K6" /></a>
+<div class="card shadow-sm custom-size thumbnail-card"><a href="/blog/performance-testing-with-k6"><img src="images/blog/performance-testing/basic-setup/banner-thumbnail.png" class="thumbnail-img" alt="Performance Testing for APIs: Basic setup with K6" /></a>
     <div class="card-body"><a href="/filtered-blogs?tag=Performance Testing"><span class="badge bg-primary mx-1">Performance Testing</span></a><a href="/filtered-blogs?tag=K6"><span class="badge bg-primary mx-1">K6</span></a><a href="/filtered-blogs?tag=API"><span class="badge bg-primary mx-1">API</span></a><a href="/filtered-blogs?tag=.NET"><span class="badge bg-primary mx-1">.NET</span></a><h5 class="card-title mt-2"><a href="/blog/performance-testing-with-k6" class="text-decoration-none text-dark">Performance Testing for APIs: Basic setup with K6</a></h5>
         <p class="card-text text-muted small">By Ajay kumar · Saturday, August 9, 2025</p></div></div></div><div class="col"><style>
     .custom-size {
         max-width: 400px;
+        /* keep overflow hidden so the scaled card doesn't overflow layout */
+        overflow: hidden;
     }
     .thumbnail-img {
         width: 100%;
@@ -108,14 +173,35 @@
         border-radius: 0.375rem 0.375rem 0 0;
         background: #f8f9fa;
         display: block;
+        /* smooth filter transition for image brighten */
+        transition: filter 250ms ease;
+    }
+
+    /* Slight zoom of the whole component on hover */
+    .thumbnail-card {
+        transition: transform 220ms ease, box-shadow 220ms ease;
+        transform-origin: center center;
+        will-change: transform;
+    }
+
+    .thumbnail-card:hover {
+        transform: scale(1.04);
+        box-shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.12);
+    }
+
+    /* Subtle image brighten on hover */
+    .thumbnail-card:hover .thumbnail-img {
+        filter: brightness(1.04);
     }
 </style>
 
-<div class="card shadow-sm custom-size"><a href="/blog/frontend/dynamically-updating-svg-images"><img src="images/blog/frontend/dynamic-svg/banner-thumbnail.png" class="thumbnail-img" alt="Interactive SVG Graphics with Blazor: From Static Images to Real-Time Visualizations" /></a>
+<div class="card shadow-sm custom-size thumbnail-card"><a href="/blog/frontend/dynamically-updating-svg-images"><img src="images/blog/frontend/dynamic-svg/banner-thumbnail.png" class="thumbnail-img" alt="Interactive SVG Graphics with Blazor: From Static Images to Real-Time Visualizations" /></a>
     <div class="card-body"><a href="/filtered-blogs?tag=Frontend"><span class="badge bg-primary mx-1">Frontend</span></a><a href="/filtered-blogs?tag=SVG"><span class="badge bg-primary mx-1">SVG</span></a><a href="/filtered-blogs?tag=Blazor"><span class="badge bg-primary mx-1">Blazor</span></a><a href="/filtered-blogs?tag=Interactive"><span class="badge bg-primary mx-1">Interactive</span></a><a href="/filtered-blogs?tag=Real-time"><span class="badge bg-primary mx-1">Real-time</span></a><h5 class="card-title mt-2"><a href="/blog/frontend/dynamically-updating-svg-images" class="text-decoration-none text-dark">Interactive SVG Graphics with Blazor: From Static Images to Real-Time Visualizations</a></h5>
         <p class="card-text text-muted small">By Ajay kumar · Saturday, July 26, 2025</p></div></div></div><div class="col"><style>
     .custom-size {
         max-width: 400px;
+        /* keep overflow hidden so the scaled card doesn't overflow layout */
+        overflow: hidden;
     }
     .thumbnail-img {
         width: 100%;
@@ -124,14 +210,35 @@
         border-radius: 0.375rem 0.375rem 0 0;
         background: #f8f9fa;
         display: block;
+        /* smooth filter transition for image brighten */
+        transition: filter 250ms ease;
+    }
+
+    /* Slight zoom of the whole component on hover */
+    .thumbnail-card {
+        transition: transform 220ms ease, box-shadow 220ms ease;
+        transform-origin: center center;
+        will-change: transform;
+    }
+
+    .thumbnail-card:hover {
+        transform: scale(1.04);
+        box-shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.12);
+    }
+
+    /* Subtle image brighten on hover */
+    .thumbnail-card:hover .thumbnail-img {
+        filter: brightness(1.04);
     }
 </style>
 
-<div class="card shadow-sm custom-size"><a href="/blog/frontend/events-demo"><img src="images/blog/frontend/events-demo/banner-thumbnail.png" class="thumbnail-img" alt="Event-Driven Communication in frontend/react: Beginner&#x27;s Guide" /></a>
+<div class="card shadow-sm custom-size thumbnail-card"><a href="/blog/frontend/events-demo"><img src="images/blog/frontend/events-demo/banner-thumbnail.png" class="thumbnail-img" alt="Event-Driven Communication in frontend/react: Beginner&#x27;s Guide" /></a>
     <div class="card-body"><a href="/filtered-blogs?tag=Frontend"><span class="badge bg-primary mx-1">Frontend</span></a><a href="/filtered-blogs?tag=Micro-Frontends"><span class="badge bg-primary mx-1">Micro-Frontends</span></a><a href="/filtered-blogs?tag=Events"><span class="badge bg-primary mx-1">Events</span></a><a href="/filtered-blogs?tag=JavaScript"><span class="badge bg-primary mx-1">JavaScript</span></a><a href="/filtered-blogs?tag=Architecture"><span class="badge bg-primary mx-1">Architecture</span></a><h5 class="card-title mt-2"><a href="/blog/frontend/events-demo" class="text-decoration-none text-dark">Event-Driven Communication in frontend/react: Beginner&#x27;s Guide</a></h5>
         <p class="card-text text-muted small">By Ajay kumar · Saturday, July 19, 2025</p></div></div></div><div class="col"><style>
     .custom-size {
         max-width: 400px;
+        /* keep overflow hidden so the scaled card doesn't overflow layout */
+        overflow: hidden;
     }
     .thumbnail-img {
         width: 100%;
@@ -140,14 +247,35 @@
         border-radius: 0.375rem 0.375rem 0 0;
         background: #f8f9fa;
         display: block;
+        /* smooth filter transition for image brighten */
+        transition: filter 250ms ease;
+    }
+
+    /* Slight zoom of the whole component on hover */
+    .thumbnail-card {
+        transition: transform 220ms ease, box-shadow 220ms ease;
+        transform-origin: center center;
+        will-change: transform;
+    }
+
+    .thumbnail-card:hover {
+        transform: scale(1.04);
+        box-shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.12);
+    }
+
+    /* Subtle image brighten on hover */
+    .thumbnail-card:hover .thumbnail-img {
+        filter: brightness(1.04);
     }
 </style>
 
-<div class="card shadow-sm custom-size"><a href="/blog/software-practices/solid/dependency-inversion-principle"><img src="images/blog/software-practices/solid/dip/banner-thumbnail.png" class="thumbnail-img" alt="SOLID Principles: Understanding the Dependency Inversion Principle" /></a>
+<div class="card shadow-sm custom-size thumbnail-card"><a href="/blog/software-practices/solid/dependency-inversion-principle"><img src="images/blog/software-practices/solid/dip/banner-thumbnail.png" class="thumbnail-img" alt="SOLID Principles: Understanding the Dependency Inversion Principle" /></a>
     <div class="card-body"><a href="/filtered-blogs?tag=Software Practices"><span class="badge bg-primary mx-1">Software Practices</span></a><a href="/filtered-blogs?tag=SOLID"><span class="badge bg-primary mx-1">SOLID</span></a><a href="/filtered-blogs?tag=DIP"><span class="badge bg-primary mx-1">DIP</span></a><h5 class="card-title mt-2"><a href="/blog/software-practices/solid/dependency-inversion-principle" class="text-decoration-none text-dark">SOLID Principles: Understanding the Dependency Inversion Principle</a></h5>
         <p class="card-text text-muted small">By Ajay kumar · Saturday, July 12, 2025</p></div></div></div><div class="col"><style>
     .custom-size {
         max-width: 400px;
+        /* keep overflow hidden so the scaled card doesn't overflow layout */
+        overflow: hidden;
     }
     .thumbnail-img {
         width: 100%;
@@ -156,14 +284,35 @@
         border-radius: 0.375rem 0.375rem 0 0;
         background: #f8f9fa;
         display: block;
+        /* smooth filter transition for image brighten */
+        transition: filter 250ms ease;
+    }
+
+    /* Slight zoom of the whole component on hover */
+    .thumbnail-card {
+        transition: transform 220ms ease, box-shadow 220ms ease;
+        transform-origin: center center;
+        will-change: transform;
+    }
+
+    .thumbnail-card:hover {
+        transform: scale(1.04);
+        box-shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.12);
+    }
+
+    /* Subtle image brighten on hover */
+    .thumbnail-card:hover .thumbnail-img {
+        filter: brightness(1.04);
     }
 </style>
 
-<div class="card shadow-sm custom-size"><a href="/blog/ai/openai-rest-api-in-dotnet"><img src="images/blog/ai/open-ai-rest-demo/banner-thumbnail.png" class="thumbnail-img" alt="Using OpenAI APIs: Basic chat completions API Guide in .NET" /></a>
+<div class="card shadow-sm custom-size thumbnail-card"><a href="/blog/ai/openai-rest-api-in-dotnet"><img src="images/blog/ai/open-ai-rest-demo/banner-thumbnail.png" class="thumbnail-img" alt="Using OpenAI APIs: Basic chat completions API Guide in .NET" /></a>
     <div class="card-body"><a href="/filtered-blogs?tag=AI"><span class="badge bg-primary mx-1">AI</span></a><a href="/filtered-blogs?tag=OpenAI"><span class="badge bg-primary mx-1">OpenAI</span></a><a href="/filtered-blogs?tag=API"><span class="badge bg-primary mx-1">API</span></a><a href="/filtered-blogs?tag=.NET"><span class="badge bg-primary mx-1">.NET</span></a><a href="/filtered-blogs?tag=C#"><span class="badge bg-primary mx-1">C#</span></a><h5 class="card-title mt-2"><a href="/blog/ai/openai-rest-api-in-dotnet" class="text-decoration-none text-dark">Using OpenAI APIs: Basic chat completions API Guide in .NET</a></h5>
         <p class="card-text text-muted small">By Ajay kumar · Saturday, June 28, 2025</p></div></div></div><div class="col"><style>
     .custom-size {
         max-width: 400px;
+        /* keep overflow hidden so the scaled card doesn't overflow layout */
+        overflow: hidden;
     }
     .thumbnail-img {
         width: 100%;
@@ -172,14 +321,35 @@
         border-radius: 0.375rem 0.375rem 0 0;
         background: #f8f9fa;
         display: block;
+        /* smooth filter transition for image brighten */
+        transition: filter 250ms ease;
+    }
+
+    /* Slight zoom of the whole component on hover */
+    .thumbnail-card {
+        transition: transform 220ms ease, box-shadow 220ms ease;
+        transform-origin: center center;
+        will-change: transform;
+    }
+
+    .thumbnail-card:hover {
+        transform: scale(1.04);
+        box-shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.12);
+    }
+
+    /* Subtle image brighten on hover */
+    .thumbnail-card:hover .thumbnail-img {
+        filter: brightness(1.04);
     }
 </style>
 
-<div class="card shadow-sm custom-size"><a href="/blog/connection-pooling-sql-server"><img src="images/blog/connection-pooling-intro/banner-thumbnail.png" class="thumbnail-img" alt="Connection Pooling in SQL Server: What, When, and How" /></a>
+<div class="card shadow-sm custom-size thumbnail-card"><a href="/blog/connection-pooling-sql-server"><img src="images/blog/connection-pooling-intro/banner-thumbnail.png" class="thumbnail-img" alt="Connection Pooling in SQL Server: What, When, and How" /></a>
     <div class="card-body"><a href="/filtered-blogs?tag=SQL Server"><span class="badge bg-primary mx-1">SQL Server</span></a><a href="/filtered-blogs?tag=Connection Pooling"><span class="badge bg-primary mx-1">Connection Pooling</span></a><a href="/filtered-blogs?tag=.NET"><span class="badge bg-primary mx-1">.NET</span></a><a href="/filtered-blogs?tag=Database"><span class="badge bg-primary mx-1">Database</span></a><h5 class="card-title mt-2"><a href="/blog/connection-pooling-sql-server" class="text-decoration-none text-dark">Connection Pooling in SQL Server: What, When, and How</a></h5>
         <p class="card-text text-muted small">By Ajay kumar · Saturday, June 14, 2025</p></div></div></div><div class="col"><style>
     .custom-size {
         max-width: 400px;
+        /* keep overflow hidden so the scaled card doesn't overflow layout */
+        overflow: hidden;
     }
     .thumbnail-img {
         width: 100%;
@@ -188,14 +358,35 @@
         border-radius: 0.375rem 0.375rem 0 0;
         background: #f8f9fa;
         display: block;
+        /* smooth filter transition for image brighten */
+        transition: filter 250ms ease;
+    }
+
+    /* Slight zoom of the whole component on hover */
+    .thumbnail-card {
+        transition: transform 220ms ease, box-shadow 220ms ease;
+        transform-origin: center center;
+        will-change: transform;
+    }
+
+    .thumbnail-card:hover {
+        transform: scale(1.04);
+        box-shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.12);
+    }
+
+    /* Subtle image brighten on hover */
+    .thumbnail-card:hover .thumbnail-img {
+        filter: brightness(1.04);
     }
 </style>
 
-<div class="card shadow-sm custom-size"><a href="/blog/software-practices/solid/interface-segregation-principle"><img src="images/blog/software-practices/solid/isp/banner-thumbnail.png" class="thumbnail-img" alt="SOLID Principles: Understanding the Interface Segregation Principle" /></a>
+<div class="card shadow-sm custom-size thumbnail-card"><a href="/blog/software-practices/solid/interface-segregation-principle"><img src="images/blog/software-practices/solid/isp/banner-thumbnail.png" class="thumbnail-img" alt="SOLID Principles: Understanding the Interface Segregation Principle" /></a>
     <div class="card-body"><a href="/filtered-blogs?tag=Software Practices"><span class="badge bg-primary mx-1">Software Practices</span></a><a href="/filtered-blogs?tag=SOLID"><span class="badge bg-primary mx-1">SOLID</span></a><a href="/filtered-blogs?tag=ISP"><span class="badge bg-primary mx-1">ISP</span></a><h5 class="card-title mt-2"><a href="/blog/software-practices/solid/interface-segregation-principle" class="text-decoration-none text-dark">SOLID Principles: Understanding the Interface Segregation Principle</a></h5>
         <p class="card-text text-muted small">By Ajay kumar · Saturday, June 7, 2025</p></div></div></div><div class="col"><style>
     .custom-size {
         max-width: 400px;
+        /* keep overflow hidden so the scaled card doesn't overflow layout */
+        overflow: hidden;
     }
     .thumbnail-img {
         width: 100%;
@@ -204,14 +395,35 @@
         border-radius: 0.375rem 0.375rem 0 0;
         background: #f8f9fa;
         display: block;
+        /* smooth filter transition for image brighten */
+        transition: filter 250ms ease;
+    }
+
+    /* Slight zoom of the whole component on hover */
+    .thumbnail-card {
+        transition: transform 220ms ease, box-shadow 220ms ease;
+        transform-origin: center center;
+        will-change: transform;
+    }
+
+    .thumbnail-card:hover {
+        transform: scale(1.04);
+        box-shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.12);
+    }
+
+    /* Subtle image brighten on hover */
+    .thumbnail-card:hover .thumbnail-img {
+        filter: brightness(1.04);
     }
 </style>
 
-<div class="card shadow-sm custom-size"><a href="/blog/software-practices/solid/liskov-substitution-principle"><img src="images/blog/software-practices/solid/lsp/banner-thumbnail.png" class="thumbnail-img" alt="SOLID Principles: Understanding the Liskov Substitution Principle" /></a>
+<div class="card shadow-sm custom-size thumbnail-card"><a href="/blog/software-practices/solid/liskov-substitution-principle"><img src="images/blog/software-practices/solid/lsp/banner-thumbnail.png" class="thumbnail-img" alt="SOLID Principles: Understanding the Liskov Substitution Principle" /></a>
     <div class="card-body"><a href="/filtered-blogs?tag=Software Practices"><span class="badge bg-primary mx-1">Software Practices</span></a><a href="/filtered-blogs?tag=SOLID"><span class="badge bg-primary mx-1">SOLID</span></a><a href="/filtered-blogs?tag=LSP"><span class="badge bg-primary mx-1">LSP</span></a><h5 class="card-title mt-2"><a href="/blog/software-practices/solid/liskov-substitution-principle" class="text-decoration-none text-dark">SOLID Principles: Understanding the Liskov Substitution Principle</a></h5>
         <p class="card-text text-muted small">By Ajay kumar · Saturday, May 31, 2025</p></div></div></div><div class="col"><style>
     .custom-size {
         max-width: 400px;
+        /* keep overflow hidden so the scaled card doesn't overflow layout */
+        overflow: hidden;
     }
     .thumbnail-img {
         width: 100%;
@@ -220,14 +432,35 @@
         border-radius: 0.375rem 0.375rem 0 0;
         background: #f8f9fa;
         display: block;
+        /* smooth filter transition for image brighten */
+        transition: filter 250ms ease;
+    }
+
+    /* Slight zoom of the whole component on hover */
+    .thumbnail-card {
+        transition: transform 220ms ease, box-shadow 220ms ease;
+        transform-origin: center center;
+        will-change: transform;
+    }
+
+    .thumbnail-card:hover {
+        transform: scale(1.04);
+        box-shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.12);
+    }
+
+    /* Subtle image brighten on hover */
+    .thumbnail-card:hover .thumbnail-img {
+        filter: brightness(1.04);
     }
 </style>
 
-<div class="card shadow-sm custom-size"><a href="/blog/software-practices/solid/open-close-principle"><img src="images/blog/software-practices/solid/ocp/banner-thumbnail.png" class="thumbnail-img" alt="SOLID Principles: Understanding the Open/Closed Principle" /></a>
+<div class="card shadow-sm custom-size thumbnail-card"><a href="/blog/software-practices/solid/open-close-principle"><img src="images/blog/software-practices/solid/ocp/banner-thumbnail.png" class="thumbnail-img" alt="SOLID Principles: Understanding the Open/Closed Principle" /></a>
     <div class="card-body"><a href="/filtered-blogs?tag=Software Practices"><span class="badge bg-primary mx-1">Software Practices</span></a><a href="/filtered-blogs?tag=SOLID"><span class="badge bg-primary mx-1">SOLID</span></a><a href="/filtered-blogs?tag=OCP"><span class="badge bg-primary mx-1">OCP</span></a><h5 class="card-title mt-2"><a href="/blog/software-practices/solid/open-close-principle" class="text-decoration-none text-dark">SOLID Principles: Understanding the Open/Closed Principle</a></h5>
         <p class="card-text text-muted small">By Ajay kumar · Saturday, May 24, 2025</p></div></div></div><div class="col"><style>
     .custom-size {
         max-width: 400px;
+        /* keep overflow hidden so the scaled card doesn't overflow layout */
+        overflow: hidden;
     }
     .thumbnail-img {
         width: 100%;
@@ -236,14 +469,35 @@
         border-radius: 0.375rem 0.375rem 0 0;
         background: #f8f9fa;
         display: block;
+        /* smooth filter transition for image brighten */
+        transition: filter 250ms ease;
+    }
+
+    /* Slight zoom of the whole component on hover */
+    .thumbnail-card {
+        transition: transform 220ms ease, box-shadow 220ms ease;
+        transform-origin: center center;
+        will-change: transform;
+    }
+
+    .thumbnail-card:hover {
+        transform: scale(1.04);
+        box-shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.12);
+    }
+
+    /* Subtle image brighten on hover */
+    .thumbnail-card:hover .thumbnail-img {
+        filter: brightness(1.04);
     }
 </style>
 
-<div class="card shadow-sm custom-size"><a href="/blog/software-practices/solid/single-responsibility-principle"><img src="images/blog/software-practices/solid/srp/banner-thumbnail.png" class="thumbnail-img" alt="SOLID Principles: Understanding the Single Responsibility Principle" /></a>
+<div class="card shadow-sm custom-size thumbnail-card"><a href="/blog/software-practices/solid/single-responsibility-principle"><img src="images/blog/software-practices/solid/srp/banner-thumbnail.png" class="thumbnail-img" alt="SOLID Principles: Understanding the Single Responsibility Principle" /></a>
     <div class="card-body"><a href="/filtered-blogs?tag=Software Practices"><span class="badge bg-primary mx-1">Software Practices</span></a><a href="/filtered-blogs?tag=SOLID"><span class="badge bg-primary mx-1">SOLID</span></a><a href="/filtered-blogs?tag=SRP"><span class="badge bg-primary mx-1">SRP</span></a><h5 class="card-title mt-2"><a href="/blog/software-practices/solid/single-responsibility-principle" class="text-decoration-none text-dark">SOLID Principles: Understanding the Single Responsibility Principle</a></h5>
         <p class="card-text text-muted small">By Ajay kumar · Saturday, May 10, 2025</p></div></div></div><div class="col"><style>
     .custom-size {
         max-width: 400px;
+        /* keep overflow hidden so the scaled card doesn't overflow layout */
+        overflow: hidden;
     }
     .thumbnail-img {
         width: 100%;
@@ -252,14 +506,35 @@
         border-radius: 0.375rem 0.375rem 0 0;
         background: #f8f9fa;
         display: block;
+        /* smooth filter transition for image brighten */
+        transition: filter 250ms ease;
+    }
+
+    /* Slight zoom of the whole component on hover */
+    .thumbnail-card {
+        transition: transform 220ms ease, box-shadow 220ms ease;
+        transform-origin: center center;
+        will-change: transform;
+    }
+
+    .thumbnail-card:hover {
+        transform: scale(1.04);
+        box-shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.12);
+    }
+
+    /* Subtle image brighten on hover */
+    .thumbnail-card:hover .thumbnail-img {
+        filter: brightness(1.04);
     }
 </style>
 
-<div class="card shadow-sm custom-size"><a href="/blog/integration-testing-in-dotnet-with-aws"><img src="images/blog/integration-testing/handling-aws/banner-thumbnail.png" class="thumbnail-img" alt="Integration testing for dotnet core APIs: Working with AWS flows" /></a>
+<div class="card shadow-sm custom-size thumbnail-card"><a href="/blog/integration-testing-in-dotnet-with-aws"><img src="images/blog/integration-testing/handling-aws/banner-thumbnail.png" class="thumbnail-img" alt="Integration testing for dotnet core APIs: Working with AWS flows" /></a>
     <div class="card-body"><a href="/filtered-blogs?tag=Integration Testing"><span class="badge bg-primary mx-1">Integration Testing</span></a><a href="/filtered-blogs?tag=Localstack"><span class="badge bg-primary mx-1">Localstack</span></a><a href="/filtered-blogs?tag=AWS"><span class="badge bg-primary mx-1">AWS</span></a><h5 class="card-title mt-2"><a href="/blog/integration-testing-in-dotnet-with-aws" class="text-decoration-none text-dark">Integration testing for dotnet core APIs: Working with AWS flows</a></h5>
         <p class="card-text text-muted small">By Ajay kumar · Saturday, May 3, 2025</p></div></div></div><div class="col"><style>
     .custom-size {
         max-width: 400px;
+        /* keep overflow hidden so the scaled card doesn't overflow layout */
+        overflow: hidden;
     }
     .thumbnail-img {
         width: 100%;
@@ -268,14 +543,35 @@
         border-radius: 0.375rem 0.375rem 0 0;
         background: #f8f9fa;
         display: block;
+        /* smooth filter transition for image brighten */
+        transition: filter 250ms ease;
+    }
+
+    /* Slight zoom of the whole component on hover */
+    .thumbnail-card {
+        transition: transform 220ms ease, box-shadow 220ms ease;
+        transform-origin: center center;
+        will-change: transform;
+    }
+
+    .thumbnail-card:hover {
+        transform: scale(1.04);
+        box-shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.12);
+    }
+
+    /* Subtle image brighten on hover */
+    .thumbnail-card:hover .thumbnail-img {
+        filter: brightness(1.04);
     }
 </style>
 
-<div class="card shadow-sm custom-size"><a href="/blog/module-federation-demo-in-react"><img src="images/blog/react/module-federation/banner-thumbnail.png" class="thumbnail-img" alt="Module Federation in React" /></a>
+<div class="card shadow-sm custom-size thumbnail-card"><a href="/blog/module-federation-demo-in-react"><img src="images/blog/react/module-federation/banner-thumbnail.png" class="thumbnail-img" alt="Module Federation in React" /></a>
     <div class="card-body"><a href="/filtered-blogs?tag=micro-fronted"><span class="badge bg-primary mx-1">micro-fronted</span></a><a href="/filtered-blogs?tag=react"><span class="badge bg-primary mx-1">react</span></a><a href="/filtered-blogs?tag=module-federation"><span class="badge bg-primary mx-1">module-federation</span></a><h5 class="card-title mt-2"><a href="/blog/module-federation-demo-in-react" class="text-decoration-none text-dark">Module Federation in React</a></h5>
         <p class="card-text text-muted small">By Ajay kumar · Saturday, April 19, 2025</p></div></div></div><div class="col"><style>
     .custom-size {
         max-width: 400px;
+        /* keep overflow hidden so the scaled card doesn't overflow layout */
+        overflow: hidden;
     }
     .thumbnail-img {
         width: 100%;
@@ -284,14 +580,35 @@
         border-radius: 0.375rem 0.375rem 0 0;
         background: #f8f9fa;
         display: block;
+        /* smooth filter transition for image brighten */
+        transition: filter 250ms ease;
+    }
+
+    /* Slight zoom of the whole component on hover */
+    .thumbnail-card {
+        transition: transform 220ms ease, box-shadow 220ms ease;
+        transform-origin: center center;
+        will-change: transform;
+    }
+
+    .thumbnail-card:hover {
+        transform: scale(1.04);
+        box-shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.12);
+    }
+
+    /* Subtle image brighten on hover */
+    .thumbnail-card:hover .thumbnail-img {
+        filter: brightness(1.04);
     }
 </style>
 
-<div class="card shadow-sm custom-size"><a href="/blog/custom-elements-in-html"><img src="images/blog/html-blogs/custom-element/banner-thumbnail.png" class="thumbnail-img" alt="Custom Elements in HTML" /></a>
+<div class="card shadow-sm custom-size thumbnail-card"><a href="/blog/custom-elements-in-html"><img src="images/blog/html-blogs/custom-element/banner-thumbnail.png" class="thumbnail-img" alt="Custom Elements in HTML" /></a>
     <div class="card-body"><a href="/filtered-blogs?tag=HTML"><span class="badge bg-primary mx-1">HTML</span></a><a href="/filtered-blogs?tag=Web Components"><span class="badge bg-primary mx-1">Web Components</span></a><a href="/filtered-blogs?tag=Custom Elements"><span class="badge bg-primary mx-1">Custom Elements</span></a><h5 class="card-title mt-2"><a href="/blog/custom-elements-in-html" class="text-decoration-none text-dark">Custom Elements in HTML</a></h5>
         <p class="card-text text-muted small">By Ajay kumar · Saturday, April 5, 2025</p></div></div></div><div class="col"><style>
     .custom-size {
         max-width: 400px;
+        /* keep overflow hidden so the scaled card doesn't overflow layout */
+        overflow: hidden;
     }
     .thumbnail-img {
         width: 100%;
@@ -300,14 +617,35 @@
         border-radius: 0.375rem 0.375rem 0 0;
         background: #f8f9fa;
         display: block;
+        /* smooth filter transition for image brighten */
+        transition: filter 250ms ease;
+    }
+
+    /* Slight zoom of the whole component on hover */
+    .thumbnail-card {
+        transition: transform 220ms ease, box-shadow 220ms ease;
+        transform-origin: center center;
+        will-change: transform;
+    }
+
+    .thumbnail-card:hover {
+        transform: scale(1.04);
+        box-shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.12);
+    }
+
+    /* Subtle image brighten on hover */
+    .thumbnail-card:hover .thumbnail-img {
+        filter: brightness(1.04);
     }
 </style>
 
-<div class="card shadow-sm custom-size"><a href="/blog/package-vulnerability-detection-in-dotnet"><img src="images/blog/vulnerability/auditing/banner-thumbnail.png" class="thumbnail-img" alt="Securing .NET Applications: Preventing Threats Through Package Audits" /></a>
+<div class="card shadow-sm custom-size thumbnail-card"><a href="/blog/package-vulnerability-detection-in-dotnet"><img src="images/blog/vulnerability/auditing/banner-thumbnail.png" class="thumbnail-img" alt="Securing .NET Applications: Preventing Threats Through Package Audits" /></a>
     <div class="card-body"><a href="/filtered-blogs?tag=Security"><span class="badge bg-primary mx-1">Security</span></a><a href="/filtered-blogs?tag=Vulnerability"><span class="badge bg-primary mx-1">Vulnerability</span></a><a href="/filtered-blogs?tag=.NET"><span class="badge bg-primary mx-1">.NET</span></a><h5 class="card-title mt-2"><a href="/blog/package-vulnerability-detection-in-dotnet" class="text-decoration-none text-dark">Securing .NET Applications: Preventing Threats Through Package Audits</a></h5>
         <p class="card-text text-muted small">By Ajay kumar · Saturday, March 22, 2025</p></div></div></div><div class="col"><style>
     .custom-size {
         max-width: 400px;
+        /* keep overflow hidden so the scaled card doesn't overflow layout */
+        overflow: hidden;
     }
     .thumbnail-img {
         width: 100%;
@@ -316,14 +654,35 @@
         border-radius: 0.375rem 0.375rem 0 0;
         background: #f8f9fa;
         display: block;
+        /* smooth filter transition for image brighten */
+        transition: filter 250ms ease;
+    }
+
+    /* Slight zoom of the whole component on hover */
+    .thumbnail-card {
+        transition: transform 220ms ease, box-shadow 220ms ease;
+        transform-origin: center center;
+        will-change: transform;
+    }
+
+    .thumbnail-card:hover {
+        transform: scale(1.04);
+        box-shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.12);
+    }
+
+    /* Subtle image brighten on hover */
+    .thumbnail-card:hover .thumbnail-img {
+        filter: brightness(1.04);
     }
 </style>
 
-<div class="card shadow-sm custom-size"><a href="/blog/integration-testing-in-dotnet-with-external-services"><img src="images/blog/integration-testing/handling-external-services/banner-thumbnail.png" class="thumbnail-img" alt="Integration testing for dotnet core APIs: Handling 3rd party service calls using wiremock" /></a>
+<div class="card shadow-sm custom-size thumbnail-card"><a href="/blog/integration-testing-in-dotnet-with-external-services"><img src="images/blog/integration-testing/handling-external-services/banner-thumbnail.png" class="thumbnail-img" alt="Integration testing for dotnet core APIs: Handling 3rd party service calls using wiremock" /></a>
     <div class="card-body"><a href="/filtered-blogs?tag=Integration Testing"><span class="badge bg-primary mx-1">Integration Testing</span></a><a href="/filtered-blogs?tag=WireMock"><span class="badge bg-primary mx-1">WireMock</span></a><h5 class="card-title mt-2"><a href="/blog/integration-testing-in-dotnet-with-external-services" class="text-decoration-none text-dark">Integration testing for dotnet core APIs: Handling 3rd party service calls using wiremock</a></h5>
         <p class="card-text text-muted small">By Ajay kumar · Saturday, March 8, 2025</p></div></div></div><div class="col"><style>
     .custom-size {
         max-width: 400px;
+        /* keep overflow hidden so the scaled card doesn't overflow layout */
+        overflow: hidden;
     }
     .thumbnail-img {
         width: 100%;
@@ -332,14 +691,35 @@
         border-radius: 0.375rem 0.375rem 0 0;
         background: #f8f9fa;
         display: block;
+        /* smooth filter transition for image brighten */
+        transition: filter 250ms ease;
+    }
+
+    /* Slight zoom of the whole component on hover */
+    .thumbnail-card {
+        transition: transform 220ms ease, box-shadow 220ms ease;
+        transform-origin: center center;
+        will-change: transform;
+    }
+
+    .thumbnail-card:hover {
+        transform: scale(1.04);
+        box-shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.12);
+    }
+
+    /* Subtle image brighten on hover */
+    .thumbnail-card:hover .thumbnail-img {
+        filter: brightness(1.04);
     }
 </style>
 
-<div class="card shadow-sm custom-size"><a href="/blog/integration-testing-in-dotnet-with-auth"><img src="images/blog/integration-testing/handling-auth/banner-thumbnail.png" class="thumbnail-img" alt="Integration testing for dotnet core APIs: Handling APIs behind authentication" /></a>
+<div class="card shadow-sm custom-size thumbnail-card"><a href="/blog/integration-testing-in-dotnet-with-auth"><img src="images/blog/integration-testing/handling-auth/banner-thumbnail.png" class="thumbnail-img" alt="Integration testing for dotnet core APIs: Handling APIs behind authentication" /></a>
     <div class="card-body"><a href="/filtered-blogs?tag=Integration Testing"><span class="badge bg-primary mx-1">Integration Testing</span></a><a href="/filtered-blogs?tag=Authentication"><span class="badge bg-primary mx-1">Authentication</span></a><h5 class="card-title mt-2"><a href="/blog/integration-testing-in-dotnet-with-auth" class="text-decoration-none text-dark">Integration testing for dotnet core APIs: Handling APIs behind authentication</a></h5>
         <p class="card-text text-muted small">By Ajay kumar · Saturday, February 22, 2025</p></div></div></div><div class="col"><style>
     .custom-size {
         max-width: 400px;
+        /* keep overflow hidden so the scaled card doesn't overflow layout */
+        overflow: hidden;
     }
     .thumbnail-img {
         width: 100%;
@@ -348,14 +728,35 @@
         border-radius: 0.375rem 0.375rem 0 0;
         background: #f8f9fa;
         display: block;
+        /* smooth filter transition for image brighten */
+        transition: filter 250ms ease;
+    }
+
+    /* Slight zoom of the whole component on hover */
+    .thumbnail-card {
+        transition: transform 220ms ease, box-shadow 220ms ease;
+        transform-origin: center center;
+        will-change: transform;
+    }
+
+    .thumbnail-card:hover {
+        transform: scale(1.04);
+        box-shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.12);
+    }
+
+    /* Subtle image brighten on hover */
+    .thumbnail-card:hover .thumbnail-img {
+        filter: brightness(1.04);
     }
 </style>
 
-<div class="card shadow-sm custom-size"><a href="/blog/integration-testing-in-dotnet-with-database"><img src="images/blog/integration-testing/handling-database/banner-thumbnail.png" class="thumbnail-img" alt="Integration testing for dotnet core APIs: Handling database" /></a>
+<div class="card shadow-sm custom-size thumbnail-card"><a href="/blog/integration-testing-in-dotnet-with-database"><img src="images/blog/integration-testing/handling-database/banner-thumbnail.png" class="thumbnail-img" alt="Integration testing for dotnet core APIs: Handling database" /></a>
     <div class="card-body"><a href="/filtered-blogs?tag=Integration Testing"><span class="badge bg-primary mx-1">Integration Testing</span></a><a href="/filtered-blogs?tag=Database"><span class="badge bg-primary mx-1">Database</span></a><h5 class="card-title mt-2"><a href="/blog/integration-testing-in-dotnet-with-database" class="text-decoration-none text-dark">Integration testing for dotnet core APIs: Handling database</a></h5>
         <p class="card-text text-muted small">By Ajay kumar · Saturday, February 8, 2025</p></div></div></div><div class="col"><style>
     .custom-size {
         max-width: 400px;
+        /* keep overflow hidden so the scaled card doesn't overflow layout */
+        overflow: hidden;
     }
     .thumbnail-img {
         width: 100%;
@@ -364,14 +765,35 @@
         border-radius: 0.375rem 0.375rem 0 0;
         background: #f8f9fa;
         display: block;
+        /* smooth filter transition for image brighten */
+        transition: filter 250ms ease;
+    }
+
+    /* Slight zoom of the whole component on hover */
+    .thumbnail-card {
+        transition: transform 220ms ease, box-shadow 220ms ease;
+        transform-origin: center center;
+        will-change: transform;
+    }
+
+    .thumbnail-card:hover {
+        transform: scale(1.04);
+        box-shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.12);
+    }
+
+    /* Subtle image brighten on hover */
+    .thumbnail-card:hover .thumbnail-img {
+        filter: brightness(1.04);
     }
 </style>
 
-<div class="card shadow-sm custom-size"><a href="/blog/integration-testing-in-dotnet-intro"><img src="images/blog/integration-testing/intro/banner-thumbnail.png" class="thumbnail-img" alt="Integration testing for dotnet core APIs: Introduction" /></a>
+<div class="card shadow-sm custom-size thumbnail-card"><a href="/blog/integration-testing-in-dotnet-intro"><img src="images/blog/integration-testing/intro/banner-thumbnail.png" class="thumbnail-img" alt="Integration testing for dotnet core APIs: Introduction" /></a>
     <div class="card-body"><a href="/filtered-blogs?tag=Integration Testing"><span class="badge bg-primary mx-1">Integration Testing</span></a><a href="/filtered-blogs?tag=.NET"><span class="badge bg-primary mx-1">.NET</span></a><h5 class="card-title mt-2"><a href="/blog/integration-testing-in-dotnet-intro" class="text-decoration-none text-dark">Integration testing for dotnet core APIs: Introduction</a></h5>
         <p class="card-text text-muted small">By Ajay kumar · Saturday, January 25, 2025</p></div></div></div><div class="col"><style>
     .custom-size {
         max-width: 400px;
+        /* keep overflow hidden so the scaled card doesn't overflow layout */
+        overflow: hidden;
     }
     .thumbnail-img {
         width: 100%;
@@ -380,14 +802,35 @@
         border-radius: 0.375rem 0.375rem 0 0;
         background: #f8f9fa;
         display: block;
+        /* smooth filter transition for image brighten */
+        transition: filter 250ms ease;
+    }
+
+    /* Slight zoom of the whole component on hover */
+    .thumbnail-card {
+        transition: transform 220ms ease, box-shadow 220ms ease;
+        transform-origin: center center;
+        will-change: transform;
+    }
+
+    .thumbnail-card:hover {
+        transform: scale(1.04);
+        box-shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.12);
+    }
+
+    /* Subtle image brighten on hover */
+    .thumbnail-card:hover .thumbnail-img {
+        filter: brightness(1.04);
     }
 </style>
 
-<div class="card shadow-sm custom-size"><a href="/blog/integration-with-pactflow"><img src="images/blog/pact/pact-broker/banner-thumbnail.png" class="thumbnail-img" alt="Intro to PACT for .NET Core: Integration with PactFlow" /></a>
+<div class="card shadow-sm custom-size thumbnail-card"><a href="/blog/integration-with-pactflow"><img src="images/blog/pact/pact-broker/banner-thumbnail.png" class="thumbnail-img" alt="Intro to PACT for .NET Core: Integration with PactFlow" /></a>
     <div class="card-body"><a href="/filtered-blogs?tag=PACT"><span class="badge bg-primary mx-1">PACT</span></a><a href="/filtered-blogs?tag=PactFlow"><span class="badge bg-primary mx-1">PactFlow</span></a><h5 class="card-title mt-2"><a href="/blog/integration-with-pactflow" class="text-decoration-none text-dark">Intro to PACT for .NET Core: Integration with PactFlow</a></h5>
         <p class="card-text text-muted small">By Ajay kumar · Saturday, January 11, 2025</p></div></div></div><div class="col"><style>
     .custom-size {
         max-width: 400px;
+        /* keep overflow hidden so the scaled card doesn't overflow layout */
+        overflow: hidden;
     }
     .thumbnail-img {
         width: 100%;
@@ -396,14 +839,35 @@
         border-radius: 0.375rem 0.375rem 0 0;
         background: #f8f9fa;
         display: block;
+        /* smooth filter transition for image brighten */
+        transition: filter 250ms ease;
+    }
+
+    /* Slight zoom of the whole component on hover */
+    .thumbnail-card {
+        transition: transform 220ms ease, box-shadow 220ms ease;
+        transform-origin: center center;
+        will-change: transform;
+    }
+
+    .thumbnail-card:hover {
+        transform: scale(1.04);
+        box-shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.12);
+    }
+
+    /* Subtle image brighten on hover */
+    .thumbnail-card:hover .thumbnail-img {
+        filter: brightness(1.04);
     }
 </style>
 
-<div class="card shadow-sm custom-size"><a href="/blog/contract-testing-in-pact-with-events"><img src="images/blog/pact/events-demo/banner-thumbnail.webp" class="thumbnail-img" alt="Intro to PACT for .NET Core: Events based systems" /></a>
+<div class="card shadow-sm custom-size thumbnail-card"><a href="/blog/contract-testing-in-pact-with-events"><img src="images/blog/pact/events-demo/banner-thumbnail.webp" class="thumbnail-img" alt="Intro to PACT for .NET Core: Events based systems" /></a>
     <div class="card-body"><a href="/filtered-blogs?tag=PACT"><span class="badge bg-primary mx-1">PACT</span></a><a href="/filtered-blogs?tag=Events"><span class="badge bg-primary mx-1">Events</span></a><h5 class="card-title mt-2"><a href="/blog/contract-testing-in-pact-with-events" class="text-decoration-none text-dark">Intro to PACT for .NET Core: Events based systems</a></h5>
         <p class="card-text text-muted small">By Ajay kumar · Saturday, December 28, 2024</p></div></div></div><div class="col"><style>
     .custom-size {
         max-width: 400px;
+        /* keep overflow hidden so the scaled card doesn't overflow layout */
+        overflow: hidden;
     }
     .thumbnail-img {
         width: 100%;
@@ -412,10 +876,29 @@
         border-radius: 0.375rem 0.375rem 0 0;
         background: #f8f9fa;
         display: block;
+        /* smooth filter transition for image brighten */
+        transition: filter 250ms ease;
+    }
+
+    /* Slight zoom of the whole component on hover */
+    .thumbnail-card {
+        transition: transform 220ms ease, box-shadow 220ms ease;
+        transform-origin: center center;
+        will-change: transform;
+    }
+
+    .thumbnail-card:hover {
+        transform: scale(1.04);
+        box-shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.12);
+    }
+
+    /* Subtle image brighten on hover */
+    .thumbnail-card:hover .thumbnail-img {
+        filter: brightness(1.04);
     }
 </style>
 
-<div class="card shadow-sm custom-size"><a href="/blog/contract-testing-pact-net-intro"><img src="images/blog/pact/intro/banner-thumbnail.png" class="thumbnail-img" alt="Intro to PACT for .NET Core: API contract testing" /></a>
+<div class="card shadow-sm custom-size thumbnail-card"><a href="/blog/contract-testing-pact-net-intro"><img src="images/blog/pact/intro/banner-thumbnail.png" class="thumbnail-img" alt="Intro to PACT for .NET Core: API contract testing" /></a>
     <div class="card-body"><a href="/filtered-blogs?tag=PACT"><span class="badge bg-primary mx-1">PACT</span></a><a href="/filtered-blogs?tag=API"><span class="badge bg-primary mx-1">API</span></a><h5 class="card-title mt-2"><a href="/blog/contract-testing-pact-net-intro" class="text-decoration-none text-dark">Intro to PACT for .NET Core: API contract testing</a></h5>
         <p class="card-text text-muted small">By Ajay kumar · Saturday, December 14, 2024</p></div></div></div></div></article>
         <footer class="bg-dark text-white py-4 mt-auto"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><p class="mb-0">Copyright © 2025 Dev Codex</p></div>
@@ -423,9 +906,9 @@
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-            </div><!--Blazor:{"prerenderId":"3e6437b9b10e4942968151982fc8f057"}-->
+            </div><!--Blazor:{"prerenderId":"441c7116552e44fd9e5188c3312ae2fe"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UTJKNk5qbExaM1pGTVVaeVJHUnVibmhZWVV4RGJHNHhhWEJvWlVsMU1GSllVVWQzWkhaUmNVVnRORTk1VkhsMmNWZGhSVUUyTVZwUVFXZzRiVlk0ZG1zd1dtaFFSRkp5VFRscWRGWnZPRzFKVW5wME5pMXpRMVZ3VkZOdFV6SmpjM1p3T0hSblppMU9VVkF0T0ZoSE5tVkVVSEJtY1dkaFkweGZNWGhoUzJodlJERjNaSEI0Y2sxdVVXeGZXV1pvZDNsSk9WSkZJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UkRsSkxWUm1Oak10U2t4cWNqSnROSFpqV1dsQ1NsbDZXV3RCUmtoQlIwbGtUbTk1VEVkQ01saDJjMFZ3TVhKNlpYUlViRUZ2WmxJdE1Fa3pXVzk2TnpCdVgyNW9jbkZ1VDFsTVJuQllkVTVFYkhZMVpsUjZUMVExVGtzNE4wRnZNa0pxZGxoa1pGcHROR1JDYUMwNWFtMXlTVFo0TUZrNFkwUlhUVFZWYXpsSE5XSlBPREY1V25obVFuWnZiREpDTWtJdFRuSkZJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
