@@ -59,14 +59,25 @@
         Authors="Ajay Kumar"
         Description="@currentPage.Header" />
 
-    <Section Heading="Introduction" Level="4">
+    <Section Heading="Introduction" Level="5">
         <p>
-            Performance testing is a crucial part of modern software development, ensuring that your APIs can handle real-world traffic and deliver a smooth user experience. It is the process of evaluating how a system behaves under various levels of load. For APIs, this means simulating multiple users making requests to ensure the API remains responsive and stable.
+            Ever tried grabbing a deal during a flash sale, only to watch the site crawl, your cart freeze, or the payment page vanish into a timeout abyss? You're not alone. Behind the scenes, APIs can be overwhelmed when many users hit the system at once — searching, clicking, refreshing, checking out. Without performance testing, these systems simply aren't ready for the chaos.
         </p>
-    <List Heading="Key goals" HeadingLevel="4" ChildContents="@keyGoals" />
+        <p>
+            Performance testing helps you simulate real-world traffic so you can find bottlenecks, protect user experience, and avoid production disasters.
+        </p>
     </Section>
 
-    <Section Heading="Major types of Performance Testing" Level="4">
+    <hr>
+    <List Heading="Key goals" HeadingLevel="5" ChildContents="@keyGoals" />
+
+    <Section Heading="Real-World Analogy" Level="5">
+        <p>
+            Think of your API like a busy coffee shop. Performance testing is like simulating hundreds of customers ordering coffee at once. You want to ensure the baristas (your API) can handle the rush without slowing down or making mistakes. K6 helps you create that simulated rush and measure how well your API copes.
+        </p>
+    </Section>
+
+    <Section Heading="Major types of Performance Testing" Level="5">
         <p>
             There are several major kinds of performance testing, each with a specific purpose:
         </p>
@@ -79,11 +90,12 @@
         </ol>
     </Section>
 
-    <Section Heading="When Should You Do Performance Testing?" Level="4">
-        <List Heading="Below are some of the cases where you might find perf tests very useful:" HeadingLevel="5" ChildContents="@bestTimesToTest" />
+    <Section Heading="When Should You Do Performance Testing?" Level="5">
+        <p>Below are some common situations where performance tests are especially useful:</p>
+        <List Heading="When to run perf tests" HeadingLevel="5" ChildContents="@bestTimesToTest" />
     </Section>
 
-    <Section Heading="Why Use K6 for API Performance Testing?" Level="4">
+    <Section Heading="Why Use K6 for API Performance Testing?" Level="5">
         <p>
             <a href="https://k6.io/">K6</a> is an open-source, developer-centric tool for load testing APIs and web applications. It’s popular because:
         </p>
@@ -95,25 +107,29 @@
         </ul>
     </Section>
 
-    <Section Heading="Other Popular Tools for API Performance Testing" Level="4">
+    <Section Heading="Other Popular Tools" Level="5">
         <p>
             While K6 is a great choice, there are several other widely used tools for API performance testing:
         </p>
-        <List Heading="Other Popular Tools" HeadingLevel="4" ChildContents="@alternativesToK6" />
+        <ol>
+        @foreach (var item in alternativesToK6)
+        {
+            <li>@item</li>
+        }
+        </ol>
         <p>
             Each tool has its strengths—choose based on your team’s language preferences, required features, and integration needs.
         </p>
     </Section>
 
-    <Section Heading="How: A Practical Example with .NET API and K6" Level="4">
-        <p>
+    <p>
             Let’s walk through a real-world example using this repository.
         </p>
         <Section Heading="The Use Case: Most Borrowed Book API" Level="5">
             <p>
                 We have a simple ASP.NET Core Web API that exposes a single endpoint <code>/mostborrowedbook</code>. This endpoint returns the book with the highest borrow count from an in-memory database seeded with thousands of records.
             </p>
-            <Section Heading="API Code Example" Level="4">
+            <Section Heading="API Code Example" Level="6">
                 <CodeSnippet Language="csharp">
 // Controller action
 [HttpGet]
@@ -132,9 +148,9 @@ public async Task&lt;IActionResult&gt; Get() {
                 </CodeSnippet>
             </Section>
         </Section>
-        <Section Heading="Setting Up K6 for Performance Testing" Level="4">
-            <List Heading="Steps" HeadingLevel="4" ChildContents="@k6Steps" />
-            <Section Heading="K6 Test Script Example" Level="4">
+        <Section Heading="Setting Up K6 for Performance Testing" Level="5">
+            <List Heading="Steps" HeadingLevel="5" ChildContents="@k6Steps" />
+            <Section Heading="K6 Test Script Example" Level="6">
                 <CodeSnippet Description="K6 Test Script Example" Language="javascript">
 import http from 'k6/http';
 import {
@@ -162,7 +178,7 @@ export default function() {
                     <li><strong>sleep</strong>: Waits 1 second between requests</li>
                 </ul>
             </Section>
-            <Section Heading="Running the API and the Test" Level="4">
+            <Section Heading="Running the API and the Test" Level="5">
                 <CodeSnippet Language="bash">
 cd MostBorrowedBookApi
 dotnet run
@@ -171,16 +187,15 @@ dotnet run
 k6 run k6-mostborrowedbook.js
                 </CodeSnippet>
             </Section>
-            <Section Heading="Generate an HTML Report (Optional)" Level="4">
+            <Section Heading="Generate an HTML Report (Optional)" Level="5">
                 <CodeSnippet Language="bash">
 k6 run k6-mostborrowedbook.js --out json=results.json
 npx k6-reporter results.json
                 </CodeSnippet>
             </Section>
         </Section>
-    </Section>
 
-    <Section Heading="Demo Repository" Level="5">
+    <Section Heading="Demo Repository" Level="6">
             <p>
                 The full demo code for this article is available at:
                 <a href="https://github.com/ajaysskumar/API-Performance-Testing" target="_blank">ajaysskumar/API-Performance-Testing</a>
@@ -193,7 +208,7 @@ npx k6-reporter results.json
                     <li><strong>run-perf-test.sh</strong>: Bash script to run the API and K6 test in one shot.</li>
                 </ul>
             </p>
-            <Section Heading="One-Shot Bash Script" Level="5">
+            <Section Heading="One-Shot Bash Script" Level="6">
                 <p>
                     To run the API and the K6 test together, use the <code>run-perf-test.sh</code> script in the repository root. This script:
                 </p>
@@ -209,7 +224,7 @@ npx k6-reporter results.json
                 </p>
             </Section>
         </Section>
-    <Section Heading="Understanding K6 Metrics" Level="4">
+    <Section Heading="Understanding K6 Metrics" Level="5">
         <p>
             After running the test, K6 outputs a summary like this:
         </p>
@@ -289,18 +304,11 @@ default ✓ [======================================] 10 VUs  10s
         </p>
     </Section>
 
-    <Section Heading="Real-World Analogy" Level="4">
-        <p>
-            Think of your API like a busy coffee shop. Performance testing is like simulating hundreds of customers ordering coffee at once. You want to ensure the baristas (your API) can handle the rush without slowing down or making mistakes. K6 helps you create that simulated rush and measure how well your API copes.
-        </p>
-    </Section>
-
-    <Section Heading="Conclusion" Level="4">
+    <Section Heading="Conclusion" Level="5">
         <p>
             Performance testing is essential for delivering reliable APIs. K6 makes it easy to simulate real-world load, catch bottlenecks, and ensure your API is production-ready. With a simple setup and powerful reporting, it’s a great tool for developers and DevOps alike.
         </p>
         <p>
-            <strong>Try it out with this repository and see how your API performs!</strong>
-        </p>
+            <a href="https://github.com/ajaysskumar/API-Performance-Testing"><strong>Sample code with runnable scripts are present in the code repository</strong></a>  </p>
     </Section>
 </BlogContainer>
