@@ -16,6 +16,7 @@ In the body, use bullet points to describe everything. Focus of the articulation
 Avoid vague terms like "update", "enhance", "improve", or "better".
 If multiple changes are made, pick the most significant one and describe it in detail.
 Take extra caution in identifying rename file and content edit
+For Update case, put special emphasis on using "rename" or "update". Use rename only when file name is renamed, if file content is updated, use update/modify.
 Message length is maximum 150 characters.
 gitmojis:
 
