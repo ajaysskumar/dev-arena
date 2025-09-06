@@ -4,17 +4,16 @@
 
 @using TestArena
 @inject OpenAIService OpenAIService
-
 @code {
     PageInfo currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/ai/openai-rest-api/structured-output")!;
 
-    // Demo state for structured recipe output
-    private global::OpenAIService.Recipe? recipe = null;
-    private string dishInput = "Butter Chicken";
+    // Demo state for structured movie output
+    private global::OpenAIService.MovieDetails? movieDetails = null;
+    private string movieInput = "The Matrix";
     private string apiKeyInput = string.Empty;
     private string ApiKeyInputTrimmed => apiKeyInput?.Trim() ?? string.Empty;
-    private string DishInputTrimmed => dishInput?.Trim() ?? string.Empty;
-    private bool IsGetRecipeDisabled => isLoading || string.IsNullOrWhiteSpace(ApiKeyInputTrimmed) || string.IsNullOrWhiteSpace(DishInputTrimmed);
+    private string MovieInputTrimmed => movieInput?.Trim() ?? string.Empty;
+    private bool IsGetMovieDisabled => isLoading || string.IsNullOrWhiteSpace(ApiKeyInputTrimmed) || string.IsNullOrWhiteSpace(MovieInputTrimmed);
     private bool isApiKeyVisible = false;
     private bool isLoading = false;
 
@@ -23,22 +22,22 @@
         // Optionally, prefill API key from env or local storage if desired
     }
 
-    private async Task GetRecipe()
+    private async Task GetMovieDetails()
     {
         isLoading = true;
-        recipe = null;
+        movieDetails = null;
         StateHasChanged();
 
         try
         {
-            // Call the CreateRecipeAsync method which returns a structured Recipe object
-            recipe = await OpenAIService.CreateRecipeAsync(DishInputTrimmed, ApiKeyInputTrimmed);
+            // Call the CreateMovieDetailsAsync method which returns a structured MovieDetails object
+            movieDetails = await OpenAIService.CreateMovieDetailsAsync(MovieInputTrimmed, ApiKeyInputTrimmed);
         }
         catch (Exception ex)
         {
             // Show error as a simple serialized message in the UI (keep demo simple)
-            recipe = null;
-            Console.WriteLine($"CreateRecipeAsync failed: {ex.Message}");
+            movieDetails = null;
+            Console.WriteLine($"CreateMovieDetailsAsync failed: {ex.Message}");
         }
 
         isLoading = false;
@@ -56,9 +55,10 @@
 
     <Section Heading="Understanding OpenAI APIs" Level="2">
         <p>
-            Imagine you're building a smart home system. Just as your system needs to communicate with various devices through specific protocols,
-            developers need to interact with AI models through APIs. OpenAI's APIs serve as this communication bridge, allowing you to harness
-            the power of advanced AI models like GPT-4 in your applications.
+            When integrating AI into real apps you don't just want creative prose — you want predictable, machine-readable data you can act on.
+            "Structured output" means asking the model to return a defined JSON shape (or similar) so your code can reliably parse it and wire it
+            into your UI, database or business logic. This page walks through how to design prompts, use function schemas, and parse results safely
+            so you get deterministic, structured responses from OpenAI APIs.
         </p>
     </Section>
 
@@ -83,7 +83,7 @@
 
     <Section Heading="When to Use OpenAI APIs?" Level="4">
         <p>
-            Wondering when OpenAI APIs can make a real difference? Here are some moments where they shine—and you’ll probably recognize a few from your own life or work:
+            Wondering when OpenAI APIs can make a real difference? Here are some moments where they shine—and where structured output is especially helpful:
         </p>
         <ul>
             <li><b>Stuck on a blank page?</b> Instantly generate blog intros, catchy headlines, or even code snippets to kickstart your creativity.</li>
@@ -92,6 +92,7 @@
             <li><b>Dreaming up new designs?</b> Use AI to brainstorm product ideas, generate marketing copy, or even create images for your next campaign.</li>
             <li><b>Making your app accessible?</b> Transcribe audio, translate languages, or simplify complex text so everyone can use your product.</li>
             <li><b>Personalized learning or coaching?</b> Build a tutor that adapts to each student’s needs, explains tough concepts, or quizzes them in a fun way.</li>
+            <li><b>APIs and integrations:</b> When you need the model to return structured data—product specs, recipe objects, or event definitions—use structured output to avoid brittle text parsing.</li>
         </ul>
         <p>
             If you’ve ever wished for a superpower to automate, accelerate, or amplify your work—OpenAI APIs are your toolkit. The best part? You don’t need to be an AI expert to get started!
@@ -147,55 +148,30 @@ public class OpenAIClient
         </CodeSnippet>
 
 
-        <h4>3. Handling Chat Conversations (Chat Completion API)</h4>
+        <h4>3. Structured output: system prompts, function schemas, and parsing</h4>
         <p>
-            To have a conversation with an AI model—such as asking it to summarize a movie—you'll use the <b>Chat Completions</b> endpoint. This endpoint lets you send a series of messages (like a chat history) and receive a smart, context-aware response from the model.
-
-            The request body for this endpoint typically includes:
-            <ul>
-                <li>
-                    <b>model</b>: The name of the AI model you want to use (e.g., <code>gpt-4</code> or <code>gpt-3.5-turbo</code>). Different models have different capabilities and costs.
-                </li>
-                <li>
-                    <b>messages</b>: An array of message objects representing the conversation so far. Each message has a <code>role</code> (such as <code>system</code>, <code>user</code>, or <code>assistant</code>) and <code>content</code> (the actual text). This structure allows the model to understand context and respond appropriately.
-                </li>
-                <li>
-                    <b>max_tokens</b>: The maximum number of tokens (words or word pieces) in the response. This helps control the length and cost of the output.
-                </li>
-                <li>
-                    <b>Other optional parameters</b>: You can also specify things like <code>temperature</code> (controls randomness/creativity), <code>top_p</code> (controls diversity), and more, depending on your needs.
-                </li>
-            </ul>
-            Here’s how you might use it in practice:
+            If you want machine-readable results, design for structured output. There are three main techniques that work well together:
         </p>
-        <p><b>Example prompt:</b> <code>Give me a summary of the movie Inception.</code></p>
-        <CodeSnippet Language="csharp">
-public async Task&lt;string&gt; GetChatResponseAsync()
-{
-    var url = "https://api.openai.com/v1/chat/completions";
-    var requestBody = new
-    {
-        model = "gpt-4",
-        messages = new[]
-        {
-            new { role = "system", content = "You are a helpful assistant." },
-            new { role = "user", content = "Give me a summary of the movie Inception." }
-        },
-        max_tokens = 150
-    };
-    var json = JsonSerializer.Serialize(requestBody);
-    var request = CreateRequest(url, HttpMethod.Post, json);
+        <ol>
+            <li><b>System prompt constraints</b> — tell the model to respond only with a JSON object and describe the exact fields and limits (max length, array sizes). A clear system message reduces ambiguity.</li>
+            <li><b>Function schema / structured definitions</b> — use the API's function schema (name + JSON Schema) to signal the desired structure. The model may return the object as a <code>function_call</code>, with the structured payload in <code>function_call.arguments</code>.</li>
+            <li><b>Parsing & validation</b> — never assume perfect output. Prefer <code>function_call.arguments</code> when present, strip surrounding text or fences, parse JSON safely, and enforce length / item limits in your code.</li>
+        </ol>
 
-    var response = await _httpClient.SendAsync(request);
-    response.EnsureSuccessStatusCode();
+        <p><b>Practical example — generating a movie details object</b></p>
+        <p>
+            The demo on this page uses a helper method <code>CreateMovieDetailsAsync</code> that follows this pattern: it sends a system instruction that requests a single JSON object with fields like <code>title</code>, <code>year</code>, <code>director</code>, <code>description</code>, <code>genres</code> and <code>actors</code>. It also provides a function schema describing types and limits. When the response arrives the method prefers <code>function_call.arguments</code> (if the model used a function call), extracts the JSON, and then trims and validates the fields before returning a typed <code>MovieDetails</code> record to the app.
+        </p>
 
-    var responseString = await response.Content.ReadAsStringAsync();
-    using var doc = JsonDocument.Parse(responseString);
-    return doc.RootElement.GetProperty("choices")[0].GetProperty("message").GetProperty("content").GetString();
-}
-// Usage:
-// string summary = await GetChatResponseAsync();
+        <CodeSnippet Language="csharp">// High-level contract for CreateMovieDetailsAsync
+// Input: movie name + api key
+// Output: MovieDetails record with: Title, Year, Director, Description, Genres[], Actors[]
+// Error modes: returns null on parse failure or empty/invalid response
         </CodeSnippet>
+
+        <p>
+            This approach gives you the best of both worlds: the model's language intelligence plus predictable structured data you can render and store safely.
+        </p>
 
     </Section>
 
@@ -213,10 +189,10 @@ public async Task&lt;string&gt; GetChatResponseAsync()
         </div>
     </div>
     <div class="mb-3">
-        <label for="dishInput" class="form-label"><b>Enter a dish name:</b></label>
-        <input id="dishInput" class="form-control" @bind="dishInput" @bind:event="oninput" placeholder="e.g. Butter Chicken" />
+        <label for="movieInput" class="form-label"><b>Enter a movie name:</b></label>
+        <input id="movieInput" class="form-control" @bind="movieInput" @bind:event="oninput" placeholder="e.g. The Matrix" />
     </div>
-    <button class="btn btn-primary mb-3" @onclick="GetRecipe" disabled="@IsGetRecipeDisabled">
+    <button class="btn btn-primary mb-3" @onclick="GetMovieDetails" disabled="@IsGetMovieDisabled">
         @if (isLoading)
         {
             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -224,50 +200,51 @@ public async Task&lt;string&gt; GetChatResponseAsync()
         }
         else
         {
-            <span>Get Recipe</span>
+            <span>Get Movie Details</span>
         }
     </button>
 
     <div>
-        <b>Structured Recipe:</b><br />
+        <b>Structured Movie Details:</b><br />
         @if (isLoading)
         {
             <span>Loading...</span>
         }
-        else if (recipe != null)
+        else if (movieDetails != null)
         {
             <div class="card mt-2" style="background-color: #f8f9fa; border: 1px solid #e9ecef;">
                 <div class="card-body">
-                    <h5 class="card-title">@recipe.Title</h5>
-                    <p class="card-text"><strong>Total time:</strong> @recipe.TotalTime</p>
-                    <p class="card-text"><strong>Origin:</strong> @recipe.CountryOfOrigin</p>
+                    <h5 class="card-title">@movieDetails.Title</h5>
+                    <p class="card-text"><strong>Year:</strong> @movieDetails.Year</p>
+                    <p class="card-text"><strong>Director:</strong> @movieDetails.Director</p>
+                    <p class="card-text"><strong>Description:</strong> @movieDetails.Description</p>
 
-                    <h6>Ingredients</h6>
+                    <h6>Genres</h6>
                     <ul>
-                        @foreach (var ing in recipe.Ingredients)
+                        @foreach (var genre in movieDetails.Genres)
                         {
-                            <li>@ing</li>
+                            <li>@genre</li>
                         }
                     </ul>
 
-                    <h6>Steps</h6>
-                    <ol>
-                        @foreach (var s in recipe.Steps)
+                    <h6>Actors</h6>
+                    <ul>
+                        @foreach (var actor in movieDetails.Actors)
                         {
-                            <li>@s</li>
+                            <li>@actor</li>
                         }
-                    </ol>
+                    </ul>
 
                     <details>
                         <summary>Raw JSON</summary>
-                        <pre>@System.Text.Json.JsonSerializer.Serialize(recipe, new System.Text.Json.JsonSerializerOptions { WriteIndented = true })</pre>
+                        <pre>@System.Text.Json.JsonSerializer.Serialize(movieDetails, new System.Text.Json.JsonSerializerOptions { WriteIndented = true })</pre>
                     </details>
                 </div>
             </div>
         }
         else
         {
-            <div class="alert alert-secondary mt-2">No recipe yet — enter a dish and click <strong>Get Recipe</strong>.</div>
+            <div class="alert alert-secondary mt-2">No movie details yet — enter a movie name and click <strong>Get Movie Details</strong>.</div>
         }
     </div>
 </Section>

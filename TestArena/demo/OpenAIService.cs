@@ -19,7 +19,7 @@ public class OpenAIService
     /// <summary>
     /// Represents movie details created by the model.
     /// </summary>
-    public record MovieDetails(string Title, int Year, string Director, string[] Genres, string[] Actors);
+    public record MovieDetails(string Title, int Year, string Director, string Description, string[] Genres, string[] Actors);
 
     /// <summary>
     /// Create movie details using a movie name. The model is instructed to return a
@@ -28,6 +28,7 @@ public class OpenAIService
     /// - Title: max 100 chars
     /// - Year: valid year integer
     /// - Director: max 80 chars
+    /// - Description: max 150 chars
     /// - Genres: up to 5 items, each max 30 chars
     /// - Actors: up to 10 items, each max 60 chars
     /// </summary>
@@ -39,10 +40,10 @@ public class OpenAIService
         var url = "https://api.openai.com/v1/chat/completions";
 
         var systemInstruction =
-            "You are a JSON generator. Given a movie name, produce a single JSON object ONLY (no surrounding text, no markdown) with the exact shape:\n" +
-            "{ \"title\": string, \"year\": number, \"director\": string, \"genres\": [string,...], \"actors\": [string,...] }\n" +
-            "Constraints: title must be max 100 characters; year must be a valid year number; director must be max 80 characters; genres must be an array with at most 5 items; each genre max 30 characters; actors must be an array with at most 10 items; each actor max 60 characters.\n" +
-            "If you cannot create values that meet these constraints, truncate fields to the required length. Respond only with a single JSON object and nothing else.";
+                    "You are a JSON generator. Given a movie name, produce a single JSON object ONLY (no surrounding text, no markdown) with the exact shape:\n" +
+                    "{ \"title\": string, \"year\": number, \"director\": string, \"description\": string, \"genres\": [string,...], \"actors\": [string,...] }\n" +
+                    "Constraints: title must be max 100 characters; year must be a valid year number; director must be max 80 characters; description must be max 150 characters; genres must be an array with at most 5 items; each genre max 30 characters; actors must be an array with at most 10 items; each actor max 60 characters.\n" +
+                    "If you cannot create values that meet these constraints, truncate fields to the required length. Respond only with a single JSON object and nothing else.";
 
         var functions = new[]
         {
@@ -58,6 +59,7 @@ public class OpenAIService
                         title = new { type = "string", maxLength = 100, description = "Movie title (max 100 chars)" },
                         year = new { type = "integer", description = "Release year" },
                         director = new { type = "string", maxLength = 80, description = "Director name (max 80 chars)" },
+                        description = new { type = "string", maxLength = 150, description = "Movie description (max 150 chars)" },
                         genres = new
                         {
                             type = "array",
@@ -71,7 +73,7 @@ public class OpenAIService
                             items = new { type = "string", maxLength = 60 }
                         }
                     },
-                    required = new[] { "title", "year", "director", "genres", "actors" }
+                    required = new[] { "title", "year", "director", "description", "genres", "actors" }
                 }
             }
         };
@@ -145,6 +147,9 @@ public class OpenAIService
             var director = root.TryGetProperty("director", out var dir) && dir.ValueKind == JsonValueKind.String
                 ? dir.GetString() ?? string.Empty
                 : string.Empty;
+            var description = root.TryGetProperty("description", out var desc) && desc.ValueKind == JsonValueKind.String
+                ? desc.GetString() ?? string.Empty
+                : string.Empty;
 
             var genres = new List<string>();
             if (root.TryGetProperty("genres", out var gen) && gen.ValueKind == JsonValueKind.Array)
@@ -179,6 +184,9 @@ public class OpenAIService
             director = director.Trim();
             if (director.Length > 80) director = director.Substring(0, 80);
 
+            description = description.Trim();
+            if (description.Length > 150) description = description.Substring(0, 150);
+
             for (int i = 0; i < genres.Count; i++)
             {
                 var genre = genres[i].Trim();
@@ -193,7 +201,7 @@ public class OpenAIService
                 actors[i] = actor;
             }
 
-            return new MovieDetails(title, year, director, genres.ToArray(), actors.ToArray());
+            return new MovieDetails(title, year, director, description, genres.ToArray(), actors.ToArray());
         }
         catch (JsonException)
         {

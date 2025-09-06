@@ -143,7 +143,7 @@ namespace TestArena.Blog.Common.NavigationUtils
             "/blog/ai/openai-rest-api/structured-output",
             new DateTime(2025, 8, 23),
             "images/blog/ai/openai-rest-api/structured-output/banner.png",
-            ["AI", "OpenAI", "API", "Structured Output", ".NET", "C#"]),
+            ["AI", "OpenAI", "API", "Structured Output", ".NET", "C#"], false),
         ];
 
         //"/blog/ai/openai-rest-api/structured-output"
