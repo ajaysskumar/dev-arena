@@ -128,7 +128,7 @@ namespace TestArena.Blog.Common.NavigationUtils
             new DateTime(2025, 8, 09),
             "images/blog/performance-testing/basic-setup/banner.png",
             ["Performance Testing", "K6", "API", ".NET"]),
-            
+
         new("Performance Testing for APIs: Stress testing with K6",
             "/blog/performance-testing/stress-test-with-k6",
             new DateTime(2025, 8, 16),
@@ -139,7 +139,14 @@ namespace TestArena.Blog.Common.NavigationUtils
             new DateTime(2025, 8, 23),
             "images/blog/performance-testing/spike-test/banner.png",
             ["Performance Testing", "K6", "API", ".NET", "Spike Test"]),
+        new("OpenAI REST API: Structured Output",
+            "/blog/ai/openai-rest-api/structured-output",
+            new DateTime(2025, 8, 23),
+            "images/blog/ai/openai-rest-api/structured-output/banner.png",
+            ["AI", "OpenAI", "API", "Structured Output", ".NET", "C#"]),
         ];
+
+        //"/blog/ai/openai-rest-api/structured-output"
 
         public static IEnumerable<PageInfo> PublishedArticles => Pages.Where(p => p.IsPublished && p.PublishedOn <= DateTime.UtcNow);
     }

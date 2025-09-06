@@ -1,0 +1,287 @@
+﻿@page "/blog/ai/openai-rest-api/structured-output"
+@using TestArena.Blog.Common
+@using TestArena.Blog.Common.NavigationUtils
+
+@using TestArena
+@inject OpenAIService OpenAIService
+
+@code {
+    PageInfo currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/ai/openai-rest-api/structured-output")!;
+
+    // Demo state for structured recipe output
+    private global::OpenAIService.Recipe? recipe = null;
+    private string dishInput = "Butter Chicken";
+    private string apiKeyInput = string.Empty;
+    private string ApiKeyInputTrimmed => apiKeyInput?.Trim() ?? string.Empty;
+    private string DishInputTrimmed => dishInput?.Trim() ?? string.Empty;
+    private bool IsGetRecipeDisabled => isLoading || string.IsNullOrWhiteSpace(ApiKeyInputTrimmed) || string.IsNullOrWhiteSpace(DishInputTrimmed);
+    private bool isApiKeyVisible = false;
+    private bool isLoading = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Optionally, prefill API key from env or local storage if desired
+    }
+
+    private async Task GetRecipe()
+    {
+        isLoading = true;
+        recipe = null;
+        StateHasChanged();
+
+        try
+        {
+            // Call the CreateRecipeAsync method which returns a structured Recipe object
+            recipe = await OpenAIService.CreateRecipeAsync(DishInputTrimmed, ApiKeyInputTrimmed);
+        }
+        catch (Exception ex)
+        {
+            // Show error as a simple serialized message in the UI (keep demo simple)
+            recipe = null;
+            Console.WriteLine($"CreateRecipeAsync failed: {ex.Message}");
+        }
+
+        isLoading = false;
+        StateHasChanged();
+    }
+}
+
+<BlogContainer>
+    <Header
+        Title="@currentPage.Header"
+        Description="Learn how to leverage OpenAI's powerful APIs to integrate AI capabilities into your applications. From authentication to implementation, discover everything you need to know about working with OpenAI APIs using direct HTTP requests."
+        Image="@currentPage.ArticleImage"
+        PublishedOn="@currentPage.PublishedOn"
+        Authors="Ajay kumar"/>
+
+    <Section Heading="Understanding OpenAI APIs" Level="2">
+        <p>
+            Imagine you're building a smart home system. Just as your system needs to communicate with various devices through specific protocols,
+            developers need to interact with AI models through APIs. OpenAI's APIs serve as this communication bridge, allowing you to harness
+            the power of advanced AI models like GPT-4 in your applications.
+        </p>
+    </Section>
+
+    <Section Heading="What are OpenAI APIs?" Level="4">
+        <p>
+            Imagine if you could add the magic of ChatGPT, DALL-E, or Whisper to your own apps—instantly making them smarter, more creative, and more helpful. That’s exactly what OpenAI APIs let you do! These are powerful, easy-to-use web services that unlock the same AI superpowers behind the tools everyone’s talking about.
+        </p>
+        <p>
+            <b>What can you build?</b> Here are just a few real-world examples:
+        </p>
+        <ul>
+            <li><b>Write emails for you:</b> Let your app draft a friendly reply or summarize a long thread in seconds.</li>
+            <li><b>Chatbots that feel human:</b> Add a virtual assistant to your website that can answer questions, help with shopping, or even tell jokes.</li>
+            <li><b>Turn sketches into art:</b> Use DALL-E to generate stunning images from a simple description—"a cat surfing a wave at sunset" becomes a real picture!</li>
+            <li><b>Transcribe meetings automatically:</b> Whisper can listen to audio and give you a written transcript, perfect for notes or accessibility.</li>
+            <li><b>Personalized learning:</b> Build a study buddy that explains tough concepts in plain language, tailored to each student.</li>
+        </ul>
+        <p>
+            With OpenAI APIs, you’re not just coding—you’re inventing the future. Whether you want to automate boring tasks, create something fun, or solve real problems, these APIs are your gateway to next-level innovation. The possibilities are endless and limited only by your imagination!
+        </p>
+    </Section>
+
+    <Section Heading="When to Use OpenAI APIs?" Level="4">
+        <p>
+            Wondering when OpenAI APIs can make a real difference? Here are some moments where they shine—and you’ll probably recognize a few from your own life or work:
+        </p>
+        <ul>
+            <li><b>Stuck on a blank page?</b> Instantly generate blog intros, catchy headlines, or even code snippets to kickstart your creativity.</li>
+            <li><b>Customer support overload?</b> Deploy a chatbot that answers FAQs, helps users troubleshoot, or even cracks a joke to lighten the mood.</li>
+            <li><b>Need to summarize mountains of info?</b> Let AI read through long articles, meeting notes, or emails and give you the highlights in seconds.</li>
+            <li><b>Dreaming up new designs?</b> Use AI to brainstorm product ideas, generate marketing copy, or even create images for your next campaign.</li>
+            <li><b>Making your app accessible?</b> Transcribe audio, translate languages, or simplify complex text so everyone can use your product.</li>
+            <li><b>Personalized learning or coaching?</b> Build a tutor that adapts to each student’s needs, explains tough concepts, or quizzes them in a fun way.</li>
+        </ul>
+        <p>
+            If you’ve ever wished for a superpower to automate, accelerate, or amplify your work—OpenAI APIs are your toolkit. The best part? You don’t need to be an AI expert to get started!
+        </p>
+    </Section>
+
+
+    <Section Heading="How to Implement OpenAI APIs (API-based Approach)" Level="3">
+        <h4>1. Authentication: Getting and Securing Your API Key</h4>
+        <p>
+            <b>Authentication</b> is required for every OpenAI API call. You must use a secret API key, which you can generate from your <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI dashboard</a>.
+        </p>
+        <ul>
+            <li><b>Never share or commit your API key to source control.</b></li>
+            <li>Store your API key in a secure location, such as an environment variable or a secrets manager.</li>
+            <li>For local development, you can set the key in your shell profile or <code>appsettings.Development.json</code> (but never in public repos).</li>
+        </ul>
+        <p>Example: Setting an environment variable in your terminal (macOS/Linux):</p>
+        <CodeSnippet Language="bash">export OPENAI_API_KEY=sk-...yourkey...</CodeSnippet>
+        <p>Or in Windows PowerShell:</p>
+        <CodeSnippet Language="bash">$env:OPENAI_API_KEY="sk-...yourkey..."</CodeSnippet>
+        <p>Accessing the key in C#:</p>
+        <CodeSnippet Language="csharp">
+string apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
+if (string.IsNullOrWhiteSpace(apiKey))
+    throw new InvalidOperationException("OpenAI API key not found in environment variables.");
+        </CodeSnippet>
+
+        <h4>2. Setup: Creating a Typed API Client</h4>
+        <p>
+            To call OpenAI APIs directly, you'll use <b>HttpClient</b> to make HTTP requests. Here is a simple client class that includes authentication in every request:
+        </p>
+        <CodeSnippet Language="csharp">
+public class OpenAIClient
+{
+    private readonly HttpClient _httpClient;
+    private readonly string _apiKey;
+
+    public OpenAIClient(HttpClient httpClient, string apiKey)
+    {
+        _httpClient = httpClient;
+        _apiKey = apiKey;
+    }
+
+    private HttpRequestMessage CreateRequest(string url, HttpMethod method, string jsonContent)
+    {
+        var request = new HttpRequestMessage(method, url);
+        request.Headers.Add("Authorization", $"Bearer {_apiKey}");
+        request.Content = new StringContent(jsonContent, System.Text.Encoding.UTF8, "application/json");
+        return request;
+    }
+}
+        </CodeSnippet>
+
+
+        <h4>3. Handling Chat Conversations (Chat Completion API)</h4>
+        <p>
+            To have a conversation with an AI model—such as asking it to summarize a movie—you'll use the <b>Chat Completions</b> endpoint. This endpoint lets you send a series of messages (like a chat history) and receive a smart, context-aware response from the model.
+
+            The request body for this endpoint typically includes:
+            <ul>
+                <li>
+                    <b>model</b>: The name of the AI model you want to use (e.g., <code>gpt-4</code> or <code>gpt-3.5-turbo</code>). Different models have different capabilities and costs.
+                </li>
+                <li>
+                    <b>messages</b>: An array of message objects representing the conversation so far. Each message has a <code>role</code> (such as <code>system</code>, <code>user</code>, or <code>assistant</code>) and <code>content</code> (the actual text). This structure allows the model to understand context and respond appropriately.
+                </li>
+                <li>
+                    <b>max_tokens</b>: The maximum number of tokens (words or word pieces) in the response. This helps control the length and cost of the output.
+                </li>
+                <li>
+                    <b>Other optional parameters</b>: You can also specify things like <code>temperature</code> (controls randomness/creativity), <code>top_p</code> (controls diversity), and more, depending on your needs.
+                </li>
+            </ul>
+            Here’s how you might use it in practice:
+        </p>
+        <p><b>Example prompt:</b> <code>Give me a summary of the movie Inception.</code></p>
+        <CodeSnippet Language="csharp">
+public async Task&lt;string&gt; GetChatResponseAsync()
+{
+    var url = "https://api.openai.com/v1/chat/completions";
+    var requestBody = new
+    {
+        model = "gpt-4",
+        messages = new[]
+        {
+            new { role = "system", content = "You are a helpful assistant." },
+            new { role = "user", content = "Give me a summary of the movie Inception." }
+        },
+        max_tokens = 150
+    };
+    var json = JsonSerializer.Serialize(requestBody);
+    var request = CreateRequest(url, HttpMethod.Post, json);
+
+    var response = await _httpClient.SendAsync(request);
+    response.EnsureSuccessStatusCode();
+
+    var responseString = await response.Content.ReadAsStringAsync();
+    using var doc = JsonDocument.Parse(responseString);
+    return doc.RootElement.GetProperty("choices")[0].GetProperty("message").GetProperty("content").GetString();
+}
+// Usage:
+// string summary = await GetChatResponseAsync();
+        </CodeSnippet>
+
+    </Section>
+
+    <Section Heading="�️ Demo: Structured Recipe Generator" Level="3">
+        <p>
+            <b>How to use this demo:</b> Enter your personal OpenAI API key (create one from your <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI dashboard</a>), then type a dish name. Click <b>Get Recipe</b> and the demo will call a structured-output endpoint that returns a JSON object with clearly defined fields (title, total time, country of origin, ingredients and steps). The UI renders those fields in a clean, predictable layout.
+        </p>
+    <div class="mb-3">
+        <label for="apiKeyInput" class="form-label"><b>Enter your OpenAI API key:</b></label>
+        <div class="input-group">
+            <input id="apiKeyInput" class="form-control" type="@(isApiKeyVisible ? "text" : "password")" @bind="apiKeyInput" @bind:event="oninput" placeholder="sk-..." autocomplete="off" />
+            <button class="btn btn-outline-secondary" type="button" @onclick="() => isApiKeyVisible = !isApiKeyVisible" tabindex="-1">
+                <i class="@(isApiKeyVisible ? "bi bi-eye-slash" : "bi bi-eye")"></i>
+            </button>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="dishInput" class="form-label"><b>Enter a dish name:</b></label>
+        <input id="dishInput" class="form-control" @bind="dishInput" @bind:event="oninput" placeholder="e.g. Butter Chicken" />
+    </div>
+    <button class="btn btn-primary mb-3" @onclick="GetRecipe" disabled="@IsGetRecipeDisabled">
+        @if (isLoading)
+        {
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <span class="visually-hidden">Loading...</span>
+        }
+        else
+        {
+            <span>Get Recipe</span>
+        }
+    </button>
+
+    <div>
+        <b>Structured Recipe:</b><br />
+        @if (isLoading)
+        {
+            <span>Loading...</span>
+        }
+        else if (recipe != null)
+        {
+            <div class="card mt-2" style="background-color: #f8f9fa; border: 1px solid #e9ecef;">
+                <div class="card-body">
+                    <h5 class="card-title">@recipe.Title</h5>
+                    <p class="card-text"><strong>Total time:</strong> @recipe.TotalTime</p>
+                    <p class="card-text"><strong>Origin:</strong> @recipe.CountryOfOrigin</p>
+
+                    <h6>Ingredients</h6>
+                    <ul>
+                        @foreach (var ing in recipe.Ingredients)
+                        {
+                            <li>@ing</li>
+                        }
+                    </ul>
+
+                    <h6>Steps</h6>
+                    <ol>
+                        @foreach (var s in recipe.Steps)
+                        {
+                            <li>@s</li>
+                        }
+                    </ol>
+
+                    <details>
+                        <summary>Raw JSON</summary>
+                        <pre>@System.Text.Json.JsonSerializer.Serialize(recipe, new System.Text.Json.JsonSerializerOptions { WriteIndented = true })</pre>
+                    </details>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-secondary mt-2">No recipe yet — enter a dish and click <strong>Get Recipe</strong>.</div>
+        }
+    </div>
+</Section>
+<br/>
+<Section Heading="Important Considerations" Level="4">
+    <ul>
+        <li><b>Never hardcode your API key!</b> Treat it like your password—use environment variables or a secure vault. One accidental push to GitHub can expose your account.</li>
+        <li><b>Expect the unexpected.</b> Always handle errors gracefully. Network hiccups, expired keys, or API changes can happen—show helpful messages, not cryptic errors.</li>
+        <li><b>Watch your usage and costs.</b> OpenAI APIs are powerful, but not free. Set usage limits, monitor your dashboard, and consider caching frequent responses to save money.</li>
+        <li><b>Respect rate limits.</b> If you send too many requests too quickly, you’ll get throttled. Build in retries with backoff and inform users if things slow down.</li>
+        <li><b>Mind the tokens.</b> Each model has a token (word) limit. If your prompt or response is too long, you’ll get errors or cut-off answers. Trim and test your prompts!</li>
+        <li><b>Stay up to date.</b> OpenAI is evolving fast. Check the docs for new features, models, and best practices—what’s true today might change tomorrow.</li>
+        <li><b>Be ethical and transparent.</b> Let users know when they’re interacting with AI, and never use generated content to mislead or harm.</li>
+    </ul>
+    <p style="margin-top:1em;"><b>Pro tip:</b> The best AI apps feel magical because they combine smart tech with thoughtful design. Test with real users, handle edge cases, and always keep learning!</p>
+</Section>
+</BlogContainer>
