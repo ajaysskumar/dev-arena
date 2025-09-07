@@ -1,0 +1,310 @@
+<!DOCTYPE html><html lang="en"><head>
+    <!-- Google tag (gtag.js) -->
+    <script defer="" src="https://www.googletagmanager.com/gtag/js?id=G-N1BDBV7WLD"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-N1BDBV7WLD');
+    </script>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Dev Codex: .NET Development and Testing Guide</title>
+    <meta name="description" content="Your ultimate resource for development, AI integration, clean coding, software testing, and modern software practices."/>
+    <!-- Removed meta keywords tag as modern search engines often ignore it -->
+    <meta name="author" content="Ajay Kumar"/>
+    <!-- <meta property="og:title" content="Dev Codex: Your Ultimate Guide to .NET Development, AI, and Software Practices" />
+    <meta property="og:description" content="Explore expert insights on .NET development, AI integration, clean coding, performance testing, and modern software practices. Build better, smarter, and faster applications with Dev Codex." />
+    <meta property="og:url" content="https://devcodex.in/blog/connection-pooling-sql-server" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" /> -->
+    
+<!--Blazor:{"type":"webassembly","prerenderId":"115527d9e2e34a40ab21979c761b1bbe","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>OpenAI REST API: Structured Output</title><meta property="og:url" content="http://127.0.0.1:5050/blog/ai/openai-rest-api/structured-output" />
+    <meta property="og:title" content="OpenAI REST API: Structured Output" />
+    <meta property="og:description" content="Learn how to leverage OpenAI&#x27;s powerful APIs to integrate AI capabilities into your applications. From authentication to implementation, discover everything you need to know about working with OpenAI APIs using direct HTTP requests." />
+    <meta property="og:image" content="http://127.0.0.1:5050/images/blog/ai/open-ai-structured-output/banner.png" />
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"115527d9e2e34a40ab21979c761b1bbe"}-->
+</head><body><headoutlet>
+    <base href="/"/>
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/app.css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" defer=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js" defer=""></script>
+<link rel="icon" type="image/png" href="favicon.png"/>
+<link href="TestArena.styles.css" rel="stylesheet"/>
+
+
+
+    <div id="app">
+<!-- %%-PRERENDERING-BEGIN-%% -->
+<!--Blazor:{"type":"webassembly","prerenderId":"0e7012bd5cb149a689f9e79d6ebf993f","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
+                        <h3 class="m-0">Dev Codex</h3></a></div>
+
+                
+                <div class="col-12 col-md-4 d-flex justify-content-md-center justify-content-center mt-2 mt-md-0"><div class="w-75 position-relative"><input type="text" class="form-control" placeholder="Search..." />
+        <ul class="list-group position-absolute w-100 mt-1" style="z-index: 1000;" hidden></ul></div></div>
+
+                
+                <div class="col-12 col-md-4 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><div class="dropdown"><a href="/about-author" class="d-inline-block rounded-circle overflow-hidden border border-white" style="width: 3rem; height: 3rem; border-width: 0.25rem;"><img src="/images/shared/author.png" alt="About Author" class="img-fluid rounded-circle" style="width: 100%; height: 100%; object-fit: cover;"></a></div></div></div></div></div></header>
+        <article class="content px-4" b-mcp0h0uciv><div class="container-fluid d-flex flex-column align-items-center"><div class="content-wrapper"><style>
+    .article-header {
+        margin: 0 auto;
+        /* Centers the div */
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    .container-fluid,
+    .row,
+    .col-md-12,
+    .col-6 {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .article-image {
+        max-width: 500px !important;
+        height: auto;
+        border-radius: 10px;
+    }
+</style>
+
+
+
+
+<header class="article-header"><div class="row"><div class="col-md-12"><h1 class="fw-bold">OpenAI REST API: Structured Output</h1></div>
+        <div class="col-md-12"><img src="images/blog/ai/open-ai-structured-output/banner.png" alt="Article Banner" height="200" width="auto" class="img-fluid rounded mx-auto d-block my-3" loading="lazy" /></div>
+        <div class="col-md-12"><div class="container-fluid"><div class="row"><div class="col-md-4 col-xs-12 d-flex justify-content-md-start justify-content-center"><span class="text-secondary fw-bold">Author(s): </span>
+                        <span class="text-secondary fw-bold ms-1">Ajay kumar</span></div>
+
+                    <div class="col-md-4 col-xs-12 d-flex justify-content-md-center justify-content-center"><div class="social-share flex" b-gjpj7q7b4s><a href="https://twitter.com/intent/tweet?url=http%3A%2F%2F127.0.0.1%3A5050%2Fblog%2Fai%2Fopenai-rest-api%2Fstructured-output&amp;text=OpenAI%20REST%20API%3A%20Structured%20Output" title="Share on Twitter" target="_blank" rel="noopener" b-gjpj7q7b4s><img src="images/shared/icons/twitter-old.svg" alt="Twitter/X" width="24" style="cursor:pointer" b-gjpj7q7b4s></a>
+    <a href="https://www.linkedin.com/feed/?shareActive=true&amp;shareUrl=http://127.0.0.1:5050/blog/ai/openai-rest-api/structured-output" title="Share on LinkedIn" target="_blank" rel="noopener" b-gjpj7q7b4s><img src="images/shared/icons/linkedin.svg" alt="LinkedIn" width="24" style="cursor:pointer" b-gjpj7q7b4s></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A5050%2Fblog%2Fai%2Fopenai-rest-api%2Fstructured-output" title="Share on Facebook" target="_blank" rel="noopener" b-gjpj7q7b4s><img src="images/shared/icons/facebook.svg" alt="Facebook" width="24" style="cursor:pointer" b-gjpj7q7b4s></a></div></div>
+
+                    
+                    <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 06 Sep 2025</span></div></div></div></div></div></header>
+    <section id="7e73143c-5364-42ce-a656-752394d3f941"><h4>Getting Structured Output from OpenAI APIs</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>
+            When you first start with OpenAI's chat models, you get back conversational, unstructured text. It's great for chatbots and creative writing, but what if you need to display that data in a user interface, save it to a database, or feed it into another system? You need predictable, machine-readable data. That's where structured output comes in.
+        </p>
+        <p>
+            This article breaks down the "what, when, and how" of getting reliable JSON from OpenAI's APIs.
+        </p></div></section>
+
+    <section id="f1402759-3ab4-46e2-9ee2-294d777116e4"><h4>What is Structured Output?</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>
+            Think of it as the difference between an essay and a spreadsheet.
+        </p>
+        <ul><li><strong>Unstructured Output:</strong> A free-flowing paragraph of text. It's easy for humans to read but hard for a program to parse reliably. Example: <em>"The Matrix is a 1999 sci-fi action film directed by the Wachowskis. It's about a hacker who discovers the world is a simulation."</em></li>
+            <li><strong>Structured Output:</strong> Data organized in a predictable format, like JSON (JavaScript Object Notation). It has clear keys and values that a program can easily read and process.</li></ul>
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-json" style="font-size: 0.8rem;">
+{
+  "title": "The Matrix",
+  "year": 1999,
+  "director": "The Wachowskis",
+  "genres": ["Sci-Fi", "Action"]
+}
+        </code></pre></div><div class="col-12 text-center"><code>Example: Structured JSON Output</code></div></div></div>
+<br>
+        <div class="callout-box special note py-1"><div class="py-1"><span class="callout-icon">&#x1F3AF;</span>
+            <span class="callout-title">Tip</span></div>
+        <div class="callout-message">
+            For application development, structured output is almost always what you want. It's reliable, predictable, and easy to work with.
+        </div></div></div></section>
+
+    <section id="76b38c24-cdad-4a6f-8829-c7f93c4c6e5d"><h4>When Should You Use It?</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>
+            Use structured output whenever the AI's response needs to be processed by your application. Key scenarios include:
+        </p>
+        <ul><li><strong>Populating a User Interface:</strong> Displaying movie details, a recipe, or product information in a consistent layout.</li>
+            <li><strong>Saving to a Database:</strong> Storing generated data in specific table columns.</li>
+            <li><strong>Calling Another API:</strong> Formatting the AI's output to match the requirements of a different service.</li>
+            <li><strong>Data Analysis:</strong> Extracting specific entities from text, like names, dates, or locations, for analysis.</li>
+            <li><strong>Classification and Tagging:</strong> Categorizing user input into predefined categories (e.g., "support request," "feedback," "sales inquiry").</li></ul></div></section>
+
+    <section id="d95647c3-8301-4d46-b6e9-2ddd836b5834"><h4>How Do You Get Structured Output?</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>
+            OpenAI provides a few ways to achieve this, with newer methods being far more reliable than older ones.
+        </p>
+
+        <SubSection Heading="1. Prompt Engineering (The Brittle Way)" Level="5"><p>
+                The original method was to simply ask the model in your prompt to return JSON.
+            </p>
+            <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-text" style="font-size: 0.8rem;">
+Extract the movie title, year, and director from the following text. Return the output as a JSON object with keys "title", "year", and "director".
+
+Text: "My favorite movie is The Matrix, which came out in 1999 and was directed by the Wachowskis."
+            </code></pre></div><div class="col-12 text-center"><code>Example Prompt</code></div></div></div>
+<br>
+            <p><strong>Why it's brittle?</strong> The model might not perfectly follow instructions. It could add extra text before or after the JSON, use different key names, or generate invalid JSON, causing your parsing code to fail.
+            </p></SubSection>
+
+        <SubSection Heading="2. JSON Mode (The Better Way)" Level="5"><p>
+                A more recent and reliable feature is <strong>JSON Mode</strong>. By setting the <code>response_format</code> parameter to <code>{ "type": "json_object" }</code> in your API call, you instruct the model to guarantee that its output is a syntactically valid JSON object.
+            </p>
+            <p><strong>Requirements:</strong></p>
+            <ul><li>You must use a newer model like <code>gpt-4-turbo-preview</code> or <code>gpt-3.5-turbo-1106</code>.</li>
+                <li>Your prompt must contain the word "JSON" to remind the model of the constraint.</li></ul>
+            <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-json" style="font-size: 0.8rem;">
+{
+  "model": "gpt-4-turbo-preview",
+  "response_format": { "type": "json_object" },
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a helpful assistant designed to output JSON."
+    },
+    {
+      "role": "user",
+      "content": "Who won the world series in 2020?"
+    }
+  ]
+}
+            </code></pre></div><div class="col-12 text-center"><code>API Request Body with JSON Mode</code></div></div></div>
+<br>
+            <p>
+                This is a huge improvement, as it eliminates parsing errors. However, it doesn't guarantee the <em>schema</em> of the JSON (e.g., that a "year" field will be present).
+            </p></SubSection>
+
+        <SubSection Heading="3. Function Calling (The Best &amp; Most Reliable Way)" Level="5"><p><strong>Function Calling</strong> is the most powerful and recommended method for getting structured output. It was designed to let the model call external tools, but its real superpower is forcing the model's output into a specific, predefined JSON schema.
+            </p>
+            <p>
+                Here's how it works:
+            </p>
+            <ol><li><strong>Define a Schema:</strong> In your API request, you provide a JSON schema describing the exact structure you want. You define the function's name, its purpose, and the parameters it accepts (your desired fields), including their types (string, integer, array) and descriptions.</li>
+                <li><strong>Instruct the Model:</strong> You tell the model to call this function with data extracted from the user's prompt.</li>
+                <li><strong>Get Perfect JSON:</strong> The API returns a response containing a JSON object that perfectly matches the schema you defined.</li></ol>
+            <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-json" style="font-size: 0.8rem;">
+{
+  "model": "gpt-4o-mini",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a JSON generator. Given a movie name, produce a single JSON object with a specific schema."
+    },
+    {
+      "role": "user",
+      "content": "Get movie details for: The Matrix\nRespond by calling the function 'create_movie_details'."
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_movie_details",
+      "description": "Create a movie details object.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "title": { "type": "string" },
+          "year": { "type": "integer" },
+          "director": { "type": "string" },
+          "description": { "type": "string" },
+          "genres": { "type": "array", "items": { "type": "string" } },
+          "actors": { "type": "array", "items": { "type": "string" } }
+        },
+        "required": ["title", "year", "director", "description", "genres", "actors"]
+      }
+    }
+  ],
+  "function_call": "auto",
+  "temperature": 0.0
+}
+            </code></pre></div><div class="col-12 text-center"><code>Example API Payload for Function Calling</code></div></div></div>
+<br>
+            <p>
+                The API's response won't contain a typical text message. Instead, it will contain a <code>tool_calls</code> object. Inside, you'll find the name of the function the model chose to call (<code>create_movie_details</code>) and, most importantly, an <code>arguments</code> field. This field contains a JSON <strong>string</strong> with the extracted data, perfectly matching your schema.
+            </p>
+            <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-json" style="font-size: 0.8rem;">
+{
+  "id": "chatcmpl-CD3GM3Gc1Qfr40FKxOTf8DZG7afGn",
+  "object": "chat.completion",
+  "created": 1757226842,
+  "model": "gpt-4o-mini-2024-07-18",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": null,
+        "function_call": {
+          "name": "create_movie_details",
+          "arguments": "{\"title\":\"The Matrix\",\"year\":1999,\"director\":\"Lana Wachowski, Lilly Wachowski\",\"description\":\"A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.\",\"genres\":[\"Action\",\"Sci-Fi\",\"Adventure\"],\"actors\":[\"Keanu Reeves\",\"Laurence Fishburne\",\"Carrie-Anne Moss\",\"Hugo Weaving\",\"Gloria Foster\"]}"
+        },
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "function_call"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 104,
+    "completion_tokens": 96,
+    "total_tokens": 200,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_8bda4d3a2c"
+}}
+            </code></pre></div><div class="col-12 text-center"><code>Example API Response</code></div></div></div>
+<br>
+            <p>
+                This is the technique used in the demo below. We define a <code>MovieDetails</code> schema and ask the model to populate it. The result is a clean, predictable object that we can directly bind to our UI without any guesswork. It's the most robust way to build AI-powered features into your applications.
+            </p></SubSection></div></section>
+
+    <section id="a77603d9-1f40-45ec-812a-a84c76337308"><h5>Demo: Structured Recipe Generator</h5><hr class="border border-success border-1 opacity-50">
+    <div><p><b>How to use this demo:</b> Enter your personal OpenAI API key (create one from your <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI dashboard</a>), then type a dish name. Click <b>Get Recipe</b> and the demo will call a structured-output endpoint that returns a JSON object with clearly defined fields (title, total time, country of origin, ingredients and steps). The UI renders those fields in a clean, predictable layout.
+        </p>
+    <div class="mb-3"><label for="apiKeyInput" class="form-label"><b>Enter your OpenAI API key:</b></label>
+        <div class="input-group"><input id="apiKeyInput" class="form-control" type="password" placeholder="sk-..." autocomplete="off" value="" />
+            <button class="btn btn-outline-secondary" type="button" tabindex="-1"><i class="bi bi-eye"></i></button></div></div>
+    <div class="mb-3"><label for="movieInput" class="form-label"><b>Enter a movie name:</b></label>
+        <input id="movieInput" class="form-control" placeholder="e.g. The Matrix" value="The Matrix" /></div>
+    <button class="btn btn-primary mb-3" disabled><span>Get Movie Details</span></button>
+
+    <div><b>Structured Movie Details:</b><br><div class="alert alert-secondary mt-2">No movie details yet — enter a movie name and click <strong>Get Movie Details</strong>.</div></div></div></section></div>
+    <div class="content-wrapper mt-4"><script src="https://giscus.app/client.js" data-repo="ajaysskumar/dev-arena" data-repo-id="R_kgDONiBGGQ" data-category="Comments" data-category-id="DIC_kwDONiBGGc4Cq2ND" data-mapping="pathname" data-strict="0" data-reactions-enabled="0" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script></div></div>
+
+<style>
+    .content-wrapper {
+        width: 50%; /* Leaves 20% space on left and right */
+        background: white;
+    }
+
+    @media (max-width: 768px) {
+        .content-wrapper {
+            width: 90%; /* On smaller screens, reduce left-right space */
+        }
+    }
+</style></article>
+        <footer class="bg-dark text-white py-4 mt-auto"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><p class="mb-0">Copyright © 2025 Dev Codex</p></div>
+
+            
+            <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
+                <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
+            </div><!--Blazor:{"prerenderId":"0e7012bd5cb149a689f9e79d6ebf993f"}-->
+<!-- %%-PRERENDERING-END-%% -->
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80U1U1Q2QyUlpNVU00TlU5MWFVbHNXa3A0WjJSUlozTlJORXd5VUd0QmNIUlBNMmx1Y0hKTmRITmZRVU14T1VGcWJWSkVMVFpPVlhkalRXeENhVVI1UmpCYWNtaFlWbkE1WlhSaGNsVmFXQzFuTldoNlUyaG1MVkJLT0VKbVVFUmxNR3A0UlY4NVEzTlRlWGg1UkcwdFRUbHVTMUJGZUZGT2VXTnVOa1ZSYldGb1h6ZDNaR1EzY25sblVrUklZMU5OUzNWcWQyZFpJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+    <script src="_framework/blazor.webassembly.js" defer="" autostart="false"></script>
+    <script src="brotliloader.min.js" type="module"></script>
+
+
+
+</headoutlet></body></html>
