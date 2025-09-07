@@ -20,11 +20,11 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" /> -->
     
-<!--Blazor:{"type":"webassembly","prerenderId":"115527d9e2e34a40ab21979c761b1bbe","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>OpenAI REST API: Structured Output</title><meta property="og:url" content="http://127.0.0.1:5050/blog/ai/openai-rest-api/structured-output" />
+<!--Blazor:{"type":"webassembly","prerenderId":"03a6ad122d3e42fbb5398bb558779e28","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>OpenAI REST API: Structured Output</title><meta property="og:url" content="http://127.0.0.1:5050/blog/ai/openai-rest-api/structured-output" />
     <meta property="og:title" content="OpenAI REST API: Structured Output" />
     <meta property="og:description" content="Learn how to leverage OpenAI&#x27;s powerful APIs to integrate AI capabilities into your applications. From authentication to implementation, discover everything you need to know about working with OpenAI APIs using direct HTTP requests." />
     <meta property="og:image" content="http://127.0.0.1:5050/images/blog/ai/open-ai-structured-output/banner.png" />
-    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"115527d9e2e34a40ab21979c761b1bbe"}-->
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"03a6ad122d3e42fbb5398bb558779e28"}-->
 </head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -40,7 +40,7 @@
 
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"0e7012bd5cb149a689f9e79d6ebf993f","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"0f79398ab44049a6b1aaea48657f5f87","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -86,7 +86,7 @@
 
                     
                     <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 06 Sep 2025</span></div></div></div></div></div></header>
-    <section id="7e73143c-5364-42ce-a656-752394d3f941"><h4>Getting Structured Output from OpenAI APIs</h4><hr class="border border-success border-1 opacity-50">
+    <section id="9c5736ff-5574-4102-93a6-1615c6aa0267"><h4>Getting Structured Output from OpenAI APIs</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             When you first start with OpenAI's chat models, you get back conversational, unstructured text. It's great for chatbots and creative writing, but what if you need to display that data in a user interface, save it to a database, or feed it into another system? You need predictable, machine-readable data. That's where structured output comes in.
         </p>
@@ -94,20 +94,22 @@
             This article breaks down the "what, when, and how" of getting reliable JSON from OpenAI's APIs.
         </p></div></section>
 
-    <section id="f1402759-3ab4-46e2-9ee2-294d777116e4"><h4>What is Structured Output?</h4><hr class="border border-success border-1 opacity-50">
+    <section id="3df11957-1514-47ec-9b42-fd71cffcff0b"><h4>What is Structured Output?</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
-            Think of it as the difference between an essay and a spreadsheet.
+            Think of it as the difference between an essay and a spreadsheet. Unstructured output is free-flowing text that is easy for humans to read but hard for programs to parse reliably. Structured output, on the other hand, is organized in a predictable format like JSON, which applications can easily process.
         </p>
-        <ul><li><strong>Unstructured Output:</strong> A free-flowing paragraph of text. It's easy for humans to read but hard for a program to parse reliably. Example: <em>"The Matrix is a 1999 sci-fi action film directed by the Wachowskis. It's about a hacker who discovers the world is a simulation."</em></li>
-            <li><strong>Structured Output:</strong> Data organized in a predictable format, like JSON (JavaScript Object Notation). It has clear keys and values that a program can easily read and process.</li></ul>
-        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-json" style="font-size: 0.8rem;">
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-diff" style="font-size: 0.8rem;">
+- Unstructured Text:
+"The Matrix is a 1999 sci-fi action film directed by the Wachowskis. It's about a hacker who discovers the world is a simulation."
+
++ Structured JSON:
 {
   "title": "The Matrix",
   "year": 1999,
   "director": "The Wachowskis",
   "genres": ["Sci-Fi", "Action"]
 }
-        </code></pre></div><div class="col-12 text-center"><code>Example: Structured JSON Output</code></div></div></div>
+        </code></pre></div><div class="col-12 text-center"><code>Unstructured vs. Structured Output</code></div></div></div>
 <br>
         <div class="callout-box special note py-1"><div class="py-1"><span class="callout-icon">&#x1F3AF;</span>
             <span class="callout-title">Tip</span></div>
@@ -115,7 +117,7 @@
             For application development, structured output is almost always what you want. It's reliable, predictable, and easy to work with.
         </div></div></div></section>
 
-    <section id="76b38c24-cdad-4a6f-8829-c7f93c4c6e5d"><h4>When Should You Use It?</h4><hr class="border border-success border-1 opacity-50">
+    <section id="03349e01-42b1-4d7e-bc49-0f76ae5c6b61"><h4>When Should You Use It?</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             Use structured output whenever the AI's response needs to be processed by your application. Key scenarios include:
         </p>
@@ -125,7 +127,7 @@
             <li><strong>Data Analysis:</strong> Extracting specific entities from text, like names, dates, or locations, for analysis.</li>
             <li><strong>Classification and Tagging:</strong> Categorizing user input into predefined categories (e.g., "support request," "feedback," "sales inquiry").</li></ul></div></section>
 
-    <section id="d95647c3-8301-4d46-b6e9-2ddd836b5834"><h4>How Do You Get Structured Output?</h4><hr class="border border-success border-1 opacity-50">
+    <section id="0ae180d8-c79f-4293-a865-900f54ca69b5"><h4>How Do You Get Structured Output?</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             OpenAI provides a few ways to achieve this, with newer methods being far more reliable than older ones.
         </p>
@@ -139,7 +141,7 @@ Extract the movie title, year, and director from the following text. Return the 
 Text: "My favorite movie is The Matrix, which came out in 1999 and was directed by the Wachowskis."
             </code></pre></div><div class="col-12 text-center"><code>Example Prompt</code></div></div></div>
 <br>
-            <p><strong>Why it's brittle?</strong> The model might not perfectly follow instructions. It could add extra text before or after the JSON, use different key names, or generate invalid JSON, causing your parsing code to fail.
+            <p><strong>Why it's brittle?</strong> The model might not perfectly follow instructions, leading to common parsing failures. For example, it could add extraneous text, use different key names than requested, or generate malformed JSON.
             </p></SubSection>
 
         <SubSection Heading="2. JSON Mode (The Better Way)" Level="5"><p>
@@ -177,6 +179,12 @@ Text: "My favorite movie is The Matrix, which came out in 1999 and was directed 
             <ol><li><strong>Define a Schema:</strong> In your API request, you provide a JSON schema describing the exact structure you want. You define the function's name, its purpose, and the parameters it accepts (your desired fields), including their types (string, integer, array) and descriptions.</li>
                 <li><strong>Instruct the Model:</strong> You tell the model to call this function with data extracted from the user's prompt.</li>
                 <li><strong>Get Perfect JSON:</strong> The API returns a response containing a JSON object that perfectly matches the schema you defined.</li></ol>
+            <div class="callout-box special note py-1"><div class="py-1"><span class="callout-icon">&#x1F3AF;</span>
+            <span class="callout-title">Visualizing the Flow</span></div>
+        <div class="callout-message">
+                To demystify the process, here’s a simple flow diagram:
+                <br>
+                <strong>User Prompt</strong> → <strong>Schema Definition</strong> → <strong>API Call with Function</strong> → <strong>Structured JSON Output</strong></div></div>
             <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-json" style="font-size: 0.8rem;">
 {
   "model": "gpt-4o-mini",
@@ -259,12 +267,42 @@ Text: "My favorite movie is The Matrix, which came out in 1999 and was directed 
 }}
             </code></pre></div><div class="col-12 text-center"><code>Example API Response</code></div></div></div>
 <br>
+            <h6>A Deeper Look at Constrained Decoding</h6>
+            <p>
+                The magic behind the reliability of Function Calling and JSON Mode is a process called <strong>constrained decoding</strong>. Unlike traditional text generation where the model predicts the next most likely word from its entire vocabulary, constrained decoding restricts the model's choices at each step.
+            </p>
+            <p>
+                When you provide a JSON schema, the API uses it as a blueprint. As it generates the output, it only allows the model to select tokens that are valid for the current position in the JSON structure. For example, if it's generating a key, it will only allow string tokens. If it expects a number, it will restrict the output to digits. This programmatic enforcement is what guarantees syntactically correct JSON that conforms to your schema, moving from "please give me JSON" to "you must give me JSON."
+            </p>
+
+            <h6>Limitations and Known Issues</h6>
+            <p>
+                While powerful, the feature isn't foolproof. Here are a few things to keep in mind:
+            </p>
+            <ul><li><strong>Performance:</strong> The first request with a new or complex schema can take a few seconds to process due to caching. Subsequent calls with the same schema are much faster.</li>
+                <li><strong>Interruption:</strong> The model may still violate the schema if the generation is interrupted by a stop condition (like reaching <code>max_tokens</code>) before the JSON is complete.</li>
+                <li><strong>Complexity:</strong> Overly complex schemas can sometimes confuse the model, leading to incorrect or incomplete output.</li>
+                <li><strong>Glitches:</strong> Users have reported occasional glitches, like the model returning a JSON string with excess newline characters (e.g., <code>\n\n\n</code>).</li></ul>
+            
+            <div class="callout-box special note py-1"><div class="py-1"><span class="callout-icon">&#x1F3AF;</span>
+            <span class="callout-title">Best Practices for Structured Outputs</span></div>
+        <div class="callout-message"><ul><li><strong>Start Simple:</strong> Begin with a minimal schema and add complexity gradually.</li>
+                    <li><strong>Be Descriptive:</strong> Use clear, descriptive names and descriptions for your function and its parameters. This gives the model better context.</li>
+                    <li><strong>Handle Errors Gracefully:</strong> Always wrap your API calls and JSON parsing in try-catch blocks. Don't assume the API call will succeed or the response will be perfect.</li>
+                    <li><strong>Sanitize the Output:</strong> Before parsing, trim whitespace and control characters from the JSON string returned by the API.</li>
+                    <li><strong>Monitor Token Usage:</strong> Be mindful of `max_tokens`. If the output might be large, ensure your limit is high enough to avoid truncated, invalid JSON.</li></ul></div></div>
+
+            <h6>Beyond OpenAI: A Broader Perspective</h6>
+            <p>
+                The concept of enforcing a schema on AI output is becoming an industry standard. Other platforms like <strong>Azure OpenAI</strong> offer similar structured output capabilities, supporting a JSON Schema subset and enforcing strict rules like requiring defined fields (`required`) and prohibiting extra ones (`additionalProperties: false`). This provides a comparable level of reliability for developers on different platforms.
+            </p>
+            
             <p>
                 This is the technique used in the demo below. We define a <code>MovieDetails</code> schema and ask the model to populate it. The result is a clean, predictable object that we can directly bind to our UI without any guesswork. It's the most robust way to build AI-powered features into your applications.
             </p></SubSection></div></section>
 
-    <section id="a77603d9-1f40-45ec-812a-a84c76337308"><h5>Demo: Structured Recipe Generator</h5><hr class="border border-success border-1 opacity-50">
-    <div><p><b>How to use this demo:</b> Enter your personal OpenAI API key (create one from your <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI dashboard</a>), then type a dish name. Click <b>Get Recipe</b> and the demo will call a structured-output endpoint that returns a JSON object with clearly defined fields (title, total time, country of origin, ingredients and steps). The UI renders those fields in a clean, predictable layout.
+    <section id="d8463e2c-e34e-4afa-b416-d1552a41b830"><h4>Demo: Structured Movie Details Generator</h4><hr class="border border-success border-1 opacity-50">
+    <div><p><b>How to use this demo:</b> Enter your personal OpenAI API key (create one from your <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI dashboard</a>), then type a movie name. Click <b>Get Movie Details</b> and the demo will call a structured-output endpoint that returns a JSON object with clearly defined fields. The UI then renders those fields in a clean, predictable layout.
         </p>
     <div class="mb-3"><label for="apiKeyInput" class="form-label"><b>Enter your OpenAI API key:</b></label>
         <div class="input-group"><input id="apiKeyInput" class="form-control" type="password" placeholder="sk-..." autocomplete="off" value="" />
@@ -293,9 +331,9 @@ Text: "My favorite movie is The Matrix, which came out in 1999 and was directed 
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-            </div><!--Blazor:{"prerenderId":"0e7012bd5cb149a689f9e79d6ebf993f"}-->
+            </div><!--Blazor:{"prerenderId":"0f79398ab44049a6b1aaea48657f5f87"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80U1U1Q2QyUlpNVU00TlU5MWFVbHNXa3A0WjJSUlozTlJORXd5VUd0QmNIUlBNMmx1Y0hKTmRITmZRVU14T1VGcWJWSkVMVFpPVlhkalRXeENhVVI1UmpCYWNtaFlWbkE1WlhSaGNsVmFXQzFuTldoNlUyaG1MVkJLT0VKbVVFUmxNR3A0UlY4NVEzTlRlWGg1UkcwdFRUbHVTMUJGZUZGT2VXTnVOa1ZSYldGb1h6ZDNaR1EzY25sblVrUklZMU5OUzNWcWQyZFpJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80VDB4TlZHNU5lbWhXVWtSelFtNU1OWE5PZDFSS00yeERlbkU1TkhOVVIxbHRiMDlxTVVneWIxRm5Zek5hU25sS2IwRXlUVlpmUm10R2NuQkdRelpMV0d0eFFuZHpiV2xPT0dsQmFUQTRVWEZQWjJaR01razNhUzF2VUU1Mk0yc3RXa2hFVlROZkxYWllkemR3TldOcVprVm9XVTFDWlU4M1RsVm5hell3VVcwMldtODFOMWRGZUc5WmFGOHdXV3R1WXkxWVNWTnpJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
