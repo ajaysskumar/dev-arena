@@ -69,14 +69,14 @@
             <li><strong>Unstructured Output:</strong> A free-flowing paragraph of text. It's easy for humans to read but hard for a program to parse reliably. Example: <em>"The Matrix is a 1999 sci-fi action film directed by the Wachowskis. It's about a hacker who discovers the world is a simulation."</em></li>
             <li><strong>Structured Output:</strong> Data organized in a predictable format, like JSON (JavaScript Object Notation). It has clear keys and values that a program can easily read and process.</li>
         </ul>
-        <CodeBlock Language="json" Title="Example: Structured JSON Output">
-            {
-              "title": "The Matrix",
-              "year": 1999,
-              "director": "The Wachowskis",
-              "genres": ["Sci-Fi", "Action"]
-            }
-        </CodeBlock>
+        <CodeSnippet Language="json" Description="Example: Structured JSON Output">
+{
+  "title": "The Matrix",
+  "year": 1999,
+  "director": "The Wachowskis",
+  "genres": ["Sci-Fi", "Action"]
+}
+        </CodeSnippet>
         <p>
             For application development, structured output is almost always what you want. It's reliable, predictable, and easy to work with.
         </p>
@@ -104,11 +104,11 @@
             <p>
                 The original method was to simply ask the model in your prompt to return JSON.
             </p>
-            <CodeBlock Language="text" Title="Example Prompt">
-                Extract the movie title, year, and director from the following text. Return the output as a JSON object with keys "title", "year", and "director".
+            <CodeSnippet Language="text" Description="Example Prompt">
+Extract the movie title, year, and director from the following text. Return the output as a JSON object with keys "title", "year", and "director".
 
-                Text: "My favorite movie is The Matrix, which came out in 1999 and was directed by the Wachowskis."
-            </CodeBlock>
+Text: "My favorite movie is The Matrix, which came out in 1999 and was directed by the Wachowskis."
+            </CodeSnippet>
             <p>
                 <strong>Why it's brittle:</strong> The model might not perfectly follow instructions. It could add extra text before or after the JSON, use different key names, or generate invalid JSON, causing your parsing code to fail.
             </p>
@@ -125,22 +125,22 @@
                 <li>You must use a newer model like <code>gpt-4-turbo-preview</code> or <code>gpt-3.5-turbo-1106</code>.</li>
                 <li>Your prompt must contain the word "JSON" to remind the model of the constraint.</li>
             </ul>
-            <CodeBlock Language="json" Title="API Request Body with JSON Mode">
-                {
-                  "model": "gpt-4-turbo-preview",
-                  "response_format": { "type": "json_object" },
-                  "messages": [
-                    {
-                      "role": "system",
-                      "content": "You are a helpful assistant designed to output JSON."
-                    },
-                    {
-                      "role": "user",
-                      "content": "Who won the world series in 2020?"
-                    }
-                  ]
-                }
-            </CodeBlock>
+            <CodeSnippet Language="json" Description="API Request Body with JSON Mode">
+{
+  "model": "gpt-4-turbo-preview",
+  "response_format": { "type": "json_object" },
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a helpful assistant designed to output JSON."
+    },
+    {
+      "role": "user",
+      "content": "Who won the world series in 2020?"
+    }
+  ]
+}
+            </CodeSnippet>
             <p>
                 This is a huge improvement, as it eliminates parsing errors. However, it doesn't guarantee the <em>schema</em> of the JSON (e.g., that a "year" field will be present).
             </p>
