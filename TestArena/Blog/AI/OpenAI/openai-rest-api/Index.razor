@@ -52,7 +52,7 @@
         Image="@currentPage.ArticleImage"
         PublishedOn="@currentPage.PublishedOn"
         Authors="Ajay kumar"/>
-    <Section Heading="Getting Structured Output from OpenAI APIs" Level="2">
+    <Section Heading="Getting Structured Output from OpenAI APIs" Level="4">
         <p>
             When you first start with OpenAI's chat models, you get back conversational, unstructured text. It's great for chatbots and creative writing, but what if you need to display that data in a user interface, save it to a database, or feed it into another system? You need predictable, machine-readable data. That's where structured output comes in.
         </p>
@@ -61,7 +61,7 @@
         </p>
     </Section>
 
-    <Section Heading="What is Structured Output?" Level="3">
+    <Section Heading="What is Structured Output?" Level="4">
         <p>
             Think of it as the difference between an essay and a spreadsheet.
         </p>
@@ -77,12 +77,12 @@
   "genres": ["Sci-Fi", "Action"]
 }
         </CodeSnippet>
-        <p>
+        <CalloutBox Type="note" Title="Tip">
             For application development, structured output is almost always what you want. It's reliable, predictable, and easy to work with.
-        </p>
+        </CalloutBox>
     </Section>
 
-    <Section Heading="When Should You Use It?" Level="3">
+    <Section Heading="When Should You Use It?" Level="4">
         <p>
             Use structured output whenever the AI's response needs to be processed by your application. Key scenarios include:
         </p>
@@ -95,12 +95,12 @@
         </ul>
     </Section>
 
-    <Section Heading="How Do You Get Structured Output?" Level="3">
+    <Section Heading="How Do You Get Structured Output?" Level="4">
         <p>
             OpenAI provides a few ways to achieve this, with newer methods being far more reliable than older ones.
         </p>
 
-        <SubSection Heading="1. Prompt Engineering (The Brittle Way)" Level="4">
+        <SubSection Heading="1. Prompt Engineering (The Brittle Way)" Level="5">
             <p>
                 The original method was to simply ask the model in your prompt to return JSON.
             </p>
@@ -110,11 +110,11 @@ Extract the movie title, year, and director from the following text. Return the 
 Text: "My favorite movie is The Matrix, which came out in 1999 and was directed by the Wachowskis."
             </CodeSnippet>
             <p>
-                <strong>Why it's brittle:</strong> The model might not perfectly follow instructions. It could add extra text before or after the JSON, use different key names, or generate invalid JSON, causing your parsing code to fail.
+                <strong>Why it's brittle?</strong> The model might not perfectly follow instructions. It could add extra text before or after the JSON, use different key names, or generate invalid JSON, causing your parsing code to fail.
             </p>
         </SubSection>
 
-        <SubSection Heading="2. JSON Mode (The Better Way)" Level="4">
+        <SubSection Heading="2. JSON Mode (The Better Way)" Level="5">
             <p>
                 A more recent and reliable feature is <strong>JSON Mode</strong>. By setting the <code>response_format</code> parameter to <code>{ "type": "json_object" }</code> in your API call, you instruct the model to guarantee that its output is a syntactically valid JSON object.
             </p>
@@ -146,7 +146,7 @@ Text: "My favorite movie is The Matrix, which came out in 1999 and was directed 
             </p>
         </SubSection>
 
-        <SubSection Heading="3. Function Calling (The Best & Most Reliable Way)" Level="4">
+        <SubSection Heading="3. Function Calling (The Best & Most Reliable Way)" Level="5">
             <p>
                 <strong>Function Calling</strong> is the most powerful and recommended method for getting structured output. It was designed to let the model call external tools, but its real superpower is forcing the model's output into a specific, predefined JSON schema.
             </p>
@@ -164,7 +164,7 @@ Text: "My favorite movie is The Matrix, which came out in 1999 and was directed 
         </SubSection>
     </Section>
 
-    <Section Heading="�️ Demo: Structured Recipe Generator" Level="3">
+    <Section Heading="Demo: Structured Recipe Generator" Level="5">
         <p>
             <b>How to use this demo:</b> Enter your personal OpenAI API key (create one from your <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI dashboard</a>), then type a dish name. Click <b>Get Recipe</b> and the demo will call a structured-output endpoint that returns a JSON object with clearly defined fields (title, total time, country of origin, ingredients and steps). The UI renders those fields in a clean, predictable layout.
         </p>
