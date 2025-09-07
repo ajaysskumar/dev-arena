@@ -243,9 +243,12 @@ Text: "My favorite movie is The Matrix, which came out in 1999 and was directed 
   "system_fingerprint": "fp_8bda4d3a2c"
 }}
             </CodeSnippet>
-            <h6>Why is Function Calling So Reliable?</h6>
+            <h6>A Deeper Look at Constrained Decoding</h6>
             <p>
-                The reliability comes from a process called <strong>constrained decoding</strong>. Instead of just hoping the model follows instructions, the API actively forces the generated output to comply with the JSON schema you provide. This is why it achieves near-100% reliability in evaluations.
+                The magic behind the reliability of Function Calling and JSON Mode is a process called <strong>constrained decoding</strong>. Unlike traditional text generation where the model predicts the next most likely word from its entire vocabulary, constrained decoding restricts the model's choices at each step.
+            </p>
+            <p>
+                When you provide a JSON schema, the API uses it as a blueprint. As it generates the output, it only allows the model to select tokens that are valid for the current position in the JSON structure. For example, if it's generating a key, it will only allow string tokens. If it expects a number, it will restrict the output to digits. This programmatic enforcement is what guarantees syntactically correct JSON that conforms to your schema, moving from "please give me JSON" to "you must give me JSON."
             </p>
 
             <h6>Limitations and Known Issues</h6>
@@ -258,8 +261,15 @@ Text: "My favorite movie is The Matrix, which came out in 1999 and was directed 
                 <li><strong>Complexity:</strong> Overly complex schemas can sometimes confuse the model, leading to incorrect or incomplete output.</li>
                 <li><strong>Glitches:</strong> Users have reported occasional glitches, like the model returning a JSON string with excess newline characters (e.g., <code>\n\n\n</code>).</li>
             </ul>
-            <CalloutBox Type="warning" Title="Debugging Tip">
-                Always trim whitespace and control characters from the JSON string returned in the `arguments` field before parsing it. This simple step can prevent frustrating errors caused by extraneous newlines or spaces.
+            
+            <CalloutBox Type="note" Title="Best Practices for Structured Outputs">
+                <ul>
+                    <li><strong>Start Simple:</strong> Begin with a minimal schema and add complexity gradually.</li>
+                    <li><strong>Be Descriptive:</strong> Use clear, descriptive names and descriptions for your function and its parameters. This gives the model better context.</li>
+                    <li><strong>Handle Errors Gracefully:</strong> Always wrap your API calls and JSON parsing in try-catch blocks. Don't assume the API call will succeed or the response will be perfect.</li>
+                    <li><strong>Sanitize the Output:</strong> Before parsing, trim whitespace and control characters from the JSON string returned by the API.</li>
+                    <li><strong>Monitor Token Usage:</strong> Be mindful of `max_tokens`. If the output might be large, ensure your limit is high enough to avoid truncated, invalid JSON.</li>
+                </ul>
             </CalloutBox>
 
             <h6>Beyond OpenAI: A Broader Perspective</h6>
