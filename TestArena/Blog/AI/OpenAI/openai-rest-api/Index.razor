@@ -158,6 +158,11 @@ Text: "My favorite movie is The Matrix, which came out in 1999 and was directed 
                 <li><strong>Instruct the Model:</strong> You tell the model to call this function with data extracted from the user's prompt.</li>
                 <li><strong>Get Perfect JSON:</strong> The API returns a response containing a JSON object that perfectly matches the schema you defined.</li>
             </ol>
+            <CalloutBox Type="note" Title="Visualizing the Flow">
+                To demystify the process, here’s a simple flow diagram:
+                <br/>
+                <strong>User Prompt</strong> → <strong>Schema Definition</strong> → <strong>API Call with Function</strong> → <strong>Structured JSON Output</strong>
+            </CalloutBox>
             <CodeSnippet Language="json" Description="Example API Payload for Function Calling">
 {
   "model": "gpt-4o-mini",
@@ -238,15 +243,39 @@ Text: "My favorite movie is The Matrix, which came out in 1999 and was directed 
   "system_fingerprint": "fp_8bda4d3a2c"
 }}
             </CodeSnippet>
+            <h6>Why is Function Calling So Reliable?</h6>
+            <p>
+                The reliability comes from a process called <strong>constrained decoding</strong>. Instead of just hoping the model follows instructions, the API actively forces the generated output to comply with the JSON schema you provide. This is why it achieves near-100% reliability in evaluations.
+            </p>
+
+            <h6>Limitations and Known Issues</h6>
+            <p>
+                While powerful, the feature isn't foolproof. Here are a few things to keep in mind:
+            </p>
+            <ul>
+                <li><strong>Performance:</strong> The first request with a new or complex schema can take a few seconds to process due to caching. Subsequent calls with the same schema are much faster.</li>
+                <li><strong>Interruption:</strong> The model may still violate the schema if the generation is interrupted by a stop condition (like reaching <code>max_tokens</code>) before the JSON is complete.</li>
+                <li><strong>Complexity:</strong> Overly complex schemas can sometimes confuse the model, leading to incorrect or incomplete output.</li>
+                <li><strong>Glitches:</strong> Users have reported occasional glitches, like the model returning a JSON string with excess newline characters (e.g., <code>\n\n\n</code>).</li>
+            </ul>
+            <CalloutBox Type="warning" Title="Debugging Tip">
+                Always trim whitespace and control characters from the JSON string returned in the `arguments` field before parsing it. This simple step can prevent frustrating errors caused by extraneous newlines or spaces.
+            </CalloutBox>
+
+            <h6>Beyond OpenAI: A Broader Perspective</h6>
+            <p>
+                The concept of enforcing a schema on AI output is becoming an industry standard. Other platforms like <strong>Azure OpenAI</strong> offer similar structured output capabilities, supporting a JSON Schema subset and enforcing strict rules like requiring defined fields (`required`) and prohibiting extra ones (`additionalProperties: false`). This provides a comparable level of reliability for developers on different platforms.
+            </p>
+            
             <p>
                 This is the technique used in the demo below. We define a <code>MovieDetails</code> schema and ask the model to populate it. The result is a clean, predictable object that we can directly bind to our UI without any guesswork. It's the most robust way to build AI-powered features into your applications.
             </p>
         </SubSection>
     </Section>
 
-    <Section Heading="Demo: Structured Recipe Generator" Level="5">
+    <Section Heading="Demo: Structured Movie Details Generator" Level="4">
         <p>
-            <b>How to use this demo:</b> Enter your personal OpenAI API key (create one from your <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI dashboard</a>), then type a dish name. Click <b>Get Recipe</b> and the demo will call a structured-output endpoint that returns a JSON object with clearly defined fields (title, total time, country of origin, ingredients and steps). The UI renders those fields in a clean, predictable layout.
+            <b>How to use this demo:</b> Enter your personal OpenAI API key (create one from your <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI dashboard</a>), then type a movie name. Click <b>Get Movie Details</b> and the demo will call a structured-output endpoint that returns a JSON object with clearly defined fields. The UI then renders those fields in a clean, predictable layout.
         </p>
     <div class="mb-3">
         <label for="apiKeyInput" class="form-label"><b>Enter your OpenAI API key:</b></label>
