@@ -158,6 +158,86 @@ Text: "My favorite movie is The Matrix, which came out in 1999 and was directed 
                 <li><strong>Instruct the Model:</strong> You tell the model to call this function with data extracted from the user's prompt.</li>
                 <li><strong>Get Perfect JSON:</strong> The API returns a response containing a JSON object that perfectly matches the schema you defined.</li>
             </ol>
+            <CodeSnippet Language="json" Description="Example API Payload for Function Calling">
+{
+  "model": "gpt-4o-mini",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a JSON generator. Given a movie name, produce a single JSON object with a specific schema."
+    },
+    {
+      "role": "user",
+      "content": "Get movie details for: The Matrix\nRespond by calling the function 'create_movie_details'."
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_movie_details",
+      "description": "Create a movie details object.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "title": { "type": "string" },
+          "year": { "type": "integer" },
+          "director": { "type": "string" },
+          "description": { "type": "string" },
+          "genres": { "type": "array", "items": { "type": "string" } },
+          "actors": { "type": "array", "items": { "type": "string" } }
+        },
+        "required": ["title", "year", "director", "description", "genres", "actors"]
+      }
+    }
+  ],
+  "function_call": "auto",
+  "temperature": 0.0
+}
+            </CodeSnippet>
+            <p>
+                The API's response won't contain a typical text message. Instead, it will contain a <code>tool_calls</code> object. Inside, you'll find the name of the function the model chose to call (<code>create_movie_details</code>) and, most importantly, an <code>arguments</code> field. This field contains a JSON <strong>string</strong> with the extracted data, perfectly matching your schema.
+            </p>
+            <CodeSnippet Language="json" Description="Example API Response">
+{
+  "id": "chatcmpl-CD3GM3Gc1Qfr40FKxOTf8DZG7afGn",
+  "object": "chat.completion",
+  "created": 1757226842,
+  "model": "gpt-4o-mini-2024-07-18",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": null,
+        "function_call": {
+          "name": "create_movie_details",
+          "arguments": "{\"title\":\"The Matrix\",\"year\":1999,\"director\":\"Lana Wachowski, Lilly Wachowski\",\"description\":\"A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.\",\"genres\":[\"Action\",\"Sci-Fi\",\"Adventure\"],\"actors\":[\"Keanu Reeves\",\"Laurence Fishburne\",\"Carrie-Anne Moss\",\"Hugo Weaving\",\"Gloria Foster\"]}"
+        },
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "function_call"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 104,
+    "completion_tokens": 96,
+    "total_tokens": 200,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_8bda4d3a2c"
+}}
+            </CodeSnippet>
             <p>
                 This is the technique used in the demo below. We define a <code>MovieDetails</code> schema and ask the model to populate it. The result is a clean, predictable object that we can directly bind to our UI without any guesswork. It's the most robust way to build AI-powered features into your applications.
             </p>
