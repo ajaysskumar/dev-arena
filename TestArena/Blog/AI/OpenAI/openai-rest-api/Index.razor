@@ -164,6 +164,10 @@ Text: "My favorite movie is The Matrix, which came out in 1999 and was directed 
                 <strong>User Prompt</strong> → <strong>Schema Definition</strong> → <strong>API Call with Function</strong> → <strong>Structured JSON Output</strong>
             </CalloutBox>
             <CodeSnippet Language="json" Description="Example API Payload for Function Calling">
+-- POST https://api.openai.com/v1/chat/completions
+-- Content-Type: application/json
+-- Authorization: Bearer $OPENAI_API_KEY
+
 {
   "model": "gpt-4o-mini",
   "messages": [
