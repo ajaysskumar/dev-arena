@@ -63,13 +63,13 @@
 
     <Section Heading="What is Structured Output?" Level="4">
         <p>
-            Think of it as the difference between an essay and a spreadsheet.
+            Think of it as the difference between an essay and a spreadsheet. Unstructured output is free-flowing text that is easy for humans to read but hard for programs to parse reliably. Structured output, on the other hand, is organized in a predictable format like JSON, which applications can easily process.
         </p>
-        <ul>
-            <li><strong>Unstructured Output:</strong> A free-flowing paragraph of text. It's easy for humans to read but hard for a program to parse reliably. Example: <em>"The Matrix is a 1999 sci-fi action film directed by the Wachowskis. It's about a hacker who discovers the world is a simulation."</em></li>
-            <li><strong>Structured Output:</strong> Data organized in a predictable format, like JSON (JavaScript Object Notation). It has clear keys and values that a program can easily read and process.</li>
-        </ul>
-        <CodeSnippet Language="json" Description="Example: Structured JSON Output">
+        <CodeSnippet Language="diff" Description="Unstructured vs. Structured Output">
+- Unstructured Text:
+"The Matrix is a 1999 sci-fi action film directed by the Wachowskis. It's about a hacker who discovers the world is a simulation."
+
++ Structured JSON:
 {
   "title": "The Matrix",
   "year": 1999,
@@ -110,7 +110,7 @@ Extract the movie title, year, and director from the following text. Return the 
 Text: "My favorite movie is The Matrix, which came out in 1999 and was directed by the Wachowskis."
             </CodeSnippet>
             <p>
-                <strong>Why it's brittle?</strong> The model might not perfectly follow instructions. It could add extra text before or after the JSON, use different key names, or generate invalid JSON, causing your parsing code to fail.
+                <strong>Why it's brittle?</strong> The model might not perfectly follow instructions, leading to common parsing failures. For example, it could add extraneous text, use different key names than requested, or generate malformed JSON.
             </p>
         </SubSection>
 
