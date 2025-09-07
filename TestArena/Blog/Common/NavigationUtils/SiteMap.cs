@@ -141,7 +141,7 @@ namespace TestArena.Blog.Common.NavigationUtils
             ["Performance Testing", "K6", "API", ".NET", "Spike Test"]),
         new("OpenAI REST API: Structured Output",
             "/blog/ai/openai-rest-api/structured-output",
-            new DateTime(2025, 8, 23),
+            new DateTime(2025, 9, 06),
             "images/blog/ai/open-ai-structured-output/banner.png",
             ["AI", "OpenAI", "API", "Structured Output", ".NET", "C#"]),
         ];
