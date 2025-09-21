@@ -1,0 +1,190 @@
+<!DOCTYPE html><html lang="en"><head>
+    <!-- Google tag (gtag.js) -->
+    <script defer="" src="https://www.googletagmanager.com/gtag/js?id=G-N1BDBV7WLD"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-N1BDBV7WLD');
+    </script>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Dev Codex: .NET Development and Testing Guide</title>
+    <meta name="description" content="Your ultimate resource for development, AI integration, clean coding, software testing, and modern software practices."/>
+    <!-- Removed meta keywords tag as modern search engines often ignore it -->
+    <meta name="author" content="Ajay Kumar"/>
+    <!-- <meta property="og:title" content="Dev Codex: Your Ultimate Guide to .NET Development, AI, and Software Practices" />
+    <meta property="og:description" content="Explore expert insights on .NET development, AI integration, clean coding, performance testing, and modern software practices. Build better, smarter, and faster applications with Dev Codex." />
+    <meta property="og:url" content="https://devcodex.in/blog/connection-pooling-sql-server" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" /> -->
+    
+<!--Blazor:{"type":"webassembly","prerenderId":"2c7fe8fa296f40c282e1dffa8a5255a8","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>Test Driven Development (TDD): A Practical Introduction</title><meta property="og:url" content="http://127.0.0.1:5050/blog/tdd/introduction" />
+    <meta property="og:title" content="Test Driven Development (TDD): A Practical Introduction" />
+    <meta property="og:description" content="" />
+    <meta property="og:image" content="http://127.0.0.1:5050/images/blog/tdd/intro/banner.svg" />
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"2c7fe8fa296f40c282e1dffa8a5255a8"}-->
+</head><body><headoutlet>
+    <base href="/"/>
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/app.css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" defer=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js" defer=""></script>
+<link rel="icon" type="image/png" href="favicon.png"/>
+<link href="TestArena.styles.css" rel="stylesheet"/>
+
+
+
+    <div id="app">
+<!-- %%-PRERENDERING-BEGIN-%% -->
+<!--Blazor:{"type":"webassembly","prerenderId":"525ccfc66c9549e499afad52a9f41347","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
+                        <h3 class="m-0">Dev Codex</h3></a></div>
+
+                
+                <div class="col-12 col-md-4 d-flex justify-content-md-center justify-content-center mt-2 mt-md-0"><div class="w-75 position-relative"><input type="text" class="form-control" placeholder="Search..." />
+        <ul class="list-group position-absolute w-100 mt-1" style="z-index: 1000;" hidden></ul></div></div>
+
+                
+                <div class="col-12 col-md-4 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><div class="dropdown"><a href="/about-author" class="d-inline-block rounded-circle overflow-hidden border border-white" style="width: 3rem; height: 3rem; border-width: 0.25rem;"><img src="/images/shared/author.png" alt="About Author" class="img-fluid rounded-circle" style="width: 100%; height: 100%; object-fit: cover;"></a></div></div></div></div></div></header>
+        <article class="content px-4" b-mcp0h0uciv><style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 20px 0;
+    }
+    th, td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background-color: #f0f0f0;
+    }
+  </style>
+
+
+<div class="container-fluid d-flex flex-column align-items-center"><div class="content-wrapper"><style>
+    .article-header {
+        margin: 0 auto;
+        /* Centers the div */
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    .container-fluid,
+    .row,
+    .col-md-12,
+    .col-6 {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .article-image {
+        max-width: 500px !important;
+        height: auto;
+        border-radius: 10px;
+    }
+</style>
+
+
+
+
+<header class="article-header"><div class="row"><div class="col-md-12"><h1 class="fw-bold">Test Driven Development (TDD): A Practical Introduction</h1></div>
+        <div class="col-md-12"><img src="images/blog/tdd/intro/banner.svg" alt="Article Banner" height="200" width="auto" class="img-fluid rounded mx-auto d-block my-3" loading="lazy" /></div>
+        <div class="col-md-12"><div class="container-fluid"><div class="row"><div class="col-md-4 col-xs-12 d-flex justify-content-md-start justify-content-center"><span class="text-secondary fw-bold">Author(s): </span>
+                        <span class="text-secondary fw-bold ms-1">Ajay Kumar</span></div>
+
+                    <div class="col-md-4 col-xs-12 d-flex justify-content-md-center justify-content-center"><div class="social-share flex" b-gjpj7q7b4s><a href="https://twitter.com/intent/tweet?url=http%3A%2F%2F127.0.0.1%3A5050%2Fblog%2Ftdd%2Fintroduction&amp;text=Test%20Driven%20Development%20%28TDD%29%3A%20A%20Practical%20Introduction" title="Share on Twitter" target="_blank" rel="noopener" b-gjpj7q7b4s><img src="images/shared/icons/twitter-old.svg" alt="Twitter/X" width="24" style="cursor:pointer" b-gjpj7q7b4s></a>
+    <a href="https://www.linkedin.com/feed/?shareActive=true&amp;shareUrl=http://127.0.0.1:5050/blog/tdd/introduction" title="Share on LinkedIn" target="_blank" rel="noopener" b-gjpj7q7b4s><img src="images/shared/icons/linkedin.svg" alt="LinkedIn" width="24" style="cursor:pointer" b-gjpj7q7b4s></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A5050%2Fblog%2Ftdd%2Fintroduction" title="Share on Facebook" target="_blank" rel="noopener" b-gjpj7q7b4s><img src="images/shared/icons/facebook.svg" alt="Facebook" width="24" style="cursor:pointer" b-gjpj7q7b4s></a></div></div>
+
+                    
+                    <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 20 Sep 2025</span></div></div></div></div></div></header>
+
+  <section id="0804aefd-58a7-4089-826b-7dbddec4d371"><h3></h3><hr class="border border-success border-1 opacity-50">
+    <div><p>Test Driven Development (TDD) is a disciplined approach to software development where you write tests <b>before</b> you write the code. Instead of coding and hoping nothing breaks, TDD gives you a safety net and a clear workflow for building robust features.</p>
+    <p>In this post, we’ll break down the TDD cycle, address common misconceptions, and walk through a simple example in C#.</p></div></section>
+
+  <section id="c1306153-7e4a-4019-9a0e-753344e4862c"><h3>The TDD Cycle: Red, Green, Refactor</h3><hr class="border border-success border-1 opacity-50">
+    <div><ul><li><b>Red:</b> Write a test for a new feature. It should fail, since the feature doesn’t exist yet.</li>
+      <li><b>Green:</b> Write the minimum code needed to make the test pass.</li>
+      <li><b>Refactor:</b> Clean up the code, keeping all tests green.</li></ul>
+    <p>This loop is repeated for every new piece of functionality. It’s simple, but it fundamentally changes how you design and maintain code.</p></div></section>
+
+  <section id="76a222ec-e752-4a1c-8d84-72ae0f85856a"><h3>Common Myths About TDD</h3><hr class="border border-success border-1 opacity-50">
+    <div><ul><li><b>“TDD slows you down.”</b> It may feel slower at first, but it saves hours of debugging and regression fixes in the long run.</li>
+      <li><b>“TDD is just about testing.”</b> Actually, TDD is a design technique. Tests guide your architecture and help you write modular, maintainable code.</li>
+      <li><b>“TDD only works for simple problems.”</b> TDD is even more valuable for complex domains, where breaking problems into small, testable steps is crucial.</li></ul></div></section>
+
+  <section id="9498f45c-8cae-4402-b323-9809f2af8369"><h3>A Simple Example: Adding Two Numbers</h3><hr class="border border-success border-1 opacity-50">
+    <div><p>Let’s see TDD in action with a basic C# example. Suppose we want a method that adds two numbers.</p>
+    <ol><li><b>Write a failing test (Red):</b></li></ol>
+    <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
+using Xunit;
+
+public class CalculatorTests
+{
+  [Fact]
+  public void Add_TwoNumbers_ReturnsSum()
+  {
+    var calc = new Calculator();
+    var result = calc.Add(2, 2);
+    Assert.Equal(4, result);
+  }
+}
+    </code></pre></div><div class="col-12 text-center"><code>Code Sample #1 : Failing test for Add method</code></div></div></div>
+<br>
+    <p>This test fails because <code>Calculator</code> doesn’t exist yet.</p>
+    <ol start="2"><li><b>Write minimal code to pass (Green):</b></li></ol>
+    <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
+public class Calculator
+{
+  public int Add(int a, int b) => a + b;
+}
+    </code></pre></div><div class="col-12 text-center"><code>Code Sample #2 : Minimal code to pass the test</code></div></div></div>
+<br>
+    <p>Now the test passes. If the code is already clean, you may not need to refactor. In real projects, this is where you improve names, remove duplication, or reorganize logic—confident that your tests have your back.</p></div></section>
+
+  <section id="cd116505-cf97-4da5-bf46-a7bb22104117"><h3>Why TDD Matters</h3><hr class="border border-success border-1 opacity-50">
+    <div><p>TDD isn’t about writing more tests. It’s about building confidence in your codebase, enabling safe refactoring, and letting tests drive better design decisions. The process scales from trivial methods to complex systems.</p></div></section>
+
+  <section id="7256c135-4c15-4097-a667-10d8e1719fd2"><h3></h3><hr class="border border-success border-1 opacity-50">
+    <div><p>In the next post, we’ll tackle a slightly more complex problem (like FizzBuzz or a String Calculator) and walk through the TDD process step by step.</p>
+    <p>Have you tried TDD before? What worked, what didn’t? Share your experience in the comments below.</p></div></section></div>
+    <div class="content-wrapper mt-4"><script src="https://giscus.app/client.js" data-repo="ajaysskumar/dev-arena" data-repo-id="R_kgDONiBGGQ" data-category="Comments" data-category-id="DIC_kwDONiBGGc4Cq2ND" data-mapping="pathname" data-strict="0" data-reactions-enabled="0" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script></div></div>
+
+<style>
+    .content-wrapper {
+        width: 50%; /* Leaves 20% space on left and right */
+        background: white;
+    }
+
+    @media (max-width: 768px) {
+        .content-wrapper {
+            width: 90%; /* On smaller screens, reduce left-right space */
+        }
+    }
+</style></article>
+        <footer class="bg-dark text-white py-4 mt-auto"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><p class="mb-0">Copyright © 2025 Dev Codex</p></div>
+
+            
+            <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
+                <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
+            </div><!--Blazor:{"prerenderId":"525ccfc66c9549e499afad52a9f41347"}-->
+<!-- %%-PRERENDERING-END-%% -->
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UkdoaFZEVmpaMWx1V2tkcFNUVmlMWFJaTW0xV05HaGFVRTFxTkMxaVZsZFNSMW8wWW1oeVprTkphM0JITVV0WlpGQldja2h5U0VKRlJGazVORkJ2Y0hJeFJsbE5PV1psVG1KeVdVaHpZVnBqVEVSdWExOUNYMjlvUTNSS04yeEdaMEZoVEVKZmRHWlJTMGRDZFRKSVJ6UldMVFp1ZEdrdFpscEhUbFpDVEhWQmJHcDBiVzVMTUhobFFXZHdUVWhhUVZCZlJWcE5JaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+    <script src="_framework/blazor.webassembly.js" defer="" autostart="false"></script>
+    <script src="brotliloader.min.js" type="module"></script>
+
+
+
+</headoutlet></body></html>
