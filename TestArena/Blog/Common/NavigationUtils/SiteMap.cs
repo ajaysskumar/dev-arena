@@ -144,6 +144,11 @@ namespace TestArena.Blog.Common.NavigationUtils
             new DateTime(2025, 9, 06),
             "images/blog/ai/open-ai-structured-output/banner.png",
             ["AI", "OpenAI", "API", "Structured Output", ".NET", "C#"]),
+        new("Test Driven Development: Getting started with TDD in .NET",
+            "/blog/tdd/introduction",
+            new DateTime(2025, 9, 20),
+            "images/blog/tdd/intro/banner.svg",
+            ["TDD", "Test Driven Development", ".NET", "C#"]),
         ];
 
         //"/blog/ai/openai-rest-api/structured-output"
