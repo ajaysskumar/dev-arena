@@ -29,12 +29,61 @@
       Image="@currentPage.ArticleImage" PublishedOn="@currentPage.PublishedOn" Authors="Ajay Kumar">
   </Header>
 
-  <Section>
+  @* <Section>
     <p>Test Driven Development (TDD) is a disciplined approach to software development where you write tests <b>before</b> you write the code. Instead of coding and hoping nothing breaks, TDD gives you a safety net and a clear workflow for building robust features.</p>
     <p>In this post, we’ll break down the TDD cycle, address common misconceptions, and walk through a simple example in C#.</p>
-  </Section>
+  </Section> *@
 
-  <Section Heading="The TDD Cycle: Red, Green, Refactor">
+  <Section Heading="🤔 Think?">
+    <p>
+      Ever shipped a feature, only to have it break something seemingly unrelated? Or spent hours debugging a complex function that grew out of control? This is a common story in software development. The traditional cycle of "write code, then manually test" often leads to a codebase that is brittle, hard to change, and riddled with hidden bugs. As the project grows, the fear of making changes—regression—paralyzes development speed.
+    </p>
+    <p>
+      <b>Test-Driven Development (TDD)</b> directly tackles this problem by flipping the process on its head. It’s not about writing more tests; it’s about using tests to drive better design and build confidence. Before you write a single line of implementation, you ask: "What does this code need to do, and how can I prove it?" This simple question forces clarity and leads to more modular, decoupled, and maintainable code.
+    </p>
+    <p>
+      Here’s a quick comparison of the two approaches:
+    </p>
+    <table>
+      <thead>
+      <tr>
+        <th>Aspect</th>
+        <th>Traditional Development</th>
+        <th>Test-Driven Development (TDD)</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><strong>Workflow</strong></td>
+        <td>1. Write code<br>2. Write tests (maybe)<br>3. Debug</td>
+        <td>1. Write a failing test<br>2. Write code to pass<br>3. Refactor</td>
+      </tr>
+      <tr>
+        <td><strong>Confidence</strong></td>
+        <td><b>Low</b>, with a constant fear of introducing regressions when making changes.</td>
+        <td><b>High</b>; tests act as a safety net for all changes.</td>
+      </tr>
+      <tr>
+        <td><strong>Design</strong></td>
+        <td>Often an afterthought, leading to tightly coupled code.</td>
+        <td>Emerges from the need to be testable, promoting modularity.</td>
+      </tr>
+      <tr>
+        <td><strong>Debugging</strong></td>
+        <td>Reactive; happens when bugs are found later.</td>
+        <td>Proactive; bugs are caught instantly during development.</td>
+      </tr>
+      </tbody>
+    </table>
+    <p>
+      By investing a small amount of time upfront to define behavior with a test, you save an exponential amount of time on debugging and maintenance later. TDD provides a safety net that allows you to refactor and add new features with confidence, knowing that you haven't broken anything.
+    </p>
+    </Section>
+
+  <Section Heading="The TDD Cycle: Red, Green, Refactor" Level="4">
+  <BlogImage ImagePath="/images/blog/tdd/intro/tdd-cycle.png" 
+                   Description="Event-driven communication flow in the demo repository - showing how messages flow from Sender through Event Bus to multiple listeners (Receiver and Logger)" 
+                   Number="1" />
     <ul>
       <li><b>Red:</b> Write a test for a new feature. It should fail, since the feature doesn’t exist yet.</li>
       <li><b>Green:</b> Write the minimum code needed to make the test pass.</li>
@@ -43,15 +92,24 @@
     <p>This loop is repeated for every new piece of functionality. It’s simple, but it fundamentally changes how you design and maintain code.</p>
   </Section>
 
-  <Section Heading="Common Myths About TDD">
+  <Section Heading="Common Myths About TDD & demystifying them" Level="4">
     <ul>
-      <li><b>“TDD slows you down.”</b> It may feel slower at first, but it saves hours of debugging and regression fixes in the long run.</li>
-      <li><b>“TDD is just about testing.”</b> Actually, TDD is a design technique. Tests guide your architecture and help you write modular, maintainable code.</li>
-      <li><b>“TDD only works for simple problems.”</b> TDD is even more valuable for complex domains, where breaking problems into small, testable steps is crucial.</li>
+      <li>
+        <b>“TDD slows you down.”</b>
+        <p>While the initial cycle of writing a test first can feel slower than just diving into code, this is a short-term perspective. The time invested upfront is repaid tenfold by drastically reducing debugging time. Instead of spending hours hunting for bugs later, you catch them instantly. Furthermore, the comprehensive test suite acts as a safety net, giving you the confidence to refactor and add features quickly without fear of breaking existing functionality.</p>
+      </li>
+      <li>
+        <b>“TDD is just about testing.”</b>
+        <p>This is perhaps the biggest misconception. TDD is fundamentally a <b>design</b> practice. By forcing you to think about how a component will be used before you implement it, you naturally create cleaner, more decoupled interfaces. It encourages you to write small, focused units of code that are easy to test and, therefore, easy to understand and maintain.</p>
+      </li>
+      <li>
+        <b>“TDD only works for simple problems.”</b>
+        <p>On the contrary, TDD shines in complex systems. It provides a structured way to tackle complexity by breaking down large problems into small, verifiable steps. Instead of getting overwhelmed by the entire system, you focus on one specific behavior at a time. This incremental approach ensures that each component works as expected before being integrated into the larger whole, making complexity manageable.</p>
+      </li>
     </ul>
   </Section>
 
-  <Section Heading="A Simple Example: Adding Two Numbers">
+  <Section Heading="A Simple Example: Adding Two Numbers" Level="4">
     <p>Let’s see TDD in action with a basic C# example. Suppose we want a method that adds two numbers.</p>
     <ol>
       <li><b>Write a failing test (Red):</b></li>
@@ -83,11 +141,70 @@ public class Calculator
     <p>Now the test passes. If the code is already clean, you may not need to refactor. In real projects, this is where you improve names, remove duplication, or reorganize logic—confident that your tests have your back.</p>
   </Section>
 
-  <Section Heading="Why TDD Matters">
-    <p>TDD isn’t about writing more tests. It’s about building confidence in your codebase, enabling safe refactoring, and letting tests drive better design decisions. The process scales from trivial methods to complex systems.</p>
+  <Section Heading="Practicing TDD in day to day development" Level="4">
+    <p>
+      The real power of TDD becomes clear when you apply it to a user story. Many developers understand the Red-Green-Refactor cycle but struggle to see how it fits into their daily workflow. Let's bridge that gap with a common scenario.
+    </p>
+    <p>
+      Imagine you're given the following user story:
+    </p>
+    <blockquote class="blockquote">
+      "As a customer, I want to see a 'New' badge on products added in the last 7 days, so I can easily spot recent items."
+    </blockquote>
+    <p>
+      How would you approach this with TDD? Instead of jumping straight to UI code, you start by asking: "What's the smallest piece of logic I need to test?"
+    </p>
+    <ol>
+      <li>
+      <strong>Start with the Core Logic (The "Is New?" Question):</strong> The central requirement is determining if a product is "new." This is a perfect candidate for a unit test.
+      <ul>
+        <li>
+        <strong>RED:</strong> Write a test for a <code>`Product`</code> model. <code>`IsNew_WhenProductIs3DaysOld_ShouldBeTrue()`</code>. It will fail because there's no <code>`IsNew`</code> property.
+        </li>
+        <li>
+        <strong>GREEN:</strong> Implement the <code>`IsNew`</code> property: `<code>public bool IsNew => (DateTime.UtcNow - DateAdded).TotalDays &lt;= 7;`</code>. The test passes.
+        </li>
+        <li>
+        <strong>REFACTOR:</strong> The number `7` is a "magic number." Let's extract it into a constant like <code>`const int NewProductThresholdInDays = 7;`</code>. The test still passes.
+        </li>
+      </ul>
+      </li>
+      <li>
+      <strong>Cover the Edge Cases:</strong> What about a product that is exactly 7 days old? Or 8 days old?
+      <ul>
+        <li>
+        <strong>RED:</strong> Write a new test: <code>`IsNew_WhenProductIs8DaysOld_ShouldBeFalse()`</code>. It fails. Oh wait, it passes with our current logic. Great! This confirms our logic is correct. Let's add one for exactly 7 days to be sure.
+        </li>
+      </ul>
+      </li>
+      <li>
+      <strong>Move Up to the UI/Integration Level:</strong> Now that the core logic is solid and tested, you can work on the UI. You can be confident that if you pass a <code>`Product`</code> object to your Razor component, the <code>`product.IsNew`</code> property will work correctly. Your UI logic becomes simpler:
+      <CodeSnippet Language="razor" Description="UI logic becomes trivial" Number="3">
+  @@if (product.IsNew)
+  {
+    &lt;span class="badge"&gt;New&lt;/span&gt;
+  }
+      </CodeSnippet>
+      </li>
+    </ol>
+    <p>
+      This approach breaks a feature down into verifiable steps. You build a foundation of reliable logic first, making the final integration into the UI simple and low-risk. You're not just testing; you're using tests to guide your development from a user story to finished code.
+    </p>
+    </Section>
+
+  <Section Heading="Summary: Building Confidence Through Code" Level="4">
+    <p>
+        Test-Driven Development is more than just a testing strategy—it's a fundamental shift in how we approach software development. By following the simple yet powerful <b>Red-Green-Refactor</b> cycle, we move from a reactive "code and fix" model to a proactive one where tests guide our design.
+    </p>
+    <p>
+        As we've seen, TDD helps demystify common misconceptions. It doesn't slow you down; it saves countless hours in debugging. It's not just for simple problems; it excels at managing complexity by breaking it into small, verifiable steps. Most importantly, TDD is a <b>design practice</b> that leads to cleaner, more maintainable code.
+    </p>
+    <p>
+        From a basic calculator to a real-world user story, the process remains the same: define behavior with a test, implement it simply, and then refine your code with the confidence that your test suite provides a safety net. This discipline builds robust, adaptable software and gives developers the freedom to evolve their codebase without fear.
+    </p>
   </Section>
 
-  <Section>
+  <Section Level="4">
     <p>In the next post, we’ll tackle a slightly more complex problem (like FizzBuzz or a String Calculator) and walk through the TDD process step by step.</p>
     <p>Have you tried TDD before? What worked, what didn’t? Share your experience in the comments below.</p>
   </Section>
