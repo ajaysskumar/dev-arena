@@ -149,9 +149,12 @@ namespace TestArena.Blog.Common.NavigationUtils
             new DateTime(2025, 9, 20),
             "images/blog/tdd/intro/banner.svg",
             ["TDD", "Test Driven Development", ".NET", "C#"]),
+        new("Test Driven Development: Getting started with TDD in .NET",
+            "/blog/tdd/first-steps-string-calculator-problem",
+            new DateTime(2025, 10, 04),
+            "images/blog/tdd/string-calculator/banner.svg",
+            ["TDD", "Test Driven Development", ".NET", "C#"]),
         ];
-
-        //"/blog/ai/openai-rest-api/structured-output"
 
         public static IEnumerable<PageInfo> PublishedArticles => Pages.Where(p => p.IsPublished && p.PublishedOn <= DateTime.UtcNow);
     }

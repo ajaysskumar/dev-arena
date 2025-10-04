@@ -1,0 +1,243 @@
+@page "/blog/tdd/first-steps-string-calculator-problem"
+@using TestArena.Blog.Common
+@using TestArena.Blog.Common.NavigationUtils
+@using TestArena.Blog.Common.About
+
+<style>
+    .tip {
+        background-color: #f8f9fa;
+        border-left: 4px solid #17a2b8;
+        padding: 1rem;
+        margin: 1rem 0;
+    }
+
+    .gotcha {
+        background-color: #fff3cd;
+        border-left: 4px solid #ffc107;
+        padding: 1rem;
+        margin: 1rem 0;
+    }
+
+    .challenge {
+        background-color: #f8f9fa;
+        border-left: 4px solid #28a745;
+        padding: 1rem;
+        margin: 1rem 0;
+    }
+</style>
+
+@code {
+    PageInfo? currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/tdd/first-steps-string-calculator-problem");
+
+    protected override void OnInitialized()
+    {
+        if (currentPage == null)
+        {
+            throw new InvalidOperationException("Page not found in SiteMap");
+        }
+        base.OnInitialized();
+    }
+}
+
+<BlogContainer>
+    <Header Title="TDD in .NET: Practicing with String Calculator"
+            Image="@(currentPage?.ArticleImage)"
+            PublishedOn="@(currentPage?.PublishedOn ?? DateTime.UtcNow)"
+            Authors="Ajay Kumar">
+    </Header>
+
+    <Section Heading="Practicing TDD with a simple String Calculator">
+        <p>
+            When learning <b>Test-Driven Development (TDD)</b>, it's tempting to jump straight into complex, real-world problems. 
+            But like any skill, TDD is best learned through simple, focused exercises that highlight its core principles 
+            without the distractions of complex business logic.
+        </p>
+        <p>
+            The String Calculator kata, introduced by Roy Osherove, is perfect for this. It starts deceptively simple—adding 
+            numbers in a string—but gradually introduces complexity that challenges our TDD discipline and design decisions.
+        </p>
+    </Section>
+
+    <Section Heading="📝 The Challenge" Level="4">
+        <div class="challenge">
+            <p><strong>Create a calculator that:</strong></p>
+            <ul>
+                <li>Takes a string input (e.g., "1,2")</li>
+                <li>Returns the sum of the numbers</li>
+                <li>Handles empty strings (returns 0)</li>
+                <li>Supports multiple numbers</li>
+                <li>Allows newlines between numbers</li>
+                <li>Supports different delimiters</li>
+            </ul>
+        </div>
+        <p>
+            But here's the catch: we'll build this <em>one test at a time</em>, letting our tests guide the implementation. 
+            No peeking ahead at future requirements!
+        </p>
+    </Section>
+
+    <Section Heading="🚀 Starting with the Simplest Case" Level="4">
+        <p>
+            Following TDD means starting with the absolute simplest case. What's simpler than an empty string?
+        </p>
+
+        <ol>
+            <li><strong>First, the test (Red):</strong></li>
+        </ol>
+
+        <CodeSnippet Language="csharp" Description="Testing the empty string case" Number="1">
+[Fact]
+public void Add_EmptyString_ReturnsZero()
+{
+    var calculator = new StringCalculator();
+    var result = calculator.Add("");
+    Assert.Equal(0, result);
+}
+        </CodeSnippet>
+
+        <div class="tip">
+            <p><strong>💡 TDD Tip:</strong> Notice how we're not thinking about delimiters or multiple numbers yet. 
+            TDD is about taking the smallest possible step that moves us forward.</p>
+        </div>
+
+        <ol start="2">
+            <li><strong>The minimal implementation (Green):</strong></li>
+        </ol>
+
+        <CodeSnippet Language="csharp" Description="Minimal implementation for empty string" Number="2">
+public class StringCalculator
+{
+    public int Add(string numbers)
+    {
+        return 0;
+    }
+}
+        </CodeSnippet>
+
+        <p>
+            Yes, it's that simple! Resist the urge to implement more than the test requires. 
+            This is one of the hardest habits to build in TDD—trusting that complexity will emerge naturally from our tests.
+        </p>
+    </Section>
+
+    <Section Heading="🎯 Adding Single Numbers" Level="4">
+        <p>Now let's handle single numbers. What's our next test?</p>
+
+        <CodeSnippet Language="csharp" Description="Testing single number input" Number="3">
+[Fact]
+public void Add_SingleNumber_ReturnsThatNumber()
+{
+    var calculator = new StringCalculator();
+    var result = calculator.Add("1");
+    Assert.Equal(1, result);
+}
+        </CodeSnippet>
+
+        <p>This fails! Time to update our implementation:</p>
+
+        <CodeSnippet Language="csharp" Description="Handling single numbers" Number="4">
+public int Add(string numbers)
+{
+    if (string.IsNullOrEmpty(numbers))
+        return 0;
+    
+    return int.Parse(numbers);
+}
+        </CodeSnippet>
+
+        <div class="gotcha">
+            <p><strong>⚠️ Common Gotcha:</strong> At this point, many developers would add error handling for invalid inputs. 
+            But in TDD, we only add code that's required by a failing test. No test for invalid input? No error handling yet!</p>
+        </div>
+    </Section>
+
+    <Section Heading="🔄 Handling Two Numbers" Level="4">
+        <p>Now we're ready to tackle two numbers separated by a comma.</p>
+
+        <CodeSnippet Language="csharp" Description="Testing two number addition" Number="5">
+[Fact]
+public void Add_TwoNumbers_ReturnsSum()
+{
+    var calculator = new StringCalculator();
+    var result = calculator.Add("1,2");
+    Assert.Equal(3, result);
+}
+        </CodeSnippet>
+
+        <p>This drives us to enhance our implementation:</p>
+
+        <CodeSnippet Language="csharp" Description="Implementing two number addition" Number="6">
+public int Add(string numbers)
+{
+    if (string.IsNullOrEmpty(numbers))
+        return 0;
+
+    var numberArray = numbers.Split(',');
+    return numberArray.Sum(n => int.Parse(n));
+}
+        </CodeSnippet>
+
+        <p>
+            Notice how our implementation naturally evolved to handle multiple numbers, even though we only tested two! 
+            This is a common occurrence in TDD—sometimes the simplest implementation that passes our tests is more general 
+            than we expected.
+        </p>
+    </Section>
+
+    <Section Heading="🎓 Key Lessons So Far" Level="4">
+        <div class="tip">
+            <p><strong>1. Baby Steps are Powerful</strong></p>
+            <p>Each step was tiny, but each one moved us forward with confidence. No step felt risky or overwhelming.</p>
+        </div>
+
+        <div class="tip">
+            <p><strong>2. Tests Drive Design</strong></p>
+            <p>Notice how our implementation naturally evolved toward a clean, functional style? That's because our tests 
+            focused on behavior, not implementation details.</p>
+        </div>
+
+        <div class="tip">
+            <p><strong>3. Resist Over-Engineering</strong></p>
+            <p>Several times we could have added "useful" features (error handling, input validation), but TDD kept us focused 
+            on delivering only what was needed.</p>
+        </div>
+    </Section>
+
+    <Section Heading="🔜 Next Steps" Level="4">
+        <p>
+            We've covered the basics, but there's more to explore! In the next part, we'll tackle:
+        </p>
+        <ul>
+            <li>Handling newlines between numbers</li>
+            <li>Supporting custom delimiters</li>
+            <li>Dealing with negative numbers</li>
+            <li>Adding upper bounds for numbers</li>
+        </ul>
+        <p>
+            Each of these requirements will push us to refactor our code while maintaining our test coverage. Stay tuned!
+        </p>
+    </Section>
+
+    <Section Heading="💭 Reflection" Level="4">
+        <p>
+            The String Calculator kata isn't about building a calculator—it's about building the muscle memory of TDD. 
+            Each time you practice it, try to notice:
+        </p>
+        <ul>
+            <li>How often do you want to write more code than your tests require?</li>
+            <li>How does starting with tests influence your API design?</li>
+            <li>When do you feel the urge to refactor, and why?</li>
+        </ul>
+        <p>
+            These observations will help you apply TDD more effectively in your day-to-day coding.
+        </p>
+    </Section>
+
+    <Section Level="4">
+        <p>
+            Have you tried the String Calculator kata? What surprised you about using TDD for this seemingly simple problem? 
+            Share your experiences in the comments below!
+        </p>
+    </Section>
+
+</BlogContainer>
