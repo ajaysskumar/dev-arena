@@ -20,11 +20,11 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" /> -->
     
-<!--Blazor:{"type":"webassembly","prerenderId":"227896f58f704779a21210c619691751","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>Performance Testing for APIs: Stress testing with K6</title><meta property="og:url" content="http://127.0.0.1:5050/blog/performance-testing/stress-test-with-k6" />
+<!--Blazor:{"type":"webassembly","prerenderId":"46ca5bdc59344f09bc9eba9a9184efe6","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>Performance Testing for APIs: Stress testing with K6</title><meta property="og:url" content="http://127.0.0.1:5050/blog/performance-testing/stress-test-with-k6" />
     <meta property="og:title" content="Performance Testing for APIs: Stress testing with K6" />
     <meta property="og:description" content="Performance Testing for APIs: Stress testing with K6" />
     <meta property="og:image" content="http://127.0.0.1:5050/images/blog/performance-testing/stress-test/banner.png" />
-    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"227896f58f704779a21210c619691751"}-->
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"46ca5bdc59344f09bc9eba9a9184efe6"}-->
 </head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -40,7 +40,7 @@
 
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"c24e69eb1b4a4da390e200ec53160437","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"208655447a0b4952ba6c83ce9cf057ee","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -87,7 +87,7 @@
                     
                     <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 16 Aug 2025</span></div></div></div></div></div></header>
 
-    <section id="4cabba35-8cc3-4a5a-aea4-eccf8b48f393"><h5>&#x1F680; Introduction</h5><hr class="border border-success border-1 opacity-50">
+    <section id="c83c33d3-b17b-4d1b-98e2-94be84ab52a1"><h5>&#x1F680; Introduction</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
             Imagine this: It's the first day of summer reading programs at your public library. Your book tracking API is running smoothly, handling the usual 100 requests per minute for most borrowed books. Suddenly, thousands of excited children and parents start searching simultaneously for popular titles. Within minutes, the traffic surges to 1,000 requests per minute. Will your system maintain accuracy and responsiveness, or will it falter, leading to frustrated readers and inaccurate borrowing statistics?
         </p>
@@ -99,7 +99,7 @@
         </p>
         <section><h5>Key Goals of Stress Testing</h5><ol><li>Identify system performance under extreme conditions</li><li>Find breaking points and resource limits</li><li>Verify system behavior during periods of high load</li><li>Ensure data integrity and response accuracy under pressure</li><li>Validate recovery capabilities after system overload</li></ol></section></div></section>
 
-    <section id="e28f787b-fb00-49c5-b5fb-14b685e2e44d"><h5>&#x1F4A5; The Real Cost of Inadequate Stress Testing</h5><hr class="border border-success border-1 opacity-50">
+    <section id="32314a43-1eeb-447b-a9a7-02c7549fbc40"><h5>&#x1F4A5; The Real Cost of Inadequate Stress Testing</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
             Let's look at some real-world incidents that highlight the importance of thorough stress testing:
         </p>
@@ -113,7 +113,7 @@
             These incidents share a common theme: systems that worked perfectly under normal conditions failed catastrophically when pushed beyond their limits. This is where stress testing becomes invaluable.
         </p></div></section>
 
-    <section id="35f43551-0e75-4008-ae32-bc9bc0b48503"><h5>When to Use Stress Testing</h5><hr class="border border-success border-1 opacity-50">
+    <section id="202cc320-2d78-4ea6-ba18-e4701d511ac3"><h5>When to Use Stress Testing</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
             Stress testing becomes essential when you need to validate your system's behavior under extreme conditions. Here are the critical scenarios where you should prioritize it:
         </p>
@@ -125,7 +125,7 @@
             Always test for at least 2x your highest expected load. If you're planning for 1000 users, test for 2000. It's better to be over-prepared than caught off guard.
         </div></div></div></section>
 
-    <section id="0bf3c1fa-56f5-4524-bbdd-f3e643d1f0fd"><h5>Understanding Stress Test Stages</h5><hr class="border border-success border-1 opacity-50">
+    <section id="3f966d91-ac8b-4803-b712-efbc748f9ca7"><h5>Understanding Stress Test Stages</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
             🌊 Think of stress testing like pressure testing a dam. You don't just flood it at maximum capacity immediately; you carefully increase the water levels while monitoring every crack and strain. Let's break down this methodical approach:
         </p>
@@ -144,7 +144,7 @@
                     <li>Whether any permanent damage occurs</li>
                     <li>If all components recover properly</li></ul></li></ol></div></section>
 
-    <section id="37084616-cda5-4622-991f-6fc45c5f441b"><h5>Implementing a Stress Test with K6</h5><hr class="border border-success border-1 opacity-50">
+    <section id="7d6bc7e2-745b-4a91-9944-12a32b02aa51"><h5>Implementing a Stress Test with K6</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
             Let's work with our Most Borrowed Book API example. Sarah's team needs to stress test their book tracking API, which currently handles 100 requests per minute. They want to verify it can handle a 10x spike during peak usage periods. More importantly, they need to ensure that even if the system gets overwhelmed, it won't provide incorrect borrowing statistics or lose track of book availability.
         </p>
@@ -152,7 +152,7 @@
             We'll build upon our previous MostBorrowedBook API example to demonstrate these principles. Our stress test will simulate a gradual increase from normal load to well beyond expected peaks, while monitoring not just response times but also data integrity and system recovery.
         </p>
 
-        <section id="c9443ad3-1027-44e0-b188-639c8048b98c"><h5>The Stress Test Script</h5><hr class="border border-success border-1 opacity-50">
+        <section id="760a7d2f-ad94-4642-b612-283eb8f4a675"><h5>The Stress Test Script</h5><hr class="border border-success border-1 opacity-50">
     <div><div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-javascript" style="font-size: 0.8rem;">
 import http from 'k6/http';
 import { check, sleep } from 'k6';
@@ -219,7 +219,7 @@ export function handleSummary(data) {
             </code></pre></div><div class="col-12 text-center"><code>K6 Stress Test Script</code></div></div></div>
 <br>
 
-            <section id="787f83b2-bb00-40d2-b3ed-bb0c957f4922"><h5>Key Components Explained</h5><hr class="border border-success border-1 opacity-50">
+            <section id="894a9289-7471-41e5-80dd-34ec0009da73"><h5>Key Components Explained</h5><hr class="border border-success border-1 opacity-50">
     <div><p>Let's break down the key differences from our basic load test:</p>
                 <ol><li><strong>Staged Load Profile:</strong>
                         <ul><li>Starts with 25 virtual users</li>
@@ -241,7 +241,7 @@ export function handleSummary(data) {
                             <li>Checks response time</li>
                             <li>Validates response body</li></ul></li></ol></div></section></div></section>
 
-        <section id="f87ed271-1d0e-4874-b23a-e3443cfd6db0"><h5>Running the Stress Test</h5><hr class="border border-success border-1 opacity-50">
+        <section id="027d03bf-6668-44fb-8a28-9fb80caf7ee4"><h5>Running the Stress Test</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
                 To run the stress test:
             </p>
@@ -305,12 +305,12 @@ k6 run k6-stress-test-demo.js
 <div class="row image-header"><figure class="text-center"><img src="/images/blog/performance-testing/stress-test/stress-test-result.png" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="K6 stress test results showing response time and error rate patterns during load stages" loading="lazy" />
         <figcaption class="figure-caption"><strong>Figure 1 :</strong> K6 stress test results showing response time and error rate patterns during load stages</figcaption></figure></div></div></section>
 
-        <section id="9e67b8c2-0100-4f10-95c0-93a94f86a12c"><h5>Analyzing Test Results: A Detective Story</h5><hr class="border border-success border-1 opacity-50">
+        <section id="4ee5ab2f-dc07-4668-a287-df4f15e4a28c"><h5>Analyzing Test Results: A Detective Story</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
                 🔍 Analyzing stress test results is like being a detective at a crime scene. Each metric tells part of the story, and it's your job to piece together what happened and why. Let's look at a real scenario we encountered during our MostBorrowedBook API testing:
             </p>
             
-            <section id="14cef289-413c-4979-bd35-ac2fa4376ae5"><h5>The Mystery of the Degrading Performance</h5><hr class="border border-success border-1 opacity-50">
+            <section id="36ee7ab1-b838-444a-84c9-a472ab6378a4"><h5>The Mystery of the Degrading Performance</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
                     During our test run, we noticed something interesting at around the 90-second mark (when we hit 100 concurrent users):
                 </p>
@@ -334,7 +334,7 @@ k6 run k6-stress-test-demo.js
                     This pattern revealed a critical insight: our system wasn't failing catastrophically, but it was degrading in a specific way. The database queries for finding the most borrowed book were taking longer as the connection pool saturated.
                 </p></div></section>
 
-            <section id="5ab0c42e-c31d-4aeb-87eb-880490a2ed86"><h5>The Story in the Metrics</h5><hr class="border border-success border-1 opacity-50">
+            <section id="1e0f0bf7-0332-497a-ab18-c88811289bd0"><h5>The Story in the Metrics</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
                     By correlating different metrics, we uncovered the full story:
                 </p>
@@ -353,7 +353,7 @@ k6 run k6-stress-test-demo.js
                             <li>No lingering issues or degraded performance</li>
                             <li>This suggested our connection pooling was working correctly</li></ul></li></ol></div></section>
 
-            <section id="96dafde8-2427-4db0-bdc0-6f7c6400316e"><h5>Visual Analysis with K6 Dashboard</h5><hr class="border border-success border-1 opacity-50">
+            <section id="b63fe173-b2f9-4041-b150-4832ff9a6cb9"><h5>Visual Analysis with K6 Dashboard</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
                     The K6 HTML report transformed these raw numbers into compelling visualizations that helped us spot patterns:
                 </p>
@@ -364,12 +364,12 @@ k6 run k6-stress-test-demo.js
                     <li><strong>Virtual User Impact:</strong> Demonstrated how each user increment affected system stability
                     </li></ul></div></section></div></section></div></section>
 
-    <section id="bbfb31dd-b275-47ef-a120-70794acff69e"><h5>From Testing to Action</h5><hr class="border border-success border-1 opacity-50">
+    <section id="4fc4cd9f-093e-411a-a2de-bd063c573ae9"><h5>From Testing to Action</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
             After analyzing these test results, Sarah's library team implemented several improvements to handle their summer reading program traffic. Here's how they strengthened their book tracking API:
         </p>
 
-        <section id="a8174dc6-69c3-4768-90ca-344553351a61"><h5>Immediate Actions</h5><hr class="border border-success border-1 opacity-50">
+        <section id="54613ec9-d30b-4c42-ae7d-42ae0c4dc461"><h5>Immediate Actions</h5><hr class="border border-success border-1 opacity-50">
     <div><ol><li><strong>Connection Pool Optimization:</strong>
                     <ul><li>Increased the database connection pool size</li>
                         <li>Implemented connection timeout retry logic</li>
@@ -395,7 +395,7 @@ k6 run k6-stress-test-demo.js
                     <li>Added monitoring for early warning signs</li>
                     <li>Created fallback modes for peak traffic periods</li></ul></div></div></div></section></div></section>
 
-    <section id="36049062-a4b1-4d60-8043-2668f2d711fb"><h5>Best Practices: Lessons from the Trenches</h5><hr class="border border-success border-1 opacity-50">
+    <section id="125fa9ec-6db1-48c8-998e-5c83f091f3bf"><h5>Best Practices: Lessons from the Trenches</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
             🏆 Through our library API testing and similar experiences from larger systems, we've compiled these battle-tested best practices. While our example focuses on a library system, these principles apply universally:
         </p>
@@ -416,7 +416,7 @@ k6 run k6-stress-test-demo.js
                     When Spotify stress tests new features, they use anonymized production data patterns to ensure realistic testing scenarios.
                 </p></li></ol></div></section>
 
-    <section id="99bcd075-c4d6-4820-9d73-30e0033e5dc0"><h5>Common Pitfalls: War Stories</h5><hr class="border border-success border-1 opacity-50">
+    <section id="36310351-1b19-413d-926a-2620b425f994"><h5>Common Pitfalls: War Stories</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
             ⚠️ Learn from these real-world stress testing mistakes:
         </p>
@@ -433,7 +433,7 @@ k6 run k6-stress-test-demo.js
                     A streaming service couldn't figure out why their API was failing until they discovered they weren't monitoring their Redis cache eviction rates - a critical metric that explained their performance degradation.
                 </p></li></ul></div></section>
 
-    <section id="308372ac-ca90-4a57-912c-b95cdb505b90"><h5>Demo Repository and Resources</h5><hr class="border border-success border-1 opacity-50">
+    <section id="7d4c3b66-bcad-4b11-8f46-c001de99baa4"><h5>Demo Repository and Resources</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
             To help you get started, we've provided a complete, production-ready testing setup in our demo repository:
             <a href="https://github.com/ajaysskumar/API-Performance-Testing" target="_blank">ajaysskumar/API-Performance-Testing</a></p>
@@ -444,7 +444,7 @@ k6 run k6-stress-test-demo.js
             <li>Real-world stress testing case studies from the K6 blog</li>
             <li>Our sample dashboards and alert configurations</li></ul></div></section>
 
-    <section id="b9eee921-3eff-4588-b1e1-b23c9d1aea8c"><h5>Conclusion: The Path Forward</h5><hr class="border border-success border-1 opacity-50">
+    <section id="33dd89d4-73d2-466c-a2da-b1a99b18a5e9"><h5>Conclusion: The Path Forward</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
             Stress testing isn't just a technical exercise - it's about building confidence in your system's resilience. When done right, it transforms unknowns into knowns, anxiety into assurance, and potential disasters into manageable situations.
         </p>
@@ -476,9 +476,9 @@ k6 run k6-stress-test-demo.js
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-            </div><!--Blazor:{"prerenderId":"c24e69eb1b4a4da390e200ec53160437"}-->
+            </div><!--Blazor:{"prerenderId":"208655447a0b4952ba6c83ce9cf057ee"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UkdoaFZEVmpaMWx1V2tkcFNUVmlMWFJaTW0xV05XZHdRbmw1VUhGb2EwazViM1IwUnkxblJtTXRaV1Z3UzFkUGJEWk9jRk51UWtNd1NIZDJVa3BhVFRKdVNYVktNREZ6Y0RGM1puRmpPWGx6VVROV2MyMU5UMFZCU2s1MFdWQkNSRFpQVUdaRExXeDVlalZ1UzJFdExVNTFOblpUWldGaVlqaHBjbkJEWTJGVVZqVXRlbGN4UkRSNmFXNWhaWGN6WldwTmJrOUZJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80U0RZNGFtWkhTbmh0YkVkMGFIbGhkamhPT0hacmFIbFFkMlpMV2tKTU56QktVWEJCTlVwallsOXFPWFV6UTA1VlEwOWZZalpJVWs4dGIzcDVVVUZTVG5Wbk5tRnpYMDFvV1Vkb09DMUVkVVF6YkMxc09ERndRVWRQWWtWSU0ySkZXRU4zYzNsbWJEUnVkWFIzT1hSMVEwTm9XREJJUWswdGIzVnRiVkF4WlhWRlVEZE1NQzE1VkVOQ2EwNUxUWEJhUVhWb1JtSXdJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.

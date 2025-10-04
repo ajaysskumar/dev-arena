@@ -20,11 +20,11 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" /> -->
     
-<!--Blazor:{"type":"webassembly","prerenderId":"2c7fe8fa296f40c282e1dffa8a5255a8","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>Test Driven Development (TDD): A Practical Introduction</title><meta property="og:url" content="http://127.0.0.1:5050/blog/tdd/introduction" />
+<!--Blazor:{"type":"webassembly","prerenderId":"a313c33f211a4309920b25fdddfe3b0e","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>Test Driven Development (TDD): A Practical Introduction</title><meta property="og:url" content="http://127.0.0.1:5050/blog/tdd/introduction" />
     <meta property="og:title" content="Test Driven Development (TDD): A Practical Introduction" />
     <meta property="og:description" content="" />
     <meta property="og:image" content="http://127.0.0.1:5050/images/blog/tdd/intro/banner.svg" />
-    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"2c7fe8fa296f40c282e1dffa8a5255a8"}-->
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"a313c33f211a4309920b25fdddfe3b0e"}-->
 </head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -40,7 +40,7 @@
 
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"525ccfc66c9549e499afad52a9f41347","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"d6fdb75f888a406a95e8f3420d0edb28","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -104,22 +104,101 @@
                     
                     <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 20 Sep 2025</span></div></div></div></div></div></header>
 
-  <section id="0804aefd-58a7-4089-826b-7dbddec4d371"><h3></h3><hr class="border border-success border-1 opacity-50">
-    <div><p>Test Driven Development (TDD) is a disciplined approach to software development where you write tests <b>before</b> you write the code. Instead of coding and hoping nothing breaks, TDD gives you a safety net and a clear workflow for building robust features.</p>
-    <p>In this post, we’ll break down the TDD cycle, address common misconceptions, and walk through a simple example in C#.</p></div></section>
 
-  <section id="c1306153-7e4a-4019-9a0e-753344e4862c"><h3>The TDD Cycle: Red, Green, Refactor</h3><hr class="border border-success border-1 opacity-50">
-    <div><ul><li><b>Red:</b> Write a test for a new feature. It should fail, since the feature doesn’t exist yet.</li>
+  <section id="77c35646-66a4-40aa-bb1a-54bbd8de9446"><h3>&#x1F914; Think?</h3><hr class="border border-success border-1 opacity-50">
+    <div><p>
+      Ever shipped a feature, only to have it break something seemingly unrelated? Or spent hours debugging a complex function that grew out of control? This is a common story in software development. The traditional cycle of "write code, then manually test" often leads to a codebase that is brittle, hard to change, and riddled with hidden bugs. As the project grows, the fear of making changes—regression—paralyzes development speed.
+    </p>
+    <p><b>Test-Driven Development (TDD)</b> directly tackles this problem by flipping the process on its head. It’s not about writing more tests; it’s about using tests to drive better design and build confidence. Before you write a single line of implementation, you ask: "What does this code need to do, and how can I prove it?" This simple question forces clarity and leads to more modular, decoupled, and maintainable code.
+    </p>
+    <p>
+      Here’s a quick comparison of the two approaches:
+    </p>
+    <table><thead><tr><th>Aspect</th>
+        <th>Traditional Development</th>
+        <th>Test-Driven Development (TDD)</th></tr></thead>
+      <tbody><tr><td><strong>Workflow</strong></td>
+        <td>1. Write code<br>2. Write tests (maybe)<br>3. Debug</td>
+        <td>1. Write a failing test<br>2. Write code to pass<br>3. Refactor</td></tr>
+      <tr><td><strong>Confidence</strong></td>
+        <td><b>Low</b>, with a constant fear of introducing regressions when making changes.</td>
+        <td><b>High</b>; tests act as a safety net for all changes.</td></tr>
+      <tr><td><strong>Design</strong></td>
+        <td>Often an afterthought, leading to tightly coupled code.</td>
+        <td>Emerges from the need to be testable, promoting modularity.</td></tr>
+      <tr><td><strong>Debugging</strong></td>
+        <td>Reactive; happens when bugs are found later.</td>
+        <td>Proactive; bugs are caught instantly during development.</td></tr></tbody></table>
+    <p>
+      By investing a small amount of time upfront to define behavior with a test, you save an exponential amount of time on debugging and maintenance later. TDD provides a safety net that allows you to refactor and add new features with confidence, knowing that you haven't broken anything.
+    </p></div></section>
+
+  <section id="be3dc04c-804e-4803-8977-64fdd70a45c4"><h4>The TDD Cycle: Red, Green, Refactor</h4><hr class="border border-success border-1 opacity-50">
+    <div><style>
+    .image-header {
+        margin: 0 auto; /* Centers the div */
+        text-align: center;
+    }
+
+    .blog-support-image {
+        width: 100%; /* Ensure the image is fully responsive */
+        height: auto;
+        border-radius: 10px;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .magnified {
+        width: 100%; /* Ensure the magnified image is fully responsive */
+        height: auto;
+        border-radius: 10px;
+        transform: scale(1.5); /* Magnify the image */
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .cursor-magnify {
+        cursor: zoom-in; /* Circular magnify button */
+    }
+
+    .cursor-de-magnify {
+        cursor: zoom-out; /* Circular de-magnify button */
+    }
+
+    figcaption {
+        font-style: italic;
+        padding: 2px;
+        text-align: center;
+    }
+
+    .figure-caption {
+        font-size: 0.9rem; /* Adjust caption size */
+        color: #6c757d; /* Muted text color */
+        text-align: center; /* Center align */
+        margin-top: 8px; /* Space between image and caption */
+        font-weight: 500; /* Slightly bold for readability */
+    }
+
+    .figure-caption strong {
+        color: #343a40; /* Darker color for image number */
+        font-weight: 600; /* Make image number bold */
+    }
+</style>
+
+<div class="row image-header"><figure class="text-center"><img src="/images/blog/tdd/intro/tdd-cycle.png" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="Event-driven communication flow in the demo repository - showing how messages flow from Sender through Event Bus to multiple listeners (Receiver and Logger)" loading="lazy" />
+        <figcaption class="figure-caption"><strong>Figure 1 :</strong> Event-driven communication flow in the demo repository - showing how messages flow from Sender through Event Bus to multiple listeners (Receiver and Logger)</figcaption></figure></div>
+    <ul><li><b>Red:</b> Write a test for a new feature. It should fail, since the feature doesn’t exist yet.</li>
       <li><b>Green:</b> Write the minimum code needed to make the test pass.</li>
       <li><b>Refactor:</b> Clean up the code, keeping all tests green.</li></ul>
     <p>This loop is repeated for every new piece of functionality. It’s simple, but it fundamentally changes how you design and maintain code.</p></div></section>
 
-  <section id="76a222ec-e752-4a1c-8d84-72ae0f85856a"><h3>Common Myths About TDD</h3><hr class="border border-success border-1 opacity-50">
-    <div><ul><li><b>“TDD slows you down.”</b> It may feel slower at first, but it saves hours of debugging and regression fixes in the long run.</li>
-      <li><b>“TDD is just about testing.”</b> Actually, TDD is a design technique. Tests guide your architecture and help you write modular, maintainable code.</li>
-      <li><b>“TDD only works for simple problems.”</b> TDD is even more valuable for complex domains, where breaking problems into small, testable steps is crucial.</li></ul></div></section>
+  <section id="13b32600-9530-4b40-a796-30c1eac8428c"><h4>Common Myths About TDD &amp; demystifying them</h4><hr class="border border-success border-1 opacity-50">
+    <div><ul><li><b>“TDD slows you down.”</b>
+        <p>While the initial cycle of writing a test first can feel slower than just diving into code, this is a short-term perspective. The time invested upfront is repaid tenfold by drastically reducing debugging time. Instead of spending hours hunting for bugs later, you catch them instantly. Furthermore, the comprehensive test suite acts as a safety net, giving you the confidence to refactor and add features quickly without fear of breaking existing functionality.</p></li>
+      <li><b>“TDD is just about testing.”</b>
+        <p>This is perhaps the biggest misconception. TDD is fundamentally a <b>design</b> practice. By forcing you to think about how a component will be used before you implement it, you naturally create cleaner, more decoupled interfaces. It encourages you to write small, focused units of code that are easy to test and, therefore, easy to understand and maintain.</p></li>
+      <li><b>“TDD only works for simple problems.”</b>
+        <p>On the contrary, TDD shines in complex systems. It provides a structured way to tackle complexity by breaking down large problems into small, verifiable steps. Instead of getting overwhelmed by the entire system, you focus on one specific behavior at a time. This incremental approach ensures that each component works as expected before being integrated into the larger whole, making complexity manageable.</p></li></ul></div></section>
 
-  <section id="9498f45c-8cae-4402-b323-9809f2af8369"><h3>A Simple Example: Adding Two Numbers</h3><hr class="border border-success border-1 opacity-50">
+  <section id="309a7375-818f-497c-a760-092f1c5ed3f1"><h4>A Simple Example: Adding Two Numbers</h4><hr class="border border-success border-1 opacity-50">
     <div><p>Let’s see TDD in action with a basic C# example. Suppose we want a method that adds two numbers.</p>
     <ol><li><b>Write a failing test (Red):</b></li></ol>
     <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
@@ -148,10 +227,52 @@ public class Calculator
 <br>
     <p>Now the test passes. If the code is already clean, you may not need to refactor. In real projects, this is where you improve names, remove duplication, or reorganize logic—confident that your tests have your back.</p></div></section>
 
-  <section id="cd116505-cf97-4da5-bf46-a7bb22104117"><h3>Why TDD Matters</h3><hr class="border border-success border-1 opacity-50">
-    <div><p>TDD isn’t about writing more tests. It’s about building confidence in your codebase, enabling safe refactoring, and letting tests drive better design decisions. The process scales from trivial methods to complex systems.</p></div></section>
+  <section id="09b63b1e-989d-4d07-810f-1c4f56f54ceb"><h4>Practicing TDD in day to day development</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>
+      The real power of TDD becomes clear when you apply it to a user story. Many developers understand the Red-Green-Refactor cycle but struggle to see how it fits into their daily workflow. Let's bridge that gap with a common scenario.
+    </p>
+    <p>
+      Imagine you're given the following user story:
+    </p>
+    <blockquote class="blockquote">
+      "As a customer, I want to see a 'New' badge on products added in the last 7 days, so I can easily spot recent items."
+    </blockquote>
+    <p>
+      How would you approach this with TDD? Instead of jumping straight to UI code, you start by asking: "What's the smallest piece of logic I need to test?"
+    </p>
+    <ol><li><strong>Start with the Core Logic (The "Is New?" Question):</strong> The central requirement is determining if a product is "new." This is a perfect candidate for a unit test.
+      <ul><li><strong>RED:</strong> Write a test for a <code>`Product`</code> model. <code>`IsNew_WhenProductIs3DaysOld_ShouldBeTrue()`</code>. It will fail because there's no <code>`IsNew`</code> property.
+        </li>
+        <li><strong>GREEN:</strong> Implement the <code>`IsNew`</code> property: `<code>public bool IsNew => (DateTime.UtcNow - DateAdded).TotalDays &lt;= 7;`</code>. The test passes.
+        </li>
+        <li><strong>REFACTOR:</strong> The number `7` is a "magic number." Let's extract it into a constant like <code>`const int NewProductThresholdInDays = 7;`</code>. The test still passes.
+        </li></ul></li>
+      <li><strong>Cover the Edge Cases:</strong> What about a product that is exactly 7 days old? Or 8 days old?
+      <ul><li><strong>RED:</strong> Write a new test: <code>`IsNew_WhenProductIs8DaysOld_ShouldBeFalse()`</code>. It fails. Oh wait, it passes with our current logic. Great! This confirms our logic is correct. Let's add one for exactly 7 days to be sure.
+        </li></ul></li>
+      <li><strong>Move Up to the UI/Integration Level:</strong> Now that the core logic is solid and tested, you can work on the UI. You can be confident that if you pass a <code>`Product`</code> object to your Razor component, the <code>`product.IsNew`</code> property will work correctly. Your UI logic becomes simpler:
+      <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-razor" style="font-size: 0.8rem;">@if (product.IsNew)
+  {
+    &lt;span class="badge"&gt;New&lt;/span&gt;
+  }
+      </code></pre></div><div class="col-12 text-center"><code>Code Sample #3 : UI logic becomes trivial</code></div></div></div>
+<br></li></ol>
+    <p>
+      This approach breaks a feature down into verifiable steps. You build a foundation of reliable logic first, making the final integration into the UI simple and low-risk. You're not just testing; you're using tests to guide your development from a user story to finished code.
+    </p></div></section>
 
-  <section id="7256c135-4c15-4097-a667-10d8e1719fd2"><h3></h3><hr class="border border-success border-1 opacity-50">
+  <section id="7fdfa62a-2c53-4719-aaf0-76347eaeb932"><h4>Summary: Building Confidence Through Code</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>
+        Test-Driven Development is more than just a testing strategy—it's a fundamental shift in how we approach software development. By following the simple yet powerful <b>Red-Green-Refactor</b> cycle, we move from a reactive "code and fix" model to a proactive one where tests guide our design.
+    </p>
+    <p>
+        As we've seen, TDD helps demystify common misconceptions. It doesn't slow you down; it saves countless hours in debugging. It's not just for simple problems; it excels at managing complexity by breaking it into small, verifiable steps. Most importantly, TDD is a <b>design practice</b> that leads to cleaner, more maintainable code.
+    </p>
+    <p>
+        From a basic calculator to a real-world user story, the process remains the same: define behavior with a test, implement it simply, and then refine your code with the confidence that your test suite provides a safety net. This discipline builds robust, adaptable software and gives developers the freedom to evolve their codebase without fear.
+    </p></div></section>
+
+  <section id="feb22fb9-a9f9-4e2f-896e-d10e635ee9ea"><h4></h4><hr class="border border-success border-1 opacity-50">
     <div><p>In the next post, we’ll tackle a slightly more complex problem (like FizzBuzz or a String Calculator) and walk through the TDD process step by step.</p>
     <p>Have you tried TDD before? What worked, what didn’t? Share your experience in the comments below.</p></div></section></div>
     <div class="content-wrapper mt-4"><script src="https://giscus.app/client.js" data-repo="ajaysskumar/dev-arena" data-repo-id="R_kgDONiBGGQ" data-category="Comments" data-category-id="DIC_kwDONiBGGc4Cq2ND" data-mapping="pathname" data-strict="0" data-reactions-enabled="0" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script></div></div>
@@ -173,9 +294,9 @@ public class Calculator
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-            </div><!--Blazor:{"prerenderId":"525ccfc66c9549e499afad52a9f41347"}-->
+            </div><!--Blazor:{"prerenderId":"d6fdb75f888a406a95e8f3420d0edb28"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UkdoaFZEVmpaMWx1V2tkcFNUVmlMWFJaTW0xV05HaGFVRTFxTkMxaVZsZFNSMW8wWW1oeVprTkphM0JITVV0WlpGQldja2h5U0VKRlJGazVORkJ2Y0hJeFJsbE5PV1psVG1KeVdVaHpZVnBqVEVSdWExOUNYMjlvUTNSS04yeEdaMEZoVEVKZmRHWlJTMGRDZFRKSVJ6UldMVFp1ZEdrdFpscEhUbFpDVEhWQmJHcDBiVzVMTUhobFFXZHdUVWhhUVZCZlJWcE5JaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80U0RZNGFtWkhTbmh0YkVkMGFIbGhkamhPT0hacmFVdGhUM2RvV2t0bFZYQXljVFV5YjJacWFWQTNTMnByWmpJeVkweHRiSFoyUVRkd2VDMVJSRWxIU1RBdGJFVjZWVTVJTlZKSFdtWjNXamx0TFRCRmMwOTNVek5wUzA5TWVVdENVVTUwUkd0eU9XZEJRWEV6VVVabVoza3phMTk1TkhsTU1sSnpUMk5VVUcxVlNVVktiblEzT0V0MU9FeE1jVEp4TUZCelprbE5JaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
