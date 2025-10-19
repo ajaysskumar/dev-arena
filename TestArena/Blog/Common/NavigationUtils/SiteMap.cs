@@ -154,6 +154,11 @@ namespace TestArena.Blog.Common.NavigationUtils
             new DateTime(2025, 10, 04),
             "images/blog/tdd/string-calculator/banner.svg",
             ["TDD", "Test Driven Development", ".NET", "C#"]),
+        new("Writing good tests in TDD",
+            "/blog/tdd/writing-good-tests",
+            new DateTime(2025, 10, 18),
+            "images/blog/tdd/writing-good-tests/banner.svg",
+            ["TDD", "Testing", "Best Practices", ".NET", "C#"]),
         ];
 
         public static IEnumerable<PageInfo> PublishedArticles => Pages.Where(p => p.IsPublished && p.PublishedOn <= DateTime.UtcNow);

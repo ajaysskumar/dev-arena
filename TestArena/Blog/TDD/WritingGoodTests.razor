@@ -1,0 +1,224 @@
+@page "/blog/tdd/writing-good-tests"
+@using TestArena.Blog.Common
+@using TestArena.Blog.Common.NavigationUtils
+
+@code {
+	PageInfo? currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/tdd/writing-good-tests");
+}
+
+<BlogContainer>
+	<Header Title="Writing Good Tests in TDD"
+			Image="@(currentPage?.ArticleImage)"
+			PublishedOn="@(currentPage?.PublishedOn ?? DateTime.UtcNow)"
+			Authors="Ajay Kumar">
+	</Header>
+
+	<Section Heading="Ever run a test suite where everything’s green… but you still don’t trust it?" Level="4">
+		<p>
+            Have you ever encountered that unreliable test everyone avoids, or noticed a flaky test that occasionally fails but gets ignored due to tight deadlines? Let’s explore why this happens.<br /> <br />
+            
+			In <b>Test-Driven Development (TDD)</b>, tests aren’t just a safety net you add later. They’re the steering wheel. But if that steering wheel wobbles, you’ll never enjoy the ride.
+		</p>
+	</Section>
+
+	<Section Heading="Why ‘Good Tests’ Matter in TDD" Level="4">
+		<p>
+			Good tests are what make TDD possible—not just productive. TDD depends on trustworthy feedback loops. Poor tests lead to false confidence, brittle design, and slowed development. Great tests illuminate design issues early.
+		</p>
+		<p>
+			<b>Example:</b> Consider this misleading test:
+		</p>
+        <CodeSnippet Language="csharp">
+	// Misleading: Tests implementation, not behavior
+	[Fact]
+	public void Test_Addition()
+	{
+		var calc = new Calculator();
+		Assert.True(calc.Add(2, 2) == 4); // What does this really prove?
+	}
+        </CodeSnippet>
+		<p>
+			A better test would be:
+		</p>
+        <CodeSnippet Language="csharp">
+	[Fact]
+	public void ReturnsSum_WhenAddingTwoNumbers()
+	{
+		var calc = new Calculator();
+		var result = calc.Add(2, 2);
+		Assert.Equal(4, result);
+	}
+        </CodeSnippet>
+	</Section>
+
+    <Section Heading="What makes a ‘Good Test’? The 5 Pillars" Level="4">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Pillar</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Clarity (Naming)</td>
+                    <td>Test names should describe intent, not mechanics.</td>
+                    <td>
+                        <CodeSnippet Language="csharp">
+    // Good
+    [Fact]
+    public void ReturnsFizz_WhenNumberIsDivisibleByThree() { }
+    // Bad
+    [Fact]
+    public void Test1() { }
+                        </CodeSnippet>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Structure (AAA)</td>
+                    <td>Arrange → Act → Assert keeps tests readable.</td>
+                    <td>
+                        <CodeSnippet Language="csharp">
+    // Good
+    var calc = new Calculator(); // Arrange
+    var result = calc.Add(1, 2); // Act
+    Assert.Equal(3, result); // Assert
+    // Bad
+    Assert.Equal(3, new Calculator().Add(1, 2));
+                        </CodeSnippet>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Focus</td>
+                    <td>One behavior per test, one reason to fail.</td>
+                    <td>
+                        <CodeSnippet Language="csharp">
+    // Good
+    [Fact]
+    public void ReturnsZero_WhenEmptyInput() { }
+    // Bad
+    [Fact]
+    public void TestMultipleBehaviors() {
+        Assert.Equal(0, calc.Add(""));
+        Assert.Equal(1, calc.Add("1"));
+    }
+                        </CodeSnippet>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Readability &gt; Cleverness</td>
+                    <td>Don’t try to optimize test code. Tests are for humans.</td>
+                    <td>
+                        <CodeSnippet Language="csharp">
+    // Good
+    var result = calc.Add(2, 2);
+    Assert.Equal(4, result);
+    // Bad
+    Assert.Equal(4, calc.Add(2, 2)); // Inline everything
+                        </CodeSnippet>
+                    </td>
+                </tr>
+                <tr>
+                    <td>No Logic in Tests</td>
+                    <td>Avoid loops, conditionals, or calculations in assertions.</td>
+                    <td>
+                        <CodeSnippet Language="csharp">
+    // Bad
+    for (int i = 0; i &lt; 10; i++)
+        Assert.True(calc.Add(i, 0) == i);
+    // Good
+    Assert.Equal(0, calc.Add(0, 0));
+    Assert.Equal(1, calc.Add(1, 0));
+                        </CodeSnippet>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </Section>
+
+	<Section Heading="How Tests Drive Design" Level="4">
+		<p>
+			Every good test you write shapes your API. A hard-to-test design usually means the code is too coupled. If your test setup feels painful—that’s feedback, not failure.
+		</p>
+		<div class="tip">
+			<b>Tip:</b> Refactor when writing the test feels clumsy. Pain-driven refactoring leads to better design.
+		</div>
+	</Section>
+
+	<Section Heading="Common Pitfalls and Gotchas" Level="4">
+		<ul>
+			<li><b>❌ Tests that don’t test anything</b> — empty or overly mocked tests.</li>
+			<li><b>❌ Assertion Soup</b> — multiple unrelated asserts.</li>
+			<li><b>❌ God Test</b> — testing multiple classes or layers in one go.</li>
+			<li><b>❌ Logic in Tests</b> — if/else or loops inside tests.</li>
+		</ul>
+        <CodeSnippet Language="csharp">
+	// Bad: God Test
+	[Fact]
+	public void TestEverything() {
+		var service = new Service();
+		var repo = new Repo();
+		Assert.True(service.DoWork());
+		Assert.True(repo.Save());
+	}
+	// Good: Split into focused tests
+        </CodeSnippet>
+	</Section>
+
+	<Section Heading="Best Practices in the Wild" Level="4">
+		<p>
+			Here’s a mini before-and-after:
+		</p>
+        <CodeSnippet Language="csharp">
+	// Before: Messy
+	[Fact]
+	public void TestStuff() {
+		var calc = new Calculator();
+		Assert.Equal(0, calc.Add(""));
+		Assert.Equal(1, calc.Add("1"));
+		Assert.Equal(3, calc.Add("1,2"));
+	}
+	// After: Clear, AAA, focused
+	[Fact]
+	public void ReturnsZero_WhenEmptyInput() {
+		var calc = new Calculator();
+		var result = calc.Add("");
+		Assert.Equal(0, result);
+	}
+	[Fact]
+	public void ReturnsSum_WhenNumbersProvided() {
+		var calc = new Calculator();
+		var result = calc.Add("1,2");
+		Assert.Equal(3, result);
+	}
+        </CodeSnippet>
+		<p>
+			Readability improves confidence and flow.
+		</p>
+	</Section>
+
+	<Section Heading="Wrap-Up: The Meta-Lesson" Level="4">
+		<p>
+			When your tests read like documentation, you know you’re doing TDD right.<br />
+			<b>Reflect:</b> If someone who never saw your code can understand your tests—would they know what the system does?
+		</p>
+		<p>
+			<i>Next, we’ll look at how to keep your tests clean even when the code depends on other code—through mocks, stubs, and fakes.</i>
+		</p>
+	</Section>
+
+	<Section Heading="✨ 5-Point Test Quality Check" Level="4">
+		<ul>
+			<li>Does the test name describe intent?</li>
+			<li>Is the Arrange-Act-Assert structure clear?</li>
+			<li>Does the test focus on one behavior?</li>
+			<li>Is the test readable by someone new?</li>
+			<li>Is there any logic in the test? (If so, refactor!)</li>
+		</ul>
+	</Section>
+
+	<CalloutBox Type="quote">
+		<b>“A bad test is worse than no test — because it lies.”</b>
+	</CalloutBox>
+</BlogContainer>
