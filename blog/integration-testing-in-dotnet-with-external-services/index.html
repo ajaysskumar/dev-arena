@@ -20,11 +20,11 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" /> -->
     
-<!--Blazor:{"type":"webassembly","prerenderId":"815e00bd734746b3a06efed6caa0f87a","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>Integration testing for dotnet core APIs: Handling 3rd party service calls using wiremock</title><meta property="og:url" content="http://127.0.0.1:5050/blog/integration-testing-in-dotnet-with-external-services" />
+<!--Blazor:{"type":"webassembly","prerenderId":"324938413f3d468f9c4c4c58dcf4f68c","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>Integration testing for dotnet core APIs: Handling 3rd party service calls using wiremock</title><meta property="og:url" content="http://127.0.0.1:5050/blog/integration-testing-in-dotnet-with-external-services" />
     <meta property="og:title" content="Integration testing for dotnet core APIs: Handling 3rd party service calls using wiremock" />
     <meta property="og:description" content="" />
     <meta property="og:image" content="http://127.0.0.1:5050/images/blog/integration-testing/handling-external-services/banner.png" />
-    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"815e00bd734746b3a06efed6caa0f87a"}-->
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"324938413f3d468f9c4c4c58dcf4f68c"}-->
 </head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -40,7 +40,7 @@
 
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"3477a0ff6a46485f9d00c5ee40ec730a","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"88e8d8c28e2a48f4a4cf49bdf2182b1d","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -87,7 +87,7 @@
                     
                     <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 08 Mar 2025</span></div></div></div></div></div></header>
 
-    <section id="73f8a145-5789-4fe8-a955-2a55176871e3"><h4>Summary</h4><hr class="border border-success border-1 opacity-50">
+    <section id="472d850d-517a-4025-81c1-0dbef77152d2"><h4>Summary</h4><hr class="border border-success border-1 opacity-50">
     <div><p>This is a continuation of the <b>Integration testing in dotnet</b> series. This time we will be covering the
             scenario where third-party service calls are present in our API flows.</p>
         <p>Before we begin further, you may want to visit the previous articles in this series to get a better context
@@ -103,7 +103,7 @@
         <div class="col-md-4 d-flex align-items-center pe-2"><img src="/images/blog/integration-testing/handling-database/banner.png" class="img-fluid rounded-end" alt="Blog Image" /></div></div></div>
         <p>Also, all the code used here is available at: <a href="https://github.com/ajaysskumar/SuperHeroSolution/tree/main/DemoWith3rdPartyService">SuperHero repository link</a></p></div></section>
 
-    <section id="8787a5d9-1f5a-4798-85d3-c23ad0e089ce"><h4>Why need to mock?</h4><hr class="border border-success border-1 opacity-50">
+    <section id="e8241e79-0630-467f-83ba-ef746f61630f"><h4>Why need to mock?</h4><hr class="border border-success border-1 opacity-50">
     <div><p>Mocking third-party service calls is crucial to ensure tests are isolated, reliable, and repeatable.</p>
         <p>It avoids dependency on external systems that may be unavailable, slow, or unpredictable, allowing the focus
             to remain on verifying the behavior of your application in a controlled environment.</p>
@@ -114,7 +114,7 @@
             integration of all the components of our application. So we will be mocking only what goes out to the
             network and what comes into the network here.</p></div></section>
 
-    <section id="e457b97c-de65-4846-bab0-203eee6790ab"><h4>Suspects API</h4><hr class="border border-success border-1 opacity-50">
+    <section id="3d9c4dff-8498-4461-a3e1-56024224dedb"><h4>Suspects API</h4><hr class="border border-success border-1 opacity-50">
     <div><p>Continuing with the article, let's imagine we need an API that returns the list of notorious suspects in the
             superhero universe.</p>
         <p>We created an API as mentioned in the below Swagger screenshot:</p>
@@ -205,7 +205,7 @@
         </code></pre></div><div class="col-12 text-center"><code>Code Sample #2 : Suspect API</code></div></div></div>
 <br></div></section>
 
-    <section id="ee5f8100-2808-402a-ad61-ab1eec88b6c2"><h4>Wiremock to the rescue!</h4><hr class="border border-success border-1 opacity-50">
+    <section id="0fa47df0-1b0e-4ffb-97a4-092fc70aeeba"><h4>Wiremock to the rescue!</h4><hr class="border border-success border-1 opacity-50">
     <div><p>Here we will be setting up <b>Wiremock</b> to be used in the integration tests. For those who are new to
             Wiremock, please visit <a href="https://github.com/WireMock-Net/WireMock.Net" target="_blank">WireMock.Net</a> for more details.</p>
         <p>Install the below package in the Integration test project:</p>
@@ -268,7 +268,7 @@
 <br>
         <p>This completes the setup. We are now ready to write the tests.</p></div></section>
 
-    <section id="c97f82b5-cf3f-4241-9007-f0d52aae0e81"><h4>Test Scenarios</h4><hr class="border border-success border-1 opacity-50">
+    <section id="3d45bb69-3930-4dd1-a9d0-2e93c660303d"><h4>Test Scenarios</h4><hr class="border border-success border-1 opacity-50">
     <div><p>Below are the test scenarios for our Suspect API. These tests ensure that the API behaves as expected under
             different conditions, including both positive and negative cases.</p>
 
@@ -350,7 +350,7 @@
         </code></pre></div><div class="col-12 text-center"><code>Code Sample #8 : Negative Test: 500 Response</code></div></div></div>
 <br></div></section>
 
-    <section id="4997c11b-929a-4c69-b54d-1100187f19a6"><h4>Test Results</h4><hr class="border border-success border-1 opacity-50">
+    <section id="0b22f4f7-18b9-4fa6-b63d-b3c5046ecceb"><h4>Test Results</h4><hr class="border border-success border-1 opacity-50">
     <div><p>When running the tests, we can observe the following results:</p>
         <style>
     .image-header {
@@ -428,9 +428,9 @@
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-            </div><!--Blazor:{"prerenderId":"3477a0ff6a46485f9d00c5ee40ec730a"}-->
+            </div><!--Blazor:{"prerenderId":"88e8d8c28e2a48f4a4cf49bdf2182b1d"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UW1GU01UUldSVzAzY0VOMFlUUjFaa3d4ZFdKMVVEWTFNalpIVjNrMFNXUkVaMUZTVW1oVVIyUmZTMkYyV1ZSNVZrbE1Oak5vTm5Ca1FXcHlTVXd4ZFc0MWN6RnZXa3h0T0dkbVgycHRPVkIwVkRNMVdEWlFUV3BtY2twNVVVY3dXbVZUTjNSblEzRXlSVFo0WlVwb1VpMWpTVGh3Ym1kRlIySmZhVFpIUTFvNU5WTjNWbVl6Um1sd2FVTkRhak5uYW00NWJFaHJJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UjA1RGIxbGhORzR3YUU1eFMyeG1iM295TW5oelFtVmlWVWRRT0ZVMFgxb3hPVTU1VkdvekxXTk5SR3RpYm1sVU16QjBYM2xrWmt0SVdXWnNURXB5ZEV0eFdUSm1hV0UyUWxSUFRHNUtPR3hEY0ZOelJXaFZUM1pDTFRsNVJXMU9hMjl2T1VWWWQxRk5iMUpGV21kWlJISmpiRUV4ZVUwd04weGhlVFoxTlVZdFdXdERlRGh4ZWpaYVdVUm9XVUo0ZEVvM1RWWlZJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.

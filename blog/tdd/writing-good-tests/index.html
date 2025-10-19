@@ -1,0 +1,296 @@
+<!DOCTYPE html><html lang="en"><head>
+    <!-- Google tag (gtag.js) -->
+    <script defer="" src="https://www.googletagmanager.com/gtag/js?id=G-N1BDBV7WLD"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-N1BDBV7WLD');
+    </script>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Dev Codex: .NET Development and Testing Guide</title>
+    <meta name="description" content="Your ultimate resource for development, AI integration, clean coding, software testing, and modern software practices."/>
+    <!-- Removed meta keywords tag as modern search engines often ignore it -->
+    <meta name="author" content="Ajay Kumar"/>
+    <!-- <meta property="og:title" content="Dev Codex: Your Ultimate Guide to .NET Development, AI, and Software Practices" />
+    <meta property="og:description" content="Explore expert insights on .NET development, AI integration, clean coding, performance testing, and modern software practices. Build better, smarter, and faster applications with Dev Codex." />
+    <meta property="og:url" content="https://devcodex.in/blog/connection-pooling-sql-server" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" /> -->
+    
+<!--Blazor:{"type":"webassembly","prerenderId":"274887106514449f94fc5436a8b6e620","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>Writing Good Tests in TDD</title><meta property="og:url" content="http://127.0.0.1:5050/blog/tdd/writing-good-tests" />
+    <meta property="og:title" content="Writing Good Tests in TDD" />
+    <meta property="og:description" content="" />
+    <meta property="og:image" content="http://127.0.0.1:5050/images/blog/tdd/writing-good-tests/banner.svg" />
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"274887106514449f94fc5436a8b6e620"}-->
+</head><body><headoutlet>
+    <base href="/"/>
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/app.css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" defer=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js" defer=""></script>
+<link rel="icon" type="image/png" href="favicon.png"/>
+<link href="TestArena.styles.css" rel="stylesheet"/>
+
+
+
+    <div id="app">
+<!-- %%-PRERENDERING-BEGIN-%% -->
+<!--Blazor:{"type":"webassembly","prerenderId":"ec48c1be229d41769e8f242afca05051","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
+                        <h3 class="m-0">Dev Codex</h3></a></div>
+
+                
+                <div class="col-12 col-md-4 d-flex justify-content-md-center justify-content-center mt-2 mt-md-0"><div class="w-75 position-relative"><input type="text" class="form-control" placeholder="Search..." />
+        <ul class="list-group position-absolute w-100 mt-1" style="z-index: 1000;" hidden></ul></div></div>
+
+                
+                <div class="col-12 col-md-4 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><div class="dropdown"><a href="/about-author" class="d-inline-block rounded-circle overflow-hidden border border-white" style="width: 3rem; height: 3rem; border-width: 0.25rem;"><img src="/images/shared/author.png" alt="About Author" class="img-fluid rounded-circle" style="width: 100%; height: 100%; object-fit: cover;"></a></div></div></div></div></div></header>
+        <article class="content px-4" b-mcp0h0uciv><div class="container-fluid d-flex flex-column align-items-center"><div class="content-wrapper"><style>
+    .article-header {
+        margin: 0 auto;
+        /* Centers the div */
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    .container-fluid,
+    .row,
+    .col-md-12,
+    .col-6 {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .article-image {
+        max-width: 500px !important;
+        height: auto;
+        border-radius: 10px;
+    }
+</style>
+
+
+
+
+<header class="article-header"><div class="row"><div class="col-md-12"><h1 class="fw-bold">Writing Good Tests in TDD</h1></div>
+        <div class="col-md-12"><img src="images/blog/tdd/writing-good-tests/banner.svg" alt="Article Banner" height="200" width="auto" class="img-fluid rounded mx-auto d-block my-3" loading="lazy" /></div>
+        <div class="col-md-12"><div class="container-fluid"><div class="row"><div class="col-md-4 col-xs-12 d-flex justify-content-md-start justify-content-center"><span class="text-secondary fw-bold">Author(s): </span>
+                        <span class="text-secondary fw-bold ms-1">Ajay Kumar</span></div>
+
+                    <div class="col-md-4 col-xs-12 d-flex justify-content-md-center justify-content-center"><div class="social-share flex" b-gjpj7q7b4s><a href="https://twitter.com/intent/tweet?url=http%3A%2F%2F127.0.0.1%3A5050%2Fblog%2Ftdd%2Fwriting-good-tests&amp;text=Writing%20Good%20Tests%20in%20TDD" title="Share on Twitter" target="_blank" rel="noopener" b-gjpj7q7b4s><img src="images/shared/icons/twitter-old.svg" alt="Twitter/X" width="24" style="cursor:pointer" b-gjpj7q7b4s></a>
+    <a href="https://www.linkedin.com/feed/?shareActive=true&amp;shareUrl=http://127.0.0.1:5050/blog/tdd/writing-good-tests" title="Share on LinkedIn" target="_blank" rel="noopener" b-gjpj7q7b4s><img src="images/shared/icons/linkedin.svg" alt="LinkedIn" width="24" style="cursor:pointer" b-gjpj7q7b4s></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A5050%2Fblog%2Ftdd%2Fwriting-good-tests" title="Share on Facebook" target="_blank" rel="noopener" b-gjpj7q7b4s><img src="images/shared/icons/facebook.svg" alt="Facebook" width="24" style="cursor:pointer" b-gjpj7q7b4s></a></div></div>
+
+                    
+                    <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 18 Oct 2025</span></div></div></div></div></div></header>
+
+	<section id="dcd626c2-540c-4e28-99fc-2bb260fc152d"><h4>Ever run a test suite where everything&#x2019;s green&#x2026; but you still don&#x2019;t trust it?</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>
+            Have you ever encountered that unreliable test everyone avoids, or noticed a flaky test that occasionally fails but gets ignored due to tight deadlines? Let’s explore why this happens.<br> <br>
+            
+			In <b>Test-Driven Development (TDD)</b>, tests aren’t just a safety net you add later. They’re the steering wheel. But if that steering wheel wobbles, you’ll never enjoy the ride.
+		</p></div></section>
+
+	<section id="8ca0cc12-5c0a-49e8-8e6d-d730c7dc6a8f"><h4>Why &#x2018;Good Tests&#x2019; Matter in TDD</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>
+			Good tests are what make TDD possible—not just productive. TDD depends on trustworthy feedback loops. Poor tests lead to false confidence, brittle design, and slowed development. Great tests illuminate design issues early.
+		</p>
+		<p><b>Example:</b> Consider this misleading test:
+		</p>
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
+	// Misleading: Tests implementation, not behavior
+	[Fact]
+	public void Test_Addition()
+	{
+		var calc = new Calculator();
+		Assert.True(calc.Add(2, 2) == 4); // What does this really prove?
+	}
+        </code></pre></div><div class="col-12 text-center"><code></code></div></div></div>
+<br>
+		<p>
+			A better test would be:
+		</p>
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
+	[Fact]
+	public void ReturnsSum_WhenAddingTwoNumbers()
+	{
+		var calc = new Calculator();
+		var result = calc.Add(2, 2);
+		Assert.Equal(4, result);
+	}
+        </code></pre></div><div class="col-12 text-center"><code></code></div></div></div>
+<br></div></section>
+
+    <section id="e889ea59-cb48-46c7-a0f6-b4f62b421556"><h4>What makes a &#x2018;Good Test&#x2019;? The 5 Pillars</h4><hr class="border border-success border-1 opacity-50">
+    <div><table class="table table-bordered"><thead><tr><th>Pillar</th>
+                    <th>Description</th>
+                    <th>Example</th></tr></thead>
+            <tbody><tr><td>Clarity (Naming)</td>
+                    <td>Test names should describe intent, not mechanics.</td>
+                    <td><div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
+    // Good
+    [Fact]
+    public void ReturnsFizz_WhenNumberIsDivisibleByThree() { }
+    // Bad
+    [Fact]
+    public void Test1() { }
+                        </code></pre></div><div class="col-12 text-center"><code></code></div></div></div>
+<br></td></tr>
+                <tr><td>Structure (AAA)</td>
+                    <td>Arrange → Act → Assert keeps tests readable.</td>
+                    <td><div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
+    // Good
+    var calc = new Calculator(); // Arrange
+    var result = calc.Add(1, 2); // Act
+    Assert.Equal(3, result); // Assert
+    // Bad
+    Assert.Equal(3, new Calculator().Add(1, 2));
+                        </code></pre></div><div class="col-12 text-center"><code></code></div></div></div>
+<br></td></tr>
+                <tr><td>Focus</td>
+                    <td>One behavior per test, one reason to fail.</td>
+                    <td><div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
+    // Good
+    [Fact]
+    public void ReturnsZero_WhenEmptyInput() { }
+    // Bad
+    [Fact]
+    public void TestMultipleBehaviors() {
+        Assert.Equal(0, calc.Add(""));
+        Assert.Equal(1, calc.Add("1"));
+    }
+                        </code></pre></div><div class="col-12 text-center"><code></code></div></div></div>
+<br></td></tr>
+                <tr><td>Readability &gt; Cleverness</td>
+                    <td>Don’t try to optimize test code. Tests are for humans.</td>
+                    <td><div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
+    // Good
+    var result = calc.Add(2, 2);
+    Assert.Equal(4, result);
+    // Bad
+    Assert.Equal(4, calc.Add(2, 2)); // Inline everything
+                        </code></pre></div><div class="col-12 text-center"><code></code></div></div></div>
+<br></td></tr>
+                <tr><td>No Logic in Tests</td>
+                    <td>Avoid loops, conditionals, or calculations in assertions.</td>
+                    <td><div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
+    // Bad
+    for (int i = 0; i &lt; 10; i++)
+        Assert.True(calc.Add(i, 0) == i);
+    // Good
+    Assert.Equal(0, calc.Add(0, 0));
+    Assert.Equal(1, calc.Add(1, 0));
+                        </code></pre></div><div class="col-12 text-center"><code></code></div></div></div>
+<br></td></tr></tbody></table></div></section>
+
+	<section id="20e26549-fb6b-4f25-8edf-aa654ad71be5"><h4>How Tests Drive Design</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>
+			Every good test you write shapes your API. A hard-to-test design usually means the code is too coupled. If your test setup feels painful—that’s feedback, not failure.
+		</p>
+		<div class="tip"><b>Tip:</b> Refactor when writing the test feels clumsy. Pain-driven refactoring leads to better design.
+		</div></div></section>
+
+	<section id="1cacdad4-c623-4704-b876-e2a6f0dfdbce"><h4>Common Pitfalls and Gotchas</h4><hr class="border border-success border-1 opacity-50">
+    <div><ul><li><b>❌ Tests that don’t test anything</b> — empty or overly mocked tests.</li>
+			<li><b>❌ Assertion Soup</b> — multiple unrelated asserts.</li>
+			<li><b>❌ God Test</b> — testing multiple classes or layers in one go.</li>
+			<li><b>❌ Logic in Tests</b> — if/else or loops inside tests.</li></ul>
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
+	// Bad: God Test
+	[Fact]
+	public void TestEverything() {
+		var service = new Service();
+		var repo = new Repo();
+		Assert.True(service.DoWork());
+		Assert.True(repo.Save());
+	}
+	// Good: Split into focused tests
+        </code></pre></div><div class="col-12 text-center"><code></code></div></div></div>
+<br></div></section>
+
+	<section id="5499b88b-ba87-4fa9-b3cc-b38896acdfb1"><h4>Best Practices in the Wild</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>
+			Here’s a mini before-and-after:
+		</p>
+        <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
+	// Before: Messy
+	[Fact]
+	public void TestStuff() {
+		var calc = new Calculator();
+		Assert.Equal(0, calc.Add(""));
+		Assert.Equal(1, calc.Add("1"));
+		Assert.Equal(3, calc.Add("1,2"));
+	}
+	// After: Clear, AAA, focused
+	[Fact]
+	public void ReturnsZero_WhenEmptyInput() {
+		var calc = new Calculator();
+		var result = calc.Add("");
+		Assert.Equal(0, result);
+	}
+	[Fact]
+	public void ReturnsSum_WhenNumbersProvided() {
+		var calc = new Calculator();
+		var result = calc.Add("1,2");
+		Assert.Equal(3, result);
+	}
+        </code></pre></div><div class="col-12 text-center"><code></code></div></div></div>
+<br>
+		<p>
+			Readability improves confidence and flow.
+		</p></div></section>
+
+	<section id="6a5d937a-d338-47ac-81c8-01eaba62d2b3"><h4>Wrap-Up: The Meta-Lesson</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>
+			When your tests read like documentation, you know you’re doing TDD right.<br>
+			<b>Reflect:</b> If someone who never saw your code can understand your tests—would they know what the system does?
+		</p>
+		<p><i>Next, we’ll look at how to keep your tests clean even when the code depends on other code—through mocks, stubs, and fakes.</i></p></div></section>
+
+	<section id="9531693a-539e-40d9-a24b-20cb55852a29"><h4>&#x2728; 5-Point Test Quality Check</h4><hr class="border border-success border-1 opacity-50">
+    <div><ul><li>Does the test name describe intent?</li>
+			<li>Is the Arrange-Act-Assert structure clear?</li>
+			<li>Does the test focus on one behavior?</li>
+			<li>Is the test readable by someone new?</li>
+			<li>Is there any logic in the test? (If so, refactor!)</li></ul></div></section>
+
+	<div class="callout-box special &#x2139;&#xFE0F; py-1"><div class="py-1"><span class="callout-icon">&#x2139;&#xFE0F;</span>
+            <span class="callout-title">Tip</span></div>
+        <div class="callout-message"><b>“A bad test is worse than no test — because it lies.”</b></div></div></div>
+    <div class="content-wrapper mt-4"><script src="https://giscus.app/client.js" data-repo="ajaysskumar/dev-arena" data-repo-id="R_kgDONiBGGQ" data-category="Comments" data-category-id="DIC_kwDONiBGGc4Cq2ND" data-mapping="pathname" data-strict="0" data-reactions-enabled="0" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script></div></div>
+
+<style>
+    .content-wrapper {
+        width: 50%; /* Leaves 20% space on left and right */
+        background: white;
+    }
+
+    @media (max-width: 768px) {
+        .content-wrapper {
+            width: 90%; /* On smaller screens, reduce left-right space */
+        }
+    }
+</style></article>
+        <footer class="bg-dark text-white py-4 mt-auto"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><p class="mb-0">Copyright © 2025 Dev Codex</p></div>
+
+            
+            <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
+                <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
+            </div><!--Blazor:{"prerenderId":"ec48c1be229d41769e8f242afca05051"}-->
+<!-- %%-PRERENDERING-END-%% -->
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UjA1RGIxbGhORzR3YUU1eFMyeG1iM295TW5oelJHdFFiVko0V25KWk5tb3dYMEZEWDA5c1ExQm9VRGRqWkhWRk5sazVlR1I0UzJGelpFSTRabkpWUm5Zd1JYaDVjRjloZFdacVIwNVpjMjF4TFU5blJ6TldUa0ZRZFZSUlJHbERZVnBRTjJwc05qZDVPVnBoUTNaSFdqQk1Vek5LYTBOSlJtNDFaVlkzTlZsU0xWQTNhWEZHTkROSlpHaDVNVlYwY2tGSVgwb3dJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+    <script src="_framework/blazor.webassembly.js" defer="" autostart="false"></script>
+    <script src="brotliloader.min.js" type="module"></script>
+
+
+
+</headoutlet></body></html>
