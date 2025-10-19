@@ -20,11 +20,11 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" /> -->
     
-<!--Blazor:{"type":"webassembly","prerenderId":"54ebf855eb054980805ae1b841313570","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>Performance Testing for APIs: Spike testing with K6</title><meta property="og:url" content="http://127.0.0.1:5050/blog/performance-testing/spike-test-with-k6" />
+<!--Blazor:{"type":"webassembly","prerenderId":"7acb6a2525cf417ca3c9941ab0775a35","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>Performance Testing for APIs: Spike testing with K6</title><meta property="og:url" content="http://127.0.0.1:5050/blog/performance-testing/spike-test-with-k6" />
     <meta property="og:title" content="Performance Testing for APIs: Spike testing with K6" />
     <meta property="og:description" content="How to design and run spike tests with k6, plus real-world incidents that spike testing could have prevented" />
     <meta property="og:image" content="http://127.0.0.1:5050/images/blog/performance-testing/spike-test/banner.png" />
-    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"54ebf855eb054980805ae1b841313570"}-->
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"7acb6a2525cf417ca3c9941ab0775a35"}-->
 </head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -33,14 +33,14 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" defer=""></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js" defer=""></script>
-<link rel="icon" type="image/png" href="favicon.png"/>
+<link rel="icon" type="image/x-icon" href="favicon.ico" sizes="72x72"/>
 <link href="TestArena.styles.css" rel="stylesheet"/>
 
 
 
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"79adf20fe264465e8f45ecb637e649bd","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 2rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"d773787718fa4691949dc1cfa053a18f","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -87,7 +87,7 @@
                     
                     <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 23 Aug 2025</span></div></div></div></div></div></header>
 
-    <section id="f36873bc-b3c8-46f6-9003-973272ca3923"><h5>&#x1F526; Introduction</h5><hr class="border border-success border-1 opacity-50">
+    <section id="670b3899-8bde-43b6-84d7-14683718bad5"><h5>&#x1F526; Introduction</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
             Picture this: a small community library's online reservation page is quiet all week, then a popular local author announces a surprise appearance. Within minutes, hundreds — then thousands — of visitors flood the site to reserve tickets. The system wasn’t built for this sudden surge and becomes unresponsive for the very people it was meant to serve.
         </p>
@@ -96,7 +96,7 @@
         </p>
         <section><h5>Primary Goals of Spike Testing</h5><ol><li>Validate system behavior under sudden traffic surges</li><li>Detect cascading failures caused by resource exhaustion</li><li>Measure recovery time and data integrity after the spike</li><li>Identify capacity bottlenecks that only appear under abrupt load</li></ol></section></div></section>
 
-    <section id="1f44dbe4-e02c-4322-929b-9919bffab5ee"><h5>Why Spike Tests Matter (Real-World Lessons)</h5><hr class="border border-success border-1 opacity-50">
+    <section id="40b426e4-f7d9-496c-8160-5e002eba07ae"><h5>Why Spike Tests Matter (Real-World Lessons)</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
             Many outages aren't caused by steady growth but by sudden spikes. Below are real-world incidents and the ways spike testing could have reduced their impact:
         </p>
@@ -109,7 +109,7 @@
             <li><strong>API Rate-Limiter Misconfiguration:</strong> A public API had generous per-minute quotas but strict per-second limits. When a partner system retried aggressively after brief failures, it triggered per-second throttles and a severe outage. Spike tests exposing per-second behavior would have surfaced the configuration mismatch.
             </li></ul></div></section>
 
-    <section id="0287bef9-d69d-49c5-8985-775af3c906d9"><h5>When to Use Spike Testing</h5><hr class="border border-success border-1 opacity-50">
+    <section id="bbe8a6f8-cf21-4584-ac05-5eb5f9b5f567"><h5>When to Use Spike Testing</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
             Spike testing is essential in scenarios where traffic can jump instantaneously. Use it when:
         </p>
@@ -121,12 +121,12 @@
             If a single event can change your traffic profile in under a minute, run a spike test that reflects the worst realistic sudden jump.
         </div></div></div></section>
 
-    <section id="652d9b43-c77f-4e1d-87a0-5c5fed30c132"><h5>Designing a Spike Test with k6</h5><hr class="border border-success border-1 opacity-50">
+    <section id="81ccf556-63c2-477b-a535-5b04cabda14a"><h5>Designing a Spike Test with k6</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
             The key elements of a spike test are a small baseline, a rapid ramp to a high target for a short duration, and an immediate recovery period to observe system behavior. We'll use the sample k6 script in our repository as a concrete example.
         </p>
 
-        <section id="60c3c202-12a5-4c28-861a-9d2a6577b346"><h5>The Spike Test Script (k6)</h5><hr class="border border-success border-1 opacity-50">
+        <section id="321f7b4b-9f19-49e4-85cc-7743bff3d765"><h5>The Spike Test Script (k6)</h5><hr class="border border-success border-1 opacity-50">
     <div><div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-javascript" style="font-size: 0.8rem;">
 import http from 'k6/http';
 import { check, sleep } from 'k6';
@@ -210,7 +210,7 @@ export function handleSummary(data) {
             </code></pre></div><div class="col-12 text-center"><code>K6 Spike Test Script</code></div></div></div>
 <br>
 
-            <section id="3a87ca48-984d-4ca3-8309-a2a77fae9e52"><h5>Key Components Explained</h5><hr class="border border-success border-1 opacity-50">
+            <section id="8340a373-9310-4b6f-b7ff-653ac72bfb34"><h5>Key Components Explained</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
                     Important parts to note:
                 </p>
@@ -220,7 +220,7 @@ export function handleSummary(data) {
                     <li><strong>Recovery Observation:</strong> The immediate ramp-down and subsequent baseline period reveal whether the system recovers gracefully or remains degraded.</li>
                     <li><strong>Checks &amp; Custom Metrics:</strong> Functional checks (status, response body) and a `check_failure_rate` metric help correlate functional correctness with performance metrics.</li></ol></div></section></div></section>
 
-        <section id="5f7b544b-3ecf-4f4c-ba38-3192e8a27cf8"><h5>How to Run and Interpret Results</h5><hr class="border border-success border-1 opacity-50">
+        <section id="2562d8b7-31eb-432d-bec9-2b0354457cc6"><h5>How to Run and Interpret Results</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
                 Run the spike test from the `api-performance-testing` directory:
             </p>
@@ -287,7 +287,7 @@ k6 run k6-spike-test-demo.js
                 <li><strong>Recovery curve:</strong> How long does p95 take to return to baseline? Long recovery can indicate background tasks or caches rebuilding.</li>
                 <li><strong>Functional failures:</strong> `check_failure_rate` shows correctness regressions — e.g., incomplete responses or incorrect data during the spike.</li></ul></div></section>
 
-        <section id="5ad93fea-4b16-43b0-8331-3584248e1652"><h5>Mitigations and Practical Fixes</h5><hr class="border border-success border-1 opacity-50">
+        <section id="16ac334a-d87e-43a5-a6f2-e695c8df0778"><h5>Mitigations and Practical Fixes</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
                 If a spike test reveals problems, here are practical mitigations to consider:
             </p>
@@ -297,7 +297,7 @@ k6 run k6-spike-test-demo.js
                 <li><strong>Idempotency &amp; Rate Limits:</strong> Make key operations idempotent and ensure rate-limit rules match real traffic patterns (per-second vs per-minute boundaries).</li>
                 <li><strong>Autoscaling Tuning:</strong> Ensure autoscaling reacts fast enough for expected spike durations or adopt pre-warming strategies when spikes are predictable.</li></ol></div></section>
 
-        <section id="ef0f03f8-124e-44ce-9d9d-bd130b4beaa1"><h5>Summary and Next Steps</h5><hr class="border border-success border-1 opacity-50">
+        <section id="1fdc507c-5d4f-4cb7-a957-10f795ca4dcb"><h5>Summary and Next Steps</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
                 Spike tests target a specific, high-risk scenario: abrupt traffic surges. They reveal different failure modes than gradual stress tests — namely race conditions, cache stampedes, connection pool exhaustion, and misconfigured rate-limits. By rehearsing these scenarios in a controlled environment, teams can harden systems and design better fallback behavior.
             </p>
@@ -308,7 +308,7 @@ k6 run k6-spike-test-demo.js
                 <li>Iterate on infrastructure fixes, then re-run to verify improvements.</li>
                 <li>Automate periodic spike tests for critical endpoints ahead of known events (drops, launches).</li></ol></div></section></div></section>
 
-    <section id="a58fa660-91bb-43a0-8260-5077329bc579"><h5>Resources</h5><hr class="border border-success border-1 opacity-50">
+    <section id="e987b204-ed49-4037-972a-50c2282f5369"><h5>Resources</h5><hr class="border border-success border-1 opacity-50">
     <div><ul><li><a href="https://k6.io/docs/">k6 Documentation</a></li>
             <li>Repository: <a href="https://github.com/ajaysskumar/API-Performance-Testing" target="_blank">ajaysskumar/API-Performance-Testing</a> (contains `k6-spike-test-demo.js`)</li></ul></div></section></div>
     <div class="content-wrapper mt-4"><script src="https://giscus.app/client.js" data-repo="ajaysskumar/dev-arena" data-repo-id="R_kgDONiBGGQ" data-category="Comments" data-category-id="DIC_kwDONiBGGc4Cq2ND" data-mapping="pathname" data-strict="0" data-reactions-enabled="0" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script></div></div>
@@ -330,9 +330,9 @@ k6 run k6-spike-test-demo.js
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-            </div><!--Blazor:{"prerenderId":"79adf20fe264465e8f45ecb637e649bd"}-->
+            </div><!--Blazor:{"prerenderId":"d773787718fa4691949dc1cfa053a18f"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UjA1RGIxbGhORzR3YUU1eFMyeG1iM295TW5oelFVSmZia1I0TlhsV2JYZG1SMGhYWTFFdFFYSkVWVEJxVEcxa2VGbElSVGRQVERGVVVUZEZMV1F6YUVaeE1rdzVVR28zWmpoUlRXVTJlamt3VFhJMWJtcEZVWE5MTmkxVlYzcEtWVWh6Ym5wUVJXaGhkRmw2Vm1SR1EwUjNhMkpqTm0xeVh6ZElhbkpZVURoWE0xazFiVUpIZHpsUmFuWkNOVVZMTmxRMFlXWlpJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UldJMmVVeEZNMHRpWkVKMU5GaG5Uazg1UlVoQloyVndOWGN4T1d4bFNqbHVUVFYzVUd0MFlqZGtNRFZuV21acFFtcEROMHhtUlRaalowVmljWFkyTlVsdmVXeFNTbUYyWDNGbmJqRnpRekF4Wlc5NmVVUjZaM2h6ZUhoVWIyRnBiazV2UTJkVVJUZDFaVGh6YldGNkxWSlRSM05qV1ZsS2VGUmhOV2R5UlZoM05HSm5aMkpUWmxsa1QwRldjRzV4WVZack9HVTRJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
