@@ -20,11 +20,11 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" /> -->
     
-<!--Blazor:{"type":"webassembly","prerenderId":"fab041102ce84ae89d91380172a37685","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>Integration testing for dotnet core APIs: Introduction</title><meta property="og:url" content="http://127.0.0.1:5050/blog/integration-testing-in-dotnet-intro" />
+<!--Blazor:{"type":"webassembly","prerenderId":"2a566adb53614707b0052d46ad4b24d3","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>Integration testing for dotnet core APIs: Introduction</title><meta property="og:url" content="http://127.0.0.1:5050/blog/integration-testing-in-dotnet-intro" />
     <meta property="og:title" content="Integration testing for dotnet core APIs: Introduction" />
     <meta property="og:description" content="" />
     <meta property="og:image" content="http://127.0.0.1:5050/images/blog/integration-testing/intro/banner.png" />
-    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"fab041102ce84ae89d91380172a37685"}-->
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"2a566adb53614707b0052d46ad4b24d3"}-->
 </head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -40,7 +40,7 @@
 
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"68e10104e4f74d97887e62c87ebe3010","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"88a4d574648b4ee18e35e94135f568f1","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -87,10 +87,10 @@
                     
                     <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 25 Jan 2025</span></div></div></div></div></div></header>
 
-    <section id="0b7d483f-4afa-4496-b40d-496263e8d314"><h3></h3><hr class="border border-success border-1 opacity-50">
+    <section id="791a3c19-0d9e-4333-aaf3-31eb6946f82e"><h3></h3><hr class="border border-success border-1 opacity-50">
     <div><p>This is going to be multi-part series on integration tests from introduction to advanced used cases.</p></div></section>
 
-    <section id="7e54c680-7016-4807-90e3-d3d4a7e5ae63"><h3>What are integration tests in context of APIs?</h3><hr class="border border-success border-1 opacity-50">
+    <section id="1465fb10-7b6c-4d28-8692-8a093abb6158"><h3>What are integration tests in context of APIs?</h3><hr class="border border-success border-1 opacity-50">
     <div><p>In the context of <b>.NET Core APIs</b> for a blog, integration tests are automated tests that evaluate the
             functionality of various parts of your application working together as a whole. Specifically, these tests
             ensure that multiple components — such as controllers, database access, middleware, internal and external
@@ -208,7 +208,7 @@
 <div class="row image-header"><figure class="text-center"><img src="/images/blog/integration-testing/intro/Build process when integration tests pass.webp" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="Build process when integration tests pass" loading="lazy" />
         <figcaption class="figure-caption"><strong>Figure 2 :</strong> Build process when integration tests pass</figcaption></figure></div></div></section>
 
-    <section id="9e919e4a-b79b-4833-a75a-2e219df9eb71"><h3>Ways to write integration tests</h3><hr class="border border-success border-1 opacity-50">
+    <section id="da7f8e02-9eb6-429d-b863-be0c2b6c816b"><h3>Ways to write integration tests</h3><hr class="border border-success border-1 opacity-50">
     <div><p>Now there are various ways to write integration tests:</p>
         <ul><li>Using Postman or any other API testing tool</li>
             <li>Deploying services to actual environment, either server or cloud service</li>
@@ -223,7 +223,7 @@
             <li><b>Flexible Testing with Dependency Injection:</b> You can easily replace services, middleware, or database contexts using the test server’s dependency injection, which allows for testing specific scenarios like using an in-memory database.</li>
             <li><b>Seamless Integration with Test Frameworks:</b> It integrates well with popular testing frameworks like xUnit, NUnit, or MSTest, and is optimized for use in .NET Core testing scenarios, reducing friction in writing and running tests.</li></ul></div></section>
 
-    <section id="23104527-3f53-440d-85c8-fbdb79716b73"><h3>Diving into the code</h3><hr class="border border-success border-1 opacity-50">
+    <section id="47d97206-632e-49e5-934d-b15925eb6342"><h3>Diving into the code</h3><hr class="border border-success border-1 opacity-50">
     <div><p>For a demo code, we will be referring a code repository, which stores the information for superhero personalities. I’ll be sharing the GitHub link of the code repo at the end of the article.</p>
         <p>Our demo API has 2 APIs:</p>
 
@@ -309,7 +309,7 @@ public class SuperHeroController(ISuperHeroRepository superHeroRepository)
 <br>
         <p>Since this is basic demo, our ISuperHeroRepository interacts with a Sqlite database which has some predefined SuperHero entries.</p></div></section>
 
-    <section id="7655ac74-b73e-48aa-b36e-c401df86a9c6"><h3>Integration test example</h3><hr class="border border-success border-1 opacity-50">
+    <section id="0f12df3f-4331-4418-a874-5b446f8e6a97"><h3>Integration test example</h3><hr class="border border-success border-1 opacity-50">
     <div><p>Here is an example for our integration test for <b>Get SuperHero By Id</b> scenario:</p>
 
         <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
@@ -373,7 +373,7 @@ public async Task Get_ById_SuperHero_Returns_SuperHero()
         </code></pre></div><div class="col-12 text-center"><code>Code Sample #6 : Assert Status Code</code></div></div></div>
 <br>
         <p>This assertion ensures the API returns a status code of <code>200 OK</code>, confirming that the request was successful. If the API returned any other status code (like <code>404 Not Found</code> or <code>500 Internal Server Error</code>), the test would fail.</p></div></section>
-    <section id="8f3fc3bb-5eec-4202-8b93-9c9829408489"><h3>Validating the Returned Data</h3><hr class="border border-success border-1 opacity-50">
+    <section id="169ea067-c551-428a-a0dd-deb81346ce10"><h3>Validating the Returned Data</h3><hr class="border border-success border-1 opacity-50">
     <div><p>Next, we check the actual content of the response by deserializing the JSON response into a <code>SuperHero</code> object:</p>
 
         <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
@@ -385,7 +385,7 @@ public async Task Get_ById_SuperHero_Returns_SuperHero()
         <ul><li><code>ReadFromJsonAsync&lt;SuperHero&gt;()</code>: This method reads the JSON response and converts it into a <code>SuperHero</code> object. If the response doesn’t match the expected structure, or if the superhero doesn't exist, the test will fail.</li>
             <li><code>superHero.Should().NotBeNull()</code>: This assertion checks that the API did, in fact, return a superhero. If the API returned null (i.e., no superhero was found), the test would fail here.</li></ul></div></section>
 
-    <section id="9f6a4606-8d7d-4687-89ba-f9d38a00d7ff"><h3>Verifying Specific Property Values</h3><hr class="border border-success border-1 opacity-50">
+    <section id="1068ae01-eb06-413f-9c8f-ee432a927304"><h3>Verifying Specific Property Values</h3><hr class="border border-success border-1 opacity-50">
     <div><p>Finally, we verify that the returned superhero has the correct properties, specifically checking that the ID is 1 and the superhero's name is "Batman":</p>
 
         <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
@@ -448,7 +448,7 @@ public async Task Get_ById_SuperHero_Returns_SuperHero()
 <div class="row image-header"><figure class="text-center"><img src="/images/blog/integration-testing/intro/Success test result.webp" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="Success test result" loading="lazy" />
         <figcaption class="figure-caption"><strong>Figure 4 :</strong> Success test result</figcaption></figure></div></div></section>
     
-    <section id="07812eb5-3aee-494b-9fe9-78e2602660b1"><h3>Negative Scenario</h3><hr class="border border-success border-1 opacity-50">
+    <section id="5444ecc7-60b8-4e98-90e7-f67926f4b3d9"><h3>Negative Scenario</h3><hr class="border border-success border-1 opacity-50">
     <div><p>Let’s deliberately try to break our code to understand how the test behaves in a negative scenario. The test scenario <b>Get superhero by invalid Id returns not found</b> expects a <code>404 Not Found</code> status code when a superhero is not found.</p>
 
         <p>We will make a change in our code to return <code>400 Bad Request</code> instead of <code>404 Not Found</code>:</p>
@@ -552,9 +552,9 @@ public async Task Get_ById_SuperHero_Returns_SuperHero()
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-            </div><!--Blazor:{"prerenderId":"68e10104e4f74d97887e62c87ebe3010"}-->
+            </div><!--Blazor:{"prerenderId":"88a4d574648b4ee18e35e94135f568f1"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UldJMmVVeEZNMHRpWkVKMU5GaG5Uazg1UlVoQmFGTTBjMVpDY1MxS05WQjVlRk5LWjNwaWRVeFJibmhaTW5FNGJXeHROME5GYTNobWRuUlFWMU5qVkZVdFdsOUdjVzFzVkhaRFkwTjNjM2d0T0hWWlYwRmZRa1pJVEdOM2NtSm1iM2xaVldSdWJIUnpNRzB5WDNoRlVqQTBXSFYwVUdoRGNUazVNMkZKZERkWU5VdDJhVnBqYzBSSldGaE5lVlpIUjJsMlZHRTRJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UTB4c09YTlFibGxOT1VGdWN5MDBNVk5SZEhkSlIyVnJiRTV1TlhwVVVpMVFSMjQ0VkZoRmFHcHRVMjgxV0dsVmJsVmFOMnB0VmpGbllYVmtVa05pWlRaeGFEWllRazUyVWxaaVYwUnJOMHd0U25GS1pHbzBZVk5VT0ZOak9FSnlTMGRIYkZFMlRrRklSelpSY1dKVFIzVjVSV2xVY0VsdFprSkhURUp6YmxOSWJXMTZWRlI1UlV0WGNFOUxkV0l6Y0U0eGVHSkJJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
