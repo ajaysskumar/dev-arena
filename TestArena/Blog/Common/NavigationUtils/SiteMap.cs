@@ -159,12 +159,18 @@ namespace TestArena.Blog.Common.NavigationUtils
             new DateTime(2025, 10, 18),
             "images/blog/tdd/writing-good-tests/banner.svg",
             ["TDD", "Testing", "Best Practices", ".NET", "C#"]),
+        new("TDD in .NET: Working with Dependencies (Mocks, Stubs, and Fakes)",
+            "/blog/tdd/working-with-dependencies",
+            new DateTime(2025, 11, 1),
+            "images/blog/tdd/working-with-dependencies/banner.svg",
+            ["TDD", "Testing", "Mocking", "Test Doubles", ".NET", "C#"],
+            isOlderThumbnailFormat: false),
         ];
 
         public static IEnumerable<PageInfo> PublishedArticles => Pages.Where(p => p.IsPublished && p.PublishedOn <= DateTime.UtcNow);
     }
 
-    public class PageInfo(string header, string relativePath, DateTime publishedOn, string articleImage, List<string> tags, bool isPublished = true)
+    public class PageInfo(string header, string relativePath, DateTime publishedOn, string articleImage, List<string> tags, bool isPublished = true, bool isOlderThumbnailFormat = true)
     {
         public string Header { get; } = header;
         public string RelativePath { get; } = relativePath;
@@ -173,7 +179,7 @@ namespace TestArena.Blog.Common.NavigationUtils
         public string ArticleImage { get; } = articleImage;
         public string ArticleImageThumbnail { get; } = GetThumbnailName(articleImage);
         public bool IsPublished { get; set; } = isPublished;
-
+        public bool IsOlderThumbnailFormat { get; set; } = isOlderThumbnailFormat;
         private static string GetThumbnailName(string imagePath)
         {
             if (string.IsNullOrEmpty(imagePath))

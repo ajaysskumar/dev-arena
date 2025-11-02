@@ -1,0 +1,665 @@
+@page "/blog/tdd/working-with-dependencies"
+@using TestArena.Blog.Common
+@using TestArena.Blog.Common.NavigationUtils
+
+<style>
+    .tip {
+        background-color: #e8f4f8;
+        border-left: 4px solid #17a2b8;
+        padding: 1rem;
+        margin: 1rem 0;
+    }
+
+    .gotcha {
+        background-color: #fff3cd;
+        border-left: 4px solid #ffc107;
+        padding: 1rem;
+        margin: 1rem 0;
+    }
+
+    .challenge {
+        background-color: #e7f5e7;
+        border-left: 4px solid #28a745;
+        padding: 1rem;
+        margin: 1rem 0;
+    }
+
+    .design-insight {
+        background-color: #f3e5f5;
+        border-left: 4px solid #9c27b0;
+        padding: 1rem;
+        margin: 1rem 0;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 20px 0;
+    }
+
+    th, td {
+        padding: 12px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f0f0f0;
+        font-weight: bold;
+    }
+
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+
+    blockquote {
+        font-style: italic;
+        border-left: 4px solid #ddd;
+        padding-left: 1rem;
+        margin: 1.5rem 0;
+        color: #666;
+    }
+</style>
+
+@code {
+    PageInfo? currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/tdd/working-with-dependencies");
+
+    protected override void OnInitialized()
+    {
+        if (currentPage == null)
+        {
+            throw new InvalidOperationException("Page not found in SiteMap");
+        }
+        base.OnInitialized();
+    }
+}
+
+<BlogContainer>
+    <Header Title="TDD in .NET: Working with Dependencies (Mocks, Stubs, and Fakes)"
+            Image="@(currentPage?.ArticleImage)"
+            PublishedOn="@(currentPage?.PublishedOn ?? DateTime.UtcNow)"
+            IsOlderThumbnailFormat="@(currentPage?.IsOlderThumbnailFormat ?? true)"
+            Authors="Ajay Kumar">
+    </Header>
+
+    <Section Heading="🎯 When the Real World Gets in the Way of Your Tests">
+        <p>
+            You've just written a beautiful test. It's clear, focused, and follows the Red-Green-Refactor cycle perfectly. 
+            Then you realize your code needs to send an email, call an external API, or query a database. Suddenly, your 
+            tests become:
+        </p>
+        <ul>
+            <li>🐢 <b>Slow</b> — waiting for database queries or API responses</li>
+            <li>🎲 <b>Unreliable</b> — network issues, rate limits, or external service downtime</li>
+            <li>🎭 <b>Non-deterministic</b> — data changes between test runs</li>
+            <li>🔗 <b>Tightly coupled</b> — difficult to swap or replace dependencies</li>
+        </ul>
+        
+        <blockquote>
+            "The pain of testing dependencies is feedback. It's your code telling you that your design could be cleaner."
+        </blockquote>
+
+        <p>
+            This article will help you understand why dependencies make TDD tricky, what test doubles are (mocks, stubs, 
+            fakes), and how they can actually improve your design—not just your tests.
+        </p>
+    </Section>
+
+    <Section Heading="🪄 The Problem: Why Real Dependencies Break TDD" Level="4">
+        <p>
+            Let's look at a common scenario. You're building a user registration system that sends a welcome email:
+        </p>
+
+        <CodeSnippet Language="csharp" Description="User registration with email dependency" Number="1">
+public class UserService
+{
+    private readonly EmailService _emailService;
+    
+    public UserService(EmailService emailService)
+    {
+        _emailService = emailService;
+    }
+
+    public void RegisterUser(string email, string username)
+    {
+        // ... validation and user creation logic ...
+        
+        _emailService.SendWelcomeEmail(email, username);
+    }
+}
+        </CodeSnippet>
+
+        <p>
+            How do you test this without actually sending emails? More importantly, should your test care about the email at all, 
+            or just that the registration logic works correctly?
+        </p>
+
+        <div class="gotcha">
+            <p><strong>⚠️ The Testing Dilemma:</strong></p>
+            <ul>
+                <li>If you use a real <code>EmailService</code>, tests become slow and may spam real email addresses</li>
+                <li>If you don't test the email integration, you miss a critical part of the feature</li>
+                <li>If you tightly couple to <code>EmailService</code>, changing email providers breaks all your tests</li>
+            </ul>
+        </div>
+
+        <p>
+            This is where <b>Test Doubles</b> come to the rescue. Think of them as stunt performers—they step in when 
+            the real thing is too risky, expensive, or slow for practice.
+        </p>
+    </Section>
+
+    <Section Heading="🧩 Meet the Test Doubles Family" Level="4">
+        <p>
+            Just like Hollywood has different types of stand-ins (stunt doubles, body doubles, CGI), testing has different 
+            types of doubles for different purposes. Let's meet the family:
+        </p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>What it does</th>
+                    <th>Example Use Case</th>
+                    <th>When to use</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Dummy</strong></td>
+                    <td>Passed but never actually used</td>
+                    <td>A null logger passed to satisfy a constructor</td>
+                    <td>Required parameter but unused in test</td>
+                </tr>
+                <tr>
+                    <td><strong>Stub</strong></td>
+                    <td>Provides canned (pre-programmed) responses</td>
+                    <td><code>IUserRepo.GetUser()</code> returns a fake user</td>
+                    <td>To control test data and setup</td>
+                </tr>
+                <tr>
+                    <td><strong>Fake</strong></td>
+                    <td>Has working but simplified implementation</td>
+                    <td>In-memory database for testing</td>
+                    <td>Fast alternative for complex systems</td>
+                </tr>
+                <tr>
+                    <td><strong>Mock</strong></td>
+                    <td>Verifies interactions and behavior</td>
+                    <td><code>Verify(x => x.SendEmail(...))</code></td>
+                    <td>To assert that methods were called correctly</td>
+                </tr>
+                <tr>
+                    <td><strong>Spy</strong></td>
+                    <td>Records calls for later inspection</td>
+                    <td>Capturing all API calls made during a test</td>
+                    <td>Debugging or detailed behavior verification</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="tip">
+            <p><strong>💡 Key Distinction:</strong> <b>Mocks</b> verify behavior (did you call this method?), 
+            while <b>Stubs</b> control state (here's the data you need). Understanding this difference is crucial 
+            for writing clean tests.</p>
+        </div>
+    </Section>
+
+    <Section Heading="💡 Hands-On: Email Notification on User Signup" Level="4">
+        <p>
+            Let's solve our email problem step-by-step using TDD principles and test doubles.
+        </p>
+
+        <h5 class="mt-4"><strong>Step 1: Identify the Problem</strong></h5>
+        <p>
+            Our <code>UserService</code> is tightly coupled to <code>EmailService</code>. This makes it hard to test 
+            and violates the Dependency Inversion Principle. Let's fix the design first.
+        </p>
+
+        <CodeSnippet Language="csharp" Description="Introducing an interface for email service" Number="2">
+public interface IEmailService
+{
+    void SendWelcomeEmail(string email, string username);
+}
+
+public class UserService
+{
+    private readonly IEmailService _emailService;
+    
+    public UserService(IEmailService emailService)
+    {
+        _emailService = emailService;
+    }
+
+    public void RegisterUser(string email, string username)
+    {
+        // ... validation logic ...
+        _emailService.SendWelcomeEmail(email, username);
+    }
+}
+        </CodeSnippet>
+
+        <div class="design-insight">
+            <p><strong>🎨 Design Insight:</strong> By introducing <code>IEmailService</code>, we've made our code 
+            more flexible. Now we can swap email providers, use different implementations for testing, or even 
+            disable emails entirely without changing <code>UserService</code>.</p>
+        </div>
+
+        <h5 class="mt-4"><strong>Step 2: Write a Test with a Mock</strong></h5>
+        <p>
+            Now let's write a test that verifies the email is sent, without actually sending it:
+        </p>
+
+        <CodeSnippet Language="csharp" Description="Testing email sending with Moq" Number="3">
+using Moq;
+using Xunit;
+
+public class UserServiceTests
+{
+    [Fact]
+    public void RegisterUser_SendsWelcomeEmail_WithCorrectDetails()
+    {
+        // Arrange
+        var mockEmailService = new Mock&lt;IEmailService&gt;();
+        var userService = new UserService(mockEmailService.Object);
+
+        // Act
+        userService.RegisterUser("ajay@example.com", "Ajay");
+
+        // Assert
+        mockEmailService.Verify(
+            e => e.SendWelcomeEmail("ajay@example.com", "Ajay"), 
+            Times.Once
+        );
+    }
+}
+        </CodeSnippet>
+
+        <p>
+            This test is fast, deterministic, and focused. It verifies that <code>UserService</code> correctly 
+            calls the email service without actually sending any emails.
+        </p>
+
+        <div class="tip">
+            <p><strong>💡 TDD Benefit:</strong> This test documents the behavior: "When registering a user, 
+            a welcome email should be sent with the user's details." Anyone reading this test understands 
+            the feature immediately.</p>
+        </div>
+
+        <h5 class="mt-4"><strong>Step 3: What About Stubs?</strong></h5>
+        <p>
+            Stubs are useful when you need to control the return values of dependencies. Let's add a feature: 
+            users can't register twice with the same email. We need a repository to check for existing users.
+        </p>
+
+        <CodeSnippet Language="csharp" Description="Using a stub for repository responses" Number="4">
+public interface IUserRepository
+{
+    User? FindByEmail(string email);
+    void Save(User user);
+}
+
+public class UserService
+{
+    private readonly IEmailService _emailService;
+    private readonly IUserRepository _userRepository;
+    
+    public UserService(IEmailService emailService, IUserRepository userRepository)
+    {
+        _emailService = emailService;
+        _userRepository = userRepository;
+    }
+
+    public void RegisterUser(string email, string username)
+    {
+        var existingUser = _userRepository.FindByEmail(email);
+        if (existingUser != null)
+            throw new InvalidOperationException("User already exists");
+            
+        var newUser = new User { Email = email, Username = username };
+        _userRepository.Save(newUser);
+        _emailService.SendWelcomeEmail(email, username);
+    }
+}
+
+[Fact]
+public void RegisterUser_ThrowsException_WhenEmailAlreadyExists()
+{
+    // Arrange
+    var mockEmailService = new Mock&lt;IEmailService&gt;();
+    var mockUserRepo = new Mock&lt;IUserRepository&gt;();
+    
+    // Stub: Control what FindByEmail returns
+    mockUserRepo
+        .Setup(r => r.FindByEmail("ajay@example.com"))
+        .Returns(new User { Email = "ajay@example.com" });
+    
+    var userService = new UserService(mockEmailService.Object, mockUserRepo.Object);
+
+    // Act & Assert
+    Assert.Throws&lt;InvalidOperationException&gt;(
+        () => userService.RegisterUser("ajay@example.com", "Ajay")
+    );
+}
+        </CodeSnippet>
+
+        <p>
+            Here, we're using <code>Setup()</code> to create a stub—we're controlling what data the repository 
+            returns, not verifying that it was called.
+        </p>
+    </Section>
+
+    <Section Heading="🧰 Beyond Basics: When to Use Fakes" Level="4">
+        <p>
+            Sometimes you want more realistic behavior without the overhead of real dependencies. That's where 
+            <b>Fakes</b> shine. A fake has a working implementation, but it's simplified and in-memory.
+        </p>
+
+        <CodeSnippet Language="csharp" Description="Creating an in-memory fake repository" Number="5">
+public class InMemoryUserRepository : IUserRepository
+{
+    private readonly List&lt;User&gt; _users = new();
+
+    public User? FindByEmail(string email)
+    {
+        return _users.FirstOrDefault(u => u.Email == email);
+    }
+
+    public void Save(User user)
+    {
+        _users.Add(user);
+    }
+}
+
+[Fact]
+public void RegisterUser_SavesUser_WhenEmailIsNew()
+{
+    // Arrange
+    var mockEmailService = new Mock&lt;IEmailService&gt;();
+    var fakeUserRepo = new InMemoryUserRepository(); // Using a fake instead of a mock
+    var userService = new UserService(mockEmailService.Object, fakeUserRepo);
+
+    // Act
+    userService.RegisterUser("ajay@example.com", "Ajay");
+
+    // Assert
+    var savedUser = fakeUserRepo.FindByEmail("ajay@example.com");
+    Assert.NotNull(savedUser);
+    Assert.Equal("Ajay", savedUser.Username);
+}
+        </CodeSnippet>
+
+        <div class="design-insight">
+            <p><strong>🎨 When to Choose Fakes vs Mocks:</strong></p>
+            <ul>
+                <li><b>Use Mocks</b> when you care about <em>how</em> a dependency is called (behavior verification)</li>
+                <li><b>Use Stubs</b> when you just need to control return values (state setup)</li>
+                <li><b>Use Fakes</b> when you want realistic behavior without external dependencies (integration-like tests)</li>
+            </ul>
+        </div>
+
+        <p>
+            Fakes offer a middle ground:
+        </p>
+        <ul>
+            <li>✅ More realistic than mocks—actual logic, not just assertions</li>
+            <li>✅ Faster than real dependencies—everything stays in memory</li>
+            <li>✅ Reusable across multiple tests</li>
+        </ul>
+    </Section>
+
+    <Section Heading="🔍 Design Feedback: What Your Mocks Are Telling You" Level="4">
+        <p>
+            Here's the secret most developers miss: <b>Mocks don't just help you test—they reveal design flaws.</b>
+        </p>
+
+        <div class="gotcha">
+            <p><strong>⚠️ Warning Signs in Your Tests:</strong></p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Test Smell</th>
+                        <th>What It Reveals</th>
+                        <th>Design Fix</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Too many mocks in one test</td>
+                        <td>Class has too many dependencies → violates Single Responsibility Principle</td>
+                        <td>Split the class into smaller, focused services</td>
+                    </tr>
+                    <tr>
+                        <td>Deep mock chains like <code>mock.Object.Property.Method()</code></td>
+                        <td>Tight coupling, Law of Demeter violation</td>
+                        <td>Introduce facades or aggregate interfaces</td>
+                    </tr>
+                    <tr>
+                        <td>Repeating the same mock setup everywhere</td>
+                        <td>Common abstraction missing</td>
+                        <td>Create a test fixture or helper methods</td>
+                    </tr>
+                    <tr>
+                        <td>Tests break when internal implementation changes</td>
+                        <td>Testing implementation details, not behavior</td>
+                        <td>Focus tests on public API and outcomes</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <blockquote>
+            "If your code is hard to test, it's not your tests' fault—it's your design asking for help."
+        </blockquote>
+    </Section>
+
+    <Section Heading="⚖️ Common Testing Gotchas and Anti-Patterns" Level="4">
+        <p>
+            Let's call out some testing sins that even experienced developers fall into:
+        </p>
+
+        <div class="gotcha">
+            <p><strong>❌ Anti-Pattern 1: Mocking Everything</strong></p>
+            <CodeSnippet Language="csharp" Description="Over-mocking example">
+[Fact]
+public void BadTest_MocksValueObjects()
+{
+    var mockUser = new Mock&lt;User&gt;(); // User is a value object!
+    var mockEmail = new Mock&lt;Email&gt;(); // Email is a value type!
+    // ... you're testing mocks, not code
+}
+            </CodeSnippet>
+            <p><b>Fix:</b> Only mock interfaces and external dependencies. Use real value objects and domain models.</p>
+        </div>
+
+        <div class="gotcha">
+            <p><strong>❌ Anti-Pattern 2: Verifying Too Much</strong></p>
+            <CodeSnippet Language="csharp" Description="Over-verification example">
+[Fact]
+public void BrittleTest_VerifiesInternals()
+{
+    var mock = new Mock&lt;IEmailService&gt;();
+    // ... act ...
+    
+    // Verifying every single interaction makes tests brittle
+    mock.Verify(e => e.Connect(), Times.Once);
+    mock.Verify(e => e.Authenticate(), Times.Once);
+    mock.Verify(e => e.SendEmail(...), Times.Once);
+    mock.Verify(e => e.Disconnect(), Times.Once);
+}
+            </CodeSnippet>
+            <p><b>Fix:</b> Only verify behavior that matters to the test. Internal orchestration should be an implementation detail.</p>
+        </div>
+
+        <div class="gotcha">
+            <p><strong>❌ Anti-Pattern 3: Inconsistent Stubs</strong></p>
+            <CodeSnippet Language="csharp" Description="Inconsistent stub setup">
+[Fact]
+public void ConfusingTest_InconsistentStubs()
+{
+    var mockRepo = new Mock&lt;IUserRepository&gt;();
+    mockRepo.Setup(r => r.FindByEmail("test@example.com")).Returns(null);
+    mockRepo.Setup(r => r.FindByEmail("ajay@example.com")).Returns(new User());
+    
+    // Test gets confusing—which email are we actually testing?
+}
+            </CodeSnippet>
+            <p><b>Fix:</b> Keep test data clear and focused. One scenario per test.</p>
+        </div>
+    </Section>
+
+    <Section Heading="🎓 Practical Comparison: Mocks vs Stubs vs Fakes" Level="4">
+        <p>
+            Let's compare all three approaches for the same scenario: testing a <code>PaymentProcessor</code> 
+            that depends on a <code>IPaymentGateway</code>:
+        </p>
+
+        <CodeSnippet Language="csharp" Description="Comparison of test double approaches" Number="6">
+// === Using a Mock (Behavior Verification) ===
+[Fact]
+public void WithMock_VerifiesPaymentWasCalled()
+{
+    var mockGateway = new Mock&lt;IPaymentGateway&gt;();
+    var processor = new PaymentProcessor(mockGateway.Object);
+    
+    processor.ProcessPayment(100);
+    
+    mockGateway.Verify(g => g.Charge(100), Times.Once);
+}
+
+// === Using a Stub (State Setup) ===
+[Fact]
+public void WithStub_ControlsGatewayResponse()
+{
+    var stubGateway = new Mock&lt;IPaymentGateway&gt;();
+    stubGateway.Setup(g => g.Charge(It.IsAny&lt;decimal&gt;())).Returns(true);
+    var processor = new PaymentProcessor(stubGateway.Object);
+    
+    var result = processor.ProcessPayment(100);
+    
+    Assert.True(result);
+}
+
+// === Using a Fake (Realistic Implementation) ===
+public class FakePaymentGateway : IPaymentGateway
+{
+    public List&lt;decimal&gt; ChargedAmounts { get; } = new();
+    
+    public bool Charge(decimal amount)
+    {
+        ChargedAmounts.Add(amount);
+        return amount > 0; // Simple validation logic
+    }
+}
+
+[Fact]
+public void WithFake_RealisticBehavior()
+{
+    var fakeGateway = new FakePaymentGateway();
+    var processor = new PaymentProcessor(fakeGateway);
+    
+    processor.ProcessPayment(100);
+    processor.ProcessPayment(50);
+    
+    Assert.Equal(2, fakeGateway.ChargedAmounts.Count);
+    Assert.Equal(150, fakeGateway.ChargedAmounts.Sum());
+}
+        </CodeSnippet>
+
+        <div class="tip">
+            <p><strong>💡 Choosing the Right Approach:</strong></p>
+            <ul>
+                <li><b>Unit tests</b> → Fast and isolated → Use mocks and stubs</li>
+                <li><b>Integration tests</b> → Realistic but fast → Use fakes</li>
+                <li><b>End-to-end tests</b> → Full realism → Use real implementations (sparingly)</li>
+            </ul>
+        </div>
+    </Section>
+
+    <Section Heading="💬 Key Takeaways: Dependency Isolation = Design Clarity" Level="4">
+        <blockquote>
+            "Mocks and fakes aren't testing tricks—they're design feedback tools."
+        </blockquote>
+
+        <p>
+            Here's what we've learned about working with dependencies in TDD:
+        </p>
+
+        <ol>
+            <li>
+                <b>Dependencies are design feedback</b>
+                <p>If your code is hard to test, it's telling you the design needs improvement. 
+                Listen to that feedback.</p>
+            </li>
+            <li>
+                <b>Test doubles serve different purposes</b>
+                <ul>
+                    <li>Mocks → Verify behavior ("Did you call this?")</li>
+                    <li>Stubs → Control state ("Here's your data")</li>
+                    <li>Fakes → Provide realistic but simplified implementations</li>
+                </ul>
+            </li>
+            <li>
+                <b>Great tests focus on behavior, not implementation</b>
+                <p>Verify outcomes and contracts, not internal mechanics.</p>
+            </li>
+            <li>
+                <b>Design for testability is good design</b>
+                <p>Dependency injection, interface segregation, and single responsibility emerge naturally 
+                when you practice TDD.</p>
+            </li>
+        </ol>
+
+        <div class="design-insight">
+            <p><strong>🎨 Final Design Insight:</strong> When you find yourself creating many mocks for a single 
+            class, it's not a testing problem—it's a code smell. Your class is likely doing too much. 
+            Break it down, introduce clear boundaries, and watch both your code and tests become clearer.</p>
+        </div>
+    </Section>
+
+    <Section Heading="🪶 Challenge: Refactor with Test Doubles" Level="4">
+        <div class="challenge">
+            <p><strong>Try This:</strong></p>
+            <p>
+                Take one of your existing services that talks to a database or external API. 
+                Refactor it to use dependency injection with an interface. Then:
+            </p>
+            <ol>
+                <li>Write tests using mocks to verify behavior</li>
+                <li>Create a fake implementation for integration-style testing</li>
+                <li>Compare the test speed and readability</li>
+            </ol>
+            <p>
+                Does it feel faster, more predictable, more readable? Did you discover any design issues along the way?
+            </p>
+        </div>
+
+        <blockquote>
+            "Great TDD isn't about avoiding the real world. It's about learning to simulate it—gracefully."
+        </blockquote>
+    </Section>
+
+    <Section Heading="🔜 What's Next?" Level="4">
+        <p>
+            Now that you understand how to handle dependencies, you're ready to tackle more complex scenarios. 
+            In the next article, we'll explore:
+        </p>
+        <ul>
+            <li>TDD in a Web API context with practical examples</li>
+            <li>Testing controllers, middleware, and request pipelines</li>
+            <li>Balancing unit tests, integration tests, and end-to-end tests</li>
+            <li>Building a complete feature using TDD from start to finish</li>
+        </ul>
+        <p>
+            Until then, practice isolating your dependencies and let your tests guide your design!
+        </p>
+    </Section>
+
+    <Section Level="4">
+        <p>
+            Have you struggled with testing dependencies before? What strategies worked for you? 
+            Share your experiences and questions in the comments below!
+        </p>
+    </Section>
+
+</BlogContainer>
