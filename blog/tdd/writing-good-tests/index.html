@@ -20,11 +20,11 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" /> -->
     
-<!--Blazor:{"type":"webassembly","prerenderId":"3f952d5db3564a65bf39cb17d95a9cbb","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>Writing Good Tests in TDD</title><meta property="og:url" content="http://127.0.0.1:5050/blog/tdd/writing-good-tests" />
+<!--Blazor:{"type":"webassembly","prerenderId":"48bb7838fe9a4df1a41498885549ee18","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>Writing Good Tests in TDD</title><meta property="og:url" content="http://127.0.0.1:5050/blog/tdd/writing-good-tests" />
     <meta property="og:title" content="Writing Good Tests in TDD" />
     <meta property="og:description" content="" />
     <meta property="og:image" content="http://127.0.0.1:5050/images/blog/tdd/writing-good-tests/banner.svg" />
-    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"3f952d5db3564a65bf39cb17d95a9cbb"}-->
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"48bb7838fe9a4df1a41498885549ee18"}-->
 </head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -40,7 +40,7 @@
 
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"fb3426d1698445d198e62770c3618cd5","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"e0dbc395fb0a4e21b7a5bba42e6815f2","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -87,14 +87,14 @@
                     
                     <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 18 Oct 2025</span></div></div></div></div></div></header>
 
-	<section id="e4ac8228-7bc4-4753-b43d-55f23f50bca7"><h4>Ever run a test suite where everything&#x2019;s green&#x2026; but you still don&#x2019;t trust it?</h4><hr class="border border-success border-1 opacity-50">
+	<section id="f5250a16-5ad5-4766-8fbc-2249ec1566df"><h4>Ever run a test suite where everything&#x2019;s green&#x2026; but you still don&#x2019;t trust it?</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             Have you ever encountered that unreliable test everyone avoids, or noticed a flaky test that occasionally fails but gets ignored due to tight deadlines? Let’s explore why this happens.<br> <br>
             
 			In <b>Test-Driven Development (TDD)</b>, tests aren’t just a safety net you add later. They’re the steering wheel. But if that steering wheel wobbles, you’ll never enjoy the ride.
 		</p></div></section>
 
-	<section id="c2a03b02-9256-4bbb-b668-60203a8f6e70"><h4>Why &#x2018;Good Tests&#x2019; Matter in TDD</h4><hr class="border border-success border-1 opacity-50">
+	<section id="136d51ac-e5f4-46b8-b02e-9fbc582158bc"><h4>Why &#x2018;Good Tests&#x2019; Matter in TDD</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
 			Good tests are what make TDD possible—not just productive. TDD depends on trustworthy feedback loops. Poor tests lead to false confidence, brittle design, and slowed development. Great tests illuminate design issues early.
 		</p>
@@ -124,7 +124,7 @@
         </code></pre></div><div class="col-12 text-center"><code></code></div></div></div>
 <br></div></section>
 
-    <section id="4065ab25-883d-47db-9fb0-f7a8be4a4033"><h4>What makes a &#x2018;Good Test&#x2019;? The 5 Pillars</h4><hr class="border border-success border-1 opacity-50">
+    <section id="eef8c9e1-57fa-4da7-a461-29bf8b09e696"><h4>What makes a &#x2018;Good Test&#x2019;? The 5 Pillars</h4><hr class="border border-success border-1 opacity-50">
     <div><table class="table table-bordered"><thead><tr><th>Pillar</th>
                     <th>Description</th>
                     <th>Example</th></tr></thead>
@@ -186,14 +186,14 @@
                         </code></pre></div><div class="col-12 text-center"><code></code></div></div></div>
 <br></td></tr></tbody></table></div></section>
 
-	<section id="ea849508-3e2b-46eb-a3da-57c395e3b764"><h4>How Tests Drive Design</h4><hr class="border border-success border-1 opacity-50">
+	<section id="324e7b31-d45f-4d9b-aa78-5e3a97692b02"><h4>How Tests Drive Design</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
 			Every good test you write shapes your API. A hard-to-test design usually means the code is too coupled. If your test setup feels painful—that’s feedback, not failure.
 		</p>
 		<div class="tip"><b>Tip:</b> Refactor when writing the test feels clumsy. Pain-driven refactoring leads to better design.
 		</div></div></section>
 
-	<section id="daefa50b-f1ba-4d46-b895-b369fa205d4d"><h4>Common Pitfalls and Gotchas</h4><hr class="border border-success border-1 opacity-50">
+	<section id="6bbebbfc-d4da-4234-98b6-1413b4a0f7cd"><h4>Common Pitfalls and Gotchas</h4><hr class="border border-success border-1 opacity-50">
     <div><ul><li><b>❌ Tests that don’t test anything</b> — empty or overly mocked tests.</li>
 			<li><b>❌ Assertion Soup</b> — multiple unrelated asserts.</li>
 			<li><b>❌ God Test</b> — testing multiple classes or layers in one go.</li>
@@ -211,7 +211,7 @@
         </code></pre></div><div class="col-12 text-center"><code></code></div></div></div>
 <br></div></section>
 
-	<section id="3ca40bfd-7491-4af8-8630-b7beb54523ab"><h4>Best Practices in the Wild</h4><hr class="border border-success border-1 opacity-50">
+	<section id="15924b0c-7ce4-494e-b9e7-db09e05704a2"><h4>Best Practices in the Wild</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
 			Here’s a mini before-and-after:
 		</p>
@@ -243,14 +243,14 @@
 			Readability improves confidence and flow.
 		</p></div></section>
 
-	<section id="8f542389-4ff9-4f33-9fa1-ce4eca97ca1a"><h4>Wrap-Up: The Meta-Lesson</h4><hr class="border border-success border-1 opacity-50">
+	<section id="f5612314-4c35-4ab0-9ac7-cdae824ba19b"><h4>Wrap-Up: The Meta-Lesson</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
 			When your tests read like documentation, you know you’re doing TDD right.<br>
 			<b>Reflect:</b> If someone who never saw your code can understand your tests—would they know what the system does?
 		</p>
 		<p><i>Next, we’ll look at how to keep your tests clean even when the code depends on other code—through mocks, stubs, and fakes.</i></p></div></section>
 
-	<section id="04a6a70a-ea9c-485b-a242-a257c6d6320b"><h4>&#x2728; 5-Point Test Quality Check</h4><hr class="border border-success border-1 opacity-50">
+	<section id="38eacd4c-cc93-4e57-b667-0c9a95d6e796"><h4>&#x2728; 5-Point Test Quality Check</h4><hr class="border border-success border-1 opacity-50">
     <div><ul><li>Does the test name describe intent?</li>
 			<li>Is the Arrange-Act-Assert structure clear?</li>
 			<li>Does the test focus on one behavior?</li>
@@ -279,9 +279,9 @@
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-            </div><!--Blazor:{"prerenderId":"fb3426d1698445d198e62770c3618cd5"}-->
+            </div><!--Blazor:{"prerenderId":"e0dbc395fb0a4e21b7a5bba42e6815f2"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80VFUxVGVVRlNOVmRSZEV0cVVsQXlhVEpPYTNKMExWUmxRbUkzVjNscE1IZHJNMWRUU21jMmN6VkNkSE42TTFOVlpIQkxOM1JRYVVKaVFuUmZUbmhWUTBGTWIwMDRYM2d3Y0hreVYxbHdYemR5VERkVWVIbHRTREpoWkVrMGMzQmFTMlJQY1hWeGJWcFdXV3RrVlhvd1ZXVnRlVzVKT0Uxd0xUbDZUMnBFYkdKSk5UVmZUWHA0YVhsaFdtaEVTWEZhY25oZlNVUkpJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UjJsNlEwMW9Vbk51Ums5c1UwSjBjazVVUjFWRlNYVjJTRU4xWWxGSWJWaFJTMFJRVW5wM1NVRlNRVmc1V0VoaVVXNWxSMjVRY2poUU5IVjVaRE54Y2tORExYWXRNMEZWUjJORlJYVnljekZLVWpCT2NEa3lNbUpQU0hWV1NGVnJjaTFPVEVSV1p6ZHFjR3BYVTFSYVZXRklXbU5GUWxSZmVHaDRWblZET1RWNWFFZzNTbnB4T0dSM2EybE9UMGxEVkdkbFVGOUpJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.

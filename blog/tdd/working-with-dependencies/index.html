@@ -20,11 +20,11 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" /> -->
     
-<!--Blazor:{"type":"webassembly","prerenderId":"2667d3f1bd1549d79af5f11d6b4be4c2","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>TDD in .NET: Working with Dependencies (Mocks, Stubs, and Fakes)</title><meta property="og:url" content="http://127.0.0.1:5050/blog/tdd/working-with-dependencies" />
+<!--Blazor:{"type":"webassembly","prerenderId":"3548add3e2ba4b4da0ca6a7e2aaf2c87","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>TDD in .NET: Working with Dependencies (Mocks, Stubs, and Fakes)</title><meta property="og:url" content="http://127.0.0.1:5050/blog/tdd/working-with-dependencies" />
     <meta property="og:title" content="TDD in .NET: Working with Dependencies (Mocks, Stubs, and Fakes)" />
     <meta property="og:description" content="" />
     <meta property="og:image" content="http://127.0.0.1:5050/images/blog/tdd/working-with-dependencies/banner.svg" />
-    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"2667d3f1bd1549d79af5f11d6b4be4c2"}-->
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"3548add3e2ba4b4da0ca6a7e2aaf2c87"}-->
 </head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -40,7 +40,7 @@
 
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"d0dfc98d4c524a56b535fa091e740271","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"aa9983e34cfa429889d65c9952c0e727","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -151,7 +151,7 @@
                     
                     <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 01 Nov 2025</span></div></div></div></div></div></header>
 
-    <section id="3e2dcdca-20e8-4d34-a11f-58cb883396d3"><h3>&#x1F3AF; When the Real World Gets in the Way of Your Tests</h3><hr class="border border-success border-1 opacity-50">
+    <section id="4584d2fb-f0d3-4f86-937f-df2865151a82"><h3>&#x1F3AF; When the Real World Gets in the Way of Your Tests</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             You've just written a beautiful test. It's clear, focused, and follows the Red-Green-Refactor cycle perfectly. 
             Then you realize your code needs to send an email, call an external API, or query a database. Suddenly, your 
@@ -171,7 +171,7 @@
             fakes), and how they can actually improve your design—not just your tests.
         </p></div></section>
 
-    <section id="f929547f-58cf-42ca-8433-73277ce5ded4"><h4>&#x1FA84; The Problem: Why Real Dependencies Break TDD</h4><hr class="border border-success border-1 opacity-50">
+    <section id="a809e6cf-5f25-4eb5-a261-8ea53ba7e3f6"><h4>&#x1FA84; The Problem: Why Real Dependencies Break TDD</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             Let's look at a common scenario. You're building a user registration system that sends a welcome email:
         </p>
@@ -211,7 +211,7 @@ public class UserService
             the real thing is too risky, expensive, or slow for practice.
         </p></div></section>
 
-    <section id="195994dd-d757-4696-b522-976a6443266a"><h4>&#x1F9E9; Meet the Test Doubles Family</h4><hr class="border border-success border-1 opacity-50">
+    <section id="ee312487-f4da-4463-bde2-e13b95715518"><h4>&#x1F9E9; Meet the Test Doubles Family</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             Just like Hollywood has different types of stand-ins (stunt doubles, body doubles, CGI), testing has different 
             types of doubles for different purposes. Let's meet the family:
@@ -246,7 +246,7 @@ public class UserService
             while <b>Stubs</b> control state (here's the data you need). Understanding this difference is crucial 
             for writing clean tests.</p></div></div></section>
 
-    <section id="beba85cc-4ffb-4e96-a59b-29737361d178"><h4>&#x1F4A1; Hands-On: Email Notification on User Signup</h4><hr class="border border-success border-1 opacity-50">
+    <section id="a7cbd260-64a1-4415-b116-e4e23a0bb5bf"><h4>&#x1F4A1; Hands-On: Email Notification on User Signup</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             Let's solve our email problem step-by-step using TDD principles and test doubles.
         </p>
@@ -388,7 +388,7 @@ public void RegisterUser_ThrowsException_WhenEmailAlreadyExists()
             returns, not verifying that it was called.
         </p></div></section>
 
-    <section id="48167149-a8f7-4dcd-9ecd-886a1ec704e3"><h4>&#x1F9F0; Beyond Basics: When to Use Fakes</h4><hr class="border border-success border-1 opacity-50">
+    <section id="46238ca6-c72f-4312-9f45-d78cca30fbe8"><h4>&#x1F9F0; Beyond Basics: When to Use Fakes</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             Sometimes you want more realistic behavior without the overhead of real dependencies. That's where 
             <b>Fakes</b> shine. A fake has a working implementation, but it's simplified and in-memory.
@@ -441,7 +441,7 @@ public void RegisterUser_SavesUser_WhenEmailIsNew()
             <li>✅ Faster than real dependencies—everything stays in memory</li>
             <li>✅ Reusable across multiple tests</li></ul></div></section>
 
-    <section id="7f6c360c-1c64-4c9b-aa75-fdeacc6e6475"><h4>&#x1F50D; Design Feedback: What Your Mocks Are Telling You</h4><hr class="border border-success border-1 opacity-50">
+    <section id="fff006bd-d343-486f-b392-f80ba474c6b1"><h4>&#x1F50D; Design Feedback: What Your Mocks Are Telling You</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             Here's the secret most developers miss: <b>Mocks don't just help you test—they reveal design flaws.</b></p>
 
@@ -466,7 +466,7 @@ public void RegisterUser_SavesUser_WhenEmailIsNew()
             "If your code is hard to test, it's not your tests' fault—it's your design asking for help."
         </blockquote></div></section>
 
-    <section id="51c75385-e64c-4dbe-88ab-56efc5d1b715"><h4>&#x2696;&#xFE0F; Common Testing Gotchas and Anti-Patterns</h4><hr class="border border-success border-1 opacity-50">
+    <section id="bc69759f-298a-41f4-906b-f226927bb721"><h4>&#x2696;&#xFE0F; Common Testing Gotchas and Anti-Patterns</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             Let's call out some testing sins that even experienced developers fall into:
         </p>
@@ -517,7 +517,7 @@ public void ConfusingTest_InconsistentStubs()
 <br>
             <p><b>Fix:</b> Keep test data clear and focused. One scenario per test.</p></div></div></section>
 
-    <section id="646d3800-2a53-49fe-9b78-058023fe6f65"><h4>&#x1F393; Practical Comparison: Mocks vs Stubs vs Fakes</h4><hr class="border border-success border-1 opacity-50">
+    <section id="c0a1ecfa-4aec-4902-b994-46ed5edb1d6f"><h4>&#x1F393; Practical Comparison: Mocks vs Stubs vs Fakes</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             Let's compare all three approaches for the same scenario: testing a <code>PaymentProcessor</code> 
             that depends on a <code>IPaymentGateway</code>:
@@ -581,7 +581,7 @@ public void WithFake_RealisticBehavior()
                 <li><b>Integration tests</b> → Realistic but fast → Use fakes</li>
                 <li><b>End-to-end tests</b> → Full realism → Use real implementations (sparingly)</li></ul></div></div></section>
 
-    <section id="dbdd278b-3290-41dd-a202-855fd0f60551"><h4>&#x1F4AC; Key Takeaways: Dependency Isolation = Design Clarity</h4><hr class="border border-success border-1 opacity-50">
+    <section id="15406db6-1512-49df-a378-59aab1906d1d"><h4>&#x1F4AC; Key Takeaways: Dependency Isolation = Design Clarity</h4><hr class="border border-success border-1 opacity-50">
     <div><blockquote>
             "Mocks and fakes aren't testing tricks—they're design feedback tools."
         </blockquote>
@@ -607,7 +607,7 @@ public void WithFake_RealisticBehavior()
             class, it's not a testing problem—it's a code smell. Your class is likely doing too much. 
             Break it down, introduce clear boundaries, and watch both your code and tests become clearer.</p></div></div></section>
 
-    <section id="e4175bca-ab51-4664-b0d8-c97e2f694848"><h4>&#x1FAB6; Challenge: Refactor with Test Doubles</h4><hr class="border border-success border-1 opacity-50">
+    <section id="12505922-c56a-437b-817b-d9f8d561f2d5"><h4>&#x1FAB6; Challenge: Refactor with Test Doubles</h4><hr class="border border-success border-1 opacity-50">
     <div><div class="challenge"><p><strong>Try This:</strong></p>
             <p>
                 Take one of your existing services that talks to a database or external API. 
@@ -624,7 +624,7 @@ public void WithFake_RealisticBehavior()
             "Great TDD isn't about avoiding the real world. It's about learning to simulate it—gracefully."
         </blockquote></div></section>
 
-    <section id="8c5dc80e-a348-4280-a649-834cda66fb59"><h4>&#x1F51C; What&#x27;s Next?</h4><hr class="border border-success border-1 opacity-50">
+    <section id="a8cca6bf-5061-40c3-b033-77b411fabe59"><h4>&#x1F51C; What&#x27;s Next?</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             Now that you understand how to handle dependencies, you're ready to tackle more complex scenarios. 
             In the next article, we'll explore:
@@ -637,7 +637,7 @@ public void WithFake_RealisticBehavior()
             Until then, practice isolating your dependencies and let your tests guide your design!
         </p></div></section>
 
-    <section id="332e27e4-56b4-4398-88c5-afc9b01f3850"><h4></h4><hr class="border border-success border-1 opacity-50">
+    <section id="59c02917-b08e-49a1-bd68-bdb23d12a189"><h4></h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             Have you struggled with testing dependencies before? What strategies worked for you? 
             Share your experiences and questions in the comments below!
@@ -661,9 +661,9 @@ public void WithFake_RealisticBehavior()
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-            </div><!--Blazor:{"prerenderId":"d0dfc98d4c524a56b535fa091e740271"}-->
+            </div><!--Blazor:{"prerenderId":"aa9983e34cfa429889d65c9952c0e727"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80VFUxVGVVRlNOVmRSZEV0cVVsQXlhVEpPYTNKMExYUnpUekZyTVhoc1ZqWlhZbGRmTURBNVFXNVlVRVJMVUVRNFNHWTBRbmxoWlZjM1drZHZOVVpRUzBsRU0zaElSM1U0VTJ0dWFqbDBUMmt4VkdFNFlqRlVaRnBTU1dsUFV6RklObk5yU2pkcE5tTm1VMWRvV1ZseU5uSnRhVGRpV2xCSmFWbFdiM0IzTkc1TVUzUnBWbVJYZFZGemNUWlZOV3hKY0dWUWFrTnpJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UjJsNlEwMW9Vbk51Ums5c1UwSjBjazVVUjFWRlN6bFJNbTVMUTJNMVpUbGZXVGc0UmtwNE9FVndSbWhoTjJORVoxcEVYemcyY0dGWmVIZzBTa3RwTWpaRVdIWlFMVUp4Umt4aU1HMXhZM1Z0YjBveE5sWmZUa3RPZUhkR1NIQnZVV050TUZNeVJUSm5kbVJ4TFhNNVpuRkpjREZXTVhCQ2VHOVhhV2RUVlZsbVdsTXdjR2RGV1ZSVWJWTTVlbkZFWkdRM2NrVjNJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
