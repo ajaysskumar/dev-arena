@@ -20,11 +20,11 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" /> -->
     
-<!--Blazor:{"type":"webassembly","prerenderId":"d35c8461b29345c18aec8c5a3be00e4e","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>Integration testing for dotnet core APIs: Handling APIs behind authentication</title><meta property="og:url" content="http://127.0.0.1:5050/blog/integration-testing-in-dotnet-with-auth" />
+<!--Blazor:{"type":"webassembly","prerenderId":"2c5e8ce874c94515a5e3fa2064347b0d","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>Integration testing for dotnet core APIs: Handling APIs behind authentication</title><meta property="og:url" content="http://127.0.0.1:5050/blog/integration-testing-in-dotnet-with-auth" />
     <meta property="og:title" content="Integration testing for dotnet core APIs: Handling APIs behind authentication" />
     <meta property="og:description" content="" />
     <meta property="og:image" content="http://127.0.0.1:5050/images/blog/integration-testing/handling-auth/banner.png" />
-    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"d35c8461b29345c18aec8c5a3be00e4e"}-->
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"2c5e8ce874c94515a5e3fa2064347b0d"}-->
 </head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -40,7 +40,7 @@
 
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"8caac98c08bf40ccae6a614e317826b0","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"67ed8a65676b4bac9d51976c4abea557","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -87,7 +87,7 @@
                     
                     <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 22 Feb 2025</span></div></div></div></div></div></header>
 
-    <section id="a6994148-fcb5-427c-a2f5-d4e3bcc76599"><h4>Integration testing for APIs behind authentication</h4><hr class="border border-success border-1 opacity-50">
+    <section id="dba95dc9-218f-4932-8057-5ad25a393cd5"><h4>Integration testing for APIs behind authentication</h4><hr class="border border-success border-1 opacity-50">
     <div><p>This is continuation of the <b>Integration testing in dotnet</b> series.</p>
         <p>This time we will be covering on how to test APIs which are behind authentication. We will be extending the same code repo we used in the previous article on handling 3rd party services (folder name <code>DemoWith3rdPartyService</code>).</p>
         <p>Please make sure to checkout the previous articles in the series to get the most out of this article:</p>
@@ -104,7 +104,7 @@
                 <a href="/blog/integration-testing-in-dotnet-with-external-services" class="text-muted">devcodex.in</a></div></div>
         <div class="col-md-4 d-flex align-items-center pe-2"><img src="/images/blog/integration-testing/handling-auth/banner.png" class="img-fluid rounded-end" alt="Blog Image" /></div></div></div></div></section>
 
-    <section id="abf80903-3be3-4c5a-938b-83ad0d9a87f9"><h4>Let&#x2019;s get started</h4><hr class="border border-success border-1 opacity-50">
+    <section id="409d1ade-aa0b-449c-a6c2-d359462595e3"><h4>Let&#x2019;s get started</h4><hr class="border border-success border-1 opacity-50">
     <div><p>To make this happen we have created an authenticated version of our SuperHero API. The API is called <code>/SuperHero/private</code>. Refer the swagger screenshot below.</p>
 
         <style>
@@ -420,10 +420,10 @@
 
         <p>Now that we have seen our authenticated API working, we can proceed to write the integration tests for it.</p></div></section>
 
-    <section id="a016dbd0-955e-421f-8421-dc57000f6677"><h4>The setup</h4><hr class="border border-success border-1 opacity-50">
+    <section id="c03e03f3-7ebb-4096-bbab-fcc63f883060"><h4>The setup</h4><hr class="border border-success border-1 opacity-50">
     <div><p>Now this is going to be a bit complex setup, however, it will help us in testing different and complex scenarios. The following steps are needed before we begin writing tests.</p>
 
-        <section id="395d2792-2ae9-46cd-a9af-86dc955f35a7"><h5>Step 1: A class to help us create authentication claims</h5><hr class="border border-success border-1 opacity-50">
+        <section id="70ad145d-a06d-4eb9-b35e-0fffa0b97b59"><h5>Step 1: A class to help us create authentication claims</h5><hr class="border border-success border-1 opacity-50">
     <div><p><b>Why is this needed?</b></p>
             <p>We need this to create HTTP client with different set of authentication claims for different kinds of auth flows. For example, an API might work only for Admin role and another may work for some other role having fewer privileges. Our <code>AuthClaimsProvider</code> looks like below:</p>
 
@@ -451,7 +451,7 @@
             </code></pre></div><div class="col-12 text-center"><code>Code Sample #4 : AuthClaimsProvider class</code></div></div></div>
 <br></div></section>
 
-        <section id="381a04d7-cadd-4a03-b8a2-384f6243afc4"><h5>Step 2: An extension method to create HTTP client with required auth claims</h5><hr class="border border-success border-1 opacity-50">
+        <section id="b8803a9c-38f7-44be-869e-095d01cdd38f"><h5>Step 2: An extension method to create HTTP client with required auth claims</h5><hr class="border border-success border-1 opacity-50">
     <div><p><b>Why is this needed?</b></p>
             <p>It's needed because when we create a default HTTP client for tests using <code>CustomApiFactory</code>, the created HTTP client instance does not hold any auth token. However, for our authenticated APIs, we want our HTTP client to have the required token.</p>
 
@@ -479,7 +479,7 @@
             </code></pre></div><div class="col-12 text-center"><code>Code Sample #5 : Extension method for HTTP client</code></div></div></div>
 <br></div></section>
 
-        <section id="0260dfba-57d3-475d-b11c-c0ee11df1e43"><h5>Step 3: Setting up a service to introduce the authentication ticket/token in the request</h5><hr class="border border-success border-1 opacity-50">
+        <section id="9ed2c120-7d42-49c1-be8d-fe4e1ef77d23"><h5>Step 3: Setting up a service to introduce the authentication ticket/token in the request</h5><hr class="border border-success border-1 opacity-50">
     <div><p><b>Why is this needed?</b></p>
             <p>It's needed because in real scenarios, users will get tokens by performing any auth process, like:</p>
             <ul><li>By providing username and password</li>
@@ -519,7 +519,7 @@
             </code></pre></div><div class="col-12 text-center"><code>Code Sample #6 : TestAuthHandler class</code></div></div></div>
 <br></div></section>
 
-        <section id="8be34c7a-a761-4f16-91bc-8cd3b7a80d62"><h5>Step 4: Registering the TestAuthHandler service</h5><hr class="border border-success border-1 opacity-50">
+        <section id="5f5999a3-44ff-439a-8935-2b0a358eb662"><h5>Step 4: Registering the TestAuthHandler service</h5><hr class="border border-success border-1 opacity-50">
     <div><p><b>Why is this needed?</b></p>
             <p>It's needed so that whenever we try to get an HTTP client from the <code>CustomApiFactory</code>, we get an HTTP client with an auth token in it (unless we do not want it by using empty claims).</p>
 
@@ -534,7 +534,7 @@
             </code></pre></div><div class="col-12 text-center"><code>Code Sample #7 : Registering TestAuthHandler</code></div></div></div>
 <br></div></section></div></section>
 
-    <section id="36b6e174-856a-4d88-bd6a-478c23eb7ab0"><h4>Finally, the tests</h4><hr class="border border-success border-1 opacity-50">
+    <section id="af9e1c9b-43cd-4113-80b8-9877285d4a69"><h4>Finally, the tests</h4><hr class="border border-success border-1 opacity-50">
     <div><p>Let's add a test to our <code>SuperHeroApiTests</code>. Please note that the below test is with the default HTTP client, which does not hold any successful auth ticket:</p>
 
         <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
@@ -771,9 +771,9 @@
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-            </div><!--Blazor:{"prerenderId":"8caac98c08bf40ccae6a614e317826b0"}-->
+            </div><!--Blazor:{"prerenderId":"67ed8a65676b4bac9d51976c4abea557"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UjJsNlEwMW9Vbk51Ums5c1UwSjBjazVVUjFWRlNuTktjMnB3WTBWNFlscHBTSG8wVlZkMk9FcGxjMWxCVVZkSGVYaFJUMjl1TjA5NVZrTkNXR1JETjBkMlpEQkZaVTlPWDNJMVNIRlBWSEYyU0c1VE5VMWlWblF3WjI1Q1RIaFpPSG94YTJVeGJraEtSa1YwUmtNeVFrMXZWVmcwT0VabFl6VktZMjExUXkxMlowdDFPVkUwYVZNeVZVcFhUMGhKVDNSYVoySjNJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80U0hBMmEyMUtjWGhVT1Uxb1pXRXlkRmt5WVd0M2JsZEROVXN6UkVkQmMxTkdSRGRGUzBGR1owdEphVk16VlU4NFFuWnZaRE41TXpSRFZHYzVOVzlHY214SU5rUjVUMGR3TjIxcmJsQndPRTVJTkdKU1NtTkRRM2xGTm1KelJUTTRTazFHVW5aMVJETTBjRUpmUVdsMVFrMWxMVkIzT1ZCT2NraGtPRmRaTFc5WGEwMWZYMGh5YXpKM1dqUlFVVTVhV1hCWVNrNWpJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
