@@ -20,11 +20,11 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" /> -->
     
-<!--Blazor:{"type":"webassembly","prerenderId":"ed611ca42ea54ccb9d06ffaec614d82d","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>OpenAI REST API: Structured Output</title><meta property="og:url" content="http://127.0.0.1:5050/blog/ai/openai-rest-api/structured-output" />
+<!--Blazor:{"type":"webassembly","prerenderId":"097533b347f34687977dc8b4ea367b99","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>OpenAI REST API: Structured Output</title><meta property="og:url" content="http://127.0.0.1:5050/blog/ai/openai-rest-api/structured-output" />
     <meta property="og:title" content="OpenAI REST API: Structured Output" />
     <meta property="og:description" content="Learn how to leverage OpenAI&#x27;s powerful APIs to integrate AI capabilities into your applications. From authentication to implementation, discover everything you need to know about working with OpenAI APIs using direct HTTP requests." />
     <meta property="og:image" content="http://127.0.0.1:5050/images/blog/ai/open-ai-structured-output/banner.png" />
-    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"ed611ca42ea54ccb9d06ffaec614d82d"}-->
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"097533b347f34687977dc8b4ea367b99"}-->
 </head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -40,7 +40,7 @@
 
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"228ab223bc974b0da3770daa85ff434e","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"bd060cce593d483fb9aea3fbdee04c16","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -86,7 +86,7 @@
 
                     
                     <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 06 Sep 2025</span></div></div></div></div></div></header>
-    <section id="634d9ac2-8c28-4fce-bcc2-e3cce95be7a1"><h4>Getting Structured Output from OpenAI APIs</h4><hr class="border border-success border-1 opacity-50">
+    <section id="32bf9148-e3d6-4fa7-999a-0ef5156af7f8"><h4>Getting Structured Output from OpenAI APIs</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             When you first start with OpenAI's chat models, you get back conversational, unstructured text. It's great for chatbots and creative writing, but what if you need to display that data in a user interface, save it to a database, or feed it into another system? You need predictable, machine-readable data. That's where structured output comes in.
         </p>
@@ -94,7 +94,7 @@
             This article breaks down the "what, when, and how" of getting reliable JSON from OpenAI's APIs.
         </p></div></section>
 
-    <section id="2d17ded2-b0a8-494b-a139-ef145fb02475"><h4>What is Structured Output?</h4><hr class="border border-success border-1 opacity-50">
+    <section id="ad3b9d73-00be-41b5-93f8-526dac25c8e7"><h4>What is Structured Output?</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             Think of it as the difference between an essay and a spreadsheet. Unstructured output is free-flowing text that is easy for humans to read but hard for programs to parse reliably. Structured output, on the other hand, is organized in a predictable format like JSON, which applications can easily process.
         </p>
@@ -117,7 +117,7 @@
             For application development, structured output is almost always what you want. It's reliable, predictable, and easy to work with.
         </div></div></div></section>
 
-    <section id="5421129c-a60d-4029-a51c-e7ed5e805b29"><h4>When Should You Use It?</h4><hr class="border border-success border-1 opacity-50">
+    <section id="59ed9578-73b3-40a1-aec8-006fd49aa667"><h4>When Should You Use It?</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             Use structured output whenever the AI's response needs to be processed by your application. Key scenarios include:
         </p>
@@ -127,7 +127,7 @@
             <li><strong>Data Analysis:</strong> Extracting specific entities from text, like names, dates, or locations, for analysis.</li>
             <li><strong>Classification and Tagging:</strong> Categorizing user input into predefined categories (e.g., "support request," "feedback," "sales inquiry").</li></ul></div></section>
 
-    <section id="652448e2-a676-40eb-b8ef-9e94b428d4fb"><h4>How Do You Get Structured Output?</h4><hr class="border border-success border-1 opacity-50">
+    <section id="4c478026-0869-4fc5-a6b4-2409d0aaa86a"><h4>How Do You Get Structured Output?</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             OpenAI provides a few ways to achieve this, with newer methods being far more reliable than older ones.
         </p>
@@ -305,7 +305,7 @@ Text: "My favorite movie is The Matrix, which came out in 1999 and was directed 
                 This is the technique used in the demo below. We define a <code>MovieDetails</code> schema and ask the model to populate it. The result is a clean, predictable object that we can directly bind to our UI without any guesswork. It's the most robust way to build AI-powered features into your applications.
             </p></SubSection></div></section>
 
-    <section id="3731c14b-6060-4eb0-91f7-18101cbdccf2"><h4>Demo: Structured Movie Details Generator</h4><hr class="border border-success border-1 opacity-50">
+    <section id="0c4a475e-433e-4c32-9211-e9dba3407434"><h4>Demo: Structured Movie Details Generator</h4><hr class="border border-success border-1 opacity-50">
     <div><p><b>How to use this demo:</b> Enter your personal OpenAI API key (create one from your <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI dashboard</a>), then type a movie name. Click <b>Get Movie Details</b> and the demo will call a structured-output endpoint that returns a JSON object with clearly defined fields. The UI then renders those fields in a clean, predictable layout.
         </p>
     <div class="mb-3"><label for="apiKeyInput" class="form-label"><b>Enter your OpenAI API key:</b></label>
@@ -335,9 +335,9 @@ Text: "My favorite movie is The Matrix, which came out in 1999 and was directed 
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-            </div><!--Blazor:{"prerenderId":"228ab223bc974b0da3770daa85ff434e"}-->
+            </div><!--Blazor:{"prerenderId":"bd060cce593d483fb9aea3fbdee04c16"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UW05eWEwRlZZVUUyV2toeFlUTnpWbG8yTlRCT1FXbHplamx0YlZoMlYzTkhZalJIYkVFdFYyYzFia3BtTVdoTGR6ZHNURWRTU2xkTldrVjBTa1ZOU0ROUmIxaHlUWFJyYW1aNGFtcDNRbHBxTXpGdFFWVnRjRFJMTkZKQ01UbHhTRmRaUnpOMlMxZ3RWRXRhTFc1clJFUllSQzF2WVd3d1lUWlZabTlFWTJsaFVrRlBUbWRUYkVWUE5IUmZTSFJOTTJ0MlRVRjNJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80Um5OTFNXNUJhWEJaV2taemFsTTNNRk4xWDJOelRuWkxVVEpSWTFKUWNHOVFia0ZHZFRnM1RHbG5PRVJ4YldOMWJHVkNNMjFHYlV4eVlWZG9TMkl3VW1KT2NtaEhka2RIYTAwNVpWZFBZVFppVFZoeGNHRTVaemRYVnpSNmRIaFVTbk55TTNoYVpYUm1Obll3V0hGQ2RFeE9XbmgzT0cxemRFdzFTUzFaYmprMVEwbGFOVTB0WVRSSk9Wb3dWV2xKTkcxdE1HZHpJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
