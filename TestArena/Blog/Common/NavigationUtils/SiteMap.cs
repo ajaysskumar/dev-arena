@@ -167,7 +167,7 @@ namespace TestArena.Blog.Common.NavigationUtils
             isOlderThumbnailFormat: false),
         new("TDD in .NET: Practicing TDD in a Web API Project",
             "/blog/tdd/expense-tracker-tdd-webapi",
-            new DateTime(2025, 11, 23),
+            new DateTime(2025, 11, 15),
             "images/blog/tdd/expense-tracker/banner.svg",
             ["TDD", "Web API", "Expense Tracker", "Mocks", "Fakes", ".NET", "C#"],
             isPublished: true,
