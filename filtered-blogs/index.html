@@ -20,7 +20,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" /> -->
     
-<!--Blazor:{"type":"webassembly","prerenderId":"9617c80b150a4d2e9040e0c8a29ca114","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><!--Blazor:{"prerenderId":"9617c80b150a4d2e9040e0c8a29ca114"}-->
+<!--Blazor:{"type":"webassembly","prerenderId":"711ea580edfc40e1b561ebac6a31448b","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><!--Blazor:{"prerenderId":"711ea580edfc40e1b561ebac6a31448b"}-->
 </head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -36,7 +36,7 @@
 
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"0f69e05334ad49789ce6b7535e6e5bfd","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"876fe8fd995f4d6085724967d3355041","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -47,6 +47,43 @@
                 <div class="col-12 col-md-4 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><div class="dropdown"><a href="/about-author" class="d-inline-block rounded-circle overflow-hidden border border-white" style="width: 3rem; height: 3rem; border-width: 0.25rem;"><img src="/images/shared/author.png" alt="About Author" class="img-fluid rounded-circle" style="width: 100%; height: 100%; object-fit: cover;"></a></div></div></div></div></div></header>
         <article class="content px-4" b-mcp0h0uciv><h2 class="mb-4">Blogs with tag: <code></code></h2>
 <div class="row row-cols-1 row-cols-md-3 g-4 p-2"><div class="col"><style>
+    .custom-size {
+        max-width: 400px;
+        /* keep overflow hidden so the scaled card doesn't overflow layout */
+        overflow: hidden;
+    }
+    .thumbnail-img {
+        width: 100%;
+        height: 220px;
+        object-fit: fill;
+        border-radius: 0.375rem 0.375rem 0 0;
+        background: #f8f9fa;
+        display: block;
+        /* smooth filter transition for image brighten */
+        transition: filter 250ms ease;
+    }
+
+    /* Slight zoom of the whole component on hover */
+    .thumbnail-card {
+        transition: transform 220ms ease, box-shadow 220ms ease;
+        transform-origin: center center;
+        will-change: transform;
+    }
+
+    .thumbnail-card:hover {
+        transform: scale(1.04);
+        box-shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.12);
+    }
+
+    /* Subtle image brighten on hover */
+    .thumbnail-card:hover .thumbnail-img {
+        filter: brightness(1.04);
+    }
+</style>
+
+<div class="card shadow-sm custom-size thumbnail-card"><a href="/blog/tdd/expense-tracker-tdd-webapi"><img src="images/blog/tdd/expense-tracker/banner.svg" class="thumbnail-img" alt="TDD in .NET: Practicing TDD in a Web API Project" /></a>
+    <div class="card-body"><a href="/filtered-blogs?tag=TDD"><span class="badge bg-primary mx-1">TDD</span></a><a href="/filtered-blogs?tag=Web API"><span class="badge bg-primary mx-1">Web API</span></a><a href="/filtered-blogs?tag=Expense Tracker"><span class="badge bg-primary mx-1">Expense Tracker</span></a><a href="/filtered-blogs?tag=Mocks"><span class="badge bg-primary mx-1">Mocks</span></a><a href="/filtered-blogs?tag=Fakes"><span class="badge bg-primary mx-1">Fakes</span></a><a href="/filtered-blogs?tag=.NET"><span class="badge bg-primary mx-1">.NET</span></a><a href="/filtered-blogs?tag=C#"><span class="badge bg-primary mx-1">C#</span></a><h5 class="card-title mt-2"><a href="/blog/tdd/expense-tracker-tdd-webapi" class="text-decoration-none text-dark">TDD in .NET: Practicing TDD in a Web API Project</a></h5>
+        <p class="card-text text-muted small">By Ajay kumar · Saturday, November 15, 2025</p></div></div></div><div class="col"><style>
     .custom-size {
         max-width: 400px;
         /* keep overflow hidden so the scaled card doesn't overflow layout */
@@ -118,8 +155,8 @@
     }
 </style>
 
-<div class="card shadow-sm custom-size thumbnail-card"><a href="/blog/tdd/writing-good-tests"><img src="images/blog/tdd/writing-good-tests/banner.svg" class="thumbnail-img" alt="Writing good tests in TDD" /></a>
-    <div class="card-body"><a href="/filtered-blogs?tag=TDD"><span class="badge bg-primary mx-1">TDD</span></a><a href="/filtered-blogs?tag=Testing"><span class="badge bg-primary mx-1">Testing</span></a><a href="/filtered-blogs?tag=Best Practices"><span class="badge bg-primary mx-1">Best Practices</span></a><a href="/filtered-blogs?tag=.NET"><span class="badge bg-primary mx-1">.NET</span></a><a href="/filtered-blogs?tag=C#"><span class="badge bg-primary mx-1">C#</span></a><h5 class="card-title mt-2"><a href="/blog/tdd/writing-good-tests" class="text-decoration-none text-dark">Writing good tests in TDD</a></h5>
+<div class="card shadow-sm custom-size thumbnail-card"><a href="/blog/tdd/writing-good-tests"><img src="images/blog/tdd/writing-good-tests/banner.svg" class="thumbnail-img" alt="TDD in .NET: Writing good tests in TDD" /></a>
+    <div class="card-body"><a href="/filtered-blogs?tag=TDD"><span class="badge bg-primary mx-1">TDD</span></a><a href="/filtered-blogs?tag=Testing"><span class="badge bg-primary mx-1">Testing</span></a><a href="/filtered-blogs?tag=Best Practices"><span class="badge bg-primary mx-1">Best Practices</span></a><a href="/filtered-blogs?tag=.NET"><span class="badge bg-primary mx-1">.NET</span></a><a href="/filtered-blogs?tag=C#"><span class="badge bg-primary mx-1">C#</span></a><h5 class="card-title mt-2"><a href="/blog/tdd/writing-good-tests" class="text-decoration-none text-dark">TDD in .NET: Writing good tests in TDD</a></h5>
         <p class="card-text text-muted small">By Ajay kumar · Saturday, October 18, 2025</p></div></div></div><div class="col"><style>
     .custom-size {
         max-width: 400px;
@@ -155,8 +192,8 @@
     }
 </style>
 
-<div class="card shadow-sm custom-size thumbnail-card"><a href="/blog/tdd/first-steps-string-calculator-problem"><img src="images/blog/tdd/string-calculator/banner.svg" class="thumbnail-img" alt="Test Driven Development: Getting started with TDD in .NET" /></a>
-    <div class="card-body"><a href="/filtered-blogs?tag=TDD"><span class="badge bg-primary mx-1">TDD</span></a><a href="/filtered-blogs?tag=Test Driven Development"><span class="badge bg-primary mx-1">Test Driven Development</span></a><a href="/filtered-blogs?tag=.NET"><span class="badge bg-primary mx-1">.NET</span></a><a href="/filtered-blogs?tag=C#"><span class="badge bg-primary mx-1">C#</span></a><h5 class="card-title mt-2"><a href="/blog/tdd/first-steps-string-calculator-problem" class="text-decoration-none text-dark">Test Driven Development: Getting started with TDD in .NET</a></h5>
+<div class="card shadow-sm custom-size thumbnail-card"><a href="/blog/tdd/first-steps-string-calculator-problem"><img src="images/blog/tdd/string-calculator/banner.svg" class="thumbnail-img" alt="TDD in .NET: Sample problem - String Calculator" /></a>
+    <div class="card-body"><a href="/filtered-blogs?tag=TDD"><span class="badge bg-primary mx-1">TDD</span></a><a href="/filtered-blogs?tag=Test Driven Development"><span class="badge bg-primary mx-1">Test Driven Development</span></a><a href="/filtered-blogs?tag=.NET"><span class="badge bg-primary mx-1">.NET</span></a><a href="/filtered-blogs?tag=C#"><span class="badge bg-primary mx-1">C#</span></a><h5 class="card-title mt-2"><a href="/blog/tdd/first-steps-string-calculator-problem" class="text-decoration-none text-dark">TDD in .NET: Sample problem - String Calculator</a></h5>
         <p class="card-text text-muted small">By Ajay kumar · Saturday, October 4, 2025</p></div></div></div><div class="col"><style>
     .custom-size {
         max-width: 400px;
@@ -192,8 +229,8 @@
     }
 </style>
 
-<div class="card shadow-sm custom-size thumbnail-card"><a href="/blog/tdd/introduction"><img src="images/blog/tdd/intro/banner.svg" class="thumbnail-img" alt="Test Driven Development: Getting started with TDD in .NET" /></a>
-    <div class="card-body"><a href="/filtered-blogs?tag=TDD"><span class="badge bg-primary mx-1">TDD</span></a><a href="/filtered-blogs?tag=Test Driven Development"><span class="badge bg-primary mx-1">Test Driven Development</span></a><a href="/filtered-blogs?tag=.NET"><span class="badge bg-primary mx-1">.NET</span></a><a href="/filtered-blogs?tag=C#"><span class="badge bg-primary mx-1">C#</span></a><h5 class="card-title mt-2"><a href="/blog/tdd/introduction" class="text-decoration-none text-dark">Test Driven Development: Getting started with TDD in .NET</a></h5>
+<div class="card shadow-sm custom-size thumbnail-card"><a href="/blog/tdd/introduction"><img src="images/blog/tdd/intro/banner.svg" class="thumbnail-img" alt="TDD in .NET: Getting started" /></a>
+    <div class="card-body"><a href="/filtered-blogs?tag=TDD"><span class="badge bg-primary mx-1">TDD</span></a><a href="/filtered-blogs?tag=Test Driven Development"><span class="badge bg-primary mx-1">Test Driven Development</span></a><a href="/filtered-blogs?tag=.NET"><span class="badge bg-primary mx-1">.NET</span></a><a href="/filtered-blogs?tag=C#"><span class="badge bg-primary mx-1">C#</span></a><h5 class="card-title mt-2"><a href="/blog/tdd/introduction" class="text-decoration-none text-dark">TDD in .NET: Getting started</a></h5>
         <p class="card-text text-muted small">By Ajay kumar · Saturday, September 20, 2025</p></div></div></div><div class="col"><style>
     .custom-size {
         max-width: 400px;
@@ -1088,9 +1125,9 @@
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-            </div><!--Blazor:{"prerenderId":"0f69e05334ad49789ce6b7535e6e5bfd"}-->
+            </div><!--Blazor:{"prerenderId":"876fe8fd995f4d6085724967d3355041"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80VEVOdGNFd3pPSFpLWkVob1NWbDNObmxaZVVremFUWmxUakpDUWpWME1qVnJTbkZLUzFKVWRFZHNjalpSY0hCbmNETlFOSFF6VUVaeVJrOXlOMEpSU0hCaFRtTjRPR3RZU1MxbU1tTjZSV2N0VWpGd1QxbEdPRlJpTWw5dlJIUlpVRzFOU0hKSFExQkhZWEZUVFVGalVrTkVTakJ3YTA4eWRrSm9aRFpDZDFkdGIybG5OMFY2VVZjd09HNUtZbDh6VldzNExWRkpJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UTIxYVNWUTFNRGRyVmtKdE9GWkphVnBTVGxWcGEzQnljM1JITkdndFpFMHRhMWRUZEhKa1gzQk1RWE5PVlVFMlZIaFRXSFYyVEZRMWJrSXpaSGN3VTI5Vk5VVlBYM0pyTlc1R05rdEJTMnhqUzNwUVlXUkhNVlJVYXpCM1ExbDVTbWc1V1dObWNuUXhNV1JwU25kM2FVSktOMjlpUlVwRVNtRXRabTR0T0ZocE5VdHBSVkJOVlVKbFZVUmhiM1F5ZGxSSk5WZG5JaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
