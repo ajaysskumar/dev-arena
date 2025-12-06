@@ -21,5 +21,12 @@ namespace ExpenseTrackerApi.Controllers
             // Implementation will be added via TDD
             throw new NotImplementedException();
         }
+
+        [HttpGet("category/{category}")]
+        public async Task<IActionResult> GetExpensesByCategory(string category)
+        {
+            var expenses = await _service.GetExpensesByCategoryAsync(category);
+            return Ok(expenses);
+        }
     }
 }

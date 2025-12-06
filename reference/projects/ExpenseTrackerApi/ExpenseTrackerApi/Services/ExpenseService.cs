@@ -19,5 +19,11 @@ namespace ExpenseTrackerApi.Services
             // Implementation will be added via TDD
             throw new NotImplementedException();
         }
+
+        public async Task<IEnumerable<ExpenseDto>> GetExpensesByCategoryAsync(string category)
+        {
+            // For now, return an empty list to make the test compile
+            return new List<ExpenseDto>();
+        }
     }
 }

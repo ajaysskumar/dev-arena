@@ -1,9 +1,9 @@
-@page "/blog/tdd/expense-tracker-tdd-webapi"
+@page "/blog/tdd/expense-tracker-tdd-webapi-v2"
 @using TestArena.Blog.Common
 @using TestArena.Blog.Common.NavigationUtils
 
 @code {
-    PageInfo? currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/tdd/expense-tracker-tdd-webapi");
+    PageInfo? currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/tdd/expense-tracker-tdd-webapi-v2");
 
     protected override void OnInitialized()
     {
@@ -16,161 +16,125 @@
 }
 
 <BlogContainer>
-    <Header Title="@currentPage?.Header"
+    <Header Title="TDD in .NET: Controller Layer with Expense Tracker Example"
             Image="@(currentPage?.ArticleImage)"
             PublishedOn="@(currentPage?.PublishedOn ?? DateTime.UtcNow)"
             IsOlderThumbnailFormat="@(currentPage?.IsOlderThumbnailFormat ?? true)"
             Authors="Ajay Kumar">
     </Header>
 
-    <Section Heading="Introduction">
+    <Section Heading="Introduction" Level="2">
         <p>
-            In this article, we apply Test-Driven Development (TDD) to a real-world scenario: building a minimal Expense Tracker API in .NET. You'll learn how to break down the system, write tests for each layer, and keep dependencies controlled using mocks and fakes. We'll walk through the process step-by-step, showing code and design decisions at each stage.
+            In this article, we focus on applying Test-Driven Development (TDD) to the <b>controller layer</b> of a minimal Expense Tracker API in .NET. You'll see how to break down the use case, write tests for the controller, and drive implementation step-by-step. All code and narration are based on a real TDD diary, making the process easy to follow and practical.
         </p>
         <div class="tip">
-            <b>Why TDD?</b> TDD helps you build reliable, maintainable code by writing tests before implementation. It keeps your design focused and your codebase flexible.
+            <b>Why start with controllers?</b> Controllers are the entry point for API requests. TDD here ensures your endpoints behave as expected and delegate correctly to the service layer.
         </div>
     </Section>
 
-    <Section Heading="Problem Statement">
+    <Section Heading="Use Case: Get Expenses by Category" Level="2">
         <ul>
-            <li>Feature: Add a new expense</li>
-            <li>Fields: title, amount, category, date</li>
-            <li>API must validate input and store the expense</li>
+            <li>Feature: Fetch all expenses for a given category (e.g., "Food", "Travel")</li>
+            <li>API should return a list of matching expenses</li>
         </ul>
     </Section>
 
-    <Section Heading="System Breakdown">
-        <ul>
-            <li><b>API Controller</b> — Receives HTTP requests, validates input, returns responses</li>
-            <li><b>Service Layer</b> — Contains business logic, enforces rules (e.g., amount > 0)</li>
-            <li><b>Repository</b> — Persists data, can be faked for tests</li>
-            <li><b>Models/DTOs</b> — Define structure for requests and domain objects</li>
-        </ul>
-        <div class="design-insight">
-            <b>Design Insight:</b> Separating layers makes your code easier to test and maintain. Each layer has a clear responsibility.
-        </div>
-    </Section>
-
-    <Section Heading="Test Strategy">
-        <h5>Controller</h5>
-        <ul>
-            <li>Returns <b>400 Bad Request</b> for invalid data</li>
-            <li>Returns <b>201 Created</b> for valid expense</li>
-            <li>Calls service with correct values</li>
-        </ul>
-        <h5>Service</h5>
-        <ul>
-            <li>Rejects negative/zero amounts</li>
-            <li>Rejects empty titles</li>
-            <li>Creates a valid Expense model</li>
-            <li>Calls repository once</li>
-        </ul>
-        <h5>Repository</h5>
-        <ul>
-            <li>Uses an in-memory fake for fast TDD cycles</li>
-            <li>Tests basic persistence if needed</li>
-        </ul>
-        <div class="gotcha">
-            <b>Tip:</b> Write tests for each layer separately. Use mocks for dependencies to keep tests focused.
-        </div>
-    </Section>
-
-    <Section Heading="Step-by-Step TDD Implementation">
-        <ol>
-            <li><b>Write Service Tests First:</b> Start from core logic, force domain rules to emerge (amount > 0, title not empty, category known). Example:
-                <CodeSnippet Language="csharp" Description="Service test for negative amount">
-[Fact]
-public void AddExpense_ShouldThrow_WhenAmountIsNegative()
-{
-    var repo = new InMemoryExpenseRepository();
-    var service = new ExpenseService(repo);
-    var dto = new ExpenseDto { Title = "Lunch", Amount = -5, Category = "Food", Date = DateTime.Today };
-    Assert.Throws&lt;ArgumentException&gt;(() =&gt; service.AddExpense(dto));
-}
-                </CodeSnippet>
-            </li>
-            <li><b>Implement Service Logic:</b> Only write enough code to pass each failing test. Refactor frequently. Example:
-                <CodeSnippet Language="csharp" Description="Service validation logic">
-public Expense AddExpense(ExpenseDto dto)
-{
-    if (dto.Amount &lt;= 0) throw new ArgumentException("Amount must be positive");
-    if (string.IsNullOrWhiteSpace(dto.Title)) throw new ArgumentException("Title required");
-    var expense = new Expense { Title = dto.Title, Amount = dto.Amount, Category = dto.Category, Date = dto.Date };
-    _repository.Add(expense);
-    return expense;
-}
-                </CodeSnippet>
-            </li>
-            <li><b>Write Controller Tests:</b> Mock the service, validate input, assert correct HTTP status codes. Example:
-                <CodeSnippet Language="csharp" Description="Controller test for valid expense">
-[Fact]
-public void AddExpense_Returns201_WhenValid()
-{
-    var mockService = new Mock&lt;IExpenseService&gt;();
-    mockService.Setup(s =&gt; s.AddExpense(It.IsAny&lt;ExpenseDto&gt;())).Returns(new Expense());
-    var controller = new ExpensesController(mockService.Object);
-    var result = controller.AddExpense(new ExpenseDto { Title = "Lunch", Amount = 10, Category = "Food", Date = DateTime.Today });
-    Assert.IsType&lt;CreatedResult&gt;(result);
-}
-                </CodeSnippet>
-            </li>
-            <li><b>Implement Controller:</b> Thin controllers, delegate to service, return consistent responses. Example:
-                <CodeSnippet Language="csharp" Description="Controller implementation">
-[HttpPost]
-public IActionResult AddExpense([FromBody] ExpenseDto dto)
-{
-    try
-    {
-        var expense = _service.AddExpense(dto);
-        return Created($"/api/expenses/{expense.Id}", expense);
-    }
-    catch (ArgumentException ex)
-    {
-        return BadRequest(ex.Message);
-    }
-}
-                </CodeSnippet>
-            </li>
-            <li><b>Add Repository Fake:</b> Keep storage simple (list/dictionary), focus on TDD of logic, not infra setup. Example:
-                <CodeSnippet Language="csharp" Description="In-memory repository">
-public class InMemoryExpenseRepository : IExpenseRepository
-{
-    private readonly List&lt;Expense&gt; _expenses = new();
-    public void Add(Expense expense) =&gt; _expenses.Add(expense);
-    // ...
-}
-                </CodeSnippet>
-            </li>
-        </ol>
-    </Section>
-
-    <Section Heading="Example TDD Flow">
-        <blockquote>
-            <b>TDD Cycle:</b>
-            <ul>
-                <li><b>Red:</b> Write a failing test (e.g., service rejects negative amount)</li>
-                <li><b>Green:</b> Implement minimal code to pass the test</li>
-                <li><b>Refactor:</b> Clean up code, move logic to private methods if needed</li>
-                <li>Repeat for each feature and layer</li>
-            </ul>
-        </blockquote>
-    </Section>
-
-    <Section Heading="Lessons Learned">
-        <ul>
-            <li>Start from the core business logic and let rules emerge from tests</li>
-            <li>Write API/controller tests only after service logic is stable</li>
-            <li>Mocks and stubs help isolate web layers from business rules</li>
-            <li>Thin controllers, fat services: keep logic out of controllers</li>
-            <li>Fakes are useful for fast TDD cycles and avoid infrastructure setup</li>
-            <li>Refactor often—TDD encourages clean, maintainable code</li>
-        </ul>
-    </Section>
-
-    <Section Heading="Summary">
+    <Section Heading="Step 1: Write a Failing Controller Test" Level="3">
         <p>
-            This article demonstrated how to apply TDD to a real Web/API scenario by breaking the system into layers, writing tests for each layer, implementing only what is needed to make tests pass, and keeping dependencies controlled through mocks and fakes. By following this approach, you build robust, maintainable APIs and prepare for more advanced TDD topics.
+            We start by writing a test for the controller. The test checks that the endpoint returns a list of expenses for the requested category.
+        </p>
+        <CodeSnippet Language="csharp" Description="Controller test for GetExpensesByCategory">
+[Fact]
+public async Task GetExpensesByCategory_ReturnsExpensesForCategory()
+{
+    // Arrange
+    var mockService = new Mock&lt;IExpenseService&gt;();
+    var category = "Food";
+    var expected = new List&lt;ExpenseDto&gt; {
+        new ExpenseDto { Title = "Lunch", Amount = 10, Category = "Food", Date = DateTime.Today },
+        new ExpenseDto { Title = "Snacks", Amount = 5, Category = "Food", Date = DateTime.Today }
+    };
+    mockService.Setup(s =&gt; s.GetExpensesByCategoryAsync(category)).ReturnsAsync(expected);
+    var controller = new ExpensesController(mockService.Object);
+
+    // Act
+    var result = await controller.GetExpensesByCategory(category);
+
+    // Assert
+    var okResult = Assert.IsType&lt;OkObjectResult&gt;(result);
+    var actual = Assert.IsAssignableFrom&lt;IEnumerable&lt;ExpenseDto&gt;&gt;(okResult.Value);
+    Assert.Equal(expected.Count, actual.Count());
+}
+        </CodeSnippet>
+        <div class="gotcha">
+            <b>Tip:</b> The test will fail at first, because the endpoint does not exist yet. This is the "Red" phase of TDD.
+        </div>
+    </Section>
+
+    <Section Heading="Step 2: Make the Test Compile (Add Endpoint)" Level="3">
+        <p>
+            Next, we add the minimum code to the controller to define the endpoint and make the test compile.
+        </p>
+        <CodeSnippet Language="csharp" Description="Controller endpoint for GetExpensesByCategory">
+[HttpGet("category/{category}")]
+public async Task&lt;IActionResult&gt; GetExpensesByCategory(string category)
+{
+    var expenses = await _service.GetExpensesByCategoryAsync(category);
+    return Ok(expenses);
+}
+        </CodeSnippet>
+        <div class="design-insight">
+            <b>Design Insight:</b> Thin controllers delegate work to the service layer. This keeps your API endpoints simple and maintainable.
+        </div>
+    </Section>
+
+    <Section Heading="Step 3: Add Service Method (Just Enough to Pass)" Level="3">
+        <p>
+            The controller calls a service method. We add just enough code to make the test compile and run, returning an empty list for now.
+        </p>
+        <CodeSnippet Language="csharp" Description="Service method stub">
+// IExpenseService
+Task&lt;IEnumerable&lt;ExpenseDto&gt;&gt; GetExpensesByCategoryAsync(string category);
+
+// ExpenseService
+public async Task&lt;IEnumerable&lt;ExpenseDto&gt;&gt; GetExpensesByCategoryAsync(string category)
+{
+    // For now, return an empty list to make the test compile
+    return new List&lt;ExpenseDto&gt;();
+}
+        </CodeSnippet>
+        <div class="tip">
+            <b>TDD Principle:</b> Only write enough code to make the test pass. Refactor later as needed.
+        </div>
+    </Section>
+
+    <Section Heading="Step 4: Run the Test and Refactor" Level="3">
+        <p>
+            After fixing missing using directives and method signatures, the test passes. The controller correctly delegates to the service and returns the expected data.
+        </p>
+        <blockquote>
+            <b>Test Run Log:</b>
+            <pre>
+Test summary: total: 1, failed: 0, succeeded: 1, skipped: 0, duration: 0.6s
+            </pre>
+        </blockquote>
+        <div class="challenge">
+            <b>Challenge:</b> Try changing the test data or category to see how the controller responds. TDD makes it easy to adapt and extend your API.
+        </div>
+    </Section>
+
+    <Section Heading="Lessons Learned" Level="2">
+        <ul>
+            <li>Start with a failing test to drive your API design</li>
+            <li>Controllers should be thin and delegate to services</li>
+            <li>Write just enough code to pass each test, then refactor</li>
+            <li>Document each step and test run for clarity</li>
+        </ul>
+    </Section>
+
+    <Section Heading="Summary" Level="2">
+        <p>
+            This article demonstrated TDD for the controller layer of a .NET Expense Tracker API. By following the diary-based approach, you can build robust, maintainable endpoints and understand the value of incremental, test-driven development.
         </p>
     </Section>
 </BlogContainer>

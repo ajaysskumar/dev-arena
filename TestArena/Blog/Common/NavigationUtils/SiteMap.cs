@@ -165,12 +165,12 @@ namespace TestArena.Blog.Common.NavigationUtils
             "images/blog/tdd/working-with-dependencies/banner.svg",
             ["TDD", "Testing", "Mocking", "Test Doubles", ".NET", "C#"],
             isOlderThumbnailFormat: false),
-        new("TDD in .NET: Building a Web/API with Expense Tracker Example",
+        new("TDD in .NET: Practicing TDD in a Web API Project",
             "/blog/tdd/expense-tracker-tdd-webapi",
             new DateTime(2025, 11, 23),
             "images/blog/tdd/expense-tracker/banner.svg",
             ["TDD", "Web API", "Expense Tracker", "Mocks", "Fakes", ".NET", "C#"],
-            isPublished: false,
+            isPublished: true,
             isOlderThumbnailFormat: false),
         ];
 
