@@ -172,6 +172,14 @@ namespace TestArena.Blog.Common.NavigationUtils
             ["TDD", "Web API", "Expense Tracker", "Mocks", "Fakes", ".NET", "C#"],
             isPublished: true,
             isOlderThumbnailFormat: false),
+
+        new("TDD in .NET: Refactoring Safely",
+            "/blog/tdd/refactoring-safely-with-tdd",
+            new DateTime(2025, 11, 29),
+            "images/blog/tdd/refactoring/banner.svg",
+            ["TDD", "Refactoring", "Best Practices", ".NET", "C#"],
+            isPublished: true,
+            isOlderThumbnailFormat: false),
         ];
 
         public static IEnumerable<PageInfo> PublishedArticles => Pages.Where(p => p.IsPublished && p.PublishedOn <= DateTime.UtcNow);

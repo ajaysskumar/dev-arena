@@ -1,0 +1,259 @@
+@page "/blog/tdd/refactoring-safely-with-tdd"
+@using TestArena.Blog.Common
+@using TestArena.Blog.Common.NavigationUtils
+
+@code {
+    PageInfo? currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/tdd/refactoring-safely-with-tdd");
+
+    protected override void OnInitialized()
+    {
+        if (currentPage == null)
+        {
+            throw new InvalidOperationException("Page not found in SiteMap");
+        }
+        base.OnInitialized();
+    }
+}
+
+<BlogContainer>
+    <Header Title="@(currentPage?.Header)"
+            Image="@(currentPage?.ArticleImage)"
+            PublishedOn="@(currentPage?.PublishedOn ?? DateTime.UtcNow)"
+            IsOlderThumbnailFormat="@(currentPage?.IsOlderThumbnailFormat ?? true)"
+            Authors="Ajay Kumar">
+    </Header>
+
+    <Section Heading="Why Developers Fear Refactoring (But Shouldn’t)" Level="4">
+        <p>
+            Picture this: You join a new team, and your first task is to fix a bug in a legacy billing module. The method is 300 lines long, filled with cryptic variable names and nested ifs. You hesitate—what if you break something? This fear is universal. But with a solid suite of tests, refactoring transforms from a risky gamble into a safe, even enjoyable, process. Tests are your safety net, letting you clean up code with confidence.
+        </p>
+        <CalloutBox Type="info">
+            <b>Real-life:</b> At a fintech startup, a developer inherited a payment calculation function. By writing tests first, they refactored it from a tangled mess into readable, maintainable code—without a single production bug.
+        </CalloutBox>
+    </Section>
+    <Section Heading="How to Decide What to Refactor First" Level="4">
+        <p>
+            Not sure where to start? Focus your refactoring efforts where they’ll have the biggest impact:
+        </p>
+        <ul>
+            <li><b>High-churn areas:</b> Code that changes often is more likely to accumulate bugs and technical debt. Clean it up first.</li>
+            <li><b>Pain points:</b> Functions or modules that frustrate you or your team—slow to understand, hard to modify, or error-prone.</li>
+            <li><b>Repetitive code:</b> Copy-pasted logic or duplicated patterns are prime candidates for extraction and simplification.</li>
+            <li><b>Frequent bugs:</b> If a part of the codebase is always breaking, refactor it to make future fixes easier.</li>
+        </ul>
+        <CalloutBox Type="info">
+            <b>Tip for juniors:</b> Start small. Refactor a single function or file, and build confidence as your tests protect you.
+        </CalloutBox>
+    </Section>
+
+    <Section Heading="What Refactoring Really Means (and Why It’s Hard)" Level="4">
+        <p>
+            Refactoring isn’t rewriting, slowing down, or sneaking in new features. It’s about <b>improving the internal structure without changing what the code does</b>. The challenge? Sometimes the code is so tangled, or so poorly tested, that even small changes feel risky. If you’ve ever tried to clean up a function and ended up breaking something, you know the pain.
+        </p>
+        <CalloutBox Type="note">
+            <b>Example:</b> A retail company’s discount logic was duplicated across three services. Refactoring unified the logic, but only after tests locked down the expected behavior.
+        </CalloutBox>
+    </Section>
+
+    <Section Heading="The Golden Rule of Refactoring" Level="4">
+        <blockquote>
+            <b>If it’s not covered by tests, don’t refactor it.</b>
+        </blockquote>
+        <div style="text-align:center; margin: 1.5em 0;">
+            <svg width="340" height="60" style="max-width:100%;">
+                <rect x="5" y="15" width="90" height="30" rx="8" fill="#e0e7ef" stroke="#6b7280" />
+                <text x="50" y="35" text-anchor="middle" font-size="14" fill="#222">Legacy Code</text>
+                <polygon points="95,30 115,30 105,40" fill="#6b7280" />
+                <rect x="115" y="15" width="110" height="30" rx="8" fill="#e0e7ef" stroke="#6b7280" />
+                <text x="170" y="35" text-anchor="middle" font-size="14" fill="#222">Characterization Tests</text>
+                <polygon points="225,30 245,30 235,40" fill="#6b7280" />
+                <rect x="245" y="15" width="90" height="30" rx="8" fill="#e0e7ef" stroke="#6b7280" />
+                <text x="290" y="35" text-anchor="middle" font-size="14" fill="#222">Refactor Safely</text>
+            </svg>
+            <div style="font-size:13px; color:#555; margin-top:0.5em;">Workflow: Legacy Code → Characterization Tests → Refactor Safely</div>
+        </div>
+        <ol>
+            <li>Identify what the code does (read, run, and document its outputs)</li>
+            <li>Write tests that lock its current behavior (characterization tests)</li>
+            <li>Refactor safely in tiny steps</li>
+            <li>Run tests after every micro-change</li>
+        </ol>
+        <p>Tests are your seatbelts. If you don’t have them, write them first—even if they just confirm the current (possibly weird) behavior.</p>
+        <CalloutBox Type="warning">
+            <b>Tip:</b> Never refactor and add features in the same commit. Keep changes isolated.
+        </CalloutBox>
+    </Section>
+
+    <Section Heading="Red → Green → Refactor, Explained Deeply" Level="4">
+        <p>
+            TDD (Test-Driven Development) makes refactoring a natural part of coding. Here’s how:
+        </p>
+        <ol>
+            <li><b>Red:</b> Write a test for a new or existing behavior. Watch it fail (proves the test is valid).</li>
+            <li><b>Green:</b> Make the test pass with the simplest code possible.</li>
+            <li><b>Refactor:</b> Now, clean up the code. The tests guarantee you don’t break anything.</li>
+        </ol>
+        <p>
+            <b>Example:</b> In a logistics app, a developer added a test for a buggy shipment fee calculation. After making it pass, they refactored the fee logic into a clean, reusable method—knowing the test would catch any mistakes.
+        </p>
+    </Section>
+
+    <Section Heading="Practical Example — The Ugly Function Makeover" Level="4">
+        <p>
+            Let’s walk through a real-world scenario. You’re tasked with refactoring an API method that calculates discounts for a shopping cart. It’s a monster:
+        </p>
+        <ul>
+            <li>150 lines long</li>
+            <li>Duplicated logic for different product types</li>
+            <li>Messy, nested conditionals</li>
+            <li>No documentation</li>
+        </ul>
+        <p><b>Before (giant nested ifs):</b></p>
+        <CodeSnippet Language="csharp" Description="Before Refactor: Giant Nested Ifs">
+            public decimal CalculateDiscount(Cart cart)
+            {
+                if (cart.ProductType == "Electronics")
+                {
+                    if (cart.Price > 100)
+                    {
+                        return cart.Price * 0.9m;
+                    }
+                    else
+                    {
+                        return cart.Price * 0.95m;
+                    }
+                }
+                else if (cart.ProductType == "Groceries")
+                {
+                    // ...more nested ifs...
+                }
+                // ...many more lines...
+            }
+        </CodeSnippet>
+        <p><b>After (small clean methods):</b></p>
+        <CodeSnippet Language="csharp" Description="After Refactor: Small Clean Methods">
+            public decimal CalculateDiscount(Cart cart)
+            {
+                switch (cart.ProductType)
+                {
+                    case "Electronics":
+                        return ApplyElectronicsDiscount(cart);
+                    case "Groceries":
+                        return ApplyGroceriesDiscount(cart);
+                    default:
+                        return cart.Price;
+                }
+            }
+
+            private decimal ApplyElectronicsDiscount(Cart cart)
+            {
+                return cart.Price > 100 ? cart.Price * 0.9m : cart.Price * 0.95m;
+            }
+            // ...other clean methods...
+        </CodeSnippet>
+        <p>Here’s how you tackle it:</p>
+        <ol>
+            <li><b>Step 1:</b> Write tests confirming its current behavior (characterization tests). Example:</li>
+        </ol>
+        <CodeSnippet Language="csharp" Description="Characterization Test for Discount Calculation">
+            // &lt;summary&gt;Verifies current discount logic for electronics&lt;/summary&gt;
+            [Fact]
+            public void Discount_Electronics_ShouldBe10Percent()
+            {
+                var cart = new Cart { ProductType = "Electronics", Price = 100 };
+                var result = DiscountCalculator.Calculate(cart);
+                Assert.Equal(90, result);
+            }
+        </CodeSnippet>
+        <ol start="2">
+            <li><b>Step 2:</b> Start micro-refactoring. Extract methods, rename variables, remove duplication, and introduce domain concepts. Example:</li>
+        </ol>
+        <CodeSnippet Language="csharp" Description="Extracting Method for Discount">
+            // &lt;summary&gt;Extracted method for electronics discount&lt;/summary&gt;
+            private decimal ApplyElectronicsDiscount(Cart cart)
+            {
+                return cart.Price * 0.9m;
+            }
+        </CodeSnippet>
+        <ol start="3">
+            <li><b>Step 3:</b> Keep running tests. If anything breaks, behavior changed—fix immediately. The tests will catch regressions before they reach production.</li>
+        </ol>
+        <CalloutBox Type="success">
+            <b>Result:</b> The function shrinks to 40 lines, logic is clear, and future changes are easy.
+        </CalloutBox>
+    </Section>
+
+    <Section Heading="When to Stop Refactoring" Level="4">
+        <blockquote>
+            <b>Boy Scout Rule:</b> Leave the code cleaner than you found it.
+        </blockquote>
+        <ul>
+            <li>It’s readable</li>
+            <li>Duplication is removed</li>
+            <li>Structure makes sense</li>
+            <li>No further clarity is gained</li>
+        </ul>
+        <CalloutBox Type="note">
+            <b>Real-life:</b> In a healthcare app, a developer stopped refactoring when the code was clear and maintainable, resisting the urge to “perfect” it endlessly.
+        </CalloutBox>
+    </Section>
+
+    <Section Heading="Refactoring Patterns You Should Know" Level="4">
+        <ul>
+            <li>Extract Method</li>
+            <li>Extract Class</li>
+            <li>Inline Variable</li>
+            <li>Rename for Intent</li>
+            <li>Introduce Parameter Object</li>
+            <li>Replace Magic Numbers with Constants</li>
+            <li>Move Method</li>
+            <li>Encapsulate Collection</li>
+            <li>Replace Conditional with Polymorphism</li>
+        </ul>
+        <p>Learn a few — not all. Use them often. Try applying one pattern in your next refactor and see the difference.</p>
+    </Section>
+
+    <Section Heading="Common Gotchas & Anti-Patterns" Level="4">
+        <ul>
+            <li>Refactoring while adding new features</li>
+            <li>Mixing feature changes and refactors in the same commit</li>
+            <li>Editing tests to “make green” instead of fixing code</li>
+            <li>Over-engineering</li>
+            <li>Ignoring performance regressions</li>
+        </ul>
+        <CalloutBox Type="warning">
+            <b>Watch out:</b> A developer once refactored and added a feature in the same commit. The bug was hard to trace and took days to fix. Keep refactors and features separate!
+        </CalloutBox>
+    </Section>
+
+    <Section Heading="Tools That Make Refactoring Easier" Level="4">
+        <ul>
+            <li>IDE automated refactorings (Rider/VS/IntelliJ)</li>
+            <li>Mutation testing</li>
+            <li>Linters & static analysis tools</li>
+            <li>Coverage tools (for guidance, not targets)</li>
+        </ul>
+        <Section Heading="Mutation Testing — Are Your Tests Strong Enough?" Level="5">
+            <p>
+                Mutation testing helps verify your tests are strong enough to detect broken behavior. It works by making small changes (mutations) to your code and checking if your tests fail as expected.
+            </p>
+            <CodeSnippet Language="csharp" Description="Mutation Testing Example">
+                // Original code
+                return cart.Price * 0.9m;
+                // Mutated code (by tool)
+                return cart.Price * 0.8m;
+                // If your test still passes, it’s too weak!
+            </CodeSnippet>
+            <p style="font-size:13px; color:#555;">Tools like Stryker.NET or Pitest (Java) automate mutation testing and help you strengthen your test suite.</p>
+        </Section>
+        <CalloutBox Type="info">
+            <b>Tip:</b> Use your IDE’s “Extract Method” and “Rename” features—they’re safer and faster than manual edits.
+        </CalloutBox>
+    </Section>
+
+    <Section Heading="Wrap-Up — Courage via Tests" Level="4">
+        <p>
+            Refactoring is a habit. TDD encourages frequent, safe refactors, cleaner designs, confidence in code, and higher quality with less fear. With tests as your safety net, refactoring becomes not just easy — but joyful. Next time you see a scary function, remember: write a test, refactor in small steps, and let your tests give you courage.
+        </p>
+    </Section>
+</BlogContainer>
