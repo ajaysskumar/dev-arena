@@ -180,6 +180,14 @@ namespace TestArena.Blog.Common.NavigationUtils
             ["TDD", "Refactoring", "Best Practices", ".NET", "C#"],
             isPublished: true,
             isOlderThumbnailFormat: false),
+
+        new("TDD in .NET: Anti-Patterns & When NOT to Use TDD",
+            "/blog/tdd/anti-patterns-when-not-to-use-tdd",
+            new DateTime(2025, 12, 13),
+            "images/blog/tdd/anti-patterns/banner.svg",
+            ["TDD", "Anti-Patterns", "Best Practices", "Testing", ".NET", "C#"],
+            isPublished: true,
+            isOlderThumbnailFormat: false),
         ];
 
         public static IEnumerable<PageInfo> PublishedArticles => Pages.Where(p => p.IsPublished && p.PublishedOn <= DateTime.UtcNow);
