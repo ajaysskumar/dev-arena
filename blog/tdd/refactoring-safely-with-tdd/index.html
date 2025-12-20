@@ -20,11 +20,11 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" /> -->
     
-<!--Blazor:{"type":"webassembly","prerenderId":"6866815571bd43a19dac953341be705a","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>TDD in .NET: Refactoring Safely</title><meta property="og:url" content="http://127.0.0.1:5050/blog/tdd/refactoring-safely-with-tdd" />
+<!--Blazor:{"type":"webassembly","prerenderId":"181d465de9934d898dd4a045418013f4","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>TDD in .NET: Refactoring Safely</title><meta property="og:url" content="http://127.0.0.1:5050/blog/tdd/refactoring-safely-with-tdd" />
     <meta property="og:title" content="TDD in .NET: Refactoring Safely" />
     <meta property="og:description" content="" />
     <meta property="og:image" content="http://127.0.0.1:5050/images/blog/tdd/refactoring/banner.svg" />
-    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"6866815571bd43a19dac953341be705a"}-->
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"181d465de9934d898dd4a045418013f4"}-->
 </head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -40,7 +40,7 @@
 
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"ba42d36cd57e4591b3320067fc8ebe2a","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"f201f38d173a4acfb61e960cedb14f51","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -91,7 +91,7 @@
                     
                     <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 29 Nov 2025</span></div></div></div></div></div></header>
 
-    <section id="ec82ccee-987c-4762-9569-88659f02c643" style="margin-bottom:1rem;"><h4>Why Developers Fear Refactoring (But Shouldn&#x2019;t)</h4><hr class="border border-success border-1 opacity-50">
+    <section id="060e8d8c-f62c-407c-8b7f-3addb4f13198" style="margin-bottom:1rem;"><h4>Why Developers Fear Refactoring (But Shouldn&#x2019;t)</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             Picture this: You join a new team, and your first task is to fix a bug in a legacy billing module. The method is 300 lines long, filled with cryptic variable names and nested ifs. You hesitate—what if you break something? This fear is universal. But with a solid suite of tests, refactoring transforms from a risky gamble into a safe, even enjoyable, process. Tests are your safety net, letting you clean up code with confidence.
         </p>
@@ -99,7 +99,7 @@
             <span class="callout-title">Tip</span></div>
         <div class="callout-message"><b>Real-life:</b> At a fintech startup, a developer inherited a payment calculation function. By writing tests first, they refactored it from a tangled mess into readable, maintainable code—without a single production bug.
         </div></div></div></section>
-    <section id="b8c00410-11cf-4b48-ad70-7f042f550ba9" style="margin-bottom:1rem;"><h4>How to Decide What to Refactor First</h4><hr class="border border-success border-1 opacity-50">
+    <section id="218e156b-c0c1-4185-a85e-69ea658048d0" style="margin-bottom:1rem;"><h4>How to Decide What to Refactor First</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             Not sure where to start? Focus your refactoring efforts where they’ll have the biggest impact:
         </p>
@@ -112,7 +112,7 @@
         <div class="callout-message"><b>Tip for juniors:</b> Start small. Refactor a single function or file, and build confidence as your tests protect you.
         </div></div></div></section>
 
-    <section id="ec3c8fcc-8572-4c60-b728-fa2ce3d2076c" style="margin-bottom:1rem;"><h4>What Refactoring Really Means (and Why It&#x2019;s Hard)</h4><hr class="border border-success border-1 opacity-50">
+    <section id="12ed89e6-a7d3-4812-b374-6bd34cdf8eaa" style="margin-bottom:1rem;"><h4>What Refactoring Really Means (and Why It&#x2019;s Hard)</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             Refactoring isn’t rewriting, slowing down, or sneaking in new features. It’s about <b>improving the internal structure without changing what the code does</b>. The challenge? Sometimes the code is so tangled, or so poorly tested, that even small changes feel risky. If you’ve ever tried to clean up a function and ended up breaking something, you know the pain.
         </p>
@@ -121,7 +121,7 @@
         <div class="callout-message"><b>Example:</b> A retail company’s discount logic was duplicated across three services. Refactoring unified the logic, but only after tests locked down the expected behavior.
         </div></div></div></section>
 
-    <section id="42092351-e5b5-4c26-a43a-58396e90a62d" style="margin-bottom:1rem;"><h4>The Golden Rule of Refactoring</h4><hr class="border border-success border-1 opacity-50">
+    <section id="41f15b21-96b2-480b-83e3-5673b74a72b0" style="margin-bottom:1rem;"><h4>The Golden Rule of Refactoring</h4><hr class="border border-success border-1 opacity-50">
     <div><blockquote><b>If it’s not covered by tests, don’t refactor it.</b></blockquote>
         <div style="text-align:center; margin: 1.5em 0;"><svg width="340" height="60" style="max-width:100%;"><rect x="5" y="15" width="90" height="30" rx="8" fill="#e0e7ef" stroke="#6b7280"></rect>
                 <text x="50" y="35" text-anchor="middle" font-size="14" fill="#222">Legacy Code</text>
@@ -142,7 +142,7 @@
         <div class="callout-message"><b>Tip:</b> Never refactor and add features in the same commit. Keep changes isolated.
         </div></div></div></section>
 
-    <section id="f6cfce25-2587-4bf8-94b3-b03552fa45a3" style="margin-bottom:1rem;"><h4>Red &#x2192; Green &#x2192; Refactor, Explained Deeply</h4><hr class="border border-success border-1 opacity-50">
+    <section id="8e090bc7-300d-40c4-9566-4529041faf53" style="margin-bottom:1rem;"><h4>Red &#x2192; Green &#x2192; Refactor, Explained Deeply</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             TDD (Test-Driven Development) makes refactoring a natural part of coding. Here’s how:
         </p>
@@ -152,7 +152,7 @@
         <p><b>Example:</b> In a logistics app, a developer added a test for a buggy shipment fee calculation. After making it pass, they refactored the fee logic into a clean, reusable method—knowing the test would catch any mistakes.
         </p></div></section>
 
-    <section id="e99fe26d-067f-4eab-856e-0bf20e150131" style="margin-bottom:1rem;"><h4>Practical Example &#x2014; The Ugly Function Makeover</h4><hr class="border border-success border-1 opacity-50">
+    <section id="ff54056d-b68a-4720-96fc-824568f0c596" style="margin-bottom:1rem;"><h4>Practical Example &#x2014; The Ugly Function Makeover</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             Let’s walk through a real-world scenario. You’re tasked with refactoring an API method that calculates discounts for a shopping cart. It’s a monster:
         </p>
@@ -233,7 +233,7 @@
         <div class="callout-message"><b>Result:</b> The function shrinks to 40 lines, logic is clear, and future changes are easy.
         </div></div></div></section>
 
-    <section id="6d3ff08a-9909-4684-a5c9-714b6e8f6969" style="margin-bottom:1rem;"><h4>When to Stop Refactoring</h4><hr class="border border-success border-1 opacity-50">
+    <section id="30841c08-a89a-4680-960d-918481bb7930" style="margin-bottom:1rem;"><h4>When to Stop Refactoring</h4><hr class="border border-success border-1 opacity-50">
     <div><blockquote><b>Boy Scout Rule:</b> Leave the code cleaner than you found it.
         </blockquote>
         <ul><li>It’s readable</li>
@@ -245,7 +245,7 @@
         <div class="callout-message"><b>Real-life:</b> In a healthcare app, a developer stopped refactoring when the code was clear and maintainable, resisting the urge to “perfect” it endlessly.
         </div></div></div></section>
 
-    <section id="d11a4632-53f5-4c43-b89d-217195201cf8" style="margin-bottom:1rem;"><h4>Refactoring Patterns You Should Know</h4><hr class="border border-success border-1 opacity-50">
+    <section id="50eb7ce8-2c45-476d-8e1c-31555b52ce6e" style="margin-bottom:1rem;"><h4>Refactoring Patterns You Should Know</h4><hr class="border border-success border-1 opacity-50">
     <div><ul><li>Extract Method</li>
             <li>Extract Class</li>
             <li>Inline Variable</li>
@@ -257,7 +257,7 @@
             <li>Replace Conditional with Polymorphism</li></ul>
         <p>Learn a few — not all. Use them often. Try applying one pattern in your next refactor and see the difference.</p></div></section>
 
-    <section id="883acb79-08c0-432b-a68c-51ee62a60db2" style="margin-bottom:1rem;"><h4>Common Gotchas &amp; Anti-Patterns</h4><hr class="border border-success border-1 opacity-50">
+    <section id="21ff7f2e-9dc8-45ce-866c-c031e86b300c" style="margin-bottom:1rem;"><h4>Common Gotchas &amp; Anti-Patterns</h4><hr class="border border-success border-1 opacity-50">
     <div><ul><li>Refactoring while adding new features</li>
             <li>Mixing feature changes and refactors in the same commit</li>
             <li>Editing tests to “make green” instead of fixing code</li>
@@ -268,12 +268,12 @@
         <div class="callout-message"><b>Watch out:</b> A developer once refactored and added a feature in the same commit. The bug was hard to trace and took days to fix. Keep refactors and features separate!
         </div></div></div></section>
 
-    <section id="45aa8196-a3a0-4c0f-9245-883baabd12b7" style="margin-bottom:1rem;"><h4>Tools That Make Refactoring Easier</h4><hr class="border border-success border-1 opacity-50">
+    <section id="f63f252a-67dd-4672-877e-dc29c7e211e7" style="margin-bottom:1rem;"><h4>Tools That Make Refactoring Easier</h4><hr class="border border-success border-1 opacity-50">
     <div><ul><li>IDE automated refactorings (Rider/VS/IntelliJ)</li>
             <li>Mutation testing</li>
             <li>Linters & static analysis tools</li>
             <li>Coverage tools (for guidance, not targets)</li></ul>
-        <section id="c9db34ca-4b1e-4b5a-b852-d119a5c80046" style="margin-bottom:1rem;"><h5>Mutation Testing &#x2014; Are Your Tests Strong Enough?</h5><hr class="border border-success border-1 opacity-50">
+        <section id="15a81c8c-54b3-46f0-ab7c-8e2133c7e195" style="margin-bottom:1rem;"><h5>Mutation Testing &#x2014; Are Your Tests Strong Enough?</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
                 Mutation testing helps verify your tests are strong enough to detect broken behavior. It works by making small changes (mutations) to your code and checking if your tests fail as expected.
             </p>
@@ -291,7 +291,7 @@
         <div class="callout-message"><b>Tip:</b> Use your IDE’s “Extract Method” and “Rename” features—they’re safer and faster than manual edits.
         </div></div></div></section>
 
-    <section id="f119b79e-fef1-4410-a5a9-8fe26231c09e" style="margin-bottom:1rem;"><h4>Wrap-Up &#x2014; Courage via Tests</h4><hr class="border border-success border-1 opacity-50">
+    <section id="422ea189-5046-485a-8534-7b3babc74f75" style="margin-bottom:1rem;"><h4>Wrap-Up &#x2014; Courage via Tests</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             Refactoring is a habit. TDD encourages frequent, safe refactors, cleaner designs, confidence in code, and higher quality with less fear. With tests as your safety net, refactoring becomes not just easy — but joyful. Next time you see a scary function, remember: write a test, refactor in small steps, and let your tests give you courage.
         </p></div></section></div>
@@ -314,9 +314,9 @@
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-            </div><!--Blazor:{"prerenderId":"ba42d36cd57e4591b3320067fc8ebe2a"}-->
+            </div><!--Blazor:{"prerenderId":"f201f38d173a4acfb61e960cedb14f51"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UjFCYVlXaFJNRTVWVmt4dFpVcDJNbkp6VmtkWVVqSXdabDlWWlVSSU1XMUpiREpzYkdaYVIxSm5hV0ZOTVU5dWJFTXRSemRRUkRWaVVUQnlOSGxvWWxsVVoydFhSRmx1TTFoalVUTjFXRGRLUXpSQ1pXeEtWbkpNYjBZNE1qaG1jbFJsYlV0UmJtRnpTbFJyTTNONWJFd3djSGwzZEc5RlNFSTVkRWRFU0c1ck56VlpPV2xXWlMxS09UWnJXbXRTU2paRmVHd3dJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UVd0NWJWOVdRVlIyT1VKc1YxbFdVSFZHTkVKaldXdG5jVXh4VkdKNGVtVkdlVmgyT0c1TlFtSXlWbTFMYmtWa01VMWlhekZ4TVRWU09YUkJhVGd6VFRSTFNFbERTbVUzYlRGaFJVY3RlVmxXYzJaRmMyMUtWbXQwU2tWWWN6VjJZM2s0V0VOU1kwaHNXbmxPTW5Wa2VTMUtRbXhaZW1kdU4yaHZOVlZCUW14eGVrdDBhMGRJU0dwc2NEVk9UMFp1YVc5NU1URnJJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
