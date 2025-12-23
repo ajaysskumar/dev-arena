@@ -20,11 +20,11 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" /> -->
     
-<!--Blazor:{"type":"webassembly","prerenderId":"6fed6c6ccec646afb21c38ba29db756b","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>Intro to PACT for .NET Core: API contract testing</title><meta property="og:url" content="http://127.0.0.1:5050/blog/contract-testing-pact-net-intro" />
+<!--Blazor:{"type":"webassembly","prerenderId":"a7f04097439c4ce3a9f5ba85049c1618","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>Intro to PACT for .NET Core: API contract testing</title><meta property="og:url" content="http://127.0.0.1:5050/blog/contract-testing-pact-net-intro" />
     <meta property="og:title" content="Intro to PACT for .NET Core: API contract testing" />
     <meta property="og:description" content="" />
     <meta property="og:image" content="http://127.0.0.1:5050/images/blog/pact/intro/banner.png" />
-    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"6fed6c6ccec646afb21c38ba29db756b"}-->
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"a7f04097439c4ce3a9f5ba85049c1618"}-->
 </head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -40,7 +40,7 @@
 
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"5dff0818be8a434cbbc5cef95a335c68","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"34e64d4b7ae041e7b1945d16ac709f8b","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -87,7 +87,7 @@
                     
                     <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 14 Dec 2024</span></div></div></div></div></div></header>
     
-    <section id="3a566c02-7b10-4884-ac47-7c6e8ba20cd5" style="margin-bottom:1rem;"><h3>Summary</h3><hr class="border border-success border-1 opacity-50">
+    <section id="22560a1a-f086-449e-b359-44b8363a3d86" style="margin-bottom:1rem;"><h3>Summary</h3><hr class="border border-success border-1 opacity-50">
     <div><p>Recently i came a across a situation where i had to explore contract testing using PACT framework.</p>
 
         <p>For some background, the account that i was working for had already implemented contract testing in their
@@ -214,7 +214,7 @@
 
         <p>The above diagram shows a failure case. The failure is because the <code>Consumer C</code> is expecting the role field which now has been removed from the Provider API schema.</p></div></section>
     
-    <section id="8d50354e-8d8c-4049-b8d8-9d9f09f3f450" style="margin-bottom:1rem;"><h4>Everything till here looks good, we are able to capture failures, then why we explored another options ?</h4><hr class="border border-success border-1 opacity-50">
+    <section id="2e35f797-5df8-4037-93d7-884828ae8e41" style="margin-bottom:1rem;"><h4>Everything till here looks good, we are able to capture failures, then why we explored another options ?</h4><hr class="border border-success border-1 opacity-50">
     <div><p>Its because in the approach above, the contract test pipeline was running on development environment
                         and the schema was taken from a currently deployed service in development environment. This
                         means that the failure will only be caught after the breaking change has been introduced in the
@@ -329,7 +329,7 @@
 <div class="row image-header"><figure class="text-center"><img src="/images/blog/pact/intro/Failure at build step.webp" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="Failure at build step" loading="lazy" />
         <figcaption class="figure-caption"><strong>Figure 4 :</strong> Failure at build step</figcaption></figure></div></div></section>
     
-    <section id="5996ead6-5cfd-4e51-8ea1-0eb163ce08f9" style="margin-bottom:1rem;"><h3>How we achieved the above using PACT framework ?</h3><hr class="border border-success border-1 opacity-50">
+    <section id="9fa0c077-d5a3-4685-9c85-52b2650db052" style="margin-bottom:1rem;"><h3>How we achieved the above using PACT framework ?</h3><hr class="border border-success border-1 opacity-50">
     <div><p>I will focus on how i implemented consumer driven contract testing using PACT in .NET Core API. I will not go
             into the very details of what PACT is, as that is explained much better at <a href="https://docs.pact.io/">pact
                 official site</a>.</p>
@@ -440,20 +440,20 @@
 <div class="row image-header"><figure class="text-center"><img src="/images/blog/pact/intro/Project structure.webp" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="Project structure" loading="lazy" />
         <figcaption class="figure-caption"><strong>Figure 6 :</strong> Project structure</figcaption></figure></div></div></section>
     
-    <section id="d20932a5-7ce7-4521-8675-24eeb27f676a" style="margin-bottom:1rem;"><h3>Consumer side tests:</h3><hr class="border border-success border-1 opacity-50">
+    <section id="82902259-8f9b-4241-8924-d1a26b34afce" style="margin-bottom:1rem;"><h3>Consumer side tests:</h3><hr class="border border-success border-1 opacity-50">
     <div><p>The very first step is to create a unit test file and initialize pact builder as shown below</p>
             <section class="[ flex flex-col ]"><h5 class="[ bg-gray-200 ] [ p-2 ] [ font-semibold ] [ text-black ] [ flex items-center ]"><svg xmlns="http://www.w3.org/2000/svg" class="[ icon icon-tabler icon-tabler-code ] [ text-purple-700 ] [ fill-purple-500 ]" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
             <polyline points="7 8 3 12 7 16"></polyline>
             <polyline points="17 8 21 12 17 16"></polyline>
             <line x1="14" y1="4" x2="10" y2="20"></line></svg><code>Code Sample - Pact Builder Setup</code></h5>
-    <article id="7fdf26de-4a81-4fe2-9c3d-16fb8d8c6ee0" class="[ bg-gray-300 ]"></article></section>
+    <article id="67cddfa8-30de-4c2e-87f6-4cf26df8320d" class="[ bg-gray-300 ]"></article></section>
             
             <p>Next we have to write test and setup scenario. Here below, we are instructing pact builder to return a specific response when it gets a specific request on the mock server (<code>ctx.MockServerUri</code>).</p>
             <section class="[ flex flex-col ]"><h5 class="[ bg-gray-200 ] [ p-2 ] [ font-semibold ] [ text-black ] [ flex items-center ]"><svg xmlns="http://www.w3.org/2000/svg" class="[ icon icon-tabler icon-tabler-code ] [ text-purple-700 ] [ fill-purple-500 ]" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
             <polyline points="7 8 3 12 7 16"></polyline>
             <polyline points="17 8 21 12 17 16"></polyline>
             <line x1="14" y1="4" x2="10" y2="20"></line></svg><code>Code Sample - Pact consumer unit test</code></h5>
-    <article id="11f69189-0b1f-406c-9245-69791491a56c" class="[ bg-gray-300 ]"></article></section>
+    <article id="e202b6c1-6768-40d7-b385-92107af9a45e" class="[ bg-gray-300 ]"></article></section>
             
             <p>The success test run will look like below</p>
             <style>
@@ -518,9 +518,9 @@
             <polyline points="7 8 3 12 7 16"></polyline>
             <polyline points="17 8 21 12 17 16"></polyline>
             <line x1="14" y1="4" x2="10" y2="20"></line></svg><code>Code Sample - Pact contract file</code></h5>
-    <article id="bdd73361-1415-4554-969d-38c38dbaca4d" class="[ bg-gray-300 ]"></article></section></div></section>
+    <article id="8b4b8a3f-b747-49f6-99a0-037100d146f7" class="[ bg-gray-300 ]"></article></section></div></section>
     
-    <section id="2b5cd08a-ce06-4933-bc03-9db753e66d5f" style="margin-bottom:1rem;"><h3>Provider side tests and verification of pact file:</h3><hr class="border border-success border-1 opacity-50">
+    <section id="fb585bc1-88d5-4218-a2da-c8b45348f669" style="margin-bottom:1rem;"><h3>Provider side tests and verification of pact file:</h3><hr class="border border-success border-1 opacity-50">
     <div><p>Once we have the pact file with us, we can use this pact file to validate it against the Provider API.</p>
 
         <p>Provider side tests take a little more effort than the consumer side tests, as it requires more setup.</p>
@@ -588,7 +588,7 @@
             <polyline points="7 8 3 12 7 16"></polyline>
             <polyline points="17 8 21 12 17 16"></polyline>
             <line x1="14" y1="4" x2="10" y2="20"></line></svg><code>Code Sample - Provider APIs pact setup</code></h5>
-    <article id="e7f0a3fc-96d9-48f7-8949-fbe8c1934f89" class="[ bg-gray-300 ]"></article></section>
+    <article id="98193f77-37b1-4c34-b9cf-cae8e406d732" class="[ bg-gray-300 ]"></article></section>
 
         <p>In ProviderStateMiddleware class we are trying to setup the state of the system. It is to note that using Pact we can write complex test scenarios as well. For example lets say if student address anything other than Delhi then, consumer is expecting an additional field called City. These kind of scenarios can be handled by defining the state of the Provider API using state middlewares like below.</p>
 
@@ -598,7 +598,7 @@
             <polyline points="7 8 3 12 7 16"></polyline>
             <polyline points="17 8 21 12 17 16"></polyline>
             <line x1="14" y1="4" x2="10" y2="20"></line></svg><code>Code Sample - ProviderStateMiddleware class</code></h5>
-    <article id="e201023e-9904-4c40-8801-445979c61312" class="[ bg-gray-300 ]"></article></section>
+    <article id="af4f4dda-085c-4183-b961-5253136924e8" class="[ bg-gray-300 ]"></article></section>
 
         <p>Next step is to define the TestStartup(can be named anything) class. This class contains all the code that our Provider API needs to get started.</p>
         <p>It is to note that an actual production application may contain various other services and middlewares like, logging, analytics, health checks etc, which does not affect the code logic. However, since our purpose is limited to testing the code that can potentially impact the contract side of things of the application, so we can ignore all other things, to make our tests lighter. This should be subset of the actual Startup.cs file in the Provider API. In short, just enough for our tests to run.</p>
@@ -608,7 +608,7 @@
             <polyline points="7 8 3 12 7 16"></polyline>
             <polyline points="17 8 21 12 17 16"></polyline>
             <line x1="14" y1="4" x2="10" y2="20"></line></svg><code>Code Sample - TestStartup class</code></h5>
-    <article id="9bbbcbd1-e097-4cf0-884b-c25e81e4fcd6" class="[ bg-gray-300 ]"></article></section>
+    <article id="18f5dfdf-0a40-44f4-ba42-dcddba21ce3a" class="[ bg-gray-300 ]"></article></section>
 
         <p>Finally the test case. In the test case, instruct Pact verifier about which fixture class to use for setting up and running the host (<span class="text-success">Line #5</span>) and along with the path of the Pact file that was generated by the consumer (<span class="text-success">Line #11</span>). Pact verifier take all the required information about host and pact file and finally runs <code>Verify()</code> method.</p>
         
@@ -616,7 +616,7 @@
             <polyline points="7 8 3 12 7 16"></polyline>
             <polyline points="17 8 21 12 17 16"></polyline>
             <line x1="14" y1="4" x2="10" y2="20"></line></svg><code>Code Sample - Provider test class</code></h5>
-    <article id="d401db51-e3fc-426d-b943-b0006c5dac66" class="[ bg-gray-300 ]"></article></section>
+    <article id="44231f8d-6aec-4a10-b8a8-5e44da52f78c" class="[ bg-gray-300 ]"></article></section>
         
         <p>The test run will look something like below.</p>
         
@@ -672,7 +672,7 @@
 <div class="row image-header"><figure class="text-center"><img src="/images/blog/pact/intro/Provider test run for success case.webp" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="Provider test run for success case" loading="lazy" />
         <figcaption class="figure-caption"><strong>Figure 9 :</strong> Provider test run for success case</figcaption></figure></div></div></section>
     
-    <section id="2bc1c21f-4a79-4345-ba13-2095e87744da" style="margin-bottom:1rem;"><h3>Failure Scenario</h3><hr class="border border-success border-1 opacity-50">
+    <section id="a2836f32-4d5a-496a-9b76-550dcb1f9fa8" style="margin-bottom:1rem;"><h3>Failure Scenario</h3><hr class="border border-success border-1 opacity-50">
     <div><p>To test out failure scenario, we will try to change the pact file manually and mimic a scenario such that the
             consumer is expecting another field called <code>classId</code> (<span class="text-success">Line #22</span>) which, at the moment, our provider API does
             not supports. After manually changing the pact file the response expected by consumer service will look like
@@ -681,7 +681,7 @@
             <polyline points="7 8 3 12 7 16"></polyline>
             <polyline points="17 8 21 12 17 16"></polyline>
             <line x1="14" y1="4" x2="10" y2="20"></line></svg><code>Code Sample - Changing pact file manually to mimic fail scenario</code></h5>
-    <article id="72efb77e-201b-4f10-8c13-2d77582184f8" class="[ bg-gray-300 ]"></article></section>
+    <article id="433c1ec7-04e3-4975-87ae-f82833f6bc84" class="[ bg-gray-300 ]"></article></section>
 
         <p>After this, if we try to get this pact file verified by our provider unit test, we will get a failure result
             indicating why the test failed. The failure message (<span class="text-danger">$ -> Actual map is missing the following keys: classId</span>)
@@ -764,9 +764,9 @@
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-            </div><!--Blazor:{"prerenderId":"5dff0818be8a434cbbc5cef95a335c68"}-->
+            </div><!--Blazor:{"prerenderId":"34e64d4b7ae041e7b1945d16ac709f8b"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80Uldwc2R6WlZVV2c1Y0VSd1IydHdZMlZPUzNWdVprUkxkbUZFTm5odmRscDJjR2QxTVUxb1ltUXhWWEpCUWxGNWFuWk1NV3B6TTE5cVVrOXhTVWhaUjBGS2VGUm5XVVZ0Y2xSek4wSndRM1Y0TUd0cmFVZE9ieTFvVVVGMlUzWjRNVTFmVjJKNVFVZENTRmR6T0RaeVJuUmhhMXByYjFWTFZUZERiMWRCVG5wM2NWUklVVW8wVFVndFMwOW9kRWR2ZVZoMmFqSnpJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UmtsRFpGVmxTVVpzYUVScVpWOVhXSEJKYzFKNVZWOVRjVlpsTFdwS1IzRkZNbTFwZVdGSGVtbEJNbTB0U1VSTE1tbG1OekJ4Vm5Sb1FYRk5jMHQ1UVVVMWVHeE5iVm94WVdnelQyMUdlR1IwV201V2JIQlZNa2x5UVVONlRGQm5XVzUyVG1WM1duaEhVbU0wUms5Q1gzaG1RVTVZUXpOZlIyZHpZbEpNVFZkRFJXazNhVjlGZGtsaVJ5MWlkalE0UTNoYWVHdHpJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
