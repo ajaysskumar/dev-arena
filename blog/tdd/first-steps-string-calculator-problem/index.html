@@ -20,11 +20,11 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" /> -->
     
-<!--Blazor:{"type":"webassembly","prerenderId":"ad6c52f04b3f485bb474531069e7a23e","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>TDD in .NET: Practicing with String Calculator</title><meta property="og:url" content="http://127.0.0.1:5050/blog/tdd/first-steps-string-calculator-problem" />
+<!--Blazor:{"type":"webassembly","prerenderId":"b95f9583a97847bc9b61342db23fadd9","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>TDD in .NET: Practicing with String Calculator</title><meta property="og:url" content="http://127.0.0.1:5050/blog/tdd/first-steps-string-calculator-problem" />
     <meta property="og:title" content="TDD in .NET: Practicing with String Calculator" />
     <meta property="og:description" content="" />
     <meta property="og:image" content="http://127.0.0.1:5050/images/blog/tdd/string-calculator/banner.svg" />
-    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"ad6c52f04b3f485bb474531069e7a23e"}-->
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"b95f9583a97847bc9b61342db23fadd9"}-->
 </head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -40,7 +40,7 @@
 
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"bf76ce6eecdd4948ad5be91e2395eb0e","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"09d3c87714c74f5fb24c62508cfa0bd4","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -111,7 +111,7 @@
                     
                     <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 04 Oct 2025</span></div></div></div></div></div></header>
 
-    <section id="9167dafd-9c32-4042-af4b-88a58154fad7" style="margin-bottom:1rem;"><h3>Practicing TDD with a simple String Calculator</h3><hr class="border border-success border-1 opacity-50">
+    <section id="785f6046-d889-4854-bc94-9a429dac8ce1" style="margin-bottom:1rem;"><h3>Practicing TDD with a simple String Calculator</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             When learning <b>Test-Driven Development (TDD)</b>, it's tempting to jump straight into complex, real-world problems. 
             But like any skill, TDD is best learned through simple, focused exercises that highlight its core principles 
@@ -122,7 +122,7 @@
             numbers in a string—but gradually introduces complexity that challenges our TDD discipline and design decisions.
         </p></div></section>
 
-    <section id="a012b3fd-b5da-4ec1-ba18-e1640703944d" style="margin-bottom:1rem;"><h4>&#x1F4DD; The Challenge</h4><hr class="border border-success border-1 opacity-50">
+    <section id="d9548a94-1f2f-41a3-b768-a58d26fe1c76" style="margin-bottom:1rem;"><h4>&#x1F4DD; The Challenge</h4><hr class="border border-success border-1 opacity-50">
     <div><div class="challenge"><p><strong>Create a calculator that:</strong></p>
             <ul><li>Takes a string input (e.g., "1,2")</li>
                 <li>Returns the sum of the numbers</li>
@@ -135,7 +135,7 @@
             No peeking ahead at future requirements!
         </p></div></section>
 
-    <section id="d252482f-23a5-4383-b023-ec1cdb07a170" style="margin-bottom:1rem;"><h4>&#x1F680; Starting with the Simplest Case</h4><hr class="border border-success border-1 opacity-50">
+    <section id="2ed4acb1-afb4-48e0-b91b-f7f559577d73" style="margin-bottom:1rem;"><h4>&#x1F680; Starting with the Simplest Case</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             Following TDD means starting with the absolute simplest case. What's simpler than an empty string?
         </p>
@@ -174,7 +174,7 @@ public class StringCalculator
             This is one of the hardest habits to build in TDD—trusting that complexity will emerge naturally from our tests.
         </p></div></section>
 
-    <section id="8bd5dc18-4057-47bf-b067-dd6c44411d7f" style="margin-bottom:1rem;"><h4>&#x1F3AF; Adding Single Numbers</h4><hr class="border border-success border-1 opacity-50">
+    <section id="804796c5-f462-4f83-8f34-4d4fb0145dab" style="margin-bottom:1rem;"><h4>&#x1F3AF; Adding Single Numbers</h4><hr class="border border-success border-1 opacity-50">
     <div><p>Now let's handle single numbers. What's our next test?</p>
 
         <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
@@ -204,7 +204,7 @@ public int Add(string numbers)
         <div class="gotcha"><p><strong>⚠️ Common Gotcha:</strong> At this point, many developers would add error handling for invalid inputs. 
             But in TDD, we only add code that's required by a failing test. No test for invalid input? No error handling yet!</p></div></div></section>
 
-    <section id="33a17fc8-91be-42ae-ad00-15258d11a59f" style="margin-bottom:1rem;"><h4>&#x1F504; Handling Two Numbers</h4><hr class="border border-success border-1 opacity-50">
+    <section id="ef9469a3-20e3-45d5-bb36-21c26d71bb66" style="margin-bottom:1rem;"><h4>&#x1F504; Handling Two Numbers</h4><hr class="border border-success border-1 opacity-50">
     <div><p>Now we're ready to tackle two numbers separated by a comma.</p>
 
         <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
@@ -238,7 +238,7 @@ public int Add(string numbers)
             than we expected.
         </p></div></section>
 
-    <section id="b110b886-feb9-48c0-a13c-59a5a2078f8c" style="margin-bottom:1rem;"><h4>&#x1F393; Key Lessons So Far</h4><hr class="border border-success border-1 opacity-50">
+    <section id="d81e7358-4487-4063-a894-4c1d838c960a" style="margin-bottom:1rem;"><h4>&#x1F393; Key Lessons So Far</h4><hr class="border border-success border-1 opacity-50">
     <div><div class="tip"><p><strong>1. Baby Steps are Powerful</strong></p>
             <p>Each step was tiny, but each one moved us forward with confidence. No step felt risky or overwhelming.</p></div>
 
@@ -250,7 +250,7 @@ public int Add(string numbers)
             <p>Several times we could have added "useful" features (error handling, input validation), but TDD kept us focused 
             on delivering only what was needed.</p></div></div></section>
 
-    <section id="1b5ca631-e5ee-44ad-9b8f-2fd3b8b575d6" style="margin-bottom:1rem;"><h4>&#x1F51C; Next Steps</h4><hr class="border border-success border-1 opacity-50">
+    <section id="55abbc72-cb91-4cdc-95b6-12dfd43056a1" style="margin-bottom:1rem;"><h4>&#x1F51C; Next Steps</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             We've covered the basics, but there's more to explore! In the next part, we'll tackle:
         </p>
@@ -262,7 +262,7 @@ public int Add(string numbers)
             Each of these requirements will push us to refactor our code while maintaining our test coverage. Stay tuned!
         </p></div></section>
 
-    <section id="18306cac-eb9c-4689-9e74-305de69e3cf1" style="margin-bottom:1rem;"><h4>&#x1F4AD; Reflection</h4><hr class="border border-success border-1 opacity-50">
+    <section id="20dfa866-a850-4105-a188-65520aab99c7" style="margin-bottom:1rem;"><h4>&#x1F4AD; Reflection</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             The String Calculator kata isn't about building a calculator—it's about building the muscle memory of TDD. 
             Each time you practice it, try to notice:
@@ -274,7 +274,7 @@ public int Add(string numbers)
             These observations will help you apply TDD more effectively in your day-to-day coding.
         </p></div></section>
 
-    <section id="601a2d9c-a78e-4ed3-b342-8ccfe58fb453" style="margin-bottom:1rem;"><h4></h4><hr class="border border-success border-1 opacity-50">
+    <section id="aa9788a3-bb6f-46d8-b006-90753d4ba140" style="margin-bottom:1rem;"><h4></h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             Have you tried the String Calculator kata? What surprised you about using TDD for this seemingly simple problem? 
             Share your experiences in the comments below!
@@ -298,9 +298,9 @@ public int Add(string numbers)
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-            </div><!--Blazor:{"prerenderId":"bf76ce6eecdd4948ad5be91e2395eb0e"}-->
+            </div><!--Blazor:{"prerenderId":"09d3c87714c74f5fb24c62508cfa0bd4"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UmtsRFpGVmxTVVpzYUVScVpWOVhXSEJKYzFKNVZXaFFMVWQ2U3poR2IydFVaMnBhUlU1NWVVZzBVVGd5UjFsTFEydERRVWd4VTJoWFVubzNkRE5oUVVkVlRVMDVlRFYwT1hod2N6Uk1NWFE1UVZoaGQxaGZjRzgxUVU1Vlp6RjNaamd6WkZSTU5VVXhWWFpOUm5wUVdYRTNPVTExYTB3NFdUZHBSbUZtVERWQ1ZqSkNTWEJqYVZndGFXMXlkV0pmYURWRmFHSk5JaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80VDBad1FsQndlWEJTVmtwcGFIWjFURFkyZVZoUVRWQXdkbGh4YWt4alduUkpjRzgxTVRBMWJWbHpYMnczTVVoM1ZpMWFORmh3VDBOdGNXNUxjMDFuVkhoeVpXRkxVblp4UldWaFdFOXFjM0l5ZG10d2FuVkdSbEZWUjJwemRFeFNNMWhQWW14UVIxaE9kRUZ2TVVGMmNtcGtiamxaYzFsT2N6SkdZa05pYVVwR1FWZFhTbU5yZUdaUlRYUTNWVmgzYmpSSlZrbzRJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
