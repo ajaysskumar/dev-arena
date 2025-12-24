@@ -27,20 +27,19 @@
         <p>
             Picture this: You join a new team, and your first task is to fix a bug in a legacy billing module. The method is 300 lines long, filled with cryptic variable names and nested ifs. You hesitate—what if you break something? This fear is universal. But with a solid suite of tests, refactoring transforms from a risky gamble into a safe, even enjoyable, process. Tests are your safety net, letting you clean up code with confidence.
         </p>
-        <b>Imagine a scenario:</b> You inherit an 8-year-old payment processing function mixing currency conversion, platform fees, and tax logic. Write 18 characterization tests covering edge cases. Now refactor safely: split into `CalculatePlatformFee()`, `ApplyTaxes()`, `ConvertCurrency()`. Tests verify all three work together.
     </Section>
     <Section Heading="How to Decide What to Refactor First" Level="4">
         <p>
-            Not sure where to start? Focus your refactoring efforts where they’ll have the biggest impact:
+            In TDD, refactoring opportunities emerge naturally from your test suite. Focus your refactoring efforts where they'll have the biggest impact:
         </p>
         <ul>
-            <li><b>High-churn areas:</b> Code that changes often is more likely to accumulate bugs and technical debt. Clean it up first.</li>
-            <li><b>Pain points:</b> Functions or modules that frustrate you or your team—slow to understand, hard to modify, or error-prone.</li>
-            <li><b>Repetitive code:</b> Copy-pasted logic or duplicated patterns are prime candidates for extraction and simplification.</li>
-            <li><b>Frequent bugs:</b> If a part of the codebase is always breaking, refactor it to make future fixes easier.</li>
+            <li><b>High-churn areas with weak tests:</b> Code that changes often but lacks comprehensive test coverage is a refactoring candidate. Write tests first (characterization tests if it's legacy code), then refactor safely.</li>
+            <li><b>Failing or flaky tests:</b> If tests are hard to write or maintain for a feature, the underlying code likely needs refactoring. Use the test feedback as a signal that design is off.</li>
+            <li><b>Repetitive test patterns:</b> Duplicated test logic or setup code suggests the production code should be simplified. Refactor to reduce test boilerplate.</li>
+            <li><b>Complex test assertions:</b> If verifying behavior requires many assertions or helper methods, the code under test is probably doing too much. Refactor to single responsibility.</li>
         </ul>
         <CalloutBox Type="info">
-            <b>Tip for juniors:</b> Start small. Refactor a single function or file, and build confidence as your tests protect you.
+            <b>Tip for juniors:</b> Let your tests guide you. If a test is hard to write, refactor the code to make it testable. Testability and clean design go hand-in-hand.
         </CalloutBox>
     </Section>
 
@@ -49,6 +48,84 @@
             Refactoring isn’t rewriting, slowing down, or sneaking in new features. It’s about <b>improving the internal structure without changing what the code does</b>. The challenge? Sometimes the code is so tangled, or so poorly tested, that even small changes feel risky. If you’ve ever tried to clean up a function and ended up breaking something, you know the pain.
         </p>
         <b>Example:</b> Discount logic is duplicated in `OrderService`, `CartService`, and `QuoteService`. Write 24 tests covering percentage, flat-rate, seasonal, and tier-based discounts. Extract a single `DiscountCalculator` class. Now one bug fix to senior-citizen discounts benefits all three services.
+    <p>
+        <b>Step-by-step walkthrough:</b>
+    </p>
+    <ol>
+        <li>
+            <b>Before refactoring:</b> Each service calculates discounts independently, leading to bugs when business rules change.
+            <CodeSnippet Language="csharp" Description="Duplicated Discount Logic">
+    public class OrderService
+    {
+        public decimal CalculateTotal(Order order)
+        {
+            decimal discount = 0;
+            if (order.CustomerType == "Senior") discount = order.Total * 0.15m;
+            else if (order.CustomerType == "Premium") discount = order.Total * 0.10m;
+            return order.Total - discount;
+        }
+    }
+
+    public class CartService
+    {
+        public decimal CalculateTotal(Cart cart)
+        {
+            decimal discount = 0;
+            if (cart.CustomerType == "Senior") discount = cart.Total * 0.15m;
+            else if (cart.CustomerType == "Premium") discount = cart.Total * 0.10m;
+            return cart.Total - discount;
+        }
+    }
+            </CodeSnippet>
+        </li>
+        <li>
+            <b>Write tests first:</b> Cover all discount scenarios to lock in expected behavior.
+            <CodeSnippet Language="csharp" Description="Comprehensive Discount Tests">
+    [Fact]
+    public void CalculateDiscount_SeniorCustomer_ShouldReturn15Percent() => 
+        Assert.Equal(150m, calculator.CalculateDiscount(100m, "Senior"));
+
+    [Fact]
+    public void CalculateDiscount_PremiumCustomer_ShouldReturn10Percent() => 
+        Assert.Equal(90m, calculator.CalculateDiscount(100m, "Premium"));
+
+    [Fact]
+    public void CalculateDiscount_RegularCustomer_ShouldReturnNoDiscount() => 
+        Assert.Equal(100m, calculator.CalculateDiscount(100m, "Regular"));
+            </CodeSnippet>
+        </li>
+        <li>
+            <b>After refactoring:</b> Extract discount logic into a single, reusable class.
+            <CodeSnippet Language="csharp" Description="Centralized DiscountCalculator">
+    public class DiscountCalculator
+    {
+        public decimal CalculateDiscount(decimal total, string customerType) => customerType switch
+        {
+            "Senior" => total * 0.15m,
+            "Premium" => total * 0.10m,
+            _ => 0m
+        };
+    }
+
+    public class OrderService
+    {
+        private readonly DiscountCalculator discountCalc = new();
+        public decimal CalculateTotal(Order order) => 
+            order.Total - discountCalc.CalculateDiscount(order.Total, order.CustomerType);
+    }
+
+    public class CartService
+    {
+        private readonly DiscountCalculator discountCalc = new();
+        public decimal CalculateTotal(Cart cart) => 
+            cart.Total - discountCalc.CalculateDiscount(cart.Total, cart.CustomerType);
+    }
+            </CodeSnippet>
+        </li>
+        <li>
+            <b>Benefit:</b> Fix a bug once, fix it everywhere. Change senior-citizen discount from 15% to 20%? Update one line in `DiscountCalculator`. All three services benefit immediately. Tests ensure nothing breaks.
+        </li>
+    </ol>
     </Section>
 
     <Section Heading="The Golden Rule of Refactoring" Level="4">
@@ -94,8 +171,43 @@
             <li><b>Refactor:</b> Now, clean up the code. The tests guarantee you don’t break anything.</li>
         </ol>
         <p>
-            <b>Example:</b> Express shipments should cost $15 flat, but are being charged weight-based rates. Red: `Assert.Equal(15, calculator.CalculateExpressShippingFee(anyWeight))` fails. Green: simplest fix. Refactor: introduce `ShippingStrategy` interface with implementations. Tests lock down both express and weight-tier rates working correctly.
+            <b>Example:</b> Your shipping calculator has a bug: express shipments should cost $15 flat, but the system is incorrectly charging weight-based rates instead.
         </p>
+        <ol>
+            <li><b>Red:</b> Write a test that locks in the correct behavior:
+            <CodeSnippet Language="csharp" Description="Test for Express Shipping">
+    [Fact]
+    public void CalculateExpressShippingFee_ShouldReturn15Flat()
+    {
+        var calculator = new ShippingCalculator();
+        var result = calculator.CalculateExpressShippingFee(weight: 50); // weight shouldn't matter
+        Assert.Equal(15m, result);
+    }
+            </CodeSnippet>
+            The test fails because the code applies weight-based logic to express shipments.
+            </li>
+            <li><b>Green:</b> Make the test pass with the simplest fix—hardcode $15 for express shipments or add a conditional check.
+            </li>
+            <li><b>Refactor:</b> Now that tests protect you, introduce a `ShippingStrategy` interface to handle different shipping types cleanly:
+            <CodeSnippet Language="csharp" Description="Refactored Shipping Strategy">
+    public interface IShippingStrategy
+    {
+        decimal CalculateFee(decimal weight);
+    }
+
+    public class ExpressShippingStrategy : IShippingStrategy
+    {
+        public decimal CalculateFee(decimal weight) => 15m; // flat rate
+    }
+
+    public class StandardShippingStrategy : IShippingStrategy
+    {
+        public decimal CalculateFee(decimal weight) => weight * 0.5m;
+    }
+            </CodeSnippet>
+            All tests still pass. Both express and weight-tier shipping now work correctly, and adding new shipping types is easy.
+            </li>
+        </ol>
     </Section>
 
     <Section Heading="Practical Example — The Ugly Function Makeover" Level="4">
@@ -195,18 +307,44 @@
     </Section>
 
     <Section Heading="Refactoring Patterns You Should Know" Level="4">
+        <p>
+            In TDD, refactoring patterns emerge from your Red-Green-Refactor cycle. Here are essential patterns and how they fit into TDD:
+        </p>
         <ul>
-            <li>Extract Method</li>
-            <li>Extract Class</li>
-            <li>Inline Variable</li>
-            <li>Rename for Intent</li>
-            <li>Introduce Parameter Object</li>
-            <li>Replace Magic Numbers with Constants</li>
-            <li>Move Method</li>
-            <li>Encapsulate Collection</li>
-            <li>Replace Conditional with Polymorphism</li>
+            <li><b>Extract Method:</b> Test reveals a method does too much? Extract a helper. Write a test for the extracted behavior first.</li>
+            <li><b>Extract Class:</b> When a class has too many responsibilities (and your tests for it are complex), split it. Tests guide which responsibilities belong together.</li>
+            <li><b>Inline Variable:</b> Overly complex intermediate variables make tests harder to read. Inline them once tests verify the logic.</li>
+            <li><b>Rename for Intent:</b> If a test name doesn't match what the code does, rename the code. Tests act as specifications.</li>
+            <li><b>Introduce Parameter Object:</b> When you have many parameters making tests verbose, group them. Tests tell you when parameters need organization.</li>
+            <li><b>Replace Magic Numbers with Constants:</b> Tests should use named constants, not magic numbers. This refactor improves both code and test readability.</li>
+            <li><b>Replace Conditional with Polymorphism:</b> Complex conditionals (if/else chains) are test nightmares. Strategy or State patterns simplify testing.</li>
         </ul>
-        <p>Learn a few — not all. Use them often. Try applying one pattern in your next refactor and see the difference.</p>
+        <p>
+            <b>Example - Extract Method via TDD:</b> Your test is failing because a method mixes currency conversion with discount calculation.
+        </p>
+        <CodeSnippet Language="csharp" Description="Test Reveals Need for Extraction">
+    [Fact]
+    public void CalculatePrice_WithCurrencyAndDiscount_ShouldWorkCorrectly()
+    {
+        // This test is trying to verify too much at once
+        var result = calculator.CalculatePrice(100m, "USD", "Senior");
+        Assert.Equal(expectedValue, result);
+    }
+    
+    // Refactor: Write separate tests
+    [Fact]
+    public void ConvertCurrency_USD_ShouldApplyCorrectRate() => ...
+    
+    [Fact]
+    public void ApplyDiscount_SeniorCustomer_ShouldReturn15Percent() => ...
+    
+    // Now extract the methods to make tests pass
+    private decimal ConvertCurrency(decimal amount, string currency) => ...
+    private decimal ApplyDiscount(decimal amount, string customerType) => ...
+        </CodeSnippet>
+        <p>
+            Learn a few patterns and use them often. Let your tests guide which pattern fits best.
+        </p>
     </Section>
 
     <Section Heading="Common Gotchas & Anti-Patterns" Level="4">
@@ -234,11 +372,11 @@
                 Mutation testing helps verify your tests are strong enough to detect broken behavior. It works by making small changes (mutations) to your code and checking if your tests fail as expected.
             </p>
             <CodeSnippet Language="csharp" Description="Mutation Testing Example">
-                // Original code
-                return cart.Price * 0.9m;
-                // Mutated code (by tool)
-                return cart.Price * 0.8m;
-                // If your test still passes, it’s too weak!
+            // Original code
+            return cart.Price * 0.9m;
+            // Mutated code (by tool)
+            return cart.Price * 0.8m;
+            // If your test still passes, it’s too weak!
             </CodeSnippet>
             <p>Tools like Stryker.NET or Pitest (Java) automate mutation testing and help you strengthen your test suite.</p>
         </Section>
