@@ -20,11 +20,11 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" /> -->
     
-<!--Blazor:{"type":"webassembly","prerenderId":"6fdf0ded075a4036910694bc77d19acf","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>SOLID Principles: Understanding the Interface Segregation Principle</title><meta property="og:url" content="http://127.0.0.1:5050/blog/software-practices/solid/interface-segregation-principle" />
+<!--Blazor:{"type":"webassembly","prerenderId":"1012a4c7dda2466287c16329877b4058","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>SOLID Principles: Understanding the Interface Segregation Principle</title><meta property="og:url" content="http://127.0.0.1:5050/blog/software-practices/solid/interface-segregation-principle" />
     <meta property="og:title" content="SOLID Principles: Understanding the Interface Segregation Principle" />
     <meta property="og:description" content="" />
     <meta property="og:image" content="http://127.0.0.1:5050/images/blog/software-practices/solid/isp/banner.png" />
-    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"6fdf0ded075a4036910694bc77d19acf"}-->
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"1012a4c7dda2466287c16329877b4058"}-->
 </head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -40,7 +40,7 @@
 
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"15631e610a3148d5a224e005b5f30166","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"0b2a95ba71cb4951948bbb4878d11642","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -88,7 +88,7 @@
                     <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 07 Jun 2025</span></div></div></div></div></div></header>
 
     
-    <section id="c7522ec6-35e0-4e6c-9719-64c93a63b22d" style="margin-bottom:1rem;"><h3>&#x1F50D; What is the Interface Segregation Principle (ISP)?</h3><hr class="border border-success border-1 opacity-50">
+    <section id="194526b3-4fa0-40d7-9520-686c1b91da56" style="margin-bottom:1rem;"><h3>&#x1F50D; What is the Interface Segregation Principle (ISP)?</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             Imagine you’re at a restaurant, and the menu is a single giant page with every possible dish—pizza, sushi, burgers, desserts, drinks, and more. You just want a coffee, but you have to flip through everything! Wouldn’t it be easier if there was a separate drinks menu? That’s the heart of the <b>Interface Segregation Principle (ISP)</b> in software design.
         </p>
@@ -96,7 +96,7 @@
             ISP is the fourth of the five SOLID principles. In simple terms: <b>"Clients should not be forced to depend on interfaces they do not use."</b> This means you should split large, "fat" interfaces into smaller, more specific ones so that classes only need to know about the methods that are relevant to them.
         </p></div></section>
 
-    <section id="f3554882-39de-4fa6-a622-82ad5914dbca" style="margin-bottom:1rem;"><h3>&#x1F4A1; Why is ISP Important?</h3><hr class="border border-success border-1 opacity-50">
+    <section id="13ff0d78-db54-452b-a78e-d06641425ce5" style="margin-bottom:1rem;"><h3>&#x1F4A1; Why is ISP Important?</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             Violating ISP leads to code that’s hard to maintain and extend. If a class is forced to implement methods it doesn’t need, you end up with empty method bodies, confusing code, and more chances for bugs. Here’s why ISP matters:
         </p>
@@ -107,7 +107,7 @@
             ISP helps you build focused, maintainable, and robust systems.
         </p></div></section>
 
-    <section id="c3018094-e421-40f2-8a19-6f7a803eed9b" style="margin-bottom:1rem;"><h3>&#x1F552; When Does ISP Matter Most?</h3><hr class="border border-success border-1 opacity-50">
+    <section id="23144023-4a09-434e-9c1a-9a69d0f719b4" style="margin-bottom:1rem;"><h3>&#x1F552; When Does ISP Matter Most?</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             ISP is crucial when you design APIs, services, or any system with interfaces. Watch for these red flags 🚩:
         </p>
@@ -118,7 +118,7 @@
             The earlier you spot these, the easier it is to fix. ISP is your guide to clean, focused interfaces!
         </p></div></section>
 
-    <section id="5f5838df-f9d3-44ad-9dc5-3e7183db2535" style="margin-bottom:1rem;"><h3>&#x1F6E0;&#xFE0F; How Do You Apply ISP in C#?</h3><hr class="border border-success border-1 opacity-50">
+    <section id="ee3acaa5-f063-44a9-b42b-19fb97cc1bb8" style="margin-bottom:1rem;"><h3>&#x1F6E0;&#xFE0F; How Do You Apply ISP in C#?</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             Let’s get practical. Suppose you have a <code>IWorker</code> interface that tries to do too much:
         </p>
@@ -179,7 +179,7 @@ public class RobotWorker : IWorkable
             Now, each class only implements what it needs. No more empty methods or confusing exceptions.
         </p></div></section>
 
-    <section id="d3c8c046-d1bf-4404-9154-d5bce36a2911" style="margin-bottom:1rem;"><h3>&#x1F30D; ISP in the Real World: Practical Scenarios</h3><hr class="border border-success border-1 opacity-50">
+    <section id="9d61e68d-3ca0-4ba5-b36b-6593f18ffe34" style="margin-bottom:1rem;"><h3>&#x1F30D; ISP in the Real World: Practical Scenarios</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             ISP isn’t just for workers! It applies to services, controllers, and any place you use interfaces. Here’s a real-world example with a notification system:
         </p>
@@ -211,14 +211,14 @@ public class NotificationService : IEmailSender, ISmsSender
             Now, you can use <code>NotificationService</code> for both email and SMS, or swap in a different implementation for just one type of notification. That’s ISP in action!
         </p></div></section>
 
-    <section id="d3b9f19c-6bb7-4c7b-ab28-bd832ad47e40" style="margin-bottom:1rem;"><h3>&#x1F6A9; Common Pitfalls (and How to Dodge Them)</h3><hr class="border border-success border-1 opacity-50">
+    <section id="cdee0a6a-10e3-419a-bf29-7fbae8bf780a" style="margin-bottom:1rem;"><h3>&#x1F6A9; Common Pitfalls (and How to Dodge Them)</h3><hr class="border border-success border-1 opacity-50">
     <div><ul><li><b>Fat interfaces:</b> Don’t add methods "just in case." Only include what’s truly needed.</li>
             <li><b>Empty implementations:</b> If a class leaves interface methods empty, it’s a sign to split the interface.</li>
             <li><b>Breaking changes:</b> Changing a large interface can force many unrelated classes to change. Keep interfaces small to avoid this.</li></ul>
         <p><b>Pro tip:</b> When in doubt, ask: “Does every implementer need every method?” If not, split the interface!
         </p></div></section>
 
-    <section id="d94dff4c-435a-4739-a2e0-97c369e42f78" style="margin-bottom:1rem;"><h3>&#x1F517; ISP and the Other SOLID Principles</h3><hr class="border border-success border-1 opacity-50">
+    <section id="8871fd3a-0b9b-40f1-84f4-95d3edbe9cf8" style="margin-bottom:1rem;"><h3>&#x1F517; ISP and the Other SOLID Principles</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             ISP works hand-in-hand with the other SOLID principles:
         </p>
@@ -230,7 +230,7 @@ public class NotificationService : IEmailSender, ISmsSender
             Mastering ISP helps you build flexible, reliable, and maintainable systems.
         </p></div></section>
 
-    <section id="eb13206c-c871-479c-b869-c0f4482ba8e2" style="margin-bottom:1rem;"><h3>&#x1F4DD; Wrapping Up: Why ISP Makes Life Easier</h3><hr class="border border-success border-1 opacity-50">
+    <section id="fd24aec0-260b-4854-9443-2b3df7fad9be" style="margin-bottom:1rem;"><h3>&#x1F4DD; Wrapping Up: Why ISP Makes Life Easier</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             The Interface Segregation Principle is about focus and clarity. Like a well-organized menu, ISP helps you build systems where classes only see what they need. Use ISP to guide your interface design, and your codebase will be easier to test, extend, and maintain.
         </p></div></section></div>
@@ -253,9 +253,9 @@ public class NotificationService : IEmailSender, ISmsSender
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-            </div><!--Blazor:{"prerenderId":"15631e610a3148d5a224e005b5f30166"}-->
+            </div><!--Blazor:{"prerenderId":"0b2a95ba71cb4951948bbb4878d11642"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80U0RaamNWcHZibEF0Y0Uxc2NYbE1Ra2RJYzFONWRVUkxNVkUwVDJoVFoyRnlRak5qZG5KS1FWa3pTemN6ZHpWeFNWSnZRMjFKTUdaSE5HMVBkVWhmTmxaWkxXNVdPVXROZERRMGNsOWtUa0pJYjJwVE1ETnlielU1ZEdwMFFWOVVhak4zWTFFNGRXd3dlRTQ0V2xaV1JsQTBNekprTW10d2FqSkpORmxrY25SUGRWUkdUblZSV2tWMUxVTkVVa2xFVURWdVEzaEZJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UWxjM2NXdHhabDlmVWtoMWMzbHNVMTg1VUVGdlFUQlNiMDlCZUhCQ2QyMTFkMWRvZEd0eVRVcGlXVVJFU1Vsc1RsRTRNVnBNTTJKZmVGUkJObGh4VmxSUk1XZE9ZVWhYUzBSMGNUaERZMEUzYldWMk9IZEhOVVF4V0RrM2JXRXhVbEpxV0dSdmNuSkhSR0pNY1VaSk9GcEhVSEJUZG5GSE5scG1OeTFqUkMxNldFTjRMVXRQT1RSeFJ6bDBkQzExV2xOUWNHVlpJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
