@@ -7,7 +7,7 @@
                 <code class="language-@Language" style="font-size: 0.8rem;">@ChildContent</code>
             </pre>
         </div>
-        @if (ShowDescription)
+        @if (Number > 0 && !string.IsNullOrEmpty(Description))
         {
             <div class="col-12 text-center">
                 <code>@(Number > 0 ? $"Code Sample #{Number.ToString()} : " : string.Empty)@Description</code> 
@@ -22,7 +22,7 @@
     [Parameter] public string Language { get; set; } = "csharp"; // Default to C#
     [Parameter] public int Number { get; set; } = 0; // Default to C#
     [Parameter] public string Description { get; set; } = ""; // Default to C#
-    [Parameter] public bool ShowDescription { get => Number > 0 && !string.IsNullOrWhiteSpace(Description); }
+    [Parameter] public bool ShowDescription { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
