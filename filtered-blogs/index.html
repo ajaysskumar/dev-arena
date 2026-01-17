@@ -20,7 +20,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" /> -->
     
-<!--Blazor:{"type":"webassembly","prerenderId":"d4e302168ba7456abfd312e398e17005","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><!--Blazor:{"prerenderId":"d4e302168ba7456abfd312e398e17005"}-->
+<!--Blazor:{"type":"webassembly","prerenderId":"f0e2bcf1b7fb400ebb6b87682ae65a4a","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><!--Blazor:{"prerenderId":"f0e2bcf1b7fb400ebb6b87682ae65a4a"}-->
 </head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -36,7 +36,7 @@
 
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"ddb72afe235e45e48e50590bb06d9030","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"a68f604a7542481e80302fed4f113e41","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -47,6 +47,43 @@
                 <div class="col-12 col-md-4 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><div class="dropdown"><a href="/about-author" class="d-inline-block rounded-circle overflow-hidden border border-white" style="width: 3rem; height: 3rem; border-width: 0.25rem;"><img src="/images/shared/author.png" alt="About Author" class="img-fluid rounded-circle" style="width: 100%; height: 100%; object-fit: cover;"></a></div></div></div></div></div></header>
         <article class="content px-4" b-mcp0h0uciv><h2 class="mb-4">Blogs with tag: <code></code></h2>
 <div class="row row-cols-1 row-cols-md-3 g-4 p-2"><div class="col"><style>
+    .custom-size {
+        max-width: 400px;
+        /* keep overflow hidden so the scaled card doesn't overflow layout */
+        overflow: hidden;
+    }
+    .thumbnail-img {
+        width: 100%;
+        height: 220px;
+        object-fit: fill;
+        border-radius: 0.375rem 0.375rem 0 0;
+        background: #f8f9fa;
+        display: block;
+        /* smooth filter transition for image brighten */
+        transition: filter 250ms ease;
+    }
+
+    /* Slight zoom of the whole component on hover */
+    .thumbnail-card {
+        transition: transform 220ms ease, box-shadow 220ms ease;
+        transform-origin: center center;
+        will-change: transform;
+    }
+
+    .thumbnail-card:hover {
+        transform: scale(1.04);
+        box-shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.12);
+    }
+
+    /* Subtle image brighten on hover */
+    .thumbnail-card:hover .thumbnail-img {
+        filter: brightness(1.04);
+    }
+</style>
+
+<div class="card shadow-sm custom-size thumbnail-card"><a href="/blog/ai/bedrock"><img src="images/blog/ai/bedrock/banner.svg" class="thumbnail-img" alt="Getting Started with AWS Bedrock in .NET" /></a>
+    <div class="card-body"><a href="/filtered-blogs?tag=AI"><span class="badge bg-primary mx-1">AI</span></a><a href="/filtered-blogs?tag=AWS Bedrock"><span class="badge bg-primary mx-1">AWS Bedrock</span></a><a href="/filtered-blogs?tag=API"><span class="badge bg-primary mx-1">API</span></a><a href="/filtered-blogs?tag=.NET"><span class="badge bg-primary mx-1">.NET</span></a><a href="/filtered-blogs?tag=C#"><span class="badge bg-primary mx-1">C#</span></a><h5 class="card-title mt-2"><a href="/blog/ai/bedrock" class="text-decoration-none text-dark">Getting Started with AWS Bedrock in .NET</a></h5>
+        <p class="card-text text-muted small">By Ajay kumar · Saturday, December 27, 2025</p></div></div></div><div class="col"><style>
     .custom-size {
         max-width: 400px;
         /* keep overflow hidden so the scaled card doesn't overflow layout */
@@ -1199,9 +1236,9 @@
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-            </div><!--Blazor:{"prerenderId":"ddb72afe235e45e48e50590bb06d9030"}-->
+            </div><!--Blazor:{"prerenderId":"a68f604a7542481e80302fed4f113e41"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80VUhGRGR6RkJSRlZXY0U5MlRXZDNaVk5OV1hCS01HTm1hMHhtTW05WVZtUk1NREZ3VDJselZIaEVUbDl6UVdOeFJtSlNZbWhDYUZGeU1EbEtWWE5yYVV0R01ESTVSMkpZVDNkNlUyWnRjSFpoTkVWWGQzQjJVMHhPTlRaeGNXOUlla051Tmt4WGRXMDBkbXBTVlRnNVNXUkxhVFpKZFZKelozaG1hUzB0WldaVGJYcDNkVjlXTjFkdlpUQjRYM1kwUmpKdGVWZEpJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80VURKeGNFZDRlR2R2ZUVocE0xZG1XR2g0WWtGbldXczBaVEZwZGtwc2FsazBZelpyUlVaVFpXNVBaRnAwWkU1UFlrOUdlRVJqVG1oSmNVdHNPR1ExYmt0WE5rWTNPQzFOY1dOMWJHOTNZWEJwUkZOdFNVRnJjMlZGV1V0aFNGUXpXRlJ6TUhvemFsaFhVRU40Y2xKNVltSlpkMWxTVDNGSVJHODFlWEUyV0c5VmRVNW1USE5xVUZWeVprdHNRM2g0UzFrdGMySTRJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.

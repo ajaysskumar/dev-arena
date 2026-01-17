@@ -20,11 +20,11 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" /> -->
     
-<!--Blazor:{"type":"webassembly","prerenderId":"629cc2f2ca8c4a9c9aade5ce6170382f","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>Writing Good Tests in TDD</title><meta property="og:url" content="http://127.0.0.1:5050/blog/tdd/writing-good-tests" />
+<!--Blazor:{"type":"webassembly","prerenderId":"e60ebf8ecb1d45d693156464bdc3ec92","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>Writing Good Tests in TDD</title><meta property="og:url" content="http://127.0.0.1:5050/blog/tdd/writing-good-tests" />
     <meta property="og:title" content="Writing Good Tests in TDD" />
     <meta property="og:description" content="" />
     <meta property="og:image" content="http://127.0.0.1:5050/images/blog/tdd/writing-good-tests/banner.svg" />
-    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"629cc2f2ca8c4a9c9aade5ce6170382f"}-->
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"e60ebf8ecb1d45d693156464bdc3ec92"}-->
 </head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -40,7 +40,7 @@
 
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"a886df58f06f4781ba901439f84569fa","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"4c8b9990c9cd454db599b50543d5ee52","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -87,14 +87,14 @@
                     
                     <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 18 Oct 2025</span></div></div></div></div></div></header>
 
-	<section id="7fa3375b-4863-4032-bcbe-4172705eaa19" style="margin-bottom:1rem;"><h4>Ever run a test suite where everything&#x2019;s green&#x2026; but you still don&#x2019;t trust it?</h4><hr class="border border-success border-1 opacity-50">
+	<section id="c2633ea6-9cf6-4742-ba52-9737fa515d05" style="margin-bottom:1rem;"><h4>Ever run a test suite where everything&#x2019;s green&#x2026; but you still don&#x2019;t trust it?</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             Have you ever encountered that unreliable test everyone avoids, or noticed a flaky test that occasionally fails but gets ignored due to tight deadlines? Let’s explore why this happens.<br> <br>
             
 			In <b>Test-Driven Development (TDD)</b>, tests aren’t just a safety net you add later. They’re the steering wheel. But if that steering wheel wobbles, you’ll never enjoy the ride.
 		</p></div></section>
 
-	<section id="51c1c606-fa9d-4e20-b5e8-5e88941e3b67" style="margin-bottom:1rem;"><h4>Why &#x2018;Good Tests&#x2019; Matter in TDD</h4><hr class="border border-success border-1 opacity-50">
+	<section id="89ac0754-fbc7-44e2-b9b4-d8768edb49c5" style="margin-bottom:1rem;"><h4>Why &#x2018;Good Tests&#x2019; Matter in TDD</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
 			Good tests are what make TDD possible—not just productive. TDD depends on trustworthy feedback loops. Poor tests lead to false confidence, brittle design, and slowed development. Great tests illuminate design issues early.
 		</p>
@@ -108,7 +108,7 @@
 		var calc = new Calculator();
 		Assert.True(calc.Add(2, 2) == 4); // What does this really prove?
 	}
-        </code></pre></div><div class="col-12 text-center"><code></code></div></div></div>
+        </code></pre></div></div></div>
 <br>
 		<p>
 			A better test would be:
@@ -121,10 +121,10 @@
 		var result = calc.Add(2, 2);
 		Assert.Equal(4, result);
 	}
-        </code></pre></div><div class="col-12 text-center"><code></code></div></div></div>
+        </code></pre></div></div></div>
 <br></div></section>
 
-    <section id="f6692254-1bc4-4785-abef-189297d09e0c" style="margin-bottom:1rem;"><h4>What makes a &#x2018;Good Test&#x2019;? The 5 Pillars</h4><hr class="border border-success border-1 opacity-50">
+    <section id="75588df0-9eb7-40a4-a768-111cee03c534" style="margin-bottom:1rem;"><h4>What makes a &#x2018;Good Test&#x2019;? The 5 Pillars</h4><hr class="border border-success border-1 opacity-50">
     <div><table class="table table-bordered"><thead><tr><th>Pillar</th>
                     <th>Description</th>
                     <th>Example</th></tr></thead>
@@ -137,7 +137,7 @@
     // Bad
     [Fact]
     public void Test1() { }
-                        </code></pre></div><div class="col-12 text-center"><code></code></div></div></div>
+                        </code></pre></div></div></div>
 <br></td></tr>
                 <tr><td>Structure (AAA)</td>
                     <td>Arrange → Act → Assert keeps tests readable.</td>
@@ -148,7 +148,7 @@
     Assert.Equal(3, result); // Assert
     // Bad
     Assert.Equal(3, new Calculator().Add(1, 2));
-                        </code></pre></div><div class="col-12 text-center"><code></code></div></div></div>
+                        </code></pre></div></div></div>
 <br></td></tr>
                 <tr><td>Focus</td>
                     <td>One behavior per test, one reason to fail.</td>
@@ -162,7 +162,7 @@
         Assert.Equal(0, calc.Add(""));
         Assert.Equal(1, calc.Add("1"));
     }
-                        </code></pre></div><div class="col-12 text-center"><code></code></div></div></div>
+                        </code></pre></div></div></div>
 <br></td></tr>
                 <tr><td>Readability &gt; Cleverness</td>
                     <td>Don’t try to optimize test code. Tests are for humans.</td>
@@ -172,7 +172,7 @@
     Assert.Equal(4, result);
     // Bad
     Assert.Equal(4, calc.Add(2, 2)); // Inline everything
-                        </code></pre></div><div class="col-12 text-center"><code></code></div></div></div>
+                        </code></pre></div></div></div>
 <br></td></tr>
                 <tr><td>No Logic in Tests</td>
                     <td>Avoid loops, conditionals, or calculations in assertions.</td>
@@ -183,17 +183,17 @@
     // Good
     Assert.Equal(0, calc.Add(0, 0));
     Assert.Equal(1, calc.Add(1, 0));
-                        </code></pre></div><div class="col-12 text-center"><code></code></div></div></div>
+                        </code></pre></div></div></div>
 <br></td></tr></tbody></table></div></section>
 
-	<section id="58a77590-7a48-4e73-bfc6-faffe4370ab0" style="margin-bottom:1rem;"><h4>How Tests Drive Design</h4><hr class="border border-success border-1 opacity-50">
+	<section id="f7d362ac-5a54-4470-b3f4-7ffb06537db5" style="margin-bottom:1rem;"><h4>How Tests Drive Design</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
 			Every good test you write shapes your API. A hard-to-test design usually means the code is too coupled. If your test setup feels painful—that’s feedback, not failure.
 		</p>
 		<div class="tip"><b>Tip:</b> Refactor when writing the test feels clumsy. Pain-driven refactoring leads to better design.
 		</div></div></section>
 
-	<section id="26ed852d-5eca-4cc8-aabc-fbca537b7a21" style="margin-bottom:1rem;"><h4>Common Pitfalls and Gotchas</h4><hr class="border border-success border-1 opacity-50">
+	<section id="7fc80eba-3528-405d-881c-e7b0ee7766a9" style="margin-bottom:1rem;"><h4>Common Pitfalls and Gotchas</h4><hr class="border border-success border-1 opacity-50">
     <div><ul><li><b>❌ Tests that don’t test anything</b> — empty or overly mocked tests.</li>
 			<li><b>❌ Assertion Soup</b> — multiple unrelated asserts.</li>
 			<li><b>❌ God Test</b> — testing multiple classes or layers in one go.</li>
@@ -208,10 +208,10 @@
 		Assert.True(repo.Save());
 	}
 	// Good: Split into focused tests
-        </code></pre></div><div class="col-12 text-center"><code></code></div></div></div>
+        </code></pre></div></div></div>
 <br></div></section>
 
-	<section id="0add05c9-703c-4c1a-b8a9-a3b7c632e66c" style="margin-bottom:1rem;"><h4>Best Practices in the Wild</h4><hr class="border border-success border-1 opacity-50">
+	<section id="ae809256-7dc0-4a06-b78d-5b6305ed489b" style="margin-bottom:1rem;"><h4>Best Practices in the Wild</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
 			Here’s a mini before-and-after:
 		</p>
@@ -237,20 +237,20 @@
 		var result = calc.Add("1,2");
 		Assert.Equal(3, result);
 	}
-        </code></pre></div><div class="col-12 text-center"><code></code></div></div></div>
+        </code></pre></div></div></div>
 <br>
 		<p>
 			Readability improves confidence and flow.
 		</p></div></section>
 
-	<section id="79d0d62a-8b43-4a02-b2a3-e37a73b0ac52" style="margin-bottom:1rem;"><h4>Wrap-Up: The Meta-Lesson</h4><hr class="border border-success border-1 opacity-50">
+	<section id="c06261b1-305d-47c6-b410-d8c7f77a703e" style="margin-bottom:1rem;"><h4>Wrap-Up: The Meta-Lesson</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
 			When your tests read like documentation, you know you’re doing TDD right.<br>
 			<b>Reflect:</b> If someone who never saw your code can understand your tests—would they know what the system does?
 		</p>
 		<p><i>Next, we’ll look at how to keep your tests clean even when the code depends on other code—through mocks, stubs, and fakes.</i></p></div></section>
 
-	<section id="cb2864d8-7949-49b3-a3b7-096c7eb2daf6" style="margin-bottom:1rem;"><h4>&#x2728; 5-Point Test Quality Check</h4><hr class="border border-success border-1 opacity-50">
+	<section id="5708e79f-3c73-4acb-9082-4f3d8bffb9db" style="margin-bottom:1rem;"><h4>&#x2728; 5-Point Test Quality Check</h4><hr class="border border-success border-1 opacity-50">
     <div><ul><li>Does the test name describe intent?</li>
 			<li>Is the Arrange-Act-Assert structure clear?</li>
 			<li>Does the test focus on one behavior?</li>
@@ -279,9 +279,9 @@
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-            </div><!--Blazor:{"prerenderId":"a886df58f06f4781ba901439f84569fa"}-->
+            </div><!--Blazor:{"prerenderId":"4c8b9990c9cd454db599b50543d5ee52"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80VUhGRGR6RkJSRlZXY0U5MlRXZDNaVk5OV1hCS01raHhjREJ0U2pONWJGTldlREZWU0ZoWmJEWlpMV3hwTkVOcGIwWkZTRk5TUkhnd1luRTROMnBvWlZVd2JVaEdPRWhKVG1wck9IQm9hRXRNYTNWclVYWmlUMmhoYjFwU1QybE5OV2xIWjFoT01VdE5XWGRZVm14ZlVrUklVR2x3TmxjM1UwOTFZMXB4WVVKSFFpMWxWMms0TVhCa1lqbDVOV2gwYlUxaWRHSlZJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80VURKeGNFZDRlR2R2ZUVocE0xZG1XR2g0WWtGbldtd3dXV051VGsxNlNqQkxjbDlFYUV4WFRDMUlNVVZZYmpaSmVVMVhWRWxIYnpOTVZWVkZaRkZGUVdoaFRERmFiVFZuTm1kaWRscDJjbUY0U2xjM1Qyd3RhREpQZG5nM2VVdFROMkUyYldaRGNFNXdhRGhOZDNsSFVFVkZORlk0UTNKM2NrWkpXREJvZGxWdVIzaElZMnM0Y0dacVFsZzFZbFZoVlZneVltWnpJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
