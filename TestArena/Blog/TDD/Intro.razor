@@ -25,7 +25,7 @@
 <BlogContainer>
 
 
-  <Header Title="Test Driven Development (TDD): A Practical Introduction"
+  <Header Title="@currentPage.Header"
       Image="@currentPage.ArticleImage" PublishedOn="@currentPage.PublishedOn" Authors="Ajay Kumar">
   </Header>
 
@@ -82,7 +82,7 @@
 
   <Section Heading="The TDD Cycle: Red, Green, Refactor" Level="4">
   <BlogImage ImagePath="/images/blog/tdd/intro/tdd-cycle.png" 
-                   Description="Event-driven communication flow in the demo repository - showing how messages flow from Sender through Event Bus to multiple listeners (Receiver and Logger)" 
+                   Description="TDD Cycle: Red, Green, Refactor" />
                    Number="1" />
     <ul>
       <li><b>Red:</b> Write a test for a new feature. It should fail, since the feature doesn’t exist yet.</li>
@@ -179,7 +179,7 @@ public class Calculator
       </li>
       <li>
       <strong>Move Up to the UI/Integration Level:</strong> Now that the core logic is solid and tested, you can work on the UI. You can be confident that if you pass a <code>`Product`</code> object to your Razor component, the <code>`product.IsNew`</code> property will work correctly. Your UI logic becomes simpler:
-      <CodeSnippet Language="razor" Description="UI logic becomes trivial" Number="3">
+      <CodeSnippet Description="UI logic becomes trivial" Number="3">
   @@if (product.IsNew)
   {
     &lt;span class="badge"&gt;New&lt;/span&gt;

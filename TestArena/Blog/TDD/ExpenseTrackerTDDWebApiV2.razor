@@ -1,0 +1,248 @@
+@page "/blog/tdd/expense-tracker-tdd-webapi"
+@using TestArena.Blog.Common
+@using TestArena.Blog.Common.NavigationUtils
+
+@code {
+    PageInfo? currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/tdd/expense-tracker-tdd-webapi");
+
+    protected override void OnInitialized()
+    {
+        if (currentPage == null)
+        {
+            throw new InvalidOperationException("Page not found in SiteMap");
+        }
+        base.OnInitialized();
+    }
+}
+
+<BlogContainer>
+    <Header Title="@(currentPage?.Header)"
+            Image="@(currentPage?.ArticleImage)"
+            PublishedOn="@(currentPage?.PublishedOn ?? DateTime.UtcNow)"
+            IsOlderThumbnailFormat="@(currentPage?.IsOlderThumbnailFormat ?? true)"
+            Authors="Ajay Kumar">
+    </Header>
+
+    <Section Heading="Motivation: Why This Article?" Level="4">
+        <p>
+            Many developers struggle to apply Test-Driven Development (TDD) effectively in real-world Web API projects. Common challenges include unclear test boundaries, slow feedback cycles, and confusion about where to start—controller, service, or database? This article aims to bridge that gap by providing a practical, layered approach to TDD, using a simple but realistic use case. The goal is to help readers build confidence, avoid common pitfalls, and make informed decisions at every step of the development process.
+        </p>
+        <div class="challenge">
+            <b>Challenge:</b> TDD is not just about writing tests first—it's about designing APIs that are robust, maintainable, and easy to change. This article shows how to achieve that, one layer at a time.
+        </div>
+        <p>
+            This article demonstrates how to apply Test-Driven Development (TDD) to a .NET Web API project, focusing on the controller, service, and database layers. We'll use a hypothetical Expense Manager application and a simple read-only use case—<b>Get expenses by category</b>—to show best practices and a clear, step-by-step flow.
+        </p>
+        <div class="tip">
+            <b>Why TDD?</b> TDD helps you build reliable, maintainable code by writing tests before implementation. It keeps your design focused and your codebase flexible.
+        </div>
+    </Section>
+
+    <Section Heading="System Breakdown" Level="4">
+        <ul>
+            <li><b>Controller</b> — Receives HTTP requests, returns responses</li>
+            <li><b>Service</b> — Contains business logic, enforces rules</li>
+            <li><b>Repository</b> — Persists data, uses in-memory fakes for tests</li>
+        </ul>
+        <div class="design-insight">
+            <b>Design Insight:</b> Separating layers makes your code easier to test and maintain. Each layer has a clear responsibility.
+        </div>
+    </Section>
+
+    <Section Heading="Use Case: Get Expenses by Category" Level="4">
+        <ul>
+            <li>Feature: Fetch all expenses for a given category (e.g., "Food", "Travel")</li>
+            <li>API should return a list of matching expenses</li>
+        </ul>
+    </Section>
+
+    <Section Heading="Step 1: Controller Layer TDD" Level="4">
+        <p>
+            The TDD process begins with the user's perspective: what does the API need to deliver? For the Expense Manager, the client wants to fetch expenses by category. Consider the endpoint, the shape of the response, and edge cases (empty results, invalid category, etc.).
+        </p>
+        <p>
+            <b>Write a failing test:</b> The test should describe the ideal behavior. Use Moq to mock the service, focusing only on the controller's responsibility: receiving the request, delegating to the service, and returning the correct response.
+        </p>
+        <CodeSnippet Language="csharp" Description="Controller test for GetExpensesByCategory">
+[Fact]
+public async Task GetExpensesByCategory_ReturnsExpensesForCategory()
+{
+    var mockService = new Mock&lt;IExpenseService&gt;();
+    var category = "Food";
+    var expected = new List&lt;ExpenseDto&gt; {
+        new ExpenseDto { Title = "Lunch", Amount = 10, Category = "Food", Date = DateTime.Today },
+        new ExpenseDto { Title = "Snacks", Amount = 5, Category = "Food", Date = DateTime.Today }
+    };
+    mockService.Setup(s =&gt; s.GetExpensesByCategoryAsync(category)).ReturnsAsync(expected);
+    var controller = new ExpensesController(mockService.Object);
+
+    var result = await controller.GetExpensesByCategory(category);
+
+    var okResult = Assert.IsType&lt;OkObjectResult&gt;(result);
+    var actual = Assert.IsAssignableFrom&lt;IEnumerable&lt;ExpenseDto&gt;&gt;(okResult.Value);
+    Assert.Equal(expected.Count, actual.Count());
+}
+        </CodeSnippet>
+        <div class="gotcha">
+            <b>Tip:</b> The test will fail at first, because the endpoint does not exist yet. This is the "Red" phase of TDD. This failure is feedback that guides the next step.
+        </div>
+        <p>
+            <b>Implement minimal code:</b> Add the endpoint to the controller, just enough to make the test compile and run. Avoid adding extra logic or validation here; the goal is to move quickly from red to green.
+        </p>
+        <CodeSnippet Language="csharp" Description="Controller endpoint for GetExpensesByCategory">
+[HttpGet("category/{category}")]
+public async Task&lt;IActionResult&gt; GetExpensesByCategory(string category)
+{
+    var expenses = await _service.GetExpensesByCategoryAsync(category);
+    return Ok(expenses);
+}
+        </CodeSnippet>
+        <p>
+            <b>Refactor:</b> Once the test passes, review the controller for clarity and simplicity. Thin controllers are best—keep business logic out and delegate to the service.
+        </p>
+    </Section>
+
+    <Section Heading="Step 2: Service Layer TDD" Level="4">
+        <p>
+            The next focus is business logic. The service must filter expenses by category, handle edge cases, and ensure correctness. Consider what could go wrong: unknown categories, empty lists, performance with large datasets.
+        </p>
+        <p>
+            <b>Write a failing test:</b> Use an in-memory fake repository to keep tests fast and isolated. The test should check that only expenses matching the category are returned, and that the service doesn't leak implementation details.
+        </p>
+        <CodeSnippet Language="csharp" Description="Service test for GetExpensesByCategory">
+[Fact]
+public async Task GetExpensesByCategory_ReturnsOnlyMatchingCategory()
+{
+    var fakeRepo = new InMemoryExpenseRepository();
+    fakeRepo.Add(new Expense { Title = "Lunch", Amount = 10, Category = "Food", Date = DateTime.Today });
+    fakeRepo.Add(new Expense { Title = "Taxi", Amount = 20, Category = "Travel", Date = DateTime.Today });
+    var service = new ExpenseService(fakeRepo);
+
+    var result = await service.GetExpensesByCategoryAsync("Food");
+
+    Assert.Single(result);
+    Assert.Equal("Lunch", result.First().Title);
+}
+        </CodeSnippet>
+        <div class="tip">
+            <b>Best Practice:</b> Avoid real database calls in unit tests. Fakes let you control the data and keep the feedback loop tight.
+        </div>
+        <p>
+            <b>Implement minimal code:</b> Add filtering logic to the service, just enough to pass the test. Do not optimize or add extra features yet—TDD is about incremental progress.
+        </p>
+        <CodeSnippet Language="csharp" Description="Service filtering logic">
+public async Task&lt;IEnumerable&lt;ExpenseDto&gt;&gt; GetExpensesByCategoryAsync(string category)
+{
+    var all = await _repository.GetAllAsync();
+    return all.Where(e =&gt; e.Category == category)
+              .Select(e =&gt; new ExpenseDto { Title = e.Title, Amount = e.Amount, Category = e.Category, Date = e.Date });
+}
+        </CodeSnippet>
+        <p>
+            <b>Refactor:</b> After the test passes, look for duplication, unclear names, or opportunities to improve performance. Keep the service focused on business rules.
+        </p>
+    </Section>
+
+    <Section Heading="Step 3: Repository Layer TDD" Level="4">
+        <p>
+            Persistence is the foundation. The repository should be reliable and predictable. Use an in-memory list for tests, which simulates database behavior without the overhead.
+        </p>
+        <p>
+            <b>Write a failing test:</b> Test that expenses can be added and retrieved. Consider edge cases: duplicate entries, empty lists, thread safety if needed.
+        </p>
+        <CodeSnippet Language="csharp" Description="Repository fake for expenses">
+public class InMemoryExpenseRepository : IExpenseRepository
+{
+    private readonly List&lt;Expense&gt; _expenses = new();
+    public void Add(Expense expense) =&gt; _expenses.Add(expense);
+    public Task&lt;List&lt;Expense&gt;&gt; GetAllAsync() =&gt; Task.FromResult(_expenses);
+}
+        </CodeSnippet>
+        <div class="tip">
+            <b>Best Practice:</b> Fakes are great for TDD—they keep tests fast and isolated from infrastructure. Use them to validate persistence logic before integrating with a real database.
+        </div>
+        <p>
+            <b>Refactor:</b> Once the repository works as expected, consider adding interfaces, improving naming, and preparing for future database integration.
+        </p>
+    </Section>
+
+    <Section Heading="Visual Flow: Layered Architecture" Level="5">
+        <p>
+            The flow of a typical Web API request is:
+        </p>
+        <p>
+            <b>Controller</b> → <b>Service</b> → <b>Repository</b> → <b>DB/Fake</b>
+        </p>
+    </Section>
+
+    <Section Heading="Test Boundaries: Why Mock, Why DTOs?" Level="4">
+        <p>
+            <b>Controller tests</b> should mock the service layer to focus on request handling, validation, and response formatting. This keeps tests fast and isolated from business logic and data access.
+        </p>
+        <p>
+            <b>DTOs (Data Transfer Objects)</b> are used to shape the data sent to and from the API. They prevent leaking domain models and allow for versioning and validation. Always use DTOs in controller and service boundaries.
+        </p>
+        <div class="tip">
+            <b>Best Practice:</b> Use unit tests for controllers and services, and reserve integration tests for end-to-end scenarios.
+        </div>
+    </Section>
+
+    <Section Heading="Repository Layer: Expanded" Level="4">
+        <p>
+            The repository manages data access. In tests, use an in-memory fake to avoid external dependencies. In production, use a real implementation (e.g., EFCore).
+        </p>
+        <CodeSnippet Language="csharp" Description="Repository test example">
+[Fact]
+public void AddAndRetrieveExpense_WorksCorrectly()
+{
+    var repo = new InMemoryExpenseRepository();
+    var expense = new Expense { Title = "Lunch", Amount = 10, Category = "Food", Date = DateTime.Today };
+    repo.Add(expense);
+    var all = repo.GetAllAsync().Result;
+    Assert.Contains(expense, all);
+}
+        </CodeSnippet>
+        <div class="tip">
+            <b>Note:</b> A real repository (e.g., using EFCore) would connect to a database, handle queries, and manage transactions. Fakes are for fast, isolated tests.
+        </div>
+    </Section>
+
+    <Section Heading="Theory: Making Good TDD Decisions" Level="4">
+        <p>
+            TDD is more than just writing tests first—it's about making design decisions that lead to maintainable, flexible code. Here are some key principles and decision points to help you succeed:
+        </p>
+        <ul>
+            <li><b>Start with the API contract:</b> Think about what your endpoint should do and how clients will use it. Write tests that reflect real usage.</li>
+            <li><b>Test one responsibility at a time:</b> Each test should focus on a single behavior. This makes failures easy to diagnose and code easier to refactor.</li>
+            <li><b>Mock only what you don't control:</b> Use Moq for external dependencies (services, repositories), but use real value objects and DTOs in your tests.</li>
+            <li><b>Prefer fakes for persistence:</b> In-memory fakes let you test business logic without slow or flaky infrastructure. This keeps your TDD cycle fast.</li>
+            <li><b>Let tests drive design:</b> If a test is hard to write, your code may be too tightly coupled. Refactor to introduce interfaces or break up responsibilities.</li>
+            <li><b>Refactor often:</b> After each green test, clean up your code. Move logic to private methods, clarify names, and remove duplication.</li>
+            <li><b>Document your process:</b> Keep a diary or log of your TDD steps. This helps you learn and makes it easier to onboard others.</li>
+        </ul>
+        <div class="design-insight">
+            <b>Design Insight:</b> TDD is a feedback loop. Use test failures and successes to guide your next design decision, not just to check correctness.
+        </div>
+        <p>
+            By following these principles, you'll be able to make better decisions at each step of the TDD cycle, leading to APIs that are robust, easy to change, and well-documented.
+        </p>
+    </Section>
+
+    <Section Heading="Troubleshooting TDD Pitfalls" Level="4">
+        <ul>
+            <li><b>Test not discovered?</b> Check method/class attributes and naming.</li>
+            <li><b>Over-mocking?</b> Only mock external dependencies, not value objects.</li>
+            <li><b>Brittle tests?</b> Focus on behavior, not implementation details.</li>
+            <li><b>Slow tests?</b> Use fakes and avoid real database/API calls.</li>
+        </ul>
+        <div class="gotcha">
+            <b>Tip:</b> Refactor often and keep tests focused on one responsibility.
+        </div>
+    </Section>
+
+    <Section Heading="Summary" Level="4">
+        <p>
+            By following TDD across controller, service, and repository layers, you build robust, maintainable APIs. Use Moq for mocking, in-memory fakes for fast cycles, and keep each test focused. Document each step and test run for clarity and learning.
+        </p>
+    </Section>
+</BlogContainer>
