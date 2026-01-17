@@ -188,6 +188,13 @@ namespace TestArena.Blog.Common.NavigationUtils
             ["TDD", "Anti-Patterns", "Best Practices", "Testing", ".NET", "C#"],
             isPublished: true,
             isOlderThumbnailFormat: false),
+        new("Getting Started with AWS Bedrock in .NET",
+            "/blog/ai/bedrock",
+            new DateTime(2025, 12, 27),
+            "images/blog/ai/bedrock/banner.svg",
+            ["AI", "AWS Bedrock", "API", ".NET", "C#"],
+            isPublished: true,
+            isOlderThumbnailFormat: false),
         ];
 
         public static IEnumerable<PageInfo> PublishedArticles => Pages.Where(p => p.IsPublished && p.PublishedOn <= DateTime.UtcNow);

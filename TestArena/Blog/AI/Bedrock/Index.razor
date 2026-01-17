@@ -1,0 +1,299 @@
+@page "/blog/ai/bedrock"
+@using TestArena.Blog.Common
+@using TestArena.Blog
+@using System.Linq
+@using TestArena.Blog.Common.NavigationUtils
+
+@code{
+    PageInfo currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/ai/bedrock")!;
+}
+
+<BlogContainer>
+    <Header Title="@currentPage.Header"
+            Image="@currentPage.ArticleImage" 
+            PublishedOn="@currentPage.PublishedOn" 
+            Authors="Ajay Kumar"
+            isOlderThumbnailFormat="@currentPage.IsOlderThumbnailFormat">
+    </Header>
+
+    <Section Heading="What is AWS Bedrock and Why Use It from .NET?" Level="4">
+
+        <p>
+            If you're a .NET developer looking to integrate generative AI into your applications, AWS Bedrock offers a straightforward way to access foundation models from providers like Anthropic Claude and Amazon Titan. Instead of managing multiple API integrations or dealing with different authentication systems for each provider, Bedrock consolidates access to these models under a single, consistent interface.
+        </p>
+        <p>
+            With the official AWS SDK for .NET, you can invoke these models using familiar C# code, making it a natural fit for existing .NET projects. This means you can add AI-powered features—like text generation, summarization, or intelligent chat—without leaving your preferred language or toolset.
+        </p>
+    </Section>
+
+    <Section Heading="Why: The Need for Simplicity, Security, and Scale" Level="4">
+        <ul>
+            <li><b>Simplicity:</b> No need to wrangle with REST APIs or manage authentication tokens manually. The AWS SDK for .NET handles all the heavy lifting.</li>
+            <li><b>Security:</b> Leverage AWS IAM and credentials management for secure access to powerful models.</li>
+            <li><b>Scale:</b> Bedrock is designed for production workloads, with built-in monitoring, throttling, and cost controls.</li>
+        </ul>
+        <p>
+            Whether you're building a prototype or a production system, integrating GenAI into your .NET stack is now straightforward and robust.
+        </p>
+    </Section>
+
+    <Section Heading="How: Step-by-Step Guide to Using AWS Bedrock from .NET" Level="4">
+        <Section Heading="1. Prerequisites" Level="5">
+            <ul>
+                <li>An AWS account with Bedrock access enabled.</li>
+                <li>AWS credentials (Access Key, Secret Key, and Session Token) with permissions for Bedrock.</li>
+                <li>.NET 9 SDK or later installed.</li>
+                <li>The following NuGet packages:
+                    <ul>
+                        <li>AWSSDK.Bedrock</li>
+                        <li>AWSSDK.BedrockRuntime</li>
+                    </ul>
+                </li>
+            </ul>
+        </Section>
+
+        <Section Heading="2. Setting Up Your Project" Level="5">
+            <p>You can use a C# Jupyter notebook (with .NET Interactive) or a simple C# script. Here's how to reference the required libraries:</p>
+            <CodeSnippet Language="csharp">
+// ...other using statements...
+#r "nuget: AWSSDK.Bedrock, 3.7.0"
+#r "nuget: AWSSDK.BedrockRuntime, 3.7.0"
+
+            </CodeSnippet>
+        </Section>
+
+        <Section Heading="3. Authenticating with AWS" Level="5">
+            <p>
+                <b>⚠️ Authentication and permissions are where most developers struggle.</b> The AWS SDK supports multiple authentication methods, each suited for different scenarios. Choose the one that fits your deployment model.
+            </p>
+
+            <Section Heading="Method 1: Session Credentials (Local Development)" Level="6">
+                <p>Use this for quick local testing with temporary credentials (e.g., from AWS STS or temporary session tokens).</p>
+                <CodeSnippet Language="csharp" Number="2">
+SessionAWSCredentials GetCredentials()
+{
+    // ⚠️ NEVER hardcode credentials in production!
+    string accessKey = "&lt;your-access-key&gt;";
+    string secretKey = "&lt;your-secret-key&gt;";
+    string sessionToken = "&lt;your-session-token&gt;";
+    return new SessionAWSCredentials(accessKey, secretKey, sessionToken);
+}
+                </CodeSnippet>
+                <CalloutBox Type="warning" Title="Security Warning">
+                    <p>Session credentials are temporary and should never be hardcoded. Use them only during development with test accounts.</p>
+                </CalloutBox>
+            </Section>
+
+            <Section Heading="Method 2: IAM User Credentials (Not Recommended for Production)" Level="6">
+                <p>Use static IAM user credentials for simple scenarios, but this method is less secure for production.</p>
+                <CodeSnippet Language="csharp" Number="3">
+BasicAWSCredentials GetBasicCredentials()
+{
+    string accessKey = Environment.GetEnvironmentVariable("AWS_ACCESS_KEY_ID");
+    string secretKey = Environment.GetEnvironmentVariable("AWS_SECRET_ACCESS_KEY");
+    
+    if (string.IsNullOrWhiteSpace(accessKey) || string.IsNullOrWhiteSpace(secretKey))
+        throw new InvalidOperationException("AWS credentials not found in environment variables.");
+    
+    return new BasicAWSCredentials(accessKey, secretKey);
+}
+                </CodeSnippet>
+                <CalloutBox Type="tip" Title="Environment Variables">
+                    <p>Store credentials in environment variables, not in appsettings files or source code. Use <code>AWS_ACCESS_KEY_ID</code> and <code>AWS_SECRET_ACCESS_KEY</code>.</p>
+                </CalloutBox>
+            </Section>
+
+            <Section Heading="Method 3: EC2 Instance Profile Role (Production on EC2)" Level="6">
+                <p>
+                    This is the <b>recommended approach for production applications running on EC2</b>. The SDK automatically retrieves credentials from the instance metadata without any code changes.
+                </p>
+                <CodeSnippet Language="csharp" Number="4">
+// No credentials needed! The SDK automatically uses the EC2 instance role.
+var bedrockClient = new AmazonBedrockClient(RegionEndpoint.USEast1);
+var runtimeClient = new AmazonBedrockRuntimeClient(RegionEndpoint.USEast1);
+                </CodeSnippet>
+            </Section>
+
+            <Section Heading="Method 4: ECS Task Role (Production on ECS/Fargate)" Level="6">
+                <p>For containerized applications running on ECS or Fargate, use an ECS task execution role.</p>
+                <CodeSnippet Language="csharp" Number="6">
+// No credentials code needed! ECS automatically injects AWS_CONTAINER_CREDENTIALS_RELATIVE_URI
+var bedrockClient = new AmazonBedrockClient(RegionEndpoint.USEast1);
+                </CodeSnippet>
+                <p>The IAM permissions are the same as EC2 Instance Profile. Configure the task role in your ECS task definition.</p>
+            </Section>
+
+            <Section Heading="Creating the EC2 Instance Profile Role" Level="6">
+                <p>
+                    To create an EC2 instance profile role with the minimal permissions needed to list models and invoke them:
+                </p>
+                <p><b>Step 1: Create an IAM Role</b></p>
+                <ol>
+                    <li>Go to IAM console → Roles → Create Role</li>
+                    <li>Select "AWS service" → "EC2" as the trusted entity</li>
+                    <li>Click "Create Role"</li>
+                </ol>
+                <p><b>Step 2: Add Inline Policy with Required Permissions</b></p>
+                <p>Once the role is created, add this inline policy to grant Bedrock permissions:</p>
+                <CodeSnippet Language="json" Number="7">
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "bedrock:ListFoundationModels",
+        "bedrock:GetFoundationModel"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "bedrock:InvokeModel",
+        "bedrock:InvokeModelWithResponseStream"
+      ],
+      "Resource": "arn:aws:bedrock:*:*:foundation-model/*"
+    }
+  ]
+}
+                </CodeSnippet>
+                <p><b>Step 3: Attach the Role to Your EC2 Instance</b></p>
+                <ol>
+                    <li>Go to EC2 console → Instances → Select your instance</li>
+                    <li>Right-click → Security → Modify IAM role</li>
+                    <li>Select the role you created</li>
+                    <li>Click "Update IAM role"</li>
+                </ol>
+                <p><b>Step 4: Use in Your .NET Code</b></p>
+                <p>No code changes needed! The SDK automatically picks up the EC2 instance role:</p>
+                <CodeSnippet Language="csharp" Number="8">
+var bedrockClient = new AmazonBedrockClient(RegionEndpoint.USEast1);
+var runtimeClient = new AmazonBedrockRuntimeClient(RegionEndpoint.USEast1);
+                </CodeSnippet>
+            </Section>
+
+            <Section Heading="Troubleshooting Authentication Issues" Level="6">
+                <p>If you're getting permission errors, check these common issues:</p>
+                <ul>
+                    <li><b>UnauthorizedException or AccessDeniedException:</b> Your credentials don't have Bedrock permissions. Double-check the IAM policy above is attached to your role/user.</li>
+                    <li><b>InvalidUserID or SignatureDoesNotMatch:</b> Your AWS credentials are incorrect or expired. Re-verify your access key and secret key.</li>
+                    <li><b>EC2 instance can't access Bedrock:</b> The instance profile role isn't attached, or the IAM policy is missing. Check the instance details in AWS console.</li>
+                    <li><b>Region issues:</b> Ensure Bedrock is available in your region. Not all AWS regions support Bedrock yet.</li>
+                </ul>
+                <p><b>Debug tip:</b> Use the AWS CLI to test credentials before using them in your .NET app:</p>
+                <CodeSnippet Language="bash" Number="9">
+aws bedrock list-foundation-models --region us-east-1
+                </CodeSnippet>
+                <p style="margin-top: 1em;"><i>Note: The same IAM permissions can also be set up using CloudFormation or AWS CDK if you prefer infrastructure-as-code approaches.</i></p>
+            </Section>
+        </Section>
+
+        <Section Heading="4. Listing Available Foundation Models" Level="5">
+            <CodeSnippet Language="csharp" Number="3">
+async Task ListAvailableModels(AmazonBedrockClient client)
+{
+    var request = new ListFoundationModelsRequest();
+    var response = await client.ListFoundationModelsAsync(request);
+    Console.WriteLine($"Found {response.ModelSummaries.Count} models:");
+    foreach (var model in response.ModelSummaries.Take(10))
+    {
+        Console.WriteLine($"  Model ID: {model.ModelId}");
+        Console.WriteLine($"  Name: {model.ModelName}");
+        Console.WriteLine();
+    }
+}
+            </CodeSnippet>
+        </Section>
+
+        <Section Heading="5. Invoking a Model (Anthropic Claude)" Level="5">
+            <CodeSnippet Language="csharp" Number="4">
+var invokeRequest = new InvokeModelRequest
+{
+    ModelId = "anthropic.claude-3-sonnet-20240229-v1:0",
+    Body = new System.IO.MemoryStream(System.Text.Encoding.UTF8.GetBytes(
+        JsonSerializer.Serialize(new
+        {
+            anthropic_version = "bedrock-2023-05-31",
+            max_tokens = 1024,
+            messages = new[] 
+            {
+                new { role = "user", content = "Tell me about the movie Inception and its impact on cinema." }
+            }
+        })
+    )),
+    ContentType = "application/json",
+    Accept = "application/json"
+};
+
+var runtimeClient = new AmazonBedrockRuntimeClient(GetCredentials());
+var invokeResponse = await runtimeClient.InvokeModelAsync(invokeRequest);
+
+using var reader = new System.IO.StreamReader(invokeResponse.Body);
+var responseText = await reader.ReadToEndAsync();
+            </CodeSnippet>
+            <p><b>Example Response from Claude:</b></p>
+            <CodeSnippet Language="text" Number="5">
+Inception was a 2010 science fiction film written and directed by Christopher Nolan. It starred Leonardo DiCaprio, Ellen Page, Tom Hardy, and others.
+
+The movie was very innovative and had a huge impact on cinema for several reasons:
+
+1. Complex Narrative Structure - The film employed a highly complex non-linear narrative structure with multiple nested dream levels. This challenged audiences and pioneered new ways of storytelling on film.
+
+2. Visual Effects - The special effects depicting the bending of cities and gravity-defying fight scenes were groundbreaking and pushed the boundaries of what visual effects could achieve. Many new techniques had to be developed.
+
+3. Original Concept - The premise of corporate espionage taking place within the architecture of the mind was a fresh, original concept that allowed for creativity in visuals and plot.
+
+4. Box Office Success - Despite its cerebral and complex nature, Inception was a huge box office hit, making over $825 million worldwide. This showed audiences had an appetite for intelligent, innovative blockbusters.
+
+5. Influenced Other Films - Its success inspired other thought-provoking, concept-driven science fiction films and showed Hollywood that movies could be both popular and intellectually chewy.
+
+Inception was a landmark for introducing mainstream audiences to Nolan's incredible vision and raised the bar for what could be achieved through film in terms of originality, visual spectacle, and narrative sophistication. It had a major influence on science fiction and blockbuster filmmaking in the 2010s.
+            </CodeSnippet>
+        </Section>
+
+        <Section Heading="6. Putting It All Together" Level="5">
+            <p>Here's a minimal, complete example (see the notebook for the full version):</p>
+            <CodeSnippet Language="csharp" Number="6">
+// ...library references and using statements...
+
+AmazonBedrockClient bedrockClient = new AmazonBedrockClient(GetCredentials());
+await ListAvailableModels(bedrockClient);
+
+// Prepare and invoke the model
+// ...invokeRequest as above...
+
+var runtimeClient = new AmazonBedrockRuntimeClient(GetCredentials());
+var invokeResponse = await runtimeClient.InvokeModelAsync(invokeRequest);
+using var reader = new System.IO.StreamReader(invokeResponse.Body);
+var responseText = await reader.ReadToEndAsync();
+
+FormatAndPrintResponse(responseText);
+            </CodeSnippet>
+        </Section>
+    </Section>
+
+    <Section Heading="Summary" Level="4">
+        <ul>
+            <li><b>What:</b> You can now use AWS Bedrock's powerful GenAI models directly from .NET.</li>
+            <li><b>Why:</b> It's secure, scalable, and easy to integrate into your existing C# workflows.</li>
+            <li><b>How:</b> With just a few lines of code, you can list models, send prompts, and process responses—all using the official AWS SDK.</li>
+        </ul>
+        <p>
+            This approach lets you build intelligent, generative features into your .NET apps with minimal friction. Whether you're prototyping or going to production, AWS Bedrock and .NET make GenAI accessible and robust.
+        </p>
+    </Section>
+
+    <Section Heading="References & Further Reading" Level="4">
+        <ul>
+            <li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html" target="_blank">AWS Bedrock Documentation</a></li>
+            <li><a href="https://docs.aws.amazon.com/sdk-for-net/v3/developer-guide/" target="_blank">AWS SDK for .NET</a></li>
+            <li><a href="https://github.com/ajaysskumar/dev-arena/blob/main/reference/notebooks/aws-bedrock-demo.ipynb" target="_blank">Complete working example - Jupyter notebook on GitHub</a></li>
+        </ul>
+        <CalloutBox Type="warning" Title="Important Note">
+            <p>For a full working sample, see the notebook linked above. Replace credentials with your own and ensure you have the necessary AWS permissions.</p>
+        </CalloutBox>
+    </Section>
+
+    <EndNotes RepositoryLink="https://github.com/ajaysskumar/dev-arena/blob/main/reference/notebooks/aws-bedrock-demo.ipynb" />
+</BlogContainer>
