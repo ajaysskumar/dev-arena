@@ -1,0 +1,651 @@
+@page "/blog/tdd/anti-patterns-when-not-to-use-tdd"
+@using TestArena.Blog.Common
+@using TestArena.Blog.Common.NavigationUtils
+
+<style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 20px 0;
+    }
+    th, td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background-color: #f0f0f0;
+    }
+    .warning-box {
+      background-color: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 4px;
+    }
+    .success-box {
+      background-color: #d4edda;
+      border-left: 4px solid #28a745;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 4px;
+    }
+</style>
+
+@code{
+  PageInfo currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/tdd/anti-patterns-when-not-to-use-tdd");
+}
+
+<BlogContainer>
+
+  <Header Title="TDD in .NET: Anti-Patterns & When NOT to Use TDD"
+      Image="@currentPage.ArticleImage" PublishedOn="@currentPage.PublishedOn" Authors="Ajay Kumar" IsOlderThumbnailFormat="false">
+  </Header>
+
+  <Section Heading="The Double-Edged Sword" Level="4">
+    <p>
+      You've heard the promise: Test-Driven Development leads to better design, fewer bugs, and happier developers. And in many cases, it does. But like any tool, TDD can be misused - and when it is, it becomes a burden rather than a benefit.
+    </p>
+    <p>
+      Imagine a team writing hundreds of tests, hitting 95% code coverage, yet still shipping buggy software and dreading refactoring. Or developers spending weeks writing complex test setups for trivial features. This isn't TDD failing; it's TDD being misapplied.
+    </p>
+    <p>
+      In this article, we'll explore common TDD anti-patterns - the pitfalls that turn a powerful practice into a time sink - and identify scenarios where TDD simply isn't the right answer. The goal? Help you use TDD wisely, not blindly.
+    </p>
+  </Section>
+
+  <Section Heading="Quick Takeaways" Level="4">
+    <div class="success-box">
+      <b>TL;DR - Key Insights:</b>
+      <ul>
+        <li>✓ TDD is excellent for business logic, algorithms, and complex systems - but not universally applicable.</li>
+        <li>✓ Test <b>behavior</b>, not implementation. Implementation details change; behavior stays stable.</li>
+        <li>✓ Mock external dependencies (APIs, databases) only. Real instances of internal logic reveal design issues.</li>
+        <li>✓ Skip TDD for prototypes, throwaway code, and exploratory spikes.</li>
+        <li>✓ Aim for 70-80% meaningful coverage, not 100% compliance.</li>
+        <li>✓ The "Refactor" step isn't optional - it's where TDD delivers its promise.</li>
+      </ul>
+    </div>
+  </Section>
+
+  <Section Heading="Understanding Anti-Patterns" Level="4">
+    <p>
+      An <b>anti-pattern</b> is a common response to a recurring problem that is usually ineffective and risks being counterproductive. In TDD, anti-patterns emerge when teams follow TDD mechanically without understanding its purpose: to drive better design and build confidence.
+    </p>
+    <p>
+      Think of it like a compass. A compass is invaluable when navigating - until you mindlessly follow it into a cliff. Anti-patterns are the moments when you're following TDD off the cliff.
+    </p>
+    <p>
+      <i><b>A Hypothetical Scenario:</b> Imagine a team of 8 developers adopting TDD with strict governance: "100% code coverage or bust." They write tests for every getter, setter, and property. Their unit test suite grows to 2,000+ tests, taking 45 seconds to run. Developers stop running tests before commits - it's too slow. Within six months, the test suite becomes a maintenance burden. Nobody trusts it because it passes even when real bugs slip through. The team spends more time maintaining tests than writing features. The irony? Their adoption of TDD made them <i>less</i> confident, not more. Once they refocused on meaningful tests and embraced pragmatism, their velocity actually increased.</i>
+    </p>
+  </Section>
+
+  <Section Heading="Common TDD Anti-Patterns" Level="4">
+
+    <Section Heading="1. Test Obsession (Testing the Obvious)" Level="5">
+      <p>
+        <b>The Problem:</b> Writing tests for every trivial piece of code - getters, setters, simple properties, and obvious logic.
+      </p>
+      <CodeSnippet Language="csharp">
+// Bad: Test obsession
+[Fact]
+public void Age_Getter_ReturnsAge()
+{
+    var person = new Person { Age = 30 };
+    Assert.Equal(30, person.Age); // What's this testing?
+}
+
+[Fact]
+public void Name_Getter_ReturnsName()
+{
+    var person = new Person { Name = "John" };
+    Assert.Equal("John", person.Name); // And this?
+}
+
+// This bloats your test suite without adding value.
+      </CodeSnippet>
+      <p>
+        <b>Why It's a Problem:</b>
+      </p>
+      <ul>
+        <li>Inflates code coverage metrics without adding confidence.</li>
+        <li>Creates brittle tests that break with every minor refactor.</li>
+        <li>Wastes time and cognitive load maintaining trivial tests.</li>
+        <li>Dilutes the signal-to-noise ratio of your test suite.</li>
+      </ul>
+      <p>
+        <b>The Fix:</b> Test behavior, not implementation. Ask: "What could go wrong here?" If nothing can go wrong, skip the test.
+      </p>
+      <CodeSnippet Language="csharp">
+// Better: Focus on behavior
+[Fact]
+public void IsAgeValid_WhenAgeIsNegative_ReturnsFalse()
+{
+    var person = new Person();
+    var result = person.IsAgeValid(-5);
+    Assert.False(result);
+}
+
+[Fact]
+public void IsAgeValid_WhenAgeIsOver150_ReturnsFalse()
+{
+    var person = new Person();
+    var result = person.IsAgeValid(200);
+    Assert.False(result);
+}
+      </CodeSnippet>
+    </Section>
+
+    <Section Heading="2. Over-Mocking (Mocking Everything)" Level="5">
+      <p>
+        <b>The Problem:</b> Excessive use of mocks, stubs, and fakes - even for internal implementation details that should just work.
+      </p>
+      <CodeSnippet Language="csharp">
+// Bad: Over-mocking
+[Fact]
+public void ProcessOrder_WithMockedEverything()
+{
+    var mockValidator = new Mock&lt;IOrderValidator&gt;();
+    var mockLogger = new Mock&lt;ILogger&gt;();
+    var mockRepository = new Mock&lt;IOrderRepository&gt;();
+    var mockEmailService = new Mock&lt;IEmailService&gt;();
+    var mockNotificationService = new Mock&lt;INotificationService&gt;();
+    
+    // 50 lines of setup...
+    
+    var service = new OrderProcessor(mockValidator.Object, mockLogger.Object, 
+        mockRepository.Object, mockEmailService.Object, mockNotificationService.Object);
+    
+    // 10 lines of test...
+    
+    // What are we actually testing?
+}
+      </CodeSnippet>
+      <p>
+        <b>Why It's a Problem:</b>
+      </p>
+      <ul>
+        <li>Tests become tightly coupled to implementation, not behavior.</li>
+        <li>Brittle tests that break when you refactor the internals (even if behavior stays the same).</li>
+        <li>False confidence: tests pass, but integration fails.</li>
+        <li>Test setup becomes so complex that tests themselves need testing.</li>
+      </ul>
+      <p>
+        <b>The Fix:</b> Mock only external dependencies (databases, APIs, third-party services). Let internal logic run for real. <b>Why?</b> Real instances catch bugs at the boundary between components. If your internal logic breaks, you want to know immediately - not when you integrate later.
+      </p>
+      <CodeSnippet Language="csharp">
+// Better: Mock only what's external
+[Fact]
+public void ProcessOrder_SendsEmailAfterSuccess()
+{
+    var mockEmailService = new Mock&lt;IEmailService&gt;();
+    var validator = new OrderValidator(); // Real - catches issues in validation logic
+    var repository = new InMemoryOrderRepository(); // Real - tests the contract between layers
+    
+    var service = new OrderProcessor(validator, repository, mockEmailService.Object);
+    
+    service.ProcessOrder(new Order { Id = 1, Amount = 100 });
+    
+    mockEmailService.Verify(x => x.SendConfirmation(It.IsAny&lt;string&gt;()), Times.Once);
+}
+      </CodeSnippet>
+    </Section>
+
+    <Section Heading="3. Skipping Refactoring (Red-Green, No Refactor)" Level="5">
+      <p>
+        <b>The Problem:</b> Ignoring the "Refactor" step in the Red-Green-Refactor cycle, leaving code messy and brittle.
+      </p>
+      <CodeSnippet Language="csharp">
+// Bad: No refactoring (Real-world: Discount calculation)
+[Fact]
+public void CalculateDiscount_StandardCustomer_5Percent()
+{
+    var calculator = new DiscountCalculator();
+    var discount = calculator.Calculate(100, CustomerType.Standard);
+    Assert.Equal(5, discount); // 5% of 100
+}
+
+[Fact]
+public void CalculateDiscount_PremiumCustomer_10Percent()
+{
+    var calculator = new DiscountCalculator();
+    var discount = calculator.Calculate(100, CustomerType.Premium);
+    Assert.Equal(10, discount);
+}
+
+[Fact]
+public void CalculateDiscount_VIPCustomer_15Percent()
+{
+    var calculator = new DiscountCalculator();
+    var discount = calculator.Calculate(100, CustomerType.VIP);
+    Assert.Equal(15, discount);
+}
+
+// Minimal code to pass tests, but impossible to read
+public class DiscountCalculator
+{
+    public decimal Calculate(decimal amount, CustomerType type)
+    {
+        decimal d = 0;
+        if (type == CustomerType.Standard) { d = amount * 0.05m; }
+        if (type == CustomerType.Premium) { d = amount * 0.1m; }
+        if (type == CustomerType.VIP) { d = amount * 0.15m; }
+        return d;
+    }
+}
+// Problems: Poor naming, repetitive if statements, magic numbers, no constants
+      </CodeSnippet>
+      <p>
+        <b>Why It's a Problem:</b>
+      </p>
+      <ul>
+        <li>Code accumulates technical debt quickly.</li>
+        <li>Tests pass, but code becomes hard to understand and maintain.</li>
+        <li>Adding new customer types means repeating the same pattern.</li>
+        <li>Magic numbers scattered throughout (0.05, 0.1, 0.15) with no context.</li>
+        <li>Negates TDD's main benefit: better design through testing.</li>
+      </ul>
+      <p>
+        <b>The Fix:</b> Commit to the full Red-Green-<b>Refactor</b> cycle. After tests pass, improve the code.
+      </p>
+      <CodeSnippet Language="csharp">
+// Better: Complete the cycle with clarity and maintainability
+public class DiscountCalculator
+{
+    private static readonly Dictionary&lt;CustomerType, decimal&gt; DiscountRates = new()
+    {
+        { CustomerType.Standard, 0.05m },
+        { CustomerType.Premium, 0.10m },
+        { CustomerType.VIP, 0.15m }
+    };
+
+    public decimal Calculate(decimal amount, CustomerType type)
+    {
+        if (!DiscountRates.TryGetValue(type, out var rate))
+            throw new ArgumentException($"Unknown customer type: {type}");
+        
+        return amount * rate;
+    }
+}
+// Benefits: Clear intent, easy to add new types, magic numbers have context,
+// DRY principle applied, easy to test and modify
+      </CodeSnippet>
+    </Section>
+
+    <Section Heading="4. Testing Implementation, Not Behavior" Level="5">
+      <p>
+        <b>The Problem:</b> Writing tests that mirror the code structure rather than verifying expected behavior. These tests break the moment you refactor internals. This overlaps with Over-Mocking (Anti-Pattern #2), but the underlying issue is broader.
+      </p>
+      <CodeSnippet Language="csharp">
+// Bad: Testing implementation
+[Fact]
+public void GetUser_CallsRepository_AndReturnsUser()
+{
+    var mockRepo = new Mock&lt;IUserRepository&gt;();
+    mockRepo.Setup(x => x.GetById(1)).Returns(new User { Id = 1, Name = "John" });
+    
+    var service = new UserService(mockRepo.Object);
+    var user = service.GetUser(1);
+    
+    // This test is overly detailed about HOW it works
+    mockRepo.Verify(x => x.GetById(It.IsAny&lt;int&gt;()), Times.Once);
+    Assert.Equal("John", user.Name);
+}
+
+// If we refactor to use a cache or a different repository, this test breaks
+// even if the behavior (returning the correct user) is unchanged.
+      </CodeSnippet>
+      <p>
+        <b>Why It's a Problem:</b>
+      </p>
+      <ul>
+        <li>Tests become brittle and tightly coupled to implementation details.</li>
+        <li>Refactoring becomes a fear, not a confidence-building exercise.</li>
+        <li>Tests don't catch real behavioral failures, only structural changes.</li>
+      </ul>
+      <p>
+        <b>The Fix:</b> Test the contract, not the mechanism. Care about what, not how.
+      </p>
+      <CodeSnippet Language="csharp">
+// Better: Test behavior
+[Fact]
+public void GetUser_ReturnsCorrectUser()
+{
+    var service = new UserService(new InMemoryUserRepository());
+    var user = service.GetUser(1);
+    
+    Assert.NotNull(user);
+    Assert.Equal(1, user.Id);
+    Assert.Equal("John", user.Name);
+    
+    // Now you can refactor the internals without breaking this test
+}
+      </CodeSnippet>
+    </Section>
+
+    <Section Heading="5. Slow Feedback Loops" Level="5">
+      <p>
+        <b>The Problem:</b> Tests become slow (seconds to minutes per run), discouraging developers from running them frequently.
+      </p>
+      <div class="warning-box">
+        <b>Impact:</b> If your unit tests take 30+ seconds to run, developers won't run them before committing. The feedback loop breaks.
+      </div>
+      <p>
+        <b>Why It's a Problem:</b>
+      </p>
+      <ul>
+        <li>Slow tests kill the TDD feedback loop.</li>
+        <li>Developers skip running tests, defeating the purpose.</li>
+        <li>Bugs slip through because tests aren't run frequently enough.</li>
+      </ul>
+      <p>
+        <b>The Fix:</b> Keep unit tests fast. Use mocks for external calls. Move slow integration tests to a separate suite.
+      </p>
+      <CodeSnippet Language="csharp">
+// Bad: Slow test
+[Fact]
+public void ProcessOrder_WithRealDatabase()
+{
+    // This hits the real database - could take seconds!
+    var dbContext = new OrderDbContext(ConnectionString);
+    var repository = new OrderRepository(dbContext);
+    var service = new OrderProcessor(repository);
+    
+    service.ProcessOrder(new Order());
+    
+    // Assertion...
+}
+
+// Better: Fast unit test with mocked repository
+[Fact]
+public void ProcessOrder_QuickFeedback()
+{
+    var mockRepository = new Mock&lt;IOrderRepository&gt;();
+    var service = new OrderProcessor(mockRepository.Object);
+    
+    service.ProcessOrder(new Order());
+    
+    // Assertion...
+    // This runs in milliseconds.
+}
+      </CodeSnippet>
+    </Section>
+
+    <Section Heading="6. 100% Code Coverage as a Goal" Level="5">
+      <p>
+        <b>The Problem:</b> Pursuing high code coverage for its own sake, treating it as a success metric rather than a tool.
+      </p>
+      <div class="warning-box">
+        <b>The Quote:</b> "Code coverage of 100% is often a sign that you're testing the wrong things."  -  Many experienced developers
+      </div>
+      <p>
+        <b>Why It's a Problem:</b>
+      </p>
+      <ul>
+        <li>High coverage doesn't mean high quality. You can have 100% coverage and zero confidence.</li>
+        <li>Forces trivial tests that add no value (see: Test Obsession).</li>
+        <li>Metric gaming: hitting coverage targets without catching real bugs.</li>
+      </ul>
+      <p>
+        <b>The Fix:</b> Focus on <b>meaningful</b> test coverage. Aim for 70-80% on critical paths, not 100% everywhere.
+      </p>
+      <CodeSnippet Language="csharp">
+// Don't test everything. Test what matters:
+// 1. Business logic and algorithms
+// 2. Edge cases and error handling
+// 3. Integration points with external systems
+// 4. Not: simple getters, property setters, or framework code
+      </CodeSnippet>
+    </Section>
+
+  </Section>
+
+  <Section Heading="When NOT to Use TDD" Level="4">
+
+    <p>
+      TDD is powerful, but it's not a universal solution. Here are scenarios where it doesn't make sense - or where other approaches are more appropriate.
+    </p>
+
+    <Section Heading="1. Prototyping & Exploratory Code" Level="5">
+      <p>
+        <b>The Scenario:</b> You're exploring a new library, framework, or technology. Requirements are fuzzy. Code will be thrown away.
+      </p>
+      <p>
+        <b>Why Skip TDD:</b> Writing tests for code you'll delete is waste. The goal is learning and proving feasibility, not building production code.
+      </p>
+      <p>
+        <b>Better Approach:</b> Write throwaway code without tests. Once you've proven the concept works and understand the requirements, refactor into production code with TDD.
+      </p>
+      <div class="success-box">
+        <b>Pro Tip:</b> Use a separate "spike" branch for exploration. Once you understand the problem, start fresh on the main branch with TDD.
+      </div>
+    </Section>
+
+    <Section Heading="2. UI-Heavy or Visual Prototyping" Level="5">
+      <p>
+        <b>The Scenario:</b> Building interactive UIs where visual appearance and user feedback are paramount. UI specs change frequently.
+      </p>
+      <p>
+        <b>Why Skip TDD:</b> Testing UI logic is difficult and often brittle. The value of tests diminishes when the UI changes every sprint.
+      </p>
+      <p>
+        <b>Better Approach:</b> Use TDD for the <b>logic</b> behind the UI (view models, state management). Prototype the UI separately. Integrate later. For visual consistency, use <b>visual regression tests</b> (tools like Percy or Chromatic capture screenshots and alert on visual drift), not unit tests.
+      </p>
+      <CodeSnippet Language="csharp">
+// TDD the logic...
+[Fact]
+public void CartTotalCalculator_WithThreeItems_ReturnsCorrectSum()
+{
+    var calculator = new CartTotalCalculator();
+    var total = calculator.Calculate(new[] { 10, 20, 30 });
+    Assert.Equal(60, total);
+}
+
+// Don't test: "Button is in the top-right corner"
+// That's for visual regression tests (Percy, Chromatic) or manual testing.
+// They're better suited for catching visual regressions than unit tests.
+      </CodeSnippet>
+    </Section>
+
+    <Section Heading="3. Legacy Codebases Without Tests" Level="5">
+      <p>
+        <b>The Scenario:</b> You've inherited a large codebase with zero tests. The code is tightly coupled and hard to test.
+      </p>
+      <p>
+        <b>Why Skip (Initially) TDD:</b> Retrofitting tests into untestable code is painful. Introducing TDD upfront might slow your team to a crawl.
+      </p>
+      <p>
+        <b>Better Approach:</b> Use <b>characterization tests</b> to document current behavior. Gradually refactor for testability. Then introduce TDD for new features.
+      </p>
+      <CodeSnippet Language="csharp">
+// Characterization test: Document what the code does, even if it's not perfect
+[Fact]
+public void LegacyProcess_BehavesAsDocumented()
+{
+    var result = LegacyClass.OldMethod("input");
+    Assert.Equal("expected_output", result);
+}
+
+// This test documents current behavior. Now you have a safety net to refactor.
+      </CodeSnippet>
+    </Section>
+
+    <Section Heading="4. Performance-Critical or Hardware-Dependent Code" Level="5">
+      <p>
+        <b>The Scenario:</b> Low-level code that interacts with hardware, OS APIs, or requires specific performance characteristics.
+      </p>
+      <p>
+        <b>Why Skip TDD:</b> Mocking hardware interactions is often infeasible. Testing performance requires benchmarks, not unit tests.
+      </p>
+      <p>
+        <b>Better Approach:</b> Use integration and performance tests. Reserve unit tests for the algorithmic parts. Use test doubles strategically. For performance testing, tools like <b>BenchmarkDotNet</b> (for .NET) provide measurable profiling - far better than guessing.
+      </p>
+      <CodeSnippet Language="csharp">
+// Use BenchmarkDotNet for performance validation
+[MemoryDiagnoser]
+public class SortingBenchmark
+{
+    private int[] _data;
+
+    [GlobalSetup]
+    public void Setup() => _data = new int[10000].Select(_ => Random.Shared.Next()).ToArray();
+
+    [Benchmark]
+    public void QuickSort() => Array.Sort(_data);
+}
+// Run: dotnet run -c Release --benchmarkdotnet
+      </CodeSnippet>
+    </Section>
+
+    <Section Heading="5. One-Off Scripts or Throwaway Code" Level="5">
+      <p>
+        <b>The Scenario:</b> Utility scripts, data migrations, or temporary tools that solve a specific problem once.
+      </p>
+      <p>
+        <b>Why Skip TDD:</b> The cost-benefit ratio is unfavorable. A script run once doesn't need a test suite.
+      </p>
+      <p>
+        <b>Better Approach:</b> Use manual testing or simple assertions. Focus on correctness, not test coverage.
+      </p>
+    </Section>
+
+  </Section>
+
+  <Section Heading="TDD Maturity Levels" Level="4">
+    <p>
+      Understanding when and how to apply TDD comes with experience. Here's a framework for thinking about TDD maturity:
+    </p>
+    <table>
+      <thead>
+      <tr>
+        <th>Level</th>
+        <th>Characteristic</th>
+        <th>Pitfalls</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><b>1. Skeptical</b></td>
+        <td>Never uses TDD. Writes code first, tests second (if at all).</td>
+        <td>Lots of bugs, low confidence in changes.</td>
+      </tr>
+      <tr>
+        <td><b>2. Dogmatic</b></td>
+        <td>Always uses TDD, even when inappropriate. Obsesses over coverage.</td>
+        <td>Brittle tests, slow feedback, wasted effort.</td>
+      </tr>
+      <tr>
+        <td><b>3. Pragmatic</b></td>
+        <td>Uses TDD where it provides value. Skips where it doesn't. Focuses on meaningful coverage.</td>
+        <td>Fewer pitfalls, but requires judgment and experience.</td>
+      </tr>
+      </tbody>
+    </table>
+    <p>
+      <b>Goal:</b> Reach Level 3 - use TDD as a tool, not a religion.
+    </p>
+  </Section>
+
+  <Section Heading="A Cohesive Refactoring Journey: From Anti-Pattern to Clean Code" Level="4">
+    <p>
+      Let's trace a realistic journey - the kind many teams experience - where anti-patterns accumulate, then get cleaned up.
+    </p>
+    <CodeSnippet Language="csharp">
+// PHASE 1: Anti-patterns in action
+// Test Obsession + Over-Mocking + No Refactoring = Pain
+[Fact]
+public void OrderService_Test() // Vague name
+{
+    var mockValidator = new Mock&lt;IOrderValidator&gt;();
+    var mockLogger = new Mock&lt;ILogger&gt;();
+    var mockEmailService = new Mock&lt;IEmailService&gt;();
+    var mockRepository = new Mock&lt;IOrderRepository&gt;();
+    
+    mockValidator.Setup(x => x.IsValid(It.IsAny&lt;Order&gt;())).Returns(true);
+    mockRepository.Setup(x => x.Save(It.IsAny&lt;Order&gt;())).Returns(Task.CompletedTask);
+    // 30 more lines of setup...
+    
+    var service = new OrderService(mockValidator.Object, mockLogger.Object,
+        mockEmailService.Object, mockRepository.Object);
+    var order = new Order { Amount = 100 };
+    
+    service.ProcessAsync(order); // What are we testing?
+    // Result: Setup is 40 lines, test is 5 lines. Tests are fragile.
+}
+
+// PHASE 2: Recognition & Refactoring
+// Focus on behavior, reduce mocks, improve names
+[Fact]
+public void ProcessOrder_ValidatesBeforeSaving()
+{
+    var validator = new OrderValidator(); // Real
+    var mockEmailService = new Mock&lt;IEmailService&gt;(); // External, mock it
+    var repository = new InMemoryOrderRepository(); // Real internal
+    
+    var service = new OrderService(validator, repository, mockEmailService.Object);
+    var invalidOrder = new Order { Amount = -100 }; // Negative = invalid
+    
+    // Act & Assert: Should not save invalid orders
+    await Assert.ThrowsAsync&lt;ValidationException&gt;(() => service.ProcessAsync(invalidOrder));
+    Assert.Empty(repository.GetAll()); // Nothing was saved
+}
+
+[Fact]
+public void ProcessOrder_SendsEmailAfterSuccess()
+{
+    var mockEmailService = new Mock&lt;IEmailService&gt;();
+    var validator = new OrderValidator();
+    var repository = new InMemoryOrderRepository();
+    
+    var service = new OrderService(validator, repository, mockEmailService.Object);
+    var validOrder = new Order { Amount = 100, CustomerEmail = "user@example.com" };
+    
+    await service.ProcessAsync(validOrder);
+    
+    // Verify external service was called
+    mockEmailService.Verify(x => x.SendConfirmation("user@example.com"), Times.Once);
+}
+// Result: Setup is 5-7 lines. Tests are clear. Refactoring is safe.
+    </CodeSnippet>
+    <p>
+      <b>The Transformation:</b> By addressing each anti-pattern - clarity in naming, real instances for internals, mocks only for externals - the test suite became faster, clearer, and safer to refactor. This is what pragmatic TDD looks like.
+    </p>
+  </Section>
+
+  <Section Heading="Best Practices to Avoid Anti-Patterns" Level="4">
+    <ul>
+      <li><b>Focus on behavior, not implementation:</b> Ask "What should this do?" not "How does it do it?"</li>
+      <li><b>Keep tests simple and fast:</b> If setup takes longer than the test itself, something's wrong.</li>
+      <li><b>Mock external dependencies, not internals:</b> Databases, APIs, third-party services - mock these. Your own code - test it for real.</li>
+      <li><b>Don't chase code coverage numbers:</b> Aim for meaningful coverage (70-80% on critical paths), not 100%.</li>
+      <li><b>Refactor ruthlessly:</b> The refactor step is sacred. Don't skip it.</li>
+      <li><b>Write tests for future-you:</b> Ask: "Will this test help someone understand the code 6 months from now?"</li>
+      <li><b>Use TDD as a design tool, not just a safety net:</b> If writing a test feels hard, it's telling you something about your design.</li>
+    </ul>
+  </Section>
+
+  <Section Heading="Summary: Using TDD Wisely" Level="4">
+    <p>
+      TDD is not magic, nor is it a silver bullet. It's a practice - powerful when applied wisely, counterproductive when misused. The anti-patterns we've discussed - test obsession, over-mocking, skipping refactoring - emerge when teams follow TDD mechanically instead of thoughtfully.
+    </p>
+    <p>
+      Equally important is recognizing where TDD doesn't apply. Prototyping, exploratory coding, UI-heavy work, and legacy systems have different approaches. The mature developer knows when to apply TDD and when to reach for other tools.
+    </p>
+    <p>
+      The ultimate goal of TDD isn't high test counts or code coverage. It's <b>confidence</b> - the ability to change code fearlessly, knowing your tests have your back. When you lose sight of that goal and start pursuing metrics, you've crossed into anti-pattern territory.
+    </p>
+    <p>
+      Use TDD where it helps you build better software. Skip it where it doesn't. And always ask yourself: "Is this making my code better, or am I just following a checklist?"
+    </p>
+  </Section>
+
+  <Section Level="4">
+    <p><i>If you like this post, then check out other articles in the series as well. Start with: </i></p>
+    <BlogReferenceCard Title="TDD in .NET: Getting started"
+            Description="TDD fundamentals - understand the Red-Green-Refactor cycle"
+            Url="/blog/tdd/introduction" ImageUrl="/images/blog/tdd/intro/banner.svg"
+            Source="devcodex.in" />
+    <p>Have you encountered these anti-patterns in your projects? What's your experience with TDD? Share your thoughts in the comments below.</p>
+  </Section>
+
+</BlogContainer>
