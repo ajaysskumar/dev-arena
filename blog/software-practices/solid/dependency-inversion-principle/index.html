@@ -20,11 +20,11 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" /> -->
     
-<!--Blazor:{"type":"webassembly","prerenderId":"d10bbed5bd10451ebdcf747609c5644f","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>SOLID Principles: Understanding the Dependency Inversion Principle</title><meta property="og:url" content="http://127.0.0.1:5050/blog/software-practices/solid/dependency-inversion-principle" />
+<!--Blazor:{"type":"webassembly","prerenderId":"95c291ddd92e45a1a8786c73fcdb5888","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>SOLID Principles: Understanding the Dependency Inversion Principle</title><meta property="og:url" content="http://127.0.0.1:5050/blog/software-practices/solid/dependency-inversion-principle" />
     <meta property="og:title" content="SOLID Principles: Understanding the Dependency Inversion Principle" />
     <meta property="og:description" content="" />
     <meta property="og:image" content="http://127.0.0.1:5050/images/blog/software-practices/solid/dip/banner.png" />
-    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"d10bbed5bd10451ebdcf747609c5644f"}-->
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"95c291ddd92e45a1a8786c73fcdb5888"}-->
 </head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -40,7 +40,7 @@
 
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"c8d50043afbe4504a7ef9d4672c227c1","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"d1ef2e9c979644bfbf149a2c2a327b4a","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -87,7 +87,7 @@
                     
                     <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 12 Jul 2025</span></div></div></div></div></div></header>
 
-    <section id="c0b84901-5e21-4cec-8cba-46e7d0440d55" style="margin-bottom:1rem;"><h3>&#x1F50D; What is the Dependency Inversion Principle (DIP)?</h3><hr class="border border-success border-1 opacity-50">
+    <section id="559b6920-9a3e-4db9-ad56-4536d5b9a61c" style="margin-bottom:1rem;"><h3>&#x1F50D; What is the Dependency Inversion Principle (DIP)?</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             Imagine you’re building a house. Would you want your living room lights to be directly wired to a specific brand of light bulb? Of course not! You want the flexibility to swap bulbs as needed. In software, the <b>Dependency Inversion Principle (DIP)</b> is about making sure high-level modules (like your living room) don’t depend on low-level details (a specific bulb brand), but on general contracts (the light socket). DIP is the fifth and final SOLID principle, and it states:
         </p>
@@ -97,7 +97,7 @@
             In plain English: <b>Depend on interfaces, not concrete implementations.</b> This makes your code flexible, testable, and easy to maintain.
         </p></div></section>
 
-    <section id="0e208068-1de8-4237-a16e-662c101c5b6f" style="margin-bottom:1rem;"><h3>&#x1F4A1; Why is DIP Important?</h3><hr class="border border-success border-1 opacity-50">
+    <section id="fffc1215-1bc3-4c21-ad21-d7795c1676ea" style="margin-bottom:1rem;"><h3>&#x1F4A1; Why is DIP Important?</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             Without DIP, your code becomes rigid and hard to change. High-level modules are tightly coupled to low-level details, making it difficult to swap implementations, test in isolation, or extend functionality. DIP encourages you to program to abstractions (like interfaces or abstract classes), so both high-level and low-level modules depend on contracts, not each other.
         </p>
@@ -106,7 +106,7 @@
             <li><b>Maintainability:</b> Change details without breaking the big picture.</li>
             <li><b>Extensibility:</b> Add new features with minimal changes to existing code.</li></ul></div></section>
 
-    <section id="3637888f-9a83-44b5-b5bf-da65a27743bc" style="margin-bottom:1rem;"><h3>&#x1F552; When Does DIP Matter Most?</h3><hr class="border border-success border-1 opacity-50">
+    <section id="1d1b81fa-0a51-4c7c-86b5-70a64fa2d3e2" style="margin-bottom:1rem;"><h3>&#x1F552; When Does DIP Matter Most?</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             DIP shines as your application grows. Watch for these red flags 🚩:
         </p>
@@ -118,7 +118,7 @@
             The earlier you apply DIP, the easier it is to keep your codebase healthy. But it’s never too late to refactor!
         </p></div></section>
 
-    <section id="34a75db1-ae04-41ef-81c1-37a0d0ebbd21" style="margin-bottom:1rem;"><h3>&#x1F6E0;&#xFE0F; How Do You Apply DIP in C#?</h3><hr class="border border-success border-1 opacity-50">
+    <section id="1e7094b2-6af1-4003-a890-103f1c42a7ff" style="margin-bottom:1rem;"><h3>&#x1F6E0;&#xFE0F; How Do You Apply DIP in C#?</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             Let’s get practical. Suppose you have a <code>ReportGenerator</code> class that logs messages:
         </p>
@@ -190,12 +190,12 @@ public class ReportGenerator
                 Now, <code>ReportGenerator</code> depends on the <code>ILogger</code> abstraction. You can inject any logger you want—file, database, or even a mock for testing. This makes your code flexible, testable, and open to extension.
             </p></div></div></div></section>
 
-    <section id="ef444375-88a9-4478-9ce3-3c58955b3b1b" style="margin-bottom:1rem;"><h3>&#x1F30D; Real-World Analogy</h3><hr class="border border-success border-1 opacity-50">
+    <section id="6e7b378d-1253-42ab-b633-cc13aac8ded8" style="margin-bottom:1rem;"><h3>&#x1F30D; Real-World Analogy</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             Think of DIP like using a universal power adapter. Your laptop charger (high-level module) doesn’t care about the specific wall socket (low-level detail)—it just needs a compatible interface. As long as the adapter fits, you’re good to go! In software, DIP lets you swap out details without changing the big picture.
         </p></div></section>
 
-    <section id="1f3eb522-d411-40b0-b8f8-206d167785fa" style="margin-bottom:1rem;"><h3>&#x1F3D7;&#xFE0F; DIP in Larger Systems: Dependency Injection</h3><hr class="border border-success border-1 opacity-50">
+    <section id="901b9cbb-f955-453f-b6af-24b9a32734f8" style="margin-bottom:1rem;"><h3>&#x1F3D7;&#xFE0F; DIP in Larger Systems: Dependency Injection</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             DIP is the foundation of <b>dependency injection</b>—a technique where dependencies are provided from the outside, rather than created inside a class. In ASP.NET Core, for example, you register services and inject them where needed:
         </p>
@@ -220,7 +220,7 @@ public class HomeController : Controller
             This approach makes your application modular and easy to test. You can swap implementations without touching the core logic.
         </p></div></section>
 
-    <section id="7c9846de-ff64-4721-9032-2041e75cf650" style="margin-bottom:1rem;"><h3>&#x1F6A9; Common Pitfalls (and How to Dodge Them)</h3><hr class="border border-success border-1 opacity-50">
+    <section id="a66196d3-e171-4a01-b12f-b60856d8c929" style="margin-bottom:1rem;"><h3>&#x1F6A9; Common Pitfalls (and How to Dodge Them)</h3><hr class="border border-success border-1 opacity-50">
     <div><ul><li><b>Over-injecting:</b> Don’t inject everything—only what’s needed. Too many dependencies can make classes hard to understand.</li>
             <li><b>Leaky abstractions:</b> Make sure your interfaces are meaningful, not just placeholders.</li>
             <li><b>Premature abstraction:</b> Don’t create interfaces for every class. Use DIP where flexibility and testability matter.</li>
@@ -228,7 +228,7 @@ public class HomeController : Controller
         <p><b>Pro tip:</b> When in doubt, ask: “If I want to swap this dependency, how much code do I have to change?” If the answer is “a lot,” DIP can help!
         </p></div></section>
 
-    <section id="d7d85f5a-be69-4974-97c6-58fa87353da4" style="margin-bottom:1rem;"><h3>&#x1F517; DIP and the Other SOLID Principles</h3><hr class="border border-success border-1 opacity-50">
+    <section id="db0d67f8-5d58-418a-a89b-8bd2504823b8" style="margin-bottom:1rem;"><h3>&#x1F517; DIP and the Other SOLID Principles</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             DIP ties all the SOLID principles together:
         </p>
@@ -240,7 +240,7 @@ public class HomeController : Controller
             Mastering DIP helps you build flexible, maintainable, and scalable systems.
         </p></div></section>
 
-    <section id="126c07aa-9bf5-45ad-8d71-f65e867982c0" style="margin-bottom:1rem;"><h3>&#x1F4DD; Wrapping Up: Why DIP Makes Life Easier</h3><hr class="border border-success border-1 opacity-50">
+    <section id="85549c90-0d3a-4fb1-9a47-c139750c1fe0" style="margin-bottom:1rem;"><h3>&#x1F4DD; Wrapping Up: Why DIP Makes Life Easier</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             The Dependency Inversion Principle is about building on solid ground. By depending on abstractions, not details, you make your codebase ready for change. Like a universal socket, DIP lets you plug in new features, swap out old ones, and keep everything running smoothly. Start small, refactor as you grow, and your future self will thank you.
         </p></div></section></div>
@@ -263,9 +263,9 @@ public class HomeController : Controller
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-            </div><!--Blazor:{"prerenderId":"c8d50043afbe4504a7ef9d4672c227c1"}-->
+            </div><!--Blazor:{"prerenderId":"d1ef2e9c979644bfbf149a2c2a327b4a"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UkVScVozVnRiR2hhVWs1dFFXdHJXRFozYVU5MlpWRllZVmxhVVdWNFRucEdNVkppWnpaalZYZE5ObTgyVkRGU2VWTklVRnBLVUVOTmFYTk9XblpCZEZVd2RucHBjbGgwYkhVeFdVTmtMWEZZUWpWZlRGODFjMkoyYzFKSFgzVk1kV1pIZUhCUFpXVk5kbkIyZDNKa1NWSmFRbTFEU1VOTlJXMW5Ramx3YUVOaFdUSk5PV2Q2TUhkSWJEaG1kR016WjNobFV6SnJJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80VUhGRGR6RkJSRlZXY0U5MlRXZDNaVk5OV1hCS01VeGhSM0ZrZFU5ZlUzSm5TWE5PVW05MmVqaGpZME5KUlZScWJGVlJUM2RMTVZaSU9UQnhOV1ZSWkZSVk5rUkxhMWxJVmkwM1RYWmlhMTlrYUVoeUxXaFlVWGs0VEdaeVlYVktYemxTWVhrNFVpMVJkV1JtV2xGd2VTMVhWblZyTVRac1pUZ3hkM2d5WlhwMk5uQXhWRm8wWW1ReVdXbHJjWEJJWkZCamNXWnpJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
