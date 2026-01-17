@@ -20,11 +20,11 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" /> -->
     
-<!--Blazor:{"type":"webassembly","prerenderId":"b601957d9ca34845981f64fa72ebedc9","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>TDD in .NET: Practicing TDD in a Web API Project</title><meta property="og:url" content="http://127.0.0.1:5050/blog/tdd/expense-tracker-tdd-webapi" />
+<!--Blazor:{"type":"webassembly","prerenderId":"b34228fabdda4da5aea0d94f9fd9f358","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>TDD in .NET: Practicing TDD in a Web API Project</title><meta property="og:url" content="http://127.0.0.1:5050/blog/tdd/expense-tracker-tdd-webapi" />
     <meta property="og:title" content="TDD in .NET: Practicing TDD in a Web API Project" />
     <meta property="og:description" content="" />
     <meta property="og:image" content="http://127.0.0.1:5050/images/blog/tdd/expense-tracker/banner.svg" />
-    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"b601957d9ca34845981f64fa72ebedc9"}-->
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"b34228fabdda4da5aea0d94f9fd9f358"}-->
 </head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -40,7 +40,7 @@
 
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"1a6630e3cb4a48548bddb8094d247508","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"ae227b83a00a494799546d48cce39b1d","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -91,7 +91,7 @@
                     
                     <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 15 Nov 2025</span></div></div></div></div></div></header>
 
-    <section id="0594cb4d-7690-4342-b811-97d51077c12b" style="margin-bottom:1rem;"><h4>Motivation: Why This Article?</h4><hr class="border border-success border-1 opacity-50">
+    <section id="5801febd-901d-4b6a-b200-5f17e0a6e68a" style="margin-bottom:1rem;"><h4>Motivation: Why This Article?</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             Many developers struggle to apply Test-Driven Development (TDD) effectively in real-world Web API projects. Common challenges include unclear test boundaries, slow feedback cycles, and confusion about where to start—controller, service, or database? This article aims to bridge that gap by providing a practical, layered approach to TDD, using a simple but realistic use case. The goal is to help readers build confidence, avoid common pitfalls, and make informed decisions at every step of the development process.
         </p>
@@ -103,18 +103,18 @@
         <div class="tip"><b>Why TDD?</b> TDD helps you build reliable, maintainable code by writing tests before implementation. It keeps your design focused and your codebase flexible.
         </div></div></section>
 
-    <section id="28e20f36-9284-4e16-b6d2-4800aa6777e5" style="margin-bottom:1rem;"><h4>System Breakdown</h4><hr class="border border-success border-1 opacity-50">
+    <section id="2eff7f8d-06e9-41b2-a240-44b984ef2baa" style="margin-bottom:1rem;"><h4>System Breakdown</h4><hr class="border border-success border-1 opacity-50">
     <div><ul><li><b>Controller</b> — Receives HTTP requests, returns responses</li>
             <li><b>Service</b> — Contains business logic, enforces rules</li>
             <li><b>Repository</b> — Persists data, uses in-memory fakes for tests</li></ul>
         <div class="design-insight"><b>Design Insight:</b> Separating layers makes your code easier to test and maintain. Each layer has a clear responsibility.
         </div></div></section>
 
-    <section id="1a2880f8-a73e-41bc-a874-feea6518030b" style="margin-bottom:1rem;"><h4>Use Case: Get Expenses by Category</h4><hr class="border border-success border-1 opacity-50">
+    <section id="675de13b-05c1-4879-b7fc-e7841396ea57" style="margin-bottom:1rem;"><h4>Use Case: Get Expenses by Category</h4><hr class="border border-success border-1 opacity-50">
     <div><ul><li>Feature: Fetch all expenses for a given category (e.g., "Food", "Travel")</li>
             <li>API should return a list of matching expenses</li></ul></div></section>
 
-    <section id="20e329a2-1dd1-4813-926a-dca9acb32b18" style="margin-bottom:1rem;"><h4>Step 1: Controller Layer TDD</h4><hr class="border border-success border-1 opacity-50">
+    <section id="5ade0f76-56d8-451e-afcb-2419b342f993" style="margin-bottom:1rem;"><h4>Step 1: Controller Layer TDD</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             The TDD process begins with the user's perspective: what does the API need to deliver? For the Expense Manager, the client wants to fetch expenses by category. Consider the endpoint, the shape of the response, and edge cases (empty results, invalid category, etc.).
         </p>
@@ -157,7 +157,7 @@ public async Task&lt;IActionResult&gt; GetExpensesByCategory(string category)
         <p><b>Refactor:</b> Once the test passes, review the controller for clarity and simplicity. Thin controllers are best—keep business logic out and delegate to the service.
         </p></div></section>
 
-    <section id="433e7a1f-a28e-4eb2-8d5d-777cdbaf1dda" style="margin-bottom:1rem;"><h4>Step 2: Service Layer TDD</h4><hr class="border border-success border-1 opacity-50">
+    <section id="70bfcf06-e3f9-4d41-a78b-78108868bd79" style="margin-bottom:1rem;"><h4>Step 2: Service Layer TDD</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             The next focus is business logic. The service must filter expenses by category, handle edge cases, and ensure correctness. Consider what could go wrong: unknown categories, empty lists, performance with large datasets.
         </p>
@@ -195,7 +195,7 @@ public async Task&lt;IEnumerable&lt;ExpenseDto&gt;&gt; GetExpensesByCategoryAsyn
         <p><b>Refactor:</b> After the test passes, look for duplication, unclear names, or opportunities to improve performance. Keep the service focused on business rules.
         </p></div></section>
 
-    <section id="b31a9110-2550-4a54-b498-4392610743d0" style="margin-bottom:1rem;"><h4>Step 3: Repository Layer TDD</h4><hr class="border border-success border-1 opacity-50">
+    <section id="a12ec136-eb07-49bc-b9df-19c6513cefa5" style="margin-bottom:1rem;"><h4>Step 3: Repository Layer TDD</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             Persistence is the foundation. The repository should be reliable and predictable. Use an in-memory list for tests, which simulates database behavior without the overhead.
         </p>
@@ -215,13 +215,13 @@ public class InMemoryExpenseRepository : IExpenseRepository
         <p><b>Refactor:</b> Once the repository works as expected, consider adding interfaces, improving naming, and preparing for future database integration.
         </p></div></section>
 
-    <section id="8e18839a-7f6e-4b37-aba6-94da12c41515" style="margin-bottom:1rem;"><h5>Visual Flow: Layered Architecture</h5><hr class="border border-success border-1 opacity-50">
+    <section id="dc15de22-1444-409a-b71a-02ff5da113be" style="margin-bottom:1rem;"><h5>Visual Flow: Layered Architecture</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
             The flow of a typical Web API request is:
         </p>
         <p><b>Controller</b> → <b>Service</b> → <b>Repository</b> → <b>DB/Fake</b></p></div></section>
 
-    <section id="a7e0a492-5b37-43c4-a8b4-008794351bd1" style="margin-bottom:1rem;"><h4>Test Boundaries: Why Mock, Why DTOs?</h4><hr class="border border-success border-1 opacity-50">
+    <section id="a6bdc405-87a9-4b48-894e-db8507381095" style="margin-bottom:1rem;"><h4>Test Boundaries: Why Mock, Why DTOs?</h4><hr class="border border-success border-1 opacity-50">
     <div><p><b>Controller tests</b> should mock the service layer to focus on request handling, validation, and response formatting. This keeps tests fast and isolated from business logic and data access.
         </p>
         <p><b>DTOs (Data Transfer Objects)</b> are used to shape the data sent to and from the API. They prevent leaking domain models and allow for versioning and validation. Always use DTOs in controller and service boundaries.
@@ -229,7 +229,7 @@ public class InMemoryExpenseRepository : IExpenseRepository
         <div class="tip"><b>Best Practice:</b> Use unit tests for controllers and services, and reserve integration tests for end-to-end scenarios.
         </div></div></section>
 
-    <section id="062f200b-4802-4f6a-8d34-3c1baa6ec0c2" style="margin-bottom:1rem;"><h4>Repository Layer: Expanded</h4><hr class="border border-success border-1 opacity-50">
+    <section id="1f05aad6-077c-47ca-ad77-25f2f625cac0" style="margin-bottom:1rem;"><h4>Repository Layer: Expanded</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             The repository manages data access. In tests, use an in-memory fake to avoid external dependencies. In production, use a real implementation (e.g., EFCore).
         </p>
@@ -248,7 +248,7 @@ public void AddAndRetrieveExpense_WorksCorrectly()
         <div class="tip"><b>Note:</b> A real repository (e.g., using EFCore) would connect to a database, handle queries, and manage transactions. Fakes are for fast, isolated tests.
         </div></div></section>
 
-    <section id="fc8be9bd-a414-42a8-ba37-beb5b577a3d3" style="margin-bottom:1rem;"><h4>Theory: Making Good TDD Decisions</h4><hr class="border border-success border-1 opacity-50">
+    <section id="f08f5b5d-fe2c-406f-850d-2204609aac31" style="margin-bottom:1rem;"><h4>Theory: Making Good TDD Decisions</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             TDD is more than just writing tests first—it's about making design decisions that lead to maintainable, flexible code. Here are some key principles and decision points to help you succeed:
         </p>
@@ -265,7 +265,7 @@ public void AddAndRetrieveExpense_WorksCorrectly()
             By following these principles, you'll be able to make better decisions at each step of the TDD cycle, leading to APIs that are robust, easy to change, and well-documented.
         </p></div></section>
 
-    <section id="083b625d-b567-416b-92b0-b0826e378d45" style="margin-bottom:1rem;"><h4>Troubleshooting TDD Pitfalls</h4><hr class="border border-success border-1 opacity-50">
+    <section id="c4784818-d5c3-4d78-a6d9-8320a02ef87d" style="margin-bottom:1rem;"><h4>Troubleshooting TDD Pitfalls</h4><hr class="border border-success border-1 opacity-50">
     <div><ul><li><b>Test not discovered?</b> Check method/class attributes and naming.</li>
             <li><b>Over-mocking?</b> Only mock external dependencies, not value objects.</li>
             <li><b>Brittle tests?</b> Focus on behavior, not implementation details.</li>
@@ -273,7 +273,7 @@ public void AddAndRetrieveExpense_WorksCorrectly()
         <div class="gotcha"><b>Tip:</b> Refactor often and keep tests focused on one responsibility.
         </div></div></section>
 
-    <section id="ecbc48e5-7e82-467b-9baf-c17b04e8569b" style="margin-bottom:1rem;"><h4>Summary</h4><hr class="border border-success border-1 opacity-50">
+    <section id="94e5d27d-70b6-4872-8e76-f4b7cd209a7f" style="margin-bottom:1rem;"><h4>Summary</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             By following TDD across controller, service, and repository layers, you build robust, maintainable APIs. Use Moq for mocking, in-memory fakes for fast cycles, and keep each test focused. Document each step and test run for clarity and learning.
         </p></div></section></div>
@@ -296,9 +296,9 @@ public void AddAndRetrieveExpense_WorksCorrectly()
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-            </div><!--Blazor:{"prerenderId":"1a6630e3cb4a48548bddb8094d247508"}-->
+            </div><!--Blazor:{"prerenderId":"ae227b83a00a494799546d48cce39b1d"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UkZWQmRGbDFYMnBqV2tsc2VreFZPSGhwZUdWeVJDMTJRMFI1ZUhGaGNTMVRNVzkyVkVWelFraDNaMHR4UlVjNU1UQm9lRzk0VTA5Q2IyaDRUSHBrZFhndFZUaHVhREJmVjFoelNUSkJVVk5WTTBKRFFtMVRhR1pUT1haaGMwMWtiMGRmZG1sTFVWZHNYek5CZDJ3dE5tbDZhMkZ5TUhoWkxVTTRNSFZDY2pnemRFeHRTSEJvVmpSTVRDMVBWREF5VEhGdVIxQkJJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UW5Kck5VTkZSRzlaY0VSdVlsZDBkSEpGTjFSR1lWcENPVGQwY2pSd1NUa3pRVFpTWTIxdFVrSnNlR1ZpYUV0dFJqSXhXSGxFU1cwd2RWQjVZazF1YURKalZtVnVlVGRoWDJOcVNGUkVVRko1YzBGdVIwUXdNa3hZU0dkZmJHWnBhRkYzZVRKR1dscDRRbTkzUjFKSmNXbHlOREV4VW00eldHWndPVXd5ZFRab1dGRXdjV2Q2VFhwSGFubFFOMjk1YWtsSWFFSm5JaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
