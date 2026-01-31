@@ -202,6 +202,13 @@ namespace TestArena.Blog.Common.NavigationUtils
             ["AI", "AWS Bedrock", "Converse API", ".NET", "C#", "Chatbot"],
             isPublished: true,
             isOlderThumbnailFormat: false),
+        new("AWS Bedrock with .NET: Converse API with Tools",
+            "/blog/ai/bedrock/converse-tools",
+            new DateTime(2026, 1, 24),
+            "images/blog/ai/bedrock/banner.svg",
+            ["AI", "AWS Bedrock", "Converse API", "Tools", ".NET", "C#", "Structured Output"],
+            isPublished: true,
+            isOlderThumbnailFormat: false),
         ];
 
         public static IEnumerable<PageInfo> PublishedArticles => Pages.Where(p => p.IsPublished && p.PublishedOn <= DateTime.UtcNow);

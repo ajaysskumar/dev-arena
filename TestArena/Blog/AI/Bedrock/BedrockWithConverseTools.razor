@@ -1,0 +1,281 @@
+@page "/blog/ai/bedrock/converse-tools"
+@using TestArena.Blog.Common
+@using TestArena.Blog
+@using System.Linq
+@using TestArena.Blog.Common.NavigationUtils
+
+@code{
+    PageInfo currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/ai/bedrock/converse-tools")!;
+}
+
+<BlogContainer>
+    <Header Title="@currentPage.Header"
+            Image="@currentPage.ArticleImage" 
+            PublishedOn="@currentPage.PublishedOn" 
+            Authors="Ajay Kumar"
+            isOlderThumbnailFormat="@currentPage.IsOlderThumbnailFormat">
+    </Header>
+
+    <Section Heading="What is the Converse API with Tools?" Level="4">
+        <p>
+            AWS Bedrock's <b>Converse API</b> can be supercharged with <b>tools</b>—structured interfaces that let the model call functions, enforce output schemas, or interact with external systems. This enables developers to build AI agents that not only chat, but also return structured data, trigger workflows, or integrate with business logic.
+        </p>
+        <p>
+            In this article, you'll learn how to use the Converse API with tools to guarantee structured, reliable responses from generative AI models. We'll walk through a real-world example: extracting detailed movie information as JSON using a tool schema.
+        </p>
+        <CalloutBox Type="info" Title="Why Tools?">
+            <p>
+                Tools let you move beyond plain text. They enable the model to return data in a format your application can consume directly—no more brittle prompt engineering or regex parsing!
+            </p>
+        </CalloutBox>
+    </Section>
+
+    <Section Heading="When and Why to Use Tools with Converse API" Level="4">
+        <ul>
+            <li><b>Structured Output:</b> Enforce JSON schemas for reliable, machine-readable responses.</li>
+            <li><b>Function Calling:</b> Let the model trigger business logic, database queries, or API calls.</li>
+            <li><b>Data Extraction:</b> Extract entities, summaries, or analytics from unstructured text.</li>
+            <li><b>Workflow Automation:</b> Build agents that can take actions, not just answer questions.</li>
+        </ul>
+        <p>
+            Use tools when you need more than just a chat—you want the AI to work as part of your system.
+        </p>
+    </Section>
+
+    <Section Heading="How: Building a Movie Info Extractor with Converse Tools" Level="4">
+        <Section Heading="1. Prerequisites" Level="5">
+            <ul>
+                <li>AWS account with Bedrock access enabled.</li>
+                <li>AWS credentials with permissions for Bedrock Converse API and tools.</li>
+                <li>.NET 8 or later SDK installed.</li>
+                <li>NuGet package: <b>AWSSDK.BedrockRuntime</b></li>
+            </ul>
+        </Section>
+        <Section Heading="2. Service Implementation Example" Level="5">
+            <p>This example shows how to use a tool schema to extract structured movie information from the model. The tool enforces a JSON schema, so the model must return an array of movie objects with required fields.</p>
+            <CodeSnippet Language="csharp">
+using Amazon.BedrockRuntime;
+using Amazon.BedrockRuntime.Model;
+using Amazon.Runtime.Documents;
+using System.Collections.Generic;
+using System.Text.Json;
+using System.Threading.Tasks;
+
+public class BedrockWithConverseToolsService
+{
+    private readonly AmazonBedrockRuntimeClient _client;
+    private const string ModelId = "anthropic.claude-3-haiku-20240307-v1:0";
+
+    public BedrockWithConverseToolsService()
+    {
+        _client = new AmazonBedrockRuntimeClient(Amazon.RegionEndpoint.USEast1);
+    }
+
+    public async Task&lt;string&gt; GetMovieDetailsAsJson(string movieQuery)
+    {
+        // Build the tool configuration - this GUARANTEES the output structure
+        var toolConfig = BuildToolConfiguration();
+
+        // Create the user message
+        var userMessage = new Message
+        {
+            Role = "user",
+            Content = new List&lt;ContentBlock&gt;
+            {
+                new ContentBlock
+                {
+                    Text = $"Provide detailed information about the movie '{movieQuery}'."
+                }
+            }
+        };
+
+        var converseRequest = new ConverseRequest
+        {
+            ModelId = ModelId,
+            Messages = new List&lt;Message&gt; { userMessage },
+            ToolConfig = toolConfig,
+            System = new List&lt;SystemContentBlock&gt;
+            {
+                new SystemContentBlock
+                {
+                    Text = "You are a movie information expert"
+                }
+            }
+        };
+
+        // Send the request to Bedrock
+        var response = await _client.ConverseAsync(converseRequest);
+
+        if (response?.Output?.Message?.Content == null)
+        {
+            return JsonSerializer.Serialize(new { error = "Invalid response from Bedrock" });
+        }
+
+        // Find the tool use response
+        var toolUseBlock = response.Output.Message.Content
+            .FirstOrDefault(c =&gt; c.ToolUse != null);
+
+        if (toolUseBlock?.ToolUse == null)
+        {
+            return JsonSerializer.Serialize(new { error = "Model did not use the expected tool" });
+        }
+
+        // Extract the structured data from the tool input
+        return ExtractMovieInfoAsJson(toolUseBlock.ToolUse.Input);
+    }
+
+    private ToolConfiguration BuildToolConfiguration()
+    {
+        // Define the JSON schema for the tool input
+        var toolInputSchema = new
+        {
+            type = "object",
+            properties = new
+            {
+                movies = new
+                {
+                    type = "array",
+                    description = "Array of movie information objects",
+                    items = new
+                    {
+                        type = "object",
+                        properties = new
+                        {
+                            title = new { type = "string", description = "The movie title" },
+                            year = new { type = "integer", description = "The release year" },
+                            category = new { type = "string", description = "Category to which this title belongs to. Like a TV show or Movie" },
+                            directors = new { type = "array", description = "Array of director names", items = new { type = "string", description = "A director name" } },
+                            actors = new { type = "array", description = "Array of actor names", items = new { type = "string", description = "An actor name" } },
+                            plot = new { type = "string", description = "Brief plot summary" },
+                            genre = new { type = "string", description = "Movie genre" },
+                            rating = new { type = "string", description = "IMDb rating or similar" }
+                        },
+                        required = new[] { "title", "year", "category", "directors", "actors", "plot", "genre", "rating" },
+                        additionalProperties = false
+                    }
+                }
+            },
+            required = new[] { "movies" },
+            additionalProperties = false
+        };
+
+        var tool = new Tool
+        {
+            ToolSpec = new ToolSpecification
+            {
+                Name = "return_movie_info",
+                Description = "Return structured movie information as an array to handle multiple matching movies",
+                InputSchema = new ToolInputSchema
+                {
+                    Json = Document.FromObject(toolInputSchema)
+                }
+            }
+        };
+
+        return new ToolConfiguration
+        {
+            Tools = new List&lt;Tool&gt; { tool },
+            ToolChoice = new ToolChoice
+            {
+                Tool = new SpecificToolChoice
+                {
+                    Name = "return_movie_info"
+                }
+            }
+        };
+    }
+
+    private string ExtractMovieInfoAsJson(Document toolInput)
+    {
+        try
+        {
+            var inputDict = toolInput.AsDictionary();
+            if (!inputDict.ContainsKey("movies"))
+            {
+                return JsonSerializer.Serialize(new { error = "Expected 'movies' property in response" });
+            }
+            var moviesDoc = inputDict["movies"];
+            if (!moviesDoc.IsList())
+            {
+                return JsonSerializer.Serialize(new { error = "Expected 'movies' to be an array" });
+            }
+            var moviesList = moviesDoc.AsList();
+            var movies = new List&lt;object&gt;();
+            foreach (var movieDoc in moviesList)
+            {
+                var movieDict = movieDoc.AsDictionary();
+                var directors = new List&lt;string&gt;();
+                if (movieDict.ContainsKey("directors") && movieDict["directors"].IsList())
+                {
+                    directors = movieDict["directors"].AsList().Select(doc =&gt; doc.AsString()).ToList();
+                }
+                var actors = new List&lt;string&gt;();
+                if (movieDict.ContainsKey("actors") && movieDict["actors"].IsList())
+                {
+                    actors = movieDict["actors"].AsList().Select(doc =&gt; doc.AsString()).ToList();
+                }
+                var movieData = new
+                {
+                    title = movieDict.ContainsKey("title") ? movieDict["title"].AsString() : "",
+                    year = movieDict.ContainsKey("year") ? movieDict["year"].AsInt() : 0,
+                    category = movieDict.ContainsKey("category") ? movieDict["category"].AsString() : "",
+                    directors = directors,
+                    actors = actors,
+                    plot = movieDict.ContainsKey("plot") ? movieDict["plot"].AsString() : "",
+                    genre = movieDict.ContainsKey("genre") ? movieDict["genre"].AsString() : "",
+                    rating = movieDict.ContainsKey("rating") ? movieDict["rating"].AsString() : ""
+                };
+                movies.Add(movieData);
+            }
+            return JsonSerializer.Serialize(movies, new JsonSerializerOptions { WriteIndented = true });
+        }
+        catch (Exception ex)
+        {
+            return JsonSerializer.Serialize(new { error = $"Failed to extract movie info: {ex.Message}" });
+        }
+    }
+}
+            </CodeSnippet>
+            <CalloutBox Type="tip" Title="Full Example on GitHub">
+                <p>See the complete implementation and usage in the <a href="https://github.com/ajaysskumar/ai-playground/blob/main/AwsBedrockExamples/Services/BedrockWithConverseToolsService.cs" target="_blank">BedrockWithConverseToolsService.cs</a> file on GitHub.</p>
+            </CalloutBox>
+        </Section>
+        <Section Heading="3. How the Example Works" Level="5">
+            <ul>
+                <li><b>Tool Schema:</b> Defines exactly what fields the model must return for each movie.</li>
+                <li><b>System Prompt:</b> Sets the AI’s persona as a movie expert.</li>
+                <li><b>Tool Use:</b> The model is required to use the tool and return structured data.</li>
+                <li><b>Extraction:</b> The code parses the tool output and returns formatted JSON.</li>
+            </ul>
+        </Section>
+        <Section Heading="4. Example Use Case: Movie Info Extraction" Level="5">
+            <p>Suppose a user wants to get details about "Inception". The service will return a structured JSON array with all the required fields, ready for use in your app or workflow.</p>
+            <CodeSnippet Language="csharp">
+var service = new BedrockWithConverseToolsService();
+string movieJson = await service.GetMovieDetailsAsJson("Inception");
+Console.WriteLine(movieJson);
+            </CodeSnippet>
+            <p>The output will be a JSON array of movie objects, each with title, year, category, directors, actors, plot, genre, and rating.</p>
+        </Section>
+    </Section>
+
+    <Section Heading="Summary" Level="4">
+        <ul>
+            <li><b>What:</b> Converse API with tools lets you build AI agents that return structured, reliable data—not just text.</li>
+            <li><b>When:</b> Use tools for data extraction, workflow automation, and any scenario where you need more than chat.</li>
+            <li><b>How:</b> Define tool schemas, enforce output structure, and integrate with your .NET apps using the AWS SDK.</li>
+        </ul>
+        <p>
+            For more details and the full code, see the <a href="https://github.com/ajaysskumar/ai-playground/blob/main/AwsBedrockExamples/Services/BedrockWithConverseToolsService.cs" target="_blank">GitHub example</a>.
+        </p>
+    </Section>
+
+    <Section Heading="References & Further Reading" Level="4">
+        <ul>
+            <li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/converse-api.html" target="_blank">AWS Bedrock Converse API Documentation</a></li>
+            <li><a href="https://github.com/ajaysskumar/ai-playground/blob/main/AwsBedrockExamples/Services/BedrockWithConverseToolsService.cs" target="_blank">BedrockWithConverseToolsService.cs on GitHub</a></li>
+        </ul>
+    </Section>
+
+    <EndNotes RepositoryLink="https://github.com/ajaysskumar/ai-playground/blob/main/AwsBedrockExamples/Services/BedrockWithConverseToolsService.cs" />
+</BlogContainer>
