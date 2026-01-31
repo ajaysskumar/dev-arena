@@ -53,12 +53,10 @@
         </Section>
 
         <Section Heading="2. Setting Up Your Project" Level="5">
-            <p>You can use a C# Jupyter notebook (with .NET Interactive) or a simple C# script. Here's how to reference the required libraries:</p>
+            <p>You can use a simple C# script or a .NET project. Here's how to reference the required libraries:</p>
             <CodeSnippet Language="csharp">
-// ...other using statements...
 #r "nuget: AWSSDK.Bedrock, 3.7.0"
 #r "nuget: AWSSDK.BedrockRuntime, 3.7.0"
-
             </CodeSnippet>
         </Section>
 
@@ -253,7 +251,7 @@ Inception was a landmark for introducing mainstream audiences to Nolan's incredi
         </Section>
 
         <Section Heading="6. Putting It All Together" Level="5">
-            <p>Here's a minimal, complete example (see the notebook for the full version):</p>
+            <p>Here's a minimal, complete example. For a full version, see the linked GitHub repository:</p>
             <CodeSnippet Language="csharp" Number="6">
 // ...library references and using statements...
 
@@ -288,11 +286,8 @@ FormatAndPrintResponse(responseText);
         <ul>
             <li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html" target="_blank">AWS Bedrock Documentation</a></li>
             <li><a href="https://docs.aws.amazon.com/sdk-for-net/v3/developer-guide/" target="_blank">AWS SDK for .NET</a></li>
-            <li><a href="https://github.com/ajaysskumar/dev-arena/blob/main/reference/notebooks/aws-bedrock-demo.ipynb" target="_blank">Complete working example - Jupyter notebook on GitHub</a></li>
+            <li><a href="https://github.com/ajaysskumar/dev-arena/blob/main/reference/notebooks/aws-bedrock-demo.ipynb" target="_blank">Complete working example on GitHub</a></li>
         </ul>
-        <CalloutBox Type="warning" Title="Important Note">
-            <p>For a full working sample, see the notebook linked above. Replace credentials with your own and ensure you have the necessary AWS permissions.</p>
-        </CalloutBox>
     </Section>
 
     <EndNotes RepositoryLink="https://github.com/ajaysskumar/dev-arena/blob/main/reference/notebooks/aws-bedrock-demo.ipynb" />
