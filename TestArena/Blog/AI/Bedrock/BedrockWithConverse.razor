@@ -16,6 +16,18 @@
             isOlderThumbnailFormat="@currentPage.IsOlderThumbnailFormat">
     </Header>
 
+    <Section Heading="The Problem: AI That Forgets" Level="4">
+        <p>
+            Picture a customer contacting your support bot about a billing issue. They explain the problem, the bot asks for their account number, they provide it — and then the next response treats them like a stranger. No memory of the account number. No memory of the issue. The user has to start over.
+        </p>
+        <p>
+            This is what happens when you build conversational experiences on stateless, single-turn APIs. Every message is an island. The model sees no history, carries no context, and the user experience suffers for it.
+        </p>
+        <CalloutBox Type="info" Title="The root cause">
+            <p>The original Bedrock <b>Invoke API</b> was built for single-shot prompts — great for summarization or one-off generation, but fundamentally broken for anything conversational.</p>
+        </CalloutBox>
+    </Section>
+
     <Section Heading="What is the AWS Bedrock Converse API and Why Use It?" Level="4">
         <p>
             As generative AI becomes more integrated into business workflows, the need for natural, multi-turn conversations with AI models is growing. AWS Bedrock's <b>Converse API</b> is designed to simplify these interactions, enabling developers to build chatbots, virtual agents, and assistants that can maintain context and handle complex dialogues.

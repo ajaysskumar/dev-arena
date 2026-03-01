@@ -16,24 +16,35 @@
             isOlderThumbnailFormat="@currentPage.IsOlderThumbnailFormat">
     </Header>
 
-    <Section Heading="What is AWS Bedrock and Why Use It from .NET?" Level="4">
-
+    <Section Heading="The Problem: Too Many APIs, Too Much Friction" Level="4">
         <p>
-            If you're a .NET developer looking to integrate generative AI into your applications, AWS Bedrock offers a straightforward way to access foundation models from providers like Anthropic Claude and Amazon Titan. Instead of managing multiple API integrations or dealing with different authentication systems for each provider, Bedrock consolidates access to these models under a single, consistent interface.
+            Imagine this: your team decides to add AI to your .NET application. You pick a model, wire up the HTTP client, handle the auth, parse the response schema—and it works. Then the product team asks to try a different model. Suddenly you have two HTTP clients, two authentication flows, two response formats, and twice the maintenance burden. Add a third model and things start to spiral.
         </p>
         <p>
-            With the official AWS SDK for .NET, you can invoke these models using familiar C# code, making it a natural fit for existing .NET projects. This means you can add AI-powered features—like text generation, summarization, or intelligent chat—without leaving your preferred language or toolset.
+            This is the reality that many .NET teams hit when integrating generative AI directly through vendor APIs. Each provider has its own conventions, and none of them speak fluent C#.
+        </p>
+        <CalloutBox Type="info" Title="Sound familiar?">
+            <p>If you've ever copy-pasted an <code>HttpClient</code> setup just to talk to a different AI model, this article is for you.</p>
+        </CalloutBox>
+    </Section>
+
+    <Section Heading="What is AWS Bedrock and Why Use It from .NET?" Level="4">
+        <p>
+            AWS Bedrock is Amazon's answer to the multi-model problem. It gives you a <b>single, consistent interface</b> to access foundation models from providers like Anthropic Claude and Amazon Titan—without juggling separate APIs, auth tokens, or request formats for each one.
+        </p>
+        <p>
+            What makes it especially compelling for .NET developers is the official AWS SDK for .NET. You can invoke powerful AI models using idiomatic C# code, plugging straight into your existing projects—no context switching, no foreign tooling. Text generation, summarization, intelligent chat—all accessible through the same familiar patterns you already use for other AWS services.
         </p>
     </Section>
 
     <Section Heading="Why: The Need for Simplicity, Security, and Scale" Level="4">
         <ul>
-            <li><b>Simplicity:</b> No need to wrangle with REST APIs or manage authentication tokens manually. The AWS SDK for .NET handles all the heavy lifting.</li>
-            <li><b>Security:</b> Leverage AWS IAM and credentials management for secure access to powerful models.</li>
-            <li><b>Scale:</b> Bedrock is designed for production workloads, with built-in monitoring, throttling, and cost controls.</li>
+            <li><b>Simplicity:</b> No REST API wrangling or manual token management. The AWS SDK for .NET handles the heavy lifting so you can focus on building features.</li>
+            <li><b>Security:</b> AWS IAM and credentials management give you enterprise-grade access control out of the box—no custom auth layers needed.</li>
+            <li><b>Scale:</b> Bedrock is built for production, with built-in monitoring, throttling, and cost controls that would take weeks to build yourself.</li>
         </ul>
         <p>
-            Whether you're building a prototype or a production system, integrating GenAI into your .NET stack is now straightforward and robust.
+            Whether you're prototyping an idea or shipping to production, Bedrock removes the friction that usually slows GenAI adoption in .NET teams.
         </p>
     </Section>
 

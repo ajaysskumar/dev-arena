@@ -16,6 +16,18 @@
             isOlderThumbnailFormat="@currentPage.IsOlderThumbnailFormat">
     </Header>
 
+    <Section Heading="The Problem: You Can't Trust Plain Text" Level="4">
+        <p>
+            You ask the AI for movie details. It responds with a beautifully written paragraph. Now your code needs to extract the title, the year, the director, and the rating from that paragraph. So you write a regex. It works — until the model rephrases something slightly differently, and suddenly your parser breaks silently in production.
+        </p>
+        <p>
+            This is the fragility of relying on plain text responses from AI models. The output looks right to a human, but it is unpredictable for a machine. Prompt engineering can nudge the model toward a format, but it cannot enforce one.
+        </p>
+        <CalloutBox Type="info" Title="The core problem">
+            <p>Without a contract between your code and the model's output, every response is a gamble. One rephrase and your downstream logic breaks.</p>
+        </CalloutBox>
+    </Section>
+
     <Section Heading="What is the Converse API with Tools?" Level="4">
         <p>
             AWS Bedrock's <b>Converse API</b> can be supercharged with <b>tools</b>—structured interfaces that let the model call functions, enforce output schemas, or interact with external systems. This enables developers to build AI agents that not only chat, but also return structured data, trigger workflows, or integrate with business logic.
