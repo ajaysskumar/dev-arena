@@ -231,22 +231,28 @@ using var reader = new System.IO.StreamReader(invokeResponse.Body);
 var responseText = await reader.ReadToEndAsync();
             </CodeSnippet>
             <p><b>Example Response from Claude:</b></p>
-            <CodeSnippet Language="text" Number="5">
-Inception was a 2010 science fiction film written and directed by Christopher Nolan. It starred Leonardo DiCaprio, Ellen Page, Tom Hardy, and others.
-
-The movie was very innovative and had a huge impact on cinema for several reasons:
-
-1. Complex Narrative Structure - The film employed a highly complex non-linear narrative structure with multiple nested dream levels. This challenged audiences and pioneered new ways of storytelling on film.
-
-2. Visual Effects - The special effects depicting the bending of cities and gravity-defying fight scenes were groundbreaking and pushed the boundaries of what visual effects could achieve. Many new techniques had to be developed.
-
-3. Original Concept - The premise of corporate espionage taking place within the architecture of the mind was a fresh, original concept that allowed for creativity in visuals and plot.
-
-4. Box Office Success - Despite its cerebral and complex nature, Inception was a huge box office hit, making over $825 million worldwide. This showed audiences had an appetite for intelligent, innovative blockbusters.
-
-5. Influenced Other Films - Its success inspired other thought-provoking, concept-driven science fiction films and showed Hollywood that movies could be both popular and intellectually chewy.
-
-Inception was a landmark for introducing mainstream audiences to Nolan's incredible vision and raised the bar for what could be achieved through film in terms of originality, visual spectacle, and narrative sophistication. It had a major influence on science fiction and blockbuster filmmaking in the 2010s.
+            <CodeSnippet Language="json" Number="5">
+[
+  {
+    "title": "Inception",
+    "year": 2010,
+    "category": "Movie",
+    "directors": [
+      "Christopher Nolan"
+    ],
+    "actors": [
+      "Leonardo DiCaprio",
+      "Ellen Page",
+      "Joseph Gordon-Levitt",
+      "Tom Hardy",
+      "Cillian Murphy",
+      "Michael Caine"
+    ],
+    "plot": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea in the mind of a CEO.",
+    "genre": "Science Fiction, Action, Adventure",
+    "rating": "PG-13"
+  }
+]
             </CodeSnippet>
         </Section>
 
