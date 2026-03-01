@@ -52,14 +52,15 @@
             </ul>
         </Section>
         <Section Heading="2. Service Implementation Example" Level="5">
-            <p>This example shows how to use a tool schema to extract structured movie information from the model. The tool enforces a JSON schema, so the model must return an array of movie objects with required fields.</p>
-            <CodeSnippet Language="csharp">
+            <p>This example is broken into smaller steps for clarity. Let's walk through each part of the service.</p>
+
+            <Section Heading="Step 1: Service Setup" Level="6">
+                <p>Define the service class with a Bedrock client and the model ID. The client is initialised with the target AWS region.</p>
+                <CodeSnippet Language="csharp">
 using Amazon.BedrockRuntime;
 using Amazon.BedrockRuntime.Model;
 using Amazon.Runtime.Documents;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 public class BedrockWithConverseToolsService
 {
@@ -70,172 +71,179 @@ public class BedrockWithConverseToolsService
     {
         _client = new AmazonBedrockRuntimeClient(Amazon.RegionEndpoint.USEast1);
     }
+}
+                </CodeSnippet>
+            </Section>
 
-    public async Task&lt;string&gt; GetMovieDetailsAsJson(string movieQuery)
+            <Section Heading="Step 2: Sending the Request" Level="6">
+                <p>Build the user message with the movie query, attach the tool configuration, and send the request to Bedrock. After receiving the response, locate the tool use block that contains the structured output.</p>
+                <CodeSnippet Language="csharp">
+public async Task&lt;string&gt; GetMovieDetailsAsJson(string movieQuery)
+{
+    // Build the tool configuration - this GUARANTEES the output structure
+    var toolConfig = BuildToolConfiguration();
+
+    var userMessage = new Message
     {
-        // Build the tool configuration - this GUARANTEES the output structure
-        var toolConfig = BuildToolConfiguration();
-
-        // Create the user message
-        var userMessage = new Message
+        Role = "user",
+        Content = new List&lt;ContentBlock&gt;
         {
-            Role = "user",
-            Content = new List&lt;ContentBlock&gt;
+            new ContentBlock
             {
-                new ContentBlock
-                {
-                    Text = $"Provide detailed information about the movie '{movieQuery}'."
-                }
+                Text = $"Provide detailed information about the movie '{movieQuery}'."
             }
-        };
-
-        var converseRequest = new ConverseRequest
-        {
-            ModelId = ModelId,
-            Messages = new List&lt;Message&gt; { userMessage },
-            ToolConfig = toolConfig,
-            System = new List&lt;SystemContentBlock&gt;
-            {
-                new SystemContentBlock
-                {
-                    Text = "You are a movie information expert"
-                }
-            }
-        };
-
-        // Send the request to Bedrock
-        var response = await _client.ConverseAsync(converseRequest);
-
-        if (response?.Output?.Message?.Content == null)
-        {
-            return JsonSerializer.Serialize(new { error = "Invalid response from Bedrock" });
         }
+    };
 
-        // Find the tool use response
-        var toolUseBlock = response.Output.Message.Content
-            .FirstOrDefault(c =&gt; c.ToolUse != null);
-
-        if (toolUseBlock?.ToolUse == null)
-        {
-            return JsonSerializer.Serialize(new { error = "Model did not use the expected tool" });
-        }
-
-        // Extract the structured data from the tool input
-        return ExtractMovieInfoAsJson(toolUseBlock.ToolUse.Input);
-    }
-
-    private ToolConfiguration BuildToolConfiguration()
+    var converseRequest = new ConverseRequest
     {
-        // Define the JSON schema for the tool input
-        var toolInputSchema = new
+        ModelId = ModelId,
+        Messages = new List&lt;Message&gt; { userMessage },
+        ToolConfig = toolConfig,
+        System = new List&lt;SystemContentBlock&gt;
         {
-            type = "object",
-            properties = new
+            new SystemContentBlock { Text = "You are a movie information expert" }
+        }
+    };
+
+    var response = await _client.ConverseAsync(converseRequest);
+
+    if (response?.Output?.Message?.Content == null)
+        return JsonSerializer.Serialize(new { error = "Invalid response from Bedrock" });
+
+    // Find the tool use response - in v4 it's accessed via ToolUse property
+    var toolUseBlock = response.Output.Message.Content
+        .FirstOrDefault(c =&gt; c.ToolUse != null);
+
+    if (toolUseBlock?.ToolUse == null)
+        return JsonSerializer.Serialize(new { error = "Model did not use the expected tool" });
+
+    // Extract the structured data from the tool input
+    return ExtractMovieInfoAsJson(toolUseBlock.ToolUse.Input);
+}
+                </CodeSnippet>
+            </Section>
+
+            <Section Heading="Step 3: Defining the Tool Schema" Level="6">
+                <p>The tool schema is the key piece — it tells the model exactly what shape the output must take. We define a <code>movies</code> array with required fields for each entry. Setting <code>ToolChoice</code> to the specific tool name forces the model to always use it.</p>
+                <CodeSnippet Language="csharp">
+private ToolConfiguration BuildToolConfiguration()
+{
+    // Define the JSON schema for the tool input - this is what the model MUST follow
+    // Root must be object type, with movies array as a property
+    var toolInputSchema = new
+    {
+        type = "object",
+        properties = new
+        {
+            movies = new
             {
-                movies = new
+                type = "array",
+                description = "Array of movie information objects",
+                items = new
                 {
-                    type = "array",
-                    description = "Array of movie information objects",
-                    items = new
+                    type = "object",
+                    properties = new
                     {
-                        type = "object",
-                        properties = new
-                        {
-                            title = new { type = "string", description = "The movie title" },
-                            year = new { type = "integer", description = "The release year" },
-                            category = new { type = "string", description = "Category to which this title belongs to. Like a TV show or Movie" },
-                            directors = new { type = "array", description = "Array of director names", items = new { type = "string", description = "A director name" } },
-                            actors = new { type = "array", description = "Array of actor names", items = new { type = "string", description = "An actor name" } },
-                            plot = new { type = "string", description = "Brief plot summary" },
-                            genre = new { type = "string", description = "Movie genre" },
-                            rating = new { type = "string", description = "IMDb rating or similar" }
-                        },
-                        required = new[] { "title", "year", "category", "directors", "actors", "plot", "genre", "rating" },
-                        additionalProperties = false
-                    }
-                }
-            },
-            required = new[] { "movies" },
-            additionalProperties = false
-        };
-
-        var tool = new Tool
-        {
-            ToolSpec = new ToolSpecification
-            {
-                Name = "return_movie_info",
-                Description = "Return structured movie information as an array to handle multiple matching movies",
-                InputSchema = new ToolInputSchema
-                {
-                    Json = Document.FromObject(toolInputSchema)
+                        title    = new { type = "string",  description = "The movie title" },
+                        year     = new { type = "integer", description = "The release year" },
+                        category = new { type = "string",  description = "Category to which this title belongs to. Like a TV show or Movie" },
+                        directors = new { type = "array", description = "Array of director names", items = new { type = "string", description = "A director name" } },
+                        actors    = new { type = "array", description = "Array of actor names",   items = new { type = "string", description = "An actor name" } },
+                        plot     = new { type = "string",  description = "Brief plot summary" },
+                        genre    = new { type = "string",  description = "Movie genre" },
+                        rating   = new { type = "string",  description = "IMDb rating or similar" }
+                    },
+                    required = new[] { "title", "year", "category", "directors", "actors", "plot", "genre", "rating" },
+                    additionalProperties = false
                 }
             }
-        };
+        },
+        required = new[] { "movies" },
+        additionalProperties = false
+    };
 
-        return new ToolConfiguration
-        {
-            Tools = new List&lt;Tool&gt; { tool },
-            ToolChoice = new ToolChoice
-            {
-                Tool = new SpecificToolChoice
-                {
-                    Name = "return_movie_info"
-                }
-            }
-        };
-    }
-
-    private string ExtractMovieInfoAsJson(Document toolInput)
+    var tool = new Tool
     {
-        try
+        ToolSpec = new ToolSpecification
         {
-            var inputDict = toolInput.AsDictionary();
-            if (!inputDict.ContainsKey("movies"))
+            Name = "return_movie_info",
+            Description = "Return structured movie information as an array to handle multiple matching movies",
+            InputSchema = new ToolInputSchema
             {
-                return JsonSerializer.Serialize(new { error = "Expected 'movies' property in response" });
+                Json = Document.FromObject(toolInputSchema)
             }
-            var moviesDoc = inputDict["movies"];
-            if (!moviesDoc.IsList())
-            {
-                return JsonSerializer.Serialize(new { error = "Expected 'movies' to be an array" });
-            }
-            var moviesList = moviesDoc.AsList();
-            var movies = new List&lt;object&gt;();
-            foreach (var movieDoc in moviesList)
-            {
-                var movieDict = movieDoc.AsDictionary();
-                var directors = new List&lt;string&gt;();
-                if (movieDict.ContainsKey("directors") && movieDict["directors"].IsList())
-                {
-                    directors = movieDict["directors"].AsList().Select(doc =&gt; doc.AsString()).ToList();
-                }
-                var actors = new List&lt;string&gt;();
-                if (movieDict.ContainsKey("actors") && movieDict["actors"].IsList())
-                {
-                    actors = movieDict["actors"].AsList().Select(doc =&gt; doc.AsString()).ToList();
-                }
-                var movieData = new
-                {
-                    title = movieDict.ContainsKey("title") ? movieDict["title"].AsString() : "",
-                    year = movieDict.ContainsKey("year") ? movieDict["year"].AsInt() : 0,
-                    category = movieDict.ContainsKey("category") ? movieDict["category"].AsString() : "",
-                    directors = directors,
-                    actors = actors,
-                    plot = movieDict.ContainsKey("plot") ? movieDict["plot"].AsString() : "",
-                    genre = movieDict.ContainsKey("genre") ? movieDict["genre"].AsString() : "",
-                    rating = movieDict.ContainsKey("rating") ? movieDict["rating"].AsString() : ""
-                };
-                movies.Add(movieData);
-            }
-            return JsonSerializer.Serialize(movies, new JsonSerializerOptions { WriteIndented = true });
         }
-        catch (Exception ex)
+    };
+
+    return new ToolConfiguration
+    {
+        Tools = new List&lt;Tool&gt; { tool },
+        ToolChoice = new ToolChoice
         {
-            return JsonSerializer.Serialize(new { error = $"Failed to extract movie info: {ex.Message}" });
+            Tool = new SpecificToolChoice { Name = "return_movie_info" }
         }
+    };
+}
+                </CodeSnippet>
+            </Section>
+
+            <Section Heading="Step 4: Extracting the Structured Output" Level="6">
+                <p>Once the model responds, we parse the <code>Document</code> object from the tool input into a typed list of movies and serialise it as formatted JSON.</p>
+                <CodeSnippet Language="csharp">
+/// &lt;summary&gt;
+/// Extracts movie info from the tool input Document and returns as formatted JSON.
+/// The schema GUARANTEES this will be an object with a movies array.
+/// &lt;/summary&gt;
+private string ExtractMovieInfoAsJson(Document toolInput)
+{
+    try
+    {
+        var inputDict = toolInput.AsDictionary();
+
+        if (!inputDict.ContainsKey("movies"))
+            return JsonSerializer.Serialize(new { error = "Expected 'movies' property in response" });
+
+        var moviesDoc = inputDict["movies"];
+        if (!moviesDoc.IsList())
+            return JsonSerializer.Serialize(new { error = "Expected 'movies' to be an array" });
+
+        var movies = new List&lt;object&gt;();
+        foreach (var movieDoc in moviesDoc.AsList())
+        {
+            var movieDict = movieDoc.AsDictionary();
+
+            var directors = new List&lt;string&gt;();
+            if (movieDict.ContainsKey("directors") && movieDict["directors"].IsList())
+                directors = movieDict["directors"].AsList().Select(doc =&gt; doc.AsString()).ToList();
+
+            var actors = new List&lt;string&gt;();
+            if (movieDict.ContainsKey("actors") && movieDict["actors"].IsList())
+                actors = movieDict["actors"].AsList().Select(doc =&gt; doc.AsString()).ToList();
+
+            movies.Add(new
+            {
+                title    = movieDict.ContainsKey("title")    ? movieDict["title"].AsString()    : "",
+                year     = movieDict.ContainsKey("year")     ? movieDict["year"].AsInt()         : 0,
+                category = movieDict.ContainsKey("category") ? movieDict["category"].AsString() : "",
+                directors,
+                actors,
+                plot     = movieDict.ContainsKey("plot")     ? movieDict["plot"].AsString()     : "",
+                genre    = movieDict.ContainsKey("genre")    ? movieDict["genre"].AsString()    : "",
+                rating   = movieDict.ContainsKey("rating")   ? movieDict["rating"].AsString()   : ""
+            });
+        }
+
+        return JsonSerializer.Serialize(movies, new JsonSerializerOptions { WriteIndented = true });
+    }
+    catch (Exception ex)
+    {
+        return JsonSerializer.Serialize(new { error = $"Failed to extract movie info: {ex.Message}" });
     }
 }
-            </CodeSnippet>
+                </CodeSnippet>
+            </Section>
+
             <CalloutBox Type="tip" Title="Full Example on GitHub">
                 <p>See the complete implementation and usage in the <a href="https://github.com/ajaysskumar/ai-playground/blob/main/AwsBedrockExamples/Services/BedrockWithConverseToolsService.cs" target="_blank">BedrockWithConverseToolsService.cs</a> file on GitHub.</p>
             </CalloutBox>
