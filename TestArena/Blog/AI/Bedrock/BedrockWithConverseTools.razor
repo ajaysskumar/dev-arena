@@ -263,7 +263,30 @@ var service = new BedrockWithConverseToolsService();
 string movieJson = await service.GetMovieDetailsAsJson("Inception");
 Console.WriteLine(movieJson);
             </CodeSnippet>
-            <p>The output will be a JSON array of movie objects, each with title, year, category, directors, actors, plot, genre, and rating.</p>
+            <p>Running the above produces the following structured JSON output:</p>
+            <CodeSnippet Language="json">
+=== Movie Information (Structured JSON) ===
+
+[
+  {
+    "title": "Inception",
+    "year": 2010,
+    "category": "Movie",
+    "directors": [
+      "Christopher Nolan"
+    ],
+    "actors": [
+      "Leonardo DiCaprio",
+      "Ellen Page",
+      "Joseph Gordon-Levitt",
+      "Tom Hardy"
+    ],
+    "plot": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea in the mind of a CEO.",
+    "genre": "Action, Adventure, Sci-Fi",
+    "rating": "8.2"
+  }
+]
+            </CodeSnippet>
         </Section>
     </Section>
 
