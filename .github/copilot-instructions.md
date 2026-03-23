@@ -28,4 +28,9 @@ Skills provide specialised workflows for common tasks in this repository.
   <description>**WORKFLOW SKILL** — Registering a new page or article in SiteMap.cs and sitemap.xml. USE FOR: "add this page to the sitemap", "register this article", "update the sitemap", "add a SiteMap entry". Covers adding a PageInfo entry to SiteMap.cs and a url block to sitemap.xml. DO NOT USE FOR: writing the article content itself, reviewing article quality.</description>
   <file>.github/skills/sitemap-update/SKILL.md</file>
 </skill>
+<skill>
+  <name>code-snippet-formatter</name>
+  <description>**FORMATTING SKILL** — Converting raw code blocks into correctly formatted &lt;CodeSnippet&gt; components for blog articles. USE FOR: "format this code for the article", "escape this snippet", "add this code to the blog post", "what language attribute should I use". Handles escaping &lt; and &gt;, sequential numbering, language selection, and pairing with CalloutBox. DO NOT USE FOR: writing the surrounding article content, reviewing article quality.</description>
+  <file>.github/skills/code-snippet-formatter/SKILL.md</file>
+</skill>
 </skills>
