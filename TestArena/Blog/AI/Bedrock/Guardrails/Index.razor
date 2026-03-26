@@ -67,7 +67,7 @@
             <li><b>Multi-tenant systems:</b> Different guardrail versions per tenant means you can dial up or down the strictness for different customer tiers.</li>
         </ul>
         <CalloutBox Type="tip" Title="Guardrails are versioned">
-            <p>Because guardrails are published as numbered versions, you can safely iterate on your policy in staging while production stays locked to a verified version. No surprise policy changes mid-deploy.</p>
+            <p>Think of guardrail versions like Git commits — each version is a snapshot. When you publish version 2 with stricter rules, your production bot stays on version 1 until you explicitly tell it to upgrade. This prevents accidental policy changes from breaking production.</p>
         </CalloutBox>
     </Section>
 
