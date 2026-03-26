@@ -20,11 +20,11 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" /> -->
     
-<!--Blazor:{"type":"webassembly","prerenderId":"be5348020e22476d8c1a493e40f9c55a","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>AWS Bedrock with .NET: Getting Started</title><meta property="og:url" content="http://127.0.0.1:5050/blog/ai/bedrock" />
+<!--Blazor:{"type":"webassembly","prerenderId":"713874fa1aba430b91073907077e8e01","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>AWS Bedrock with .NET: Getting Started</title><meta property="og:url" content="http://127.0.0.1:5050/blog/ai/bedrock" />
     <meta property="og:title" content="AWS Bedrock with .NET: Getting Started" />
     <meta property="og:description" content="" />
     <meta property="og:image" content="http://127.0.0.1:5050/images/blog/ai/bedrock/banner.svg" />
-    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"be5348020e22476d8c1a493e40f9c55a"}-->
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"713874fa1aba430b91073907077e8e01"}-->
 </head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -40,7 +40,7 @@
 
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"62459562ee3e4d85a99811812cbcabed","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"904352a1468b4e1e8cabe75a3472edb7","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -91,7 +91,7 @@
                     
                     <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 27 Dec 2025</span></div></div></div></div></div></header>
 
-    <section id="ba708c05-d45d-42fb-b5b8-b8074fa09016" style="margin-bottom:1rem;"><h4>The Problem: Too Many APIs, Too Much Friction</h4><hr class="border border-success border-1 opacity-50">
+    <section id="6a7a98cc-b025-410b-86e9-d075e8bfdb6c" style="margin-bottom:1rem;"><h4>The Problem: Too Many APIs, Too Much Friction</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             Imagine this: your team decides to add AI to your .NET application. You pick a model, wire up the HTTP client, handle the auth, parse the response schema—and it works. Then the product team asks to try a different model. Suddenly you have two HTTP clients, two authentication flows, two response formats, and twice the maintenance burden. Add a third model and things start to spiral.
         </p>
@@ -102,7 +102,7 @@
             <span class="callout-title">Sound familiar?</span></div>
         <div class="callout-message"><p>If you've ever copy-pasted an <code>HttpClient</code> setup just to talk to a different AI model, this article is for you.</p></div></div></div></section>
 
-    <section id="73f42586-46cf-4d63-b757-ade6a4a28deb" style="margin-bottom:1rem;"><h4>What is AWS Bedrock and Why Use It from .NET?</h4><hr class="border border-success border-1 opacity-50">
+    <section id="16f8caa2-18fc-4941-b8af-e5a41668e831" style="margin-bottom:1rem;"><h4>What is AWS Bedrock and Why Use It from .NET?</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             AWS Bedrock is Amazon's answer to the multi-model problem. It gives you a <b>single, consistent interface</b> to access foundation models from providers like Anthropic Claude and Amazon Titan—without juggling separate APIs, auth tokens, or request formats for each one.
         </p>
@@ -110,7 +110,7 @@
             What makes it especially compelling for .NET developers is the official AWS SDK for .NET. You can invoke powerful AI models using idiomatic C# code, plugging straight into your existing projects—no context switching, no foreign tooling. Text generation, summarization, intelligent chat—all accessible through the same familiar patterns you already use for other AWS services.
         </p></div></section>
 
-    <section id="ccc6199b-a2be-47aa-89ba-567640cafd08" style="margin-bottom:1rem;"><h4>Why: The Need for Simplicity, Security, and Scale</h4><hr class="border border-success border-1 opacity-50">
+    <section id="d8ad6903-aef5-4044-bf0f-d6232bcd6103" style="margin-bottom:1rem;"><h4>Why: The Need for Simplicity, Security, and Scale</h4><hr class="border border-success border-1 opacity-50">
     <div><ul><li><b>Simplicity:</b> No REST API wrangling or manual token management. The AWS SDK for .NET handles the heavy lifting so you can focus on building features.</li>
             <li><b>Security:</b> AWS IAM and credentials management give you enterprise-grade access control out of the box—no custom auth layers needed.</li>
             <li><b>Scale:</b> Bedrock is built for production, with built-in monitoring, throttling, and cost controls that would take weeks to build yourself.</li></ul>
@@ -118,169 +118,57 @@
             Whether you're prototyping an idea or shipping to production, Bedrock removes the friction that usually slows GenAI adoption in .NET teams.
         </p></div></section>
 
-    <section id="37ee0160-11a2-4483-8fb0-c0539f8baed3" style="margin-bottom:1rem;"><h4>How: Step-by-Step Guide to Using AWS Bedrock from .NET</h4><hr class="border border-success border-1 opacity-50">
-    <div><section id="4c1282ff-0f3c-4930-ad86-0f0617d9118d" style="margin-bottom:1rem;"><h5>1. Prerequisites</h5><hr class="border border-success border-1 opacity-50">
+    <section id="a58bfe29-aeb0-466e-b99a-0104226413ba" style="margin-bottom:1rem;"><h4>How: Step-by-Step Guide to Using AWS Bedrock from .NET</h4><hr class="border border-success border-1 opacity-50">
+    <div><section id="1794a4a0-bf77-4caa-ad99-76970a3cda2f" style="margin-bottom:1rem;"><h5>1. Prerequisites</h5><hr class="border border-success border-1 opacity-50">
     <div><ul><li>An AWS account with Bedrock access enabled.</li>
-                <li>AWS credentials (Access Key, Secret Key, and Session Token) with permissions for Bedrock.</li>
+                <li>AWS credentials with permissions for Bedrock (use <code>aws configure</code> for the shared credentials file).</li>
                 <li>.NET 9 SDK or later installed.</li>
                 <li>The following NuGet packages:
                     <ul><li>AWSSDK.Bedrock</li>
                         <li>AWSSDK.BedrockRuntime</li></ul></li></ul></div></section>
 
-        <section id="6b119626-120f-4d91-906c-032fc3970043" style="margin-bottom:1rem;"><h5>2. Setting Up Your Project</h5><hr class="border border-success border-1 opacity-50">
-    <div><p>You can use a simple C# script or a .NET project. Here's how to reference the required libraries:</p>
+        <section id="e72c52bb-2ea6-4acd-a7e7-5afd0aed8fb0" style="margin-bottom:1rem;"><h5>2. Setting Up Your Project</h5><hr class="border border-success border-1 opacity-50">
+    <div><p>You can use a simple C# script or a full .NET project. Here's how to reference the required libraries:</p>
             <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
 #r "nuget: AWSSDK.Bedrock, 3.7.0"
 #r "nuget: AWSSDK.BedrockRuntime, 3.7.0"
             </code></pre></div></div></div>
-<br></div></section>
-
-        <section id="bcc79f59-c32d-486d-a1d3-a3f3ae0e675d" style="margin-bottom:1rem;"><h5>3. Authenticating with AWS</h5><hr class="border border-success border-1 opacity-50">
-    <div><p><b>⚠️ Authentication and permissions are where most developers struggle.</b> The AWS SDK supports multiple authentication methods, each suited for different scenarios. Choose the one that fits your deployment model.
-            </p>
-
-            <section id="441df524-d278-4e92-8a8f-ca725a09df13" style="margin-bottom:1rem;"><h6>Method 1: Session Credentials (Local Development)</h6><hr class="border border-success border-1 opacity-50">
-    <div><p>Use this for quick local testing with temporary credentials (e.g., from AWS STS or temporary session tokens).</p>
-                <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
-SessionAWSCredentials GetCredentials()
-{
-    // ⚠️ NEVER hardcode credentials in production!
-    string accessKey = "&lt;your-access-key&gt;";
-    string secretKey = "&lt;your-secret-key&gt;";
-    string sessionToken = "&lt;your-session-token&gt;";
-    return new SessionAWSCredentials(accessKey, secretKey, sessionToken);
-}
+<br>
+            <div class="callout-box special tip py-1"><div class="py-1"><span class="callout-icon">&#x1F4A1;</span>
+            <span class="callout-title">For Standard .NET Projects</span></div>
+        <div class="callout-message"><p>If you're working in a regular .NET project (not a script), add the packages using the CLI:</p>
+                <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-bash" style="font-size: 0.8rem;">
+dotnet add package AWSSDK.Bedrock
+dotnet add package AWSSDK.BedrockRuntime
                 </code></pre></div></div></div>
 <br>
-                <div class="callout-box special &#x2139;&#xFE0F; py-1"><div class="py-1"><span class="callout-icon">&#x2139;&#xFE0F;</span>
-            <span class="callout-title">Security Warning</span></div>
-        <div class="callout-message"><p>Session credentials are temporary and should never be hardcoded. Use them only during development with test accounts.</p></div></div></div></section>
+                <p>Or use the NuGet Package Manager in Visual Studio.</p></div></div></div></section>
 
-            <section id="0a5aea5b-e190-4578-964b-5b85518c982c" style="margin-bottom:1rem;"><h6>Method 2: IAM User Credentials (Not Recommended for Production)</h6><hr class="border border-success border-1 opacity-50">
-    <div><p>Use static IAM user credentials for simple scenarios, but this method is less secure for production.</p>
-                <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
-BasicAWSCredentials GetBasicCredentials()
-{
-    string accessKey = Environment.GetEnvironmentVariable("AWS_ACCESS_KEY_ID");
-    string secretKey = Environment.GetEnvironmentVariable("AWS_SECRET_ACCESS_KEY");
-    
-    if (string.IsNullOrWhiteSpace(accessKey) || string.IsNullOrWhiteSpace(secretKey))
-        throw new InvalidOperationException("AWS credentials not found in environment variables.");
-    
-    return new BasicAWSCredentials(accessKey, secretKey);
-}
-                </code></pre></div></div></div>
-<br>
-                <div class="callout-box special tip py-1"><div class="py-1"><span class="callout-icon">&#x1F4A1;</span>
-            <span class="callout-title">Environment Variables</span></div>
-        <div class="callout-message"><p>Store credentials in environment variables, not in appsettings files or source code. Use <code>AWS_ACCESS_KEY_ID</code> and <code>AWS_SECRET_ACCESS_KEY</code>.</p></div></div></div></section>
-
-            <section id="dcf32b79-c676-41f4-a206-7882d610c49a" style="margin-bottom:1rem;"><h6>Method 3: AWS Credentials File (~/.aws/credentials)</h6><hr class="border border-success border-1 opacity-50">
+        <section id="0c26bf7d-ac21-410f-9a74-4c0183bf5db0" style="margin-bottom:1rem;"><h5>3. Authenticating with AWS (Recommended)</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
-                    The most convenient approach for <b>local development</b> is the AWS shared credentials file. When you run <code>aws configure</code>, the CLI writes your credentials to <code>~/.aws/credentials</code>. The AWS SDK for .NET automatically reads from this file through its default credential resolution chain—no extra code required.
-                </p>
-                <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-ini" style="font-size: 0.8rem;">
+                The easiest and most secure way for most developers is to use the AWS shared credentials file. Run <code>aws configure</code> and the CLI will write your credentials to <code>~/.aws/credentials</code>. The AWS SDK for .NET automatically reads from this file—no extra code required.
+            </p>
+            <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-ini" style="font-size: 0.8rem;">
 # ~/.aws/credentials
 [default]
 aws_access_key_id     = YOUR_ACCESS_KEY_ID
 aws_secret_access_key = YOUR_SECRET_ACCESS_KEY
-
-[bedrock-dev]
-aws_access_key_id     = YOUR_DEV_ACCESS_KEY_ID
-aws_secret_access_key = YOUR_DEV_SECRET_ACCESS_KEY
-                </code></pre></div></div></div>
+            </code></pre></div></div></div>
 <br>
-                <p>To use the <code>default</code> profile, simply instantiate the client without passing credentials—the SDK picks it up automatically:</p>
-                <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
+            <p>To use the <code>default</code> profile, simply instantiate the client without passing credentials—the SDK picks it up automatically:</p>
+            <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
 // SDK automatically resolves credentials from ~/.aws/credentials [default] profile
 var bedrockClient = new AmazonBedrockClient(RegionEndpoint.USEast1);
-                </code></pre></div></div></div>
+            </code></pre></div></div></div>
 <br>
-                <p>To use a named profile explicitly at runtime, use <code>CredentialProfileStoreChain</code>:</p>
-                <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
-var chain = new CredentialProfileStoreChain(); // reads ~/.aws/credentials
-if (chain.TryGetAWSCredentials("bedrock-dev", out AWSCredentials credentials))
-{
-    var bedrockClient = new AmazonBedrockClient(credentials, RegionEndpoint.USEast1);
-}
-                </code></pre></div></div></div>
-<br>
-                <div class="callout-box special tip py-1"><div class="py-1"><span class="callout-icon">&#x1F4A1;</span>
+            <div class="callout-box special tip py-1"><div class="py-1"><span class="callout-icon">&#x1F4A1;</span>
             <span class="callout-title">Set Up in One Command</span></div>
-        <div class="callout-message"><p>Run <code>aws configure</code> (or <code>aws configure --profile bedrock-dev</code> for a named profile) and answer the prompts. The CLI writes the credentials file for you.</p></div></div></div></section>
+        <div class="callout-message"><p>Run <code>aws configure</code> and answer the prompts. The CLI writes the credentials file for you.</p></div></div>
+            <div class="callout-box special &#x2139;&#xFE0F; py-1"><div class="py-1"><span class="callout-icon">&#x2139;&#xFE0F;</span>
+            <span class="callout-title">Need advanced authentication or production setup?</span></div>
+        <div class="callout-message"><p>For IAM user credentials, EC2 instance roles, or troubleshooting, see <a href="/blog/ai/bedrock/advanced">the advanced article</a>.</p></div></div></div></section></div></section>
 
-            <section id="c5bd233d-2ea8-4e6c-82a5-f63b45ae84b8" style="margin-bottom:1rem;"><h6>Method 4: EC2 Instance Profile Role (Production on EC2)</h6><hr class="border border-success border-1 opacity-50">
-    <div><p>
-                    This is the <b>recommended approach for production applications running on EC2</b>. The SDK automatically retrieves credentials from the instance metadata without any code changes.
-                </p>
-                <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
-// No credentials needed! The SDK automatically uses the EC2 instance role.
-var bedrockClient = new AmazonBedrockClient(RegionEndpoint.USEast1);
-var runtimeClient = new AmazonBedrockRuntimeClient(RegionEndpoint.USEast1);
-                </code></pre></div></div></div>
-<br></div></section>
-
-            <section id="49c015a0-68fc-4d4d-89d1-c5fbb05e21bf" style="margin-bottom:1rem;"><h6>Creating the EC2 Instance Profile Role</h6><hr class="border border-success border-1 opacity-50">
-    <div><p>
-                    To create an EC2 instance profile role with the minimal permissions needed to list models and invoke them:
-                </p>
-                <p><b>Step 1: Create an IAM Role</b></p>
-                <ol><li>Go to IAM console → Roles → Create Role</li>
-                    <li>Select "AWS service" → "EC2" as the trusted entity</li>
-                    <li>Click "Create Role"</li></ol>
-                <p><b>Step 2: Add Inline Policy with Required Permissions</b></p>
-                <p>Once the role is created, add this inline policy to grant Bedrock permissions:</p>
-                <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-json" style="font-size: 0.8rem;">
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": [
-        "bedrock:ListFoundationModels",
-        "bedrock:GetFoundationModel"
-      ],
-      "Resource": "*"
-    },
-    {
-      "Effect": "Allow",
-      "Action": [
-        "bedrock:InvokeModel",
-        "bedrock:InvokeModelWithResponseStream"
-      ],
-      "Resource": "arn:aws:bedrock:*:*:foundation-model/*"
-    }
-  ]
-}
-                </code></pre></div></div></div>
-<br>
-                <p><b>Step 3: Attach the Role to Your EC2 Instance</b></p>
-                <ol><li>Go to EC2 console → Instances → Select your instance</li>
-                    <li>Right-click → Security → Modify IAM role</li>
-                    <li>Select the role you created</li>
-                    <li>Click "Update IAM role"</li></ol>
-                <p><b>Step 4: Use in Your .NET Code</b></p>
-                <p>No code changes needed! The SDK automatically picks up the EC2 instance role:</p>
-                <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
-var bedrockClient = new AmazonBedrockClient(RegionEndpoint.USEast1);
-var runtimeClient = new AmazonBedrockRuntimeClient(RegionEndpoint.USEast1);
-                </code></pre></div></div></div>
-<br></div></section>
-
-            <section id="64512f30-49dd-4125-be3d-f50fed4af7ab" style="margin-bottom:1rem;"><h6>Troubleshooting Authentication Issues</h6><hr class="border border-success border-1 opacity-50">
-    <div><p>If you're getting permission errors, check these common issues:</p>
-                <ul><li><b>UnauthorizedException or AccessDeniedException:</b> Your credentials don't have Bedrock permissions. Double-check the IAM policy above is attached to your role/user.</li>
-                    <li><b>InvalidUserID or SignatureDoesNotMatch:</b> Your AWS credentials are incorrect or expired. Re-verify your access key and secret key.</li>
-                    <li><b>EC2 instance can't access Bedrock:</b> The instance profile role isn't attached, or the IAM policy is missing. Check the instance details in AWS console.</li>
-                    <li><b>Region issues:</b> Ensure Bedrock is available in your region. Not all AWS regions support Bedrock yet.</li></ul>
-                <p><b>Debug tip:</b> Use the AWS CLI to test credentials before using them in your .NET app:</p>
-                <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-bash" style="font-size: 0.8rem;">
-aws bedrock list-foundation-models --region us-east-1
-                </code></pre></div></div></div>
-<br>
-                <p style="margin-top: 1em;"><i>Note: The same IAM permissions can also be set up using CloudFormation or AWS CDK if you prefer infrastructure-as-code approaches.</i></p></div></section></div></section>
-
-        <section id="1637aedc-d896-4852-acf1-7da51fd85ce2" style="margin-bottom:1rem;"><h5>4. Listing Available Foundation Models</h5><hr class="border border-success border-1 opacity-50">
+        <section id="8afa1729-bcc0-44d9-82c9-d65df19ac2ee" style="margin-bottom:1rem;"><h5>4. Listing Available Foundation Models</h5><hr class="border border-success border-1 opacity-50">
     <div><div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
 async Task ListAvailableModels(AmazonBedrockClient client)
 {
@@ -297,7 +185,7 @@ async Task ListAvailableModels(AmazonBedrockClient client)
             </code></pre></div></div></div>
 <br></div></section>
 
-        <section id="4ee01628-e142-4fff-b6d0-75be593176b3" style="margin-bottom:1rem;"><h5>5. Invoking a Model (Anthropic Claude)</h5><hr class="border border-success border-1 opacity-50">
+        <section id="9fc69294-3b57-4352-96f0-cd64cf41292a" style="margin-bottom:1rem;"><h5>5. Invoking a Model (Anthropic Claude)</h5><hr class="border border-success border-1 opacity-50">
     <div><p>The <code>BedrockService</code> class in the <b>AwsBedrockExamples</b> project wraps the Invoke API to query movie details. Here is the core invocation logic from <a href="https://github.com/ajaysskumar/ai-playground/blob/main/AwsBedrockExamples/Services/BedrockService.cs" target="_blank">BedrockService.cs</a>:</p>
             <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
 public async Task&lt;string&gt; GetMovieDetails(string movieQuery)
@@ -332,7 +220,7 @@ public async Task&lt;string&gt; GetMovieDetails(string movieQuery)
             </code></pre></div></div></div>
 <br></div></section>
 
-        <section id="c9d1bfce-3f33-4821-be7e-1ee31bd4e730" style="margin-bottom:1rem;"><h5>6. Putting It All Together</h5><hr class="border border-success border-1 opacity-50">
+        <section id="049d4847-09f6-4168-a8aa-689eeb0e9767" style="margin-bottom:1rem;"><h5>6. Putting It All Together</h5><hr class="border border-success border-1 opacity-50">
     <div><p>Here's how you'd use <code>BedrockService</code> from the <b>AwsBedrockExamples</b> solution to query movie details end-to-end. For the full source, see <a href="https://github.com/ajaysskumar/ai-playground/blob/main/AwsBedrockExamples/Services/BedrockService.cs" target="_blank">BedrockService.cs on GitHub</a>.</p>
             <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
 var service = new BedrockService();
@@ -367,17 +255,20 @@ Console.WriteLine(movieJson);
 <br>
             <div class="callout-box special tip py-1"><div class="py-1"><span class="callout-icon">&#x1F4A1;</span>
             <span class="callout-title">Full Example on GitHub</span></div>
-        <div class="callout-message"><p>See the complete <code>BedrockService</code> implementation including response parsing in the <a href="https://github.com/ajaysskumar/ai-playground/blob/main/AwsBedrockExamples/Services/BedrockService.cs" target="_blank">BedrockService.cs</a> file on GitHub.</p></div></div></div></section></div></section>
+        <div class="callout-message"><p>See the complete <code>BedrockService</code> implementation including response parsing in the <a href="https://github.com/ajaysskumar/ai-playground/blob/main/AwsBedrockExamples/Services/BedrockService.cs" target="_blank">BedrockService.cs</a> file on GitHub.</p></div></div></div></section>
 
-    <section id="d9b72aeb-125d-4474-9566-77b0e88f502c" style="margin-bottom:1rem;"><h4>Summary</h4><hr class="border border-success border-1 opacity-50">
+    <section id="ce481d42-b125-4674-a856-61f3413194aa" style="margin-bottom:1rem;"><h4>Summary</h4><hr class="border border-success border-1 opacity-50">
     <div><ul><li><b>What:</b> You can now use AWS Bedrock's powerful GenAI models directly from .NET.</li>
             <li><b>Why:</b> It's secure, scalable, and easy to integrate into your existing C# workflows.</li>
             <li><b>How:</b> With just a few lines of code, you can list models, send prompts, and process responses—all using the official AWS SDK.</li></ul>
         <p>
             This approach lets you build intelligent, generative features into your .NET apps with minimal friction. Whether you're prototyping or going to production, AWS Bedrock and .NET make GenAI accessible and robust.
-        </p></div></section>
+        </p>
+        <div class="callout-box special &#x2139;&#xFE0F; py-1"><div class="py-1"><span class="callout-icon">&#x2139;&#xFE0F;</span>
+            <span class="callout-title">Looking for advanced/production setup?</span></div>
+        <div class="callout-message"><p>For IAM roles, troubleshooting, and advanced authentication, see <a href="/blog/ai/bedrock/advanced">AWS Bedrock with .NET: Advanced Integration & Production Setup</a>.</p></div></div></div></section>
 
-    <section id="21b63617-cb47-4703-a73f-99ebc1623faf" style="margin-bottom:1rem;"><h4>References &amp; Further Reading</h4><hr class="border border-success border-1 opacity-50">
+    <section id="7562c516-7136-49a6-94b0-bf9616484a29" style="margin-bottom:1rem;"><h4>References &amp; Further Reading</h4><hr class="border border-success border-1 opacity-50">
     <div><ul><li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html" target="_blank">AWS Bedrock Documentation</a></li>
             <li><a href="https://docs.aws.amazon.com/sdk-for-net/v3/developer-guide/" target="_blank">AWS SDK for .NET</a></li>
             <li><a href="https://github.com/ajaysskumar/ai-playground/blob/main/AwsBedrockExamples/Services/BedrockService.cs" target="_blank">BedrockService.cs on GitHub</a></li></ul></div></section>
@@ -402,9 +293,9 @@ Console.WriteLine(movieJson);
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-            </div><!--Blazor:{"prerenderId":"62459562ee3e4d85a99811812cbcabed"}-->
+            </div><!--Blazor:{"prerenderId":"904352a1468b4e1e8cabe75a3472edb7"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UlY5RVVVaEZkMUZaVGs5eU9FcENNMFZrY2sxcWFIb3RUbWczYmkxVFZHNW9SMDVPVVZOQ1RuZ3hWazl1U0hSbmNEaFdabUV0TkU5Q2JHRkVSMnQxUTAxa1psaHZVa3RhUnpScmFFOU1jblZDWXpGMGNscElTSHBLVFVVMllsbGpTR1pLVkdkU1JVbzBXUzFvTTNOeVZIcGFWRkJwTkhKaVJXNURablV5YnpST2F6QXhWM0owWjBwVFh6VnVVRFF0WmpKVVRGWjNJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UVZBMmRYTXphRTF2TVV4bmEyUnhhSGhmYkcxYVRrTkpUM1oyUjFWV1ZIazRiVlZQUmpWWk5FRkJTelpuUjJJd1dYVkhhV0ZQTUUxMlVuSnNaM0ZEYkVSWWIwNXdhRTl2YVhKdFVYTlVRWFJUU1RoSldsVkRhMnRSTkdsTmRtTjVTRTVuWHpoNVMyRXdjVjl3U2pkV1JHaEhhMjVWYUhwaGNFZEllWFJqZW1FMlpVTjJSR2h3WW5WcE5sOVBjMUJxZEdkRVdUVlJJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
