@@ -20,11 +20,11 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" /> -->
     
-<!--Blazor:{"type":"webassembly","prerenderId":"32e20552b3cc4967a525498bf8d4e5b0","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>TDD in .NET: Anti-Patterns &amp; When NOT to Use TDD</title><meta property="og:url" content="http://127.0.0.1:5050/blog/tdd/anti-patterns-when-not-to-use-tdd" />
+<!--Blazor:{"type":"webassembly","prerenderId":"6f01ab7e5c3b4bfaa4073be9b83bb2d3","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>TDD in .NET: Anti-Patterns &amp; When NOT to Use TDD</title><meta property="og:url" content="http://127.0.0.1:5050/blog/tdd/anti-patterns-when-not-to-use-tdd" />
     <meta property="og:title" content="TDD in .NET: Anti-Patterns &amp; When NOT to Use TDD" />
     <meta property="og:description" content="" />
     <meta property="og:image" content="http://127.0.0.1:5050/images/blog/tdd/anti-patterns/banner.svg" />
-    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"32e20552b3cc4967a525498bf8d4e5b0"}-->
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"6f01ab7e5c3b4bfaa4073be9b83bb2d3"}-->
 </head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -40,7 +40,7 @@
 
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"efc7ec2b0db94c028a3adb6347867c1e","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"266a5a0ff2bc4756a4a3704714e1a52a","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -122,7 +122,7 @@
                     
                     <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 13 Dec 2025</span></div></div></div></div></div></header>
 
-  <section id="4d2b858d-ad0c-41ef-a813-61b44e388452" style="margin-bottom:1rem;"><h4>The Double-Edged Sword</h4><hr class="border border-success border-1 opacity-50">
+  <section id="d60afdac-0281-40c5-bb7d-d2e1cbd8464e" style="margin-bottom:1rem;"><h4>The Double-Edged Sword</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
       You've heard the promise: Test-Driven Development leads to better design, fewer bugs, and happier developers. And in many cases, it does. But like any tool, TDD can be misused - and when it is, it becomes a burden rather than a benefit.
     </p>
@@ -133,7 +133,7 @@
       In this article, we'll explore common TDD anti-patterns - the pitfalls that turn a powerful practice into a time sink - and identify scenarios where TDD simply isn't the right answer. The goal? Help you use TDD wisely, not blindly.
     </p></div></section>
 
-  <section id="4bab697a-fbb5-41f9-a65f-107e9e5024e0" style="margin-bottom:1rem;"><h4>Quick Takeaways</h4><hr class="border border-success border-1 opacity-50">
+  <section id="03a05963-6dbf-4a2e-8c18-3e9c11b4266f" style="margin-bottom:1rem;"><h4>Quick Takeaways</h4><hr class="border border-success border-1 opacity-50">
     <div><div class="success-box"><b>TL;DR - Key Insights:</b>
       <ul><li>✓ TDD is excellent for business logic, algorithms, and complex systems - but not universally applicable.</li>
         <li>✓ Test <b>behavior</b>, not implementation. Implementation details change; behavior stays stable.</li>
@@ -142,7 +142,7 @@
         <li>✓ Aim for 70-80% meaningful coverage, not 100% compliance.</li>
         <li>✓ The "Refactor" step isn't optional - it's where TDD delivers its promise.</li></ul></div></div></section>
 
-  <section id="4e82b5c8-5723-4dba-aa4d-ab3889168199" style="margin-bottom:1rem;"><h4>Understanding Anti-Patterns</h4><hr class="border border-success border-1 opacity-50">
+  <section id="9c84b64d-4533-4048-9be1-b99723d71605" style="margin-bottom:1rem;"><h4>Understanding Anti-Patterns</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
       An <b>anti-pattern</b> is a common response to a recurring problem that is usually ineffective and risks being counterproductive. In TDD, anti-patterns emerge when teams follow TDD mechanically without understanding its purpose: to drive better design and build confidence.
     </p>
@@ -151,8 +151,8 @@
     </p>
     <p><i><b>A Hypothetical Scenario:</b> Imagine a team of 8 developers adopting TDD with strict governance: "100% code coverage or bust." They write tests for every getter, setter, and property. Their unit test suite grows to 2,000+ tests, taking 45 seconds to run. Developers stop running tests before commits - it's too slow. Within six months, the test suite becomes a maintenance burden. Nobody trusts it because it passes even when real bugs slip through. The team spends more time maintaining tests than writing features. The irony? Their adoption of TDD made them <i>less</i> confident, not more. Once they refocused on meaningful tests and embraced pragmatism, their velocity actually increased.</i></p></div></section>
 
-  <section id="9feefdd9-8dc3-4f75-a320-80c64e21c56a" style="margin-bottom:1rem;"><h4>Common TDD Anti-Patterns</h4><hr class="border border-success border-1 opacity-50">
-    <div><section id="13c162c0-82ec-45b0-92a6-f45cc582ca4c" style="margin-bottom:1rem;"><h5>1. Test Obsession (Testing the Obvious)</h5><hr class="border border-success border-1 opacity-50">
+  <section id="1a6adf13-122b-4c1c-82e9-9f8596bd9871" style="margin-bottom:1rem;"><h4>Common TDD Anti-Patterns</h4><hr class="border border-success border-1 opacity-50">
+    <div><section id="f7557836-be73-4d05-9ce3-df1cf4f32728" style="margin-bottom:1rem;"><h5>1. Test Obsession (Testing the Obvious)</h5><hr class="border border-success border-1 opacity-50">
     <div><p><b>The Problem:</b> Writing tests for every trivial piece of code - getters, setters, simple properties, and obvious logic.
       </p>
       <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
@@ -201,7 +201,7 @@ public void IsAgeValid_WhenAgeIsOver150_ReturnsFalse()
       </code></pre></div></div></div>
 <br></div></section>
 
-    <section id="9c78e0e4-2300-4761-b231-eff49bf479a0" style="margin-bottom:1rem;"><h5>2. Over-Mocking (Mocking Everything)</h5><hr class="border border-success border-1 opacity-50">
+    <section id="417b7f98-ffd4-4916-9ac7-b4113fc31464" style="margin-bottom:1rem;"><h5>2. Over-Mocking (Mocking Everything)</h5><hr class="border border-success border-1 opacity-50">
     <div><p><b>The Problem:</b> Excessive use of mocks, stubs, and fakes - even for internal implementation details that should just work.
       </p>
       <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
@@ -251,7 +251,7 @@ public void ProcessOrder_SendsEmailAfterSuccess()
       </code></pre></div></div></div>
 <br></div></section>
 
-    <section id="4e745640-f88b-40d4-b9de-0ba14d6e1ac3" style="margin-bottom:1rem;"><h5>3. Skipping Refactoring (Red-Green, No Refactor)</h5><hr class="border border-success border-1 opacity-50">
+    <section id="cd895465-ae8b-485f-b069-ddf6a31c293c" style="margin-bottom:1rem;"><h5>3. Skipping Refactoring (Red-Green, No Refactor)</h5><hr class="border border-success border-1 opacity-50">
     <div><p><b>The Problem:</b> Ignoring the "Refactor" step in the Red-Green-Refactor cycle, leaving code messy and brittle.
       </p>
       <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
@@ -327,7 +327,7 @@ public class DiscountCalculator
       </code></pre></div></div></div>
 <br></div></section>
 
-    <section id="f9c06f52-5516-4618-83e0-84ea1f3d7350" style="margin-bottom:1rem;"><h5>4. Testing Implementation, Not Behavior</h5><hr class="border border-success border-1 opacity-50">
+    <section id="e901797e-8552-45cc-ab59-94b4527954c0" style="margin-bottom:1rem;"><h5>4. Testing Implementation, Not Behavior</h5><hr class="border border-success border-1 opacity-50">
     <div><p><b>The Problem:</b> Writing tests that mirror the code structure rather than verifying expected behavior. These tests break the moment you refactor internals. This overlaps with Over-Mocking (Anti-Pattern #2), but the underlying issue is broader.
       </p>
       <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
@@ -373,7 +373,7 @@ public void GetUser_ReturnsCorrectUser()
       </code></pre></div></div></div>
 <br></div></section>
 
-    <section id="d17f6277-e804-4df7-9708-b3010affd314" style="margin-bottom:1rem;"><h5>5. Slow Feedback Loops</h5><hr class="border border-success border-1 opacity-50">
+    <section id="8f666e13-b03f-49e1-aaec-6383aebf47d1" style="margin-bottom:1rem;"><h5>5. Slow Feedback Loops</h5><hr class="border border-success border-1 opacity-50">
     <div><p><b>The Problem:</b> Tests become slow (seconds to minutes per run), discouraging developers from running them frequently.
       </p>
       <div class="warning-box"><b>Impact:</b> If your unit tests take 30+ seconds to run, developers won't run them before committing. The feedback loop breaks.
@@ -414,7 +414,7 @@ public void ProcessOrder_QuickFeedback()
       </code></pre></div></div></div>
 <br></div></section>
 
-    <section id="92b1199b-f12d-480b-be40-03ab98148bc7" style="margin-bottom:1rem;"><h5>6. 100% Code Coverage as a Goal</h5><hr class="border border-success border-1 opacity-50">
+    <section id="cbec1740-4a59-4afc-9ec3-57eaa822a22e" style="margin-bottom:1rem;"><h5>6. 100% Code Coverage as a Goal</h5><hr class="border border-success border-1 opacity-50">
     <div><p><b>The Problem:</b> Pursuing high code coverage for its own sake, treating it as a success metric rather than a tool.
       </p>
       <div class="warning-box"><b>The Quote:</b> "Code coverage of 100% is often a sign that you're testing the wrong things."  -  Many experienced developers
@@ -434,12 +434,12 @@ public void ProcessOrder_QuickFeedback()
       </code></pre></div></div></div>
 <br></div></section></div></section>
 
-  <section id="d257dbfe-534b-4dea-b03b-698763c1267a" style="margin-bottom:1rem;"><h4>When NOT to Use TDD</h4><hr class="border border-success border-1 opacity-50">
+  <section id="4b4f1f05-c9f9-4470-90b6-dd936ef81164" style="margin-bottom:1rem;"><h4>When NOT to Use TDD</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
       TDD is powerful, but it's not a universal solution. Here are scenarios where it doesn't make sense - or where other approaches are more appropriate.
     </p>
 
-    <section id="e98561b2-73a2-4cc1-9c5b-41ff53735fda" style="margin-bottom:1rem;"><h5>1. Prototyping &amp; Exploratory Code</h5><hr class="border border-success border-1 opacity-50">
+    <section id="67f65eb8-3e1c-41c3-8e1b-4d6e6773edc4" style="margin-bottom:1rem;"><h5>1. Prototyping &amp; Exploratory Code</h5><hr class="border border-success border-1 opacity-50">
     <div><p><b>The Scenario:</b> You're exploring a new library, framework, or technology. Requirements are fuzzy. Code will be thrown away.
       </p>
       <p><b>Why Skip TDD:</b> Writing tests for code you'll delete is waste. The goal is learning and proving feasibility, not building production code.
@@ -449,7 +449,7 @@ public void ProcessOrder_QuickFeedback()
       <div class="success-box"><b>Pro Tip:</b> Use a separate "spike" branch for exploration. Once you understand the problem, start fresh on the main branch with TDD.
       </div></div></section>
 
-    <section id="8065219f-cd5d-4dc8-ae5d-6b96e187ad81" style="margin-bottom:1rem;"><h5>2. UI-Heavy or Visual Prototyping</h5><hr class="border border-success border-1 opacity-50">
+    <section id="0a482be8-2323-4741-8cfa-ca13e1252aa8" style="margin-bottom:1rem;"><h5>2. UI-Heavy or Visual Prototyping</h5><hr class="border border-success border-1 opacity-50">
     <div><p><b>The Scenario:</b> Building interactive UIs where visual appearance and user feedback are paramount. UI specs change frequently.
       </p>
       <p><b>Why Skip TDD:</b> Testing UI logic is difficult and often brittle. The value of tests diminishes when the UI changes every sprint.
@@ -472,7 +472,7 @@ public void CartTotalCalculator_WithThreeItems_ReturnsCorrectSum()
       </code></pre></div></div></div>
 <br></div></section>
 
-    <section id="f27a44b7-8bab-4340-ac23-070d05c117f9" style="margin-bottom:1rem;"><h5>3. Legacy Codebases Without Tests</h5><hr class="border border-success border-1 opacity-50">
+    <section id="b673a0ac-9a0c-44ca-83e4-555197d9fa67" style="margin-bottom:1rem;"><h5>3. Legacy Codebases Without Tests</h5><hr class="border border-success border-1 opacity-50">
     <div><p><b>The Scenario:</b> You've inherited a large codebase with zero tests. The code is tightly coupled and hard to test.
       </p>
       <p><b>Why Skip (Initially) TDD:</b> Retrofitting tests into untestable code is painful. Introducing TDD upfront might slow your team to a crawl.
@@ -492,7 +492,7 @@ public void LegacyProcess_BehavesAsDocumented()
       </code></pre></div></div></div>
 <br></div></section>
 
-    <section id="2791bae6-95c6-4366-8510-3a2341079fbf" style="margin-bottom:1rem;"><h5>4. Performance-Critical or Hardware-Dependent Code</h5><hr class="border border-success border-1 opacity-50">
+    <section id="24bc8802-59f2-4a5a-8791-f197f075a299" style="margin-bottom:1rem;"><h5>4. Performance-Critical or Hardware-Dependent Code</h5><hr class="border border-success border-1 opacity-50">
     <div><p><b>The Scenario:</b> Low-level code that interacts with hardware, OS APIs, or requires specific performance characteristics.
       </p>
       <p><b>Why Skip TDD:</b> Mocking hardware interactions is often infeasible. Testing performance requires benchmarks, not unit tests.
@@ -516,7 +516,7 @@ public class SortingBenchmark
       </code></pre></div></div></div>
 <br></div></section>
 
-    <section id="093f45f1-5206-4f8d-ad93-baa9d823d9da" style="margin-bottom:1rem;"><h5>5. One-Off Scripts or Throwaway Code</h5><hr class="border border-success border-1 opacity-50">
+    <section id="fef3142a-bc5d-4c42-bb88-4677c4b021c7" style="margin-bottom:1rem;"><h5>5. One-Off Scripts or Throwaway Code</h5><hr class="border border-success border-1 opacity-50">
     <div><p><b>The Scenario:</b> Utility scripts, data migrations, or temporary tools that solve a specific problem once.
       </p>
       <p><b>Why Skip TDD:</b> The cost-benefit ratio is unfavorable. A script run once doesn't need a test suite.
@@ -524,7 +524,7 @@ public class SortingBenchmark
       <p><b>Better Approach:</b> Use manual testing or simple assertions. Focus on correctness, not test coverage.
       </p></div></section></div></section>
 
-  <section id="17ec57de-f814-4208-8663-a9eae082a9cd" style="margin-bottom:1rem;"><h4>TDD Maturity Levels</h4><hr class="border border-success border-1 opacity-50">
+  <section id="51cc5139-43a0-41cc-b9c3-69f744c5fd14" style="margin-bottom:1rem;"><h4>TDD Maturity Levels</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
       Understanding when and how to apply TDD comes with experience. Here's a framework for thinking about TDD maturity:
     </p>
@@ -543,7 +543,7 @@ public class SortingBenchmark
     <p><b>Goal:</b> Reach Level 3 - use TDD as a tool, not a religion.
     </p></div></section>
 
-  <section id="ce4ca6ae-0b20-4cc2-a63e-59b98f013db0" style="margin-bottom:1rem;"><h4>A Cohesive Refactoring Journey: From Anti-Pattern to Clean Code</h4><hr class="border border-success border-1 opacity-50">
+  <section id="aadb7f2b-8a44-4455-8d0b-e04ead19bd47" style="margin-bottom:1rem;"><h4>A Cohesive Refactoring Journey: From Anti-Pattern to Clean Code</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
       Let's trace a realistic journey - the kind many teams experience - where anti-patterns accumulate, then get cleaned up.
     </p>
@@ -608,7 +608,7 @@ public void ProcessOrder_SendsEmailAfterSuccess()
     <p><b>The Transformation:</b> By addressing each anti-pattern - clarity in naming, real instances for internals, mocks only for externals - the test suite became faster, clearer, and safer to refactor. This is what pragmatic TDD looks like.
     </p></div></section>
 
-  <section id="9b54939b-942a-4ebd-ab3a-0b3d70b083f0" style="margin-bottom:1rem;"><h4>Best Practices to Avoid Anti-Patterns</h4><hr class="border border-success border-1 opacity-50">
+  <section id="2a0fd517-c9dd-458d-b093-dbe3c9c2945d" style="margin-bottom:1rem;"><h4>Best Practices to Avoid Anti-Patterns</h4><hr class="border border-success border-1 opacity-50">
     <div><ul><li><b>Focus on behavior, not implementation:</b> Ask "What should this do?" not "How does it do it?"</li>
       <li><b>Keep tests simple and fast:</b> If setup takes longer than the test itself, something's wrong.</li>
       <li><b>Mock external dependencies, not internals:</b> Databases, APIs, third-party services - mock these. Your own code - test it for real.</li>
@@ -617,7 +617,7 @@ public void ProcessOrder_SendsEmailAfterSuccess()
       <li><b>Write tests for future-you:</b> Ask: "Will this test help someone understand the code 6 months from now?"</li>
       <li><b>Use TDD as a design tool, not just a safety net:</b> If writing a test feels hard, it's telling you something about your design.</li></ul></div></section>
 
-  <section id="4c3cafba-cc9c-4af0-948c-637d5f029bed" style="margin-bottom:1rem;"><h4>Summary: Using TDD Wisely</h4><hr class="border border-success border-1 opacity-50">
+  <section id="7e2747df-b6af-48ce-9862-48eb79509d72" style="margin-bottom:1rem;"><h4>Summary: Using TDD Wisely</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
       TDD is not magic, nor is it a silver bullet. It's a practice - powerful when applied wisely, counterproductive when misused. The anti-patterns we've discussed - test obsession, over-mocking, skipping refactoring - emerge when teams follow TDD mechanically instead of thoughtfully.
     </p>
@@ -631,7 +631,7 @@ public void ProcessOrder_SendsEmailAfterSuccess()
       Use TDD where it helps you build better software. Skip it where it doesn't. And always ask yourself: "Is this making my code better, or am I just following a checklist?"
     </p></div></section>
 
-  <section id="f863c81a-2d53-4015-9fb7-deff7b2d2294" style="margin-bottom:1rem;"><h4></h4><hr class="border border-success border-1 opacity-50">
+  <section id="d70cb11c-75a6-4638-afd0-656d4385db1c" style="margin-bottom:1rem;"><h4></h4><hr class="border border-success border-1 opacity-50">
     <div><p><i>If you like this post, then check out other articles in the series as well. Start with: </i></p>
     <div class="card mb-3 mx-auto" style="max-width: 600px;"><div class="row g-0"><div class="col-md-8"><div class="card-body"><h5 class="card-title"><a href="/blog/tdd/introduction" class="text-decoration-none"><strong>TDD in .NET: Getting started</strong></a></h5>
                 <p class="card-text">TDD fundamentals - understand the Red-Green-Refactor cycle</p>
@@ -657,9 +657,9 @@ public void ProcessOrder_SendsEmailAfterSuccess()
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-            </div><!--Blazor:{"prerenderId":"efc7ec2b0db94c028a3adb6347867c1e"}-->
+            </div><!--Blazor:{"prerenderId":"266a5a0ff2bc4756a4a3704714e1a52a"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UzFndGNEaHdOR2R0V2tWcVdEaEhZVlEyZVdwWVpsZERUakpWZWpGRGFsWldjSFF0Y1d0TFNHbEZiME5uZGsxdFRtZGpabFV0YlVoUVpsUm1jR0V4T1VkcWIyUlJURXhJU21GTWRXVk1kelpNVkd0cmNtZElVV04zTjJwRk1GSlliWFV5Y1hCeFYxSktlbWN6ZWtzNWEwNVNUbk5RV0VSV1dIaFdaVWhSWW1sNU9FbDJSbVZwVVdOdGRWcFRWa3htTjA1ZlVFWXdJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UlY5RVVVaEZkMUZaVGs5eU9FcENNMFZrY2sxcWFrOWxZMnBwVXpjeWNXaHJVV2M0V2pJeVdFRmFaVVZKTjBGWllVNTBVRTFJVkdrMlNXZ3RaV1JWUnpaTFNtUTFOazlxWVZOalQweGtMWEpaYzJSaGVtSXlaeTFUUm5GTllXSlFhVmhGWTBWVVdYVmxVbGd4VVd4aU1GcFFPVVpJUmxaR09WVm1Tbmx2YUVwb1VUQkJlakF5V1UxM2NGVk1iVVZWYWpKb01rUk5JaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
