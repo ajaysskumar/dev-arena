@@ -212,7 +212,7 @@ namespace TestArena.Blog.Common.NavigationUtils
 
         new("AWS Bedrock with .NET: Guardrails for Safe AI Applications",
             "/blog/ai/bedrock/guardrails",
-            new DateTime(2026, 3, 17),
+            new DateTime(2026, 3, 21),
             "images/blog/ai/bedrock/banner.svg",
             ["AI", "AWS Bedrock", "Guardrails", "Safety", ".NET", "C#"],
             isPublished: true,
