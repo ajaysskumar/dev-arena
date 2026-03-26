@@ -1,0 +1,181 @@
+
+@page "/blog/ai/bedrock/advanced"
+@using TestArena.Blog.Common
+@using TestArena.Blog
+@using System.Linq
+@using TestArena.Blog.Common.NavigationUtils
+
+@code{
+    PageInfo currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/ai/bedrock/advanced")!;
+}
+
+<BlogContainer>
+    <Header Title="@currentPage.Header"
+            Image="@currentPage.ArticleImage" 
+            PublishedOn="@currentPage.PublishedOn" 
+            Authors="Ajay Kumar"
+            isOlderThumbnailFormat="@currentPage.IsOlderThumbnailFormat">
+    </Header>
+
+    <CalloutBox Type="info" Title="Looking for the basics?">
+        <p>Start with <a href="/blog/ai/bedrock">Getting Started with AWS Bedrock in .NET</a> for the simplest setup and usage.</p>
+    </CalloutBox>
+
+    <Section Heading="Advanced Authentication & Production Setup" Level="4">
+        <Section Heading="Session Credentials (Local Development)" Level="5">
+            <p>Use this for quick local testing with temporary credentials (e.g., from AWS STS or temporary session tokens).</p>
+            <CodeSnippet Language="csharp" Number="2">
+SessionAWSCredentials GetCredentials()
+{
+    // ⚠️ NEVER hardcode credentials in production!
+    string accessKey = "&lt;your-access-key&gt;";
+    string secretKey = "&lt;your-secret-key&gt;";
+    string sessionToken = "&lt;your-session-token&gt;";
+    return new SessionAWSCredentials(accessKey, secretKey, sessionToken);
+}
+            </CodeSnippet>
+            <CalloutBox Type="warning" Title="Security Warning">
+                <p>Session credentials are temporary and should never be hardcoded. Use them only during development with test accounts.</p>
+            </CalloutBox>
+        </Section>
+
+        <Section Heading="IAM User Credentials (Not Recommended for Production)" Level="5">
+            <p>Use static IAM user credentials for simple scenarios, but this method is less secure for production.</p>
+            <CodeSnippet Language="csharp" Number="3">
+BasicAWSCredentials GetBasicCredentials()
+{
+    string accessKey = Environment.GetEnvironmentVariable("AWS_ACCESS_KEY_ID");
+    string secretKey = Environment.GetEnvironmentVariable("AWS_SECRET_ACCESS_KEY");
+    
+    if (string.IsNullOrWhiteSpace(accessKey) || string.IsNullOrWhiteSpace(secretKey))
+        throw new InvalidOperationException("AWS credentials not found in environment variables.");
+    
+    return new BasicAWSCredentials(accessKey, secretKey);
+}
+            </CodeSnippet>
+            <CalloutBox Type="tip" Title="Environment Variables">
+                <p>Store credentials in environment variables, not in appsettings files or source code. Use <code>AWS_ACCESS_KEY_ID</code> and <code>AWS_SECRET_ACCESS_KEY</code>.</p>
+            </CalloutBox>
+        </Section>
+
+        <Section Heading="EC2 Instance Profile Role (Production on EC2)" Level="5">
+            <p>
+                This is the <b>recommended approach for production applications running on EC2</b>. The SDK automatically retrieves credentials from the instance metadata without any code changes.
+            </p>
+            <CodeSnippet Language="csharp" Number="4">
+// No credentials needed! The SDK automatically uses the EC2 instance role.
+var bedrockClient = new AmazonBedrockClient(RegionEndpoint.USEast1);
+var runtimeClient = new AmazonBedrockRuntimeClient(RegionEndpoint.USEast1);
+            </CodeSnippet>
+        </Section>
+
+        <Section Heading="Creating the EC2 Instance Profile Role" Level="5">
+            <p>
+                To create an EC2 instance profile role with the minimal permissions needed to list models and invoke them:
+            </p>
+            <p><b>Step 1: Create an IAM Role</b></p>
+            <ol>
+                <li>Go to IAM console → Roles → Create Role</li>
+                <li>Select "AWS service" → "EC2" as the trusted entity</li>
+                <li>Click "Create Role"</li>
+            </ol>
+            <p><b>Step 2: Add Inline Policy with Required Permissions</b></p>
+            <p>Once the role is created, add this inline policy to grant Bedrock permissions:</p>
+            <CodeSnippet Language="json" Number="7">
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "bedrock:ListFoundationModels",
+        "bedrock:GetFoundationModel"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "bedrock:InvokeModel",
+        "bedrock:InvokeModelWithResponseStream"
+      ],
+      "Resource": "arn:aws:bedrock:*:*:foundation-model/*"
+    }
+  ]
+}
+            </CodeSnippet>
+            <p><b>Step 3: Attach the Role to Your EC2 Instance</b></p>
+            <ol>
+                <li>Go to EC2 console → Instances → Select your instance</li>
+                <li>Right-click → Security → Modify IAM role</li>
+                <li>Select the role you created</li>
+                <li>Click "Update IAM role"</li>
+            </ol>
+            <p><b>Step 4: Use in Your .NET Code</b></p>
+            <p>No code changes needed! The SDK automatically picks up the EC2 instance role:</p>
+            <CodeSnippet Language="csharp" Number="8">
+var bedrockClient = new AmazonBedrockClient(RegionEndpoint.USEast1);
+var runtimeClient = new AmazonBedrockRuntimeClient(RegionEndpoint.USEast1);
+            </CodeSnippet>
+        </Section>
+
+        <Section Heading="Troubleshooting Authentication Issues" Level="5">
+            <p>If you're getting permission errors, check these common issues:</p>
+            <ul>
+                <li><b>UnauthorizedException or AccessDeniedException:</b> Your credentials don't have Bedrock permissions. Double-check the IAM policy above is attached to your role/user.</li>
+                <li><b>InvalidUserID or SignatureDoesNotMatch:</b> Your AWS credentials are incorrect or expired. Re-verify your access key and secret key.</li>
+                <li><b>EC2 instance can't access Bedrock:</b> The instance profile role isn't attached, or the IAM policy is missing. Check the instance details in AWS console.</li>
+                <li><b>Region issues:</b> Ensure Bedrock is available in your region. Not all AWS regions support Bedrock yet.</li>
+            </ul>
+            <p><b>Debug tip:</b> Use the AWS CLI to test credentials before using them in your .NET app:</p>
+            <CodeSnippet Language="bash" Number="9">
+aws bedrock list-foundation-models --region us-east-1
+            </CodeSnippet>
+            <p style="margin-top: 1em;"><i>Note: The same IAM permissions can also be set up using CloudFormation or AWS CDK if you prefer infrastructure-as-code approaches.</i></p>
+        </Section>
+    </Section>
+
+    <Section Heading="Prompt Engineering & Response Parsing" Level="4">
+        <p>For reliable parsing, craft your prompts to instruct the model to return strict JSON. Here’s a helper for formatting/parsing the response:</p>
+        <CodeSnippet Language="csharp">
+private string FormatJsonString(string input)
+{
+    if (string.IsNullOrWhiteSpace(input)) return input;
+    // Try to extract the first JSON array or object from the string
+    var match = System.Text.RegularExpressions.Regex.Match(input,
+        "(\\{[\\s\\S]*\\}|\\[[\\s\\S]*\\])");
+    if (!match.Success)
+        return input;
+    var jsonContent = match.Value;
+    try
+    {
+        using var doc = System.Text.Json.JsonDocument.Parse(jsonContent);
+        return System.Text.Json.JsonSerializer.Serialize(doc.RootElement,
+            new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
+    }
+    catch
+    {
+        // If not valid JSON, return as-is
+        return jsonContent;
+    }
+}
+        </CodeSnippet>
+        <CalloutBox Type="tip" Title="Prompt Engineering">
+            <p>Always instruct the model to return a strict JSON array/object and nothing else for easier parsing.</p>
+        </CalloutBox>
+    </Section>
+
+    <Section Heading="Summary & Best Practices" Level="4">
+        <ul>
+            <li><b>Advanced authentication</b> enables secure, scalable, and production-ready AWS Bedrock integration in .NET.</li>
+            <li><b>Use EC2 instance roles</b> for production workloads—never hardcode credentials.</li>
+            <li><b>Prompt engineering</b> and response parsing are key for reliable GenAI workflows.</li>
+            <li>Refer to AWS documentation for the latest best practices and SDK updates.</li>
+        </ul>
+        <p>
+            For most users, the shared credentials file is sufficient. Move to advanced setups only when your deployment or security needs require it.
+        </p>
+    </Section>
+
+    <EndNotes RepositoryLink="https://github.com/ajaysskumar/ai-playground" />
+</BlogContainer>
