@@ -20,11 +20,11 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" /> -->
     
-<!--Blazor:{"type":"webassembly","prerenderId":"713874fa1aba430b91073907077e8e01","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>AWS Bedrock with .NET: Getting Started</title><meta property="og:url" content="http://127.0.0.1:5050/blog/ai/bedrock" />
+<!--Blazor:{"type":"webassembly","prerenderId":"ae90c372496f406599ab1a2018eb082e","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>AWS Bedrock with .NET: Getting Started</title><meta property="og:url" content="http://127.0.0.1:5050/blog/ai/bedrock" />
     <meta property="og:title" content="AWS Bedrock with .NET: Getting Started" />
     <meta property="og:description" content="" />
     <meta property="og:image" content="http://127.0.0.1:5050/images/blog/ai/bedrock/banner.svg" />
-    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"713874fa1aba430b91073907077e8e01"}-->
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"ae90c372496f406599ab1a2018eb082e"}-->
 </head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -40,7 +40,7 @@
 
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"904352a1468b4e1e8cabe75a3472edb7","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"730e7e482a6f474eabdb4dfbfff93298","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -91,7 +91,7 @@
                     
                     <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 27 Dec 2025</span></div></div></div></div></div></header>
 
-    <section id="6a7a98cc-b025-410b-86e9-d075e8bfdb6c" style="margin-bottom:1rem;"><h4>The Problem: Too Many APIs, Too Much Friction</h4><hr class="border border-success border-1 opacity-50">
+    <section id="b7e851ca-513d-453c-a0fb-5e2f004164e4" style="margin-bottom:1rem;"><h4>The Problem: Too Many APIs, Too Much Friction</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             Imagine this: your team decides to add AI to your .NET application. You pick a model, wire up the HTTP client, handle the auth, parse the response schema—and it works. Then the product team asks to try a different model. Suddenly you have two HTTP clients, two authentication flows, two response formats, and twice the maintenance burden. Add a third model and things start to spiral.
         </p>
@@ -102,7 +102,7 @@
             <span class="callout-title">Sound familiar?</span></div>
         <div class="callout-message"><p>If you've ever copy-pasted an <code>HttpClient</code> setup just to talk to a different AI model, this article is for you.</p></div></div></div></section>
 
-    <section id="16f8caa2-18fc-4941-b8af-e5a41668e831" style="margin-bottom:1rem;"><h4>What is AWS Bedrock and Why Use It from .NET?</h4><hr class="border border-success border-1 opacity-50">
+    <section id="36b364ef-629e-46dc-8b8a-a78235d7359d" style="margin-bottom:1rem;"><h4>What is AWS Bedrock and Why Use It from .NET?</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             AWS Bedrock is Amazon's answer to the multi-model problem. It gives you a <b>single, consistent interface</b> to access foundation models from providers like Anthropic Claude and Amazon Titan—without juggling separate APIs, auth tokens, or request formats for each one.
         </p>
@@ -110,7 +110,7 @@
             What makes it especially compelling for .NET developers is the official AWS SDK for .NET. You can invoke powerful AI models using idiomatic C# code, plugging straight into your existing projects—no context switching, no foreign tooling. Text generation, summarization, intelligent chat—all accessible through the same familiar patterns you already use for other AWS services.
         </p></div></section>
 
-    <section id="d8ad6903-aef5-4044-bf0f-d6232bcd6103" style="margin-bottom:1rem;"><h4>Why: The Need for Simplicity, Security, and Scale</h4><hr class="border border-success border-1 opacity-50">
+    <section id="81faa709-f011-4edf-bc7b-f0d918498fd7" style="margin-bottom:1rem;"><h4>Why: The Need for Simplicity, Security, and Scale</h4><hr class="border border-success border-1 opacity-50">
     <div><ul><li><b>Simplicity:</b> No REST API wrangling or manual token management. The AWS SDK for .NET handles the heavy lifting so you can focus on building features.</li>
             <li><b>Security:</b> AWS IAM and credentials management give you enterprise-grade access control out of the box—no custom auth layers needed.</li>
             <li><b>Scale:</b> Bedrock is built for production, with built-in monitoring, throttling, and cost controls that would take weeks to build yourself.</li></ul>
@@ -118,8 +118,8 @@
             Whether you're prototyping an idea or shipping to production, Bedrock removes the friction that usually slows GenAI adoption in .NET teams.
         </p></div></section>
 
-    <section id="a58bfe29-aeb0-466e-b99a-0104226413ba" style="margin-bottom:1rem;"><h4>How: Step-by-Step Guide to Using AWS Bedrock from .NET</h4><hr class="border border-success border-1 opacity-50">
-    <div><section id="1794a4a0-bf77-4caa-ad99-76970a3cda2f" style="margin-bottom:1rem;"><h5>1. Prerequisites</h5><hr class="border border-success border-1 opacity-50">
+    <section id="bc7fe1c3-c9f5-4e14-b94d-91461c9c7cca" style="margin-bottom:1rem;"><h4>How: Step-by-Step Guide to Using AWS Bedrock from .NET</h4><hr class="border border-success border-1 opacity-50">
+    <div><section id="e9dd5e5f-1807-4445-b23e-fa2f56d96b4c" style="margin-bottom:1rem;"><h5>1. Prerequisites</h5><hr class="border border-success border-1 opacity-50">
     <div><ul><li>An AWS account with Bedrock access enabled.</li>
                 <li>AWS credentials with permissions for Bedrock (use <code>aws configure</code> for the shared credentials file).</li>
                 <li>.NET 9 SDK or later installed.</li>
@@ -127,7 +127,7 @@
                     <ul><li>AWSSDK.Bedrock</li>
                         <li>AWSSDK.BedrockRuntime</li></ul></li></ul></div></section>
 
-        <section id="e72c52bb-2ea6-4acd-a7e7-5afd0aed8fb0" style="margin-bottom:1rem;"><h5>2. Setting Up Your Project</h5><hr class="border border-success border-1 opacity-50">
+        <section id="66e4a9d1-8c56-47c0-a3e5-0ceea11b54b3" style="margin-bottom:1rem;"><h5>2. Setting Up Your Project</h5><hr class="border border-success border-1 opacity-50">
     <div><p>You can use a simple C# script or a full .NET project. Here's how to reference the required libraries:</p>
             <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
 #r "nuget: AWSSDK.Bedrock, 3.7.0"
@@ -144,7 +144,7 @@ dotnet add package AWSSDK.BedrockRuntime
 <br>
                 <p>Or use the NuGet Package Manager in Visual Studio.</p></div></div></div></section>
 
-        <section id="0c26bf7d-ac21-410f-9a74-4c0183bf5db0" style="margin-bottom:1rem;"><h5>3. Authenticating with AWS (Recommended)</h5><hr class="border border-success border-1 opacity-50">
+        <section id="dac622d9-3808-4b97-83c1-79d9f4782e09" style="margin-bottom:1rem;"><h5>3. Authenticating with AWS (Recommended)</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
                 The easiest and most secure way for most developers is to use the AWS shared credentials file. Run <code>aws configure</code> and the CLI will write your credentials to <code>~/.aws/credentials</code>. The AWS SDK for .NET automatically reads from this file—no extra code required.
             </p>
@@ -168,7 +168,7 @@ var bedrockClient = new AmazonBedrockClient(RegionEndpoint.USEast1);
             <span class="callout-title">Need advanced authentication or production setup?</span></div>
         <div class="callout-message"><p>For IAM user credentials, EC2 instance roles, or troubleshooting, see <a href="/blog/ai/bedrock/advanced">the advanced article</a>.</p></div></div></div></section></div></section>
 
-        <section id="8afa1729-bcc0-44d9-82c9-d65df19ac2ee" style="margin-bottom:1rem;"><h5>4. Listing Available Foundation Models</h5><hr class="border border-success border-1 opacity-50">
+        <section id="2f19c7d0-baa5-4d22-a697-dac0cdbbb6c7" style="margin-bottom:1rem;"><h5>4. Listing Available Foundation Models</h5><hr class="border border-success border-1 opacity-50">
     <div><div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
 async Task ListAvailableModels(AmazonBedrockClient client)
 {
@@ -185,7 +185,7 @@ async Task ListAvailableModels(AmazonBedrockClient client)
             </code></pre></div></div></div>
 <br></div></section>
 
-        <section id="9fc69294-3b57-4352-96f0-cd64cf41292a" style="margin-bottom:1rem;"><h5>5. Invoking a Model (Anthropic Claude)</h5><hr class="border border-success border-1 opacity-50">
+        <section id="e9caefcf-0d81-46d8-9385-189f251247ba" style="margin-bottom:1rem;"><h5>5. Invoking a Model (Anthropic Claude)</h5><hr class="border border-success border-1 opacity-50">
     <div><p>The <code>BedrockService</code> class in the <b>AwsBedrockExamples</b> project wraps the Invoke API to query movie details. Here is the core invocation logic from <a href="https://github.com/ajaysskumar/ai-playground/blob/main/AwsBedrockExamples/Services/BedrockService.cs" target="_blank">BedrockService.cs</a>:</p>
             <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
 public async Task&lt;string&gt; GetMovieDetails(string movieQuery)
@@ -220,7 +220,7 @@ public async Task&lt;string&gt; GetMovieDetails(string movieQuery)
             </code></pre></div></div></div>
 <br></div></section>
 
-        <section id="049d4847-09f6-4168-a8aa-689eeb0e9767" style="margin-bottom:1rem;"><h5>6. Putting It All Together</h5><hr class="border border-success border-1 opacity-50">
+        <section id="3cc64a9c-94c3-44d8-abb3-bb3c3e9dcc4f" style="margin-bottom:1rem;"><h5>6. Putting It All Together</h5><hr class="border border-success border-1 opacity-50">
     <div><p>Here's how you'd use <code>BedrockService</code> from the <b>AwsBedrockExamples</b> solution to query movie details end-to-end. For the full source, see <a href="https://github.com/ajaysskumar/ai-playground/blob/main/AwsBedrockExamples/Services/BedrockService.cs" target="_blank">BedrockService.cs on GitHub</a>.</p>
             <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
 var service = new BedrockService();
@@ -257,7 +257,7 @@ Console.WriteLine(movieJson);
             <span class="callout-title">Full Example on GitHub</span></div>
         <div class="callout-message"><p>See the complete <code>BedrockService</code> implementation including response parsing in the <a href="https://github.com/ajaysskumar/ai-playground/blob/main/AwsBedrockExamples/Services/BedrockService.cs" target="_blank">BedrockService.cs</a> file on GitHub.</p></div></div></div></section>
 
-    <section id="ce481d42-b125-4674-a856-61f3413194aa" style="margin-bottom:1rem;"><h4>Summary</h4><hr class="border border-success border-1 opacity-50">
+    <section id="a2a35cc6-3174-4dab-abcc-c2641050f880" style="margin-bottom:1rem;"><h4>Summary</h4><hr class="border border-success border-1 opacity-50">
     <div><ul><li><b>What:</b> You can now use AWS Bedrock's powerful GenAI models directly from .NET.</li>
             <li><b>Why:</b> It's secure, scalable, and easy to integrate into your existing C# workflows.</li>
             <li><b>How:</b> With just a few lines of code, you can list models, send prompts, and process responses—all using the official AWS SDK.</li></ul>
@@ -268,10 +268,14 @@ Console.WriteLine(movieJson);
             <span class="callout-title">Looking for advanced/production setup?</span></div>
         <div class="callout-message"><p>For IAM roles, troubleshooting, and advanced authentication, see <a href="/blog/ai/bedrock/advanced">AWS Bedrock with .NET: Advanced Integration & Production Setup</a>.</p></div></div></div></section>
 
-    <section id="7562c516-7136-49a6-94b0-bf9616484a29" style="margin-bottom:1rem;"><h4>References &amp; Further Reading</h4><hr class="border border-success border-1 opacity-50">
+    <section id="fae4379e-acad-4155-91b5-72293939eb78" style="margin-bottom:1rem;"><h4>References &amp; Further Reading</h4><hr class="border border-success border-1 opacity-50">
     <div><ul><li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html" target="_blank">AWS Bedrock Documentation</a></li>
             <li><a href="https://docs.aws.amazon.com/sdk-for-net/v3/developer-guide/" target="_blank">AWS SDK for .NET</a></li>
             <li><a href="https://github.com/ajaysskumar/ai-playground/blob/main/AwsBedrockExamples/Services/BedrockService.cs" target="_blank">BedrockService.cs on GitHub</a></li></ul></div></section>
+
+    <div class="callout-box special &#x2139;&#xFE0F; py-1"><div class="py-1"><span class="callout-icon">&#x2139;&#xFE0F;</span>
+            <span class="callout-title">&#x1F680; Next in the Series</span></div>
+        <div class="callout-message"><p>Ready to take it further? Check out <a href="/blog/ai/bedrock/advanced">AWS Bedrock with .NET: Advanced Integration & Production Setup</a> to learn about IAM authentication, EC2 instance roles, and production deployment strategies.</p></div></div>
 
     <section><p>For reference, the code repository being discussed is available at github: <a href="https://github.com/ajaysskumar/ai-playground">https://github.com/ajaysskumar/ai-playground</a></p><p>Thanks for reading through. Please share feedback, if any, in comments or on my email <a href="mailto:ajay.a338@gmail.com">ajay.a338@gmail.com</a></p></section></div>
     <div class="content-wrapper mt-4"><script src="https://giscus.app/client.js" data-repo="ajaysskumar/dev-arena" data-repo-id="R_kgDONiBGGQ" data-category="Comments" data-category-id="DIC_kwDONiBGGc4Cq2ND" data-mapping="pathname" data-strict="0" data-reactions-enabled="0" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script></div></div>
@@ -293,9 +297,9 @@ Console.WriteLine(movieJson);
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-            </div><!--Blazor:{"prerenderId":"904352a1468b4e1e8cabe75a3472edb7"}-->
+            </div><!--Blazor:{"prerenderId":"730e7e482a6f474eabdb4dfbfff93298"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UVZBMmRYTXphRTF2TVV4bmEyUnhhSGhmYkcxYVRrTkpUM1oyUjFWV1ZIazRiVlZQUmpWWk5FRkJTelpuUjJJd1dYVkhhV0ZQTUUxMlVuSnNaM0ZEYkVSWWIwNXdhRTl2YVhKdFVYTlVRWFJUU1RoSldsVkRhMnRSTkdsTmRtTjVTRTVuWHpoNVMyRXdjVjl3U2pkV1JHaEhhMjVWYUhwaGNFZEllWFJqZW1FMlpVTjJSR2h3WW5WcE5sOVBjMUJxZEdkRVdUVlJJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UVdvd2RtbzFibUpwUWs5bmNVODRPRTFtUlRsM1pUUkROV3Q2UTJoU2FUVlFNRnBEYmpNMVltSkxWWFkyWDE5dWRWRkRaVTFYU21ZM1RtOW1SVUZvTjJwVmNUTlpNV0ZCTFRKRlJ6VndTWGhFVDFSb1kzWTJWbGxLTlVKNU5EUmFNMkZLU0VwTGFIUmtVRlZOVTJ4NWRsbDFjMUpWWkZoYVpYWlFSRmw2YWt0b05sQkRSR1ozWlZCbU5GTk9ka3R0TVZsQmJrVlZJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.

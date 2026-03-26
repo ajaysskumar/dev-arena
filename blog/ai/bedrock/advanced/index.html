@@ -20,11 +20,11 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" /> -->
     
-<!--Blazor:{"type":"webassembly","prerenderId":"56e999911a2d43989ad319522e9765db","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>AWS Bedrock with .NET: Advanced Integration &amp; Production Setup</title><meta property="og:url" content="http://127.0.0.1:5050/blog/ai/bedrock/advanced" />
+<!--Blazor:{"type":"webassembly","prerenderId":"ec88cb9bdd0f4ff097b3bfccda2fe294","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>AWS Bedrock with .NET: Advanced Integration &amp; Production Setup</title><meta property="og:url" content="http://127.0.0.1:5050/blog/ai/bedrock/advanced" />
     <meta property="og:title" content="AWS Bedrock with .NET: Advanced Integration &amp; Production Setup" />
     <meta property="og:description" content="" />
     <meta property="og:image" content="http://127.0.0.1:5050/images/blog/ai/bedrock/banner.svg" />
-    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"56e999911a2d43989ad319522e9765db"}-->
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"ec88cb9bdd0f4ff097b3bfccda2fe294"}-->
 </head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -40,7 +40,7 @@
 
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"d8250479fc7f4ef09412f9c1635827c7","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"2ecddbbb74a04c2da19884d4021041f3","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -95,8 +95,8 @@
             <span class="callout-title">Looking for the basics?</span></div>
         <div class="callout-message"><p>Start with <a href="/blog/ai/bedrock">Getting Started with AWS Bedrock in .NET</a> for the simplest setup and usage.</p></div></div>
 
-    <section id="c528f68d-ca25-44be-820f-274503cf5b77" style="margin-bottom:1rem;"><h4>Advanced Authentication &amp; Production Setup</h4><hr class="border border-success border-1 opacity-50">
-    <div><section id="9e7fad1f-77a3-4562-8692-ef7fbb05d055" style="margin-bottom:1rem;"><h5>Session Credentials (Local Development)</h5><hr class="border border-success border-1 opacity-50">
+    <section id="0d6ce687-f594-405f-8945-fe23609377de" style="margin-bottom:1rem;"><h4>Advanced Authentication &amp; Production Setup</h4><hr class="border border-success border-1 opacity-50">
+    <div><section id="ca2d022a-0c27-4041-b1f7-16f773d107ce" style="margin-bottom:1rem;"><h5>Session Credentials (Local Development)</h5><hr class="border border-success border-1 opacity-50">
     <div><p>Use this for quick local testing with temporary credentials (e.g., from AWS STS or temporary session tokens).</p>
             <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
 SessionAWSCredentials GetCredentials()
@@ -113,7 +113,7 @@ SessionAWSCredentials GetCredentials()
             <span class="callout-title">Security Warning</span></div>
         <div class="callout-message"><p>Session credentials are temporary and should never be hardcoded. Use them only during development with test accounts.</p></div></div></div></section>
 
-        <section id="85cc75f8-ea1b-4bd9-a24b-8e3b95c87bbd" style="margin-bottom:1rem;"><h5>IAM User Credentials (Not Recommended for Production)</h5><hr class="border border-success border-1 opacity-50">
+        <section id="44e18fc2-b5c6-4603-90f8-bf8b0932575d" style="margin-bottom:1rem;"><h5>IAM User Credentials (Not Recommended for Production)</h5><hr class="border border-success border-1 opacity-50">
     <div><p>Use static IAM user credentials for simple scenarios, but this method is less secure for production.</p>
             <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
 BasicAWSCredentials GetBasicCredentials()
@@ -132,7 +132,7 @@ BasicAWSCredentials GetBasicCredentials()
             <span class="callout-title">Environment Variables</span></div>
         <div class="callout-message"><p>Store credentials in environment variables, not in appsettings files or source code. Use <code>AWS_ACCESS_KEY_ID</code> and <code>AWS_SECRET_ACCESS_KEY</code>.</p></div></div></div></section>
 
-        <section id="b04e4a6a-e521-41dd-8800-b6029fe0cf21" style="margin-bottom:1rem;"><h5>EC2 Instance Profile Role (Production on EC2)</h5><hr class="border border-success border-1 opacity-50">
+        <section id="9a5a16ed-50ae-4163-928c-abad85e76644" style="margin-bottom:1rem;"><h5>EC2 Instance Profile Role (Production on EC2)</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
                 This is the <b>recommended approach for production applications running on EC2</b>. The SDK automatically retrieves credentials from the instance metadata without any code changes.
             </p>
@@ -143,7 +143,7 @@ var runtimeClient = new AmazonBedrockRuntimeClient(RegionEndpoint.USEast1);
             </code></pre></div></div></div>
 <br></div></section>
 
-        <section id="dcef9c3a-9dba-4faa-83e5-0e4a6da8ff7a" style="margin-bottom:1rem;"><h5>Creating the EC2 Instance Profile Role</h5><hr class="border border-success border-1 opacity-50">
+        <section id="b9566fe0-0554-4fab-90b0-ea8a434691a8" style="margin-bottom:1rem;"><h5>Creating the EC2 Instance Profile Role</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
                 To create an EC2 instance profile role with the minimal permissions needed to list models and invoke them:
             </p>
@@ -190,7 +190,7 @@ var runtimeClient = new AmazonBedrockRuntimeClient(RegionEndpoint.USEast1);
             </code></pre></div></div></div>
 <br></div></section>
 
-        <section id="cc961351-36de-4930-a291-a0a25440977c" style="margin-bottom:1rem;"><h5>Troubleshooting Authentication Issues</h5><hr class="border border-success border-1 opacity-50">
+        <section id="4e61ea8f-d9d9-48c6-9c63-28ff19be8be8" style="margin-bottom:1rem;"><h5>Troubleshooting Authentication Issues</h5><hr class="border border-success border-1 opacity-50">
     <div><p>If you're getting permission errors, check these common issues:</p>
             <ul><li><b>UnauthorizedException or AccessDeniedException:</b> Your credentials don't have Bedrock permissions. Double-check the IAM policy above is attached to your role/user.</li>
                 <li><b>InvalidUserID or SignatureDoesNotMatch:</b> Your AWS credentials are incorrect or expired. Re-verify your access key and secret key.</li>
@@ -203,7 +203,7 @@ aws bedrock list-foundation-models --region us-east-1
 <br>
             <p style="margin-top: 1em;"><i>Note: The same IAM permissions can also be set up using CloudFormation or AWS CDK if you prefer infrastructure-as-code approaches.</i></p></div></section></div></section>
 
-    <section id="fd0ed6ec-8a22-4add-90e1-2aeb097845a0" style="margin-bottom:1rem;"><h4>Prompt Engineering &amp; Response Parsing</h4><hr class="border border-success border-1 opacity-50">
+    <section id="1abd6e00-6b60-42ea-b577-e9d51e6f79a2" style="margin-bottom:1rem;"><h4>Prompt Engineering &amp; Response Parsing</h4><hr class="border border-success border-1 opacity-50">
     <div><p>For reliable parsing, craft your prompts to instruct the model to return strict JSON. Here’s a helper for formatting/parsing the response:</p>
         <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
 private string FormatJsonString(string input)
@@ -233,7 +233,7 @@ private string FormatJsonString(string input)
             <span class="callout-title">Prompt Engineering</span></div>
         <div class="callout-message"><p>Always instruct the model to return a strict JSON array/object and nothing else for easier parsing.</p></div></div></div></section>
 
-    <section id="3041c3a8-ad41-4d80-850f-5f2f22cbabb6" style="margin-bottom:1rem;"><h4>Summary &amp; Best Practices</h4><hr class="border border-success border-1 opacity-50">
+    <section id="4e6999ed-450f-4d51-a9ac-2dc71db27ef0" style="margin-bottom:1rem;"><h4>Summary &amp; Best Practices</h4><hr class="border border-success border-1 opacity-50">
     <div><ul><li><b>Advanced authentication</b> enables secure, scalable, and production-ready AWS Bedrock integration in .NET.</li>
             <li><b>Use EC2 instance roles</b> for production workloads—never hardcode credentials.</li>
             <li><b>Prompt engineering</b> and response parsing are key for reliable GenAI workflows.</li>
@@ -241,6 +241,10 @@ private string FormatJsonString(string input)
         <p>
             For most users, the shared credentials file is sufficient. Move to advanced setups only when your deployment or security needs require it.
         </p></div></section>
+
+    <div class="callout-box special &#x2139;&#xFE0F; py-1"><div class="py-1"><span class="callout-icon">&#x2139;&#xFE0F;</span>
+            <span class="callout-title">&#x1F680; Next in the Series</span></div>
+        <div class="callout-message"><p>Now that you've mastered production authentication, explore multi-turn conversations. Check out <a href="/blog/ai/bedrock/converse">AWS Bedrock with .NET: Conversational AI Converse API</a> to build chatbots that remember context.</p></div></div>
 
     <section><p>For reference, the code repository being discussed is available at github: <a href="https://github.com/ajaysskumar/ai-playground">https://github.com/ajaysskumar/ai-playground</a></p><p>Thanks for reading through. Please share feedback, if any, in comments or on my email <a href="mailto:ajay.a338@gmail.com">ajay.a338@gmail.com</a></p></section></div>
     <div class="content-wrapper mt-4"><script src="https://giscus.app/client.js" data-repo="ajaysskumar/dev-arena" data-repo-id="R_kgDONiBGGQ" data-category="Comments" data-category-id="DIC_kwDONiBGGc4Cq2ND" data-mapping="pathname" data-strict="0" data-reactions-enabled="0" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script></div></div>
@@ -262,9 +266,9 @@ private string FormatJsonString(string input)
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-            </div><!--Blazor:{"prerenderId":"d8250479fc7f4ef09412f9c1635827c7"}-->
+            </div><!--Blazor:{"prerenderId":"2ecddbbb74a04c2da19884d4021041f3"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UVZBMmRYTXphRTF2TVV4bmEyUnhhSGhmYkcxYVQyVlBiR3AwWkRodFZXMUtWMU15U2xCR04yWmFjRFJ6WjFsbWVrTXhiakkwUTBocGQydFRSbmhLVFhCRFdHbEtVMlJsT0Zrd1UxOTNjMm93Vlc4eVFYTkZSSEZWYzBwTU5rZFVVUzFuTVZRMGEwNVpaV3hWVXpWVmRqaFJPRWxzT1RWeVpETjNRV1l5Y0doWFZUVm9NWGxSVjIxbFJrVXdPV1l6VDBSR1RtNVpJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UVdvd2RtbzFibUpwUWs5bmNVODRPRTFtUlRsM1pqbFJTMUV0VTJKRFVHZGhTa1UwZWtWU2QxZG1SWHBOWldwRFZtaFdlRTlVZEd4UFZHcEJZalpvVlZWbGREa3RPVTk0U25kSVYzTkhTamhCVFRCeGNGTllZbmxQZFY5SFQxZEZhMkZIV0cxTlRuWjNOVzVKTkhSeE1tZDNTRmRJZEVJMExYZDBSVGxvWDJWZlZGTkJTVXhWWDFWdmFHRk9WalpUVVhRd1MyNHdJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
