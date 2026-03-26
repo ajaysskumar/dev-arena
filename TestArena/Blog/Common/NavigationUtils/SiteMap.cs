@@ -209,6 +209,14 @@ namespace TestArena.Blog.Common.NavigationUtils
             ["AI", "AWS Bedrock", "Converse API", "Tools", ".NET", "C#", "Structured Output"],
             isPublished: true,
             isOlderThumbnailFormat: false),
+
+        new("AWS Bedrock with .NET: Guardrails for Safe AI Applications",
+            "/blog/ai/bedrock/guardrails",
+            new DateTime(2026, 3, 17),
+            "images/blog/ai/bedrock/banner.svg",
+            ["AI", "AWS Bedrock", "Guardrails", "Safety", ".NET", "C#"],
+            isPublished: true,
+            isOlderThumbnailFormat: false),
         ];
 
         public static IEnumerable<PageInfo> PublishedArticles => Pages.Where(p => p.IsPublished && p.PublishedOn <= DateTime.UtcNow);
