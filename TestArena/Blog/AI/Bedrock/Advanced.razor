@@ -135,41 +135,13 @@ aws bedrock list-foundation-models --region us-east-1
         </Section>
     </Section>
 
-    <Section Heading="Prompt Engineering & Response Parsing" Level="4">
-        <p>For reliable parsing, craft your prompts to instruct the model to return strict JSON. Here’s a helper for formatting/parsing the response:</p>
-        <CodeSnippet Language="csharp">
-private string FormatJsonString(string input)
-{
-    if (string.IsNullOrWhiteSpace(input)) return input;
-    // Try to extract the first JSON array or object from the string
-    var match = System.Text.RegularExpressions.Regex.Match(input,
-        "(\\{[\\s\\S]*\\}|\\[[\\s\\S]*\\])");
-    if (!match.Success)
-        return input;
-    var jsonContent = match.Value;
-    try
-    {
-        using var doc = System.Text.Json.JsonDocument.Parse(jsonContent);
-        return System.Text.Json.JsonSerializer.Serialize(doc.RootElement,
-            new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
-    }
-    catch
-    {
-        // If not valid JSON, return as-is
-        return jsonContent;
-    }
-}
-        </CodeSnippet>
-        <CalloutBox Type="tip" Title="Prompt Engineering">
-            <p>Always instruct the model to return a strict JSON array/object and nothing else for easier parsing.</p>
-        </CalloutBox>
-    </Section>
+
+
 
     <Section Heading="Summary & Best Practices" Level="4">
         <ul>
             <li><b>Advanced authentication</b> enables secure, scalable, and production-ready AWS Bedrock integration in .NET.</li>
             <li><b>Use EC2 instance roles</b> for production workloads—never hardcode credentials.</li>
-            <li><b>Prompt engineering</b> and response parsing are key for reliable GenAI workflows.</li>
             <li>Refer to AWS documentation for the latest best practices and SDK updates.</li>
         </ul>
         <p>
