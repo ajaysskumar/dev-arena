@@ -33,4 +33,9 @@ Skills provide specialised workflows for common tasks in this repository.
   <description>**FORMATTING SKILL** — Converting raw code blocks into correctly formatted &lt;CodeSnippet&gt; components for blog articles. USE FOR: "format this code for the article", "escape this snippet", "add this code to the blog post", "what language attribute should I use". Handles escaping &lt; and &gt;, sequential numbering, language selection, and pairing with CalloutBox. DO NOT USE FOR: writing the surrounding article content, reviewing article quality.</description>
   <file>.github/skills/code-snippet-formatter/SKILL.md</file>
 </skill>
+<skill>
+  <name>flow-diagram</name>
+  <description>**WORKFLOW SKILL** — Generate industry-standard software engineering flow diagrams. USE FOR: "create a flowchart", "draw a sequence diagram", "architecture diagram", "state machine diagram", "draw.io diagram", "mermaid diagram", "CI/CD pipeline diagram", "system design diagram", "ER diagram", "class diagram", "data flow diagram". Produces diagrams in Mermaid (validated + previewed via MCP tools) or draw.io XML format. DO NOT USE FOR: general documentation writing, code generation, non-diagram visuals.</description>
+  <file>.github/skills/flow-diagram/SKILL.md</file>
+</skill>
 </skills>
