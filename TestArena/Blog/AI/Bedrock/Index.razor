@@ -204,7 +204,7 @@ async Task ListAvailableModels(AmazonBedrockClient client)
                 </CodeSnippet>
             </Section>
 
-            <Section Heading="5. InvokeModel vs. Converse API — Which Should You Use?" Level="5">
+            <Section Heading="5b. InvokeModel vs. Converse API — Which Should You Use?" Level="5">
                 <p>
                     Before invoking your first model, it's important to know that Bedrock exposes two different APIs for calling foundation models:
                 </p>
@@ -233,7 +233,7 @@ async Task ListAvailableModels(AmazonBedrockClient client)
                 </CalloutBox>
             </Section>
 
-            <Section Heading="6. Invoking a Model (Anthropic Claude)" Level="5">
+            <Section Heading="5c. Invoking a Model (Anthropic Claude)" Level="5">
                 <p>Now let's invoke Claude to get useful output. The <code>BedrockService</code> class wraps the Invoke API. Here is the core logic from <a href="https://github.com/ajaysskumar/ai-playground/blob/main/AwsBedrockExamples/Services/BedrockService.cs" target="_blank">BedrockService.cs</a>:</p>
                 <CodeSnippet Language="csharp" Number="4">
 public async Task&lt;string&gt; GetMovieDetails(string movieQuery)
@@ -275,7 +275,7 @@ public async Task&lt;string&gt; GetMovieDetails(string movieQuery)
             </Section>
         </Section>
 
-        <Section Heading="7. Production Patterns: Batch Processing & Error Recovery" Level="5">
+        <Section Heading="6. Production Patterns: Batch Processing & Error Recovery" Level="5">
             <p>
                 Single queries are great for testing, but production systems need efficiency and resilience. Let's move beyond toy examples to a realistic scenario: <b>batch document summarization</b>. 
                 Imagine your SaaS platform ingests customer support tickets and needs to auto-summarize them in real-time. With a naive approach, you'd loop through tickets one-by-one—slow and expensive. Here's a production-ready approach that batches requests and handles failures gracefully.
@@ -440,7 +440,7 @@ Console.WriteLine($"Processed {results.Count} tickets, {successCount} succeeded"
         </Section>
     </Section>
 
-    <Section Heading="8. Summary" Level="4">
+    <Section Heading="7. Summary" Level="4">
         <ul>
             <li><b>What:</b> AWS Bedrock is a managed service that abstracts vendor-specific AI APIs into a unified API interface (with C# SDK support).</li>
             <li><b>Why:</b> It reduces friction: unified auth (IAM), consistent error handling, and easy model switching.</li>
@@ -461,7 +461,7 @@ Console.WriteLine($"Processed {results.Count} tickets, {successCount} succeeded"
         </CalloutBox>
     </Section>
 
-    <Section Heading="9. References & Further Reading" Level="4">
+    <Section Heading="8. References & Further Reading" Level="4">
         <ul>
             <li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html" target="_blank">AWS Bedrock Documentation</a></li>
             <li><a href="https://docs.aws.amazon.com/sdk-for-net/v3/developer-guide/" target="_blank">AWS SDK for .NET</a></li>
