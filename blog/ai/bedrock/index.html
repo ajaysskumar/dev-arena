@@ -20,11 +20,11 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" /> -->
     
-<!--Blazor:{"type":"webassembly","prerenderId":"8f3cac15092a42bcb00b633c463f8172","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>AWS Bedrock with .NET: Getting Started</title><meta property="og:url" content="http://127.0.0.1:5050/blog/ai/bedrock" />
+<!--Blazor:{"type":"webassembly","prerenderId":"1ebec942398847a9acd52613eec73f7d","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>AWS Bedrock with .NET: Getting Started</title><meta property="og:url" content="http://127.0.0.1:5050/blog/ai/bedrock" />
     <meta property="og:title" content="AWS Bedrock with .NET: Getting Started" />
     <meta property="og:description" content="" />
     <meta property="og:image" content="http://127.0.0.1:5050/images/blog/ai/bedrock/banner.svg" />
-    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"8f3cac15092a42bcb00b633c463f8172"}-->
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"1ebec942398847a9acd52613eec73f7d"}-->
 </head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -40,7 +40,7 @@
 
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"239122e9097e4f2b867119227ca07645","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"f4aa3ed17d5c446aa05ebcd6ed81b412","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -91,7 +91,7 @@
                     
                     <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 27 Dec 2025</span></div></div></div></div></div></header>
 
-    <section id="dac499c1-5f34-44a1-a365-9ca8cdd6dd6d" style="margin-bottom:1rem;"><h4>The Problem: Too Many APIs, Too Much Friction</h4><hr class="border border-success border-1 opacity-50">
+    <section id="80a9b908-d2e4-400a-9a7e-9ec2e3c29a4b" style="margin-bottom:1rem;"><h4>The Problem: Too Many APIs, Too Much Friction</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             Imagine this: your team decides to add AI to your .NET application. You pick a model, wire up the HTTP client, handle the auth, parse the response schema—and it works. Then the product team asks to try a different model. Suddenly you have two HTTP clients, two authentication flows, two response formats, and twice the maintenance burden. Add a third model and things start to spiral.
         </p>
@@ -102,24 +102,106 @@
             <span class="callout-title">Sound familiar?</span></div>
         <div class="callout-message"><p>If you've ever copy-pasted an <code>HttpClient</code> setup just to talk to a different AI model, this article is for you.</p></div></div></div></section>
 
-    <section id="e81e512f-2e47-468b-9158-89caab02716a" style="margin-bottom:1rem;"><h4>What is AWS Bedrock and Why Use It from .NET?</h4><hr class="border border-success border-1 opacity-50">
+    <section id="58462fd9-c559-4c51-bd66-1e48c09f37b0" style="margin-bottom:1rem;"><h4>What is AWS Bedrock and Why Use It from .NET?</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             AWS Bedrock is Amazon's answer to the multi-model problem. It gives you a <b>single, consistent interface</b> to access foundation models from providers like Anthropic Claude and Amazon Titan—without juggling separate APIs, auth tokens, or request formats for each one.
         </p>
         <p>
-            What makes it especially compelling for .NET developers is the official AWS SDK for .NET. You can invoke powerful AI models using idiomatic C# code, plugging straight into your existing projects—no context switching, no foreign tooling. Text generation, summarization, intelligent chat—all accessible through the same familiar patterns you already use for other AWS services.
-        </p></div></section>
-
-    <section id="4078c05c-0da1-417e-aa3b-4a37415aa642" style="margin-bottom:1rem;"><h4>Why: The Need for Simplicity, Security, and Scale</h4><hr class="border border-success border-1 opacity-50">
-    <div><ul><li><b>Simplicity:</b> No REST API wrangling or manual token management. The AWS SDK for .NET handles the heavy lifting so you can focus on building features.</li>
-            <li><b>Security:</b> AWS IAM and credentials management give you enterprise-grade access control out of the box—no custom auth layers needed.</li>
-            <li><b>Scale:</b> Bedrock is built for production, with built-in monitoring, throttling, and cost controls that would take weeks to build yourself.</li></ul>
+            Think of Bedrock as a universal adapter—like those laptop power converters that work worldwide. You plug in once, and voltage, plug shape, and frequency differences disappear. Similarly, your .NET code plugs into Bedrock once, and differences between Claude, Titan, and other models are handled at the API layer.
+        </p>
         <p>
-            Whether you're prototyping an idea or shipping to production, Bedrock removes the friction that usually slows GenAI adoption in .NET teams.
-        </p></div></section>
+            What makes it especially compelling for .NET developers is the official AWS SDK for .NET. You can invoke powerful AI models using idiomatic C# code, plugging straight into your existing projects—no context switching, no foreign tooling. Text generation, summarization, intelligent chat—all accessible through the same familiar patterns you already use for other AWS services.
+        </p>
 
-    <section id="09a9661f-c94e-4bdd-b439-d41781f69d4f" style="margin-bottom:1rem;"><h4>How: Step-by-Step Guide to Using AWS Bedrock from .NET</h4><hr class="border border-success border-1 opacity-50">
-    <div><section id="d2c65dfe-185c-456b-a98c-ed00b7e30bdd" style="margin-bottom:1rem;"><h5>1. Prerequisites</h5><hr class="border border-success border-1 opacity-50">
+        <p>
+            At a high level, every Bedrock request follows this flow:
+        </p>
+
+        <style>
+    .image-header {
+        margin: 0 auto; /* Centers the div */
+        text-align: center;
+    }
+
+    .blog-support-image {
+        width: 100%; /* Ensure the image is fully responsive */
+        height: auto;
+        border-radius: 10px;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .magnified {
+        width: 100%; /* Ensure the magnified image is fully responsive */
+        height: auto;
+        border-radius: 10px;
+        transform: scale(1.5); /* Magnify the image */
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .cursor-magnify {
+        cursor: zoom-in; /* Circular magnify button */
+    }
+
+    .cursor-de-magnify {
+        cursor: zoom-out; /* Circular de-magnify button */
+    }
+
+    figcaption {
+        font-style: italic;
+        padding: 2px;
+        text-align: center;
+    }
+
+    .figure-caption {
+        font-size: 0.9rem; /* Adjust caption size */
+        color: #6c757d; /* Muted text color */
+        text-align: center; /* Center align */
+        margin-top: 8px; /* Space between image and caption */
+        font-weight: 500; /* Slightly bold for readability */
+    }
+
+    .figure-caption strong {
+        color: #343a40; /* Darker color for image number */
+        font-weight: 600; /* Make image number bold */
+    }
+</style>
+
+<div class="row image-header"><figure class="text-center"><img src="/images/blog/ai/bedrock/bedrock-architecture-flow.svg" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="Bedrock Request Flow: .NET App &#x2192; Bedrock API &#x2192; Model &#x2192; Response" loading="lazy" />
+        <figcaption class="figure-caption"><strong>Figure 1 :</strong> Bedrock Request Flow: .NET App &#x2192; Bedrock API &#x2192; Model &#x2192; Response</figcaption></figure></div>
+
+        <section id="295e1aac-73fb-48a1-af8b-9686cb5f59a0" style="margin-bottom:1rem;"><h5>How Bedrock Unifies Foundation Models</h5><hr class="border border-success border-1 opacity-50">
+    <div><p>Here's what abstraction buys you when calling different models:</p>
+            <table style="width:100%; border-collapse: collapse; margin-top: 1rem; margin-bottom: 1rem;"><tr style="background-color: #f5f5f5;"><th style="border: 1px solid #ddd; padding: 12px; text-align: left;"><b>Aspect</b></th>
+                    <th style="border: 1px solid #ddd; padding: 12px; text-align: left;"><b>Direct Claude API</b></th>
+                    <th style="border: 1px solid #ddd; padding: 12px; text-align: left;"><b>Direct Titan API</b></th>
+                    <th style="border: 1px solid #ddd; padding: 12px; text-align: left;"><b>Via Bedrock</b></th></tr>
+                <tr><td style="border: 1px solid #ddd; padding: 12px;">Authentication</td>
+                    <td style="border: 1px solid #ddd; padding: 12px;">Custom API keys</td>
+                    <td style="border: 1px solid #ddd; padding: 12px;">AWS credentials (different service)</td>
+                    <td style="border: 1px solid #ddd; padding: 12px;">AWS IAM (unified)</td></tr>
+                <tr><td style="border: 1px solid #ddd; padding: 12px;">Request Format</td>
+                    <td style="border: 1px solid #ddd; padding: 12px;">Anthropic-specific JSON</td>
+                    <td style="border: 1px solid #ddd; padding: 12px;">Amazon-specific JSON</td>
+                    <td style="border: 1px solid #ddd; padding: 12px;">Bedrock abstracts API layer (formats vary slightly per model)</td></tr>
+                <tr><td style="border: 1px solid #ddd; padding: 12px;">Error Handling</td>
+                    <td style="border: 1px solid #ddd; padding: 12px;">Custom error codes &amp; retry logic</td>
+                    <td style="border: 1px solid #ddd; padding: 12px;">Different error codes &amp; retry logic</td>
+                    <td style="border: 1px solid #ddd; padding: 12px;">Consistent Bedrock exceptions</td></tr>
+                <tr><td style="border: 1px solid #ddd; padding: 12px;">Switching Models</td>
+                    <td style="border: 1px solid #ddd; padding: 12px;">Rewrite auth + request logic</td>
+                    <td style="border: 1px solid #ddd; padding: 12px;">Rewrite auth + request logic</td>
+                    <td style="border: 1px solid #ddd; padding: 12px;">Often just change model ID (minor format tweaks may apply)</td></tr></table></div></section></div></section>
+
+    <section id="b95eacaa-e9bc-4897-87b8-ec55e503af44" style="margin-bottom:1rem;"><h4>Why: The Need for Simplicity, Security, and Scale</h4><hr class="border border-success border-1 opacity-50">
+    <div><ul><li><b>Simplicity:</b> Less manual REST/API handling compared to direct integrations. The AWS SDK for .NET handles the heavy lifting so you can focus on building features.</li>
+            <li><b>Security:</b> AWS IAM and credentials management give you enterprise-grade access control out of the box—no custom auth layers needed.</li>
+            <li><b>Scale:</b> Bedrock is built for production, with built-in monitoring, throttling, and cost controls that would take weeks to build yourself.</li></ul></div></section>
+
+    <section id="0935b958-3027-4f9c-96e8-78bdc81c1212" style="margin-bottom:1rem;"><h4>How: Step-by-Step Guide to Using AWS Bedrock from .NET</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>
+            Now that you understand what Bedrock does and why it's valuable, let's get hands-on. In this section, we'll walk through setup, authentication, and basic model invocation. Then we'll explore how this scales in production systems.
+        </p>
+        <section id="ad63d241-5700-4b81-97b4-05fe93e82a7c" style="margin-bottom:1rem;"><h5>1. Prerequisites</h5><hr class="border border-success border-1 opacity-50">
     <div><ul><li>An AWS account with Bedrock access enabled.</li>
                 <li>AWS credentials with permissions for Bedrock (use <code>aws configure</code> for the shared credentials file).</li>
                 <li>.NET 9 SDK or later installed.</li>
@@ -127,7 +209,7 @@
                     <ul><li>AWSSDK.Bedrock</li>
                         <li>AWSSDK.BedrockRuntime</li></ul></li></ul></div></section>
 
-        <section id="df67cc30-b380-4a48-83ae-56d2b56a53d5" style="margin-bottom:1rem;"><h5>2. Setting Up Your Project</h5><hr class="border border-success border-1 opacity-50">
+        <section id="4aa34271-dfe5-4b01-965f-3109b150d28e" style="margin-bottom:1rem;"><h5>2. Setting Up Your Project</h5><hr class="border border-success border-1 opacity-50">
     <div><p>You can use a simple C# script or a full .NET project. Here's how to reference the required libraries:</p>
             <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
 #r "nuget: AWSSDK.Bedrock, 3.7.0"
@@ -144,7 +226,7 @@ dotnet add package AWSSDK.BedrockRuntime
 <br>
                 <p>Or use the NuGet Package Manager in Visual Studio.</p></div></div></div></section>
 
-        <section id="c641b291-bb34-4ad4-99ed-c52106f1813d" style="margin-bottom:1rem;"><h5>3. Authenticating with AWS (Recommended)</h5><hr class="border border-success border-1 opacity-50">
+        <section id="d57bf3d6-f16d-496b-97e5-aa1c85441f92" style="margin-bottom:1rem;"><h5>3. Authenticating with AWS (Recommended)</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
                 The easiest and most secure way for most developers is to use the AWS shared credentials file. Run <code>aws configure</code> and the CLI will write your credentials to <code>~/.aws/credentials</code>. The AWS SDK for .NET automatically reads from this file—no extra code required.
             </p>
@@ -166,10 +248,35 @@ var bedrockClient = new AmazonBedrockClient(RegionEndpoint.USEast1);
         <div class="callout-message"><p>Run <code>aws configure</code> and answer the prompts. The CLI writes the credentials file for you.</p></div></div>
             <div class="callout-box special &#x2139;&#xFE0F; py-1"><div class="py-1"><span class="callout-icon">&#x2139;&#xFE0F;</span>
             <span class="callout-title">Need advanced authentication or production setup?</span></div>
-        <div class="callout-message"><p>For IAM user credentials, EC2 instance roles, or troubleshooting, see <a href="/blog/ai/bedrock/advanced">the advanced article</a>.</p></div></div></div></section></div></section>
+        <div class="callout-message"><p>For IAM user credentials, EC2 instance roles, or troubleshooting, see <a href="/blog/ai/bedrock/advanced">the advanced article</a>.</p></div></div></div></section>
 
-        <section id="57cfdd31-1614-4d4e-84ef-efe2e4315c37" style="margin-bottom:1rem;"><h5>4. Listing Available Foundation Models</h5><hr class="border border-success border-1 opacity-50">
-    <div><div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
+        <section id="cdc7fa89-bf68-4b50-80bd-c4ce0625ac84" style="margin-bottom:1rem;"><h5>4. Common Setup Pitfalls &amp; Solutions</h5><hr class="border border-success border-1 opacity-50">
+    <div><p>Before diving into code, let's address the most common setup mistakes that catch developers:</p>
+            <table style="width:100%; border-collapse: collapse; margin-top: 1rem; margin-bottom: 1rem;"><tr style="background-color: #f5f5f5;"><th style="border: 1px solid #ddd; padding: 12px; text-align: left;"><b>Step</b></th>
+                    <th style="border: 1px solid #ddd; padding: 12px; text-align: left;"><b>Common Error</b></th>
+                    <th style="border: 1px solid #ddd; padding: 12px; text-align: left;"><b>Fix</b></th></tr>
+                <tr><td style="border: 1px solid #ddd; padding: 12px;">AWS Configure</td>
+                    <td style="border: 1px solid #ddd; padding: 12px;"><code>AmazonServiceException: Could not find credentials</code></td>
+                    <td style="border: 1px solid #ddd; padding: 12px;">Verify credentials file exists at <code>~/.aws/credentials</code> (or <code>%USERPROFILE%\.aws\credentials</code> on Windows)</td></tr>
+                <tr><td style="border: 1px solid #ddd; padding: 12px;">Enable Model Access</td>
+                    <td style="border: 1px solid #ddd; padding: 12px;"><code>ResourceNotFoundException: Model not available</code></td>
+                    <td style="border: 1px solid #ddd; padding: 12px;">Go to AWS Console → Bedrock → Model access and request access to the model (takes 5–15 min)</td></tr>
+                <tr><td style="border: 1px solid #ddd; padding: 12px;">Region Mismatch</td>
+                    <td style="border: 1px solid #ddd; padding: 12px;"><code>ModelNotFound exception</code></td>
+                    <td style="border: 1px solid #ddd; padding: 12px;">Claude 3 Haiku is only in <code>us-east-1</code> and <code>us-west-2</code>. Verify your region matches model availability</td></tr>
+                <tr><td style="border: 1px solid #ddd; padding: 12px;">NuGet Version</td>
+                    <td style="border: 1px solid #ddd; padding: 12px;">API method not found or signature mismatch</td>
+                    <td style="border: 1px solid #ddd; padding: 12px;">Use AWSSDK.BedrockRuntime version 3.7.0 or later to match recent Bedrock API changes</td></tr></table>
+            <div class="callout-box special &#x2139;&#xFE0F; py-1"><div class="py-1"><span class="callout-icon">&#x2139;&#xFE0F;</span>
+            <span class="callout-title">Region Availability Matters</span></div>
+        <div class="callout-message"><p>Not all models are available in all AWS regions. When you get a <code>ModelNotFound</code> exception, <b>check region first</b> before debugging your code. Use the AWS docs or Console to verify model availability in your target region.</p></div></div></div></section>
+
+        <section id="4b41b790-c719-437d-be04-c2f368b7f0ae" style="margin-bottom:1rem;"><h5>5. Quick Start: Your First Model Invocation</h5><hr class="border border-success border-1 opacity-50">
+    <div><p>Now that everything is configured and common pitfalls are clear, let's invoke your first model. We'll show you how to list available models and then call Claude with a simple query.</p>
+
+            <section id="b000517e-5af7-47d9-b177-c1c5a1b09d98" style="margin-bottom:1rem;"><h6>5a. List Available Foundation Models</h6><hr class="border border-success border-1 opacity-50">
+    <div><p>Start by discovering what models Bedrock has available in your region:</p>
+                <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
 async Task ListAvailableModels(AmazonBedrockClient client)
 {
     var request = new ListFoundationModelsRequest();
@@ -182,12 +289,32 @@ async Task ListAvailableModels(AmazonBedrockClient client)
         Console.WriteLine();
     }
 }
-            </code></pre></div></div></div>
+                </code></pre></div></div></div>
 <br></div></section>
 
-        <section id="57403b64-98c9-4f41-889b-ea1e2d8a4677" style="margin-bottom:1rem;"><h5>5. Invoking a Model (Anthropic Claude)</h5><hr class="border border-success border-1 opacity-50">
-    <div><p>The <code>BedrockService</code> class in the <b>AwsBedrockExamples</b> project wraps the Invoke API to query movie details. Here is the core invocation logic from <a href="https://github.com/ajaysskumar/ai-playground/blob/main/AwsBedrockExamples/Services/BedrockService.cs" target="_blank">BedrockService.cs</a>:</p>
-            <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
+            <section id="8001588d-25ce-460f-a06d-c9196ba3a4a8" style="margin-bottom:1rem;"><h5>5. InvokeModel vs. Converse API &#x2014; Which Should You Use?</h5><hr class="border border-success border-1 opacity-50">
+    <div><p>
+                    Before invoking your first model, it's important to know that Bedrock exposes two different APIs for calling foundation models:
+                </p>
+                <table style="width:100%; border-collapse: collapse; margin-top: 1rem; margin-bottom: 1rem;"><tr style="background-color: #f5f5f5;"><th style="border: 1px solid #ddd; padding: 12px; text-align: left;"><b>API</b></th>
+                        <th style="border: 1px solid #ddd; padding: 12px; text-align: left;"><b>Use Case</b></th>
+                        <th style="border: 1px solid #ddd; padding: 12px; text-align: left;"><b>Best For</b></th></tr>
+                    <tr><td style="border: 1px solid #ddd; padding: 12px;"><code>InvokeModel</code></td>
+                        <td style="border: 1px solid #ddd; padding: 12px;">Single request/response; full control over model parameters</td>
+                        <td style="border: 1px solid #ddd; padding: 12px;">One-shot tasks, API customization, batch processing</td></tr>
+                    <tr><td style="border: 1px solid #ddd; padding: 12px;"><code>Converse API</code> (newer)</td>
+                        <td style="border: 1px solid #ddd; padding: 12px;">Multi-turn conversation; handles message history automatically</td>
+                        <td style="border: 1px solid #ddd; padding: 12px;">Chatbots, ongoing conversations, abstracts provider differences</td></tr></table>
+                <p>
+                    For this intro article, we'll focus on <code>InvokeModel</code> since it gives you lower-level control and is more common in production workflows. The Converse API is typically more convenient for chatbot scenarios but comes with less granular control.
+                </p>
+                <div class="callout-box special tip py-1"><div class="py-1"><span class="callout-icon">&#x1F4A1;</span>
+            <span class="callout-title">Which API should I use?</span></div>
+        <div class="callout-message"><p>Start with <code>InvokeModel</code> for control and transparency. If you find yourself managing conversation history manually, switching to <code>Converse API</code> can simplify things.</p></div></div></div></section>
+
+            <section id="10d840a3-05a4-4851-9a84-7cddaa22099a" style="margin-bottom:1rem;"><h5>6. Invoking a Model (Anthropic Claude)</h5><hr class="border border-success border-1 opacity-50">
+    <div><p>Now let's invoke Claude to get useful output. The <code>BedrockService</code> class wraps the Invoke API. Here is the core logic from <a href="https://github.com/ajaysskumar/ai-playground/blob/main/AwsBedrockExamples/Services/BedrockService.cs" target="_blank">BedrockService.cs</a>:</p>
+                <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
 public async Task&lt;string&gt; GetMovieDetails(string movieQuery)
 {
     var prompt =
@@ -217,58 +344,175 @@ public async Task&lt;string&gt; GetMovieDetails(string movieQuery)
     var responseBody = System.Text.Encoding.UTF8.GetString(response.Body.ToArray());
     return FormatJsonString(responseBody);
 }
-            </code></pre></div></div></div>
-<br></div></section>
+                </code></pre></div></div></div>
+<br>
+                <p><b>What's happening:</b> You build an <code>InvokeModelRequest</code> with your prompt, serialize it as JSON, and send it to Bedrock. The response comes back as a stream; decode it to see Claude's answer.
+                </p>
+                <div class="callout-box special tip py-1"><div class="py-1"><span class="callout-icon">&#x1F4A1;</span>
+            <span class="callout-title">Test Your Setup</span></div>
+        <div class="callout-message"><p>Use this simple example to verify your credentials, region, and model access all work correctly before moving to production patterns.</p></div></div></div></section></div></section>
 
-        <section id="e1a1128f-1102-4e94-b6ee-1433dd88e68b" style="margin-bottom:1rem;"><h5>6. Putting It All Together</h5><hr class="border border-success border-1 opacity-50">
-    <div><p>Here's how you'd use <code>BedrockService</code> from the <b>AwsBedrockExamples</b> solution to query movie details end-to-end. For the full source, see <a href="https://github.com/ajaysskumar/ai-playground/blob/main/AwsBedrockExamples/Services/BedrockService.cs" target="_blank">BedrockService.cs on GitHub</a>.</p>
+        <section id="e3ccb7f8-90cb-431c-93ef-09bc21825735" style="margin-bottom:1rem;"><h5>7. Production Patterns: Batch Processing &amp; Error Recovery</h5><hr class="border border-success border-1 opacity-50">
+    <div><p>
+                Single queries are great for testing, but production systems need efficiency and resilience. Let's move beyond toy examples to a realistic scenario: <b>batch document summarization</b>. 
+                Imagine your SaaS platform ingests customer support tickets and needs to auto-summarize them in real-time. With a naive approach, you'd loop through tickets one-by-one—slow and expensive. Here's a production-ready approach that batches requests and handles failures gracefully.
+            </p>
+            <div class="callout-box special tip py-1"><div class="py-1"><span class="callout-icon">&#x1F4A1;</span>
+            <span class="callout-title">Why This Matters</span></div>
+        <div class="callout-message"><p>Bedrock pricing is per-request. A naive loop over 1000 tickets will cost significantly more than a batched approach with smart error recovery. Always design for batch efficiency in production.</p></div></div>
+
+            <p><b>Compare these two approaches:</b></p>
+
+            <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
+// Bad: loops sequentially, costs money, slow
+foreach (var ticket in tickets)
+{
+    string summary = await service.GetMovieDetails(ticket.Description); // Slow!
+    await db.SaveAsync(summary);
+}
+            </code></pre></div><div class="col-12 text-center"><code>Code Sample #5 : &#x274C; Naive approach: Sequential processing (slow and expensive)</code></div></div></div>
+<br>
+
+            <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
+public async Task&lt;List&lt;SummarizationResult&gt;&gt; BatchSummarizeTickets(List&lt;SupportTicket&gt; tickets)
+{
+    var results = new List&lt;SummarizationResult&gt;();
+    var batchSize = 10; // Process in groups to avoid overwhelming Bedrock
+    var results = new ConcurrentBag&lt;SummarizationResult&gt;();
+
+    for (int i = 0; i &lt; tickets.Count; i += batchSize)
+    {
+        var batch = tickets.Skip(i).Take(batchSize).ToList();
+        var tasks = batch.Select(async ticket =&gt;
+        {
+            try
+            {
+                var summary = await _bedrockService.SummarizeAsync(ticket.Description);
+                results.Add(new SummarizationResult { TicketId = ticket.Id, Summary = summary, Success = true });
+            }
+            catch (ThrottlingException)
+            {
+                // Backoff and retry
+                await Task.Delay(TimeSpan.FromMilliseconds(new Random().Next(100, 500)));
+                results.Add(new SummarizationResult { TicketId = ticket.Id, ErrorMessage = "Rate limited", Success = false });
+            }
+            catch (Exception ex)
+            {
+                results.Add(new SummarizationResult { TicketId = ticket.Id, ErrorMessage = ex.Message, Success = false });
+            }
+        });
+        await Task.WhenAll(tasks);
+    }
+    return results.OrderBy(r =&gt; r.TicketId).ToList();
+}
+            </code></pre></div><div class="col-12 text-center"><code>Code Sample #6 : &#x2713; Production approach: Batched processing with error recovery</code></div></div></div>
+<br>
+
+            <p><b>Why batching?</b> By processing tickets in groups of 10 and using <code>Task.WhenAll</code>, you maximize throughput while respecting Bedrock's rate limits. Error handling ensures that throttling or transient failures don't crash your entire pipeline—each ticket is tracked independently.
+            </p>
+
+            <p><b>Example usage:</b></p>
+
             <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
 var service = new BedrockService();
-string movieJson = await service.GetMovieDetails("Inception");
-Console.WriteLine(movieJson);
+var tickets = new List&lt;SupportTicket&gt; { /* ... */ };
+var results = await BatchSummarizeTickets(tickets);
+var successCount = results.Count(r =&gt; r.Success);
+Console.WriteLine($"Processed {results.Count} tickets, {successCount} succeeded");
             </code></pre></div></div></div>
 <br>
-            <p><b>Example Response from Claude:</b></p>
-            <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-json" style="font-size: 0.8rem;">
-[
-  {
-    "title": "Inception",
-    "year": 2010,
-    "category": "Movie",
-    "directors": [
-      "Christopher Nolan"
-    ],
-    "actors": [
-      "Leonardo DiCaprio",
-      "Ellen Page",
-      "Joseph Gordon-Levitt",
-      "Tom Hardy",
-      "Cillian Murphy",
-      "Michael Caine"
-    ],
-    "plot": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea in the mind of a CEO.",
-    "genre": "Science Fiction, Action, Adventure",
-    "rating": "PG-13"
-  }
-]
-            </code></pre></div></div></div>
-<br>
+
+            <p><b>Key benefits of this approach:</b></p>
+            <ul><li><b>Batching:</b> Groups requests to balance throughput and cost</li>
+                <li><b>Error Resilience:</b> Catches throttling and gracefully degrades</li>
+                <li><b>Concurrent Processing:</b> <code>Task.WhenAll</code> processes multiple tickets in parallel (respecting throttle limits)</li>
+                <li><b>Tracking:</b> Each result includes success/failure status for audit trails</li></ul>
+
+            <div class="callout-box special tip py-1"><div class="py-1"><span class="callout-icon">&#x1F4A1;</span>
+            <span class="callout-title">Production Tip</span></div>
+        <div class="callout-message"><p>Store failed ticket IDs (from <code>Success == false</code>) in a retry queue. Set up a scheduled job to retry failed submissions with exponential backoff.</p></div></div>
+
             <div class="callout-box special tip py-1"><div class="py-1"><span class="callout-icon">&#x1F4A1;</span>
             <span class="callout-title">Full Example on GitHub</span></div>
-        <div class="callout-message"><p>See the complete <code>BedrockService</code> implementation including response parsing in the <a href="https://github.com/ajaysskumar/ai-playground/blob/main/AwsBedrockExamples/Services/BedrockService.cs" target="_blank">BedrockService.cs</a> file on GitHub.</p></div></div></div></section>
+        <div class="callout-message"><p>See the complete <code>BedrockService</code> implementation including batching logic in the <a href="https://github.com/ajaysskumar/ai-playground/blob/main/AwsBedrockExamples/Services/BedrockService.cs" target="_blank">BedrockService.cs</a> file on GitHub.</p></div></div></div></section></div></section>
 
-    <section id="2ab1d7e2-5792-4990-acf9-3808191f82af" style="margin-bottom:1rem;"><h4>Summary</h4><hr class="border border-success border-1 opacity-50">
-    <div><ul><li><b>What:</b> You can now use AWS Bedrock's powerful GenAI models directly from .NET.</li>
-            <li><b>Why:</b> It's secure, scalable, and easy to integrate into your existing C# workflows.</li>
-            <li><b>How:</b> With just a few lines of code, you can list models, send prompts, and process responses—all using the official AWS SDK.</li></ul>
-        <p>
-            This approach lets you build intelligent, generative features into your .NET apps with minimal friction. Whether you're prototyping or going to production, AWS Bedrock and .NET make GenAI accessible and robust.
+    <section id="d1e145c3-a982-4ba4-92bb-0fef4fdb4f8e" style="margin-bottom:1rem;"><h4>&#x26A0;&#xFE0F; Pitfalls to Avoid &amp; Limitations to Know</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>
+            Before shipping Bedrock to production, understand these real-world constraints. They won't stop you, but they will catch you off guard if you're unprepared.
         </p>
+
+        <section id="f3d8fdb7-4476-4798-8d4e-da1ad82e4f3d" style="margin-bottom:1rem;"><h5>Regional Availability</h5><hr class="border border-success border-1 opacity-50">
+    <div><p>
+                Not all models are available in all AWS regions. Claude 3 Haiku and Sonnet are primarily in <code>us-east-1</code> and <code>us-west-2</code>. 
+                Titan Text is available in more regions. Check the <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html" target="_blank">AWS Bedrock documentation</a> 
+                for the latest region matrix before deploying.
+            </p>
+            <div class="callout-box special &#x2139;&#xFE0F; py-1"><div class="py-1"><span class="callout-icon">&#x2139;&#xFE0F;</span>
+            <span class="callout-title">Real-world gotcha</span></div>
+        <div class="callout-message"><p><code>ModelNotFound</code> errors are almost always region mismatches, not code bugs. Save debugging time by verifying region first.</p></div></div></div></section>
+
+        <section id="298e3f85-81bc-40f2-902c-f3384896917b" style="margin-bottom:1rem;"><h5>Rate Limits &amp; Quotas</h5><hr class="border border-success border-1 opacity-50">
+    <div><p>
+                Bedrock enforces account-specific quotas to protect infrastructure. The default is commonly around <b>100 requests per minute per model</b>, though this varies by region, account age, and model. 
+                Exceed your quota and you'll get a <code>ThrottlingException</code>. In production, implement exponential backoff and request a higher quota from AWS Support if needed.
+            </p>
+            <div class="callout-box special &#x2139;&#xFE0F; py-1"><div class="py-1"><span class="callout-icon">&#x2139;&#xFE0F;</span>
+            <span class="callout-title">Quota varies by account</span></div>
+        <div class="callout-message"><p>Contact AWS Support to check your specific quota and request increases. Don't assume the 100 req/min default applies to your account.</p></div></div>
+            <p><b>Pricing impact:</b> Bedrock charges per input + output token. A 1000-ticket batch can run approximately $5–20 depending on model and verbosity (check <a href="https://aws.amazon.com/bedrock/pricing/" target="_blank">current pricing</a> for exact rates). Always estimate costs before scaling.</p></div></section>
+
+        <section id="0b8d2fe8-9489-46f1-b8aa-a16144a2ad9d" style="margin-bottom:1rem;"><h5>Model Differences Matter</h5><hr class="border border-success border-1 opacity-50">
+    <div><p>
+                Claude 3 models have different characteristics (approximate values—check <a href="https://aws.amazon.com/bedrock/pricing/" target="_blank">AWS pricing page</a> for current rates):
+            </p>
+            <ul><li><b>Haiku (fastest, cheapest):</b> ~300ms latency, ~$0.25 per million input tokens. Best for simple tasks.</li>
+                <li><b>Sonnet (balanced):</b> ~800ms latency, ~$3 per million input tokens. Best for complex reasoning.</li>
+                <li><b>Token limits vary:</b> Check model docs for current context window and output limits.</li></ul>
+            <div class="callout-box special tip py-1"><div class="py-1"><span class="callout-icon">&#x1F4A1;</span>
+            <span class="callout-title">Choose the right model</span></div>
+        <div class="callout-message"><p>Start with Haiku for testing. Switch to Sonnet only if you need better reasoning quality. Always benchmark latency + cost in your use case.</p></div></div></div></section>
+
+        <section id="c2dbac4e-9bfb-4fd1-bf22-ae2f3b3cb4c2" style="margin-bottom:1rem;"><h5>Model Access Approval Delays</h5><hr class="border border-success border-1 opacity-50">
+    <div><p>
+                When you first try to use a model, Bedrock requires you to request access in the AWS Console. 
+                This usually takes <b>5–15 minutes</b> but can be instant. Don't request access at 4:59 PM on Friday if you plan to demo on Monday.
+            </p></div></section>
+
+        <section id="49924f42-6b03-4d19-995b-c7f2bd12d970" style="margin-bottom:1rem;"><h5>Common Errors &amp; How to Fix Them</h5><hr class="border border-success border-1 opacity-50">
+    <div><table style="width:100%; border-collapse: collapse; margin-top: 1rem; margin-bottom: 1rem;"><tr style="background-color: #f5f5f5;"><th style="border: 1px solid #ddd; padding: 12px; text-align: left;"><b>Error</b></th>
+                    <th style="border: 1px solid #ddd; padding: 12px; text-align: left;"><b>Cause</b></th>
+                    <th style="border: 1px solid #ddd; padding: 12px; text-align: left;"><b>Fix</b></th></tr>
+                <tr><td style="border: 1px solid #ddd; padding: 12px;"><code>ResourceNotFoundException</code></td>
+                    <td style="border: 1px solid #ddd; padding: 12px;">Model not available or not enabled</td>
+                    <td style="border: 1px solid #ddd; padding: 12px;">AWS Console → Bedrock → Model access. Request access and wait 5–15 min.</td></tr>
+                <tr><td style="border: 1px solid #ddd; padding: 12px;"><code>ValidationException</code></td>
+                    <td style="border: 1px solid #ddd; padding: 12px;">Malformed request (bad JSON structure)</td>
+                    <td style="border: 1px solid #ddd; padding: 12px;">Verify your request JSON matches Bedrock's schema and <code>ContentType</code> is <code>application/json</code></td></tr>
+                <tr><td style="border: 1px solid #ddd; padding: 12px;"><code>AccessDeniedException</code></td>
+                    <td style="border: 1px solid #ddd; padding: 12px;">IAM permissions insufficient</td>
+                    <td style="border: 1px solid #ddd; padding: 12px;">Verify your IAM user/role has <code>bedrock:InvokeModel</code> permissions</td></tr>
+                <tr><td style="border: 1px solid #ddd; padding: 12px;"><code>ThrottlingException</code></td>
+                    <td style="border: 1px solid #ddd; padding: 12px;">Rate limit hit (100 req/min default)</td>
+                    <td style="border: 1px solid #ddd; padding: 12px;">Implement exponential backoff. Request quota increase from AWS Support if you need higher throughput.</td></tr></table></div></section></div></section>
+
+    <section id="af0635dd-7be6-43e9-8b52-132199fc1f3d" style="margin-bottom:1rem;"><h4>8. Summary</h4><hr class="border border-success border-1 opacity-50">
+    <div><ul><li><b>What:</b> AWS Bedrock is a managed service that abstracts vendor-specific AI APIs into a unified API interface (with C# SDK support).</li>
+            <li><b>Why:</b> It reduces friction: unified auth (IAM), consistent error handling, and easy model switching.</li>
+            <li><b>How:</b> Use <code>InvokeModel</code> for single requests, <code>Converse API</code> for multi-turn conversations. In production, always batch, handle throttling, and forecast costs.</li></ul>
+        <p>
+            This approach lets you build intelligent, generative features into your .NET apps with clarity and control. Whether you're prototyping or going to production, AWS Bedrock and .NET make GenAI accessible and robust.
+        </p>
+
+        <div class="callout-box special tip py-1"><div class="py-1"><span class="callout-icon">&#x1F4A1;</span>
+            <span class="callout-title">&#x1F4A1; If You Remember Only One Thing</span></div>
+        <div class="callout-message"><p><b>Bedrock = abstraction layer.</b> You control: the model you invoke, the prompt you send, and the cost/quality tradeoff. Start with <code>InvokeModel</code>, add error handling, batch in production, and always check region availability first when things break.
+            </p></div></div>
+
         <div class="callout-box special &#x2139;&#xFE0F; py-1"><div class="py-1"><span class="callout-icon">&#x2139;&#xFE0F;</span>
             <span class="callout-title">Looking for advanced/production setup?</span></div>
         <div class="callout-message"><p>For IAM roles, troubleshooting, and advanced authentication, see <a href="/blog/ai/bedrock/advanced">AWS Bedrock with .NET: Advanced Integration & Production Setup</a>.</p></div></div></div></section>
 
-    <section id="fec7265b-9776-4009-808e-d5d846c86ab8" style="margin-bottom:1rem;"><h4>References &amp; Further Reading</h4><hr class="border border-success border-1 opacity-50">
+    <section id="5997efb0-ec8e-4bc8-a6ce-574f123093fb" style="margin-bottom:1rem;"><h4>9. References &amp; Further Reading</h4><hr class="border border-success border-1 opacity-50">
     <div><ul><li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html" target="_blank">AWS Bedrock Documentation</a></li>
             <li><a href="https://docs.aws.amazon.com/sdk-for-net/v3/developer-guide/" target="_blank">AWS SDK for .NET</a></li>
             <li><a href="https://github.com/ajaysskumar/ai-playground/blob/main/AwsBedrockExamples/Services/BedrockService.cs" target="_blank">BedrockService.cs on GitHub</a></li></ul></div></section>
@@ -297,9 +541,9 @@ Console.WriteLine(movieJson);
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-            </div><!--Blazor:{"prerenderId":"239122e9097e4f2b867119227ca07645"}-->
+            </div><!--Blazor:{"prerenderId":"f4aa3ed17d5c446aa05ebcd6ed81b412"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80U0VoV1l6VkVZMWcyUmt0dFIzUk9kVm90Y0VvNVFWbEtSSFY0ZG5scFpIcHVja0ZqZUdsd1ZXa3RWMWx1TFVOR2VHOXdSRFJ5UVZCZmJWUlVSbEUwWmxkRFNtRkdlR1I2TURKdll5MXZkalkxZVd0MGEzTkpZa0ZEWmtZNExXbE9WblpOYVZGTmMzTnRabmh5Vm1SdU5sSXllVXhoVWsxdVFYcFVjMnR4VkZNelQyazNkSHBXVW5ZdGVXbHFVVkI2VVZKNE9XOUZJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80VG5wYU0zTkdkVTlpT1VSb2NuSnJja3RyZVhRd2FqWldTVE0zV1RocGRUWnFhV0pLYlU1VFJHNVNMVTFNWlcxYWVEVmxlV3QxYkZkSGIxUllWRlIzUWpsUmNHODRUQzA1ZHpSaWNEZFBOMTloU1dSWVdsQlRhSHB0U25RNWNsVkhka1JQYXpaWVdrazRaM0EyVGtGYU5tWnlZMWMwTjNrdGFuaHdiME4wWmpGVGN6ZEVPRlZwT0dkTUxYQTNhV1JHT0dKWmMzcG5JaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
