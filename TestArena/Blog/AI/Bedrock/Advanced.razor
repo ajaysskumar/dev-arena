@@ -301,11 +301,6 @@ public async Task&lt;APIGatewayProxyResponse&gt; Handler(APIGatewayProxyRequest 
             <li><b>Never hardcode credentials</b> in source code or config files. Always use the credential chain (env vars, roles, IMDS).</li>
             <li><b>Test with AWS CLI first.</b> If credentials work with the CLI, they'll work with your .NET app.</li>
         </ul>
-        <CalloutBox Type="info" Title="The Complete Picture">
-            <p>
-                Advanced authentication isn't complicated—it's just understanding the credential chain and picking the right source for your deployment environment. Once you've set up a role, your code never changes. That's the power of role-based access.
-            </p>
-        </CalloutBox>
     </Section>
 
     <CalloutBox Type="info" Title=" Next in the Series">
