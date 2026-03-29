@@ -20,11 +20,11 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" /> -->
     
-<!--Blazor:{"type":"webassembly","prerenderId":"fd7349d6c13a444e83b0e245d1ca43f1","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>Connection Pooling in SQL Server: What, When, and How</title><meta property="og:url" content="http://127.0.0.1:5050/blog/connection-pooling-sql-server" />
+<!--Blazor:{"type":"webassembly","prerenderId":"8191ea304e924eddb4470d28ce2908aa","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>Connection Pooling in SQL Server: What, When, and How</title><meta property="og:url" content="http://127.0.0.1:5050/blog/connection-pooling-sql-server" />
     <meta property="og:title" content="Connection Pooling in SQL Server: What, When, and How" />
     <meta property="og:description" content="Connection Pooling in SQL Server: What, When, and How" />
     <meta property="og:image" content="http://127.0.0.1:5050/images/blog/connection-pooling-intro/banner.png" />
-    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"fd7349d6c13a444e83b0e245d1ca43f1"}-->
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"8191ea304e924eddb4470d28ce2908aa"}-->
 </head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -40,7 +40,7 @@
 
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"56c60a16017247db8c41fc0b292f705c","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"4277e8b56c6d42fdbb941125683196c5","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -87,13 +87,13 @@
                     
                     <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 14 Jun 2025</span></div></div></div></div></div></header>
 
-    <section id="59a52a55-3e50-4c6f-bc58-1a7baa17b1f1" style="margin-bottom:1rem;"><h4>What is Connection Pooling?</h4><hr class="border border-success border-1 opacity-50">
+    <section id="027cd8ae-27eb-43e0-904b-cafc3cc8ecdf" style="margin-bottom:1rem;"><h4>What is Connection Pooling?</h4><hr class="border border-success border-1 opacity-50">
     <div>
         Imagine you run a busy coffee shop. Every time a customer walks in, you build a new coffee machine just for their order, then throw it away when they're done. Sounds wasteful, right? That's what happens if your application creates a new database connection for every request! Connection pooling is like having a set of ready-to-use coffee machines (connections) that you can quickly hand out to customers (requests) as needed, then clean and reuse for the next customer.
         <br><br>
         In technical terms, connection pooling is a technique used to reduce the overhead of repeatedly opening and closing database connections. Instead of creating a new connection every time, a pool of connections is maintained and reused, improving performance and resource utilization.
     </div></section>
-    <section id="75b33e60-24da-44b0-ad70-edf1dac62d83" style="margin-bottom:1rem;"><h4>How Does Connection Pooling Work Internally?</h4><hr class="border border-success border-1 opacity-50">
+    <section id="15c8de3f-52c0-4ec4-8526-c316f25d2e9d" style="margin-bottom:1rem;"><h4>How Does Connection Pooling Work Internally?</h4><hr class="border border-success border-1 opacity-50">
     <div><style>
     .image-header {
         margin: 0 auto; /* Centers the div */
@@ -149,7 +149,7 @@
             <li>If available, it is reused. If not, a new connection is created (up to <code>Max Pool Size</code>).</li>
             <li>When <code>Close()</code> or <code>Dispose()</code> is called, the connection is returned to the pool (not actually closed).</li>
             <li>If the pool is full, the connection is closed and discarded.</li></ul></div></section>
-    <section id="46ac8cb8-b262-4bfe-a39d-702c5cfe8fd8" style="margin-bottom:1rem;"><h4>When is Connection Pooling Useful?</h4><hr class="border border-success border-1 opacity-50">
+    <section id="78ef5424-2415-4d81-829a-e061b4d86ed8" style="margin-bottom:1rem;"><h4>When is Connection Pooling Useful?</h4><hr class="border border-success border-1 opacity-50">
     <div>
         Connection pooling is especially useful in high-traffic applications, such as web APIs or enterprise services, where many users or processes need to access the database concurrently. Without pooling, the cost of establishing and tearing down connections can become a major bottleneck, leading to slow response times and increased load on the database server.
         <br><br>
@@ -158,7 +158,7 @@
         <div class="callout-message">
             In a .NET web API serving thousands of requests per minute, enabling connection pooling can reduce average response times by up to 50% and significantly lower CPU usage on both the application and SQL Server.
         </div></div></div></section>
-    <section id="32498d00-fc6b-4bdd-bc63-911024237e90" style="margin-bottom:1rem;"><h4>How Does Connection Pooling Work in SQL Server?</h4><hr class="border border-success border-1 opacity-50">
+    <section id="9aa74ab7-5a92-4f10-8c2f-2d23a58a5eb3" style="margin-bottom:1rem;"><h4>How Does Connection Pooling Work in SQL Server?</h4><hr class="border border-success border-1 opacity-50">
     <div>
         In .NET, connection pooling is managed automatically by ADO.NET when you use classes like <code>SqlConnection</code>. The pool is keyed by the connection string—connections with the same string are pooled together. When you call <code>Open()</code> on a <code>SqlConnection</code>, ADO.NET checks if a suitable connection is available in the pool. If so, it reuses it; otherwise, it creates a new one (up to the pool's maximum size).
         <br><br>
@@ -182,7 +182,7 @@ var connectionString = "Server=localhost;Database=MyDb;User Id=sa;Password=your_
             <li><b>Connection Timeout</b>: The time (in seconds) to wait for a connection to become available before throwing an error. Default is <code>15</code> seconds.</li>
             <li><b>Load Balance Timeout</b>: The minimum time (in seconds) a connection lives in the pool before being destroyed. Default is <code>0</code> (no timeout).</li>
             <li><b>Enlist</b>: Whether the connection is automatically enlisted in the current transaction context. Default is <code>true</code>.</li></ul></div></section>
-    <section id="72a1bbdc-a2a5-4086-b78f-14473b79b2c9" style="margin-bottom:1rem;"><h4>Common Pitfalls and Troubleshooting</h4><hr class="border border-success border-1 opacity-50">
+    <section id="faefa0bb-37ef-4d3b-b841-9a6b54bd6173" style="margin-bottom:1rem;"><h4>Common Pitfalls and Troubleshooting</h4><hr class="border border-success border-1 opacity-50">
     <div><ul><li><b>Connection Leaks:</b> Not disposing/closing connections will eventually exhaust the pool. Always use <code>using</code> blocks.</li>
             <li><b>Pool Fragmentation:</b> Changing connection string parameters (even whitespace) creates new pools. Use consistent connection strings.</li>
             <li><b>Pool Exhaustion:</b> If all connections are in use, new requests wait for a free connection or timeout. Monitor and increase <code>Max Pool Size</code> if needed.</li>
@@ -192,7 +192,7 @@ var connectionString = "Server=localhost;Database=MyDb;User Id=sa;Password=your_
         <div class="callout-message">
             If you see errors like <code>Timeout expired. The timeout period elapsed prior to obtaining a connection from the pool</code>, check for connection leaks and pool size limits.
         </div></div></div></section>
-    <section id="f1d23fd8-f2eb-401d-a336-5826e3df4eaa" style="margin-bottom:1rem;"><h4>Common Problems Solved by Connection Pooling</h4><hr class="border border-success border-1 opacity-50">
+    <section id="bd413e49-7537-4362-9f82-43a6b85a98da" style="margin-bottom:1rem;"><h4>Common Problems Solved by Connection Pooling</h4><hr class="border border-success border-1 opacity-50">
     <div><ul><li><b>Performance:</b> Reduces latency by reusing existing connections.</li>
             <li><b>Resource Management:</b> Prevents exhausting database server resources by limiting the number of concurrent connections.</li>
             <li><b>Scalability:</b> Supports high concurrency scenarios efficiently.</li>
@@ -202,7 +202,7 @@ var connectionString = "Server=localhost;Database=MyDb;User Id=sa;Password=your_
         <div class="callout-message">
             Always close/dispose your <code>SqlConnection</code> objects promptly (e.g., with <code>using</code> blocks) to return them to the pool.
         </div></div></div></section>
-    <section id="dfe17396-421b-4a57-9204-5be3b1b4f16c" style="margin-bottom:1rem;"><h4>Advanced Pooling Scenarios</h4><hr class="border border-success border-1 opacity-50">
+    <section id="79613e5f-1719-4c5c-975b-68d15eb06dc7" style="margin-bottom:1rem;"><h4>Advanced Pooling Scenarios</h4><hr class="border border-success border-1 opacity-50">
     <div><ul><li><b>Clearing the Pool:</b> You can clear the pool manually if needed (e.g., after a fatal error):
                 <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
 SqlConnection.ClearAllPools();
@@ -210,20 +210,20 @@ SqlConnection.ClearAllPools();
 <br></li>
             <li><b>Handling Pool Exhaustion:</b> If all connections are in use, new requests will wait (up to the connection timeout). Monitor and tune <code>Max Pool Size</code> as needed.</li>
             <li><b>Pooling and Transactions:</b> Connections are only returned to the pool when fully closed and not enlisted in a transaction.</li></ul></div></section>
-    <section id="87d48774-c767-40c4-9a96-cd3f3ce98566" style="margin-bottom:1rem;"><h4>Best Practices for Connection Pooling</h4><hr class="border border-success border-1 opacity-50">
+    <section id="a6feb8e2-fcef-4853-acaf-73b8d4e7e308" style="margin-bottom:1rem;"><h4>Best Practices for Connection Pooling</h4><hr class="border border-success border-1 opacity-50">
     <div><ul><li>Always use <code>using</code> blocks to ensure connections are returned to the pool.</li>
             <li>Keep connections open only as long as needed.</li>
             <li>Use consistent connection strings to avoid pool fragmentation.</li>
             <li>Monitor pool usage and tune <code>Min/Max Pool Size</code> as needed.</li>
             <li>Store connection strings securely (e.g., environment variables, secrets manager).</li></ul></div></section>
-    <section id="2e734067-6aaa-4da1-99f2-c347494eb087" style="margin-bottom:1rem;"><h4>Pooling Beyond SQL Server</h4><hr class="border border-success border-1 opacity-50">
+    <section id="c460d9af-6910-46ea-a874-0b2c688d974e" style="margin-bottom:1rem;"><h4>Pooling Beyond SQL Server</h4><hr class="border border-success border-1 opacity-50">
     <div>
         Connection pooling is available for other ADO.NET providers (e.g., Npgsql for PostgreSQL, MySqlConnector for MySQL). Each provider may have its own pooling implementation and settings—refer to their documentation for details.
     </div></section>
-    <section id="785174a6-efe0-4a4b-af2a-dded39147afb" style="margin-bottom:1rem;"><h4>Further Reading &amp; References</h4><hr class="border border-success border-1 opacity-50">
+    <section id="3e46c431-c309-4282-9257-ff8c9c511351" style="margin-bottom:1rem;"><h4>Further Reading &amp; References</h4><hr class="border border-success border-1 opacity-50">
     <div><ul><li><a href="https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/sql-server-connection-pooling">Microsoft Docs: SQL Server Connection Pooling (ADO.NET)</a></li>
             <li><a href="https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures#connection-pooling">Connection Pooling in Modern Web Apps</a></li></ul></div></section>
-    <section id="6356243f-4eba-481c-9c13-4d6d6946c7c1" style="margin-bottom:1rem;"><h4>Summary</h4><hr class="border border-success border-1 opacity-50">
+    <section id="173591ef-eae0-4376-aea1-fcec4043082e" style="margin-bottom:1rem;"><h4>Summary</h4><hr class="border border-success border-1 opacity-50">
     <div>
         Connection pooling is a foundational performance optimization for any .NET application using SQL Server. By reusing connections, you save time, resources, and money—just like a coffee shop reuses its machines instead of building new ones for every customer. Remember to use <code>using</code> blocks, monitor your pool settings, and enjoy smoother, faster database operations!
     </div></section>
@@ -247,9 +247,9 @@ SqlConnection.ClearAllPools();
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-            </div><!--Blazor:{"prerenderId":"56c60a16017247db8c41fc0b292f705c"}-->
+            </div><!--Blazor:{"prerenderId":"4277e8b56c6d42fdbb941125683196c5"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80VUZkemNHMVZiMlpTVWt0ME1WSmtNbEpCWlhkeVdWbEVSVkZxWTJGSVZWUXdSMTlaYVZZMldVZHVPWEp1ZVVWcFdtcHZURU5yTlhadWMwWktkbkp1TlRSdFRqRTNYMDVuT0hOSWJ6VnliV1pPUVhsVk1HdHJjMkZtV0UwdFdYWlBjRXhaTFMwdFVsVm9OSHBIYjFWRldHOVlWMG90VDNKQk0ySkRXVWRKTXpKc1pYb3lkMjlZZVhwRFNVZHVlV295YVdFNFdsQTBJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UTFoSlVpMWphMVJKWkVkME56RjBNeTB0ZDB4MWFFSk1NV1ZCVldKaGEydG5RVU14UlVkbVNsTklaRFZ4YWxGbmMwRlZPVWRUV1dWamVXeEJVbmhFTVZWVlluTlhOV2RGV0RNNGVWQkxaMFZsYTNaR1kwYzBSekk1WVY5MGJISm9iVUZYTjJNMlRFSnRhbFZYUkZkT1prMU9URWx4TUZGRGNGVmtZbVZtZUVZeFZWRndOMmxRVEhab2RFOUROV3RHTjFkNWRUZEJJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
