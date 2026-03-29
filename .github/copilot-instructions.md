@@ -38,4 +38,9 @@ Skills provide specialised workflows for common tasks in this repository.
   <description>**WORKFLOW SKILL** — Generate industry-standard software engineering flow diagrams. USE FOR: "create a flowchart", "draw a sequence diagram", "architecture diagram", "state machine diagram", "draw.io diagram", "mermaid diagram", "CI/CD pipeline diagram", "system design diagram", "ER diagram", "class diagram", "data flow diagram". Produces diagrams in Mermaid (validated + previewed via MCP tools) or draw.io XML format. DO NOT USE FOR: general documentation writing, code generation, non-diagram visuals.</description>
   <file>.github/skills/flow-diagram/SKILL.md</file>
 </skill>
+<skill>
+  <name>aws-bedrock</name>
+  <description>**WORKFLOW SKILL** — AWS Bedrock tech stack best practices for .NET from development to production. USE FOR: implementing Bedrock Invoke API, Converse API, Converse with Tools, Guardrails, Claude model integration, AWS SDK setup, IAM authentication, EC2/Lambda/ECS credential patterns, token optimisation, cost reduction, streaming responses, CloudWatch observability, distributed tracing with X-Ray, production hardening, error handling, retry policies, model selection. Trigger phrases: aws bedrock, converse api, invoke api, claude model, bedrock guardrails, bedrock tools, bedrock streaming, bedrock production, bedrock observability, bedrock tracing, bedrock cost, bedrock optimisation, AmazonBedrockRuntimeClient, AWSSDK.BedrockRuntime. DO NOT USE FOR: general AI/ML theory, non-Bedrock AWS services, OpenAI-specific patterns.</description>
+  <file>.github/skills/aws-bedrock/SKILL.md</file>
+</skill>
 </skills>

@@ -28,6 +28,7 @@ You write with a **conversational, story-driven, beginner-friendly** voice. You:
    - `TestArena/Blog/TDD/Intro.razor` (conceptual/educational topics)
    - `TestArena/Blog/TDD/WorkingWithDependencies.razor` (dependency/testing topics)
 3. Read `TestArena/Blog/Common/NavigationUtils/SiteMap.cs` to understand existing entries
+4. **If the article topic involves AWS Bedrock**, load and follow `.github/skills/aws-bedrock/SKILL.md` BEFORE writing any code examples or technical content. That skill is the single source of truth for Bedrock API patterns, authentication, optimisation, observability, and model selection.
 
 ---
 
@@ -218,31 +219,82 @@ Create `TestArena/Blog/<Category>/<SubFolder>/Index.razor` with:
 
 ## Quality Checklist
 
-Before completing, verify:
+Run through this checklist before completing any article. Items marked **MUST** are non-negotiable — every article needs them. Items marked **OPTIONAL** add polish but may not apply to every topic.
 
-- [ ] `@page` directive URL matches SiteMap `RelativePath` exactly
-- [ ] `@code` block `RelativePath` string matches `@page`
-- [ ] `SiteMap.cs` has new entry with correct constructor parameters
-- [ ] `sitemap.xml` has new URL entry
-- [ ] No `<h1>`, `<h2>`, `<h3>` tags — only `<Section Level="4">` and higher
-- [ ] All code snippets use `<CodeSnippet>` component
-- [ ] All `<` and `>` in code are escaped as `&lt;` and `&gt;`
-- [ ] Article opens with relatable hook/problem
-- [ ] Article ends with Summary section
-- [ ] Word count is 1200–1800 words
-- [ ] Uses analogies to explain abstract concepts
-- [ ] Callout boxes for tips, warnings, notes
-- [ ] If part of a series, references and links previous article
+### Structure & Placement
 
----
+- [ ] **MUST** — `@page` directive URL matches SiteMap `RelativePath` exactly
+- [ ] **MUST** — `@code` block `RelativePath` string matches `@page`
+- [ ] **MUST** — `SiteMap.cs` has new entry with correct constructor parameters
+- [ ] **MUST** — `sitemap.xml` has new URL entry with today's date
+- [ ] **MUST** — No raw `<h1>`, `<h2>`, `<h3>` tags — only `<Section Level="4">` and higher
+- [ ] **MUST** — All four `@using` statements present (`TestArena.Blog.Common`, `TestArena.Blog`, `System.Linq`, `TestArena.Blog.Common.NavigationUtils`)
+- [ ] **MUST** — Content wrapped in `<BlogContainer>` → `<Header>` → sections
 
-## Series Continuity
+### Opening & Hook
 
-If writing an article in a series:
-1. Read the previous article in the series
-2. Reference it in the opening: "In the previous article, we explored..."
-3. Link to it using `<a href="/blog/...">` tags
-4. Use consistent tags in SiteMap entry
+- [ ] **MUST** — Opens with a relatable problem or scenario (not a definition)
+- [ ] **MUST** — Hook uses "you" / "your" to make it personal
+- [ ] **MUST** — Hook is vivid and specific, not vague or abstract
+- [ ] **OPTIONAL** — Hook uses a story, analogy, or memorable image
+
+### Content Quality
+
+- [ ] **MUST** — Follows the What / When / How structure
+- [ ] **MUST** — Word count is 1200–1800 words
+- [ ] **MUST** — Every claim or technique is supported by a code example or concrete illustration
+- [ ] **MUST** — No jargon is used without being explained on first use
+- [ ] **MUST** — Transitions between sections are smooth (no abrupt topic jumps)
+- [ ] **OPTIONAL** — Uses at least one analogy to ground an abstract concept
+- [ ] **OPTIONAL** — Includes a comparison table (this technique vs alternatives)
+- [ ] **OPTIONAL** — Includes a "common pitfalls" or "troubleshooting" section
+
+### Code Examples
+
+- [ ] **MUST** — All multi-line code uses `<CodeSnippet Language="..." Number="N">` component
+- [ ] **MUST** — All `<` and `>` inside code are escaped as `&lt;` and `&gt;`
+- [ ] **MUST** — Code snippets are complete enough to copy-paste and understand (no mystery imports or undefined variables)
+- [ ] **MUST** — Code examples build on each other in logical order
+- [ ] **OPTIONAL** — Code snippets have a `Description` attribute summarising what they show
+- [ ] **OPTIONAL** — Includes a "full working example" or links to a runnable repo
+
+### Callout Boxes & Visual Breaks
+
+- [ ] **MUST** — At least one `<CalloutBox>` used (info, tip, or warning)
+- [ ] **MUST** — Warnings are used for security risks, breaking changes, or common mistakes
+- [ ] **OPTIONAL** — Tips are used for time-saving shortcuts or best practices
+- [ ] **OPTIONAL** — Info boxes are used for context, history, or "why this matters"
+- [ ] **OPTIONAL** — Includes a `<BlogImage>` diagram, architecture flow, or screenshot
+
+### Readability & Engagement
+
+- [ ] **MUST** — No wall-of-text paragraphs — break up with lists, code, callouts, or sub-sections
+- [ ] **MUST** — Sentences are short and direct — aim for ≤ 25 words per sentence on average
+- [ ] **MUST** — Uses bold (`<b>`) for key terms and important phrases
+- [ ] **OPTIONAL** — Uses rhetorical questions to re-engage the reader mid-article
+- [ ] **OPTIONAL** — Uses emoji in section headings sparingly (🎭, 🔮, 🏗️, 🎯, 🛡️)
+- [ ] **OPTIONAL** — Uses bullet points with bold lead-ins for scannable lists
+
+### Closing & Summary
+
+- [ ] **MUST** — Ends with a Summary or wrap-up section
+- [ ] **MUST** — Summary recaps key takeaways (not just "we learned about X")
+- [ ] **OPTIONAL** — Summary suggests a next step or call to action ("Try this in your project")
+- [ ] **OPTIONAL** — Links to related articles or the next article in the series
+
+### Series Continuity (only when part of a series)
+
+- [ ] **MUST** — References the previous article with an `<a href>` link
+- [ ] **MUST** — Uses consistent tags in the SiteMap entry
+- [ ] **OPTIONAL** — Opens with a brief recap of what was covered last time
+- [ ] **OPTIONAL** — Ends with a teaser for the next article in the series
+
+### SEO & Discoverability
+
+- [ ] **MUST** — Title is clear and descriptive (not clever-but-vague)
+- [ ] **MUST** — SiteMap tags are relevant and specific (not generic like "programming")
+- [ ] **OPTIONAL** — Article URL slug contains the primary keyword
+- [ ] **OPTIONAL** — Opening paragraph naturally includes the target keyword
 
 ---
 
