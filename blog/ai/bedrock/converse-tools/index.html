@@ -20,11 +20,11 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" /> -->
     
-<!--Blazor:{"type":"webassembly","prerenderId":"037a130a33844e45b9c0d0b1dedbace5","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>AWS Bedrock with .NET: Converse API with Tools</title><meta property="og:url" content="http://127.0.0.1:5050/blog/ai/bedrock/converse-tools" />
+<!--Blazor:{"type":"webassembly","prerenderId":"23fbd2a31b104dda9855939fed4be7e5","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>AWS Bedrock with .NET: Converse API with Tools</title><meta property="og:url" content="http://127.0.0.1:5050/blog/ai/bedrock/converse-tools" />
     <meta property="og:title" content="AWS Bedrock with .NET: Converse API with Tools" />
     <meta property="og:description" content="" />
     <meta property="og:image" content="http://127.0.0.1:5050/images/blog/ai/bedrock/banner.svg" />
-    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"037a130a33844e45b9c0d0b1dedbace5"}-->
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"23fbd2a31b104dda9855939fed4be7e5"}-->
 </head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -40,7 +40,7 @@
 
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"6640ce1a2b5140ec88b506640ddfe6f0","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"2a676bc1a8414ec6969e2ab3d36d3a5e","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -91,7 +91,7 @@
                     
                     <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 07 Feb 2026</span></div></div></div></div></div></header>
 
-    <section id="4ac5698f-08e9-4461-b59e-f490dac6fdb2" style="margin-bottom:1rem;"><h4>The Problem: You Can&#x27;t Trust Plain Text</h4><hr class="border border-success border-1 opacity-50">
+    <section id="f88efde8-91ff-4dd3-9252-1e474e3e03c4" style="margin-bottom:1rem;"><h4>The Problem: You Can&#x27;t Trust Plain Text</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             You ask the AI for movie details. It responds with a beautifully written paragraph. Now your code needs to extract the title, the year, the director, and the rating from that paragraph. So you write a regex. It works — until the model rephrases something slightly differently, and suddenly your parser breaks silently in production.
         </p>
@@ -102,7 +102,7 @@
             <span class="callout-title">The core problem</span></div>
         <div class="callout-message"><p>Without a contract between your code and the model's output, every response is a gamble. One rephrase and your downstream logic breaks.</p></div></div></div></section>
 
-    <section id="b23163ad-52a1-4477-8ad0-16a6fe0b7699" style="margin-bottom:1rem;"><h4>What is the Converse API with Tools?</h4><hr class="border border-success border-1 opacity-50">
+    <section id="a02b7f13-cfda-4616-9921-0b973e5eb720" style="margin-bottom:1rem;"><h4>What is the Converse API with Tools?</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             AWS Bedrock's <b>Converse API</b> can be supercharged with <b>tools</b>—structured interfaces that let the model call functions, enforce output schemas, or interact with external systems. This enables developers to build AI agents that not only chat, but also return structured data, trigger workflows, or integrate with business logic.
         </p>
@@ -115,7 +115,7 @@
                 Tools let you move beyond plain text. They enable the model to return data in a format your application can consume directly—no more brittle prompt engineering or regex parsing!
             </p></div></div></div></section>
 
-    <section id="4b4aeb51-566a-4e46-90bf-683e3562e9b5" style="margin-bottom:1rem;"><h4>When and Why to Use Tools with Converse API</h4><hr class="border border-success border-1 opacity-50">
+    <section id="27fa3820-d39a-4439-a16b-ad60110f7785" style="margin-bottom:1rem;"><h4>When and Why to Use Tools with Converse API</h4><hr class="border border-success border-1 opacity-50">
     <div><ul><li><b>Structured Output:</b> Enforce JSON schemas for reliable, machine-readable responses.</li>
             <li><b>Function Calling:</b> Let the model trigger business logic, database queries, or API calls.</li>
             <li><b>Data Extraction:</b> Extract entities, summaries, or analytics from unstructured text.</li>
@@ -124,16 +124,16 @@
             Use tools when you need more than just a chat—you want the AI to work as part of your system.
         </p></div></section>
 
-    <section id="0abc8e7c-e10f-4616-8c2b-ed3aa96daace" style="margin-bottom:1rem;"><h4>How: Building a Movie Info Extractor with Converse Tools</h4><hr class="border border-success border-1 opacity-50">
-    <div><section id="909c3329-44b8-401c-8d38-cd2c1ed9f04b" style="margin-bottom:1rem;"><h5>1. Prerequisites</h5><hr class="border border-success border-1 opacity-50">
+    <section id="9d7c3e0f-c6a6-427a-b741-97e8c18331ce" style="margin-bottom:1rem;"><h4>How: Building a Movie Info Extractor with Converse Tools</h4><hr class="border border-success border-1 opacity-50">
+    <div><section id="efdfa825-ff6d-4f3c-b2bd-c767ed130226" style="margin-bottom:1rem;"><h5>1. Prerequisites</h5><hr class="border border-success border-1 opacity-50">
     <div><ul><li>AWS account with Bedrock access enabled.</li>
                 <li>AWS credentials with permissions for Bedrock Converse API and tools.</li>
                 <li>.NET 8 or later SDK installed.</li>
                 <li>NuGet package: <b>AWSSDK.BedrockRuntime</b></li></ul></div></section>
-        <section id="8162e387-4211-4e7e-a7ba-2d549615f430" style="margin-bottom:1rem;"><h5>2. Service Implementation Example</h5><hr class="border border-success border-1 opacity-50">
+        <section id="0382f97a-38b0-4f20-b607-d51128508502" style="margin-bottom:1rem;"><h5>2. Service Implementation Example</h5><hr class="border border-success border-1 opacity-50">
     <div><p>This example is broken into smaller steps for clarity. Let's walk through each part of the service.</p>
 
-            <section id="4f375276-1e29-4f2a-a996-815036db8f77" style="margin-bottom:1rem;"><h6>Step 1: Service Setup</h6><hr class="border border-success border-1 opacity-50">
+            <section id="547722c6-c5bb-4d3f-b328-bdf7f7f1ac6a" style="margin-bottom:1rem;"><h6>Step 1: Service Setup</h6><hr class="border border-success border-1 opacity-50">
     <div><p>Define the service class with a Bedrock client and the model ID. The client is initialised with the target AWS region.</p>
                 <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
 using Amazon.BedrockRuntime;
@@ -154,7 +154,7 @@ public class BedrockWithConverseToolsService
                 </code></pre></div></div></div>
 <br></div></section>
 
-            <section id="eda853af-a495-4d77-9a01-44c88974e99b" style="margin-bottom:1rem;"><h6>Step 2: Sending the Request</h6><hr class="border border-success border-1 opacity-50">
+            <section id="40f98751-ad42-4f41-8935-09e09dcdab38" style="margin-bottom:1rem;"><h6>Step 2: Sending the Request</h6><hr class="border border-success border-1 opacity-50">
     <div><p>Build the user message with the movie query, attach the tool configuration, and send the request to Bedrock. After receiving the response, locate the tool use block that contains the structured output.</p>
                 <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
 public async Task&lt;string&gt; GetMovieDetailsAsJson(string movieQuery)
@@ -203,7 +203,7 @@ public async Task&lt;string&gt; GetMovieDetailsAsJson(string movieQuery)
                 </code></pre></div></div></div>
 <br></div></section>
 
-            <section id="afb6cd93-00ae-4011-9eee-c3c32eb8011d" style="margin-bottom:1rem;"><h6>Step 3: Defining the Tool Schema</h6><hr class="border border-success border-1 opacity-50">
+            <section id="c7ffc707-5702-4f9f-ad78-3ef3ba0ec4bb" style="margin-bottom:1rem;"><h6>Step 3: Defining the Tool Schema</h6><hr class="border border-success border-1 opacity-50">
     <div><p>The tool schema is the key piece — it tells the model exactly what shape the output must take. We define a <code>movies</code> array with required fields for each entry. Setting <code>ToolChoice</code> to the specific tool name forces the model to always use it.</p>
                 <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
 private ToolConfiguration BuildToolConfiguration()
@@ -267,7 +267,7 @@ private ToolConfiguration BuildToolConfiguration()
                 </code></pre></div></div></div>
 <br></div></section>
 
-            <section id="6f535617-4ccb-4971-9eac-107e056992ea" style="margin-bottom:1rem;"><h6>Step 4: Extracting the Structured Output</h6><hr class="border border-success border-1 opacity-50">
+            <section id="69c0b34e-9905-4dd8-96de-ed8be13d1f1e" style="margin-bottom:1rem;"><h6>Step 4: Extracting the Structured Output</h6><hr class="border border-success border-1 opacity-50">
     <div><p>Once the model responds, we parse the <code>Document</code> object from the tool input into a typed list of movies and serialise it as formatted JSON.</p>
                 <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
 /// &lt;summary&gt;
@@ -326,12 +326,12 @@ private string ExtractMovieInfoAsJson(Document toolInput)
             <div class="callout-box special tip py-1"><div class="py-1"><span class="callout-icon">&#x1F4A1;</span>
             <span class="callout-title">Full Example on GitHub</span></div>
         <div class="callout-message"><p>See the complete implementation and usage in the <a href="https://github.com/ajaysskumar/ai-playground/blob/main/AwsBedrockExamples/Services/BedrockWithConverseToolsService.cs" target="_blank">BedrockWithConverseToolsService.cs</a> file on GitHub.</p></div></div></div></section>
-        <section id="3203e290-955d-45f7-aff1-2261aa03ab40" style="margin-bottom:1rem;"><h5>3. How the Example Works</h5><hr class="border border-success border-1 opacity-50">
+        <section id="e0155e01-6c81-4217-b4d9-2d6cd29d53db" style="margin-bottom:1rem;"><h5>3. How the Example Works</h5><hr class="border border-success border-1 opacity-50">
     <div><ul><li><b>Tool Schema:</b> Defines exactly what fields the model must return for each movie.</li>
                 <li><b>System Prompt:</b> Sets the AI’s persona as a movie expert.</li>
                 <li><b>Tool Use:</b> The model is required to use the tool and return structured data.</li>
                 <li><b>Extraction:</b> The code parses the tool output and returns formatted JSON.</li></ul></div></section>
-        <section id="3727f078-a3d9-40c9-8586-9a361f01af6a" style="margin-bottom:1rem;"><h5>4. Example Use Case: Movie Info Extraction</h5><hr class="border border-success border-1 opacity-50">
+        <section id="7b6ac57c-cbfa-47d7-b1dd-d9d1556f8d46" style="margin-bottom:1rem;"><h5>4. Example Use Case: Movie Info Extraction</h5><hr class="border border-success border-1 opacity-50">
     <div><p>Suppose a user wants to get details about "Inception". The service will return a structured JSON array with all the required fields, ready for use in your app or workflow.</p>
             <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
 var service = new BedrockWithConverseToolsService();
@@ -365,7 +365,7 @@ Console.WriteLine(movieJson);
             </code></pre></div></div></div>
 <br></div></section></div></section>
 
-    <section id="c72385d0-f536-489e-a59b-e39fb364f550" style="margin-bottom:1rem;"><h4>Summary</h4><hr class="border border-success border-1 opacity-50">
+    <section id="5bd36b18-67a7-452e-ab0f-c0316f03ef84" style="margin-bottom:1rem;"><h4>Summary</h4><hr class="border border-success border-1 opacity-50">
     <div><ul><li><b>What:</b> Converse API with tools lets you build AI agents that return structured, reliable data—not just text.</li>
             <li><b>When:</b> Use tools for data extraction, workflow automation, and any scenario where you need more than chat.</li>
             <li><b>How:</b> Define tool schemas, enforce output structure, and integrate with your .NET apps using the AWS SDK.</li></ul>
@@ -373,7 +373,7 @@ Console.WriteLine(movieJson);
             For more details and the full code, see the <a href="https://github.com/ajaysskumar/ai-playground/blob/main/AwsBedrockExamples/Services/BedrockWithConverseToolsService.cs" target="_blank">GitHub example</a>.
         </p></div></section>
 
-    <section id="26eda8ea-53a8-48f1-8ed0-133ef5b9be9b" style="margin-bottom:1rem;"><h4>References &amp; Further Reading</h4><hr class="border border-success border-1 opacity-50">
+    <section id="cd7dd88a-3d80-4c34-ad9f-272ca0e62cf6" style="margin-bottom:1rem;"><h4>References &amp; Further Reading</h4><hr class="border border-success border-1 opacity-50">
     <div><ul><li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/converse-api.html" target="_blank">AWS Bedrock Converse API Documentation</a></li>
             <li><a href="https://github.com/ajaysskumar/ai-playground/blob/main/AwsBedrockExamples/Services/BedrockWithConverseToolsService.cs" target="_blank">BedrockWithConverseToolsService.cs on GitHub</a></li></ul></div></section>
 
@@ -401,9 +401,9 @@ Console.WriteLine(movieJson);
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-            </div><!--Blazor:{"prerenderId":"6640ce1a2b5140ec88b506640ddfe6f0"}-->
+            </div><!--Blazor:{"prerenderId":"2a676bc1a8414ec6969e2ab3d36d3a5e"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UzNWRE1YbEdNbVZRTlVoeU5VaHBWRFIyYW5rMloxQXlUWGxxYjI1bVNISlZZazR6TVc0MGMxbGtWWFo1TVdocVYyTnBjMDFLTUMwMVJVZDJWbFJpU2xkTU1XVkNlakJoTmtWd1RXdFNWREZQWXpGdVRsZHJWWFpvUlZGVmJrZHVOMjh3Wldwcll6bG1USGRIYUVGeVMxOUtSMXB2VDBoNWNrNXZjRmhrYTJWSE9HVkdNVTlpWWxWd2FHcHpNbUpQUkdJeloyVnpJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80VUdsRlZFTlFNbEZRVGtOcE0zUkRSWEoyVHpSMFQwRkhRMmRuYWxwMFJVaFpjVWR6T1c5aVdYUlVOWFZWVlVocUxVUk9UMDFpTFU5VWEzWmZiMnhMWkRKcVNFdHJiVmhpZWxGbGFFYzBTM2xCVDFWVk1FNXRkVkp4YzA5NVRqRkNiamRYZFZGaFJ6QkNNMHR2TFdKalkwWlZYMDB5Tld0QlNrRkdVREJqV0c1MU0yMVNRbGxZVkVWbFNtTkRibUZVVFUxVVNVcFZJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
