@@ -16,6 +16,10 @@
             isOlderThumbnailFormat="@currentPage.IsOlderThumbnailFormat">
     </Header>
 
+    <CalloutBox Type="info" Title="📖 Series Context">
+        <p>This article is part of the AWS Bedrock with .NET series. If you haven't already, start with <a href="/blog/ai/bedrock">Getting Started with AWS Bedrock</a> and <a href="/blog/ai/bedrock/advanced">Advanced Integration &amp; Production Setup</a> to understand authentication, configuration, and cost optimization before diving into conversational patterns.</p>
+    </CalloutBox>
+
     <Section Heading="The Problem: AI That Forgets" Level="4">
         <p>
             Picture a customer contacting your support bot about a billing issue. They explain the problem, the bot asks for their account number, they provide it — and then the next response treats them like a stranger. No memory of the account number. No memory of the issue. The user has to start over.
@@ -85,6 +89,11 @@
             </CalloutBox>
         </Section>
 
+    <Section Heading="How the Converse API Flows End to End" Level="4">
+        <p>Before we write any code, here's a visual map of the full request lifecycle — from your .NET application calling the SDK, through Bedrock's Converse API, down to the Foundation Model, and back. Notice the <b>multi-turn conversation loop</b> and the <b>tool use</b> opt block — both are native to the Converse API and impossible with InvokeModel.</p>
+        <BlogImage ImagePath="/images/blog/ai/bedrock/aws-converse-sequence.svg" Description="Sequence diagram: .NET application using AWS Bedrock Converse API with multi-turn conversation loop and tool use" Number="1" />
+    </Section>
+
     <Section Heading="How: Building an AI Customer Service Agent with Converse API" Level="4">
         <Section Heading="1. Prerequisites" Level="5">
             <ul>
@@ -99,12 +108,15 @@
             <CodeSnippet Language="csharp">
 using Amazon.BedrockRuntime;
 using Amazon.BedrockRuntime.Model;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 public class BedrockCustomerSupportService
 {
     private readonly AmazonBedrockRuntimeClient _client;
+    // NOTE: Verify the latest Claude model ID in the AWS Bedrock console.
+    // This example uses Claude 3 Haiku as of Jan 2026 — model IDs may change.
     private const string ModelId = "anthropic.claude-3-haiku-20240307-v1:0";
 
     public BedrockCustomerSupportService()
@@ -148,7 +160,7 @@ public class BedrockCustomerSupportService
 }
             </CodeSnippet>
             <CalloutBox Type="tip" Title="Full Example on GitHub">
-                <p>See the complete implementation and usage in the <a href="https://github.com/ajaysskumar/ai-playground/blob/main/AwsBedrockExamples/Services/BedrockCustomerSupportService.cs" target="_blank">BedrockCustomerSupportService.cs</a> file on GitHub.</p>
+                <p>See the complete implementation and usage in the <a href="https://github.com/ajaysskumar/ai-playground/blob/main/AwsBedrockExamples/Services/BedrockCustomerSupportService.cs" target="_blank">BedrockCustomerSupportService.cs</a> file on GitHub. Also refer to the <a href="/blog/ai/bedrock">Getting Started with AWS Bedrock</a> article for foundational setup and IAM authentication.</p>
             </CalloutBox>
         </Section>
         <Section Heading="3. How the Example Works" Level="5">
@@ -162,21 +174,23 @@ public class BedrockCustomerSupportService
         <Section Heading="4. Example Use Case: AI Customer Service Agent" Level="5">
             <p>Suppose a user is troubleshooting an issue with their order. The conversation might look like this:</p>
             <CodeSnippet Language="csharp">
-    // Example conversation history
+    // Example conversation history — showing 5+ turns to demonstrate context retention
     var conversationHistory = new List&lt;Message&gt;
     {
-        new Message { Role = "user", Content = new List&lt;ContentBlock&gt; { new ContentBlock { Text = "My order hasn't arrived yet." } } },
-        new Message { Role = "assistant", Content = new List&lt;ContentBlock&gt; { new ContentBlock { Text = "I'm sorry to hear that. Can you provide your order number?" } } },
-        new Message { Role = "user", Content = new List&lt;ContentBlock&gt; { new ContentBlock { Text = "It's 12345." } } }
+        new Message { Role = "user", Content = new List&lt;ContentBlock&gt; { new ContentBlock { Text = "My order hasn't arrived yet. I ordered it last week." } } },
+        new Message { Role = "assistant", Content = new List&lt;ContentBlock&gt; { new ContentBlock { Text = "I'm sorry to hear that. Can you provide your order number? And what's your delivery address region?" } } },
+        new Message { Role = "user", Content = new List&lt;ContentBlock&gt; { new ContentBlock { Text = "It's order 12345, and I'm in the East Coast region." } } },
+        new Message { Role = "assistant", Content = new List&lt;ContentBlock&gt; { new ContentBlock { Text = "Thanks! Order 12345 was shipped 5 days ago to the East Coast. It should arrive within 2-3 days. Would you like me to track it further or escalate this?" } } },
+        new Message { Role = "user", Content = new List&lt;ContentBlock&gt; { new ContentBlock { Text = "Can you escalate this to a human agent? I'm concerned since it's been a week." } } }
     };
 
     var service = new BedrockCustomerSupportService();
     string response = await service.GetSupportResponse(conversationHistory);
     Console.WriteLine(response);
             </CodeSnippet>
-            <p>The AI will respond with a context-aware message, such as confirming the order status or providing next steps.</p>
+            <p>Notice how in turn 4, the AI references "Order 12345" and "East Coast region" seamlessly — context from earlier turns. This multi-turn awareness is exactly what Converse API enables. The AI doesn't forget, and the user experience feels natural.</p>
         </Section>
-            <Section Heading="6. Demo: Interactive Customer Support Chat" Level="5">
+            <Section Heading="5. Demo: Interactive Customer Support Chat" Level="5">
                 <p>Below is a complete demo of a console-based customer support chat using the Bedrock Converse API. This example shows how to maintain the conversation loop, collect user input, and keep the conversation history updated for each turn.</p>
                 <CodeSnippet Language="csharp">
     // Customer support chat demo
@@ -238,18 +252,19 @@ public class BedrockCustomerSupportService
     <Section Heading="Summary" Level="4">
         <ul>
             <li><b>What:</b> The Bedrock Converse API enables multi-turn, context-aware conversations with generative AI models.</li>
-            <li><b>When:</b> Use it for chatbots, customer support, and any scenario requiring context retention.</li>
-            <li><b>How:</b> Integrate with AWS SDK for .NET and pass conversation history for seamless, intelligent interactions.</li>
+            <li><b>When:</b> Use it for chatbots, customer support, and any scenario requiring context retention and continuous dialogue.</li>
+            <li><b>How:</b> Integrate with AWS SDK for .NET (.net 8+), maintain conversation history as a list of Message objects, and pass the entire history with each request so the model sees full context.</li>
         </ul>
         <p>
-            For more details and the full code, see the <a href="https://github.com/ajaysskumar/ai-playground/blob/main/AwsBedrockExamples/Services/BedrockCustomerSupportService.cs" target="_blank">GitHub example</a>.
+            The beauty of Converse API is its simplicity — you don't need to manage complex state servers or reinvent conversation patterns. AWS handles the heavy lifting, and you focus on building great user experiences.
         </p>
     </Section>
 
     <Section Heading="References & Further Reading" Level="4">
         <ul>
-            <li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/converse-api.html" target="_blank">AWS Bedrock Converse API Documentation</a></li>
-            <li><a href="https://github.com/ajaysskumar/ai-playground/blob/main/AwsBedrockExamples/Services/BedrockCustomerSupportService.cs" target="_blank">BedrockCustomerSupportService.cs on GitHub</a></li>
+            <li><a href="/blog/ai/bedrock">AWS Bedrock with .NET: Getting Started</a> — foundation article for IAM, authentication, and cost optimization</li>
+            <li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/converse-api.html" target="_blank">AWS Bedrock Converse API Documentation</a> — official AWS reference</li>
+            <li><a href="https://github.com/ajaysskumar/ai-playground/blob/main/AwsBedrockExamples/Services/BedrockCustomerSupportService.cs" target="_blank">BedrockCustomerSupportService.cs on GitHub</a> — full runnable example</li>
         </ul>
     </Section>
 
