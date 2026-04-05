@@ -20,11 +20,11 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" /> -->
     
-<!--Blazor:{"type":"webassembly","prerenderId":"01700286f31b44d9abcd1322545bb7dc","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>AWS Bedrock with .NET: Advanced Integration &amp; Production Setup</title><meta property="og:url" content="http://127.0.0.1:5050/blog/ai/bedrock/advanced" />
+<!--Blazor:{"type":"webassembly","prerenderId":"0018e65ae9174ce88c54b1812592e890","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>AWS Bedrock with .NET: Advanced Integration &amp; Production Setup</title><meta property="og:url" content="http://127.0.0.1:5050/blog/ai/bedrock/advanced" />
     <meta property="og:title" content="AWS Bedrock with .NET: Advanced Integration &amp; Production Setup" />
     <meta property="og:description" content="" />
     <meta property="og:image" content="http://127.0.0.1:5050/images/blog/ai/bedrock/banner.svg" />
-    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"01700286f31b44d9abcd1322545bb7dc"}-->
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"0018e65ae9174ce88c54b1812592e890"}-->
 </head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -40,7 +40,7 @@
 
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"91c4158a62284d78b1fdd1d13ac00a69","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"600925b5588541b5a8a1acbf2e1c0633","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -91,7 +91,7 @@
                     
                     <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 10 Jan 2026</span></div></div></div></div></div></header>
 
-    <section id="4918f236-0d34-4631-b480-9f1f8f0bb479" style="margin-bottom:1rem;"><h4>The Problem: Credentials Buried in the Cloud</h4><hr class="border border-success border-1 opacity-50">
+    <section id="2306fd68-f223-463e-9241-eabcab0a3f38" style="margin-bottom:1rem;"><h4>The Problem: Credentials Buried in the Cloud</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             Picture this: You've built a Bedrock chatbot locally using <code>aws configure</code>. It works perfectly on your machine. You deploy it to an EC2 instance in production, and boom—<code>UnauthorizedException</code>. The code is identical. The code didn't change. So what's broken?
         </p>
@@ -105,7 +105,7 @@
             <span class="callout-title">Coming from the basics?</span></div>
         <div class="callout-message"><p>If you haven't read <a href="/blog/ai/bedrock">Getting Started with AWS Bedrock in .NET</a> yet, start there. This article builds on that foundation and assumes you're familiar with the Invocation APIs.</p></div></div></div></section>
 
-    <section id="a76e2056-505b-45f1-916a-96cd9b09c393" style="margin-bottom:1rem;"><h4>What: The SDK&#x27;s Credential Chain</h4><hr class="border border-success border-1 opacity-50">
+    <section id="071fd233-7190-4f39-8e43-560c680d1a74" style="margin-bottom:1rem;"><h4>What: The SDK&#x27;s Credential Chain</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             The AWS SDK doesn't require you to explicitly pass credentials. Instead, it follows a <b>credential resolution chain</b>—a priority-ordered search for credentials from different sources.
         </p>
@@ -125,7 +125,7 @@
             The beauty of this chain is: <b>your code never changes.</b> You write one invocation, and it works locally (using credentials file), in CI/CD (using environment variables), and in production (using EC2 / Lambda roles). The SDK figures out which source to use automatically.
         </p></div></section>
 
-    <section id="ed9911e6-f90e-4e26-9985-8839f04fd3ef" style="margin-bottom:1rem;"><h4>When: Choosing Your Authentication Pattern</h4><hr class="border border-success border-1 opacity-50">
+    <section id="b725db42-ffe4-4c46-8c8c-84150e6fea92" style="margin-bottom:1rem;"><h4>When: Choosing Your Authentication Pattern</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             Different deployment environments call for different patterns. Here's a decision matrix to help you pick the right approach:
         </p>
@@ -158,8 +158,8 @@
         <div class="callout-message"><p><b>Use role-based authentication (EC2 instance role, Lambda execution role, or ECS task role) for any production workload.</b> It's automatic, doesn't require secrets in code, and permissions rotate transparently. Config it once, forget about credential management forever.
             </p></div></div></div></section>
 
-    <section id="6dfc4fae-bdb8-40cd-bf04-21146f0bd1cc" style="margin-bottom:1rem;"><h4>How: Implementing Each Pattern</h4><hr class="border border-success border-1 opacity-50">
-    <div><section id="4de7a661-691a-4c42-a40f-283bc30b4fe2" style="margin-bottom:1rem;"><h5>Pattern 1: Session Credentials (Quick Local Testing)</h5><hr class="border border-success border-1 opacity-50">
+    <section id="9d2d317f-18ec-417f-99de-15b3c17e1f29" style="margin-bottom:1rem;"><h4>How: Implementing Each Pattern</h4><hr class="border border-success border-1 opacity-50">
+    <div><section id="967453bf-c626-441b-b89e-40a87b110f90" style="margin-bottom:1rem;"><h5>Pattern 1: Session Credentials (Quick Local Testing)</h5><hr class="border border-success border-1 opacity-50">
     <div><p>Use this for testing with temporary credentials from AWS STS. Useful when you can't install aws-cli or want isolated, time-limited access.</p>
             <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
 SessionAWSCredentials GetCredentials()
@@ -184,7 +184,7 @@ var client = new AmazonBedrockRuntimeClient(credentials, RegionEndpoint.USEast1)
             <span class="callout-title">Session credentials expire</span></div>
         <div class="callout-message"><p>Session tokens are time-limited (typically 15 minutes to 1 hour). Once expired, requests fail with <code>UnauthorizedException</code>. Use this pattern only for testing or short-lived scripts, not long-running services.</p></div></div></div></section>
 
-        <section id="15bded59-a1c1-4ef7-bee2-7270c7027157" style="margin-bottom:1rem;"><h5>Pattern 2: Environment Variables (Containers &amp; CI/CD)</h5><hr class="border border-success border-1 opacity-50">
+        <section id="ff002799-262f-42ac-ae03-2c2589f8330e" style="margin-bottom:1rem;"><h5>Pattern 2: Environment Variables (Containers &amp; CI/CD)</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
                 Store credentials in environment variables. This is ideal for containerized workloads and CI/CD pipelines where your infrastructure orchestrator (Kubernetes, Docker, GitHub Actions) injects secrets at runtime.
             </p>
@@ -211,7 +211,7 @@ docker run \
             <span class="callout-title">Secret management in Kubernetes</span></div>
         <div class="callout-message"><p>Use Kubernetes Secrets or external secret managers (HashiCorp Vault, AWS Parameter Store) to inject credentials safely. Docker Compose uses environment variables similarly.</p></div></div></div></section>
 
-        <section id="371a773e-a3c0-4014-b04a-9e505de2576a" style="margin-bottom:1rem;"><h5>Pattern 3: EC2 Instance Profile Role (Production on EC2)</h5><hr class="border border-success border-1 opacity-50">
+        <section id="08fbe7dc-3055-4da3-a07e-4ca3e67180e4" style="margin-bottom:1rem;"><h5>Pattern 3: EC2 Instance Profile Role (Production on EC2)</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
                 This is the <b>recommended approach for production on EC2.</b> The SDK automatically retrieves temporary credentials from the EC2 Instance Metadata Service (IMDS) — no hardcoded keys, no manual credential rotation.
             </p>
@@ -226,7 +226,7 @@ var response = await client.ConverseAsync(request);
             </code></pre></div><div class="col-12 text-center"><code>Code Sample #4 : Using EC2 instance role (no credentials needed in code)</code></div></div></div>
 <br>
 
-            <section id="5f8d5938-6a87-4558-a815-8515dba6e1d3" style="margin-bottom:1rem;"><h6>Creating an EC2 Instance Profile Role (Step-by-Step)</h6><hr class="border border-success border-1 opacity-50">
+            <section id="c6e3764e-270d-4d78-b387-5cf6d7ed3134" style="margin-bottom:1rem;"><h6>Creating an EC2 Instance Profile Role (Step-by-Step)</h6><hr class="border border-success border-1 opacity-50">
     <div><p><b>Step 1: Create an IAM Role</b></p>
                 <ol><li>AWS Console → IAM → Roles → Create Role</li>
                     <li>Trusted entity type: <b>AWS service</b></li>
@@ -274,7 +274,7 @@ dotnet run  # Run your app; it should authenticate automatically
                 </code></pre></div><div class="col-12 text-center"><code>Code Sample #6 : SSH into EC2 and test Bedrock access</code></div></div></div>
 <br></div></section></div></section>
 
-        <section id="7fa6ee34-a6ec-46d7-a438-8ef46463161b" style="margin-bottom:1rem;"><h5>Pattern 4: Lambda &amp; ECS (Serverless Production)</h5><hr class="border border-success border-1 opacity-50">
+        <section id="470b7dc2-8068-4979-8d63-42f122b20ba8" style="margin-bottom:1rem;"><h5>Pattern 4: Lambda &amp; ECS (Serverless Production)</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
                 Both Lambda and ECS automatically provide credentials via execution roles. No manual setup beyond attaching the role to your function/task.
             </p>
@@ -306,8 +306,8 @@ public async Task&lt;APIGatewayProxyResponse&gt; Handler(APIGatewayProxyRequest 
             <span class="callout-title">ECS &amp; Fargate</span></div>
         <div class="callout-message"><p>Same pattern for ECS. Attach the task role in your task definition, and the SDK discovers it via the <code>AWS_CONTAINER_CREDENTIALS_FULL_URI</code> environment variable (automatically set by ECS).</p></div></div></div></section></div></section>
 
-    <section id="5aac58a8-509a-44d6-8e06-43b540598af8" style="margin-bottom:1rem;"><h4>Troubleshooting: When Things Break</h4><hr class="border border-success border-1 opacity-50">
-    <div><section id="82a3ee8a-a3f2-47d7-82e0-9a2ff16ca062" style="margin-bottom:1rem;"><h5>Common Authentication Errors &amp; Fixes</h5><hr class="border border-success border-1 opacity-50">
+    <section id="f55f4804-5516-4d61-8afa-a8d810e35b72" style="margin-bottom:1rem;"><h4>Troubleshooting: When Things Break</h4><hr class="border border-success border-1 opacity-50">
+    <div><section id="b90d1ceb-1911-4824-9cf2-971606a99933" style="margin-bottom:1rem;"><h5>Common Authentication Errors &amp; Fixes</h5><hr class="border border-success border-1 opacity-50">
     <div><p>If auth fails, the cause is usually one of these:</p>
             <table style="width: 100%; border-collapse: collapse; margin: 1em 0;"><tr style="background-color: #f5f5f5;"><th style="border: 1px solid #ddd; padding: 0.75em; text-align: left;"><b>Error</b></th>
                     <th style="border: 1px solid #ddd; padding: 0.75em; text-align: left;"><b>Likely Cause</b></th>
@@ -328,7 +328,7 @@ public async Task&lt;APIGatewayProxyResponse&gt; Handler(APIGatewayProxyRequest 
             <span class="callout-title">Always test credentials locally first</span></div>
         <div class="callout-message"><p>Before deploying, verify credentials work with the AWS CLI: <code>aws bedrock list-foundation-models --region us-east-1</code>. If the CLI works, your app will too (same SDK under the hood).</p></div></div></div></section></div></section>
 
-    <section id="330088df-06c6-4566-90cd-7d4c6f0e05b3" style="margin-bottom:1rem;"><h4>Key Takeaways &amp; Best Practices</h4><hr class="border border-success border-1 opacity-50">
+    <section id="3882ce69-cf87-4be1-b6d0-e57d35eebde3" style="margin-bottom:1rem;"><h4>Key Takeaways &amp; Best Practices</h4><hr class="border border-success border-1 opacity-50">
     <div><ul><li><b>Local dev:</b> Use <code>~/.aws/credentials</code> — run <code>aws configure</code> once and forget about it.</li>
             <li><b>Production on EC2:</b> Attach an instance profile role with Bedrock permissions. Let IMDS handle credentials automatically.</li>
             <li><b>Production on Lambda/ECS:</b> Attach the execution role with Bedrock permissions. No code changes needed.</li>
@@ -359,9 +359,9 @@ public async Task&lt;APIGatewayProxyResponse&gt; Handler(APIGatewayProxyRequest 
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-            </div><!--Blazor:{"prerenderId":"91c4158a62284d78b1fdd1d13ac00a69"}-->
+            </div><!--Blazor:{"prerenderId":"600925b5588541b5a8a1acbf2e1c0633"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80VUdsRlZFTlFNbEZRVGtOcE0zUkRSWEoyVHpSMFRVcEpRak5sZEVFNGMwZHdaR2xKYjJkSWIwMXdielJRTmt3NFgwRnRiblpMUTJSbWNUTTROSFZ1VEhCallYUnBRMWhOZW5abWJYUkdiRlJFTlUxT2EyUkNlRU5RYm1jdE0wcHBha2RUVTJaSU5VVmZjbkUxTVhkcFdIaE1Na28xWlZGbU16TTVNRXhFU2xGUmJucHFhV2hqVjE5UlJXWnhjSGhIYlhWWFRYcFpJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UTNSME5FTm9Temt3VWxCb2RXbFJOR2RYTFhCdVNpMDFNelZ5WWxoUU4wMWpNekkxUVdoU1pWTmhkVFp2WkY5R00xbEtYMHR5ZWt0UVZuWkphMnhuU2paR2JIY3pNRGgxYzBWR1RtODJaRkoyVkhsVmFXTnNSMlowY1VsNFluVnpXakJKY1Vsa2VGQTBTVTVMVVMwNFQybHZkVVZPV1dRdFIxQmtaMUJTZGxSeVdIZDNjbUl0UlU5TE5qWnNObkk0U1d0MlkyVTBJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
