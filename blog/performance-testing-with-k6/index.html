@@ -20,11 +20,11 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" /> -->
     
-<!--Blazor:{"type":"webassembly","prerenderId":"84162e1d89ee4a578cddee7297868196","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>Performance Testing for APIs: Basic setup with K6</title><meta property="og:url" content="http://127.0.0.1:5050/blog/performance-testing-with-k6" />
+<!--Blazor:{"type":"webassembly","prerenderId":"d7e521b1d31a4ea2ab17f3ca6eebeb80","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>Performance Testing for APIs: Basic setup with K6</title><meta property="og:url" content="http://127.0.0.1:5050/blog/performance-testing-with-k6" />
     <meta property="og:title" content="Performance Testing for APIs: Basic setup with K6" />
     <meta property="og:description" content="Performance Testing for APIs: Basic setup with K6" />
     <meta property="og:image" content="http://127.0.0.1:5050/images/blog/performance-testing/basic-setup/banner.png" />
-    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"84162e1d89ee4a578cddee7297868196"}-->
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"d7e521b1d31a4ea2ab17f3ca6eebeb80"}-->
 </head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -40,7 +40,7 @@
 
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"be43fbfce11a42268eaf3c057132e891","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"f94e6735485d4d808d47bb60fa02b28f","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -87,7 +87,7 @@
                     
                     <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 09 Aug 2025</span></div></div></div></div></div></header>
 
-    <section id="0cd7b26a-4f47-4ba2-8493-40bd955d38e2" style="margin-bottom:1rem;"><h5>Introduction</h5><hr class="border border-success border-1 opacity-50">
+    <section id="e6d4c99e-e58b-4991-84f9-562412154e61" style="margin-bottom:1rem;"><h5>Introduction</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
             Ever tried grabbing a deal during a flash sale, only to watch the site crawl, your cart freeze, or the payment page vanish into a timeout abyss? You're not alone. Behind the scenes, APIs can be overwhelmed when many users hit the system at once — searching, clicking, refreshing, checking out. Without performance testing, these systems simply aren't ready for the chaos.
         </p>
@@ -98,12 +98,12 @@
     <hr>
     <section><h5>Key goals</h5><ol><li>Measure response times</li><li>Identify bottlenecks</li><li>Ensure scalability</li><li>Validate reliability under stress</li></ol></section>
 
-    <section id="c7726946-2f37-46eb-8318-256ba850d019" style="margin-bottom:1rem;"><h5>Real-World Analogy</h5><hr class="border border-success border-1 opacity-50">
+    <section id="584339b0-4b26-44a6-9951-daec79ac214c" style="margin-bottom:1rem;"><h5>Real-World Analogy</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
             Think of your API like a busy coffee shop. Performance testing is like simulating hundreds of customers ordering coffee at once. You want to ensure the baristas (your API) can handle the rush without slowing down or making mistakes. K6 helps you create that simulated rush and measure how well your API copes.
         </p></div></section>
 
-    <section id="5af48db4-9e18-46b0-8ea5-22b050f8a860" style="margin-bottom:1rem;"><h5>Major types of Performance Testing</h5><hr class="border border-success border-1 opacity-50">
+    <section id="5b502b5b-22b9-4bd6-87bf-b2e3ec10b599" style="margin-bottom:1rem;"><h5>Major types of Performance Testing</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
             There are several major kinds of performance testing, each with a specific purpose:
         </p>
@@ -113,11 +113,11 @@
             <li><strong>Spike Testing:</strong> Evaluates the system’s reaction to sudden large spikes in the load generated by users.</li>
             <li><strong>Scalability Testing:</strong> Assesses the system’s ability to scale up or down in response to increased or decreased load.</li></ol></div></section>
 
-    <section id="46679fc7-9176-4cbf-b53f-0f2718fe1a74" style="margin-bottom:1rem;"><h5>When Should You Do Performance Testing?</h5><hr class="border border-success border-1 opacity-50">
+    <section id="007110db-d477-44d1-bacf-2fed9030a674" style="margin-bottom:1rem;"><h5>When Should You Do Performance Testing?</h5><hr class="border border-success border-1 opacity-50">
     <div><p>Below are some common situations where performance tests are especially useful:</p>
         <section><h5>When to run perf tests</h5><ol><li>Before production releases to catch issues early.</li><li>After major changes (features, refactoring, infrastructure).</li><li>Periodically as part of CI/CD pipelines.</li><li>When expecting traffic spikes (campaigns, launches, events).</li></ol></section></div></section>
 
-    <section id="12a733a3-3a21-4b11-922d-41564df0747e" style="margin-bottom:1rem;"><h5>Why Use K6 for API Performance Testing?</h5><hr class="border border-success border-1 opacity-50">
+    <section id="d4118d38-2949-4e5d-8937-5a0724a6898f" style="margin-bottom:1rem;"><h5>Why Use K6 for API Performance Testing?</h5><hr class="border border-success border-1 opacity-50">
     <div><p><a href="https://k6.io/">K6</a> is an open-source, developer-centric tool for load testing APIs and web applications. It’s popular because:
         </p>
         <ul><li>It uses JavaScript for scripting, making it accessible to most developers.</li>
@@ -125,7 +125,7 @@
             <li>It provides rich metrics and reporting.</li>
             <li>It’s lightweight and fast.</li></ul></div></section>
 
-    <section id="21c99408-8ba2-4442-9c95-7f6774181f70" style="margin-bottom:1rem;"><h5>Other Popular Tools</h5><hr class="border border-success border-1 opacity-50">
+    <section id="2ef8ad9f-bece-404d-ab8c-bfecc803086c" style="margin-bottom:1rem;"><h5>Other Popular Tools</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
             While K6 is a great choice, there are several other widely used tools for API performance testing:
         </p>
@@ -137,11 +137,11 @@
     <p>
             Let’s walk through a real-world example using this repository.
         </p>
-        <section id="36574263-1f8a-4fd0-b845-1cd5d7b88b74" style="margin-bottom:1rem;"><h5>The Use Case: Most Borrowed Book API</h5><hr class="border border-success border-1 opacity-50">
+        <section id="d264b8fd-c4b4-4375-8ed5-00a5093fb7af" style="margin-bottom:1rem;"><h5>The Use Case: Most Borrowed Book API</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
                 We have a simple ASP.NET Core Web API that exposes a single endpoint <code>/mostborrowedbook</code>. This endpoint returns the book with the highest borrow count from an in-memory database seeded with thousands of records.
             </p>
-            <section id="f01e81fe-6d99-4f71-aea0-c0433b401f0d" style="margin-bottom:1rem;"><h6>API Code Example</h6><hr class="border border-success border-1 opacity-50">
+            <section id="e9536a12-7f9e-469e-ba39-1c093d76e962" style="margin-bottom:1rem;"><h6>API Code Example</h6><hr class="border border-success border-1 opacity-50">
     <div><div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
 // Controller action
 [HttpGet]
@@ -159,9 +159,9 @@ public async Task&lt;IActionResult&gt; Get() {
 }
                 </code></pre></div></div></div>
 <br></div></section></div></section>
-        <section id="f205bf24-e61c-4c4a-b313-eb6b53d3ae7f" style="margin-bottom:1rem;"><h5>Setting Up K6 for Performance Testing</h5><hr class="border border-success border-1 opacity-50">
+        <section id="ae445d32-0405-40a7-b8b7-399781dbdb9c" style="margin-bottom:1rem;"><h5>Setting Up K6 for Performance Testing</h5><hr class="border border-success border-1 opacity-50">
     <div><section><h5>Steps</h5><ol><li>Install K6: On macOS, run &#x27;brew install k6&#x27;.</li><li>Write a K6 test script in JavaScript.</li><li>Run your API and execute the K6 test.</li><li>Optionally, generate an HTML report with k6-reporter.</li></ol></section>
-            <section id="9aa2c7f9-e9b5-4359-816e-589a603af842" style="margin-bottom:1rem;"><h6>K6 Test Script Example</h6><hr class="border border-success border-1 opacity-50">
+            <section id="4098742c-4cde-42dd-a950-6eb045740e7e" style="margin-bottom:1rem;"><h6>K6 Test Script Example</h6><hr class="border border-success border-1 opacity-50">
     <div><div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-javascript" style="font-size: 0.8rem;">
 import http from 'k6/http';
 import {
@@ -187,7 +187,7 @@ export default function() {
                     <li><strong>duration</strong>: How long the test runs</li>
                     <li><strong>check</strong>: Asserts that the response status is 200</li>
                     <li><strong>sleep</strong>: Waits 1 second between requests</li></ul></div></section>
-            <section id="0e6ba429-551c-48f1-aaa6-1afb78a76552" style="margin-bottom:1rem;"><h5>Running the API and the Test</h5><hr class="border border-success border-1 opacity-50">
+            <section id="1be86bb1-56af-41ec-b899-77791e1924aa" style="margin-bottom:1rem;"><h5>Running the API and the Test</h5><hr class="border border-success border-1 opacity-50">
     <div><div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-bash" style="font-size: 0.8rem;">
 cd MostBorrowedBookApi
 dotnet run
@@ -197,14 +197,14 @@ dotnet run
 k6 run k6-mostborrowedbook.js
                 </code></pre></div></div></div>
 <br></div></section>
-            <section id="b99d1deb-d190-4076-8998-c6aa99f358b6" style="margin-bottom:1rem;"><h5>Generate an HTML Report (Optional)</h5><hr class="border border-success border-1 opacity-50">
+            <section id="52f4b955-5461-4680-8d34-23415d7da9a0" style="margin-bottom:1rem;"><h5>Generate an HTML Report (Optional)</h5><hr class="border border-success border-1 opacity-50">
     <div><div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-bash" style="font-size: 0.8rem;">
 k6 run k6-mostborrowedbook.js --out json=results.json
 npx k6-reporter results.json
                 </code></pre></div></div></div>
 <br></div></section></div></section>
 
-    <section id="4ceff4ca-42b2-40b7-bcd4-8e71ed86e4d3" style="margin-bottom:1rem;"><h6>Demo Repository</h6><hr class="border border-success border-1 opacity-50">
+    <section id="48547a29-a5ce-4af8-a107-b5a643187eb8" style="margin-bottom:1rem;"><h6>Demo Repository</h6><hr class="border border-success border-1 opacity-50">
     <div><p>
                 The full demo code for this article is available at:
                 <a href="https://github.com/ajaysskumar/API-Performance-Testing" target="_blank">ajaysskumar/API-Performance-Testing</a></p>
@@ -213,7 +213,7 @@ npx k6-reporter results.json
                 <ul><li><strong>MostBorrowedBookApi</strong>: ASP.NET Core Web API with an in-memory database, seeded with thousands of books and borrows at startup. The endpoint <code>/mostborrowedbook</code> returns the book with the highest borrow count.</li>
                     <li><strong>k6-mostborrowedbook.js</strong>: K6 test script for load testing the API.</li>
                     <li><strong>run-perf-test.sh</strong>: Bash script to run the API and K6 test in one shot.</li></ul></p>
-            <section id="60611087-bf7b-4e03-9d0b-8d65a9a4d6e9" style="margin-bottom:1rem;"><h6>One-Shot Bash Script</h6><hr class="border border-success border-1 opacity-50">
+            <section id="3205a210-0989-42a9-a650-dce22cf00210" style="margin-bottom:1rem;"><h6>One-Shot Bash Script</h6><hr class="border border-success border-1 opacity-50">
     <div><p>
                     To run the API and the K6 test together, use the <code>run-perf-test.sh</code> script in the repository root. This script:
                 </p>
@@ -225,7 +225,7 @@ npx k6-reporter results.json
                 <p>
                     This makes it easy to run the full demo and performance test with a single command.
                 </p></div></section></div></section>
-    <section id="497e6840-105c-4fa1-8325-2797711f7a6c" style="margin-bottom:1rem;"><h5>Understanding K6 Metrics</h5><hr class="border border-success border-1 opacity-50">
+    <section id="48984447-5ca5-44c1-a444-e367e1c4221f" style="margin-bottom:1rem;"><h5>Understanding K6 Metrics</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
             After running the test, K6 outputs a summary like this:
         </p>
@@ -297,7 +297,7 @@ default ✓ [======================================] 10 VUs  10s
             If you use k6-reporter, you’ll get an HTML file with charts and detailed breakdowns.
         </p></div></section>
 
-    <section id="9fd8319c-55f7-43ec-909f-ae24d2255c17" style="margin-bottom:1rem;"><h5>Conclusion</h5><hr class="border border-success border-1 opacity-50">
+    <section id="aa178032-21f6-499b-bffd-06be2271ae4d" style="margin-bottom:1rem;"><h5>Conclusion</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
             Performance testing is essential for delivering reliable APIs. K6 makes it easy to simulate real-world load, catch bottlenecks, and ensure your API is production-ready. With a simple setup and powerful reporting, it’s a great tool for developers and DevOps alike.
         </p>
@@ -321,9 +321,9 @@ default ✓ [======================================] 10 VUs  10s
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-            </div><!--Blazor:{"prerenderId":"be43fbfce11a42268eaf3c057132e891"}-->
+            </div><!--Blazor:{"prerenderId":"f94e6735485d4d808d47bb60fa02b28f"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UTNSME5FTm9Temt3VWxCb2RXbFJOR2RYTFhCdVRGUkNUMHg0WmtGV1RWWXdhbXR5Y0RnNWFVd3dhMnAyYkRsVWNITldZV0pYV20weVEwMXJaRGhUVDJNelIyeFdSV1UzVldoMmFIQk9kbFJKUmtWc2FWOURZbFpqUm1zMVZrUm5Rakp4VjJ0VGIxTmxSblIwTUVWSVluTnVORUpGU1ZJMVJpMU1ZVXhXVjNoeFVXTkdaMkZxZVVrNWVESkhOMWRpWDBZMmVVZE5JaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80U1hRek1VOWFaVXhpZUU5MGJWZHNORGRmYjJwelFqY3lSakZCT1hWUGVsVkVlWFUwT0hwMlp6aGlZbWxsWkZwcGNtOVBNekpuU25aYWFqQm9NMkpNUmxwdlRWZ3RNWEJyYVRGck1tMUZSbVZOUmpOaFRXdFpTVTVPUzFSV1JWRm1kVzlmWldKMWJsTXhaV3cwTVZJdGIxSTBSbGhoUjFsT1pqVjNSelJSVGtKaGVsaGhWMlJoZFZWVGFYY3dSRWxSWW5sUlRVWXdJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
