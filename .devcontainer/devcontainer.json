@@ -1,0 +1,66 @@
+// For format details, see https://aka.ms/devcontainer.json
+// Feature reference: https://containers.dev/features
+{
+  "name": "dotnet",
+
+  // Build from the Dockerfile in this folder.
+  // The Dockerfile layers extra global tools on top of the Microsoft base image.
+  "build": {
+    "dockerfile": "Dockerfile",
+    // Pass the .NET SDK version as a build arg so you can override it without
+    // touching the Dockerfile: devcontainer build --build-arg VARIANT=8.0
+    "args": {
+      "VARIANT": "10.0"
+    }
+  },
+
+  // Composable tool modules — installed as an extra layer at container build time.
+  // Pinned to major versions for reproducibility; bump to pick up updates.
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {
+      "ppa": false,
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+
+  // VS Code customizations applied when VS Code attaches to the container.
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        // ── Shared (all stacks) ───────────────────────────────────────
+        "eamodio.gitlens",
+        "editorconfig.editorconfig",
+        "streetsidesoftware.code-spell-checker",
+        "mhutchie.git-graph",
+        "github.vscode-pull-request-github",
+        // ── .NET stack ───────────────────────────────────────────────
+        "ms-dotnettools.csdevkit",
+        "ms-dotnettools.csharp",
+        "ms-dotnettools.vscode-dotnet-runtime",
+        "formulahendry.dotnet-test-explorer"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.tabSize": 4,
+        "files.trimTrailingWhitespace": true,
+        "dotnet-test-explorer.testProjectPath": "**/*.csproj"
+      }
+    }
+  },
+
+  // Ports to forward from the container to the host.
+  // 8080 → default ASP.NET Core port; 8081 → HTTPS variant if needed.
+  "forwardPorts": [8080, 8081],
+  "portsAttributes": {
+    "8080": { "label": "App (HTTP)", "onAutoForward": "notify" },
+    "8081": { "label": "App (HTTPS)", "onAutoForward": "silent" }
+  },
+
+  // Run as the non-root 'vscode' user (already configured in the base image).
+  "remoteUser": "vscode",
+
+  // Runs once after the container is created.
+  // 'dotnet restore' is a no-op if no .csproj exists yet — safe to keep.
+  "postCreateCommand": "dotnet tool restore 2>/dev/null || true && find . -name '*.csproj' -maxdepth 3 -exec dotnet restore {} \\; 2>/dev/null || true"
+}
