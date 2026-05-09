@@ -20,11 +20,11 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" /> -->
     
-<!--Blazor:{"type":"webassembly","prerenderId":"0c1062a5026d42b7bacc8e609b38a04a","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>Integration testing for dotnet core APIs: Working with AWS flows</title><meta property="og:url" content="http://127.0.0.1:5050/blog/integration-testing-in-dotnet-with-aws" />
+<!--Blazor:{"type":"webassembly","prerenderId":"63f3326c487e451eae6662a8d5f6f4ff","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>Integration testing for dotnet core APIs: Working with AWS flows</title><meta property="og:url" content="http://127.0.0.1:5050/blog/integration-testing-in-dotnet-with-aws" />
     <meta property="og:title" content="Integration testing for dotnet core APIs: Working with AWS flows" />
     <meta property="og:description" content="" />
     <meta property="og:image" content="http://127.0.0.1:5050/images/blog/integration-testing/handling-aws/banner.png" />
-    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"0c1062a5026d42b7bacc8e609b38a04a"}-->
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"63f3326c487e451eae6662a8d5f6f4ff"}-->
 </head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -34,13 +34,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" defer=""></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js" defer=""></script>
 <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="72x72"/>
-<link href="TestArena.styles.css" rel="stylesheet"/>
+<link href="DevCodex.styles.css" rel="stylesheet"/>
 
 
 
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"ae3c88b139d84eff91e6cb3d6b520b2d","key":{"locationHash":"C733C888C8D7667DAA615FD13FBCEA27A63564B6248D165D07D7213BB48ED1E2:0","formattedComponentKey":""},"assembly":"TestArena","typeName":"TestArena.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-olox9tqfmg><div class="page " b-mcp0h0uciv><main class="d-flex flex-column min-vh-100" b-mcp0h0uciv><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"ecd191de16d54b829f4bf88595142200","key":{"locationHash":"1E5B2A40C870C32832812BA3ECC8F00C025EF68F461B075ADE40C0C55D040851:0","formattedComponentKey":""},"assembly":"DevCodex","typeName":"DevCodex.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-8rdvqw2f7f><div class="page " b-3xlixug817><main class="d-flex flex-column min-vh-100" b-3xlixug817><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -49,7 +49,7 @@
 
                 
                 <div class="col-12 col-md-4 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><div class="dropdown"><a href="/about-author" class="d-inline-block rounded-circle overflow-hidden border border-white" style="width: 3rem; height: 3rem; border-width: 0.25rem;"><img src="/images/shared/author.png" alt="About Author" class="img-fluid rounded-circle" style="width: 100%; height: 100%; object-fit: cover;"></a></div></div></div></div></div></header>
-        <article class="content px-4" b-mcp0h0uciv><div class="container-fluid d-flex flex-column align-items-center"><div class="content-wrapper"><style>
+        <article class="content px-4" b-3xlixug817><div class="container-fluid d-flex flex-column align-items-center"><div class="content-wrapper"><style>
     .article-header {
         margin: 0 auto;
         /* Centers the div */
@@ -80,9 +80,9 @@
         <div class="col-md-12"><div class="container-fluid"><div class="row"><div class="col-md-4 col-xs-12 d-flex justify-content-md-start justify-content-center"><span class="text-secondary fw-bold">Author(s): </span>
                         <span class="text-secondary fw-bold ms-1">Ajay Kumar</span></div>
 
-                    <div class="col-md-4 col-xs-12 d-flex justify-content-md-center justify-content-center"><div class="social-share flex" b-gjpj7q7b4s><a href="https://twitter.com/intent/tweet?url=http%3A%2F%2F127.0.0.1%3A5050%2Fblog%2Fintegration-testing-in-dotnet-with-aws&amp;text=Integration%20testing%20for%20dotnet%20core%20APIs%3A%20Working%20with%20AWS%20flows" title="Share on Twitter" target="_blank" rel="noopener" b-gjpj7q7b4s><img src="images/shared/icons/twitter-old.svg" alt="Twitter/X" width="24" style="cursor:pointer" b-gjpj7q7b4s></a>
-    <a href="https://www.linkedin.com/feed/?shareActive=true&amp;shareUrl=http://127.0.0.1:5050/blog/integration-testing-in-dotnet-with-aws" title="Share on LinkedIn" target="_blank" rel="noopener" b-gjpj7q7b4s><img src="images/shared/icons/linkedin.svg" alt="LinkedIn" width="24" style="cursor:pointer" b-gjpj7q7b4s></a>
-    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A5050%2Fblog%2Fintegration-testing-in-dotnet-with-aws" title="Share on Facebook" target="_blank" rel="noopener" b-gjpj7q7b4s><img src="images/shared/icons/facebook.svg" alt="Facebook" width="24" style="cursor:pointer" b-gjpj7q7b4s></a></div></div>
+                    <div class="col-md-4 col-xs-12 d-flex justify-content-md-center justify-content-center"><div class="social-share flex" b-7nt0fj50xh><a href="https://twitter.com/intent/tweet?url=http%3A%2F%2F127.0.0.1%3A5050%2Fblog%2Fintegration-testing-in-dotnet-with-aws&amp;text=Integration%20testing%20for%20dotnet%20core%20APIs%3A%20Working%20with%20AWS%20flows" title="Share on Twitter" target="_blank" rel="noopener" b-7nt0fj50xh><img src="images/shared/icons/twitter-old.svg" alt="Twitter/X" width="24" style="cursor:pointer" b-7nt0fj50xh></a>
+    <a href="https://www.linkedin.com/feed/?shareActive=true&amp;shareUrl=http://127.0.0.1:5050/blog/integration-testing-in-dotnet-with-aws" title="Share on LinkedIn" target="_blank" rel="noopener" b-7nt0fj50xh><img src="images/shared/icons/linkedin.svg" alt="LinkedIn" width="24" style="cursor:pointer" b-7nt0fj50xh></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A5050%2Fblog%2Fintegration-testing-in-dotnet-with-aws" title="Share on Facebook" target="_blank" rel="noopener" b-7nt0fj50xh><img src="images/shared/icons/facebook.svg" alt="Facebook" width="24" style="cursor:pointer" b-7nt0fj50xh></a></div></div>
 
                     
                     <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 03 May 2025</span></div></div></div></div></div></header>
@@ -429,9 +429,9 @@
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-            </div><!--Blazor:{"prerenderId":"ae3c88b139d84eff91e6cb3d6b520b2d"}-->
+            </div><!--Blazor:{"prerenderId":"ecd191de16d54b829f4bf88595142200"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UzBoNlZIaDJkMHBzU2tWdllrRXlYMGhxT1hkUWJWSklUV3BYUTB4MWJFSklkVE5CVUd0Wlh6Wm9PWG81UlRoTlNFdGFaMjFCTWtWU1lVMVpWVEo1ZDAwek1sUkljV3hQUjBsSFVUaDRhRlZVZHpSMVltTlZaa2RXWm5OaFlWOXBhblJ6ZFZwQ2RXRkVhWEU1TVhwaFNXODRVM1l3VjBwWVoxTklXREZsVlhReWEyOU9ZVFpXVUdoeU4xRmhaVVZ6U0hWVE9GaDNJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80VUhveU1XaHBhR0ZUYUVscWJscHZkVFp0UTJRd2JrOWZZaTF0WkVJd2JVWkRjRUZYWTNCeGJYTkJaVkZJWjJwMU0zUldMVVJaYTJGMFluZHdiSEJXVmtkME9GUm1iMXBXUVc1clNWRmpRV3B5UzBGRlZVSjNaRmRVU2xwc1MxOU5ibDlXYjNoWE1Ia3dRaTE2V0MxaVZIbFRWMmRFVDNkb2QyMU5NSFJ6TkUxUU1tTldMVmRNZFdoeGMwa3dUSFpQUkZSM1kzaE5JaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
