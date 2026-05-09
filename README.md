@@ -1,6 +1,6 @@
-# TestArena
+# DevCodex
 
-Welcome to **TestArena**, a comprehensive repository designed to explore and demonstrate advanced concepts in software development, testing, and modern web practices. This repository serves as a learning hub for developers, showcasing practical examples, tutorials, and best practices across various domains like integration testing, security, and custom web components.
+Welcome to **DevCodex**, a comprehensive repository designed to explore and demonstrate advanced concepts in software development, testing, and modern web practices. This repository serves as a learning hub for developers, showcasing practical examples, tutorials, and best practices across various domains like integration testing, security, and custom web components.
 
 ## What This Repository Covers
 
@@ -32,5 +32,5 @@ Welcome to **TestArena**, a comprehensive repository designed to explore and dem
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/ajaysskumar/TestArena.git
-   cd TestArena
+   git clone https://github.com/ajaysskumar/dev-arena.git
+   cd dev-arena

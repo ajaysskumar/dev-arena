@@ -1,0 +1,237 @@
+@page "/blog/ai/bedrock"
+@using DevCodex.Blog.Common
+@using DevCodex.Blog
+@using System.Linq
+@using DevCodex.Blog.Common.NavigationUtils
+
+@code{
+    PageInfo currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/ai/bedrock")!;
+}
+
+<BlogContainer>
+    <Header Title="@currentPage.Header"
+            Image="@currentPage.ArticleImage" 
+            PublishedOn="@currentPage.PublishedOn" 
+            Authors="Ajay Kumar"
+            isOlderThumbnailFormat="@currentPage.IsOlderThumbnailFormat">
+    </Header>
+
+    <Section Heading="The Problem: Too Many APIs, Too Much Friction" Level="4">
+        <p>
+            Imagine this: your team decides to add AI to your .NET application. You pick a model, wire up the HTTP client, handle the auth, parse the response schema—and it works. Then the product team asks to try a different model. Suddenly you have two HTTP clients, two authentication flows, two response formats, and twice the maintenance burden. Add a third model and things start to spiral.
+        </p>
+        <p>
+            This is the reality that many .NET teams hit when integrating generative AI directly through vendor APIs. Each provider has its own conventions, and none of them speak fluent C#.
+        </p>
+        <CalloutBox Type="info" Title="Sound familiar?">
+            <p>If you've ever copy-pasted an <code>HttpClient</code> setup just to talk to a different AI model, this article is for you.</p>
+        </CalloutBox>
+    </Section>
+
+    <Section Heading="What is AWS Bedrock and Why Use It from .NET?" Level="4">
+        <p>
+            AWS Bedrock is Amazon's answer to the multi-model problem. It gives you a <b>single, consistent interface</b> to access foundation models from providers like Anthropic Claude and Amazon Titan—without juggling separate APIs, auth tokens, or request formats for each one.
+        </p>
+        <p>
+            Think of Bedrock as a universal adapter—like those laptop power converters that work worldwide. You plug in once, and voltage, plug shape, and frequency differences disappear. Similarly, your .NET code plugs into Bedrock once, and differences between Claude, Titan, and other models are handled at the API layer.
+        </p>
+        <p>
+            What makes it especially compelling for .NET developers is the official AWS SDK for .NET. You can invoke powerful AI models using idiomatic C# code, plugging straight into your existing projects—no context switching, no foreign tooling. Text generation, summarization, intelligent chat—all accessible through the same familiar patterns you already use for other AWS services.
+        </p>
+
+        <p>
+            At a high level, every Bedrock request follows this flow:
+        </p>
+
+        <BlogImage ImagePath="/images/blog/ai/bedrock/bedrock-architecture-flow.svg" 
+                   Description="Bedrock Request Flow: .NET App → Bedrock API → Model → Response" 
+                   Number="1" />
+
+
+    </Section>
+
+    <Section Heading="Why: The Need for Simplicity, Security, and Scale" Level="4">
+        <ul>
+            <li><b>Simplicity:</b> One unified API for all models instead of managing multiple SDKs and auth flows.</li>
+            <li><b>Security:</b> Enterprise-grade access control via AWS IAM—no custom auth layers.</li>
+            <li><b>Scale:</b> Built-in monitoring and throttling for production use.</li>
+        </ul>
+    </Section>
+
+    <Section Heading="How: Step-by-Step Guide to Using AWS Bedrock from .NET" Level="4">
+        <p>Let's get hands-on with setup, authentication, and your first invocation.</p>
+        <Section Heading="1. Prerequisites" Level="5">
+            <ul>
+                <li>AWS account with Bedrock access</li>
+                <li>AWS credentials configured via <code>aws configure</code></li>
+                <li>.NET 9 SDK or later</li>
+                <li>NuGet packages: <code>AWSSDK.Bedrock</code>, <code>AWSSDK.BedrockRuntime</code></li>
+            </ul>
+        </Section>
+
+        <Section Heading="2. Setting Up Your Project" Level="5">
+            <CodeSnippet Language="bash">
+dotnet add package AWSSDK.Bedrock
+dotnet add package AWSSDK.BedrockRuntime
+            </CodeSnippet>
+        </Section>
+
+        <Section Heading="3. Authenticating with AWS" Level="5">
+            <p>Run <code>aws configure</code> and enter your credentials. The SDK automatically reads from <code>~/.aws/credentials</code>:</p>
+            <CodeSnippet Language="csharp">
+var bedrockClient = new AmazonBedrockClient(RegionEndpoint.USEast1);
+            </CodeSnippet>
+            <CalloutBox Type="info" Title="Advanced auth?">
+                <p>EC2 roles, IAM users, and troubleshooting are covered in the <a href="/blog/ai/bedrock/advanced">advanced article</a>.</p>
+            </CalloutBox>
+        </Section>
+
+        <Section Heading="4. Quick Checks Before Invoking" Level="5">
+            <ul>
+                <li><b>Credentials missing?</b> Check <code>~/.aws/credentials</code> (or <code>%USERPROFILE%\.aws\credentials</code> on Windows).</li>
+                <li><b>Model not found?</b> Request access in AWS Console → Bedrock → Model access (5–15 min wait).</li>
+                <li><b>Wrong region?</b> Claude 3 Haiku is in <code>us-east-1</code> and <code>us-west-2</code> only. Check <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html" target="_blank">model availability</a>.</li>
+                <li><b>Package version?</b> Use AWSSDK.BedrockRuntime 3.7.0 or later.</li>
+            </ul>
+        </Section>
+
+        <Section Heading="5. Quick Start: Your First Model Invocation" Level="5">
+            <p>Now that everything is configured and common pitfalls are clear, let's get hands-on and invoke Claude. Here's a real, working example from the <a href="https://github.com/ajaysskumar/ai-playground" target="_blank">ai-playground</a> repository that demonstrates how to build a practical Bedrock application:</p>
+                <CodeSnippet Language="csharp" Number="4">
+public async Task&lt;string&gt; GetMovieDetails(string movieQuery)
+{
+    // Build the prompt for Claude models: must start with "\n\nHuman: " and end with "\n\nAssistant:"
+    var prompt =
+        $"\n\nHuman: You are a movie information expert. Provide detailed information about the movie '{movieQuery}'. " +
+        "Return the results as a JSON array of objects with the following fields: title (string), year (integer), " +
+        "category (string, Movie/TV), directors (array of strings), actors (array of strings), plot (string), genre (string), rating (string). " +
+        "If no movie is found, return an empty JSON array.\n\nAssistant:";
+
+    var request = new InvokeModelRequest
+    {
+        ModelId = "anthropic.claude-3-haiku-20240307-v1:0",
+        ContentType = "application/json",
+        Accept = "application/json",
+        Body = new System.IO.MemoryStream(System.Text.Encoding.UTF8.GetBytes(
+            JsonSerializer.Serialize(new
+            {
+                anthropic_version = "bedrock-2023-05-31",
+                max_tokens = 1024,
+                messages = new[]
+                {
+                    new { role = "user", content = prompt }
+                }
+            })
+        ))
+    };
+
+    var response = await _client.InvokeModelAsync(request);
+    var responseBody = System.Text.Encoding.UTF8.GetString(response.Body.ToArray());
+    return FormatJsonString(responseBody);
+}
+                </CodeSnippet>
+                <p>
+                    <b>What's happening:</b>
+                </p>
+                <ul>
+                    <li>You craft a structured prompt that tells Claude exactly what format to return (JSON with specific fields).</li>
+                    <li>You create an <code>InvokeModelRequest</code> with your model ID and serialized prompt.</li>
+                    <li>The SDK sends the request to Bedrock. Claude processes it and returns structured movie data as JSON.</li>
+                    <li>You parse the response and return it to the caller.</li>
+                </ul>
+                <p>
+                    This example shows why Bedrock is powerful: <b>one unified C# API to get smart, JSON-formatted responses</b> from Claude. Users can add similar methods for classification, summarization, extraction, or chat—all using the same pattern.
+                </p>
+                <CalloutBox Type="tip" Title="Try It Out">
+                    <p>This is a working example from the <a href="https://github.com/ajaysskumar/ai-playground/blob/main/AwsBedrockExamples/Services/BedrockService.cs" target="_blank">ai-playground repository</a>. Clone it, configure your AWS credentials, and run it to see Bedrock in action.</p>
+                </CalloutBox>
+                <CalloutBox Type="warning" Title="Model IDs Change Over Time">
+                    <p>As of March 2026, Claude 3 Haiku model ID is <code>anthropic.claude-3-haiku-20240307-v1:0</code>, but check the <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html" target="_blank">AWS Bedrock documentation</a> for the latest available models and their IDs. Claude 3.5 models may now be available.</p>
+                </CalloutBox>
+            </Section>
+
+        <Section Heading="6. Building Production Systems: Efficient Batching" Level="5">
+            <p>
+                For scale, batch requests using <code>Task.WhenAll</code>. With 10,000 items at 1-2 seconds each, sequential processing takes 3–6 hours; batching (size 10–20) reduces this to ~15 minutes.
+            </p>
+            <ul>
+                <li><b>Batch size:</b> Start with 10–20, tune based on throttling. Us-east-1 allows higher throughput.</li>
+                <li><b>Error handling:</b> Implement exponential backoff for throttling. Queue failed items for async retry.</li>
+                <li><b>Idempotency keys:</b> Include item IDs or timestamps to prevent re-processing on retries.</li>
+            </ul>
+        </Section>
+    </Section>
+
+    <Section Heading="⚠️ Pitfalls to Avoid & Limitations to Know" Level="4">
+        <p>
+            Before shipping Bedrock to production, understand these real-world constraints. They won't stop you, but they will catch you off guard if you're unprepared.
+        </p>
+
+        <Section Heading="Regional Availability" Level="5">
+            <p>
+                Claude 3 Haiku/Sonnet are in <code>us-east-1</code> and <code>us-west-2</code>. Titan Text is more widely available. <code>ModelNotFound</code> errors are usually region mismatches—<b>always check region first</b>.
+            </p>
+        </Section>
+
+        <Section Heading="Rate Limits & Quotas" Level="5">
+            <p>
+                Bedrock enforces account-specific quotas to protect infrastructure. The default is commonly around <b>100 requests per minute per model</b>, though this varies by region, account age, and model. 
+                Exceed your quota and you'll get a <code>ThrottlingException</code>. In production, implement exponential backoff and request a higher quota from AWS Support if needed.
+            </p>
+            <CalloutBox Type="warning" Title="Quota varies by account">
+                <p>Contact AWS Support to check your specific quota and request increases. Don't assume the 100 req/min default applies to your account.</p>
+            </CalloutBox>
+            <p><b>Pricing impact:</b> Bedrock charges per input + output token. A 1000-ticket batch can run approximately $5–20 depending on model and verbosity (check <a href="https://aws.amazon.com/bedrock/pricing/" target="_blank">current pricing</a> for exact rates). Always estimate costs before scaling.</p>
+        </Section>
+
+        <Section Heading="Model Differences Matter" Level="5">
+            <p>
+                Claude 3 models have different characteristics. <b>Note: Pricing and latency figures change frequently.</b> Check the <a href="https://aws.amazon.com/bedrock/pricing/" target="_blank">AWS Bedrock pricing page</a> for current rates:
+            </p>
+            <ul>
+                <li><b>Haiku (fastest, cheapest):</b> Best for simple tasks like classification and extraction. Lowest latency.</li>
+                <li><b>Sonnet (balanced):</b> Better reasoning than Haiku. Mid-range cost and latency. Suitable for most applications.</li>
+                <li><b>Opus (most capable, if available):</b> Check AWS docs—may not be available in all regions or via Bedrock.</li>
+                <li><b>Token limits vary:</b> Check the <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html" target="_blank">model documentation</a> for current context window sizes.</li>
+            </ul>
+            <CalloutBox Type="tip" Title="Choose the right model">
+                <p>Start with Haiku for testing and prototyping—it's faster and cheaper. Switch to Sonnet only if you need better reasoning quality. Always benchmark cost + latency for your use case before scaling.</p>
+            </CalloutBox>
+        </Section>
+
+
+
+
+    </Section>
+
+    <Section Heading="7. Summary" Level="4">
+        <ul>
+            <li><b>What:</b> AWS Bedrock is a managed service that abstracts vendor-specific AI APIs into a unified interface (with C# SDK support).</li>
+            <li><b>Why:</b> It reduces friction: unified auth (IAM), consistent error handling, and easy model switching.</li>
+            <li><b>How:</b> Use <code>InvokeModel</code> for single requests and batch operations. In production, batch efficiently, handle throttling gracefully, and forecast costs.</li>
+        </ul>
+        <p>
+            This approach lets you build intelligent, generative features into your .NET apps with clarity and control. Whether you're prototyping or going to production, AWS Bedrock and .NET make GenAI accessible and robust.
+        </p>
+
+        <CalloutBox Type="tip" Title="If You Remember Only One Thing">
+            <p>
+                <b>Bedrock = abstraction layer.</b> You control: the model you invoke, the prompt you send, and the cost/quality tradeoff. Start with <code>InvokeModel</code>, add error handling, batch in production, and always check region availability first when things break.
+            </p>
+        </CalloutBox>
+    </Section>
+
+    <Section Heading="8. References & Further Reading" Level="4">
+        <ul>
+            <li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html" target="_blank">AWS Bedrock Documentation</a></li>
+            <li><a href="https://docs.aws.amazon.com/sdk-for-net/v3/developer-guide/" target="_blank">AWS SDK for .NET</a></li>
+            <li><a href="https://github.com/ajaysskumar/ai-playground/blob/main/AwsBedrockExamples/Services/BedrockService.cs" target="_blank">BedrockService.cs on GitHub</a></li>
+        </ul>
+    </Section>
+
+    <CalloutBox Type="info" Title="🚀 Next in the Series">
+        <p>Ready to take it further? Check out <a href="/blog/ai/bedrock/advanced">AWS Bedrock with .NET: Advanced Integration & Production Setup</a> to learn about IAM authentication, EC2 instance roles, and production deployment strategies.</p>
+    </CalloutBox>
+
+    <EndNotes RepositoryLink="https://github.com/ajaysskumar/ai-playground" />
+</BlogContainer>

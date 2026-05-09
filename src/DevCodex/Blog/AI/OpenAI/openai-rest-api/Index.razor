@@ -1,0 +1,363 @@
+﻿@page "/blog/ai/openai-rest-api/structured-output"
+@using DevCodex.Blog.Common
+@using DevCodex.Blog.Common.NavigationUtils
+
+@using DevCodex
+@inject OpenAIService OpenAIService
+@code {
+    PageInfo currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/ai/openai-rest-api/structured-output")!;
+
+    // Demo state for structured movie output
+    private global::OpenAIService.MovieDetails? movieDetails = null;
+    private string movieInput = "The Matrix";
+    private string apiKeyInput = string.Empty;
+    private string ApiKeyInputTrimmed => apiKeyInput?.Trim() ?? string.Empty;
+    private string MovieInputTrimmed => movieInput?.Trim() ?? string.Empty;
+    private bool IsGetMovieDisabled => isLoading || string.IsNullOrWhiteSpace(ApiKeyInputTrimmed) || string.IsNullOrWhiteSpace(MovieInputTrimmed);
+    private bool isApiKeyVisible = false;
+    private bool isLoading = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Optionally, prefill API key from env or local storage if desired
+    }
+
+    private async Task GetMovieDetails()
+    {
+        isLoading = true;
+        movieDetails = null;
+        StateHasChanged();
+
+        try
+        {
+            // Call the CreateMovieDetailsAsync method which returns a structured MovieDetails object
+            movieDetails = await OpenAIService.CreateMovieDetailsAsync(MovieInputTrimmed, ApiKeyInputTrimmed);
+        }
+        catch (Exception ex)
+        {
+            // Show error as a simple serialized message in the UI (keep demo simple)
+            movieDetails = null;
+            Console.WriteLine($"CreateMovieDetailsAsync failed: {ex.Message}");
+        }
+
+        isLoading = false;
+        StateHasChanged();
+    }
+}
+
+<BlogContainer>
+    <Header
+        Title="@currentPage.Header"
+        Description="Learn how to leverage OpenAI's powerful APIs to integrate AI capabilities into your applications. From authentication to implementation, discover everything you need to know about working with OpenAI APIs using direct HTTP requests."
+        Image="@currentPage.ArticleImage"
+        PublishedOn="@currentPage.PublishedOn"
+        Authors="Ajay kumar"/>
+    <Section Heading="Getting Structured Output from OpenAI APIs" Level="4">
+        <p>
+            When you first start with OpenAI's chat models, you get back conversational, unstructured text. It's great for chatbots and creative writing, but what if you need to display that data in a user interface, save it to a database, or feed it into another system? You need predictable, machine-readable data. That's where structured output comes in.
+        </p>
+        <p>
+            This article breaks down the "what, when, and how" of getting reliable JSON from OpenAI's APIs.
+        </p>
+    </Section>
+
+    <Section Heading="What is Structured Output?" Level="4">
+        <p>
+            Think of it as the difference between an essay and a spreadsheet. Unstructured output is free-flowing text that is easy for humans to read but hard for programs to parse reliably. Structured output, on the other hand, is organized in a predictable format like JSON, which applications can easily process.
+        </p>
+        <CodeSnippet Language="diff" Description="Unstructured vs. Structured Output">
+- Unstructured Text:
+"The Matrix is a 1999 sci-fi action film directed by the Wachowskis. It's about a hacker who discovers the world is a simulation."
+
++ Structured JSON:
+{
+  "title": "The Matrix",
+  "year": 1999,
+  "director": "The Wachowskis",
+  "genres": ["Sci-Fi", "Action"]
+}
+        </CodeSnippet>
+        <CalloutBox Type="note" Title="Tip">
+            For application development, structured output is almost always what you want. It's reliable, predictable, and easy to work with.
+        </CalloutBox>
+    </Section>
+
+    <Section Heading="When Should You Use It?" Level="4">
+        <p>
+            Use structured output whenever the AI's response needs to be processed by your application. Key scenarios include:
+        </p>
+        <ul>
+            <li><strong>Populating a User Interface:</strong> Displaying movie details, a recipe, or product information in a consistent layout.</li>
+            <li><strong>Saving to a Database:</strong> Storing generated data in specific table columns.</li>
+            <li><strong>Calling Another API:</strong> Formatting the AI's output to match the requirements of a different service.</li>
+            <li><strong>Data Analysis:</strong> Extracting specific entities from text, like names, dates, or locations, for analysis.</li>
+            <li><strong>Classification and Tagging:</strong> Categorizing user input into predefined categories (e.g., "support request," "feedback," "sales inquiry").</li>
+        </ul>
+    </Section>
+
+    <Section Heading="How Do You Get Structured Output?" Level="4">
+        <p>
+            OpenAI provides a few ways to achieve this, with newer methods being far more reliable than older ones.
+        </p>
+
+        <SubSection Heading="1. Prompt Engineering (The Brittle Way)" Level="5">
+            <p>
+                The original method was to simply ask the model in your prompt to return JSON.
+            </p>
+            <CodeSnippet Language="text" Description="Example Prompt">
+Extract the movie title, year, and director from the following text. Return the output as a JSON object with keys "title", "year", and "director".
+
+Text: "My favorite movie is The Matrix, which came out in 1999 and was directed by the Wachowskis."
+            </CodeSnippet>
+            <p>
+                <strong>Why it's brittle?</strong> The model might not perfectly follow instructions, leading to common parsing failures. For example, it could add extraneous text, use different key names than requested, or generate malformed JSON.
+            </p>
+        </SubSection>
+
+        <SubSection Heading="2. JSON Mode (The Better Way)" Level="5">
+            <p>
+                A more recent and reliable feature is <strong>JSON Mode</strong>. By setting the <code>response_format</code> parameter to <code>{ "type": "json_object" }</code> in your API call, you instruct the model to guarantee that its output is a syntactically valid JSON object.
+            </p>
+            <p>
+                <strong>Requirements:</strong>
+            </p>
+            <ul>
+                <li>You must use a newer model like <code>gpt-4-turbo-preview</code> or <code>gpt-3.5-turbo-1106</code>.</li>
+                <li>Your prompt must contain the word "JSON" to remind the model of the constraint.</li>
+            </ul>
+            <CodeSnippet Language="json" Description="API Request Body with JSON Mode">
+{
+  "model": "gpt-4-turbo-preview",
+  "response_format": { "type": "json_object" },
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a helpful assistant designed to output JSON."
+    },
+    {
+      "role": "user",
+      "content": "Who won the world series in 2020?"
+    }
+  ]
+}
+            </CodeSnippet>
+            <p>
+                This is a huge improvement, as it eliminates parsing errors. However, it doesn't guarantee the <em>schema</em> of the JSON (e.g., that a "year" field will be present).
+            </p>
+        </SubSection>
+
+        <SubSection Heading="3. Function Calling (The Best & Most Reliable Way)" Level="5">
+            <p>
+                <strong>Function Calling</strong> is the most powerful and recommended method for getting structured output. It was designed to let the model call external tools, but its real superpower is forcing the model's output into a specific, predefined JSON schema.
+            </p>
+            <p>
+                Here's how it works:
+            </p>
+            <ol>
+                <li><strong>Define a Schema:</strong> In your API request, you provide a JSON schema describing the exact structure you want. You define the function's name, its purpose, and the parameters it accepts (your desired fields), including their types (string, integer, array) and descriptions.</li>
+                <li><strong>Instruct the Model:</strong> You tell the model to call this function with data extracted from the user's prompt.</li>
+                <li><strong>Get Perfect JSON:</strong> The API returns a response containing a JSON object that perfectly matches the schema you defined.</li>
+            </ol>
+            <CalloutBox Type="note" Title="Visualizing the Flow">
+                To demystify the process, here’s a simple flow diagram:
+                <br/>
+                <strong>User Prompt</strong> → <strong>Schema Definition</strong> → <strong>API Call with Function</strong> → <strong>Structured JSON Output</strong>
+            </CalloutBox>
+            <CodeSnippet Language="json" Description="Example API Payload for Function Calling">
+-- POST https://api.openai.com/v1/chat/completions
+-- Content-Type: application/json
+-- Authorization: Bearer $OPENAI_API_KEY
+
+{
+  "model": "gpt-4o-mini",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a JSON generator. Given a movie name, produce a single JSON object with a specific schema."
+    },
+    {
+      "role": "user",
+      "content": "Get movie details for: The Matrix\nRespond by calling the function 'create_movie_details'."
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_movie_details",
+      "description": "Create a movie details object.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "title": { "type": "string" },
+          "year": { "type": "integer" },
+          "director": { "type": "string" },
+          "description": { "type": "string" },
+          "genres": { "type": "array", "items": { "type": "string" } },
+          "actors": { "type": "array", "items": { "type": "string" } }
+        },
+        "required": ["title", "year", "director", "description", "genres", "actors"]
+      }
+    }
+  ],
+  "function_call": "auto",
+  "temperature": 0.0
+}
+            </CodeSnippet>
+            <p>
+                The API's response won't contain a typical text message. Instead, it will contain a <code>tool_calls</code> object. Inside, you'll find the name of the function the model chose to call (<code>create_movie_details</code>) and, most importantly, an <code>arguments</code> field. This field contains a JSON <strong>string</strong> with the extracted data, perfectly matching your schema.
+            </p>
+            <CodeSnippet Language="json" Description="Example API Response">
+{
+  "id": "chatcmpl-CD3GM3Gc1Qfr40FKxOTf8DZG7afGn",
+  "object": "chat.completion",
+  "created": 1757226842,
+  "model": "gpt-4o-mini-2024-07-18",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": null,
+        "function_call": {
+          "name": "create_movie_details",
+          "arguments": "{\"title\":\"The Matrix\",\"year\":1999,\"director\":\"Lana Wachowski, Lilly Wachowski\",\"description\":\"A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.\",\"genres\":[\"Action\",\"Sci-Fi\",\"Adventure\"],\"actors\":[\"Keanu Reeves\",\"Laurence Fishburne\",\"Carrie-Anne Moss\",\"Hugo Weaving\",\"Gloria Foster\"]}"
+        },
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "function_call"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 104,
+    "completion_tokens": 96,
+    "total_tokens": 200,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_8bda4d3a2c"
+}}
+            </CodeSnippet>
+            <h6>A Deeper Look at Constrained Decoding</h6>
+            <p>
+                The magic behind the reliability of Function Calling and JSON Mode is a process called <strong>constrained decoding</strong>. Unlike traditional text generation where the model predicts the next most likely word from its entire vocabulary, constrained decoding restricts the model's choices at each step.
+            </p>
+            <p>
+                When you provide a JSON schema, the API uses it as a blueprint. As it generates the output, it only allows the model to select tokens that are valid for the current position in the JSON structure. For example, if it's generating a key, it will only allow string tokens. If it expects a number, it will restrict the output to digits. This programmatic enforcement is what guarantees syntactically correct JSON that conforms to your schema, moving from "please give me JSON" to "you must give me JSON."
+            </p>
+
+            <h6>Limitations and Known Issues</h6>
+            <p>
+                While powerful, the feature isn't foolproof. Here are a few things to keep in mind:
+            </p>
+            <ul>
+                <li><strong>Performance:</strong> The first request with a new or complex schema can take a few seconds to process due to caching. Subsequent calls with the same schema are much faster.</li>
+                <li><strong>Interruption:</strong> The model may still violate the schema if the generation is interrupted by a stop condition (like reaching <code>max_tokens</code>) before the JSON is complete.</li>
+                <li><strong>Complexity:</strong> Overly complex schemas can sometimes confuse the model, leading to incorrect or incomplete output.</li>
+                <li><strong>Glitches:</strong> Users have reported occasional glitches, like the model returning a JSON string with excess newline characters (e.g., <code>\n\n\n</code>).</li>
+            </ul>
+            
+            <CalloutBox Type="note" Title="Best Practices for Structured Outputs">
+                <ul>
+                    <li><strong>Start Simple:</strong> Begin with a minimal schema and add complexity gradually.</li>
+                    <li><strong>Be Descriptive:</strong> Use clear, descriptive names and descriptions for your function and its parameters. This gives the model better context.</li>
+                    <li><strong>Handle Errors Gracefully:</strong> Always wrap your API calls and JSON parsing in try-catch blocks. Don't assume the API call will succeed or the response will be perfect.</li>
+                    <li><strong>Sanitize the Output:</strong> Before parsing, trim whitespace and control characters from the JSON string returned by the API.</li>
+                    <li><strong>Monitor Token Usage:</strong> Be mindful of `max_tokens`. If the output might be large, ensure your limit is high enough to avoid truncated, invalid JSON.</li>
+                </ul>
+            </CalloutBox>
+
+            <h6>Beyond OpenAI: A Broader Perspective</h6>
+            <p>
+                The concept of enforcing a schema on AI output is becoming an industry standard. Other platforms like <strong>Azure OpenAI</strong> offer similar structured output capabilities, supporting a JSON Schema subset and enforcing strict rules like requiring defined fields (`required`) and prohibiting extra ones (`additionalProperties: false`). This provides a comparable level of reliability for developers on different platforms.
+            </p>
+            
+            <p>
+                This is the technique used in the demo below. We define a <code>MovieDetails</code> schema and ask the model to populate it. The result is a clean, predictable object that we can directly bind to our UI without any guesswork. It's the most robust way to build AI-powered features into your applications.
+            </p>
+        </SubSection>
+    </Section>
+
+    <Section Heading="Demo: Structured Movie Details Generator" Level="4">
+        <p>
+            <b>How to use this demo:</b> Enter your personal OpenAI API key (create one from your <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI dashboard</a>), then type a movie name. Click <b>Get Movie Details</b> and the demo will call a structured-output endpoint that returns a JSON object with clearly defined fields. The UI then renders those fields in a clean, predictable layout.
+        </p>
+    <div class="mb-3">
+        <label for="apiKeyInput" class="form-label"><b>Enter your OpenAI API key:</b></label>
+        <div class="input-group">
+            <input id="apiKeyInput" class="form-control" type="@(isApiKeyVisible ? "text" : "password")" @bind="apiKeyInput" @bind:event="oninput" placeholder="sk-..." autocomplete="off" />
+            <button class="btn btn-outline-secondary" type="button" @onclick="() => isApiKeyVisible = !isApiKeyVisible" tabindex="-1">
+                <i class="@(isApiKeyVisible ? "bi bi-eye-slash" : "bi bi-eye")"></i>
+            </button>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="movieInput" class="form-label"><b>Enter a movie name:</b></label>
+        <input id="movieInput" class="form-control" @bind="movieInput" @bind:event="oninput" placeholder="e.g. The Matrix" />
+    </div>
+    <button class="btn btn-primary mb-3" @onclick="GetMovieDetails" disabled="@IsGetMovieDisabled">
+        @if (isLoading)
+        {
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <span class="visually-hidden">Loading...</span>
+        }
+        else
+        {
+            <span>Get Movie Details</span>
+        }
+    </button>
+
+    <div>
+        <b>Structured Movie Details:</b><br />
+        @if (isLoading)
+        {
+            <span>Loading...</span>
+        }
+        else if (movieDetails != null)
+        {
+            <div class="card mt-2" style="background-color: #f8f9fa; border: 1px solid #e9ecef;">
+                <div class="card-body">
+                    <h5 class="card-title">@movieDetails.Title</h5>
+                    <p class="card-text"><strong>Year:</strong> @movieDetails.Year</p>
+                    <p class="card-text"><strong>Director:</strong> @movieDetails.Director</p>
+                    <p class="card-text"><strong>Description:</strong> @movieDetails.Description</p>
+
+                    <h6>Genres</h6>
+                    <ul>
+                        @foreach (var genre in movieDetails.Genres)
+                        {
+                            <li>@genre</li>
+                        }
+                    </ul>
+
+                    <h6>Actors</h6>
+                    <ul>
+                        @foreach (var actor in movieDetails.Actors)
+                        {
+                            <li>@actor</li>
+                        }
+                    </ul>
+
+                    <details>
+                        <summary>Raw JSON</summary>
+                        <pre>@System.Text.Json.JsonSerializer.Serialize(movieDetails, new System.Text.Json.JsonSerializerOptions { WriteIndented = true })</pre>
+                    </details>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-secondary mt-2">No movie details yet — enter a movie name and click <strong>Get Movie Details</strong>.</div>
+        }
+    </div>
+</Section>
+</BlogContainer>
