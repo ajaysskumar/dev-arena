@@ -92,7 +92,7 @@ jobs:
           # Clean up old files and copy the new ones
           cp -r build_output/wwwroot/* .
           rm -rf build_output
-          rm -rf TestArena
+          rm -rf src/TestArena
 
           # Commit and push changes
           git add .
