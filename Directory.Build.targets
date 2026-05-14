@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <!-- Auto-install git hooks after restore/build on all projects -->
+  <!-- This target runs on both dotnet restore and dotnet build -->
+  
+  <PropertyGroup>
+    <!-- MSBuildThisFileDirectory already points to repo root where Directory.Build.targets is located -->
+    <RepoRoot>$(MSBuildThisFileDirectory)</RepoRoot>
+    <GitHooksDir>$(RepoRoot).git/hooks</GitHooksDir>
+    <HooksScriptDir>$(RepoRoot)scripts/hooks</HooksScriptDir>
+  </PropertyGroup>
+
+  <Target Name="InstallGitHooks" BeforeTargets="Build;Restore" Condition="'$(SKIP_GIT_HOOKS)' != 'true'">
+    <!-- Ensure hooks directory exists (works on all platforms) -->
+    <Exec Command="mkdir -p &quot;$(GitHooksDir)&quot;" IgnoreExitCode="true" />
+
+    <!-- Copy pre-commit hook -->
+    <Copy 
+      SourceFiles="$(HooksScriptDir)/pre-commit" 
+      DestinationFolder="$(GitHooksDir)"
+      SkipUnchangedFiles="false"
+      Condition="Exists('$(HooksScriptDir)/pre-commit')" />
+    
+    <!-- Make hook executable (bash is available on all platforms with git) -->
+    <Exec 
+      Command="chmod +x &quot;$(GitHooksDir)/pre-commit&quot;" 
+      IgnoreExitCode="true" />
+
+    <Message Text="✓ Git pre-commit hooks installed successfully from $(HooksScriptDir)" Importance="high" />
+  </Target>
+</Project>
