@@ -62,7 +62,7 @@ jobs:
 
       # Step 6: Build the WASM project
       - name: Build the WASM project
-        run: dotnet publish DevCodex.sln -c:Release -o:build_output -p:GHPages=true
+        run: dotnet publish src/DevCodex/DevCodex.csproj -c:Release -o:build_output -p:GHPages=true
 
       # Step 7: Debug - Verify build_output exists
       - name: List build_output directory
