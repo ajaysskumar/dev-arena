@@ -6,15 +6,45 @@
 
 <div class="row row-cols-1 row-cols-md-3 g-4 p-2">
     <div class="col col-md-12">
-        <h4 class="d-flex flex-wrap">
+        <div class="tags-container">
             @foreach (var tag in SiteMap.PublishedArticles.Where(b => b.IsPublished).SelectMany(x => x.Tags).Distinct())
             {
                 var route = $"/filtered-blogs?tag={tag}";
-                <a href="@route" class="text-info px-2">#@tag</a>
+                <a href="@route" class="glass-tag">#@tag</a>
             }
-        </h4>
+        </div>
     </div>
 </div>
+
+<style>
+    .tags-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 2rem;
+    }
+
+    .glass-tag {
+        display: inline-block;
+        padding: 4px 8px;
+        background: rgba(13, 202, 240, 0.08);
+        border: 1px solid rgba(13, 202, 240, 0.3);
+        border-radius: 6px;
+        color: #0dcaf0;
+        text-decoration: none;
+        font-size: 0.95rem;
+        font-weight: 500;
+        transition: background 200ms, border-color 200ms;
+        white-space: nowrap;
+    }
+
+    .glass-tag:hover {
+        background: rgba(13, 202, 240, 0.15);
+        border-color: rgba(13, 202, 240, 0.5);
+        color: #0dcaf0;
+        text-decoration: none;
+    }
+</style>
 
 <div class="row row-cols-1 row-cols-md-3 g-4 p-2">
     @{
