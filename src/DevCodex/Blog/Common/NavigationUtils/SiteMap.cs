@@ -224,6 +224,13 @@ namespace DevCodex.Blog.Common.NavigationUtils
             ["AI", "AWS Bedrock", "Guardrails", "Safety", ".NET", "C#"],
             isPublished: true,
             isOlderThumbnailFormat: false),
+        new("Streaming APIs Explained: What, When, and How",
+            "/blog/software-practices/streaming-apis-explained",
+            new DateTime(2026, 6, 6),
+            "images/blog/streaming-apis-explained/banner.png",
+            ["Software Practices", "Streaming APIs", "SSE", "HTTP", ".NET", "C#"],
+            isPublished: true,
+            isOlderThumbnailFormat: true),
         ];
 
         public static IEnumerable<PageInfo> PublishedArticles => Pages.Where(p => p.IsPublished && p.PublishedOn <= DateTime.UtcNow);
