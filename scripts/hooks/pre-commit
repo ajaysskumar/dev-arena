@@ -49,15 +49,18 @@ if [ -f "$COMMIT_MSG_FILE" ]; then
 fi
 echo -e "${GREEN}✓ Commit message format valid${NC}\n"
 
-# 2. Check code formatting
+# 2. Check and auto-fix code formatting
 echo "→ Checking code formatting with dotnet format..."
 cd "$REPO_ROOT"
 if ! dotnet format --verify-no-changes --verbosity quiet 2>/dev/null; then
-  echo -e "${RED}✗ Code formatting issues detected${NC}"
-  echo "  Run: dotnet format"
-  exit 1
+  echo -e "${YELLOW}⚠ Code formatting issues detected - auto-fixing...${NC}"
+  dotnet format --verbosity quiet
+  echo -e "${YELLOW}→ Staging formatted changes...${NC}"
+  git add -u
+  echo -e "${GREEN}✓ Code auto-formatted and staged${NC}\n"
+else
+  echo -e "${GREEN}✓ Code formatting valid${NC}\n"
 fi
-echo -e "${GREEN}✓ Code formatting valid${NC}\n"
 
 # 3. Build validation
 echo "→ Validating build..."
