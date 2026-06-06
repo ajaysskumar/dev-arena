@@ -203,10 +203,10 @@ public static async Task ConsumerAsync()
 
         <Section Heading="Step 3: A Minimal End-to-End Example" Level="5">
             <p>
-                The full example simply starts the local server in the background and then starts the client. The goal is not production readiness. The goal is clarity. For a blog article or a learning demo, this is perfect because you can point to one file and explain the whole flow end to end.
+                The snippet below is the final bootstrap step, assuming the server and consumer methods shown earlier are already defined.
             </p>
 
-            <CodeSnippet Language="csharp" Description="Bootstrapping the local streaming server and client" Number="3">
+            <CodeSnippet Language="csharp" Description="Final bootstrap step for the already-defined streaming server and client" Number="3">
 public static async Task Main(string[] args)
 {
     var server = new StreamingServer();
@@ -240,6 +240,9 @@ public static async Task Main(string[] args)
             <li><b>Use WebSockets</b> when both sides need to send messages freely, like chat rooms, multiplayer games, or collaborative editing.</li>
             <li><b>Use gRPC streaming</b> when services talk to services and you want strong contracts, binary efficiency, and high throughput.</li>
         </ul>
+        <p>
+            One simple way to remember the difference is this: <b>SSE is one-way</b>, from server to client, while <b>WebSockets are two-way</b>, allowing both sides to send messages whenever they need to.
+        </p>
         <p>
             In other words, SSE is like a radio broadcast, WebSockets are like a phone call, and gRPC streaming is like a private fiber line between two offices.
         </p>
