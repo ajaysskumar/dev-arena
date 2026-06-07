@@ -20,11 +20,11 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" /> -->
     
-<!--Blazor:{"type":"webassembly","prerenderId":"dc74faafaafc4419a4ca3f5d9b13aa36","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>Event-Driven Communication in frontend/react: Beginner&#x27;s Guide</title><meta property="og:url" content="http://127.0.0.1:5050/blog/frontend/events-demo" />
+<!--Blazor:{"type":"webassembly","prerenderId":"0782683990a74018b1a74c1b966f3b7b","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>Event-Driven Communication in frontend/react: Beginner&#x27;s Guide</title><meta property="og:url" content="http://127.0.0.1:5050/blog/frontend/events-demo" />
     <meta property="og:title" content="Event-Driven Communication in frontend/react: Beginner&#x27;s Guide" />
     <meta property="og:description" content="" />
     <meta property="og:image" content="http://127.0.0.1:5050/images/blog/frontend/events-demo/banner.png" />
-    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"dc74faafaafc4419a4ca3f5d9b13aa36"}-->
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"0782683990a74018b1a74c1b966f3b7b"}-->
 </head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -40,7 +40,7 @@
 
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"a1c9b518b39a4788a69aeb371bdd68be","key":{"locationHash":"1E5B2A40C870C32832812BA3ECC8F00C025EF68F461B075ADE40C0C55D040851:0","formattedComponentKey":""},"assembly":"DevCodex","typeName":"DevCodex.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-8rdvqw2f7f><div class="page " b-3xlixug817><main class="d-flex flex-column min-vh-100" b-3xlixug817><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"90c53c017e8f4a60b97c6c5a52b22f9d","key":{"locationHash":"1E5B2A40C870C32832812BA3ECC8F00C025EF68F461B075ADE40C0C55D040851:0","formattedComponentKey":""},"assembly":"DevCodex","typeName":"DevCodex.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-8rdvqw2f7f><div class="page " b-3xlixug817><main class="d-flex flex-column min-vh-100" b-3xlixug817><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -87,7 +87,7 @@
                     
                     <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 19 Jul 2025</span></div></div></div></div></div></header>
 
-    <section id="210e432a-62b2-4412-b94f-9d4502197325" style="margin-bottom:1rem;"><h3>&#x1F3AD; The Tale of Two Components: A Story of Decoupled Communication</h3><hr class="border border-success border-1 opacity-50">
+    <section id="d9e9f99b-a9e8-45d7-b7fe-d7483be44160" style="margin-bottom:1rem;"><h3>&#x1F3AD; The Tale of Two Components: A Story of Decoupled Communication</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             Imagine you're at a bustling coffee shop. People are chatting, baristas are calling out orders, and the atmosphere is alive with activity. But here's the fascinating part: the barista doesn't need to know every customer personally, and customers don't need to know each other. They all communicate through a simple, elegant system—the order board and the coffee shop's rhythm.
         </p>
@@ -95,7 +95,7 @@
             This is exactly how <b>event-driven communication</b> works in micro-frontends. It's like having a magical post office where components can send messages to each other without ever meeting face-to-face. Today, we'll explore this fascinating world where components become pen pals, communicating through a shared event system.
         </p></div></section>
 
-    <section id="b16f7c25-349d-4db2-a057-5786fd2a1f80" style="margin-bottom:1rem;"><h3>&#x1F52E; The Magic of Event-Driven Architecture</h3><hr class="border border-success border-1 opacity-50">
+    <section id="ab1e339b-9350-4229-93ed-6d2caa2b9c27" style="margin-bottom:1rem;"><h3>&#x1F52E; The Magic of Event-Driven Architecture</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             Picture this: You have a React application with multiple components that need to talk to each other. Traditionally, you'd connect them like a family tree—parent to child, child to grandchild, creating a web of dependencies that's as tangled as Christmas lights.
         </p>
@@ -103,7 +103,7 @@
             But what if there was a better way? What if components could communicate like people at a party—sending messages into the air and letting anyone who's interested pick them up?
         </p>
         
-        <section id="b2b745dc-334e-45c1-82a0-9d77856b0528" style="margin-bottom:1rem;"><h4>The Event Bus: Our Digital Post Office</h4><hr class="border border-success border-1 opacity-50">
+        <section id="7561a16d-dada-4490-945d-9e857d6ab0ae" style="margin-bottom:1rem;"><h4>The Event Bus: Our Digital Post Office</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
                 Think of an <b>event bus</b> as a magical post office that never closes. When one component wants to share something, it simply drops a message into the post office. Any other component that's interested can pick up that message and react accordingly.
             </p>
@@ -111,7 +111,7 @@
                 The beauty of this system is that the sender doesn't need to know who's listening, and the listeners don't need to know who's sending. It's like having a town square where anyone can make an announcement, and anyone can choose to listen.
             </p></div></section>
 
-        <section id="38a1fef5-1710-4a63-847a-7f1e0983fc58" style="margin-bottom:1rem;"><h4>The Three Musketeers of Event Communication</h4><hr class="border border-success border-1 opacity-50">
+        <section id="5e7dd7c0-3079-4122-9d9a-a646edf80a46" style="margin-bottom:1rem;"><h4>The Three Musketeers of Event Communication</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
                 Every event-driven system has three key players:
             </p>
@@ -119,7 +119,7 @@
                 <li><b>The Subscriber (Listener):</b> Like an attentive audience, this component listens for specific events</li>
                 <li><b>The Event Bus:</b> Like the town square, this is where all the magic happens</li></ul></div></section></div></section>
 
-    <section id="082dfe22-56d0-4b03-a775-5354889c9283" style="margin-bottom:1rem;"><h3>&#x1F3D7;&#xFE0F; Building Our Digital Town Square</h3><hr class="border border-success border-1 opacity-50">
+    <section id="7d99eefe-d3e0-4b5b-87a9-f955277d10b6" style="margin-bottom:1rem;"><h3>&#x1F3D7;&#xFE0F; Building Our Digital Town Square</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             Let's create our own event bus—a simple but powerful system that can handle all our component communication needs. Think of it as building a digital town square where messages can flow freely.
         </p>
@@ -172,12 +172,12 @@ export default eventBus;
             This simple event bus is like having a magical notice board where anyone can post messages and anyone can read them. The beauty is in its simplicity—it's just a collection of functions that know how to deliver messages to the right people.
         </p></div></section>
 
-    <section id="925a9fb9-5d9d-415f-b15b-250f296b8b96" style="margin-bottom:1rem;"><h3>&#x1F3AD; Meet Our Characters: The Sender and Receiver</h3><hr class="border border-success border-1 opacity-50">
+    <section id="ecf61dde-f153-4185-b09d-a069b7ca3a04" style="margin-bottom:1rem;"><h3>&#x1F3AD; Meet Our Characters: The Sender and Receiver</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             Now let's meet our two main characters in this story: the Sender and the Receiver. They're like two people at opposite ends of our digital town square, communicating through our event bus.
         </p>
         
-        <section id="33722ba0-5415-493d-862f-c8c6091bf482" style="margin-bottom:1rem;"><h4>The Sender: Our Town Crier</h4><hr class="border border-success border-1 opacity-50">
+        <section id="154f15dc-4ed4-4f54-be2b-253a9814436f" style="margin-bottom:1rem;"><h4>The Sender: Our Town Crier</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
                 The Sender is like a friendly town crier who loves to share news with everyone. It doesn't care who's listening—it just wants to broadcast its messages to the world.
             </p>
@@ -279,7 +279,7 @@ export default Sender;
             </code></pre></div><div class="col-12 text-center"><code>Code Sample #2 : The Sender Component - Our Town Crier</code></div></div></div>
 <br></div></section>
 
-        <section id="d392934e-e1e5-4e88-ad8d-ac412324c5e8" style="margin-bottom:1rem;"><h4>The Receiver: Our Attentive Audience</h4><hr class="border border-success border-1 opacity-50">
+        <section id="801f58f4-0109-40bb-9c99-a2a6f82de910" style="margin-bottom:1rem;"><h4>The Receiver: Our Attentive Audience</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
                 The Receiver is like an attentive audience member who's always listening for interesting announcements. It doesn't care who's speaking—it just wants to hear what's being said.
             </p>
@@ -411,12 +411,12 @@ export default Receiver;
             </code></pre></div><div class="col-12 text-center"><code>Code Sample #3 : The Receiver Component - Our Attentive Audience</code></div></div></div>
 <br></div></section></div></section>
 
-    <section id="7b5773f8-42f2-4270-bf47-4fd98fabfaa3" style="margin-bottom:1rem;"><h3>&#x1F31F; The Magic Happens: Multiple Listeners</h3><hr class="border border-success border-1 opacity-50">
+    <section id="7617fcf5-3dc7-4ca7-b0c4-afdb9a013532" style="margin-bottom:1rem;"><h3>&#x1F31F; The Magic Happens: Multiple Listeners</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             Here's where the real magic begins. Just like in a real town square, one announcement can be heard by many people, each reacting in their own way. Let's add a third character to our story—the Logger.
         </p>
         
-        <section id="5a01e54d-0441-40cc-aeed-d132471d6964" style="margin-bottom:1rem;"><h4>The Logger: Our Town Historian</h4><hr class="border border-success border-1 opacity-50">
+        <section id="202e6407-6c33-4c4c-92d8-c6139f4253cc" style="margin-bottom:1rem;"><h4>The Logger: Our Town Historian</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
                 The Logger is like a town historian who records everything that happens in the square. While the Receiver displays messages, the Logger keeps a permanent record of all events.
             </p>
@@ -585,12 +585,12 @@ export default Logger;
                 This is the true beauty of event-driven communication: <b>one sender can notify multiple receivers independently</b>. The Sender doesn't need to know about the Receiver or Logger—it simply announces its message, and anyone who's interested can listen and react in their own way.
             </p></div></div></div></section>
 
-    <section id="78a8afcf-be27-4f3d-80e9-0803e6a279f5" style="margin-bottom:1rem;"><h3>&#x1F3A8; The Art of Event Design</h3><hr class="border border-success border-1 opacity-50">
+    <section id="80660432-9cd2-409f-874d-8ca9d6927d8d" style="margin-bottom:1rem;"><h3>&#x1F3A8; The Art of Event Design</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             Just like a well-designed town square has clear signage and organized notice boards, our event system needs thoughtful design to be truly effective.
         </p>
         
-        <section id="af33f00a-b93a-4bc2-9155-592012f43da3" style="margin-bottom:1rem;"><h4>Naming Your Events: The Art of Clarity</h4><hr class="border border-success border-1 opacity-50">
+        <section id="2167d095-1e6e-40be-8418-5f93f80216df" style="margin-bottom:1rem;"><h4>Naming Your Events: The Art of Clarity</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
                 Event names are like street signs—they need to be clear, consistent, and meaningful. A good event name tells you exactly what happened, like a well-written headline.
             </p>
@@ -614,7 +614,7 @@ const BAD_EVENTS = {
             </code></pre></div><div class="col-12 text-center"><code>Code Sample #5 : Event Naming Patterns</code></div></div></div>
 <br></div></section>
 
-        <section id="f77f0ff3-c2d2-455c-84d3-1cd07d12f623" style="margin-bottom:1rem;"><h4>Event Data: The Message in the Bottle</h4><hr class="border border-success border-1 opacity-50">
+        <section id="b4eef4a7-8562-4fdc-ab7a-c9eeb613a2cf" style="margin-bottom:1rem;"><h4>Event Data: The Message in the Bottle</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
                 Event data is like the message inside a bottle—it needs to contain everything the receiver needs to understand what happened, but not so much that it becomes unwieldy.
             </p>
@@ -638,12 +638,12 @@ eventBus.emit('login', {
             </code></pre></div><div class="col-12 text-center"><code>Code Sample #6 : Well-Structured Event Data</code></div></div></div>
 <br></div></section></div></section>
 
-    <section id="9c130587-f99a-4829-b8ab-7b441a4f7880" style="margin-bottom:1rem;"><h3>&#x1F504; The Dance of Decoupling</h3><hr class="border border-success border-1 opacity-50">
+    <section id="ef093abd-3c43-4ae1-ba45-d252075f08ec" style="margin-bottom:1rem;"><h3>&#x1F504; The Dance of Decoupling</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             Now let's explore why this dance of decoupled communication is so powerful. It's like having a party where everyone can mingle freely, rather than being stuck in assigned seats.
         </p>
         
-        <section id="1be06ef4-31b8-4605-970c-a051367f6def" style="margin-bottom:1rem;"><h4>The Problem with Traditional Coupling</h4><hr class="border border-success border-1 opacity-50">
+        <section id="459cfcfa-f373-4902-b5c4-8c4f5a4753d3" style="margin-bottom:1rem;"><h4>The Problem with Traditional Coupling</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
                 Traditional component communication is like a family dinner where everyone has to pass messages through the person sitting next to them. If you want to tell your cousin something, you have to ask your sibling to tell their parent to tell your cousin. It's inefficient and creates a web of dependencies.
             </p>
@@ -667,7 +667,7 @@ class UserService {
             </code></pre></div><div class="col-12 text-center"><code>Code Sample #7 : Traditional Coupled Communication</code></div></div></div>
 <br></div></section>
 
-        <section id="88b3ec3b-643e-42c1-956d-15d3c6427dbb" style="margin-bottom:1rem;"><h4>The Freedom of Event-Driven Communication</h4><hr class="border border-success border-1 opacity-50">
+        <section id="9614677e-8e2e-4a5c-88a4-9d53dda07130" style="margin-bottom:1rem;"><h4>The Freedom of Event-Driven Communication</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
                 Event-driven communication is like a party where everyone can mingle freely. You can announce something to the room, and anyone who's interested can listen and react in their own way.
             </p>
@@ -699,12 +699,12 @@ eventBus.on('user:updated', (data) => {
             </code></pre></div><div class="col-12 text-center"><code>Code Sample #8 : Decoupled Event-Driven Communication</code></div></div></div>
 <br></div></section></div></section>
 
-    <section id="ae0e4182-4b87-4cdc-99c4-cc6e2bdc32d1" style="margin-bottom:1rem;"><h3>&#x1F31F; Real-World Applications: When Events Shine</h3><hr class="border border-success border-1 opacity-50">
+    <section id="6deab3e1-8edb-46aa-a64a-f90b58d933c4" style="margin-bottom:1rem;"><h3>&#x1F31F; Real-World Applications: When Events Shine</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             Event-driven communication isn't just a theoretical concept—it's a practical solution for many real-world scenarios. Let's explore some situations where this pattern truly shines.
         </p>
         
-        <section id="e1be59f4-eebc-47ef-b595-0d50de2fb7ee" style="margin-bottom:1rem;"><h4>The Shopping Experience</h4><hr class="border border-success border-1 opacity-50">
+        <section id="43ffaf62-ff12-412f-bc5e-574e6811b7ab" style="margin-bottom:1rem;"><h4>The Shopping Experience</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
                 Imagine an e-commerce application where multiple components need to react to user actions. When a user adds an item to their cart, several things need to happen:
             </p>
@@ -717,7 +717,7 @@ eventBus.on('user:updated', (data) => {
                 With event-driven communication, the "add to cart" component simply announces what happened, and all interested components can react independently.
             </p></div></section>
 
-        <section id="8cc4dabe-10cf-4a11-9f65-a34e7124d04c" style="margin-bottom:1rem;"><h4>The User Authentication Flow</h4><hr class="border border-success border-1 opacity-50">
+        <section id="bdde7c3f-af5d-45b0-9b01-c0138b80b8e2" style="margin-bottom:1rem;"><h4>The User Authentication Flow</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
                 When a user logs in, multiple parts of the application need to know about it:
             </p>
@@ -730,24 +730,24 @@ eventBus.on('user:updated', (data) => {
                 Instead of the login component having to know about all these other components, it simply announces "user logged in" and lets everyone else figure out what they need to do.
             </p></div></section></div></section>
 
-    <section id="53577b43-4e41-41db-9cd7-755676e9e9c4" style="margin-bottom:1rem;"><h3>&#x1F3AD; The Dark Side: When Events Can Be Tricky</h3><hr class="border border-success border-1 opacity-50">
+    <section id="908eee76-c7ab-4fae-94b5-3958543c4142" style="margin-bottom:1rem;"><h3>&#x1F3AD; The Dark Side: When Events Can Be Tricky</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             Like any powerful tool, event-driven communication has its challenges. It's important to understand when to use it and when to avoid it.
         </p>
         
-        <section id="7df3b916-9572-4b92-a079-85709b7b703e" style="margin-bottom:1rem;"><h4>When Events Are Perfect</h4><hr class="border border-success border-1 opacity-50">
+        <section id="1609c2e4-76fc-4c30-a68b-00e6fa5b40e1" style="margin-bottom:1rem;"><h4>When Events Are Perfect</h4><hr class="border border-success border-1 opacity-50">
     <div><ul><li><b>Multiple components need to react to the same event</b> - Like when a user logs in and many parts of the app need to update</li>
                 <li><b>You want to avoid tight coupling</b> - When components shouldn't need to know about each other</li>
                 <li><b>Real-time updates are needed</b> - When changes need to propagate immediately across the application</li>
                 <li><b>You're building a micro-frontend architecture</b> - Where different teams work on different parts</li></ul></div></section>
 
-        <section id="480dec50-7c36-4bc7-80c3-e12647a314ca" style="margin-bottom:1rem;"><h4>When Events Might Not Be the Best Choice</h4><hr class="border border-success border-1 opacity-50">
+        <section id="c017cd1f-480c-41bf-99dc-305c36635571" style="margin-bottom:1rem;"><h4>When Events Might Not Be the Best Choice</h4><hr class="border border-success border-1 opacity-50">
     <div><ul><li><b>Simple parent-child communication</b> - When you just need to pass data down one level</li>
                 <li><b>Guaranteed delivery is critical</b> - When you need to ensure a message is received</li>
                 <li><b>Performance is extremely critical</b> - When the overhead of events might be too much</li>
                 <li><b>Synchronous operations</b> - When you need immediate, blocking responses</li></ul></div></section></div></section>
 
-    <section id="5bbe00fb-2615-4516-b995-2ba7635ff0ee" style="margin-bottom:1rem;"><h3>&#x1F680; Bringing It All Together: Our Demo in Action</h3><hr class="border border-success border-1 opacity-50">
+    <section id="20ea9be3-8db1-4019-974b-a4e5f5c18192" style="margin-bottom:1rem;"><h3>&#x1F680; Bringing It All Together: Our Demo in Action</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             Our demo from the [frontend-events-demo repository](https://github.com/ajaysskumar/frontend-events-demo) brings all these concepts to life. It's like a miniature town square where you can see the magic of event-driven communication happening in real-time.
         </p>
@@ -867,7 +867,7 @@ eventBus.on('user:updated', (data) => {
             You can interact with the demo to see how one announcement can be heard by multiple listeners, each reacting in their own unique way. It's a perfect example of how components can communicate without ever knowing about each other directly.
         </p></div></section>
 
-    <section id="7485ebd9-8223-4f2c-af64-e145003c2074" style="margin-bottom:1rem;"><h3>&#x1F3AF; The Moral of Our Story</h3><hr class="border border-success border-1 opacity-50">
+    <section id="a798e4ab-8579-4d5e-8295-8b3fdfd5b967" style="margin-bottom:1rem;"><h3>&#x1F3AF; The Moral of Our Story</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             Event-driven communication is like having a magical town square where everyone can communicate freely. It's not about forcing components to talk to each other—it's about creating a space where they can choose to listen and react in their own way.
         </p>
@@ -879,7 +879,7 @@ eventBus.on('user:updated', (data) => {
         <p>
             Whether you're building a simple React app or a complex micro-frontend architecture, event-driven communication provides a clean, scalable way for components to work together while maintaining their independence. It's like having the best of both worlds—the power of collaboration with the freedom of independence.
         </p></div></section>
-    <section id="6216f506-4a53-4406-804f-2b4a65a417da" style="margin-bottom:1rem;"><h3>&#x1F517; Reference Implementation</h3><hr class="border border-success border-1 opacity-50">
+    <section id="2581a119-9d2f-4dbe-869e-0570636605dd" style="margin-bottom:1rem;"><h3>&#x1F517; Reference Implementation</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             All code samples above are from the open-source <a href="https://github.com/ajaysskumar/frontend-events-demo" target="_blank">frontend-events-demo</a> repository. You can clone, run, and extend the demo to fit your own business needs.
         </p></div></section>
@@ -903,9 +903,9 @@ eventBus.on('user:updated', (data) => {
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-            </div><!--Blazor:{"prerenderId":"a1c9b518b39a4788a69aeb371bdd68be"}-->
+            </div><!--Blazor:{"prerenderId":"90c53c017e8f4a60b97c6c5a52b22f9d"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80VUhveU1XaHBhR0ZUYUVscWJscHZkVFp0UTJRd2JFeHhaMlU0TkdacVpuTXlaVjlXTUZVNFIxTlVNMjU1Um5GbVZsSkJlRTFzUlRCMVYwTmZMVEpoZDFBME1UUktVbk5JTVRCemJUQTRha1JJV0ZOSll6RTROblEzU1V4MGNXUlFlbXRYT0VsSmRHaGtSMnBOV201b2IxOXFhRjlvVXpacVZsOXFkRWRTYmkxblRHVmFlVlpET0hCak5rdHBVamR2V1dSblUwTkJJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UlY5dWFWRlpjRjl1ZUVGcGRuVkpiR3BMWW5wSE1VNUNOa1ptUWpkVFdEbGljMEpOWlZkQmVuaFFSMnRRYzA5bVNuWnZTVmxxT1hOWk5UUkhWa2RPV21KTU5FMHpOVkZDU210eE0wczNMVEI1VTBWaE5tSjVaR3czUzJWMlFqVlFORFJoTkhab2RIWkViMlIwYXprek9GVkpVaTFOVTI5bU1XaGFUVjkyVUVVd1QwSldiSEZCTFRocWNIVlVlVFowVmxGck1XNVZJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.

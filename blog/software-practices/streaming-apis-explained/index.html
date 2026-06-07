@@ -1,0 +1,335 @@
+<!DOCTYPE html><html lang="en"><head>
+    <!-- Google tag (gtag.js) -->
+    <script defer="" src="https://www.googletagmanager.com/gtag/js?id=G-N1BDBV7WLD"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-N1BDBV7WLD');
+    </script>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Dev Codex: .NET Development and Testing Guide</title>
+    <meta name="description" content="Your ultimate resource for development, AI integration, clean coding, software testing, and modern software practices."/>
+    <!-- Removed meta keywords tag as modern search engines often ignore it -->
+    <meta name="author" content="Ajay Kumar"/>
+    <!-- <meta property="og:title" content="Dev Codex: Your Ultimate Guide to .NET Development, AI, and Software Practices" />
+    <meta property="og:description" content="Explore expert insights on .NET development, AI integration, clean coding, performance testing, and modern software practices. Build better, smarter, and faster applications with Dev Codex." />
+    <meta property="og:url" content="https://devcodex.in/blog/connection-pooling-sql-server" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" /> -->
+    
+<!--Blazor:{"type":"webassembly","prerenderId":"f3066acba6f64c9b835cd311c30b8269","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>Streaming APIs Explained: What, When, and How</title><meta property="og:url" content="http://127.0.0.1:5050/blog/software-practices/streaming-apis-explained" />
+    <meta property="og:title" content="Streaming APIs Explained: What, When, and How" />
+    <meta property="og:description" content="" />
+    <meta property="og:image" content="http://127.0.0.1:5050/images/blog/streaming-apis-explained/banner.png" />
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"f3066acba6f64c9b835cd311c30b8269"}-->
+</head><body><headoutlet>
+    <base href="/"/>
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/app.css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" defer=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js" defer=""></script>
+<link rel="icon" type="image/x-icon" href="favicon.ico" sizes="72x72"/>
+<link href="DevCodex.styles.css" rel="stylesheet"/>
+
+
+
+    <div id="app">
+<!-- %%-PRERENDERING-BEGIN-%% -->
+<!--Blazor:{"type":"webassembly","prerenderId":"fd1a007761634ca597259ecba23a22cf","key":{"locationHash":"1E5B2A40C870C32832812BA3ECC8F00C025EF68F461B075ADE40C0C55D040851:0","formattedComponentKey":""},"assembly":"DevCodex","typeName":"DevCodex.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-8rdvqw2f7f><div class="page " b-3xlixug817><main class="d-flex flex-column min-vh-100" b-3xlixug817><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
+                        <h3 class="m-0">Dev Codex</h3></a></div>
+
+                
+                <div class="col-12 col-md-4 d-flex justify-content-md-center justify-content-center mt-2 mt-md-0"><div class="w-75 position-relative"><input type="text" class="form-control" placeholder="Search..." />
+        <ul class="list-group position-absolute w-100 mt-1" style="z-index: 1000;" hidden></ul></div></div>
+
+                
+                <div class="col-12 col-md-4 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><div class="dropdown"><a href="/about-author" class="d-inline-block rounded-circle overflow-hidden border border-white" style="width: 3rem; height: 3rem; border-width: 0.25rem;"><img src="/images/shared/author.png" alt="About Author" class="img-fluid rounded-circle" style="width: 100%; height: 100%; object-fit: cover;"></a></div></div></div></div></div></header>
+        <article class="content px-4" b-3xlixug817><div class="container-fluid d-flex flex-column align-items-center"><div class="content-wrapper"><style>
+    .article-header {
+        margin: 0 auto;
+        /* Centers the div */
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    .container-fluid,
+    .row,
+    .col-md-12,
+    .col-6 {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .article-image {
+        max-width: 500px !important;
+        height: auto;
+        border-radius: 10px;
+    }
+</style>
+
+
+
+
+<header class="article-header"><div class="row"><div class="col-md-12"><h1 class="fw-bold">Streaming APIs Explained: What, When, and How</h1></div>
+        <div class="col-md-12"><img src="images/blog/streaming-apis-explained/banner.png" alt="Article Banner" height="200" width="auto" class="img-fluid rounded mx-auto d-block my-3" loading="lazy" /></div>
+        <div class="col-md-12"><div class="container-fluid"><div class="row"><div class="col-md-4 col-xs-12 d-flex justify-content-md-start justify-content-center"><span class="text-secondary fw-bold">Author(s): </span>
+                        <span class="text-secondary fw-bold ms-1">Ajay Kumar</span></div>
+
+                    <div class="col-md-4 col-xs-12 d-flex justify-content-md-center justify-content-center"><div class="social-share flex" b-7nt0fj50xh><a href="https://twitter.com/intent/tweet?url=http%3A%2F%2F127.0.0.1%3A5050%2Fblog%2Fsoftware-practices%2Fstreaming-apis-explained&amp;text=Streaming%20APIs%20Explained%3A%20What%2C%20When%2C%20and%20How" title="Share on Twitter" target="_blank" rel="noopener" b-7nt0fj50xh><img src="images/shared/icons/twitter-old.svg" alt="Twitter/X" width="24" style="cursor:pointer" b-7nt0fj50xh></a>
+    <a href="https://www.linkedin.com/feed/?shareActive=true&amp;shareUrl=http://127.0.0.1:5050/blog/software-practices/streaming-apis-explained" title="Share on LinkedIn" target="_blank" rel="noopener" b-7nt0fj50xh><img src="images/shared/icons/linkedin.svg" alt="LinkedIn" width="24" style="cursor:pointer" b-7nt0fj50xh></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A5050%2Fblog%2Fsoftware-practices%2Fstreaming-apis-explained" title="Share on Facebook" target="_blank" rel="noopener" b-7nt0fj50xh><img src="images/shared/icons/facebook.svg" alt="Facebook" width="24" style="cursor:pointer" b-7nt0fj50xh></a></div></div>
+
+                    
+                    <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 06 Jun 2026</span></div></div></div></div></div></header>
+
+    <section id="f072af0d-7b43-456a-b9d0-d80af25bc032" style="margin-bottom:1rem;"><h4>&#x1F6B0; What If Your API Could Talk While It Thinks?</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>
+            Picture this: you click <b>Generate Report</b> in your application, and then... nothing. The spinner keeps spinning. You start wondering whether the server is working, whether the request got stuck, or whether you should refresh the page and risk making it worse. Most APIs are like that quiet restaurant kitchen where you place an order and hear absolutely nothing until the dish either arrives or never does.
+        </p>
+        <p>
+            But what if the API could behave more like a chef cooking at an open counter? First you hear, "Order received." Then, "Vegetables chopped." Then, "Sauce is ready." Then finally, "Dish is served." Suddenly the wait feels shorter because you can <b>see progress happening in real time</b>.
+        </p>
+        <p>
+            That is the core idea behind <b>streaming APIs</b>. Instead of making the client wait for one giant response at the end, the server sends useful pieces of data as they become available. For chat applications, that might be words appearing one by one. For dashboards, it might be live updates. For long-running jobs, it might be progress events.
+        </p>
+        <div class="callout-box special &#x2139;&#xFE0F; py-1"><div class="py-1"><span class="callout-icon">&#x2139;&#xFE0F;</span>
+            <span class="callout-title">Why this matters</span></div>
+        <div class="callout-message"><p>Streaming is not only about speed. It is about <b>perceived responsiveness</b>. Even when total processing time stays the same, the user experience feels dramatically better when the client starts receiving data immediately.</p></div></div></div></section>
+
+    <section id="fcba62b1-614f-4873-b392-50a58c4e45b7" style="margin-bottom:1rem;"><h4>&#x1F30A; What Is a Streaming API?</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>
+            A <b>streaming API</b> is an API that sends data in multiple chunks over time instead of returning the complete response in one go. Think of a normal API response as getting an entire book delivered in a sealed box. A streaming API feels more like reading a newspaper being printed line by line as the presses run.
+        </p>
+        <p>
+            In a traditional request-response flow, the client sends one request, the server does all the work, and only then sends back the full payload. With streaming, the connection stays open and the server keeps pushing small messages while work is in progress.
+        </p>
+
+        <table class="table table-striped table-bordered"><thead><tr><th>Aspect</th>
+                    <th>Traditional API</th>
+                    <th>Streaming API</th></tr></thead>
+            <tbody><tr><td><strong>Response timing</strong></td>
+                    <td>One final response after all work is done</td>
+                    <td>Multiple partial responses while work is happening</td></tr>
+                <tr><td><strong>User experience</strong></td>
+                    <td>Wait, then receive everything</td>
+                    <td>See progress immediately</td></tr>
+                <tr><td><strong>Best for</strong></td>
+                    <td>Fast CRUD calls and small payloads</td>
+                    <td>Long-running work and real-time updates</td></tr>
+                <tr><td><strong>Connection style</strong></td>
+                    <td>Short-lived</td>
+                    <td>Open for longer while chunks arrive</td></tr></tbody></table>
+
+        <section id="3eb2847c-dfe0-4366-84d5-5583579a8c36" style="margin-bottom:1rem;"><h5>The Common Shapes of Streaming</h5><hr class="border border-success border-1 opacity-50">
+    <div><p>
+                Not every streaming API looks the same. The three most common approaches are:
+            </p>
+            <ul><li><b>Server-Sent Events (SSE):</b> Great when the server only needs to push updates to the client over regular HTTP.</li>
+                <li><b>WebSockets:</b> Best when both client and server need full two-way, low-latency communication.</li>
+                <li><b>gRPC streaming:</b> Common in service-to-service systems where performance and typed contracts matter.</li></ul>
+            <p>
+                The demo in this article uses <b>Server-Sent Events</b> because it is the easiest way to explain the concept. It keeps the mental model simple: the server writes messages, and the client reads them as they arrive.
+            </p></div></section></div></section>
+
+    <section id="3e616542-7c39-407f-a753-cab6c4767865" style="margin-bottom:1rem;"><h4>&#x1F3AF; When Should You Use Streaming APIs?</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>
+            Streaming is useful when the user benefits from receiving <b>partial results early</b>. If the final answer is expensive to compute, if updates keep changing, or if the client needs progress rather than silence, streaming is usually a better fit than a single buffered response.
+        </p>
+
+        <section id="9f04eed7-4c00-4552-b92a-ef06e582ebfc" style="margin-bottom:1rem;"><h5>Real-World Cases Where Streaming Shines</h5><hr class="border border-success border-1 opacity-50">
+    <div><ul><li><b>AI chat APIs:</b> OpenAI, Anthropic, and AWS Bedrock stream generated text token by token so the answer starts appearing before the full model output is ready.</li>
+                <li><b>Code assistants:</b> Tools like GitHub Copilot feel responsive because suggestions can be produced progressively instead of waiting for one large completion payload.</li>
+                <li><b>Market data APIs:</b> Stock and crypto platforms stream price ticks because sending a fresh full response every second would be wasteful and slow.</li>
+                <li><b>Infrastructure watch APIs:</b> Kubernetes watch endpoints stream resource changes so clients can observe pod or deployment updates in near real time.</li>
+                <li><b>Build and deployment logs:</b> CI/CD systems often stream log output so you can watch a build fail at step 3 instead of waiting five minutes for a giant error dump.</li>
+                <li><b>Progress-heavy business workflows:</b> Video processing, report generation, file imports, and ETL jobs can stream milestones like queued, validating, transforming, and completed.</li></ul></div></section>
+
+        <section id="ace36edd-e710-4180-9f3a-7d3596afee5e" style="margin-bottom:1rem;"><h5>When Streaming Is Overkill</h5><hr class="border border-success border-1 opacity-50">
+    <div><p>
+                Streaming is powerful, but it is not a default choice for every endpoint. If your API returns a small object in 50 milliseconds, there is no benefit in keeping the connection open and delivering the object in pieces.
+            </p>
+            <div class="callout-box special &#x2139;&#xFE0F; py-1"><div class="py-1"><span class="callout-icon">&#x2139;&#xFE0F;</span>
+            <span class="callout-title">Use streaming deliberately</span></div>
+        <div class="callout-message"><p>Choose streaming when the client gains value from <b>ongoing delivery</b>. For small and instant operations like fetching a profile or saving a form, a normal JSON response is simpler and easier to maintain.</p></div></div></div></section></div></section>
+
+    <section id="93ce3a2b-1eb1-4c28-9a17-50f1998fb519" style="margin-bottom:1rem;"><h4>&#x1F6E0;&#xFE0F; How Does a Streaming API Work?</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>
+            Let us walk through the simplest mental model possible. Our in-house demo has two parts: a server that sends messages one at a time, and a client that reads those messages one at a time. That is enough to understand the entire pattern.
+        </p>
+
+        <section id="fc6cedfa-0fa7-42a4-9c2c-a8011571b2b8" style="margin-bottom:1rem;"><h5>Step 1: The Server Keeps the Connection Open</h5><hr class="border border-success border-1 opacity-50">
+    <div><p>
+                Instead of calculating everything and returning once, the server marks the response as <code>text/event-stream</code>. Then it writes small lines of text, flushes them, waits a bit, and repeats. Each flush pushes data to the client immediately.
+            </p>
+
+            <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
+private async Task HandleRequest(HttpListenerContext context)
+{
+    var response = context.Response;
+    response.ContentType = "text/event-stream";
+    response.Headers.Add("Cache-Control", "no-cache");
+    response.Headers.Add("Connection", "keep-alive");
+
+    using var writer = new StreamWriter(response.OutputStream, Encoding.UTF8, leaveOpen: true);
+
+    var messages = new[]
+    {
+        "Starting data transmission",
+        "Chunk 1: Processing request",
+        "Chunk 2: Analyzing input",
+        "Chunk 3: Generating response",
+        "Chunk 4: Almost done",
+        "Chunk 5: Complete!"
+    };
+
+    foreach (var msg in messages)
+    {
+        await writer.WriteLineAsync($"data: {msg}");
+        await writer.WriteLineAsync();
+        await writer.FlushAsync();
+        await Task.Delay(1500);
+    }
+
+    await writer.WriteLineAsync("data: [DONE]");
+    await writer.FlushAsync();
+    response.Close();
+}
+            </code></pre></div><div class="col-12 text-center"><code>Code Sample #1 : Server sending chunks using Server-Sent Events</code></div></div></div>
+<br>
+
+            <p>
+                There are two important details here. First, each message is prefixed with <code>data:</code>, which is the standard SSE format. Second, <code>FlushAsync()</code> is what makes the data visible to the client right away. Without flushing, the server may buffer the output and the client would not feel the stream.
+            </p></div></section>
+
+        <section id="63b574d6-4c41-4b95-b344-f34191ed37e2" style="margin-bottom:1rem;"><h5>Step 2: The Client Starts Reading Before the Server Finishes</h5><hr class="border border-success border-1 opacity-50">
+    <div><p>
+                On the client side, the key is to read the response as a stream, not as one finished string. That is why the demo uses <code>HttpCompletionOption.ResponseHeadersRead</code>. It tells <code>HttpClient</code>: "Give me the response as soon as headers arrive. I will read the body myself as it comes in."
+            </p>
+
+            <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
+public static async Task ConsumerAsync()
+{
+    using var client = new HttpClient();
+
+    using var response = await client.GetAsync("http://localhost:8080/stream",
+        HttpCompletionOption.ResponseHeadersRead);
+
+    using var stream = await response.Content.ReadAsStreamAsync();
+    using var reader = new StreamReader(stream);
+
+    while (!reader.EndOfStream)
+    {
+        var line = await reader.ReadLineAsync();
+        if (string.IsNullOrWhiteSpace(line)) continue;
+
+        if (line.StartsWith("data: "))
+        {
+            var data = line.Substring("data: ".Length);
+            if (data == "[DONE]")
+            {
+                break;
+            }
+
+            Console.WriteLine($"Received: {data}");
+        }
+    }
+}
+            </code></pre></div><div class="col-12 text-center"><code>Code Sample #2 : Client reading streaming data line by line</code></div></div></div>
+<br>
+
+            <p>
+                This is the moment streaming becomes real. The client is no longer waiting for the last byte of the response. It is reacting chunk by chunk. That same pattern powers AI typing effects, live dashboards, and log viewers.
+            </p></div></section>
+
+        <section id="5d2c42cd-5346-4ad3-86d5-1c00cc0865b2" style="margin-bottom:1rem;"><h5>Step 3: A Minimal End-to-End Example</h5><hr class="border border-success border-1 opacity-50">
+    <div><p>
+                The snippet below is the final bootstrap step, assuming the server and consumer methods shown earlier are already defined.
+            </p>
+
+            <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
+public static async Task Main(string[] args)
+{
+    var server = new StreamingServer();
+
+    var serverTask = server.StartAsync();
+    await Task.Delay(1000);
+
+    try
+    {
+        await ConsumerAsync();
+    }
+    finally
+    {
+        server.Stop();
+    }
+}
+            </code></pre></div><div class="col-12 text-center"><code>Code Sample #3 : Final bootstrap step for the already-defined streaming server and client</code></div></div></div>
+<br>
+
+            <div class="callout-box special tip py-1"><div class="py-1"><span class="callout-icon">&#x1F4A1;</span>
+            <span class="callout-title">What this demo intentionally leaves out</span></div>
+        <div class="callout-message"><p>A real production endpoint would need better routing, cancellation handling, reconnection logic, authentication, and robust error reporting. For learning streaming concepts, that extra plumbing would only hide the core idea.</p></div></div></div></section></div></section>
+
+    <section id="29ba62b7-1eb2-410c-8e1a-ee49896e661e" style="margin-bottom:1rem;"><h4>&#x1F9ED; Choosing the Right Streaming Style</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>
+            Once the concept clicks, the next question is usually: <b>Which transport should I pick?</b> A good rule of thumb is to match the tool to the communication pattern.
+        </p>
+        <ul><li><b>Use SSE</b> when the server needs to push a steady stream of updates to a browser or client and the client mostly listens.</li>
+            <li><b>Use WebSockets</b> when both sides need to send messages freely, like chat rooms, multiplayer games, or collaborative editing.</li>
+            <li><b>Use gRPC streaming</b> when services talk to services and you want strong contracts, binary efficiency, and high throughput.</li></ul>
+        <p>
+            One simple way to remember the difference is this: <b>SSE is one-way</b>, from server to client, while <b>WebSockets are two-way</b>, allowing both sides to send messages whenever they need to.
+        </p>
+        <p>
+            In other words, SSE is like a radio broadcast, WebSockets are like a phone call, and gRPC streaming is like a private fiber line between two offices.
+        </p></div></section>
+
+    <section id="3b378ccb-ee5b-4c63-a617-afc61707caf1" style="margin-bottom:1rem;"><h4>&#x2705; Summary</h4><hr class="border border-success border-1 opacity-50">
+    <div><p>
+            Streaming APIs solve a very human problem: <b>waiting in silence feels slow and uncertain</b>. By sending data progressively, they make applications feel alive, responsive, and trustworthy.
+        </p>
+        <ul><li><b>What:</b> A streaming API delivers multiple chunks over time instead of one final payload.</li>
+            <li><b>When:</b> Use it for AI responses, logs, market feeds, progress-heavy jobs, and live state updates.</li>
+            <li><b>How:</b> Keep the connection open, flush chunks from the server, and read them incrementally on the client.</li></ul>
+        <p>
+            If you remember one thing from this article, let it be this: a streaming API is not magic. It is just a polite API that does not wait until the very end to start talking.
+        </p></div></section></div>
+    <div class="content-wrapper mt-4"><script src="https://giscus.app/client.js" data-repo="ajaysskumar/dev-arena" data-repo-id="R_kgDONiBGGQ" data-category="Comments" data-category-id="DIC_kwDONiBGGc4Cq2ND" data-mapping="pathname" data-strict="0" data-reactions-enabled="0" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script></div></div>
+
+<style>
+    .content-wrapper {
+        width: 50%; /* Leaves 20% space on left and right */
+        background: white;
+    }
+
+    @media (max-width: 768px) {
+        .content-wrapper {
+            width: 90%; /* On smaller screens, reduce left-right space */
+        }
+    }
+</style></article>
+        <footer class="bg-dark text-white py-4 mt-auto"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><p class="mb-0">Copyright © 2026 Dev Codex</p></div>
+
+            
+            <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
+                <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
+            </div><!--Blazor:{"prerenderId":"fd1a007761634ca597259ecba23a22cf"}-->
+<!-- %%-PRERENDERING-END-%% -->
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UlY5dWFWRlpjRjl1ZUVGcGRuVkpiR3BMWW5wSE1YRkNTRzlIWHpoSGFFSlBRbkZXUkVjeGVtZEpNWGhCYVVkcVdVOVBWRXRTT1c1aGFEaHhhbXhQYXpoWFNESmthek5RYUhRMVNIZGlXV1ozV1VFdFlVOHlaVnAxYUdSRFpsZEdkbUUwZDJGU1lrVnFhSFJoUkdsak1XUmlTR015YTFOQk1EUnZhbHBIT1dZelVXUjVZa3RoWVZSVWJHRkJNMVY1ZFhoWk1YQk5JaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+    <script src="_framework/blazor.webassembly.js" defer="" autostart="false"></script>
+    <script src="brotliloader.min.js" type="module"></script>
+
+
+
+</headoutlet></body></html>
