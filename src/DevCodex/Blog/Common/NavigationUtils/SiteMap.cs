@@ -224,7 +224,7 @@ namespace DevCodex.Blog.Common.NavigationUtils
             ["AI", "AWS Bedrock", "Guardrails", "Safety", ".NET", "C#"],
             isPublished: true,
             isOlderThumbnailFormat: false),
-        new("Streaming APIs Explained: What, When, and How",
+        new("Streaming APIs in .NET: What, When, and How",
             "/blog/software-practices/streaming-apis-explained",
             new DateTime(2026, 6, 6),
             "images/blog/streaming-apis-explained/banner.png",
