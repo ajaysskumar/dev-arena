@@ -51,15 +51,20 @@ echo -e "${GREEN}✓ Commit message format valid${NC}\n"
 
 # 2. Check and auto-fix code formatting
 echo "→ Checking code formatting with dotnet format..."
-cd "$REPO_ROOT"
-if ! dotnet format --verify-no-changes --verbosity quiet 2>/dev/null; then
-  echo -e "${YELLOW}⚠ Code formatting issues detected - auto-fixing...${NC}"
-  dotnet format --verbosity quiet
-  echo -e "${YELLOW}→ Staging formatted changes...${NC}"
-  git add -u
-  echo -e "${GREEN}✓ Code auto-formatted and staged${NC}\n"
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+if [ "$CURRENT_BRANCH" = "github-pages-master" ]; then
+  echo -e "${YELLOW}⊘ Skipping format check on github-pages-master branch${NC}\n"
 else
-  echo -e "${GREEN}✓ Code formatting valid${NC}\n"
+  cd "$REPO_ROOT"
+  if ! dotnet format --verify-no-changes --verbosity quiet 2>/dev/null; then
+    echo -e "${YELLOW}⚠ Code formatting issues detected - auto-fixing...${NC}"
+    dotnet format --verbosity quiet
+    echo -e "${YELLOW}→ Staging formatted changes...${NC}"
+    git add -u
+    echo -e "${GREEN}✓ Code auto-formatted and staged${NC}\n"
+  else
+    echo -e "${GREEN}✓ Code formatting valid${NC}\n"
+  fi
 fi
 
 # 3. Build validation
