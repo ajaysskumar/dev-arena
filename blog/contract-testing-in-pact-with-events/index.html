@@ -20,11 +20,11 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" /> -->
     
-<!--Blazor:{"type":"webassembly","prerenderId":"a19d7ef0d0c7435db9c23683e4ecb740","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>Intro to PACT for .NET Core: Events based systems</title><meta property="og:url" content="http://127.0.0.1:5050/blog/contract-testing-in-pact-with-events" />
+<!--Blazor:{"type":"webassembly","prerenderId":"cb9f0a04bef845c3bf2b9e18980be0f6","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>Intro to PACT for .NET Core: Events based systems</title><meta property="og:url" content="http://127.0.0.1:5050/blog/contract-testing-in-pact-with-events" />
     <meta property="og:title" content="Intro to PACT for .NET Core: Events based systems" />
     <meta property="og:description" content="" />
     <meta property="og:image" content="http://127.0.0.1:5050/images/blog/pact/events-demo/banner.webp" />
-    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"a19d7ef0d0c7435db9c23683e4ecb740"}-->
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"cb9f0a04bef845c3bf2b9e18980be0f6"}-->
 </head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -40,7 +40,7 @@
 
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"3ef99f3c607a4f50aaef5aabb2fb09e0","key":{"locationHash":"1E5B2A40C870C32832812BA3ECC8F00C025EF68F461B075ADE40C0C55D040851:0","formattedComponentKey":""},"assembly":"DevCodex","typeName":"DevCodex.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-8rdvqw2f7f><div class="page " b-3xlixug817><main class="d-flex flex-column min-vh-100" b-3xlixug817><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"2350815a438d4000bca1b76a390abf12","key":{"locationHash":"1E5B2A40C870C32832812BA3ECC8F00C025EF68F461B075ADE40C0C55D040851:0","formattedComponentKey":""},"assembly":"DevCodex","typeName":"DevCodex.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-8rdvqw2f7f><div class="page " b-3xlixug817><main class="d-flex flex-column min-vh-100" b-3xlixug817><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -87,7 +87,7 @@
                     
                     <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 28 Dec 2024</span></div></div></div></div></div></header>
 
-<section id="c5f65f7f-d14c-48b3-9e65-171dbe44f20b" style="margin-bottom:1rem;"><h3>Introduction</h3><hr class="border border-success border-1 opacity-50">
+<section id="404666d4-ddd6-428c-8503-a419d0b09707" style="margin-bottom:1rem;"><h3>Introduction</h3><hr class="border border-success border-1 opacity-50">
     <div><p>This is a continuation of the PACT for .NET series where I am going to cover the usage of PACT in event-based systems.</p>
     <p>This article assumes the readers will have a basic understanding of event-based systems and frameworks. In case not, a good place to start can be <a href="https://www.rabbitmq.com/tutorials">RabbitMQ Tutorials</a>.</p>
     <p>I will be using the same repo setup that I have used to demonstrate usage in API-based systems. I have covered the setup in detail in a previous blog in this series:</p>
@@ -96,7 +96,7 @@
                 <a href="/blog/contract-testing-pact-net-intro" class="text-muted">devcodex.in</a></div></div>
         <div class="col-md-4 d-flex align-items-center pe-2"><img src="/images/blog/pact/intro/banner.png" class="img-fluid rounded-end" alt="Blog Image" /></div></div></div></div></section>
 
-<section id="159ec501-24f7-42ae-a162-aba43b1a201f" style="margin-bottom:1rem;"><h5>Scenario: Event Flow</h5><hr class="border border-success border-1 opacity-50">
+<section id="341dcde9-7778-4bf6-89e0-40bb280815f0" style="margin-bottom:1rem;"><h5>Scenario: Event Flow</h5><hr class="border border-success border-1 opacity-50">
     <div><p>For illustration purposes, we can imagine a scenario where the Result service (Consumer) wants to get informed whenever a student is created.</p>
     <style>
     .image-header {
@@ -152,22 +152,22 @@
     <p>Now since both Result and Student are separate services, below is the infrastructure that has been implemented in order to make that work.</p>
     <p>I have incorporated the RabbitMQ library as a messaging service in both the APIs.</p></div></section>
 
-<section id="49b2fda7-a687-45c9-a0a2-315174bb3fcb" style="margin-bottom:1rem;"><h5>Publishing Events</h5><hr class="border border-success border-1 opacity-50">
+<section id="4a17a664-17c0-4be1-878e-60fb8bd2510f" style="margin-bottom:1rem;"><h5>Publishing Events</h5><hr class="border border-success border-1 opacity-50">
     <div><p>Whenever a new student is created using the Student service’s (Provider) POST API, we are publishing an event called <strong>StudentCreatedEvent</strong>.</p>
     <section class="[ flex flex-col ]"><h5 class="[ bg-gray-200 ] [ p-2 ] [ font-semibold ] [ text-black ] [ flex items-center ]"><svg xmlns="http://www.w3.org/2000/svg" class="[ icon icon-tabler icon-tabler-code ] [ text-purple-700 ] [ fill-purple-500 ]" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
             <polyline points="7 8 3 12 7 16"></polyline>
             <polyline points="17 8 21 12 17 16"></polyline>
             <line x1="14" y1="4" x2="10" y2="20"></line></svg><code>Code Sample - Publish event during student creation</code></h5>
-    <article id="869012b2-2d35-4ca3-bd0f-7c86d8c42ff6" class="[ bg-gray-300 ]"></article></section>
+    <article id="c7d52ac4-e875-4c3b-8246-9f6f950c9ee0" class="[ bg-gray-300 ]"></article></section>
     
     <p>The event structure includes details such as:</p>
     <section class="[ flex flex-col ]"><h5 class="[ bg-gray-200 ] [ p-2 ] [ font-semibold ] [ text-black ] [ flex items-center ]"><svg xmlns="http://www.w3.org/2000/svg" class="[ icon icon-tabler icon-tabler-code ] [ text-purple-700 ] [ fill-purple-500 ]" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
             <polyline points="7 8 3 12 7 16"></polyline>
             <polyline points="17 8 21 12 17 16"></polyline>
             <line x1="14" y1="4" x2="10" y2="20"></line></svg><code>Code Sample - Properties inside StudentCreatedEvent</code></h5>
-    <article id="ec159178-01f2-4910-86ca-2f3fff56468e" class="[ bg-gray-300 ]"></article></section></div></section>
+    <article id="654cabae-c919-442e-8c82-1aa2b6fb6b77" class="[ bg-gray-300 ]"></article></section></div></section>
 
-<section id="c9848099-b34b-4f6f-b911-90f875105554" style="margin-bottom:1rem;"><h5>Listening to Events</h5><hr class="border border-success border-1 opacity-50">
+<section id="d08d4135-98a0-4a83-9277-cfe2c7f48f18" style="margin-bottom:1rem;"><h5>Listening to Events</h5><hr class="border border-success border-1 opacity-50">
     <div><p>Now the above event can be listened to by any service interested in that event. In this scenario, that service is the Result service.</p>
 
     <p>There is a listener defined in the Result service which may perform any operation based on the information received in the <strong>StudentCreatedEvent</strong>.</p>
@@ -176,18 +176,18 @@
             <polyline points="7 8 3 12 7 16"></polyline>
             <polyline points="17 8 21 12 17 16"></polyline>
             <line x1="14" y1="4" x2="10" y2="20"></line></svg><code>Code Sample - Student created event listener in Result service</code></h5>
-    <article id="3fa39e54-c834-4f5f-956b-c8f8dea6539f" class="[ bg-gray-300 ]"></article></section>
+    <article id="3e40819c-ad2e-47d3-8db8-94aa250fc4de" class="[ bg-gray-300 ]"></article></section>
 
     <p>For example, it may store student details in the Result service to avoid direct dependency on the Student service while preparing results.</p></div></section>
 
-<section id="982d1af3-215b-4e32-b83e-cd3d3a425f57" style="margin-bottom:1rem;"><h4>Contract Testing with PACT</h4><hr class="border border-success border-1 opacity-50">
+<section id="8bb36292-7114-4828-8dec-617dd64cad5d" style="margin-bottom:1rem;"><h4>Contract Testing with PACT</h4><hr class="border border-success border-1 opacity-50">
     <div><p>The first part of contract testing involves defining the expected event structure on the consumer side, which results in generating a PACT JSON contract file.</p>
 
     <section class="[ flex flex-col ]"><h5 class="[ bg-gray-200 ] [ p-2 ] [ font-semibold ] [ text-black ] [ flex items-center ]"><svg xmlns="http://www.w3.org/2000/svg" class="[ icon icon-tabler icon-tabler-code ] [ text-purple-700 ] [ fill-purple-500 ]" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
             <polyline points="7 8 3 12 7 16"></polyline>
             <polyline points="17 8 21 12 17 16"></polyline>
             <line x1="14" y1="4" x2="10" y2="20"></line></svg><code>Code Sample - Consumer test defining the contract</code></h5>
-    <article id="065f2100-5b6d-49b9-8f14-fb0aa511a760" class="[ bg-gray-300 ]"></article></section>
+    <article id="977cf20e-8f30-4be5-b3a2-85fcb62a3f55" class="[ bg-gray-300 ]"></article></section>
 
     <p>Once the contract is defined, a PACT JSON contract file is generated, which looks something like this:</p>
 
@@ -195,17 +195,17 @@
             <polyline points="7 8 3 12 7 16"></polyline>
             <polyline points="17 8 21 12 17 16"></polyline>
             <line x1="14" y1="4" x2="10" y2="20"></line></svg><code>Code Sample - Contract snapshot</code></h5>
-    <article id="0d0a739c-5f71-4943-b9cb-6a6b69dea3f3" class="[ bg-gray-300 ]"></article></section></div></section>
+    <article id="e50788e9-1fb4-49bd-8e8d-732eabe4c33d" class="[ bg-gray-300 ]"></article></section></div></section>
 
-<section id="a7b4ce46-5586-44eb-9c7f-fc347e85b760" style="margin-bottom:1rem;"><h4>Verifying the Provider</h4><hr class="border border-success border-1 opacity-50">
+<section id="3fadbdd9-e02e-48a8-b576-66288a4a6a96" style="margin-bottom:1rem;"><h4>Verifying the Provider</h4><hr class="border border-success border-1 opacity-50">
     <div><p>Now that this contract file has been created, we need to write tests on the provider side to ensure that it adheres to the contract.</p>
     <section class="[ flex flex-col ]"><h5 class="[ bg-gray-200 ] [ p-2 ] [ font-semibold ] [ text-black ] [ flex items-center ]"><svg xmlns="http://www.w3.org/2000/svg" class="[ icon icon-tabler icon-tabler-code ] [ text-purple-700 ] [ fill-purple-500 ]" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
             <polyline points="7 8 3 12 7 16"></polyline>
             <polyline points="17 8 21 12 17 16"></polyline>
             <line x1="14" y1="4" x2="10" y2="20"></line></svg><code>Code Sample - Provider side contract verification</code></h5>
-    <article id="de6453df-b83c-4aae-a98b-10b1f37479a1" class="[ bg-gray-300 ]"></article></section></div></section>
+    <article id="f95cb6ac-ce86-4cb9-8c82-e9efd18a8591" class="[ bg-gray-300 ]"></article></section></div></section>
 
-<section id="0fe9cd08-fab6-43a0-8ae6-0d2c41aff310" style="margin-bottom:1rem;"><h4>PACT Testing in Action</h4><hr class="border border-success border-1 opacity-50">
+<section id="a935e0a0-7a1c-4dc2-ab3f-cce3477aae32" style="margin-bottom:1rem;"><h4>PACT Testing in Action</h4><hr class="border border-success border-1 opacity-50">
     <div><p>Now that this setup is ready, we can quickly do a build and test:</p>
     <span><code>dotnet build</code></span> <br>
     <span><code>dotnet build</code></span> <br>
@@ -262,14 +262,14 @@
 <div class="row image-header"><figure class="text-center"><img src="/images/blog/pact/events-demo/Success test.webp" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="Success test" loading="lazy" />
         <figcaption class="figure-caption"><strong>Figure 2 :</strong> Success test</figcaption></figure></div></div></section>
 
-<section id="efd5dd16-96f0-446f-9431-bf8c9a9aee62" style="margin-bottom:1rem;"><h4>Failure Case Example</h4><hr class="border border-success border-1 opacity-50">
+<section id="baa94344-cce4-4235-9313-84e24427b09c" style="margin-bottom:1rem;"><h4>Failure Case Example</h4><hr class="border border-success border-1 opacity-50">
     <div><p>To test a failure case, we can make some changes in our provider. For example, renaming the <strong>LastName</strong> field to <strong>LName</strong> and rerunning the tests.</p>
 
     <section class="[ flex flex-col ]"><h5 class="[ bg-gray-200 ] [ p-2 ] [ font-semibold ] [ text-black ] [ flex items-center ]"><svg xmlns="http://www.w3.org/2000/svg" class="[ icon icon-tabler icon-tabler-code ] [ text-purple-700 ] [ fill-purple-500 ]" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
             <polyline points="7 8 3 12 7 16"></polyline>
             <polyline points="17 8 21 12 17 16"></polyline>
             <line x1="14" y1="4" x2="10" y2="20"></line></svg><code>Code Sample - LastName property renamed to LName</code></h5>
-    <article id="6867d22c-57e0-45af-a194-81eb982c8fb0" class="[ bg-gray-300 ]"></article></section>
+    <article id="89d03ac5-1956-44b9-8609-a3376c751841" class="[ bg-gray-300 ]"></article></section>
 
     <p>When we run the tests, we can see the results:</p>
 
@@ -327,7 +327,7 @@
 
     <p>As we see in the results above, the error message suggests that the <strong>LastName</strong> field is missing on the provider side.</p></div></section>
 
-<section id="ebc7822e-0a2f-4503-bf18-6178cf25c925" style="margin-bottom:1rem;"><h4>Conclusion</h4><hr class="border border-success border-1 opacity-50">
+<section id="8e8630e8-e2fd-454e-bc59-83acc905af95" style="margin-bottom:1rem;"><h4>Conclusion</h4><hr class="border border-success border-1 opacity-50">
     <div><p>By implementing contract testing with PACT for event-based systems, we ensure reliable integrations between services.</p>
     <p>This methodology helps detect issues early, ensuring both consumer and provider remain in sync.</p></div></section>
 
@@ -351,9 +351,9 @@
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-            </div><!--Blazor:{"prerenderId":"3ef99f3c607a4f50aaef5aabb2fb09e0"}-->
+            </div><!--Blazor:{"prerenderId":"2350815a438d4000bca1b76a390abf12"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UVdWUldYcHZiMlkxZEV4MGJsVnZRa0pQZHpSRWRVcGtiMDR4VmtWZlExUTJUVEJYTm1aR1IyUnhNMHAwVm5obk9FRndVbTB3Tm1kdVRFMWZaMjFLYUcxaFozVldlVk14VVhaV1luQlpWV2M1TkU5b00xWjFUM2RWU3pRNVZFYzJaalZHZFVjMmRTMTNZWFIxZEZSV2IzTkxabkJGUzA0ME56RXRjbU50Y0Y5ak1DMUdNMWhGTWtsaGFFbG9hSEV5YWpCVGRYZzBJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UTJ4V2JtODNjVlpyZEVabmVGY3hNR2hIVWxaUE9ITlNURWh4TkhoQlNGbDVjVWc1VlVOSWEzQXlOa2REUmpKeE9HMXlTWGt5WW01clRWbFRXbVJmVEZReGRWVk9TbVl4YzBka2NVdGxkVEJTTlZWU00wRlhRMEUwWWxNd1dHRkhTVE5SVG5kVVJqSnRkSGxMWW1SQlUxQXhUM1ZQY1hselkwOHplRTh4YmtkRWNsODNVbVpHTWpKYVUyUllOMXBmU21ocVdtVnZJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.

@@ -20,11 +20,11 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" /> -->
     
-<!--Blazor:{"type":"webassembly","prerenderId":"15f8a88742ad42f492b3d55e9c51219a","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>AWS Bedrock with .NET: Conversational AI Converse API</title><meta property="og:url" content="http://127.0.0.1:5050/blog/ai/bedrock/converse" />
+<!--Blazor:{"type":"webassembly","prerenderId":"668aabf702964f5b93844d760f9cc0b6","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>AWS Bedrock with .NET: Conversational AI Converse API</title><meta property="og:url" content="http://127.0.0.1:5050/blog/ai/bedrock/converse" />
     <meta property="og:title" content="AWS Bedrock with .NET: Conversational AI Converse API" />
     <meta property="og:description" content="" />
     <meta property="og:image" content="http://127.0.0.1:5050/images/blog/ai/bedrock/banner.svg" />
-    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"15f8a88742ad42f492b3d55e9c51219a"}-->
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"668aabf702964f5b93844d760f9cc0b6"}-->
 </head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -40,7 +40,7 @@
 
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"2ca75937e4ca4fcca5203eb2becbceca","key":{"locationHash":"1E5B2A40C870C32832812BA3ECC8F00C025EF68F461B075ADE40C0C55D040851:0","formattedComponentKey":""},"assembly":"DevCodex","typeName":"DevCodex.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-8rdvqw2f7f><div class="page " b-3xlixug817><main class="d-flex flex-column min-vh-100" b-3xlixug817><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"7e819a3ac6d544d5924281e5cf236a3e","key":{"locationHash":"1E5B2A40C870C32832812BA3ECC8F00C025EF68F461B075ADE40C0C55D040851:0","formattedComponentKey":""},"assembly":"DevCodex","typeName":"DevCodex.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-8rdvqw2f7f><div class="page " b-3xlixug817><main class="d-flex flex-column min-vh-100" b-3xlixug817><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -95,7 +95,7 @@
             <span class="callout-title">&#x1F4D6; Series Context</span></div>
         <div class="callout-message"><p>This article is part of the AWS Bedrock with .NET series. If you haven't already, start with <a href="/blog/ai/bedrock">Getting Started with AWS Bedrock</a> and <a href="/blog/ai/bedrock/advanced">Advanced Integration &amp; Production Setup</a> to understand authentication, configuration, and cost optimization before diving into conversational patterns.</p></div></div>
 
-    <section id="9199b110-66af-4c81-94c4-577a8d94f008" style="margin-bottom:1rem;"><h4>The Problem &amp; The Solution</h4><hr class="border border-success border-1 opacity-50">
+    <section id="18bb6313-5173-447e-8457-41bef39f036b" style="margin-bottom:1rem;"><h4>The Problem &amp; The Solution</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             Picture a customer contacting your support bot about a billing issue. They explain the problem, the bot asks for their account number, they provide it — and then the next response treats them like a stranger. No memory of the account number. No memory of the issue. The user has to start over.
         </p>
@@ -117,8 +117,8 @@
                 The rise of chat-based AI (like ChatGPT and Claude) showed that context retention is critical for user satisfaction. AWS designed the Converse API to bring this capability to enterprise workloads, with the security, scalability, and compliance features expected from AWS services.
             </p></div></div></div></section>
 
-    <section id="4d4250f7-5ffc-4d24-8595-3893628dff08" style="margin-bottom:1rem;"><h4>&#x1F52E; Understanding Converse API</h4><hr class="border border-success border-1 opacity-50">
-    <div><section id="dc2159e0-3767-4af4-a131-d1fce41058be" style="margin-bottom:1rem;"><h5>Why Did AWS Create It?</h5><hr class="border border-success border-1 opacity-50">
+    <section id="5ea00418-65e0-4a26-812d-58fbe4f14da8" style="margin-bottom:1rem;"><h4>&#x1F52E; Understanding Converse API</h4><hr class="border border-success border-1 opacity-50">
+    <div><section id="84273bc9-5a69-4bbf-8fd2-34f62af39e47" style="margin-bottom:1rem;"><h5>Why Did AWS Create It?</h5><hr class="border border-success border-1 opacity-50">
     <div><ul><li><b>Context Retention:</b> Real conversations require memory. Converse API lets you pass the full message history, so the model can reference earlier turns and maintain continuity.</li>
                 <li><b>Multi-Turn Dialogues:</b> Many business scenarios (support, sales, onboarding) require back-and-forth exchanges, not just one-off answers.</li>
                 <li><b>Better User Experience:</b> Users expect AI to "remember" what they said. Stateless APIs break this illusion and frustrate users.</li>
@@ -127,7 +127,7 @@
                 In summary, Converse API exists because real-world AI needs to be conversational, not just responsive.
             </p></div></section>
 
-        <section id="029c63c5-96a3-4488-a80a-7d4be39c6652" style="margin-bottom:1rem;"><h5>When and Where to Use It</h5><hr class="border border-success border-1 opacity-50">
+        <section id="01a9d3ca-fba7-49ef-8f52-a6c61ef092ec" style="margin-bottom:1rem;"><h5>When and Where to Use It</h5><hr class="border border-success border-1 opacity-50">
     <div><ul><li><b>Customer Support:</b> Multi-step troubleshooting, order tracking, and escalation flows.</li>
                 <li><b>Virtual Assistants:</b> Scheduling, reminders, and task management that require context.</li>
                 <li><b>Education:</b> Tutoring bots that guide users through lessons and remember progress.</li>
@@ -138,8 +138,8 @@
             <span class="callout-title">Stateless vs. Stateful</span></div>
         <div class="callout-message"><p>Use Converse API for chat-like, multi-turn flows. Use Invoke API for simple, one-off completions.</p></div></div></div></section></div></section>
 
-    <section id="66cae236-11e6-4f6f-9474-4af49ec08354" style="margin-bottom:1rem;"><h4>&#x1F3D7;&#xFE0F; Technical Foundations</h4><hr class="border border-success border-1 opacity-50">
-    <div><section id="ff29f2fd-54d8-4f03-9ee9-572a653716d4" style="margin-bottom:1rem;"><h5>Converse API vs. Invoke API</h5><hr class="border border-success border-1 opacity-50">
+    <section id="b49d93db-d36c-4878-a583-3437074c8e30" style="margin-bottom:1rem;"><h4>&#x1F3D7;&#xFE0F; Technical Foundations</h4><hr class="border border-success border-1 opacity-50">
+    <div><section id="1924abb9-2d1b-4c72-8664-cf24935c75e2" style="margin-bottom:1rem;"><h5>Converse API vs. Invoke API</h5><hr class="border border-success border-1 opacity-50">
     <div><ul><li><b>Invoke API:</b> Stateless. Each request is a single prompt/response. No memory of previous turns. Simpler, but limited for conversations.</li>
                 <li><b>Converse API:</b> Stateful. You send the full conversation history (as a list of messages). The model can reference, summarize, or clarify based on prior turns.</li></ul>
             <p><b>Technical Note:</b> With Converse, you are responsible for maintaining and sending the conversation history. This gives you control, but also means you must manage message length and context window limits.
@@ -150,7 +150,7 @@
             <span class="callout-title">Migration Tip</span></div>
         <div class="callout-message"><p>If you’re moving from Invoke to Converse, refactor your code to store and manage the conversation history for each user/session.</p></div></div></div></section>
 
-        <section id="90afca72-1ff2-4f07-a296-8bdc0fb08530" style="margin-bottom:1rem;"><h5>How the Converse API Flows End to End</h5><hr class="border border-success border-1 opacity-50">
+        <section id="00612afd-65e6-4a06-947b-7da934376ee7" style="margin-bottom:1rem;"><h5>How the Converse API Flows End to End</h5><hr class="border border-success border-1 opacity-50">
     <div><p>Before we implement any code, let's visualize the full request lifecycle — from your .NET application calling the SDK, through Bedrock's Converse API, down to the Foundation Model, and back. Notice the <b>multi-turn conversation loop</b> and the <b>tool use</b> capability — both are native to the Converse API and impossible with InvokeModel.</p>
             <style>
     .image-header {
@@ -204,13 +204,13 @@
 <div class="row image-header"><figure class="text-center"><img src="/images/blog/ai/bedrock/aws-converse-sequence.svg" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="Sequence diagram: .NET application using AWS Bedrock Converse API with multi-turn conversation loop and tool use" loading="lazy" />
         <figcaption class="figure-caption"><strong>Figure 1 :</strong> Sequence diagram: .NET application using AWS Bedrock Converse API with multi-turn conversation loop and tool use</figcaption></figure></div></div></section></div></section>
 
-    <section id="90d95da4-0443-4e91-841f-255ad418d732" style="margin-bottom:1rem;"><h4>&#x1F4BB; Implementation Guide</h4><hr class="border border-success border-1 opacity-50">
-    <div><section id="8839de55-e92a-4201-b1d0-8bf9790ad340" style="margin-bottom:1rem;"><h5>1. Prerequisites</h5><hr class="border border-success border-1 opacity-50">
+    <section id="b29cb35a-4f66-4fb9-8d5d-e6937ab3ca47" style="margin-bottom:1rem;"><h4>&#x1F4BB; Implementation Guide</h4><hr class="border border-success border-1 opacity-50">
+    <div><section id="86f69d3e-c6c8-4c31-88d8-5a162816aec3" style="margin-bottom:1rem;"><h5>1. Prerequisites</h5><hr class="border border-success border-1 opacity-50">
     <div><ul><li>AWS account with Bedrock access enabled.</li>
                 <li>AWS credentials with permissions for Bedrock Converse API.</li>
                 <li>.NET 8 or later SDK installed.</li>
                 <li>NuGet package: <b>AWSSDK.BedrockRuntime</b></li></ul></div></section>
-        <section id="af3f669f-a746-4890-bac3-d0b751d36df4" style="margin-bottom:1rem;"><h5>2. Service Implementation Example</h5><hr class="border border-success border-1 opacity-50">
+        <section id="d412947e-4b0d-4482-965f-72407991a00b" style="margin-bottom:1rem;"><h5>2. Service Implementation Example</h5><hr class="border border-success border-1 opacity-50">
     <div><p>Below is a simplified version of a customer support agent using the Bedrock Converse API in C#. The agent maintains conversation history and provides context-aware responses.</p>
             <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
 using Amazon.BedrockRuntime;
@@ -270,12 +270,12 @@ public class BedrockCustomerSupportService
             <div class="callout-box special tip py-1"><div class="py-1"><span class="callout-icon">&#x1F4A1;</span>
             <span class="callout-title">Full Example on GitHub</span></div>
         <div class="callout-message"><p>See the complete implementation and usage in the <a href="https://github.com/ajaysskumar/ai-playground/blob/main/AwsBedrockExamples/Services/BedrockCustomerSupportService.cs" target="_blank">BedrockCustomerSupportService.cs</a> file on GitHub. Also refer to the <a href="/blog/ai/bedrock">Getting Started with AWS Bedrock</a> article for foundational setup and IAM authentication.</p></div></div></div></section>
-        <section id="ee9619bd-afd2-43c5-901a-29bd296782cc" style="margin-bottom:1rem;"><h5>3. How the Example Works</h5><hr class="border border-success border-1 opacity-50">
+        <section id="e808bfae-e85f-42f6-b9b1-2dec2587cba8" style="margin-bottom:1rem;"><h5>3. How the Example Works</h5><hr class="border border-success border-1 opacity-50">
     <div><ul><li><b>System Prompt:</b> Sets the behavior and tone for the AI agent.</li>
                 <li><b>Model Selection:</b> Uses Anthropic Claude 3 Haiku for fast, cost-effective responses.</li>
                 <li><b>Conversation History:</b> Passes the entire message history to maintain context.</li>
                 <li><b>Response Handling:</b> Aggregates the AI's response from the output content blocks.</li></ul></div></section>
-        <section id="9449406d-4f1c-4498-ab46-10444626bc6e" style="margin-bottom:1rem;"><h5>4. Example Use Case: AI Customer Service Agent</h5><hr class="border border-success border-1 opacity-50">
+        <section id="2bdaa010-74a8-4428-9f31-29495e1a48bd" style="margin-bottom:1rem;"><h5>4. Example Use Case: AI Customer Service Agent</h5><hr class="border border-success border-1 opacity-50">
     <div><p>Suppose a user is troubleshooting an issue with their order. The conversation might look like this:</p>
             <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
     // Example conversation history — showing 5+ turns to demonstrate context retention
@@ -294,7 +294,7 @@ public class BedrockCustomerSupportService
             </code></pre></div></div></div>
 <br>
             <p>Notice how in turn 4, the AI references "Order 12345" and "East Coast region" seamlessly — context from earlier turns. This multi-turn awareness is exactly what Converse API enables. The AI doesn't forget, and the user experience feels natural.</p></div></section>
-            <section id="874fee51-f3ed-4501-a52c-a51844987f04" style="margin-bottom:1rem;"><h5>5. Demo: Interactive Customer Support Chat</h5><hr class="border border-success border-1 opacity-50">
+            <section id="f95e8fbb-9abe-4a76-953b-9cfbf86415a4" style="margin-bottom:1rem;"><h5>5. Demo: Interactive Customer Support Chat</h5><hr class="border border-success border-1 opacity-50">
     <div><p>Below is a complete demo of a console-based customer support chat using the Bedrock Converse API. This example shows how to maintain the conversation loop, collect user input, and keep the conversation history updated for each turn.</p>
                 <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-csharp" style="font-size: 0.8rem;">
     // Customer support chat demo
@@ -402,7 +402,7 @@ public class BedrockCustomerSupportService
 <div class="row image-header"><figure class="text-center"><img src="/images/blog/ai/bedrock/chat-demo.png" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="AI Customer Support Chat Demo" loading="lazy" />
         <figcaption class="figure-caption"><strong>Figure  :</strong> AI Customer Support Chat Demo</figcaption></figure></div></div></section></div></section>
 
-    <section id="84a2a418-3412-46f8-8999-37b92a170f5f" style="margin-bottom:1rem;"><h4>Summary</h4><hr class="border border-success border-1 opacity-50">
+    <section id="9ab613de-3cd8-43e9-bbb9-2d4b9e3b1b12" style="margin-bottom:1rem;"><h4>Summary</h4><hr class="border border-success border-1 opacity-50">
     <div><ul><li><b>What:</b> The Bedrock Converse API enables multi-turn, context-aware conversations with generative AI models.</li>
             <li><b>When:</b> Use it for chatbots, customer support, and any scenario requiring context retention and continuous dialogue.</li>
             <li><b>How:</b> Integrate with AWS SDK for .NET (.net 8+), maintain conversation history as a list of Message objects, and pass the entire history with each request so the model sees full context.</li></ul>
@@ -410,7 +410,7 @@ public class BedrockCustomerSupportService
             The beauty of Converse API is its simplicity — you don't need to manage complex state servers or reinvent conversation patterns. AWS handles the heavy lifting, and you focus on building great user experiences.
         </p></div></section>
 
-    <section id="507a96a5-90ef-4bde-8608-45df6424d8c9" style="margin-bottom:1rem;"><h4>References &amp; Further Reading</h4><hr class="border border-success border-1 opacity-50">
+    <section id="8a06fdbc-ce88-45b9-b915-fbaaf6ae8918" style="margin-bottom:1rem;"><h4>References &amp; Further Reading</h4><hr class="border border-success border-1 opacity-50">
     <div><ul><li><a href="/blog/ai/bedrock">AWS Bedrock with .NET: Getting Started</a> — foundation article for IAM, authentication, and cost optimization</li>
             <li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/converse-api.html" target="_blank">AWS Bedrock Converse API Documentation</a> — official AWS reference</li>
             <li><a href="https://github.com/ajaysskumar/ai-playground/blob/main/AwsBedrockExamples/Services/BedrockCustomerSupportService.cs" target="_blank">BedrockCustomerSupportService.cs on GitHub</a> — full runnable example</li></ul></div></section>
@@ -439,9 +439,9 @@ public class BedrockCustomerSupportService
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-            </div><!--Blazor:{"prerenderId":"2ca75937e4ca4fcca5203eb2becbceca"}-->
+            </div><!--Blazor:{"prerenderId":"7e819a3ac6d544d5924281e5cf236a3e"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UVdWUldYcHZiMlkxZEV4MGJsVnZRa0pQZHpSRWRESnJPWFpTU1U1R1ZXdHdiWHBFVWw5cmIxRlVkbk5xV2t4NVNtSk9WV0l3WlhaaFJVbzNjRzR5YVhsRVdsOHlSR3BTWjJsb1lUSlhNV1pyVTBSQ2QzZGphVmMwYmxBM01tVnVaR05zUlRWeWNWSTFZalJNU21zMFRXdzVWamxSUmxOMGVuTnJaMnRHTFVoYWRsWlFNek5RV0ZONlQzTTRNWEJtYm14alJIaHpJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UTJ4V2JtODNjVlpyZEVabmVGY3hNR2hIVWxaUE9UaGtRMlZ4TFhodFFqQXlXRkpRVUdwck9VdFJPV1JyU0ZsbVNVWkpMV2RTUzJaWmIxOUVaVEZJZFdkMlR6QXRaQzFwY1dGTGIza3phM1ZEYjI4NGVua3hYMHhwV0doRVZERTJkMGRNUzNJMVR6RkdVM2x2WmtKNlFrdzBkMnQ1YlcwMk5IWm5NSFJXVW5WWGFqRlVXbEpqUjAxWFZrTk9URzU2ZVdwcVNIQkZJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
