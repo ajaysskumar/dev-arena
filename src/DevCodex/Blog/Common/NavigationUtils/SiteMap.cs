@@ -231,6 +231,13 @@ namespace DevCodex.Blog.Common.NavigationUtils
             ["Software Practices", "Streaming APIs", "SSE", "HTTP", ".NET", "C#"],
             isPublished: true,
             isOlderThumbnailFormat: true),
+        new("AWS Bedrock with .NET: Cost Tracking via Inference Profiles",
+            "/blog/ai/bedrock/inference-profile-cost-tracking",
+            new DateTime(2026, 7, 04),
+            "images/blog/ai/bedrock-cost-tracking/banner.png",
+            ["AI", "AWS Bedrock", "Inference Profiles", "Cost Tracking", "FinOps", ".NET", "C#"],
+            isPublished: true,
+            isOlderThumbnailFormat: true),
         ];
 
         public static IEnumerable<PageInfo> PublishedArticles => Pages.Where(p => p.IsPublished && p.PublishedOn <= DateTime.UtcNow);

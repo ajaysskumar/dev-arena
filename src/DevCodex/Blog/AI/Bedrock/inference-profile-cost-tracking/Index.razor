@@ -1,0 +1,405 @@
+@page "/blog/ai/bedrock/inference-profile-cost-tracking"
+@using DevCodex.Blog.Common
+@using DevCodex.Blog
+@using System.Linq
+@using DevCodex.Blog.Common.NavigationUtils
+
+@code{
+    PageInfo currentPage = SiteMap.Pages.FirstOrDefault(x => x.RelativePath == "/blog/ai/bedrock/inference-profile-cost-tracking")!;
+}
+
+<BlogContainer>
+    <Header Title="@currentPage.Header"
+            Image="@currentPage.ArticleImage"
+            PublishedOn="@currentPage.PublishedOn"
+            Authors="Ajay Kumar"
+            isOlderThumbnailFormat="@currentPage.IsOlderThumbnailFormat">
+    </Header>
+
+    <CalloutBox Type="info" Title="Part of the Bedrock .NET series">
+        <p>
+            This article extends the earlier Bedrock posts on <a href="/blog/ai/bedrock">getting started</a>,
+            <a href="/blog/ai/bedrock/advanced">production integration</a>, and
+            <a href="/blog/ai/bedrock/converse">Converse API</a>. Here we focus specifically on <b>cost tracking</b>
+            using <b>inference profiles</b> for foundation model traffic.
+        </p>
+    </CalloutBox>
+
+    <Section Heading="The Problem: Your AI Bill Grew, But You Cannot Explain It" Level="4">
+        <p>
+            A familiar story: your team ships two AI features quickly. One is a customer support assistant. Another is a content summarizer for internal dashboards.
+            A few weeks later, finance asks a simple question: "Which feature is driving most of the Bedrock spend?".
+            You open Cost Explorer and see Bedrock charges, but the numbers are blended. You know usage increased, but you cannot confidently split cost by feature,
+            environment, or business owner.
+        </p>
+        <p>
+            This is where many teams get stuck. They have technical success, but weak cost observability. Without structured attribution, every budgeting conversation becomes guesswork,
+            and every optimization initiative starts late.
+        </p>
+        <CalloutBox Type="warning" Title="Why this matters early">
+            <p>
+                If you add cost tracking only after usage scales, you have historical spend but poor historical context.
+                It is much harder to recover attribution later than to design it from day one.
+            </p>
+        </CalloutBox>
+    </Section>
+
+    <Section Heading="1. What Are We Doing Here?" Level="4">
+        <p>
+            We are implementing <b>application-level cost tracking</b> for Amazon Bedrock by routing model traffic through <b>inference profiles</b> and attaching meaningful <b>tags</b>.
+            Inference profiles are not just routing identifiers. They are a practical control point to separate usage across products, tenants, or environments.
+        </p>
+        <p>
+            Think of it like setting up dedicated electricity meters in a building. The total power bill may be one number, but separate meters for each floor tell you
+            exactly where energy is consumed. Inference profiles play a similar role for model invocation paths.
+        </p>
+        <p>
+            In this article, our target outcome is:
+        </p>
+        <ul>
+            <li>Create one or more inference profiles per workload segment (for example, support-bot-prod, support-bot-staging).</li>
+            <li>Tag those profiles with cost allocation dimensions (team, product, environment, cost-center).</li>
+            <li>Invoke Bedrock using the inference profile identifier from .NET so usage maps cleanly to business context.</li>
+            <li>Use those tags in billing and reporting workflows.</li>
+        </ul>
+
+        <BlogImage ImagePath="/images/blog/ai/bedrock-cost-tracking/supporting-artifacts/dotnet-calling-bedrock-via-inference-profile-architecture.png"
+                   Description="Architecture showing .NET services invoking Bedrock through dedicated inference profiles with cost tracking"
+                   Number="1" />
+    </Section>
+
+    <Section Heading="2. When and Why Are We Doing This? (Application-Level Cost Tracking)" Level="4">
+        <Section Heading="When to adopt this pattern" Level="5">
+            <ul>
+                <li>When multiple AI features share the same Bedrock account and region.</li>
+                <li>When teams need showback or chargeback between business units.</li>
+                <li>When you run separate environments (dev, staging, prod) and want clean spend boundaries.</li>
+                <li>When your product managers need usage-to-value comparisons per feature, not just total AI spend.</li>
+                <li>When finance requires auditable allocation using tags and cost reports.</li>
+            </ul>
+        </Section>
+
+        <Section Heading="Why this is application-level, not only account-level" Level="5">
+            <p>
+                Account-level reporting is useful for cloud governance, but product teams optimize at the application level. If one feature uses verbose prompts,
+                long outputs, and high-cost models, you need to see that feature directly. Otherwise, optimization efforts are broad and ineffective.
+            </p>
+            <p>
+                Application-level tracking gives you practical decisions:
+            </p>
+            <ul>
+                <li>Should this feature move from a larger model to a smaller model?</li>
+                <li>Should we cap output tokens in this workflow?</li>
+                <li>Which prompt templates are expensive relative to user value?</li>
+                <li>Which environment leaked unexpected traffic?</li>
+            </ul>
+            <CalloutBox Type="tip" Title="Simple governance rule">
+                <p>
+                    If a feature can be independently prioritized by product and budget, it should have its own inference profile and tagging policy.
+                </p>
+            </CalloutBox>
+        </Section>
+    </Section>
+
+    <Section Heading="3. How Are We Doing It?" Level="4">
+        <p>
+            We will implement this in three layers: profile creation, profile tagging, and profile-based invocation from .NET.
+            You can create profiles manually for quick setup or through CloudFormation for repeatable infrastructure.
+        </p>
+
+        <Section Heading="Approach A: Manual Inference Profile Creation (Console + CLI)" Level="5">
+            <p>
+                This is the fastest way to validate your design. Use it first when you are proving naming conventions and tag strategy with stakeholders.
+            </p>
+            <ol>
+                <li>Open AWS Console and navigate to Bedrock inference profile management.</li>
+                <li>Create a profile with a clear workload-oriented name.</li>
+                <li>Select the model routing target as required by your workload.</li>
+                <li>Attach standard tags during creation.</li>
+                <li>Copy the generated profile identifier for app configuration.</li>
+            </ol>
+
+            <BlogImage ImagePath="/images/blog/ai/bedrock-cost-tracking/supporting-artifacts/create-inference-profile-screen.png"
+                       Description="AWS Bedrock console showing the inference profile creation form"
+                       Number="2" />
+
+            <BlogImage ImagePath="/images/blog/ai/bedrock-cost-tracking/supporting-artifacts/inference-profile-showing-attached-tags.png"
+                       Description="Bedrock console showing inference profile details with attached cost allocation tags"
+                       Number="3" />
+
+            <p>
+                You can also do a similar operation with CLI for scripted experimentation:
+            </p>
+            <CodeSnippet Language="bash" Number="1" Description="Example CLI flow to create and tag an inference profile (illustrative)">
+aws bedrock create-inference-profile \
+  --inference-profile-name support-bot-prod \
+  --description "Inference profile for support assistant in production" \
+  --model-source copyFrom=arn:aws:bedrock:us-east-1::foundation-model/anthropic.claude-3-haiku-20240307-v1:0
+
+aws bedrock tag-resource \
+  --resource-arn arn:aws:bedrock:us-east-1:123456789012:inference-profile/support-bot-prod \
+  --tags key=environment,value=prod key=application,value=support-bot key=cost-center,value=cc-410
+            </CodeSnippet>
+            <CalloutBox Type="info" Title="CLI note">
+                <p>
+                    CLI parameters evolve over time. Validate the latest command shape in official AWS Bedrock documentation before running in production automation.
+                </p>
+            </CalloutBox>
+        </Section>
+
+        <Section Heading="Approach B: Creation via CloudFormation (recommended for production)" Level="5">
+            <p>
+                Manual creation is useful for discovery. Production systems should move to Infrastructure as Code so profile names, tags,
+                and routing definitions stay consistent across environments and accounts.
+            </p>
+            <p>
+                A typical CloudFormation template captures:
+            </p>
+            <ul>
+                <li>Profile logical name and human-readable name.</li>
+                <li>Model source or routing reference.</li>
+                <li>Environment-aware tags.</li>
+                <li>Outputs for profile identifiers consumed by application configuration pipelines.</li>
+            </ul>
+
+                        <CodeSnippet Language="yaml" Number="2" Description="CloudFormation template for application inference profile with cost allocation tags (guardrails excluded)">
+# yaml-language-server: $schema=https://s3.amazonaws.com/cfn-resource-specifications-us-east-1-prod/schemas/2.15.0/all-spec.json
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >
+    Creates an AWS Bedrock Application Inference Profile by copying from a
+    foundation model or system-defined cross-region inference profile.
+    Deploy once per environment; the output ARN can be dropped straight into
+    AwsBedrockConverse as the modelId argument.
+
+Parameters:
+    InferenceProfileName:
+        Type: String
+        Description: >
+            Display name for the application inference profile.
+            Allowed characters: alphanumeric, space, hyphen, underscore.
+            Max 64 characters.
+        Default: AwsBedrockConverse-ChatBot-Inference-Profile-CF
+        AllowedPattern: "^([0-9a-zA-Z][ _-]?)+$"
+        MinLength: 1
+        MaxLength: 64
+
+    InferenceProfileDescription:
+        Type: String
+        Description: Human-readable description of what this profile is used for.
+        Default: Application inference profile for the AwsBedrockConverse chat-loop demo. Created via CloudFormation template.
+        AllowedPattern: "^([0-9a-zA-Z:.][ _-]?)+$"
+        MinLength: 1
+        MaxLength: 200
+
+    CopyFromArn:
+        Type: String
+        Description: >
+            ARN of the foundation model or system-defined cross-region inference
+            profile to copy into this application profile.
+        Default: "arn:aws:bedrock:us-west-2:977098985944:inference-profile/us.meta.llama3-1-8b-instruct-v1:0"
+
+    Environment:
+        Type: String
+        Description: Deployment environment label (used in resource tags).
+        Default: dev
+        AllowedValues: [dev, staging, prod]
+
+    BillingServiceName:
+        Type: String
+        Description: Billing cost-allocation tag value.
+        Default: Default-App-Billing-Service
+
+    TeamName:
+        Type: String
+        Description: Team or squad that owns this resource.
+        Default: PoC-Team
+
+Resources:
+    BedrockApplicationInferenceProfile:
+        Type: AWS::Bedrock::ApplicationInferenceProfile
+        Properties:
+            InferenceProfileName: !Ref InferenceProfileName
+            Description: !Ref InferenceProfileDescription
+            ModelSource:
+                CopyFrom: !Ref CopyFromArn
+            Tags:
+                - Key: environment
+                    Value: !Ref Environment
+                - Key: rx:billing:service-name
+                    Value: !Ref BillingServiceName
+                - Key: team
+                    Value: !Ref TeamName
+                - Key: feature
+                    Value: chat-loop
+                - Key: managed-by
+                    Value: cloudformation
+                - Key: project
+                    Value: aws-experiments
+                - Key: AppName
+                    Value: SampleBedrockAppUsingAIPUsingCloudFormation
+
+Outputs:
+    InferenceProfileId:
+        Description: Unique identifier of the created application inference profile.
+        Value: !GetAtt BedrockApplicationInferenceProfile.InferenceProfileId
+        Export:
+            Name: !Sub "${AWS::StackName}-InferenceProfileId"
+
+    InferenceProfileArn:
+        Description: >
+            Full ARN of the inference profile.
+        Value: !GetAtt BedrockApplicationInferenceProfile.InferenceProfileArn
+        Export:
+            Name: !Sub "${AWS::StackName}-InferenceProfileArn"
+
+    InferenceProfileStatus:
+        Description: Status of the inference profile (ACTIVE once ready).
+        Value: !GetAtt BedrockApplicationInferenceProfile.Status
+
+    CreatedAt:
+        Description: Timestamp when the inference profile was created.
+        Value: !GetAtt BedrockApplicationInferenceProfile.CreatedAt
+                        </CodeSnippet>
+
+            <BlogImage ImagePath="/images/blog/ai/bedrock-cost-tracking/supporting-artifacts/cloud-formation-outputs.png"
+                       Description="CloudFormation stack outputs displaying the inference profile ARN and ID for application configuration"
+                       Number="4" />
+
+            <CalloutBox Type="tip" Title="Why CloudFormation wins long-term">
+                <p>
+                    It gives repeatability, code review visibility, and drift control. Most importantly, it prevents accidental tag omissions that break cost allocation reports.
+                </p>
+            </CalloutBox>
+        </Section>
+
+        <Section Heading="Approach C: Tagging Strategy for Cost Attribution" Level="5">
+            <p>
+                Tags are the bridge between technical usage and financial reporting. A profile without tags is like a transaction without metadata:
+                it happened, but you cannot classify it reliably.
+            </p>
+            <p>
+                Start with a small, mandatory taxonomy:
+            </p>
+            <ul>
+                <li><b>application</b>: product or feature name (for example, support-bot).</li>
+                <li><b>environment</b>: dev, staging, prod.</li>
+                <li><b>owner-team</b>: team accountable for optimization decisions.</li>
+                <li><b>cost-center</b>: finance mapping key.</li>
+                <li><b>workload-type</b>: chatbot, summarization, classification, extraction.</li>
+            </ul>
+            <p>
+                Keep values stable and lowercase. Avoid free-text variants like TeamA, team-a, and Team-A because they fragment reports.
+            </p>
+
+            <CodeSnippet Language="json" Number="3" Description="Suggested tag policy contract for inference profiles">
+{
+  "requiredTags": [
+    "application",
+    "environment",
+    "owner-team",
+    "cost-center",
+    "workload-type"
+  ],
+  "allowedEnvironments": ["dev", "staging", "prod"],
+  "namingRule": "lowercase-with-hyphens"
+}
+            </CodeSnippet>
+
+            <BlogImage ImagePath="/images/blog/ai/bedrock-cost-tracking/supporting-artifacts/cost-explorer-filtered-by-tags.png"
+                       Description="AWS Cost Explorer showing Bedrock costs filtered and grouped by inference profile tags (application, environment, team)"
+                       Number="5" />
+        </Section>
+
+        <Section Heading="Using the Inference Profile in .NET" Level="5">
+            <p>
+                Creation and tagging are only half the story. To make attribution real, your application must invoke Bedrock through the profile identifier,
+                not by directly coupling to a model identifier in each feature.
+            </p>
+            <CodeSnippet Language="csharp" Number="4" Description="Converse request in .NET using inference profile ID">
+using Amazon.BedrockRuntime;
+using Amazon.BedrockRuntime.Model;
+
+var client = new AmazonBedrockRuntimeClient(Amazon.RegionEndpoint.USEast1);
+
+string inferenceProfileId = configuration["Bedrock:InferenceProfileId"]
+    ?? throw new InvalidOperationException("Bedrock:InferenceProfileId is not configured.");
+
+var request = new ConverseRequest
+{
+    ModelId = inferenceProfileId,
+    Messages = new List&lt;Message&gt;
+    {
+        new()
+        {
+            Role = "user",
+            Content = new List&lt;ContentBlock&gt;
+            {
+                new() { Text = "Summarize this support ticket in 3 bullet points." }
+            }
+        }
+    },
+    InferenceConfig = new InferenceConfiguration
+    {
+        MaxTokens = 300,
+        Temperature = 0.2f
+    }
+};
+
+var response = await client.ConverseAsync(request);
+string output = response.Output.Message.Content.FirstOrDefault(c => c.Text != null)?.Text ?? string.Empty;
+            </CodeSnippet>
+
+            <CalloutBox Type="warning" Title="Avoid hidden direct model IDs">
+                <p>
+                    If one code path still invokes a raw model ID, that traffic can bypass your cost allocation design. Enforce profile ID usage through shared abstractions and code review checks.
+                </p>
+            </CalloutBox>
+
+            <BlogImage ImagePath="/images/blog/ai/bedrock-cost-tracking/supporting-artifacts/inference-profile-usage-metrics.png"
+                       Description="Inference profile metrics dashboard showing invocation count, latency, token usage, and cost attribution data"
+                       Number="6" />
+        </Section>
+
+        <Section Heading="Operational Checklist" Level="5">
+            <ul>
+                <li>Create separate profiles for each environment at minimum.</li>
+                <li>Require tags at creation time and block untagged resources in CI validation.</li>
+                <li>Store profile IDs in configuration per environment, not hardcoded in source.</li>
+                <li>Track token usage metrics and correlate with tag-based cost reports weekly.</li>
+                <li>Review top-cost profiles monthly and optimize prompt length, output caps, or model class.</li>
+            </ul>
+        </Section>
+    </Section>
+
+    <Section Heading="Summary" Level="4">
+        <p>
+            Application-level Bedrock cost tracking becomes much clearer when you standardize on inference profiles and tags.
+            You are not just creating a billing view; you are building a feedback loop for product decisions.
+        </p>
+        <ul>
+            <li><b>What we did:</b> Designed cost attribution through inference profiles for foundation model traffic.</li>
+            <li><b>When and why:</b> Used this pattern whenever multiple AI workloads need clean ownership and optimization accountability.</li>
+            <li><b>How we did it:</b> Covered manual profile creation, CloudFormation-based provisioning, and mandatory tagging strategy, plus .NET invocation through profile IDs.</li>
+        </ul>
+        <p>
+            With this setup, the next time finance asks "where did the spend come from?", your answer is not a guess. It is a report.
+        </p>
+    </Section>
+
+    <Section Heading="References & Further Reading" Level="4">
+        <ul>
+            <li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference-profiles.html" target="_blank">Amazon Bedrock Inference Profiles</a></li>
+            <li><a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/welcome.html" target="_blank">Amazon Bedrock API Reference</a></li>
+            <li><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html" target="_blank">AWS CloudFormation User Guide</a></li>
+            <li><a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html" target="_blank">AWS Cost Allocation Tags</a></li>
+        </ul>
+    </Section>
+
+    <CalloutBox Type="info" Title="Next in the series">
+        <p>
+            A good follow-up is building a small cost dashboard that combines Bedrock token usage telemetry and tag-based billing views for weekly optimization reviews.
+        </p>
+    </CalloutBox>
+
+    <EndNotes RepositoryLink="https://github.com/ajaysskumar/ai-playground" />
+</BlogContainer>
