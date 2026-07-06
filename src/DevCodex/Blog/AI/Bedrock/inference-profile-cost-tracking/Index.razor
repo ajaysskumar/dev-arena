@@ -313,14 +313,6 @@ Outputs:
 }
             </CodeSnippet>
 
-            <p>
-                In the next screenshot, Cost Explorer is filtered by the <b>AppName</b> tag, using the same tag value that we attached to the inference profile.
-                That makes the spend report line up directly with the application name we used in the profile configuration.
-            </p>
-
-            <BlogImage ImagePath="/images/blog/ai/bedrock-cost-tracking/supporting-artifacts/cost-explorer-filtered-by-tags.png"
-                       Description="AWS Cost Explorer showing Bedrock costs filtered and grouped by inference profile tags from the console image"
-                       Number="5" />
         </Section>
 
         <Section Heading="Using the Inference Profile in .NET" Level="5">
@@ -370,7 +362,7 @@ string output = response.Output.Message.Content.FirstOrDefault(c => c.Text != nu
 
             <BlogImage ImagePath="/images/blog/ai/bedrock-cost-tracking/supporting-artifacts/inference-profile-usage-metrics.png"
                        Description="Inference profile metrics dashboard showing invocation count, latency, token usage, and cost attribution data"
-                       Number="6" />
+                       Number="5" />
         </Section>
 
         <Section Heading="Operational Checklist" Level="5">
@@ -381,6 +373,15 @@ string output = response.Output.Message.Content.FirstOrDefault(c => c.Text != nu
                 <li>Track token usage metrics and correlate with tag-based cost reports weekly.</li>
                 <li>Review top-cost profiles monthly and optimize prompt length, output caps, or model class.</li>
             </ul>
+
+            <p>
+                Once this setup is in place, validate attribution in Cost Explorer by filtering with the same <b>AppName</b> tag value used on the inference profile.
+                This closes the loop between runtime invocation traffic and finance reporting.
+            </p>
+
+            <BlogImage ImagePath="/images/blog/ai/bedrock-cost-tracking/supporting-artifacts/cost-explorer-filtered-by-tags.png"
+                       Description="AWS Cost Explorer showing Bedrock costs filtered by AppName tag value from the inference profile"
+                       Number="6" />
         </Section>
     </Section>
 
