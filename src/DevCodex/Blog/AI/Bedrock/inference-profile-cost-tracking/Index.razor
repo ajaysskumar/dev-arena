@@ -278,35 +278,48 @@ Outputs:
                 it happened, but you cannot classify it reliably.
             </p>
             <p>
-                Start with a small, mandatory taxonomy:
+                The screenshot shows both the tags you define and the tags CloudFormation adds automatically. Start with a small, mandatory taxonomy for the tags you control:
             </p>
             <ul>
-                <li><b>application</b>: product or feature name (for example, support-bot).</li>
-                <li><b>environment</b>: dev, staging, prod.</li>
-                <li><b>owner-team</b>: team accountable for optimization decisions.</li>
-                <li><b>cost-center</b>: finance mapping key.</li>
-                <li><b>workload-type</b>: chatbot, summarization, classification, extraction.</li>
+                <li><b>environment</b>: dev.</li>
+                <li><b>rx:billing:service-name</b>: Default-App-Billing-Service.</li>
+                <li><b>team</b>: PoC-Team.</li>
+                <li><b>feature</b>: chat-loop.</li>
+                <li><b>managed-by</b>: cloudformation.</li>
+                <li><b>project</b>: aws-experiments.</li>
+                <li><b>AppName</b>: SampleBedrockAppUsingAIPUsingCloudFormation.</li>
             </ul>
             <p>
-                Keep values stable and lowercase. Avoid free-text variants like TeamA, team-a, and Team-A because they fragment reports.
+                CloudFormation also injects the resource lineage tags you see in the console, such as <b>aws:cloudformation:stack-name</b>,
+                <b>aws:cloudformation:stack-id</b>, and <b>aws:cloudformation:logical-id</b>. Keep the user-defined values stable and lowercase where possible.
             </p>
 
             <CodeSnippet Language="json" Number="3" Description="Suggested tag policy contract for inference profiles">
 {
   "requiredTags": [
-    "application",
     "environment",
-    "owner-team",
-    "cost-center",
-    "workload-type"
+    "SV:billing:service-name",
+    "team",
+    "feature",
+    "managed-by",
+    "project",
+    "AppName"
   ],
-  "allowedEnvironments": ["dev", "staging", "prod"],
-  "namingRule": "lowercase-with-hyphens"
+    "allowedEnvironments": ["dev", "staging", "prod"],
+    "notes": [
+        "AppName matches the screenshot and can stay in PascalCase.",
+        "CloudFormation adds aws:cloudformation:* tags automatically."
+    ]
 }
             </CodeSnippet>
 
+            <p>
+                In the next screenshot, Cost Explorer is filtered by the <b>AppName</b> tag, using the same tag value that we attached to the inference profile.
+                That makes the spend report line up directly with the application name we used in the profile configuration.
+            </p>
+
             <BlogImage ImagePath="/images/blog/ai/bedrock-cost-tracking/supporting-artifacts/cost-explorer-filtered-by-tags.png"
-                       Description="AWS Cost Explorer showing Bedrock costs filtered and grouped by inference profile tags (application, environment, team)"
+                       Description="AWS Cost Explorer showing Bedrock costs filtered and grouped by inference profile tags from the console image"
                        Number="5" />
         </Section>
 
