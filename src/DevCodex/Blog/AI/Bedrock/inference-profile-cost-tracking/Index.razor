@@ -225,7 +225,7 @@ Resources:
             Tags:
                 - Key: environment
                     Value: !Ref Environment
-                - Key: rx:billing:service-name
+                - Key: SV:billing:service-name
                     Value: !Ref BillingServiceName
                 - Key: team
                     Value: !Ref TeamName
@@ -272,7 +272,7 @@ Outputs:
             </CalloutBox>
         </Section>
 
-        <Section Heading="Approach C: Tagging Strategy for Cost Attribution" Level="5">
+        <Section Heading="Tagging Strategy for Cost Attribution" Level="5">
             <p>
                 Tags are the bridge between technical usage and financial reporting. A profile without tags is like a transaction without metadata:
                 it happened, but you cannot classify it reliably.
@@ -282,7 +282,7 @@ Outputs:
             </p>
             <ul>
                 <li><b>environment</b>: dev.</li>
-                <li><b>rx:billing:service-name</b>: Default-App-Billing-Service.</li>
+                <li><b>SV:billing:service-name</b>: Default-App-Billing-Service.</li>
                 <li><b>team</b>: PoC-Team.</li>
                 <li><b>feature</b>: chat-loop.</li>
                 <li><b>managed-by</b>: cloudformation.</li>
@@ -402,17 +402,10 @@ string output = response.Output.Message.Content.FirstOrDefault(c => c.Text != nu
     <Section Heading="References & Further Reading" Level="4">
         <ul>
             <li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference-profiles.html" target="_blank">Amazon Bedrock Inference Profiles</a></li>
-            <li><a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/welcome.html" target="_blank">Amazon Bedrock API Reference</a></li>
             <li><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html" target="_blank">AWS CloudFormation User Guide</a></li>
             <li><a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html" target="_blank">AWS Cost Allocation Tags</a></li>
         </ul>
     </Section>
 
-    <CalloutBox Type="info" Title="Next in the series">
-        <p>
-            A good follow-up is building a small cost dashboard that combines Bedrock token usage telemetry and tag-based billing views for weekly optimization reviews.
-        </p>
-    </CalloutBox>
-
-    <EndNotes RepositoryLink="https://github.com/ajaysskumar/ai-playground" />
+    <EndNotes />
 </BlogContainer>
