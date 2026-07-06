@@ -20,11 +20,11 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" /> -->
     
-<!--Blazor:{"type":"webassembly","prerenderId":"a4897842cf294679a5fd19385e40b2e7","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>AWS Bedrock with .NET: Cost Tracking via Inference Profiles</title><meta property="og:url" content="http://127.0.0.1:5050/blog/ai/bedrock/inference-profile-cost-tracking" />
+<!--Blazor:{"type":"webassembly","prerenderId":"ed1082c0c91e44a086837bf8d43c9dd6","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>AWS Bedrock with .NET: Cost Tracking via Inference Profiles</title><meta property="og:url" content="http://127.0.0.1:5050/blog/ai/bedrock/inference-profile-cost-tracking" />
     <meta property="og:title" content="AWS Bedrock with .NET: Cost Tracking via Inference Profiles" />
     <meta property="og:description" content="" />
     <meta property="og:image" content="http://127.0.0.1:5050/images/blog/ai/bedrock-cost-tracking/banner.png" />
-    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"a4897842cf294679a5fd19385e40b2e7"}-->
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"ed1082c0c91e44a086837bf8d43c9dd6"}-->
 </head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -40,7 +40,7 @@
 
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"476146790b674fa0a793bad75eb6937a","key":{"locationHash":"1E5B2A40C870C32832812BA3ECC8F00C025EF68F461B075ADE40C0C55D040851:0","formattedComponentKey":""},"assembly":"DevCodex","typeName":"DevCodex.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-8rdvqw2f7f><div class="page " b-3xlixug817><main class="d-flex flex-column min-vh-100" b-3xlixug817><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"fdbc75a211244313bdde438bcd39ba28","key":{"locationHash":"1E5B2A40C870C32832812BA3ECC8F00C025EF68F461B075ADE40C0C55D040851:0","formattedComponentKey":""},"assembly":"DevCodex","typeName":"DevCodex.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-8rdvqw2f7f><div class="page " b-3xlixug817><main class="d-flex flex-column min-vh-100" b-3xlixug817><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -96,7 +96,7 @@
             using <b>inference profiles</b> for foundation model traffic.
         </p></div></div>
 
-    <section id="7b3301c6-8e56-4926-9fb5-ff7f9fb17004" style="margin-bottom:1rem;"><h4>The Problem: Your AI Bill Grew, But You Cannot Explain It</h4><hr class="border border-success border-1 opacity-50">
+    <section id="21e5532f-1668-434f-b1e6-6b67db9c8fe4" style="margin-bottom:1rem;"><h4>The Problem: Your AI Bill Grew, But You Cannot Explain It</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             A familiar story: your team ships two AI features quickly. One is a customer support assistant. Another is a content summarizer for internal dashboards.
             A few weeks later, finance asks a simple question: "Which feature is driving most of the Bedrock spend?".
@@ -114,7 +114,7 @@
                 It is much harder to recover attribution later than to design it from day one.
             </p></div></div></div></section>
 
-    <section id="eb5fb2e0-f662-45a9-95e9-7da79de3e901" style="margin-bottom:1rem;"><h4>1. What Are We Doing Here?</h4><hr class="border border-success border-1 opacity-50">
+    <section id="e8b103cb-11e9-4087-9ea2-71b682698208" style="margin-bottom:1rem;"><h4>1. What Are We Doing Here?</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             We are implementing <b>application-level cost tracking</b> for Amazon Bedrock by routing model traffic through <b>inference profiles</b> and attaching meaningful <b>tags</b>.
             Inference profiles are not just routing identifiers. They are a practical control point to separate usage across products, tenants, or environments.
@@ -183,15 +183,15 @@
 <div class="row image-header"><figure class="text-center"><img src="/images/blog/ai/bedrock-cost-tracking/supporting-artifacts/dotnet-calling-bedrock-via-inference-profile-architecture.png" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="Architecture showing .NET services invoking Bedrock through dedicated inference profiles with cost tracking" loading="lazy" />
         <figcaption class="figure-caption"><strong>Figure 1 :</strong> Architecture showing .NET services invoking Bedrock through dedicated inference profiles with cost tracking</figcaption></figure></div></div></section>
 
-    <section id="c293fca4-57ed-4f19-895c-178b4d5989d6" style="margin-bottom:1rem;"><h4>2. When and Why Are We Doing This? (Application-Level Cost Tracking)</h4><hr class="border border-success border-1 opacity-50">
-    <div><section id="6d4c7453-b9b7-43e7-858c-c41981ab394b" style="margin-bottom:1rem;"><h5>When to adopt this pattern</h5><hr class="border border-success border-1 opacity-50">
+    <section id="592a7173-6b56-4d26-909d-334df5aae265" style="margin-bottom:1rem;"><h4>2. When and Why Are We Doing This? (Application-Level Cost Tracking)</h4><hr class="border border-success border-1 opacity-50">
+    <div><section id="cf7ae53e-9925-4564-9c0b-8d1aedb6d778" style="margin-bottom:1rem;"><h5>When to adopt this pattern</h5><hr class="border border-success border-1 opacity-50">
     <div><ul><li>When multiple AI features share the same Bedrock account and region.</li>
                 <li>When teams need showback or chargeback between business units.</li>
                 <li>When you run separate environments (dev, staging, prod) and want clean spend boundaries.</li>
                 <li>When your product managers need usage-to-value comparisons per feature, not just total AI spend.</li>
                 <li>When finance requires auditable allocation using tags and cost reports.</li></ul></div></section>
 
-        <section id="75c95ae5-7206-4197-8f78-a48eea60e31e" style="margin-bottom:1rem;"><h5>Why this is application-level, not only account-level</h5><hr class="border border-success border-1 opacity-50">
+        <section id="2e042386-a8a9-444c-8495-73f3fffcd183" style="margin-bottom:1rem;"><h5>Why this is application-level, not only account-level</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
                 Account-level reporting is useful for cloud governance, but product teams optimize at the application level. If one feature uses verbose prompts,
                 long outputs, and high-cost models, you need to see that feature directly. Otherwise, optimization efforts are broad and ineffective.
@@ -209,13 +209,13 @@
                     If a feature can be independently prioritized by product and budget, it should have its own inference profile and tagging policy.
                 </p></div></div></div></section></div></section>
 
-    <section id="a06c8d3e-8f04-4602-a3ad-085fc64ffa34" style="margin-bottom:1rem;"><h4>3. How Are We Doing It?</h4><hr class="border border-success border-1 opacity-50">
+    <section id="90737a93-5c85-46d3-b1ac-774937c3ab56" style="margin-bottom:1rem;"><h4>3. How Are We Doing It?</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             We will implement this in three layers: profile creation, profile tagging, and profile-based invocation from .NET.
             You can create profiles manually for quick setup or through CloudFormation for repeatable infrastructure.
         </p>
 
-        <section id="028a5a78-5f7d-4afd-8336-97c37f6f5f1e" style="margin-bottom:1rem;"><h5>Approach A: Manual Inference Profile Creation (Console &#x2B; CLI)</h5><hr class="border border-success border-1 opacity-50">
+        <section id="c4c2e9ac-4b3e-4db0-8eaf-91ee44b8c7c0" style="margin-bottom:1rem;"><h5>Approach A: Manual Inference Profile Creation (Console &#x2B; CLI)</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
                 This is the fastest way to validate your design. Use it first when you are proving naming conventions and tag strategy with stakeholders.
             </p>
@@ -349,7 +349,7 @@ aws bedrock tag-resource \
                     CLI parameters evolve over time. Validate the latest command shape in official AWS Bedrock documentation before running in production automation.
                 </p></div></div></div></section>
 
-        <section id="965441be-eca5-4929-8b7b-fd99063e77e8" style="margin-bottom:1rem;"><h5>Approach B: Creation via CloudFormation (recommended for production)</h5><hr class="border border-success border-1 opacity-50">
+        <section id="a30142c5-655a-48a8-aa41-0667b780fe91" style="margin-bottom:1rem;"><h5>Approach B: Creation via CloudFormation (recommended for production)</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
                 Manual creation is useful for discovery. Production systems should move to Infrastructure as Code so profile names, tags,
                 and routing definitions stay consistent across environments and accounts.
@@ -520,37 +520,50 @@ Outputs:
                     It gives repeatability, code review visibility, and drift control. Most importantly, it prevents accidental tag omissions that break cost allocation reports.
                 </p></div></div></div></section>
 
-        <section id="6627daf5-8f79-4042-9ab9-549120990d05" style="margin-bottom:1rem;"><h5>Approach C: Tagging Strategy for Cost Attribution</h5><hr class="border border-success border-1 opacity-50">
+        <section id="93f09189-99b9-46dc-a0ca-7202bfaa741d" style="margin-bottom:1rem;"><h5>Approach C: Tagging Strategy for Cost Attribution</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
                 Tags are the bridge between technical usage and financial reporting. A profile without tags is like a transaction without metadata:
                 it happened, but you cannot classify it reliably.
             </p>
             <p>
-                Start with a small, mandatory taxonomy:
+                The screenshot shows both the tags you define and the tags CloudFormation adds automatically. Start with a small, mandatory taxonomy for the tags you control:
             </p>
-            <ul><li><b>application</b>: product or feature name (for example, support-bot).</li>
-                <li><b>environment</b>: dev, staging, prod.</li>
-                <li><b>owner-team</b>: team accountable for optimization decisions.</li>
-                <li><b>cost-center</b>: finance mapping key.</li>
-                <li><b>workload-type</b>: chatbot, summarization, classification, extraction.</li></ul>
+            <ul><li><b>environment</b>: dev.</li>
+                <li><b>rx:billing:service-name</b>: Default-App-Billing-Service.</li>
+                <li><b>team</b>: PoC-Team.</li>
+                <li><b>feature</b>: chat-loop.</li>
+                <li><b>managed-by</b>: cloudformation.</li>
+                <li><b>project</b>: aws-experiments.</li>
+                <li><b>AppName</b>: SampleBedrockAppUsingAIPUsingCloudFormation.</li></ul>
             <p>
-                Keep values stable and lowercase. Avoid free-text variants like TeamA, team-a, and Team-A because they fragment reports.
+                CloudFormation also injects the resource lineage tags you see in the console, such as <b>aws:cloudformation:stack-name</b>,
+                <b>aws:cloudformation:stack-id</b>, and <b>aws:cloudformation:logical-id</b>. Keep the user-defined values stable and lowercase where possible.
             </p>
 
             <div class="container"><div class="row"><div class="col-12"><pre class="pre-scrollable rounded border border-2 p-1 px-4"><code class="language-json" style="font-size: 0.8rem;">
 {
   "requiredTags": [
-    "application",
     "environment",
-    "owner-team",
-    "cost-center",
-    "workload-type"
+    "SV:billing:service-name",
+    "team",
+    "feature",
+    "managed-by",
+    "project",
+    "AppName"
   ],
-  "allowedEnvironments": ["dev", "staging", "prod"],
-  "namingRule": "lowercase-with-hyphens"
+    "allowedEnvironments": ["dev", "staging", "prod"],
+    "notes": [
+        "AppName matches the screenshot and can stay in PascalCase.",
+        "CloudFormation adds aws:cloudformation:* tags automatically."
+    ]
 }
             </code></pre></div><div class="col-12 text-center"><code>Code Sample #3 : Suggested tag policy contract for inference profiles</code></div></div></div>
 <br>
+
+            <p>
+                In the next screenshot, Cost Explorer is filtered by the <b>AppName</b> tag, using the same tag value that we attached to the inference profile.
+                That makes the spend report line up directly with the application name we used in the profile configuration.
+            </p>
 
             <style>
     .image-header {
@@ -601,10 +614,10 @@ Outputs:
     }
 </style>
 
-<div class="row image-header"><figure class="text-center"><img src="/images/blog/ai/bedrock-cost-tracking/supporting-artifacts/cost-explorer-filtered-by-tags.png" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="AWS Cost Explorer showing Bedrock costs filtered and grouped by inference profile tags (application, environment, team)" loading="lazy" />
-        <figcaption class="figure-caption"><strong>Figure 5 :</strong> AWS Cost Explorer showing Bedrock costs filtered and grouped by inference profile tags (application, environment, team)</figcaption></figure></div></div></section>
+<div class="row image-header"><figure class="text-center"><img src="/images/blog/ai/bedrock-cost-tracking/supporting-artifacts/cost-explorer-filtered-by-tags.png" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="AWS Cost Explorer showing Bedrock costs filtered and grouped by inference profile tags from the console image" loading="lazy" />
+        <figcaption class="figure-caption"><strong>Figure 5 :</strong> AWS Cost Explorer showing Bedrock costs filtered and grouped by inference profile tags from the console image</figcaption></figure></div></div></section>
 
-        <section id="4cf698df-3614-428f-b128-dd7a300f2181" style="margin-bottom:1rem;"><h5>Using the Inference Profile in .NET</h5><hr class="border border-success border-1 opacity-50">
+        <section id="33fac089-cd2b-4023-87a8-6cfa44b90f01" style="margin-bottom:1rem;"><h5>Using the Inference Profile in .NET</h5><hr class="border border-success border-1 opacity-50">
     <div><p>
                 Creation and tagging are only half the story. To make attribution real, your application must invoke Bedrock through the profile identifier,
                 not by directly coupling to a model identifier in each feature.
@@ -702,14 +715,14 @@ string output = response.Output.Message.Content.FirstOrDefault(c => c.Text != nu
 <div class="row image-header"><figure class="text-center"><img src="/images/blog/ai/bedrock-cost-tracking/supporting-artifacts/inference-profile-usage-metrics.png" class="img-fluid rounded mx-auto d-block my-3 border border-2 border-success blog-support-image cursor-magnify" alt="Inference profile metrics dashboard showing invocation count, latency, token usage, and cost attribution data" loading="lazy" />
         <figcaption class="figure-caption"><strong>Figure 6 :</strong> Inference profile metrics dashboard showing invocation count, latency, token usage, and cost attribution data</figcaption></figure></div></div></section>
 
-        <section id="c06b2e57-9907-44f9-b10a-20bc7b448de4" style="margin-bottom:1rem;"><h5>Operational Checklist</h5><hr class="border border-success border-1 opacity-50">
+        <section id="6d35bbd1-9ce0-4fc0-8ed1-07915a3b6613" style="margin-bottom:1rem;"><h5>Operational Checklist</h5><hr class="border border-success border-1 opacity-50">
     <div><ul><li>Create separate profiles for each environment at minimum.</li>
                 <li>Require tags at creation time and block untagged resources in CI validation.</li>
                 <li>Store profile IDs in configuration per environment, not hardcoded in source.</li>
                 <li>Track token usage metrics and correlate with tag-based cost reports weekly.</li>
                 <li>Review top-cost profiles monthly and optimize prompt length, output caps, or model class.</li></ul></div></section></div></section>
 
-    <section id="c0532764-6e16-4b15-b8bb-d7f189e2f3e6" style="margin-bottom:1rem;"><h4>Summary</h4><hr class="border border-success border-1 opacity-50">
+    <section id="899effbf-4fab-475a-80a1-3c947a6dac87" style="margin-bottom:1rem;"><h4>Summary</h4><hr class="border border-success border-1 opacity-50">
     <div><p>
             Application-level Bedrock cost tracking becomes much clearer when you standardize on inference profiles and tags.
             You are not just creating a billing view; you are building a feedback loop for product decisions.
@@ -721,7 +734,7 @@ string output = response.Output.Message.Content.FirstOrDefault(c => c.Text != nu
             With this setup, the next time finance asks "where did the spend come from?", your answer is not a guess. It is a report.
         </p></div></section>
 
-    <section id="e6ff4cfe-8d8d-4240-b991-316450006e39" style="margin-bottom:1rem;"><h4>References &amp; Further Reading</h4><hr class="border border-success border-1 opacity-50">
+    <section id="5a148ce1-c3a5-4871-a2a2-f8d3526f5528" style="margin-bottom:1rem;"><h4>References &amp; Further Reading</h4><hr class="border border-success border-1 opacity-50">
     <div><ul><li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference-profiles.html" target="_blank">Amazon Bedrock Inference Profiles</a></li>
             <li><a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/welcome.html" target="_blank">Amazon Bedrock API Reference</a></li>
             <li><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html" target="_blank">AWS CloudFormation User Guide</a></li>
@@ -753,9 +766,9 @@ string output = response.Output.Message.Content.FirstOrDefault(c => c.Text != nu
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-            </div><!--Blazor:{"prerenderId":"476146790b674fa0a793bad75eb6937a"}-->
+            </div><!--Blazor:{"prerenderId":"fdbc75a211244313bdde438bcd39ba28"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80UTJ4V2JtODNjVlpyZEVabmVGY3hNR2hIVWxaUFgwY3lNVFZMY0RsMFVFZ3pXbVJXYzNvNVYwRm9OMGRmTVdKek1tOXJNbVF3VjBoSFdVSXliV0ZpVEVwaWJteFBjVEZ3ZDBJMGNuRTVVRnBNUWpSS1IwcGpMV1JUWmpGbVozSjJNbXhEWTFsck5IRTJNVE5NTlZCT1EwUXdVMWw1YkhSM1UwRnNRVWhRWVVSZmVIVkZVbXBKY2xwUGRVSlpiVlZZUnpaaFozVmpJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80VUZZMFVUQnJPRXRUVGt0bmFXSmhka1F3WjNGM1VYaFRaRGhRWjFOZlkxcEljMlJ0Y25vMVgyMXlZVXBKTFhSQ1NWSjBMVmRIWmpsRFdtWjZaREJKZVVNMGNGQmhTelpFUVhOd2NHNTJiVEF3UlZOdFpYQnNPVTU1VVdGRU5qUklRbE10TURSd2FTMUNabVExV1dOeVQwdEdOalpCWlc5RmFGUnlZemN0YjAwNWRHRnJhMWxDU25VNVQzaDVXalJQTFdkRFl6Qk5JaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
