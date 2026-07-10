@@ -20,11 +20,11 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" /> -->
     
-<!--Blazor:{"type":"webassembly","prerenderId":"2a20bbd5fd6e4fd380f32e9853ab3611","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>SOLID Principles: Understanding the Single Responsibility Principle</title><meta property="og:url" content="http://127.0.0.1:5050/blog/software-practices/solid/single-responsibility-principle" />
+<!--Blazor:{"type":"webassembly","prerenderId":"1a7c825875de4bada44618035313b8ec","key":{"locationHash":"77D12F14A8105320B1AAED6AE7E689DA0EC4483270A645E84079EAA0FFDF550D:0","formattedComponentKey":""},"assembly":"Microsoft.AspNetCore.Components.Web","typeName":"Microsoft.AspNetCore.Components.Web.HeadOutlet","parameterDefinitions":"W10=","parameterValues":"W10="}--><title>SOLID Principles: Understanding the Single Responsibility Principle</title><meta property="og:url" content="http://127.0.0.1:5050/blog/software-practices/solid/single-responsibility-principle" />
     <meta property="og:title" content="SOLID Principles: Understanding the Single Responsibility Principle" />
     <meta property="og:description" content="" />
     <meta property="og:image" content="http://127.0.0.1:5050/images/blog/software-practices/solid/srp/banner.png" />
-    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"2a20bbd5fd6e4fd380f32e9853ab3611"}-->
+    <meta property="og:type" content="article"><!--Blazor:{"prerenderId":"1a7c825875de4bada44618035313b8ec"}-->
 </head><body><headoutlet>
     <base href="/"/>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
@@ -40,7 +40,7 @@
 
     <div id="app">
 <!-- %%-PRERENDERING-BEGIN-%% -->
-<!--Blazor:{"type":"webassembly","prerenderId":"1b67f651de1b44f18fe46b5afe58d568","key":{"locationHash":"1E5B2A40C870C32832812BA3ECC8F00C025EF68F461B075ADE40C0C55D040851:0","formattedComponentKey":""},"assembly":"DevCodex","typeName":"DevCodex.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-8rdvqw2f7f><div class="page " b-3xlixug817><main class="d-flex flex-column min-vh-100" b-3xlixug817><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
+<!--Blazor:{"type":"webassembly","prerenderId":"dd374b66a27f40a5871cef11661c06c0","key":{"locationHash":"1E5B2A40C870C32832812BA3ECC8F00C025EF68F461B075ADE40C0C55D040851:0","formattedComponentKey":""},"assembly":"DevCodex","typeName":"DevCodex.App","parameterDefinitions":"W10=","parameterValues":"W10="}--><div class="error-boundary" b-8rdvqw2f7f><div class="page " b-3xlixug817><main class="d-flex flex-column min-vh-100" b-3xlixug817><header class="bg-dark text-white p-3 d-flex align-items-center"><div class="container-fluid"><div class="container-fluid"><div class="row align-items-center"><div class="col-12 col-md-4 d-flex justify-content-md-start justify-content-center"><a class="btn text-white d-flex align-items-center" href="/"><img src="/images/shared/logo.png" alt="Logo" class="me-2 mg-fluid rounded" style="height: 3rem;">
                         <h3 class="m-0">Dev Codex</h3></a></div>
 
                 
@@ -87,7 +87,7 @@
                     
                     <div class="col-md-4 col-xs-12 d-flex justify-content-md-end justify-content-center"><span class="text-muted fw-bold">Last updated: 10 May 2025</span></div></div></div></div></div></header>
 
-    <section id="675d8217-6b70-4306-9d5b-d336ca9700c8" style="margin-bottom:1rem;"><h3>&#x1F50D; What is the Single Responsibility Principle (SRP)?</h3><hr class="border border-success border-1 opacity-50">
+    <section id="03a1b8d7-b538-48b6-94c3-bbdbf5c02fba" style="margin-bottom:1rem;"><h3>&#x1F50D; What is the Single Responsibility Principle (SRP)?</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             Picture this: You’re in your kitchen, and you need to open a can, slice some bread, and tighten a loose screw. You could use a Swiss Army knife for all three, but wouldn’t it be easier (and safer!) to use a can opener, a bread knife, and a screwdriver—each designed for its job? That’s the heart of the <b>Single Responsibility Principle (SRP)</b> in software design.
         </p>
@@ -95,7 +95,7 @@
             SRP is the first of the five SOLID principles. In plain English: <b>"A class should have only one reason to change."</b> That means every module, class, or function in your code should focus on doing one thing—and doing it well.
         </p></div></section>
 
-    <section id="3ad487da-747f-4995-922c-df95fe7500fb" style="margin-bottom:1rem;"><h3>&#x1F4A1; Why Should You Care About SRP?</h3><hr class="border border-success border-1 opacity-50">
+    <section id="e0b9e5ae-1818-427d-acaf-5733c21e7879" style="margin-bottom:1rem;"><h3>&#x1F4A1; Why Should You Care About SRP?</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             Ever tried to fix a bug and accidentally broke something totally unrelated? Or spent hours trying to test a class that does a million things? That’s what happens when SRP is ignored. Here’s why SRP is your friend:
         </p>
@@ -106,7 +106,7 @@
             SRP makes your codebase friendlier for you and your teammates. No more stepping on each other’s toes!
         </p></div></section>
 
-    <section id="451793bb-fba6-4390-ae2c-a87bde421205" style="margin-bottom:1rem;"><h3>&#x1F552; When Does SRP Matter Most?</h3><hr class="border border-success border-1 opacity-50">
+    <section id="1233bd35-0712-45f3-a9c5-17a06fbd4968" style="margin-bottom:1rem;"><h3>&#x1F552; When Does SRP Matter Most?</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             SRP shines as your project grows. Watch out for these red flags 🚩:
         </p>
@@ -117,7 +117,7 @@
             The earlier you spot these, the easier your life will be. But don’t stress—refactoring is always an option as you learn more about your domain.
         </p></div></section>
 
-    <section id="effcafd0-18ff-4199-a5c2-23a4fffdeca9" style="margin-bottom:1rem;"><h3>&#x1F6E0;&#xFE0F; How Do You Apply SRP in C#?</h3><hr class="border border-success border-1 opacity-50">
+    <section id="85092ab8-f6dc-454a-a4d7-0f476f6ad455" style="margin-bottom:1rem;"><h3>&#x1F6E0;&#xFE0F; How Do You Apply SRP in C#?</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             Let’s get practical. Imagine you have a <code>User</code> class that’s trying to do it all:
         </p>
@@ -187,7 +187,7 @@ public class EmailService
         <p><b>Bottom line:</b> SRP is about grouping by reason to change, not splitting everything apart.
         </p></div></section>
 
-    <section id="f723479d-ca29-401f-86b2-57f7776d501a" style="margin-bottom:1rem;"><h3>&#x1F30D; SRP in the Real World: Practical Scenarios</h3><hr class="border border-success border-1 opacity-50">
+    <section id="540e5177-58ad-428b-aea5-897fdbe4f80d" style="margin-bottom:1rem;"><h3>&#x1F30D; SRP in the Real World: Practical Scenarios</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             SRP isn’t just for classes. It applies to methods, modules, and even microservices. Here’s how you can spot and use SRP in your day-to-day work:
         </p>
@@ -224,7 +224,7 @@ public interface IInvoiceService
             The controller delegates business logic to <code>IInvoiceService</code>, keeping each class focused and testable. This makes your code easier to read, maintain, and extend.
         </p></div></section>
 
-    <section id="8e804407-8437-4024-a98e-78c3f5ccbc44" style="margin-bottom:1rem;"><h3>&#x1F3D7;&#xFE0F; SRP in Larger Systems: Microservices &amp; Layered Architectures</h3><hr class="border border-success border-1 opacity-50">
+    <section id="37d8b924-ca13-4d7d-b02a-82c6c1423a5a" style="margin-bottom:1rem;"><h3>&#x1F3D7;&#xFE0F; SRP in Larger Systems: Microservices &amp; Layered Architectures</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             SRP isn’t just for small classes—it’s a guiding light for designing larger systems too. In a <b>layered architecture</b>, for example, you’ll often see clear separations: controllers handle HTTP requests, services contain business logic, and repositories manage data access. Each layer has its own responsibility, making the system easier to maintain and scale.
         </p>
@@ -232,7 +232,7 @@ public interface IInvoiceService
             In <b>microservices</b>, SRP helps define service boundaries. Each microservice should focus on a single business capability. This makes services easier to deploy, test, and evolve independently—just like SRP does for classes.
         </p></div></section>
 
-    <section id="fe9c363d-10ee-492c-a650-f24e012febe2" style="margin-bottom:1rem;"><h3>&#x1F6A9; Common Pitfalls (and How to Dodge Them)</h3><hr class="border border-success border-1 opacity-50">
+    <section id="1e594755-ed74-42e3-b5db-4dd907417fd4" style="margin-bottom:1rem;"><h3>&#x1F6A9; Common Pitfalls (and How to Dodge Them)</h3><hr class="border border-success border-1 opacity-50">
     <div><ul><li><b>God classes:</b> If a class has "Manager", "Processor", or "Helper" in its name and does too much, break it up.</li>
             <li><b>Feature creep:</b> Resist the urge to add unrelated features to existing classes. It’s tempting, but it’ll bite you later.</li>
             <li><b>Premature abstraction:</b> Don’t over-engineer. Split responsibilities when it makes sense, not just for the sake of it.</li>
@@ -241,7 +241,7 @@ public interface IInvoiceService
         <p><b>Pro tip:</b> When in doubt, ask: “If I change this, what else will break?” If the answer is “lots of things,” SRP can help!
         </p></div></section>
 
-    <section id="0f6a0caf-9ac2-49b3-bb53-5543250417a8" style="margin-bottom:1rem;"><h3>&#x1F517; SRP and the Other SOLID Principles</h3><hr class="border border-success border-1 opacity-50">
+    <section id="c5a25e10-b104-4361-ae52-dc8b900d664e" style="margin-bottom:1rem;"><h3>&#x1F517; SRP and the Other SOLID Principles</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             SRP is the foundation of SOLID, but it works best when combined with the other principles:
         </p>
@@ -253,7 +253,7 @@ public interface IInvoiceService
             Mastering SRP sets you up for success with the rest of SOLID!
         </p></div></section>
 
-    <section id="7e2f3457-8a2b-47e1-bc71-3dc3eaa2e428" style="margin-bottom:1rem;"><h3>&#x1F4DD; Wrapping Up: Why SRP Makes Life Easier</h3><hr class="border border-success border-1 opacity-50">
+    <section id="fe9f14f3-2b47-4cd7-b3d8-3badffd6e4d8" style="margin-bottom:1rem;"><h3>&#x1F4DD; Wrapping Up: Why SRP Makes Life Easier</h3><hr class="border border-success border-1 opacity-50">
     <div><p>
             The Single Responsibility Principle is about focus and clarity. Like using the right tool for the job, SRP helps you build software that’s easier to maintain, test, and extend. Start small, refactor when needed, and your future self (and teammates) will thank you.
         </p></div></section></div>
@@ -276,9 +276,9 @@ public interface IInvoiceService
             
             <div class="col-12 col-md-8 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0"><a href="https://github.com/ajaysskumar" class="text-white me-3" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.linkedin.com/in/ajaykumar1807" class="text-white me-3" target="_blank"><i class="bi bi-linkedin"></i></a></div></div></div></footer></main></div>
-            </div><!--Blazor:{"prerenderId":"1b67f651de1b44f18fe46b5afe58d568"}-->
+            </div><!--Blazor:{"prerenderId":"dd374b66a27f40a5871cef11661c06c0"}-->
 <!-- %%-PRERENDERING-END-%% -->
-<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80U2toQ1UyUnhSbXBTV2s5cGJuazBXSFJHUjJSTWVVazNVbFV0Y0RkdE56SXphbFJXU1ZRMGRqTjVZMkkzY21aMlVsZExkREY0UTNoZloyb3djVE5qZUU5c2VFVlRlRkJUWDBkMFlXOVJZMGRmY0ZwVmRqRlNha2t6ZERkQlFtZzFPR3BQVVhWaE16bGtURVZmUW1vNGNUQnZiR3BFYTFjMmJ6QkxaSE5rZUhCQ1JuUnVXV05mVVZsWlQzWm5OWFpVY1RJdE1WVk5JaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
+<!--Blazor-WebAssembly-Component-State:eyJfX2ludGVybmFsX19BbnRpZm9yZ2VyeVJlcXVlc3RUb2tlbiI6ImV5SjJZV3gxWlNJNklrTm1SRW80VURKb1RtVlpjSHBuTVVKcFgwcG5iVGMyV1VaelQyaFhXVTVRVTBVeGFIZ3RRa3BaTlVoTE5rNVllWGRsWkZocmVVaGFOa0pqTkZkYVZXeHdOVGs1TTNKcFl6aGlTa2RLTlRaTFkwNVpiazVzVDJKM05ESXRlWGxLZGtvemMxODBUMmRsV25KTFFtaHBXbkZ0WXpoaVIxRnllbFJNWVhNd1FYazNZbE5FTjFnMFNGTnROMGs1ZDJwRGFGcE9kMUZhWVV4alUzRTBJaXdpWm05eWJVWnBaV3hrVG1GdFpTSTZJbDlmVW1WeGRXVnpkRlpsY21sbWFXTmhkR2x2YmxSdmEyVnVJbjA9In0=--></div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
